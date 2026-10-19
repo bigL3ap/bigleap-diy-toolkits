@@ -326,8 +326,8 @@ padding-top: max(7px, env(safe-area-inset-top, 0px));
 .profile-strip { display: grid; gap: 8px; padding: 12px 14px; margin-bottom: 18px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
 .profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .profile-row b { color: var(--heading); }
-.profile-row a, .profile-row .text-btn { font-weight: 700; color: var(--heading); min-height: 32px; display: inline-flex; align-items: center; }
-.profile-paste summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--heading); min-height: 32px; display: inline-flex; align-items: center; }
+.profile-row a, .profile-row .text-btn { font-weight: 700; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
+.profile-paste summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
 .profile-paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .profile-paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
 .profile-msg { font-size: 13px; color: var(--muted); }
@@ -374,7 +374,7 @@ textarea.text-field { resize: vertical; min-height: 4.5rem; line-height: 1.45; }
 .missing { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .missing li { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; border: 1px dashed var(--line-strong); color: var(--text); }
 .btn-plain { min-height: 44px; }
-.text-btn { min-height: 32px; }
+.text-btn { min-height: 44px; display: inline-flex; align-items: center; }
 @media print {
 .draft-banner, .stepper, .profile-strip, .col-q, .closing-actions, .copy-status, #copy-host, .btn, .text-btn, .see-results, .method, .out-actions { display: none !important; }
 .layout { display: block !important; }
@@ -533,7 +533,7 @@ a { color: #000; }
 <p class="label">Related Big Leap DIY toolkits</p>
 <ul id="xlinks-list"></ul>
 </div>
-<details class="limits" id="limits">
+<details class="limits" id="limits" open>
 <summary>Where it gets complex (<span id="limits-count"></span>)</summary>
 <ul id="limits-list"></ul>
 </details>
@@ -939,7 +939,7 @@ return L.concat(planFooter('mediaKit')).join('\n');
 }
 function headline(m) {
 if (m.stalls === 0) return { num: 'Ready', unit: 'to be pitched', text: 'Nothing on this list would stall a PR program in month one.' + (m.polish ? ' One polish item left.' : '') };
-return { num: String(m.stalls), unit: m.stalls === 1 ? 'gap would stall a PR program in month one' : 'gaps would stall a PR program in month one', text: m.stalls + (m.stalls === 1 ? ' gap' : ' gaps') + ' would stall a PR program in month one. ' + m.readyCount + ' of 10 checklist items are ready.' };
+return { num: String(m.stalls), unit: m.stalls === 1 ? 'gap would stall a PR program in month one' : 'gaps would stall a PR program in month one', text: m.stalls + (m.stalls === 1 ? ' gap' : ' gaps') + ' would stall a PR program in month one. ' + m.readyCount + ' of 10 checklist items ' + (m.readyCount === 1 ? 'is' : 'are') + ' ready.' };
 }
 function render() {
 const input = readInput(form), m = model(input, profile);
@@ -953,7 +953,7 @@ $('out-unit').textContent = h.unit;
 const firstGaps = m.items.filter((t) => !t.done).slice(0, 3).map((t) => t.short.toLowerCase());
 $('out-line').innerHTML = m.stalls === 0
 ? 'You have a spokesperson, a fast reply, a story and the assets to back it up. You are ready for someone to pitch you.'
-: 'Start with <b>' + esc(firstGaps.join(', ')) + '</b>. Fix these before anyone pitches you, and the first month goes to stories instead of paperwork. <b>' + m.readyCount + ' of 10</b> items are ready.';
+: 'Start with <b>' + esc(firstGaps.join(', ')) + '</b>. Fix these before anyone pitches you, and the first month goes to stories instead of paperwork. <b>' + m.readyCount + ' of 10</b> ' + (m.readyCount === 1 ? 'item is' : 'items are') + ' ready.';
 $('answer').classList.toggle('is-done', m.stalls === 0);
 flashIfChanged(m.stalls);
 $('strip').innerHTML = ITEMS.map((it) => {

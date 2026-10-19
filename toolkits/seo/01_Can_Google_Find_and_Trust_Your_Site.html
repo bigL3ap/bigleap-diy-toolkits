@@ -1,0 +1,1431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Can Google Find and Trust Your Site?</title>
+<meta name="description" content="Eight quick answers about your website. You get your SEO Foundation Fix List: what stops Google and AI search from seeing your site, and the fixes in the order to make them.">
+<style>
+/* Big Leap DIY Toolkit shell (from the RevOps series, v2) + SEO series additions.
+Layout: masthead, series stepper, then questions left and results right on desktop; one column under 880px. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+/* ---------- SEO series additions (draft banner, profile strip, checks, snippets, print) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-wrap: anywhere; }
+.draft-banner { background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line); font-size: 12.5px; line-height: 1.4; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); padding-top: max(7px, env(safe-area-inset-top, 0px)); text-align: center; }
+.draft-banner b { font-weight: 700; }
+.min-h { min-height: 100vh; min-height: 100dvh; }
+/* Stepper for a two-toolkit series */
+.stepper ol.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.stepper ol.n2::before { left: 25%; right: 25%; }
+.stepper a.st { min-height: 44px; }
+.start-here { font-size: 12.5px; }
+.start-here a { font-weight: 700; color: var(--heading); }
+/* Profile strip */
+.profile-strip { display: grid; gap: 8px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.profile-row .p-text { flex: 1 1 18rem; min-width: 0; }
+.profile-row .p-text b { color: var(--heading); }
+.profile-row a, .profile-strip summary { font-weight: 700; color: var(--heading); }
+.profile-strip a { display: inline-flex; align-items: center; min-height: 44px; }
+.profile-strip .text-btn { min-height: 44px; }
+.profile-strip details summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+.paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.paste-status { font-size: 13px; color: var(--muted); }
+.from-profile { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); vertical-align: 1px; white-space: nowrap; }
+.profile-note { font-size: 13.5px; color: var(--muted); }
+/* Focus and checked states without :has() (Safari-safe) */
+.text-btn { display: inline-flex; align-items: center; min-height: 44px; }
+.seg label { min-height: 44px; }
+.seg.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opt { min-height: 44px; }
+.opt.is-checked { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { width: 18px; height: 18px; }
+.opt input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.wrap3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 420px) { .seg.wrap3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sub-q { display: grid; gap: 6px; padding-top: 6px; }
+.sub-q .q-label { font-size: 14px; }
+.opts.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+/* Deliverable items */
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chip.block { background: var(--field); color: var(--heading); border-color: var(--heading); }
+.chip.check { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.st-time { font-size: 13px; color: var(--muted); }
+.st-time b { color: var(--heading); }
+.how-list { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.cms-note { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+.cms-note b { color: var(--heading); }
+.done-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.done-list li { font-size: 13px; font-weight: 700; color: var(--heading); padding: 3px 10px; border-radius: 999px; background: var(--tint); border: 1px solid var(--tint-line); }
+.snippet { display: grid; gap: 6px; }
+.snippet pre { margin: 0; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 12.5px/1.5 "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.snippet-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.snippet-head span { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mini-table { font-size: 13px; }
+.mini-table th, .mini-table td { padding: 7px 8px; }
+.complex ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.complex li b { color: var(--heading); }
+.complex .applies { background: var(--seg-on); color: var(--on-seg); }
+.complex-cta { font-size: 14px; }
+.complex-cta a { font-weight: 700; }
+.skip { display: grid; gap: 10px; }
+.skip h2 { font-size: 19px; }
+.templates { display: grid; gap: 12px; }
+.email-head .btn-plain { min-height: 44px; }
+.btn-plain { min-height: 44px; }
+.loc-meta { font-size: 13px; color: var(--muted); }
+@media print {
+  .draft-banner, .stepper, .profile-strip, .col-q, .closing-actions, .closing .next, .closing .xlinks, .btn, .text-btn, .method, .see-results, .copy-fallback { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .page { max-width: none; padding: 0; }
+  .layout { display: block; }
+  .results { display: block; }
+  .panel, .closing { border: 1px solid #999; background: #fff !important; color: #000 !important; break-inside: auto; margin-bottom: 12px; }
+  .closing h2, .closing p { color: #000 !important; }
+  .steps > li { break-inside: avoid; background: #fff !important; }
+  .is-sticky { position: static !important; }
+  a { color: #000; }
+}
+
+</style>
+</head>
+<body>
+<div class="draft-banner" role="note">Draft v1 for internal review · Built Oct 19, 2026 from the Agency Brands call · Owner: <b>Shema Al-Darwish</b></div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· SEO</span></div>
+<p class="eyebrow"><span class="kit">SEO DIY Toolkit 1 of 2</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Can Google Find and Trust Your Site?</h1>
+<p class="lede">Eight quick answers about your website. You get a fix list for anything that stops Google or AI search from seeing your site, in the order to do it.</p>
+</header>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile" tabindex="-1"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The SEO DIY path</h2>
+<p class="stepper-note start-here" id="start-here"></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your website today</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+
+<fieldset class="q">
+<legend><span class="q-label">What is your website built on?<span data-pf="cms"></span></span></legend>
+<div class="seg wrap3">
+<input type="radio" id="cms-wordpress" name="cms" value="wordpress"><label for="cms-wordpress">WordPress</label>
+<input type="radio" id="cms-shopify" name="cms" value="shopify"><label for="cms-shopify">Shopify</label>
+<input type="radio" id="cms-squarespace" name="cms" value="squarespace"><label for="cms-squarespace">Squarespace</label>
+<input type="radio" id="cms-wix" name="cms" value="wix"><label for="cms-wix">Wix</label>
+<input type="radio" id="cms-webflow" name="cms" value="webflow"><label for="cms-webflow">Webflow</label>
+<input type="radio" id="cms-hubspot" name="cms" value="hubspot"><label for="cms-hubspot">HubSpot</label>
+<input type="radio" id="cms-other" name="cms" value="other"><label for="cms-other">Other or custom</label>
+</div>
+<p class="q-help">Your fix list uses the menus for your platform. Not sure? Ask whoever built the site, or look at the login page you use to edit it.</p>
+<div class="sub-q">
+<label class="q-label" for="domain">Your website address <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="www.example.com">
+<p class="q-help">Used only on this page, to fill in the checks and code below. Nothing is sent anywhere.</p>
+</div>
+</fieldset>
+
+<fieldset class="q">
+<legend><span class="q-label">Is your site set up in Google Search Console?</span></legend>
+<div class="opts">
+<label class="opt" for="gsc-full"><input type="radio" id="gsc-full" name="gsc" value="full"><span class="opt-text"><span class="opt-title">Yes, verified, and our sitemap is submitted</span></span></label>
+<label class="opt" for="gsc-nomap"><input type="radio" id="gsc-nomap" name="gsc" value="nomap"><span class="opt-text"><span class="opt-title">Verified, but no sitemap submitted</span></span></label>
+<label class="opt" for="gsc-none"><input type="radio" id="gsc-none" name="gsc" value="none"><span class="opt-text"><span class="opt-title">No, not set up</span></span></label>
+<label class="opt" for="gsc-unsure"><input type="radio" id="gsc-unsure" name="gsc" value="unsure"><span class="opt-text"><span class="opt-title">Not sure</span></span></label>
+</div>
+<p class="q-help">Search Console is Google's free tool that shows which pages Google has found and why others are left out. A <b>sitemap</b> is the list of your pages you hand to Google.</p>
+</fieldset>
+
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="bing-q">Is your site in Bing Webmaster Tools?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="bing-q">
+<input type="radio" id="bing-yes" name="bing" value="yes"><label for="bing-yes">Yes</label>
+<input type="radio" id="bing-no" name="bing" value="no"><label for="bing-no">No</label>
+<input type="radio" id="bing-unsure" name="bing" value="unsure"><label for="bing-unsure">Not sure</label>
+</div>
+</div>
+<p class="q-help">Bing's version of Search Console. Bing's index feeds Microsoft Copilot and is one of the sources ChatGPT search draws on.</p>
+</div>
+
+<fieldset class="q">
+<legend><span class="q-label">Open <span id="robots-url">yoursite.com/robots.txt</span>. What does it say?</span></legend>
+<div class="opts">
+<label class="opt" for="robots-open"><input type="radio" id="robots-open" name="robots" value="open"><span class="opt-text"><span class="opt-title">Nothing blocked, or there's no file</span><span class="opt-sub">No "Disallow: /" line, or only private areas like /cart or /admin are blocked.</span></span></label>
+<label class="opt" for="robots-some"><input type="radio" id="robots-some" name="robots" value="some"><span class="opt-text"><span class="opt-title">It blocks some bots by name</span><span class="opt-sub">For example GPTBot, OAI-SearchBot, PerplexityBot or Bingbot.</span></span></label>
+<label class="opt" for="robots-all"><input type="radio" id="robots-all" name="robots" value="all"><span class="opt-text"><span class="opt-title">It says "User-agent: *" then "Disallow: /"</span><span class="opt-sub">That blocks every search engine from the whole site.</span></span></label>
+<label class="opt" for="robots-unsure"><input type="radio" id="robots-unsure" name="robots" value="unsure"><span class="opt-text"><span class="opt-title">Haven't looked yet</span></span></label>
+</div>
+<p class="q-help">robots.txt is a small public file that tells bots where they may go. A leftover line from when the site was being built can hide the whole site.</p>
+</fieldset>
+
+<fieldset class="q">
+<legend><span class="q-label">Search Google for <span id="site-query">site:yoursite.com</span>. Do your important pages show up?</span></legend>
+<div class="opts">
+<label class="opt" for="idx-most"><input type="radio" id="idx-most" name="idx" value="most"><span class="opt-text"><span class="opt-title">Yes, my main pages are all there</span></span></label>
+<label class="opt" for="idx-some"><input type="radio" id="idx-some" name="idx" value="some"><span class="opt-text"><span class="opt-title">Some important pages are missing</span></span></label>
+<label class="opt" for="idx-few"><input type="radio" id="idx-few" name="idx" value="few"><span class="opt-text"><span class="opt-title">Very few or none show up</span></span></label>
+<label class="opt" for="idx-unsure"><input type="radio" id="idx-unsure" name="idx" value="unsure"><span class="opt-text"><span class="opt-title">Haven't checked</span></span></label>
+</div>
+<p class="q-help">"Important pages" means home, each main service or product page, About and Contact. The site: search is a quick look; Search Console's Pages report is the real count.</p>
+</fieldset>
+
+<fieldset class="q">
+<legend><span class="q-label">Tick what's already true <span class="opt-tag">(leave it if you're not sure)</span></span></legend>
+<div class="opts">
+<label class="opt" for="has-https"><input type="checkbox" id="has-https" name="has" value="https"><span class="opt-text"><span class="opt-title">Every page loads on https:// with a padlock</span><span class="opt-sub">No "Not secure" warning in the browser bar.</span></span></label>
+<label class="opt" for="has-speed"><input type="checkbox" id="has-speed" name="has" value="speed"><span class="opt-text"><span class="opt-title">The site passes Core Web Vitals on mobile</span><span class="opt-sub">Google's speed and stability check, shown at the top of PageSpeed Insights.</span></span></label>
+<label class="opt" for="has-titles"><input type="checkbox" id="has-titles" name="has" value="titles"><span class="opt-text"><span class="opt-title">Each key page has its own title and description</span><span class="opt-sub">The blue headline and grey text people see in Google results.</span></span></label>
+<label class="opt" for="has-schema"><input type="checkbox" id="has-schema" name="has" value="schema"><span class="opt-text"><span class="opt-title">The site has Organization or LocalBusiness schema</span><span class="opt-sub">Hidden code that tells search engines and AI exactly who you are.</span></span></label>
+<label class="opt" for="has-about"><input type="checkbox" id="has-about" name="has" value="about"><span class="opt-text"><span class="opt-title">A real About page and easy-to-find contact details</span><span class="opt-sub">Who runs the business, address or service area, phone, email.</span></span></label>
+</div>
+</fieldset>
+
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="ga4-q">Is Google Analytics 4 on the site?<span data-pf="ga4"></span></span>
+<div class="seg inline" role="radiogroup" aria-labelledby="ga4-q">
+<input type="radio" id="ga4-yes" name="ga4" value="yes"><label for="ga4-yes">Yes</label>
+<input type="radio" id="ga4-no" name="ga4" value="no"><label for="ga4-no">No</label>
+<input type="radio" id="ga4-unsure" name="ga4" value="unsure"><label for="ga4-unsure">Not sure</label>
+</div>
+</div>
+<p class="q-help">GA4 shows what search visitors do once they arrive. For SEO, GA4 plus a couple of conversion events is usually enough.</p>
+</div>
+
+<fieldset class="q">
+<legend><span class="q-label">About your site<span data-pf="intl"></span></span></legend>
+<span class="q-label" id="size-q" style="font-weight:400">Roughly how many pages?</span>
+<div class="seg" role="radiogroup" aria-labelledby="size-q">
+<input type="radio" id="size-small" name="size" value="small"><label for="size-small">Under 50</label>
+<input type="radio" id="size-medium" name="size" value="medium"><label for="size-medium">50–500</label>
+<input type="radio" id="size-large" name="size" value="large"><label for="size-large">500+</label>
+</div>
+<div class="opts" style="margin-top:6px">
+<label class="opt" for="plan-redesign"><input type="checkbox" id="plan-redesign" name="plan" value="redesign"><span class="opt-text"><span class="opt-title">A redesign, new platform or new domain is planned</span><span class="opt-sub">In the next six months.</span></span></label>
+<label class="opt" for="plan-intl"><input type="checkbox" id="plan-intl" name="plan" value="intl"><span class="opt-text"><span class="opt-title">The site serves more than one country or language</span></span></label>
+<label class="opt" for="plan-local"><input type="checkbox" id="plan-local" name="plan" value="local"><span class="opt-text"><span class="opt-title">Customers visit a location, or we serve a local area</span><span class="opt-sub">Shops, offices, clinics, restaurants, or trades that travel to customers.</span></span></label>
+</div>
+<p class="q-help">Count blog posts and product pages too. A rough guess is fine.</p>
+</fieldset>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See your fix list</button>
+</form>
+</section>
+
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your foundation</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">1</span><span class="hero-unit" id="out-unit">blocker</span></p>
+<p class="hero-rec" id="out-rec"></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your SEO Foundation Fix List</h2>
+<p class="deliv-sub" id="deliv-sub"></p>
+</div>
+<ol class="steps" id="plan"></ol>
+<div id="done-wrap" hidden>
+<p class="label" style="margin-bottom:6px">Already in place</p>
+<ul class="done-list" id="done-list"></ul>
+</div>
+</section>
+
+<section class="panel complex" aria-labelledby="complex-h">
+<div class="deliv-head">
+<h2 id="complex-h" style="font-size:19px">Where it gets complex</h2>
+<p class="deliv-sub">These need expert judgment. Don't let them stop you doing the list above first.</p>
+</div>
+<ul id="complex-list"></ul>
+<p class="complex-cta" id="complex-cta"></p>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want the foundation built for you?</h2>
+<p>Copy your fix list and work through it, or bring it to a call. Once these basics are in place, our time together goes to strategy, not setup.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Shema about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we calculate this</summary>
+<div class="method-body">
+<p>A <b>blocker</b> is anything that stops Google or AI search tools from seeing your pages at all: robots.txt shutting out every search engine, robots.txt shutting out named search bots, or important pages missing from Google. Answers of "haven't looked" become checks at the top of your list, not blockers, until you know.</p>
+<p>Times are rough ranges for someone doing this for the first time on a small business site. They are rules of thumb from typical setups, not promises. Waiting time (Google recrawling, verification) is extra.</p>
+<div class="table-wrap">
+<table class="mini-table">
+<thead><tr><th scope="col">Assumption</th><th scope="col">Value</th></tr></thead>
+<tbody id="assume-rows"></tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build.</p>
+<p>© Big Leap · SEO DIY Toolkit 1 of 2 · Draft v1 for internal review · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in both SEO DIY toolkits.
+OWNER: the Big Leap expert named on the CTA.
+CTA_URL: where "Talk to Shema about building it" goes.
+SERIES: every toolkit in the SEO series (file = relative link).
+LINKS: the shared cross-link map for all DIY series (relative URLs).
+===================================================================== */
+const OWNER = { name: 'Shema Al-Darwish', first: 'Shema' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Shema's meeting scheduler link
+const SERIES = [
+  { n: 1, short: 'Foundations', title: 'Can Google Find and Trust Your Site?', file: '01_Can_Google_Find_and_Trust_Your_Site.html' },
+  { n: 2, short: 'Local search', title: 'Is Your Business Ready for Local Search?', file: '02_Is_Your_Business_Ready_for_Local_Search.html' },
+];
+const LINKS = {
+  profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
+  adsReady:  { name: 'Is Your Google Ads Account Ready?',      url: '../paid/02_Is_Your_Google_Ads_Account_Ready.html',     owner: 'Scott Smoot' },
+  campaigns: { name: 'Which Campaigns Should You Run First?',  url: '../paid/03_Which_Campaigns_Should_You_Run_First.html', owner: 'Scott Smoot' },
+  tracking:  { name: 'Can You See What Your Marketing Does?',  url: '../tracking/01_Can_You_See_What_Your_Marketing_Does.html', owner: 'Scott Smoot' },
+  conversions:{ name: 'Which Conversions Should You Track?',   url: '../tracking/02_Which_Conversions_Should_You_Track.html', owner: 'Scott Smoot' },
+  seoBasics: { name: 'Can Google Find and Trust Your Site?',   url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',   owner: 'Shema Al-Darwish' },
+  local:     { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html', owner: 'Shema Al-Darwish' },
+  prReady:   { name: 'Are You Ready to Be Pitched?',           url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',            owner: 'Kristina Ainge' },
+  mediaKit:  { name: 'Build Your Media Kit',                   url: '../pr/02_Build_Your_Media_Kit.html',                   owner: 'Kristina Ainge' },
+  leadCapture:{ name: 'Is Every Lead Reaching Your CRM?',      url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',    owner: 'Dallas Olsen' },
+  speedToLead:{ name: 'Never Let a Lead Go Cold',              url: '../revops/02_Never_Let_a_Lead_Go_Cold.html',           owner: 'Dallas Olsen' },
+  pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?', url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', owner: 'Dallas Olsen' },
+  hub:       { name: 'All DIY Toolkits',                       url: '../../index.html',                                     owner: '' },
+};
+/* EXAMPLE: the answers a first-time visitor sees. */
+const EXAMPLE = { cms: 'wordpress', domain: '', gsc: 'nomap', bing: 'no', robots: 'unsure', idx: 'some', has: ['https', 'about'], ga4: 'yes', size: 'small', plan: ['local'] };
+/* ASSUMPTIONS: rough first-time times in minutes [low, high]. Rules of thumb, not measurements. */
+const ASSUMPTIONS = {
+  robots:   [15, 45],    // read robots.txt, fix the platform setting, recheck
+  robotsCheck: [5, 10],  // just looking at the file
+  gsc:      [20, 45],    // add property, verify, submit sitemap
+  gscMap:   [10, 15],    // sitemap only
+  index:    [30, 90],    // Pages report, URL Inspection, fix noindex settings
+  indexCheck: [10, 20],
+  bing:     [10, 20],    // import from Search Console
+  https:    [30, 120],   // turn on SSL, force one https version
+  speed:    [60, 240],   // PageSpeed run plus image and plugin clean-up
+  titleMinPerPage: [10, 15],
+  keyPages: { small: 6, medium: 12, large: 20 }, // key pages to title by hand
+  schema:   [30, 60],
+  about:    [60, 180],
+  ga4:      [30, 60],
+  ga4Check: [5, 10],
+};
+
+/* ---------- Shared Business Profile (same helper in every DIY toolkit) ---------- */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* ---------- small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+// minutes -> "about 2 hours" / "30–45 minutes" / "2–4 hours"
+function timeRange(lo, hi) {
+  lo = Math.max(0, lo || 0); hi = Math.max(lo, hi || 0);
+  if (hi <= 0) return 'no time';
+  if (hi < 60) return (Math.round(lo) === Math.round(hi) ? 'about ' + fmt(Math.round(hi)) : fmt(Math.round(lo)) + '–' + fmt(Math.round(hi))) + ' minutes';
+  const d = hi / 60 < 10 ? 1 : 0;
+  const a = fmt(lo / 60, d), b = fmt(hi / 60, d);
+  return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
+}
+function link(key) { return LINKS[key] || null; }
+function linkHtml(key, label) { const l = link(key); return l ? '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>' : esc(label || ''); }
+
+/* ---------- stepper ---------- */
+function renderStepper(current) {
+  const ol = $('stepper-list');
+  ol.className = 'n' + SERIES.length;
+  ol.innerHTML = SERIES.map((k) => {
+    const cur = k.n === current;
+    const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+    return '<li>' + (cur
+      ? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+      : '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+  }).join('');
+  const sh = $('start-here');
+  if (sh) sh.innerHTML = 'Start here: ' + linkHtml('profile', 'Build your Business Profile');
+}
+
+/* ---------- profile strip ---------- */
+const MODEL_LABEL = { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' };
+const REACH_LABEL = { local: 'local', regional: 'regional', national: 'national', international: 'international' };
+function profileSummary(p) {
+  const bits = [];
+  bits.push(p.name || p.industry || 'Your business');
+  if (MODEL_LABEL[p.model]) bits.push(MODEL_LABEL[p.model]);
+  if (REACH_LABEL[p.reach]) bits.push(REACH_LABEL[p.reach]);
+  return bits.join(' · ');
+}
+function initProfileStrip(onChange) {
+  const host = $('profile-strip');
+  function draw() {
+    const p = loadProfile();
+    if (p && p.v === 1) {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Using your Business Profile: <b>' + esc(profileSummary(p)) + '</b></p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Change</a>' +
+        '<button type="button" class="text-btn" id="profile-clear">Clear</button></div>';
+      $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onChange(null); $('profile-strip').focus(); });
+    } else {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Answer 8 questions once and every toolkit fills itself in.</p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Build your Business Profile →</a></div>' +
+        '<details id="paste-details"><summary>Paste a profile code</summary>' +
+        '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
+        '<input class="text-field" id="profile-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…">' +
+        '<button type="button" class="btn btn-plain" id="profile-apply">Use this profile</button></div>' +
+        '<p class="paste-status" id="paste-status" role="status" aria-live="polite"></p></details>';
+      $('profile-apply').addEventListener('click', () => {
+        const p2 = decodeProfile($('profile-code').value);
+        if (!p2) { $('paste-status').textContent = 'That code did not work. Copy the whole code, starting with BL1.'; return; }
+        saveProfile(p2); draw(); onChange(p2);
+      });
+    }
+  }
+  draw();
+  return loadProfile();
+}
+// Shows a "From your profile" tag next to a question label; hides it once the visitor changes that answer.
+function markFromProfile(names) {
+  document.querySelectorAll('[data-pf]').forEach((el) => {
+    const on = names.indexOf(el.getAttribute('data-pf')) !== -1;
+    el.innerHTML = on ? '<span class="from-profile">From your profile</span>' : '';
+  });
+}
+function unmarkProfile(name) {
+  document.querySelectorAll('[data-pf="' + name + '"]').forEach((el) => { el.innerHTML = ''; });
+}
+
+/* ---------- form state (no :has(), Safari-safe) ---------- */
+function syncChoiceStyles(root) {
+  root.querySelectorAll('.opt').forEach((o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); });
+}
+// Visible focus ring on segmented buttons for keyboard users (the radio itself is visually hidden).
+let usingKeyboard = false;
+document.addEventListener('keydown', () => { usingKeyboard = true; }, true);
+document.addEventListener('pointerdown', () => { usingKeyboard = false; }, true);
+document.addEventListener('mousedown', () => { usingKeyboard = false; }, true);
+function initSegFocus(root) {
+  const segOf = (el) => (el && el.closest) ? el.closest('.seg') : null;
+  root.addEventListener('focusin', (e) => { const s = segOf(e.target); if (s && usingKeyboard) s.classList.add('is-focus'); });
+  root.addEventListener('focusout', (e) => { const s = segOf(e.target); if (s) s.classList.remove('is-focus'); });
+  root.addEventListener('keyup', (e) => { const s = segOf(e.target); if (s && e.target === document.activeElement) s.classList.add('is-focus'); });
+}
+function radioVal(form, name) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value;
+  return '';
+}
+function setRadio(form, name, value) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) els[i].checked = els[i].value === value;
+}
+function checkVals(form, name) {
+  return Array.prototype.filter.call(form.querySelectorAll('input[name="' + name + '"]'), (i) => i.checked).map((i) => i.value);
+}
+function setChecks(form, name, values) {
+  form.querySelectorAll('input[name="' + name + '"]').forEach((i) => { i.checked = values.indexOf(i.value) !== -1; });
+}
+
+/* ---------- deliverable list ---------- */
+// item: { id, title, sev:'block'|'check'|'fix', done, why, steps:[], cms:'', time:[lo,hi], per:'', kit:{key, why}, snippetId }
+const SEV_CHIP = { block: '<span class="chip block">Blocker</span>', check: '<span class="chip check">Check this</span>', fix: '' };
+function renderItems(el, items, extraHtml) {
+  let open = 0;
+  el.innerHTML = items.map((t, i) => {
+    const first = !t.done && open++ < 3;
+    const chips = t.done ? '' : (first ? '<span class="chip first">Do these first</span>' : '') + (SEV_CHIP[t.sev] || '');
+    return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+      '<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+      '<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+      (chips ? '<span class="chips">' + chips + '</span>' : '') + '</div>' +
+      (t.done ? (t.doneNote ? '<p class="st-time">' + esc(t.doneNote) + '</p>' : '') :
+        (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+        (t.steps && t.steps.length ? '<ol class="how-list">' + t.steps.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') +
+        (t.cms ? '<p class="cms-note"><b>' + esc(t.cmsLabel || 'On your platform') + ':</b> ' + esc(t.cms) + '</p>' : '') +
+        (extraHtml && extraHtml[t.id] ? extraHtml[t.id] : '') +
+        (t.time ? '<p class="st-time">Time: <b>' + esc(timeRange(t.time[0], t.time[1])) + '</b>' + (t.per ? ' ' + esc(t.per) : '') + (t.wait ? ' · ' + esc(t.wait) : '') + '</p>' : '') +
+        (t.kit && LINKS[t.kit.key] ? '<p class="kit-link">Free toolkit: ' + linkHtml(t.kit.key) + ' · ' + esc(t.kit.why) + '</p>' : '')) +
+      '</div></li>';
+  }).join('');
+}
+function itemsText(items, extraText) {
+  const out = [];
+  let open = 0;
+  items.forEach((t, i) => {
+    const first = !t.done && open++ < 3;
+    if (t.done) { out.push('[done] ' + t.title); return; }
+    out.push((i + 1) + '. ' + t.title + (t.sev === 'block' ? ' [BLOCKER]' : t.sev === 'check' ? ' [CHECK THIS]' : '') + (first ? ', do this first' : ''));
+    if (t.why) out.push('   ' + t.why);
+    (t.steps || []).forEach((s, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + s));
+    if (t.cms) out.push('   ' + (t.cmsLabel || 'On your platform') + ': ' + t.cms);
+    if (extraText && extraText[t.id]) extraText[t.id].forEach((l) => out.push('   ' + l));
+    if (t.time) out.push('   Time: ' + timeRange(t.time[0], t.time[1]) + (t.per ? ' ' + t.per : '') + (t.wait ? ' · ' + t.wait : ''));
+    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + LINKS[t.kit.key].name + ' (' + t.kit.why + ')');
+  });
+  return out;
+}
+
+/* ---------- where it gets complex ---------- */
+function renderComplex(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  $('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+}
+function complexText(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  return sorted.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text);
+}
+
+/* ---------- cross-links and next ---------- */
+function renderXlinks(list) {
+  const live = list.filter((l) => LINKS[l.key]);
+  $('xlinks').hidden = live.length === 0;
+  $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+}
+function xlinksText(list) {
+  return list.filter((l) => LINKS[l.key]).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+}
+function renderNext(key, why) {
+  const l = LINKS[key];
+  if (!l) { $('next').hidden = true; return; }
+  $('next').hidden = false;
+  $('next-title').innerHTML = linkHtml(key);
+  $('next-why').textContent = why;
+}
+
+/* ---------- example pill ---------- */
+function setExampleState(state, exampleText) {
+  const pill = $('example-pill');
+  pill.textContent = state === 'example' ? 'Example answers' : state === 'profile' ? 'From your profile' : 'Your answers';
+  pill.classList.toggle('is-yours', state !== 'example');
+  $('example-text').textContent = state === 'example' ? exampleText
+    : state === 'profile' ? 'Some answers came from your Business Profile. Change any of them.'
+    : 'Your results update as you go.';
+  $('restore-example').hidden = state === 'example';
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+  const el = $('answer');
+  if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+  lastHeadline = key;
+}
+
+/* ---------- copy ---------- */
+function copyWithFallback(text, onDone, host) {
+  const fallback = () => {
+    let box = host.querySelector('.copy-fallback');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'copy-fallback';
+      const id = host.id + '-text';
+      box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+      host.appendChild(box);
+    }
+    const ta = box.querySelector('textarea');
+    ta.value = text; ta.focus(); ta.select();
+    try { if (document.execCommand && document.execCommand('copy')) { onDone(); } } catch (e) {}
+  };
+  const legacy = () => {
+    // Second try: a hidden textarea + execCommand. If that fails too, show the text to copy by hand.
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) { onDone(); return; }
+    } catch (e) {}
+    fallback();
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) navigator.clipboard.writeText(text).then(onDone, legacy);
+    else legacy();
+  } catch (err) { legacy(); }
+}
+function initCopyButton(btn, statusEl, host, getText, label, msg) {
+  let timer = null;
+  btn.addEventListener('click', () => {
+    copyWithFallback(getText(), () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      if (statusEl) statusEl.textContent = msg;
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = label; btn.classList.remove('is-copied'); if (statusEl) statusEl.textContent = ''; }, 3000);
+    }, host);
+  });
+}
+function initCopy(getText) {
+  initCopyButton($('copy-btn'), $('copy-status'), $('copy-host'), getText, 'Copy my plan', 'Your plan is copied. Paste it into an email, a doc or your notes.');
+  return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+
+/* ---------- layout ---------- */
+function initSticky() {
+  const q = $('col-q'), r = $('results');
+  const wide = window.matchMedia('(min-width: 880px)');
+  function update() {
+    q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+    if (!wide.matches) return;
+    const room = window.innerHeight - 32;
+    if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+    else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+  }
+  window.addEventListener('resize', update);
+  if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+  return update;
+}
+function initShell(current, onRestore) {
+  renderStepper(current);
+  $('cta-link').href = CTA_URL;
+  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+  $('complex-cta').innerHTML = 'Any of these sound like you? ' + OWNER.name + ' leads SEO at Big Leap. <a href="' + esc(CTA_URL) + '" target="_blank" rel="noopener">Talk to ' + esc(OWNER.first) + ' about building it</a>.';
+  $('hub-link').href = LINKS.hub.url;
+  $('restore-example').addEventListener('click', onRestore);
+  $('see-results').addEventListener('click', () => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { $('answer').focus({ preventScroll: true }); } catch (e) { $('answer').focus(); }
+  });
+}
+
+
+/* ---------- Toolkit 1: Can Google Find and Trust Your Site? ---------- */
+const CMS = {
+  wordpress: { name: 'WordPress', sitemap: '/sitemap_index.xml', sitemapNote: 'With Yoast or Rank Math it is /sitemap_index.xml. With no SEO plugin, WordPress makes /wp-sitemap.xml.' },
+  shopify: { name: 'Shopify', sitemap: '/sitemap.xml', sitemapNote: 'Shopify makes /sitemap.xml for you.' },
+  squarespace: { name: 'Squarespace', sitemap: '/sitemap.xml', sitemapNote: 'Squarespace makes /sitemap.xml for you.' },
+  wix: { name: 'Wix', sitemap: '/sitemap.xml', sitemapNote: 'Wix makes /sitemap.xml for you.' },
+  webflow: { name: 'Webflow', sitemap: '/sitemap.xml', sitemapNote: 'Turn on Site settings → SEO → Auto-generate sitemap, then it lives at /sitemap.xml.' },
+  hubspot: { name: 'HubSpot', sitemap: '/sitemap.xml', sitemapNote: 'HubSpot makes /sitemap.xml for you.' },
+  other: { name: 'your platform', sitemap: '/sitemap.xml', sitemapNote: 'Ask your developer for the sitemap address. It is usually /sitemap.xml.' },
+};
+// Platform-specific steps, where they differ. Menu names change; the footer says to check your own account.
+const HOW = {
+  robots: {
+    wordpress: 'Settings → Reading: untick "Discourage search engines from indexing this site" (the most common cause). To edit the file itself: Yoast SEO → Tools → File editor, or Rank Math → General Settings → Edit robots.txt.',
+    shopify: 'Online Store → Preferences: make sure password protection is off. The file is edited in Online Store → Themes → Edit code → add the robots.txt.liquid template, only if you need custom rules.',
+    squarespace: 'Settings → Crawlers: check that search engines are allowed. Squarespace\'s option to block AI crawlers also lives here. Also check that site visibility is not set to password-protected.',
+    wix: 'Settings → SEO (or Marketing & SEO → SEO Tools): make sure "Let search engines index your site" is on. Robots.txt Editor is in the same SEO Tools list.',
+    webflow: 'Site settings → SEO tab → robots.txt box. Also check that you published to your custom domain, not only the webflow.io staging address.',
+    hubspot: 'Settings → Content → Pages → SEO & Crawlers → robots.txt (pick the right domain first).',
+    other: 'Ask your developer to open the robots.txt file at the root of the site and remove any "Disallow: /" left over from the build.',
+  },
+  gsc: {
+    wordpress: 'Easiest: install Google\'s free Site Kit plugin and connect Search Console, or paste Google\'s HTML tag into Yoast SEO → Settings → Site connections.',
+    shopify: 'Choose "URL prefix", pick "HTML tag", and paste it into Online Store → Themes → Edit code → theme.liquid just above </head>. Or use the Domain option through your domain provider.',
+    squarespace: 'Connect it from Analytics → Search Keywords. Squarespace verifies the site and submits your sitemap for you.',
+    wix: 'Use Marketing & SEO → SEO → "Get found on Google" setup checklist. Wix verifies the site and submits your sitemap for you.',
+    webflow: 'Choose "URL prefix", pick "HTML tag", and paste only the code part into Site settings → SEO → Google site verification. Publish the site, then press Verify.',
+    hubspot: 'Choose "URL prefix", pick "HTML tag", and paste it into Settings → Content → Pages → Site header HTML.',
+    other: 'Use the "Domain" option and add the TXT record Google gives you at your domain registrar. It covers every version of the site at once.',
+  },
+  noindex: {
+    wordpress: 'Open the page, scroll to the Yoast or Rank Math box → Advanced, and make sure search engines are allowed to show it.',
+    shopify: 'Check the page is visible (not hidden or draft) and in a sales channel. Apps or theme code can add noindex; ask your theme developer if a page stays excluded.',
+    squarespace: 'Page settings (gear icon) → SEO tab: make sure "Hide page from search results" is off.',
+    wix: 'Page → SEO Basics: make sure "Let search engines index this page" is on.',
+    webflow: 'Page settings → SEO settings: make sure the page is not excluded from search or the sitemap.',
+    hubspot: 'Page editor → Settings → Advanced: remove any noindex in the head HTML.',
+    other: 'Ask your developer to look for a "noindex" meta tag on the missing pages.',
+  },
+  https: {
+    wordpress: 'Turn on the free SSL certificate in your hosting panel, then set both addresses to https:// in Settings → General. Turn on your host\'s "force HTTPS" option or use a redirect plugin.',
+    shopify: 'SSL is automatic. Settings → Domains: check every domain shows as secure and your main domain is set as primary.',
+    squarespace: 'Settings → Domains → SSL: choose Secure and HSTS Secure.',
+    wix: 'HTTPS is automatic. Settings → Domains: check the domain is connected and shows as secure.',
+    webflow: 'Site settings → Publishing → Advanced publishing options: turn on SSL, then republish.',
+    hubspot: 'SSL is automatic. Settings → Content → Domains & URLs: check each domain and turn on "Require HTTPS".',
+    other: 'Ask your host or developer for a free certificate (Let\'s Encrypt) and a redirect from http to https.',
+  },
+  titles: {
+    wordpress: 'Yoast or Rank Math box under each page editor → SEO title and Meta description.',
+    shopify: 'Each page, product or collection → "Search engine listing" → Edit. Homepage: Online Store → Preferences.',
+    squarespace: 'Page settings (gear icon) → SEO tab. Homepage: Marketing → SEO.',
+    wix: 'Page → SEO Basics → Title tag and Meta description.',
+    webflow: 'Page settings → SEO settings → Title tag and Meta description.',
+    hubspot: 'Page editor → Settings → Page title and Meta description.',
+    other: 'Look for an "SEO" section in each page\'s settings, or ask your developer.',
+  },
+  schema: {
+    wordpress: 'Yoast: Settings → Site representation (adds Organization schema for you). Rank Math: Titles & Meta → Local SEO. Check that name, logo and social profiles are filled in.',
+    shopify: 'Many themes already add Organization schema. If yours doesn\'t, paste the code below into theme.liquid above </head>.',
+    squarespace: 'Settings → Advanced → Code Injection → Header (needs a paid plan). Paste the code below.',
+    wix: 'Wix adds business markup from Settings → Business Info. For more, use Page → Advanced SEO → Structured data markup on the homepage.',
+    webflow: 'Home page settings → Custom code → Inside <head> tag. Paste the code below and publish.',
+    hubspot: 'Home page editor → Settings → Advanced → Head HTML. Paste the code below.',
+    other: 'Ask your developer to add the code below to the homepage <head>.',
+  },
+  ga4: {
+    wordpress: 'Site Kit by Google connects GA4 in a few clicks.',
+    shopify: 'Install the Google & YouTube app and connect your GA4 property.',
+    squarespace: 'Paste your Measurement ID (G-…) into the Google Analytics field in Squarespace\'s external services or integrations settings.',
+    wix: 'Marketing Integrations → Google Analytics → Connect.',
+    webflow: 'Site settings → Apps & integrations → Google Analytics: paste your Measurement ID (G-…).',
+    hubspot: 'Settings → Tracking & Analytics → Tracking code → Integrations: add your GA4 Measurement ID.',
+    other: 'Add the GA4 tag through Google Tag Manager or ask your developer to paste it on every page.',
+  },
+};
+const COMPLEX = [
+  { key: 'migration', title: 'Site migrations and redirect maps', text: 'A redesign, new platform or new domain needs every old URL mapped to its new home with 301 redirects, tested before and after launch. Done wrong, it can wipe out rankings and AI citations built over years.' },
+  { key: 'js', title: 'JavaScript rendering', text: 'Sites that build pages in the browser (custom apps, some headless setups) can look empty to crawlers. Diagnosing what Google actually renders takes developer tools and experience.' },
+  { key: 'crawl', title: 'Large-site crawl budget', text: 'With hundreds or thousands of pages, filters, tags and duplicate URLs can soak up Google\'s attention. Canonicals, faceted navigation and index pruning need a plan.' },
+  { key: 'intl', title: 'International sites and hreflang', text: 'More than one country or language needs hreflang tags and a URL structure that tells Google which version to show where.' },
+  { key: 'content', title: 'Content strategy and keyword targeting', text: 'Which topics and questions to own, which page should rank for what, and how to structure content so AI answers can quote it. That is strategy, not setup.' },
+  { key: 'ai', title: 'AI visibility tracking', text: 'Measuring how often ChatGPT, Perplexity, Gemini and AI Overviews mention you needs a set of prompts, competitors and pages to track. There is no history before tracking starts, so it pays to set it up early.' },
+];
+function cleanDomain(raw) {
+  let d = String(raw || '').trim().toLowerCase();
+  d = d.replace(/^[a-z]+:\/\//, '').split(/[\/?#\s]/)[0].replace(/:\d+$/, '');
+  return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(d) ? d : '';
+}
+function model(input, a) {
+  const cms = CMS[input.cms] ? input.cms : 'other';
+  const C = CMS[cms];
+  const dom = cleanDomain(input.domain);
+  const site = dom || 'yoursite.com';
+  const has = (k) => input.has.indexOf(k) !== -1;
+  const plan = (k) => input.plan.indexOf(k) !== -1;
+  const size = a.keyPages[input.size] ? input.size : 'small';
+  const items = [], done = [];
+  const sitemapUrl = 'https://' + site + C.sitemap;
+
+  // 1. robots.txt
+  if (input.robots === 'all' || input.robots === 'some' || input.robots === 'unsure') {
+    const all = input.robots === 'all', some = input.robots === 'some';
+    items.push({
+      id: 'robots', sev: all || some ? 'block' : 'check',
+      title: all ? 'Unblock your whole site in robots.txt' : some ? 'Let the search bots back in through robots.txt' : 'Check robots.txt isn\'t blocking anyone',
+      why: all ? 'Right now every search engine is told to stay out. Nothing else on this list matters until this line is gone.'
+        : some ? 'Blocking a search bot hides you from that search tool\'s answers. Blocking a training bot does not. Make sure you only block what you mean to.'
+        : 'Two minutes. A leftover "Disallow: /" from when the site was built is the most common reason a site is invisible.',
+      steps: [
+        'Open ' + site + '/robots.txt in your browser.',
+        'If you see "User-agent: *" followed by "Disallow: /", that blocks everything. Remove that Disallow line (or change it to "Allow: /").',
+        'Find any search bot named with "Disallow: /" under it: Googlebot, Bingbot, OAI-SearchBot, PerplexityBot. Remove those blocks.',
+        'Decide on training bots separately (table below). Blocking them is a business choice and does not remove you from search.',
+        'Add a Sitemap line at the bottom (see the example), save, and reload the file to confirm.',
+        'In Search Console, open Settings → robots.txt to see the version Google last fetched.',
+      ],
+      cms: HOW.robots[cms], cmsLabel: 'On ' + C.name,
+      time: all || some ? a.robots : a.robotsCheck,
+    });
+  } else done.push('robots.txt lets search engines in');
+
+  // 2. Search Console + sitemap
+  if (input.gsc !== 'full') {
+    const nomap = input.gsc === 'nomap';
+    items.push({
+      id: 'gsc', sev: input.gsc === 'unsure' ? 'check' : 'fix',
+      title: nomap ? 'Submit your sitemap in Search Console' : input.gsc === 'unsure' ? 'Confirm Search Console access, then submit your sitemap' : 'Set up Google Search Console and submit your sitemap',
+      why: nomap ? 'Google can find pages without it, but the sitemap tells it every page you care about and makes the Pages report useful.'
+        : 'Search Console is the only place Google tells you which pages it has, which it skipped, and why. Every other fix is checked here.',
+      steps: (nomap ? [] : input.gsc === 'unsure' ? [
+        'Ask whoever built the site or ran marketing before. You want Owner access added for your own Google account.',
+        'If no one has it, go to search.google.com/search-console and add the site yourself (it is free and can have several owners).',
+      ] : [
+        'Go to search.google.com/search-console and sign in with a company Google account, not a personal one.',
+        'Click Add property. "Domain" covers every version of your site; "URL prefix" is easier on site builders.',
+        'Verify ownership using the method for your platform (below).',
+      ]).concat([
+        'Check your sitemap opens: ' + sitemapUrl + '. ' + C.sitemapNote,
+        'In Search Console go to Indexing → Sitemaps, paste the sitemap address, and click Submit.',
+        'Come back in a few days. Status should say "Success" with a count of discovered pages.',
+      ]),
+      cms: nomap ? '' : HOW.gsc[cms], cmsLabel: 'Verify on ' + C.name,
+      time: nomap ? a.gscMap : a.gsc, wait: 'data appears within a few days',
+    });
+  } else done.push('Search Console verified, sitemap submitted');
+
+  // 3. Indexing
+  if (input.idx !== 'most') {
+    const unsure = input.idx === 'unsure', few = input.idx === 'few';
+    items.push({
+      id: 'index', sev: unsure ? 'check' : 'block',
+      title: unsure ? 'Check your important pages are in Google' : few ? 'Get your site into Google\'s index' : 'Get your missing pages into Google',
+      why: unsure ? 'A page that isn\'t indexed can\'t rank on Google or be cited in AI Overviews. Ten minutes tells you where you stand.'
+        : 'Pages that aren\'t indexed are invisible in Google and in AI Overviews, and harder for other AI search tools to find.',
+      steps: [
+        'Search Google for site:' + site + ' and note which key pages are missing.',
+        'In Search Console open Indexing → Pages. "Why pages aren\'t indexed" lists the reasons.',
+        'For each missing key page, paste its address in the URL Inspection bar at the top. It says whether Google can index it.',
+        'Fix the reason: "Excluded by noindex tag" is a page setting (below); "Blocked by robots.txt" is step 1; "Crawled, currently not indexed" usually means the page is thin or too like another page.',
+        'Click Request indexing on each fixed page. New sites can take a few weeks; that is normal.',
+      ].concat(few ? ['If almost nothing shows up, check the site isn\'t password-protected or still on a staging address.'] : []),
+      cms: HOW.noindex[cms], cmsLabel: 'Page visibility on ' + C.name,
+      time: unsure ? a.indexCheck : a.index, wait: 'Google may take days to weeks to recrawl',
+    });
+  } else done.push('Important pages are in Google');
+
+  // 4. Bing
+  if (input.bing !== 'yes') {
+    items.push({
+      id: 'bing', sev: input.bing === 'unsure' ? 'check' : 'fix',
+      title: input.bing === 'unsure' ? 'Check Bing Webmaster Tools access' : 'Add your site to Bing Webmaster Tools',
+      why: 'Bing\'s index feeds Microsoft Copilot and is one of the sources ChatGPT search draws on. Being findable there is a cheap way into AI answers.',
+      steps: [
+        'Go to bing.com/webmasters and sign in.',
+        input.gsc === 'full' || input.gsc === 'nomap' ? 'Choose "Import from Google Search Console". It copies your verified site and sitemap in one step.' : 'Once Search Console is set up, choose "Import from Google Search Console". Or add the site by hand and verify it.',
+        'Open Sitemaps and confirm your sitemap is listed (submit ' + sitemapUrl + ' if not).',
+        'Optional: if your platform or SEO plugin offers IndexNow, turn it on so Bing hears about new pages right away.',
+      ],
+      time: a.bing,
+    });
+  } else done.push('Bing Webmaster Tools set up');
+
+  // 5. HTTPS
+  if (!has('https')) items.push({
+    id: 'https', sev: 'fix',
+    title: 'Put every page on HTTPS, one version only',
+    why: 'Browsers mark http pages "Not secure", which costs trust and leads, and Google prefers secure pages.',
+    steps: [
+      'Turn on the free SSL certificate (below).',
+      'Type each version into your browser: http://' + site.replace(/^www\./, '') + ', http://www.' + site.replace(/^www\./, '') + ' and the https versions.',
+      'All of them should land on the same https:// address. If not, set your primary domain and a redirect.',
+      'Click around a few pages and look for the padlock. A "mixed content" warning means an image or script still loads over http.',
+    ],
+    cms: HOW.https[cms], cmsLabel: 'On ' + C.name,
+    time: a.https,
+  }); else done.push('HTTPS on every page');
+
+  // 6. Mobile and Core Web Vitals
+  if (!has('speed')) items.push({
+    id: 'speed', sev: 'fix',
+    title: 'Check mobile speed with PageSpeed Insights',
+    why: 'Google looks at the mobile version of your site first. A slow or jumpy page loses visitors before they read a word.',
+    steps: [
+      'Go to pagespeed.web.dev and test your homepage and your most important service or product page.',
+      'Read the Mobile tab. "Core Web Vitals Assessment: Passed" is the goal. Small sites may show no field data; then use the score below it as a rough guide.',
+      'Fix the easy wins: compress big images (a rule of thumb is under 200 KB each), remove plugins, apps or widgets you don\'t use, and avoid pop-ups that cover the page on phones.',
+      'Open the site on your own phone. Check that text is readable without zooming and buttons are easy to tap.',
+      'Later, Search Console → Core Web Vitals shows which groups of pages need work.',
+    ],
+    time: a.speed, per: '(bigger fixes may need a developer)',
+  }); else done.push('Passes Core Web Vitals on mobile');
+
+  // 7. Titles and descriptions
+  const kp = a.keyPages[size];
+  if (!has('titles')) items.push({
+    id: 'titles', sev: 'fix',
+    title: 'Write a unique title and description for each key page',
+    why: 'The title is the blue headline in Google and a strong clue to what the page is about. Duplicates make pages compete with each other.',
+    steps: [
+      'List your key pages: home, each main service or product page, About and Contact (about ' + kp + ' for a site your size).',
+      'Title: say what the page offers, then your brand. For example "Emergency Plumbing in Springfield | Your Brand". About 50–60 characters is a rule of thumb before Google cuts it off.',
+      'Description: one or two plain sentences on what the visitor gets and why to click. About 140–160 characters.',
+      'Make every title different. Give each page one main heading (H1) that matches its title.',
+      'After a few weeks, check Search Console → Performance → Pages to see which titles earn clicks.',
+    ],
+    cms: HOW.titles[cms], cmsLabel: 'On ' + C.name,
+    time: [a.titleMinPerPage[0] * kp, a.titleMinPerPage[1] * kp], per: '(' + kp + ' pages)',
+  }); else done.push('Unique titles and descriptions');
+
+  // 8. Schema
+  const localType = plan('local');
+  if (!has('schema')) items.push({
+    id: 'schema', sev: 'fix',
+    title: 'Add ' + (localType ? 'LocalBusiness' : 'Organization') + ' schema to your homepage',
+    why: 'Schema is hidden code that states your name, logo, contact details and profiles in a format search engines and AI tools read directly.',
+    steps: [
+      localType ? 'Use LocalBusiness (or a closer type like Dentist, Plumber or Restaurant) because customers visit you or you serve a local area.' : 'Use Organization schema. If customers visit a location, use LocalBusiness instead.',
+      'Copy the example code below and replace every value in capitals with your real details.',
+      'Add it to your homepage (below). Only include facts that also appear on the page.',
+      'Test it at search.google.com/test/rich-results and validator.schema.org. Fix any red errors.',
+    ],
+    cms: HOW.schema[cms], cmsLabel: 'On ' + C.name,
+    time: a.schema,
+  }); else done.push('Organization or LocalBusiness schema');
+
+  // 9. About and contact (trust)
+  if (!has('about')) items.push({
+    id: 'about', sev: 'fix',
+    title: 'Make it obvious who you are and how to reach you',
+    why: 'Google\'s quality guidelines talk about E-E-A-T: experience, expertise, authority and trust. In plain words: can a stranger tell a real, qualified business is behind this site?',
+    steps: [
+      'About page: who runs the business, how long you\'ve done it, credentials or licences, and real photos of people, not stock.',
+      'Contact page and footer: the same business name, phone, email and address (or service area) on every page.',
+      'Link to your social profiles' + (localType ? ' and your Google Business Profile' : '') + ' from the footer.',
+      'Blog posts: show the author\'s name and a one-line bio.',
+      'Use the exact same name, address and phone everywhere online. Small differences confuse search engines.',
+    ],
+    time: a.about,
+  }); else done.push('Clear About and contact details');
+
+  // 10. GA4
+  if (input.ga4 !== 'yes') items.push({
+    id: 'ga4', sev: input.ga4 === 'unsure' ? 'check' : 'fix',
+    title: input.ga4 === 'unsure' ? 'Check Google Analytics 4 is installed' : 'Add Google Analytics 4',
+    why: 'Without GA4 you can\'t see what search visitors do or whether SEO brings in leads or sales.',
+    steps: input.ga4 === 'unsure' ? [
+      'Open tagassistant.google.com, enter your site and look for a Google tag starting with "G-".',
+      'Or right-click your homepage → View page source, then search for "G-".',
+      'Found one? Make sure you have access in analytics.google.com. Not found? Follow the Tracking toolkit.',
+    ] : [
+      'Go to analytics.google.com → Admin → Create → Property, and add a Web data stream for your site.',
+      'Copy the Measurement ID (it starts with G-) and add it using your platform (below).',
+      'In GA4 Admin → Product links → Search Console links, link your Search Console property.',
+      'For conversion events and the full setup, use the Tracking toolkit.',
+    ],
+    cms: input.ga4 === 'unsure' ? '' : HOW.ga4[cms], cmsLabel: 'On ' + C.name,
+    time: input.ga4 === 'unsure' ? a.ga4Check : a.ga4,
+    kit: { key: 'tracking', why: 'sets up GA4 and Tag Manager in the right order.' },
+  }); else done.push('GA4 installed');
+
+  const blockers = items.filter((t) => t.sev === 'block').length;
+  const checks = items.filter((t) => t.sev === 'check').length;
+  const fixes = items.length - blockers - checks;
+  // Blockers first, then checks, then the rest, each keeping build order.
+  const rank = { block: 0, check: 1, fix: 2 };
+  const ordered = items.map((t, i) => ({ t, i })).sort((x, y) => (rank[x.t.sev] - rank[y.t.sev]) || (x.i - y.i)).map((x) => x.t);
+  const totalLo = ordered.reduce((s, t) => s + (t.time ? t.time[0] : 0), 0);
+  const totalHi = ordered.reduce((s, t) => s + (t.time ? t.time[1] : 0), 0);
+  const flags = {
+    migration: plan('redesign'),
+    js: cms === 'other' && (input.idx === 'few' || input.idx === 'some'),
+    crawl: input.size === 'large',
+    intl: plan('intl'),
+    content: ordered.length === 0,
+    ai: input.robots === 'some',
+  };
+  return { cms, C, dom, site, items: ordered, done, blockers, checks, fixes, totalLo, totalHi, flags, localType, sitemapUrl, input };
+}
+function robotsSnippet(m) {
+  return [
+    '# Let search engines and AI search tools in',
+    'User-agent: *',
+    'Allow: /',
+    '',
+    '# Optional: opt out of AI model training only.',
+    '# Remove the # from the lines you want. This does not',
+    '# remove you from Google, Bing, ChatGPT search or Perplexity.',
+    '# User-agent: GPTBot',
+    '# Disallow: /',
+    '# User-agent: Google-Extended',
+    '# Disallow: /',
+    '# User-agent: CCBot',
+    '# Disallow: /',
+    '',
+    'Sitemap: ' + m.sitemapUrl,
+  ].join('\n');
+}
+function schemaSnippet(m) {
+  const p = currentProfile || {};
+  const name = p.name || 'YOUR BUSINESS NAME';
+  const url = 'https://' + m.site + '/';
+  const lines = ['<script type="application/ld+json">', '{', '  "@context": "https://schema.org",', '  "@type": "' + (m.localType ? 'LocalBusiness' : 'Organization') + '",',
+    '  "name": ' + JSON.stringify(name) + ',', '  "url": "' + url + '",', '  "logo": "' + url + 'LOGO-FILE.png",', '  "telephone": "+1-000-000-0000",', '  "email": "HELLO@' + m.site.replace(/^www\./, '').toUpperCase() + '",'];
+  if (m.localType) lines.push('  "address": {', '    "@type": "PostalAddress",', '    "streetAddress": "STREET ADDRESS",', '    "addressLocality": "CITY",', '    "addressRegion": "STATE",', '    "postalCode": "ZIP",', '    "addressCountry": "US"', '  },', '  "openingHours": "Mo-Fr 09:00-17:00",');
+  lines.push('  "sameAs": [', '    "https://www.facebook.com/YOURPAGE",', '    "https://www.linkedin.com/company/YOURCOMPANY"', '  ]', '}', '</' + 'script>');
+  return lines.join('\n');
+}
+const BOTS = [
+  ['Googlebot', 'Search', 'Google Search and AI Overviews. Never block.'],
+  ['Bingbot', 'Search', 'Bing and Microsoft Copilot; also a source for ChatGPT search.'],
+  ['OAI-SearchBot', 'Search', 'ChatGPT search results and citations.'],
+  ['PerplexityBot', 'Search', 'Perplexity answers and citations.'],
+  ['GPTBot', 'Training', 'Collects pages to train OpenAI models. Blocking it does not hide you from ChatGPT search.'],
+  ['Google-Extended', 'Training', 'A setting, not a separate bot: controls use for Gemini training. Does not affect Google Search.'],
+  ['CCBot', 'Training', 'Common Crawl, a public dataset many AI models train on.'],
+];
+function botTableHtml() {
+  return '<div class="table-wrap"><table class="mini-table"><caption class="sr-only">Search bots versus training bots</caption><thead><tr><th scope="col">Bot</th><th scope="col">Kind</th><th scope="col">What blocking it does</th></tr></thead><tbody>' +
+    BOTS.map((b) => '<tr><th scope="row">' + esc(b[0]) + '</th><td>' + esc(b[1]) + '</td><td>' + esc(b[2]) + '</td></tr>').join('') + '</tbody></table></div>' +
+    '<p class="fine"><b>Search bots</b> fetch pages so a search tool can show or cite you; block one and you vanish from that tool. <b>Training bots</b> collect pages to teach AI models; blocking them is your call and does not affect search.</p>';
+}
+function snippetHtml(id, label, text) {
+  return '<div class="snippet"><div class="snippet-head"><span>' + esc(label) + '</span><button type="button" class="btn btn-plain" data-copy="' + id + '">Copy code</button></div><pre id="snip-' + id + '">' + esc(text) + '</pre><div id="snip-host-' + id + '"></div></div>';
+}
+let currentProfile = null;
+let SNIPS = {};
+(function () {
+  const form = $('answers');
+  let last = null, profileSnapshot = null;
+  $('assume-rows').innerHTML = [
+    ['Fix robots.txt', ASSUMPTIONS.robots], ['Set up Search Console and sitemap', ASSUMPTIONS.gsc], ['Find and fix missing pages', ASSUMPTIONS.index],
+    ['Add the site to Bing', ASSUMPTIONS.bing], ['Turn on HTTPS', ASSUMPTIONS.https], ['Mobile speed clean-up', ASSUMPTIONS.speed],
+    ['Title and description, per page', ASSUMPTIONS.titleMinPerPage], ['Schema on the homepage', ASSUMPTIONS.schema], ['About and contact details', ASSUMPTIONS.about], ['Install GA4', ASSUMPTIONS.ga4],
+  ].map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(timeRange(r[1][0], r[1][1])) + '</td></tr>').join('') +
+    '<tr><th scope="row">Key pages to title, by site size</th><td>' + ASSUMPTIONS.keyPages.small + ' / ' + ASSUMPTIONS.keyPages.medium + ' / ' + ASSUMPTIONS.keyPages.large + '</td></tr>';
+
+  function readInput() {
+    return { cms: radioVal(form, 'cms'), domain: $('domain').value, gsc: radioVal(form, 'gsc'), bing: radioVal(form, 'bing'), robots: radioVal(form, 'robots'),
+      idx: radioVal(form, 'idx'), has: checkVals(form, 'has'), ga4: radioVal(form, 'ga4'), size: radioVal(form, 'size'), plan: checkVals(form, 'plan') };
+  }
+  function applyInput(i) {
+    ['cms', 'gsc', 'bing', 'robots', 'idx', 'ga4', 'size'].forEach((k) => setRadio(form, k, i[k]));
+    $('domain').value = i.domain || '';
+    setChecks(form, 'has', i.has); setChecks(form, 'plan', i.plan);
+  }
+  function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  function applyProfile(p) {
+    currentProfile = p;
+    const i = JSON.parse(JSON.stringify(EXAMPLE));
+    const used = [];
+    if (p) {
+      if (p.ecommerce === 'shopify') { i.cms = 'shopify'; used.push('cms'); }
+      if (p.ga4 === 'yes' || p.ga4 === 'no' || p.ga4 === 'unsure') { i.ga4 = p.ga4; used.push('ga4'); }
+      const plan = i.plan.filter((x) => x !== 'local' && x !== 'intl');
+      if (p.locations === 'one' || p.locations === 'multi' || p.reach === 'local') plan.push('local');
+      if (p.reach === 'international') plan.push('intl');
+      if (p.locations || p.reach) { i.plan = plan; used.push('intl'); }
+    }
+    applyInput(i);
+    markFromProfile(used);
+    profileSnapshot = p ? readInput() : null;
+  }
+  function state(i) {
+    if (profileSnapshot && same(i, profileSnapshot)) return 'profile';
+    if (!profileSnapshot && same(i, EXAMPLE)) return 'example';
+    return 'yours';
+  }
+  function xlinks(m) {
+    const p = currentProfile || {};
+    const L = [];
+    if (m.input.ga4 !== 'yes') L.push({ key: 'tracking', why: 'set up GA4 and Tag Manager so you can see what search visitors do.' });
+    else L.push({ key: 'conversions', why: 'count the calls, forms and sales that search actually brings in.' });
+    if (m.localType || p.locations === 'one' || p.locations === 'multi') L.push({ key: 'local', why: 'you serve customers locally, so your Google Business Profile and location pages matter as much as your site.' });
+    if (p.goal === 'leads' || p.goal === 'calls' || p.crm) L.push({ key: 'leadCapture', why: 'make sure the leads search sends actually reach your CRM.' });
+    if (m.input.has.indexOf('about') === -1) L.push({ key: 'prReady', why: 'mentions in real publications are one of the strongest trust signals for Google and AI answers.' });
+    if (p.adBudget > 0) L.push({ key: 'adsReady', why: 'the same Search Console, GA4 and landing pages make ads work better too.' });
+    return L;
+  }
+  function nextFor(m) {
+    const p = currentProfile || {};
+    if (m.localType || p.locations === 'one' || p.locations === 'multi') return { key: 'local', why: 'Customers find you locally. Next, get your Google Business Profile, listings and reviews in order.' };
+    if (m.input.ga4 !== 'yes') return { key: 'tracking', why: 'Once Google can see your site, make sure you can see what visitors do there.' };
+    return { key: 'conversions', why: 'With the foundation in place, decide which actions count as a win so you can measure SEO.' };
+  }
+  function headline(m) {
+    const n = m.blockers;
+    return {
+      num: String(n),
+      unit: n === 1 ? 'blocker stops Google or AI search from seeing your site' : n === 0 ? 'blockers: Google and AI search can reach your site' : 'blockers stop Google or AI search from seeing your site',
+      line: (n > 0 ? 'Fix ' + (n === 1 ? 'it' : 'those') + ' first. ' : '') +
+        (m.items.length === 0 ? 'Every foundation check is in place. Your site is ready for an SEO strategy conversation.'
+          : 'Your list has ' + (m.checks ? m.checks + ' quick ' + (m.checks === 1 ? 'check' : 'checks') + ' and ' : '') + m.fixes + ' ' + (m.fixes === 1 ? 'fix' : 'fixes') + ' after that' + (n ? '' : '') + ', about ' + timeRange(m.totalLo, m.totalHi) + ' of work in total.'),
+    };
+  }
+  function planText(m) {
+    const h = headline(m);
+    const L = ['YOUR SEO FOUNDATION FIX LIST', 'Can Google Find and Trust Your Site? (Big Leap SEO DIY Toolkit 1 of 2)', ''];
+    if (m.dom) L.push('Site: ' + m.dom);
+    L.push('Platform: ' + (m.cms === 'other' ? 'Other or custom' : m.C.name));
+    if (currentProfile && currentProfile.website === false) L.push('Your profile says you don\'t have a website yet. Use this list as your launch checklist.');
+    L.push(h.num + ' ' + h.unit + '.', h.line, '');
+    L.push('FIXES, IN ORDER');
+    if (!m.items.length) L.push('Nothing to fix.');
+    itemsText(m.items, SNIPS_TEXT).forEach((l) => L.push(l));
+    if (m.done.length) L.push('', 'ALREADY IN PLACE', ...m.done.map((d) => '[done] ' + d));
+    L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
+    const nx = nextFor(m);
+    L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
+    const xl = xlinksText(xlinks(m));
+    if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    return L.join('\n');
+  }
+  let SNIPS_TEXT = {};
+  function render() {
+    const input = readInput(), m = model(input, ASSUMPTIONS);
+    last = m;
+    setExampleState(state(input), 'Example: a WordPress site with a few pages missing from Google. Change any answer to make it yours.');
+    const d = m.site;
+    $('robots-url').textContent = d + '/robots.txt';
+    $('site-query').textContent = 'site:' + d;
+    const h = headline(m);
+    $('out-num').textContent = h.num;
+    $('out-num').classList.toggle('is-zero', m.blockers === 0);
+    $('out-unit').textContent = h.unit;
+    $('out-rec').textContent = currentProfile && currentProfile.website === false ? 'Your profile says you don\'t have a website yet. Use this list as your launch checklist.' : '';
+    $('out-rec').hidden = !$('out-rec').textContent;
+    $('out-line').textContent = h.line;
+    $('answer').classList.toggle('is-done', m.items.length === 0);
+    flashIfChanged(m.blockers + '/' + m.items.length);
+    $('deliv-sub').textContent = m.items.length
+      ? 'Blockers first, then quick checks, then the fixes in build order. Steps use ' + (m.cms === 'other' ? 'general menus' : m.C.name + ' menus') + ' where they differ.'
+      : 'Everything on the foundation list is in place.';
+    SNIPS = { robots: robotsSnippet(m), schema: schemaSnippet(m) };
+    SNIPS_TEXT = {
+      robots: ['Search bots (keep allowed): Googlebot, Bingbot, OAI-SearchBot, PerplexityBot. Training bots (your choice): GPTBot, Google-Extended, CCBot.', 'Example robots.txt:'].concat(SNIPS.robots.split('\n').map((l) => '     ' + l)),
+      schema: ['Example schema code:'].concat(SNIPS.schema.split('\n').map((l) => '     ' + l)),
+    };
+    renderItems($('plan'), m.items, {
+      robots: botTableHtml() + snippetHtml('robots', 'Example robots.txt', SNIPS.robots),
+      schema: snippetHtml('schema', 'Example schema (JSON-LD)', SNIPS.schema),
+    });
+    $('done-wrap').hidden = m.done.length === 0;
+    $('done-list').innerHTML = m.done.map((x) => '<li><span aria-hidden="true">✓ </span>' + esc(x) + '</li>').join('');
+    renderComplex(COMPLEX, m.flags);
+    renderXlinks(xlinks(m));
+    const nx = nextFor(m);
+    renderNext(nx.key, nx.why);
+    syncChoiceStyles(form);
+    syncCopy();
+    sticky();
+  }
+  function restore() { profileSnapshot = null; applyInput(JSON.parse(JSON.stringify(EXAMPLE))); markFromProfile([]); render(); const f = form.querySelector('input[name="cms"]:checked'); if (f) f.focus(); }
+  initShell(1, restore);
+  currentProfile = initProfileStrip((p) => { applyProfile(p); render(); });
+  const syncCopy = initCopy(() => planText(last));
+  const sticky = initSticky();
+  initSegFocus(form);
+  $('plan').addEventListener('click', (e) => {
+    const b = e.target.closest ? e.target.closest('[data-copy]') : null;
+    if (!b) return;
+    const id = b.getAttribute('data-copy');
+    copyWithFallback(SNIPS[id] || '', () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy code'; }, 2500); }, $('snip-host-' + id));
+  });
+  form.addEventListener('submit', (e) => e.preventDefault());
+  form.addEventListener('change', (e) => { if (e.target && e.target.name) unmarkProfile(e.target.name === 'plan' ? 'intl' : e.target.name); render(); });
+  form.addEventListener('input', (e) => { if (e.target && e.target.id === 'domain') render(); });
+  applyProfile(currentProfile);
+  render();
+})();
+
+</script>
+</body>
+</html>

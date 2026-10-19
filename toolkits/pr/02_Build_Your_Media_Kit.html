@@ -326,8 +326,8 @@ padding-top: max(7px, env(safe-area-inset-top, 0px));
 .profile-strip { display: grid; gap: 8px; padding: 12px 14px; margin-bottom: 18px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
 .profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .profile-row b { color: var(--heading); }
-.profile-row a, .profile-row .text-btn { font-weight: 700; color: var(--heading); min-height: 32px; display: inline-flex; align-items: center; }
-.profile-paste summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--heading); min-height: 32px; display: inline-flex; align-items: center; }
+.profile-row a, .profile-row .text-btn { font-weight: 700; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
+.profile-paste summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
 .profile-paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .profile-paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
 .profile-msg { font-size: 13px; color: var(--muted); }
@@ -374,7 +374,7 @@ textarea.text-field { resize: vertical; min-height: 4.5rem; line-height: 1.45; }
 .missing { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .missing li { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; border: 1px dashed var(--line-strong); color: var(--text); }
 .btn-plain { min-height: 44px; }
-.text-btn { min-height: 32px; }
+.text-btn { min-height: 44px; display: inline-flex; align-items: center; }
 @media print {
 .draft-banner, .stepper, .profile-strip, .col-q, .closing-actions, .copy-status, #copy-host, .btn, .text-btn, .see-results, .method, .out-actions { display: none !important; }
 .layout { display: block !important; }
@@ -519,7 +519,7 @@ a { color: #000; }
 <p class="label">Related Big Leap DIY toolkits</p>
 <ul id="xlinks-list"></ul>
 </div>
-<details class="limits" id="limits">
+<details class="limits" id="limits" open>
 <summary>Where it gets complex (<span id="limits-count"></span>)</summary>
 <ul id="limits-list"></ul>
 </details>
@@ -929,11 +929,20 @@ if (k === 'pron') { const el = $('pron-' + (a.pron || 'they')); if (el) el.check
 $(k).value = a[k] == null ? '' : a[k];
 });
 }
+// With a Business Profile, start from a blank kit that carries the company name and industry
+// (the solar example would not match their business). Without one, show the full example.
 function exampleFor(p) {
-const e = Object.assign({}, EXAMPLE);
-if (p && clean(p.name)) e.company = clean(p.name);
-if (p && clean(p.industry)) e.industry = clean(p.industry);
+if (p && (clean(p.name) || clean(p.industry))) {
+const e = {}; FIELDS.forEach((k) => { e[k] = ''; }); e.pron = 'they';
+e.company = clean(p.name); e.industry = clean(p.industry);
 return e;
+}
+return Object.assign({}, EXAMPLE);
+}
+function exampleNote() {
+return profile && (clean(profile.name) || clean(profile.industry))
+? 'Company and industry came from your Business Profile. Fill in the rest and your kit writes itself.'
+: 'Example: a founder of a home-services company. Replace each answer with your own.';
 }
 function isExample(i) {
 const e = exampleFor(profile);
@@ -1033,7 +1042,7 @@ return L;
 function render() {
 const i = readInput(form);
 syncChecked(form);
-setExampleState(isExample(i), 'Example: a founder of a home-services company. Replace each answer with your own.');
+setExampleState(isExample(i), exampleNote());
 gen = build(i);
 drawOuts();
 const miss = missing(i);
