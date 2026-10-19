@@ -108,8 +108,12 @@ CSS = r"""<style id="bl-header-css">
   .blh-sub .blh-in { flex-direction: column; align-items: stretch; padding-top: 6px; padding-bottom: 8px; }
   .blh-crumb { justify-content: space-between; }
   .blh-crumb .home { width: 100%; }
-  .blh-tabs { width: 100%; }
-  .blh-tabs a { flex: 1 1 auto; justify-content: center; padding: 6px 8px; }
+  .blh-sub .blh-in { position: relative; }
+  .blh-tabs { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .blh-tabs a { justify-content: center; padding: 6px 8px; background: #fff; border: 1px solid #D4DADF; }
+  .blh-crumb .home { min-height: 44px; display: flex; align-items: center; }
+  .blh-theme { position: absolute; right: max(20px, env(safe-area-inset-right)); top: 8px; min-height: 36px; min-width: 36px; width: 36px; height: 36px; padding: 0; }
+  .blh-right:empty { display: none; }
   .blh-right { justify-content: space-between; }
   .blh-where { display: none; }
   .blh-pn { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
@@ -150,8 +154,8 @@ def header(page, current, where='', prev=None, nxt=None, extra=''):
         items.append(f'<li class="blh-li{" r" if i >= 3 else ""}"><button class="blh-top" type="button" aria-expanded="false">{e(label)}<span class="car" aria-hidden="true"></span></button><div class="blh-dd">{dd}</div></li>')
         if label == 'Resources':
             items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
-    tabs = [('Dashboard', 'index.html', 'dashboard'), ('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review')]
-    tab_html = ''.join(f'<a href="{rel(page, f)}"' + (' aria-current="page"' if key == current else '') + f'>{e(t)}</a>' for t, f, key in tabs)
+    tabs = [('Toolkits', 'index.html#toolkits', 'toolkits'), ('Widgets & embeds', 'index.html#widgets', 'widgets'), ('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review')]
+    tab_html = ''.join(f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current else '') + f'>{e(t)}</a>' for t, f, key in tabs)
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
@@ -202,7 +206,7 @@ if __name__ == '__main__':
         apply(t['file'], header(t['file'], 'toolkit', f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}", fmt(prev) if prev else False, fmt(nxt) if nxt else False))
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button>'
-    apply('index.html', header('index.html', 'dashboard', '', None, None, theme))
+    apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
     apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
     print('index.html, journey.html')
