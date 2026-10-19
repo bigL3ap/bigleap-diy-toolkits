@@ -407,9 +407,32 @@ body { background: #fff; color: #000; }
 }
 
 </style>
+<style id="bl-sitenav-css">
+/* Site navigation shared by every toolkit (added Oct 19, 2026) */
+.bl-sitenav { background: var(--surface, #F7F9FB); border-bottom: 1px solid var(--line, #D4DADF); font-family: var(--font, Arial, sans-serif); }
+.bl-sitenav .bl-in { max-width: 1240px; margin: 0 auto; padding: 6px max(16px, env(safe-area-inset-left)) 6px max(16px, env(safe-area-inset-right)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 14px; }
+.bl-sitenav .bl-home { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; }
+.bl-sitenav a { color: var(--heading, #143D55); text-decoration: none; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.bl-sitenav a:hover { color: var(--blue-ink, #246D96); text-decoration: underline; }
+.bl-sitenav a:focus-visible { outline: 3px solid var(--focus, #3187B5); outline-offset: 2px; border-radius: 6px; }
+.bl-sitenav .bl-where { font-size: 13px; color: var(--muted, #5F6E79); }
+.bl-sitenav .bl-pn { display: flex; gap: 8px; flex-wrap: wrap; }
+.bl-sitenav .bl-pn a { border: 1px solid var(--line, #D4DADF); background: var(--bg, #fff); border-radius: 999px; padding: 6px 14px; font-weight: 600; max-width: 330px; }
+.bl-sitenav .bl-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+.bl-sitenav .bl-pn a b { font-weight: 700; flex: 0 0 auto; }
+@media (max-width: 640px) {
+  .bl-sitenav .bl-in { flex-direction: column; align-items: stretch; }
+  .bl-sitenav .bl-pn { display: grid; grid-template-columns: 1fr 1fr; }
+  .bl-sitenav .bl-pn a { max-width: none; justify-content: center; }
+  .bl-sitenav .bl-pn a span { display: none; }
+  .bl-sitenav .bl-where { display: none; }
+}
+@media print { .bl-sitenav { display: none !important; } }
+</style>
 </head>
 <body>
 <div class="draft-banner" role="note">Draft v1 for internal review · Built Oct 19, 2026 from the Agency Brands call · Owner: Scott Smoot</div>
+<!-- bl-sitenav --><nav class="bl-sitenav" aria-label="Toolkit navigation"><div class="bl-in"><div class="bl-home"><a href="../../index.html">← Dashboard</a><a href="../../journey.html">Journey map</a><span class="bl-where">Paid Media · Toolkit 1 of 3</span></div><div class="bl-pn"><a href="../../index.html">← <b>Previous</b><span>All toolkits</span></a><a href="02_Is_Your_Google_Ads_Account_Ready.html" title="Is Your Google Ads Account Ready?"><b>Next</b><span>Is Your Google Ads Account Ready?</span> →</a></div></div></nav><!-- /bl-sitenav -->
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· PAID MEDIA</span></div>
@@ -514,7 +537,7 @@ body { background: #fff; color: #000; }
 <p id="closing-p"></p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Scott about building it</a>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-01" target="_blank" rel="noopener">Talk to Scott about building it</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -546,7 +569,7 @@ LINKS: the cross-link map shared by every Big Leap DIY series. Relative
 URLs, so they work on GitHub Pages and on a local copy of the repo.
 ===================================================================== */
 const OWNER = { name: 'Scott Smoot', first: 'Scott' };
-const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Scott's meeting scheduler link
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-01'; // swap for Scott's meeting scheduler link
 const SERIES = [
 { n: 1, short: 'Profile', title: 'What Kind of Business Are You?', file: '01_What_Kind_of_Business_Are_You.html' },
 { n: 2, short: 'Get ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },

@@ -51,7 +51,7 @@ var Q = [{"id": "own", "label": "Do you own the account (admin access, your bill
 var A = {"own": "yes", "conv": "unsure", "ga4": "no", "lp": "yes"};
 function compute(a){ var keys = ['own','conv','ga4','lp'], names = { own: 'account ownership', conv: 'conversion tracking', ga4: 'the GA4 link', lp: 'focused landing pages' };
 var gaps = keys.filter(function(k){ return a[k] !== 'yes'; });
-if (!gaps.length) return { big: 'Ready to launch', detail: 'The basics are in place. The full check covers billing, feeds, location assets and CRM imports too.', cta: 'Plan my first campaigns', link: '../toolkits/paid/03_Which_Campaigns_Should_You_Run_First.html' };
+if (!gaps.length) return { big: 'Ready to launch', detail: 'The basics are in place. The full check covers billing, feeds, location assets and CRM imports too.', cta: 'Plan my first campaigns', link: '../toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html' };
 var first = gaps.indexOf('conv') > -1 ? 'conv' : gaps[0];
 return { big: gaps.length + ' of 4 not ready', hot: true, detail: 'Fix ' + names[first] + ' first. Spending before it is in place means paying for clicks you cannot measure or optimize.' }; }
 var f = document.getElementById('f');

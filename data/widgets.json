@@ -33,8 +33,8 @@
     {
       "id": "tracking-check",
       "title": "Can you see what your marketing does?",
-      "service": "Tracking",
-      "owner": "Scott Smoot",
+      "service": "RevOps",
+      "owner": "Dallas Olsen",
       "file": "widgets/tracking-check.html",
       "height": 670,
       "maxWidth": 460,
@@ -84,7 +84,7 @@
       "id": "tracking-check",
       "title": "Can you see what your marketing does?",
       "file": "tiles/tracking-check-16x9.png",
-      "alt": "Slide tile: See what your marketing does. Tracking DIY toolkit by Big Leap"
+      "alt": "Slide tile: See what your marketing does. RevOps DIY toolkit by Big Leap"
     },
     {
       "id": "seo-foundations",

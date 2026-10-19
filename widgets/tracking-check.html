@@ -7,9 +7,9 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
-:root { --navy:#143D55; --blue:#3187B5; --blue-ink:#246D96; --tint:#DAE9F2; --sky:#EEF3F8; --paper:#FFFFFF; --line:#D4DADF; --text:#243642; --muted:#5F6E79; --red:#EA4335; --accent:#3187B5; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#8CC4E4; color-scheme: dark; } }
-:root[data-theme="dark"] { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#8CC4E4; color-scheme: dark; }
+:root { --navy:#143D55; --blue:#3187B5; --blue-ink:#246D96; --tint:#DAE9F2; --sky:#EEF3F8; --paper:#FFFFFF; --line:#D4DADF; --text:#243642; --muted:#5F6E79; --red:#EA4335; --accent:#143D55; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#6FB3DA; color-scheme: dark; } }
+:root[data-theme="dark"] { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#6FB3DA; color-scheme: dark; }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: transparent; }
 body { font: 15px/1.5 "Open Sans", "Segoe UI", Arial, sans-serif; color: var(--text); -webkit-text-size-adjust: 100%; }
@@ -37,11 +37,11 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 </head>
 <body>
 <main class="w" aria-labelledby="h">
-  <div class="k"><b>Tracking · Free DIY toolkit</b><span>1 minute</span></div>
+  <div class="k"><b>RevOps · Free DIY toolkit</b><span>1 minute</span></div>
   <h1 id="h">Can you see what your marketing does?</h1>
   <form id="f" onsubmit="return false"></form>
   <div class="out" aria-live="polite"><div class="big" id="big"></div><p id="det"></p></div>
-  <a class="cta" id="cta" href="../toolkits/tracking/01_Can_You_See_What_Your_Marketing_Does.html" target="_blank" rel="noopener">Get my tracking build list</a>
+  <a class="cta" id="cta" href="../toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html" target="_blank" rel="noopener">Get my tracking build list</a>
   <div class="foot"><span>Big Leap · Nothing you enter is stored</span><a href="../index.html" target="_blank" rel="noopener">All toolkits</a></div>
 </main>
 <script>
@@ -53,7 +53,7 @@ function compute(a){ var keys = ['gtm','ga4','gsc','keyev'], have = keys.filter(
 var unsure = keys.filter(function(k){ return a[k] === 'unsure'; }).length;
 var d = have === 4 ? 'Strong foundation. Next, decide which conversions to send to your ad platforms.' :
   (unsure ? 'Anything marked “not sure” counts as missing until you check it. ' : '') + 'The full toolkit gives the install order for your website platform and a test-it checklist.';
-return { big: have + ' of 4 in place', hot: have < 3, detail: d, link: have === 4 ? '../toolkits/tracking/02_Which_Conversions_Should_You_Track.html' : null, cta: have === 4 ? 'Plan my conversion events' : null }; }
+return { big: have + ' of 4 in place', hot: have < 3, detail: d, link: have === 4 ? '../toolkits/paid/03_Which_Conversions_Should_You_Track.html' : null, cta: have === 4 ? 'Plan my conversion events' : null }; }
 var f = document.getElementById('f');
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 Q.forEach(function(q){

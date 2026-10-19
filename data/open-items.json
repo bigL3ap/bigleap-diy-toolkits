@@ -47,10 +47,10 @@
     {
       "id": "tracking-owner",
       "type": "Decision",
-      "title": "Tracking toolkit co-owner",
-      "detail": "Scott offered to own tracking and suggested Alex or someone stronger in Tag Manager could co-own it.",
-      "owner": "Scott Smoot",
-      "area": "Tracking",
+      "title": "Who reviews the tracking steps?",
+      "detail": "Tracking now lives inside RevOps (Toolkit 7: Can You See What Your Marketing Does?, owned by Dallas) and Paid (Toolkit 3: Which Conversions Should You Track?, owned by Scott), with Search Console and Bing in SEO. Scott suggested Alex or someone strong in Tag Manager review the setup steps.",
+      "owner": "Dallas Olsen",
+      "area": "RevOps, Paid",
       "status": "Open",
       "ts": 757
     },
@@ -90,19 +90,19 @@
       "title": "Conversion defaults",
       "detail": "Import GA4 key events or use Google Ads tags in Tag Manager? Which CRM stages (MQL, SQL, closed-won) go back to Google Ads by default, and is ~30 conversions in 30 days the bar before target CPA/ROAS?",
       "owner": "Scott Smoot",
-      "area": "Tracking",
+      "area": "Paid",
       "status": "Open",
-      "link": "toolkits/tracking/BUILD_NOTES.md"
+      "link": "docs/build-notes/tracking-BUILD_NOTES.md"
     },
     {
       "id": "own-scott-paths",
       "type": "Owner review",
       "title": "Click through every menu path once",
-      "detail": "The tracking and paid steps name exact menus in GA4, Tag Manager, Google Ads, Meta, LinkedIn, Shopify and more. They were written from current knowledge and need one check by a practitioner before launch.",
+      "detail": "The RevOps 7 and Paid steps name exact menus in GA4, Tag Manager, Google Ads, Meta, LinkedIn, Shopify and more. They were written from current knowledge and need one check by a practitioner before launch.",
       "owner": "Scott Smoot",
-      "area": "Tracking",
+      "area": "RevOps 7, Paid 3",
       "status": "Open",
-      "link": "toolkits/tracking/BUILD_NOTES.md"
+      "link": "docs/build-notes/tracking-BUILD_NOTES.md"
     },
     {
       "id": "own-shema-ai",

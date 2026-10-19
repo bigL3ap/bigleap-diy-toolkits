@@ -12,7 +12,7 @@
       "owner": "Dallas Olsen",
       "first": "Dallas",
       "status": "live",
-      "promise": "Catch every lead, answer it fast, and see your pipeline without a spreadsheet.",
+      "promise": "Catch every lead, answer it fast, see your pipeline, and measure what your marketing actually does.",
       "toolkits": [
         {
           "n": 1,
@@ -61,6 +61,14 @@
           "file": "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html",
           "description": "Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.",
           "status": "live"
+        },
+        {
+          "n": 7,
+          "short": "Measure",
+          "title": "Can You See What Your Marketing Does?",
+          "file": "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html",
+          "description": "Check your tracking stack: Tag Manager, GA4, consent, ad tags and where leads land. You get an install-order build list for your website platform and a test-it checklist.",
+          "status": "draft"
         }
       ],
       "headline": "Catch every lead."
@@ -71,7 +79,7 @@
       "owner": "Scott Smoot",
       "first": "Scott",
       "status": "draft",
-      "promise": "Get your Google Ads account ready before you spend a dollar, then launch the right first campaign.",
+      "promise": "Get your Google Ads account ready, track the conversions that matter, then launch the right first campaign.",
       "toolkits": [
         {
           "n": 1,
@@ -91,41 +99,22 @@
         },
         {
           "n": 3,
+          "short": "Conversions",
+          "title": "Which Conversions Should You Track?",
+          "file": "toolkits/paid/03_Which_Conversions_Should_You_Track.html",
+          "description": "Tell us how you make money. You get a named event plan, which ones should steer your ad bids, and what to send back to Google Ads from your CRM.",
+          "status": "draft"
+        },
+        {
+          "n": 4,
           "short": "Launch",
           "title": "Which Campaigns Should You Run First?",
-          "file": "toolkits/paid/03_Which_Campaigns_Should_You_Run_First.html",
+          "file": "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html",
           "description": "Your first one or two campaigns, a start-tight structure, a budget split and what to check each week for the first month.",
           "status": "draft"
         }
       ],
       "headline": "Ready before you spend."
-    },
-    {
-      "id": "tracking",
-      "name": "Tracking",
-      "owner": "Scott Smoot",
-      "first": "Scott",
-      "status": "draft",
-      "promise": "See what your marketing actually does: Tag Manager, GA4, Search Console and conversions, in the right order.",
-      "toolkits": [
-        {
-          "n": 1,
-          "short": "Install",
-          "title": "Can You See What Your Marketing Does?",
-          "file": "toolkits/tracking/01_Can_You_See_What_Your_Marketing_Does.html",
-          "description": "Check your tracking stack. You get an install-order build list for your website platform and a test-it checklist.",
-          "status": "draft"
-        },
-        {
-          "n": 2,
-          "short": "Measure",
-          "title": "Which Conversions Should You Track?",
-          "file": "toolkits/tracking/02_Which_Conversions_Should_You_Track.html",
-          "description": "Tell us how you make money. You get a named event plan, which ones count as key events, and what to send back to your ad platforms.",
-          "status": "draft"
-        }
-      ],
-      "headline": "See what your marketing does."
     },
     {
       "id": "seo",

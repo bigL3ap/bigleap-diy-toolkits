@@ -116,8 +116,8 @@
     <div class="c">
       <p>Written by the Big Leap experts who do this every day</p>
       <div class="people">
-        <span class="person"><i style="--c:#143D55">DO</i><span><b>Dallas Olsen</b>RevOps</span></span>
-        <span class="person"><i style="--c:#EA4335">SS</i><span><b>Scott Smoot</b>Paid Media &amp; Tracking</span></span>
+        <span class="person"><i style="--c:#143D55">DO</i><span><b>Dallas Olsen</b>RevOps &amp; tracking</span></span>
+        <span class="person"><i style="--c:#EA4335">SS</i><span><b>Scott Smoot</b>Paid Media</span></span>
         <span class="person"><i style="--c:#0F7B5F">SA</i><span><b>Shema Al-Darwish</b>SEO</span></span>
         <span class="person"><i style="--c:#7A4E9C">KA</i><span><b>Kristina Ainge</b>Digital PR</span></span>
       </div>
@@ -187,8 +187,8 @@
 
 <script>
 (function () {
-  var C = { revops: '#143D55', paid: '#EA4335', tracking: '#3187B5', seo: '#0F7B5F', pr: '#7A4E9C' };
-  var WIDGET = { revops: ['revops-hours', 670], paid: ['paid-ready', 670], tracking: ['tracking-check', 670], seo: ['seo-foundations', 720], pr: ['pr-ready', 700] };
+  var C = { revops: '#143D55', paid: '#EA4335', seo: '#0F7B5F', pr: '#7A4E9C' };
+  var WIDGET = { revops: ['revops-hours', 670], paid: ['paid-ready', 670], seo: ['seo-foundations', 720], pr: ['pr-ready', 700] };
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function ini(n) { return n.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2).toUpperCase(); }
   fetch('../toolkits.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {

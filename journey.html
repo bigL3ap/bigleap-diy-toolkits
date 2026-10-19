@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buyer Journey Map · Big Leap DIY Toolkits</title>
+<meta name="description" content="How a prospect moves from a free DIY toolkit to a Big Leap partnership: every toolkit, touchpoint and pipeline stage on one map.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/bigleap-logo.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root {
+  --navy: #143D55; --blue: #3187B5; --blue-ink: #246D96; --sky: #EEF3F8; --tint: #DAE9F2; --paper: #FFFFFF;
+  --line: #D4DADF; --text: #243642; --muted: #5F6E79; --red: #EA4335; --green: #0F7B5F; --amber: #A15C07;
+  --head: "Raleway", "Segoe UI", Arial, sans-serif; --body: "Open Sans", "Segoe UI", Arial, sans-serif;
+  --shadow: 0 1px 2px rgba(20,61,85,.06), 0 8px 24px rgba(20,61,85,.06);
+  --c-revops: #143D55; --c-paid: #EA4335; --c-seo: #0F7B5F; --c-pr: #7A4E9C;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #DCE9F2; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26; --tint: #1D3A4C; --paper: #142632;
+    --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD; --red: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --navy: #DCE9F2; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26; --tint: #1D3A4C; --paper: #142632;
+  --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD; --red: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--sky); color: var(--text); font: 16px/1.6 var(--body); overflow-wrap: anywhere; }
+a { color: var(--blue-ink); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02em; margin: 0; }
+.wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.draft-strip { background: #143D55; color: #fff; font-size: 13px; text-align: center; padding: 8px 16px; }
+.top { background: var(--paper); border-bottom: 2px solid var(--blue); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 16px; min-height: 72px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
+.logo img { height: 34px; width: auto; display: block; }
+:root[data-theme="dark"] .logo img { background: #fff; border-radius: 8px; padding: 4px 8px; height: 38px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo img { background: #fff; border-radius: 8px; padding: 4px 8px; height: 38px; } }
+.logo span { font-family: var(--head); font-weight: 700; font-size: 15px; border-left: 1px solid var(--line); padding-left: 12px; }
+.topnav { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.topnav a, .topnav button { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 700 14px var(--body); text-decoration: none; cursor: pointer; }
+.topnav a[aria-current="page"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+.topnav .red { background: #EA4335; color: #fff; border-color: #EA4335; }
+
+.hero { padding: clamp(32px, 5vw, 60px) 0 clamp(20px, 3vw, 32px); }
+.kicker { font: italic 700 15px var(--head); color: var(--navy); margin: 0 0 12px; }
+.hero h1 { font-size: clamp(32px, 4.6vw, 54px); line-height: 1.1; font-weight: 800; max-width: 18em; }
+.hero h1 span { color: var(--blue); }
+.hero p { font-size: clamp(16px, 1.5vw, 18px); max-width: 46em; margin: 16px 0 0; }
+
+/* Persona picker */
+.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 26px 0 0; }
+.picker > span { font: 700 15px var(--head); color: var(--navy); margin-right: 4px; }
+.persona { min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 600 14px var(--body); cursor: pointer; }
+.persona[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+
+/* Swimlane */
+.board { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 18px; margin-top: 18px; }
+.lane-grid { display: grid; grid-template-columns: 150px repeat(6, minmax(0, 1fr)); gap: 8px; }
+.stage-h { grid-row: 1; padding: 10px 10px 12px; border-radius: 10px; background: var(--navy); color: var(--paper); position: relative; }
+.stage-h:not(:last-child)::after { content: ""; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); border: 7px solid transparent; border-left: 8px solid var(--navy); z-index: 1; }
+.stage-h small { display: block; font: 700 12px var(--body); opacity: .8; }
+.stage-h strong { display: block; font: 700 16px/1.25 var(--head); margin-top: 2px; }
+.lane-h { display: flex; align-items: center; padding: 10px 12px; border-radius: 10px; background: var(--tint); font: 700 14px/1.3 var(--head); color: var(--navy); }
+.lane-h small { display: block; font: 400 12px/1.35 var(--body); color: var(--muted); margin-top: 3px; }
+.cell { border: 1px solid var(--line); border-radius: 10px; padding: 10px; font-size: 13.5px; line-height: 1.45; display: flex; flex-direction: column; gap: 6px; background: var(--paper); transition: opacity .2s ease; }
+.cell.lane-0 { font-style: italic; color: var(--muted); background: transparent; border-style: dashed; }
+.cell.lane-4 { background: color-mix(in srgb, var(--tint) 55%, var(--paper)); }
+@supports not (background: color-mix(in srgb, red 50%, blue)) { .cell.lane-4 { background: var(--sky); } }
+.cell p { margin: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--c); color: var(--navy); background: var(--paper); font: 600 12.5px/1.25 var(--body); text-decoration: none; cursor: pointer; text-align: left; }
+.chip::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.chip:hover { background: var(--sky); }
+.chip.on { background: var(--c); color: #fff; }
+.chip.on::before { background: #fff; }
+.tp { display: flex; gap: 6px; align-items: flex-start; }
+.tp i { font-style: normal; flex: 0 0 auto; font: 700 11px/1.6 var(--body); padding: 0 6px; border-radius: 999px; }
+.tp i.live { background: rgba(15,123,95,.14); color: var(--green); }
+.tp i.plan { background: rgba(161,92,7,.14); color: var(--amber); }
+.stage-tag { display: inline-block; font: 700 12px/1 var(--body); padding: 6px 9px; border-radius: 8px; background: var(--navy); color: var(--paper); align-self: flex-start; }
+.signal { font-size: 12.5px; color: var(--muted); }
+.step-badge { display: none; align-self: flex-start; width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; font: 800 13px/26px var(--head); text-align: center; }
+.board.focus .cell { opacity: .32; }
+.board.focus .cell.hit { opacity: 1; border-color: var(--red); box-shadow: 0 0 0 2px rgba(234,67,53,.25); }
+.board.focus .cell.hit .step-badge { display: inline-block; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; font-size: 13px; color: var(--muted); align-items: center; }
+.legend .chip { cursor: default; }
+
+/* Story panel */
+.story { margin-top: 18px; background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--red); border-radius: 12px; padding: 18px 20px; }
+.story[hidden] { display: none; }
+.story h3 { font-size: 20px; }
+.story ol { margin: 10px 0 0; padding-left: 22px; display: grid; gap: 6px; }
+.story .out { margin-top: 10px; font-weight: 700; color: var(--navy); }
+
+section.block { padding: clamp(36px, 5vw, 64px) 0 0; }
+.block-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; align-items: end; }
+.block-head h2 { font-size: clamp(26px, 3vw, 36px); }
+.block-head p { margin: 6px 0 0; color: var(--muted); max-width: 46em; }
+
+/* Connections */
+.conn { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px; margin-top: 20px; align-items: start; }
+.series-col { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 14px; }
+.series-col h4 { font-size: 15px; margin-bottom: 6px; }
+.series-col .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.detail { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; position: sticky; top: 16px; }
+.detail h3 { font-size: 22px; }
+.detail .who { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1.1fr) 36px minmax(0, 1fr); align-items: stretch; gap: 0; margin-top: 16px; }
+.flow .col { display: flex; flex-direction: column; gap: 6px; }
+.flow .col h5 { margin: 0 0 4px; font: 700 12px var(--body); color: var(--muted); }
+.flow .arrow { display: grid; place-items: center; color: var(--muted); font-size: 20px; }
+.flow .me { display: grid; place-items: center; text-align: center; padding: 12px; border-radius: 12px; background: var(--c); color: #fff; font: 700 15px/1.3 var(--head); }
+.handoff { margin-top: 16px; padding: 14px; border-radius: 12px; background: var(--sky); font-size: 14px; }
+.handoff b { color: var(--navy); }
+.handoff code { font: 12px ui-monospace, Menlo, Consolas, monospace; background: var(--paper); padding: 2px 6px; border-radius: 6px; }
+.detail .open { display: inline-flex; align-items: center; min-height: 44px; margin-top: 14px; padding: 10px 18px; border-radius: 14px; background: #EA4335; color: #fff; font-weight: 700; text-decoration: none; }
+
+/* Instrumentation */
+.checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; margin-top: 20px; }
+.check { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 6px; }
+.check .st { justify-self: start; font: 700 12px/1 var(--body); padding: 6px 10px; border-radius: 999px; }
+.check .st.live { background: rgba(15,123,95,.14); color: var(--green); }
+.check .st.plan { background: rgba(161,92,7,.14); color: var(--amber); }
+.check h4 { font-size: 17px; }
+.check p { margin: 0; font-size: 14px; }
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin-top: 20px; }
+.principles div { background: var(--paper); border-radius: 12px; border: 1px solid var(--line); padding: 16px; }
+.principles b { display: block; font: 700 17px var(--head); color: var(--navy); margin-bottom: 4px; }
+.principles p { margin: 0; font-size: 14px; }
+
+.pager { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 48px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.pager a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font-weight: 700; text-decoration: none; }
+footer.foot { margin-top: 56px; background: var(--paper); border-top: 1px solid var(--line); padding: 24px 0 calc(24px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--muted); }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+/* Phones and tablets: stage-by-stage instead of a grid */
+@media (max-width: 1000px) {
+  .lane-grid { display: flex; flex-direction: column; gap: 8px; }
+  .lane-h { display: none; }
+  .stage-h { margin-top: 14px; }
+  .stage-h::after { display: none; }
+  .cell::before { content: attr(data-lane); font: 700 11.5px var(--body); color: var(--muted); }
+  .conn { grid-template-columns: 1fr; }
+  .detail { position: static; }
+}
+@media (max-width: 560px) {
+  .flow { grid-template-columns: 1fr; }
+  .flow .arrow { transform: rotate(90deg); height: 30px; }
+  .logo span { display: none; }
+  .topnav { width: 100%; }
+  .topnav a { flex: 1 1 auto; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .cell { transition: none; } }
+@media print { .draft-strip, .topnav, .picker { display: none !important; } body { background: #fff; } .board.focus .cell { opacity: 1; } }
+</style>
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 52px; padding-top: 4px; padding-bottom: 4px; }
+.blh-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; }
+.blh-crumb .home { font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; text-decoration: none; margin-right: 10px; }
+.blh-tabs { display: flex; flex-wrap: wrap; gap: 2px; }
+.blh-tabs a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.blh-where { font-size: 13px; color: #5F6E79; }
+.blh-pn { display: flex; gap: 8px; }
+.blh-pn a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; max-width: 300px; padding: 6px 14px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; font: 600 13.5px "Open Sans", Arial, sans-serif; text-decoration: none; }
+.blh-pn a:hover { border-color: #3187B5; }
+.blh-pn a b { flex: 0 0 auto; }
+.blh-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { flex-direction: column; align-items: stretch; padding-top: 6px; padding-bottom: 8px; }
+  .blh-crumb { justify-content: space-between; }
+  .blh-crumb .home { width: 100%; }
+  .blh-tabs { width: 100%; }
+  .blh-tabs a { flex: 1 1 auto; justify-content: center; padding: 6px 8px; }
+  .blh-right { justify-content: space-between; }
+  .blh-where { display: none; }
+  .blh-pn { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  .blh-pn a { max-width: none; justify-content: center; }
+  .blh-pn a span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+@media print { .blh { display: none !important; } }
+</style>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><div class="blh-crumb"><a class="home" href="index.html">DIY Toolkits</a><nav class="blh-tabs" aria-label="DIY Toolkits"><a href="index.html">Dashboard</a><a href="journey.html" aria-current="page">Journey map</a><a href="index.html#review">Team review</a></nav></div><div class="blh-right"></div></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft for internal review · How the DIY toolkits turn into pipeline</div>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="h1">
+    <p class="kicker">Buyer journey map</p>
+    <h1 id="h1">Help first. <span>Earn the conversation.</span></h1>
+    <p>Every toolkit gives a prospect real progress on their own. Each one also ends at the same place: the moment their plan needs an expert. This map shows how a visitor moves from a free tool to a booked call and a signed deal, which toolkit feeds which, and where each step lands in the HubSpot pipeline.</p>
+    <div class="picker" role="group" aria-label="Follow a sample prospect">
+      <span>Follow a prospect:</span>
+      <button class="persona" type="button" aria-pressed="true" data-p="none">Show everything</button>
+    </div>
+  </section>
+
+  <div class="board" id="board" aria-label="Swimlane: stages across, lanes down">
+    <div class="lane-grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="story" id="story" aria-live="polite" hidden></div>
+
+  <section class="block" aria-labelledby="conn-h">
+    <div class="block-head"><div><h2 id="conn-h">How each toolkit connects</h2><p>Pick a toolkit to see what usually comes before it, where it sends people next, and how it hands off to sales.</p></div></div>
+    <div class="conn">
+      <div class="series-col" id="series-col"></div>
+      <div class="detail" id="detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="inst-h">
+    <div class="block-head"><div><h2 id="inst-h">What makes this measurable</h2><p>The journey only becomes pipeline if HubSpot can see it. Here's what is in place today and what still has to be built. Each open piece is also on the dashboard's Open items tab.</p></div></div>
+    <div class="checks" id="checks"></div>
+  </section>
+
+  <section class="block" aria-labelledby="trust-h">
+    <div class="block-head"><div><h2 id="trust-h">Why this builds trust</h2><p>The toolkits sell by being useful. Four rules keep them that way.</p></div></div>
+    <div class="principles">
+      <div><b>Real value, no gate</b><p>No email wall. A visitor gets a complete plan for free, and leaves better off even if they never call.</p></div>
+      <div><b>Honest about limits</b><p>Every plan ends with “Where it gets complex”. Saying where DIY stops is what makes the expert credible.</p></div>
+      <div><b>A named expert</b><p>Each toolkit is written by, and hands off to, a real person: Dallas, Scott, Shema or Kristina.</p></div>
+      <div><b>Their plan becomes the scope</b><p>The visitor brings their plan to the call. The gaps they couldn't close become the proposal, and the work they already did lowers its cost.</p></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Page navigation">
+    <a href="index.html">← Back to the dashboard</a>
+    <a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html">Start with the Business Profile →</a>
+  </nav>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© Big Leap · Notice Different · Align to Genuine</span><a href="index.html">All DIY toolkits</a></div></footer>
+
+<script>
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  var STAGES = [
+    ['Discover', 'They notice a problem'],
+    ['Self-assess', 'They size it up'],
+    ['Build the foundation', 'They fix the basics'],
+    ['Get ready to grow', 'They plan the next move'],
+    ['Hit the hard part', 'They need an expert'],
+    ['Partner with Big Leap', 'They become a client']
+  ];
+  var LANES = [
+    ['What they think', 'The prospect’s mindset'],
+    ['What they do', 'Actions on our site'],
+    ['DIY toolkits', 'Click one to open it'],
+    ['Big Leap touchpoints', 'Live, or planned'],
+    ['HubSpot pipeline', 'Lifecycle stage and signal']
+  ];
+  /* Toolkit catalogue: id -> [series, file, short title] */
+  var K = {
+    paid1: ['paid', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'Business Profile'],
+    paid2: ['paid', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html', 'Google Ads ready?'],
+    trk2: ['paid', 'toolkits/paid/03_Which_Conversions_Should_You_Track.html', 'Conversion plan'],
+    paid3: ['paid', 'toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html', 'First campaigns'],
+    seo1: ['seo', 'toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html', 'SEO foundations'],
+    seo2: ['seo', 'toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html', 'Local search'],
+    rv1: ['revops', 'toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html', 'Lead capture'],
+    rv2: ['revops', 'toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html', 'Speed to lead'],
+    rv3: ['revops', 'toolkits/revops/03_Who_Should_Own_Each_New_Lead.html', 'Lead routing'],
+    rv4: ['revops', 'toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html', 'Sales automation'],
+    rv5: ['revops', 'toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', 'Time audit'],
+    rv6: ['revops', 'toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', 'Pipeline dashboard'],
+    trk1: ['revops', 'toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html', 'Tracking stack'],
+    pr1: ['pr', 'toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html', 'Pitch-ready check'],
+    pr2: ['pr', 'toolkits/pr/02_Build_Your_Media_Kit.html', 'Media kit']
+  };
+  var SERIES = { paid: ['Paid Media', 'Scott Smoot', 'Scott'], seo: ['SEO', 'Shema Al-Darwish', 'Shema'], revops: ['RevOps', 'Dallas Olsen', 'Dallas'], pr: ['Digital PR', 'Kristina Ainge', 'Kristina'] };
+  var SERIES_ORDER = ['paid', 'revops', 'seo', 'pr'];
+
+  /* Cells: [stage, lane] -> content. Types: t = text, k = toolkit chips, tp = touchpoints [label, live?], pl = pipeline */
+  var CELLS = {
+    '0,0': { t: '“Why aren’t we getting more leads?” “Are our ads even working?”' },
+    '0,1': { t: 'Lands on bigleap.com, a blog post, or a widget embedded on a partner page. Sees a slide tile in a proposal or on a sales call.' },
+    '0,2': { k: ['rv5'], t: 'Widgets: Where should you start? · Hours lost · Ads ready? · Tracking check · SEO check · Pitch-ready' },
+    '0,3': { tp: [['Homepage DIY band and nav link', 0], ['Widgets on service pages and blog', 0], ['Slide tiles with QR in proposals', 1], ['Organic and AI search to the landing page', 0]] },
+    '0,4': { pl: 'Anonymous visitor', s: 'Source and UTM captured by the HubSpot tracking code once the hub is on bigleap.com.' },
+
+    '1,0': { t: '“What kind of help do we actually need?”' },
+    '1,1': { t: 'Answers eight questions once. Gets their campaign fit and a recommended path across every service.' },
+    '1,2': { k: ['paid1', 'rv5'] },
+    '1,3': { tp: [['Business Profile with a shareable code', 1], ['“Email me my path” opt-in', 0]] },
+    '1,4': { pl: 'Visitor → Lead', s: 'Becomes a Lead when they opt in to receive their plan. Profile answers map to contact properties (industry, B2B/B2C, locations, CRM, budget).' },
+
+    '2,0': { t: '“Okay, I can do some of this myself.”' },
+    '2,1': { t: 'Installs Tag Manager and GA4, verifies Search Console, connects forms to a CRM, lines up a spokesperson.' },
+    '2,2': { k: ['trk1', 'trk2', 'seo1', 'seo2', 'rv1', 'rv2', 'rv3', 'pr1'] },
+    '2,3': { tp: [['Copy-my-plan on every toolkit', 1], ['Cross-links to the next relevant toolkit', 1], ['“How did it go?” check-in from the toolkit owner', 0]] },
+    '2,4': { pl: 'Lead → MQL', s: 'Scored as MQL on profile fit plus two or more toolkits finished, or a budget that fits.' },
+
+    '3,0': { t: '“The basics work. What should we spend on next?”' },
+    '3,1': { t: 'Checks ad-account readiness, plans first campaigns, automates sales steps, builds a dashboard and a media kit.' },
+    '3,2': { k: ['paid2', 'paid3', 'rv4', 'rv6', 'pr2'] },
+    '3,3': { tp: [['“Where it gets complex” panel on every plan', 1], ['Case studies matched to their profile', 0], ['Masterclass invite', 0]] },
+    '3,4': { pl: 'MQL', s: 'Nurture continues. Each toolkit visited adds intent; repeat visits to Paid 03 or RevOps 06 are strong signals.' },
+
+    '4,0': { t: '“This needs someone who has done it a hundred times.”' },
+    '4,1': { t: 'Clicks “Talk to Scott / Shema / Kristina / Dallas about building it” and books a call, with their plan copied in.' },
+    '4,2': { t: 'Every toolkit’s closing panel', k: [] },
+    '4,3': { tp: [['“Talk to [owner]” CTA, UTM-tagged per toolkit', 1], ['Owner scheduler links', 0], ['Plan pasted into the booking form', 0]] },
+    '4,4': { pl: 'SQL', s: 'Meeting booked. utm_campaign shows which toolkit sent them (for example paid-02), so the owner knows the context before the call.' },
+
+    '5,0': { t: '“They already know where we are. That saves us time and money.”' },
+    '5,1': { t: 'Strategy call reviews their plan. The gaps they couldn’t close become the scope. Foundations they already built lower the upfront cost.' },
+    '5,2': { t: 'Their plan and Business Profile feed the gap audit and the 90-day foundational model.' },
+    '5,3': { tp: [['Strategy call with the toolkit owner', 1], ['Proposal scoped from their gap list', 0], ['Onboarding that skips work they already did', 0]] },
+    '5,4': { pl: 'Deal → Customer', s: 'Deal created with source “DIY toolkit”. Closed-won reports back to the toolkit that started it.' }
+  };
+
+  var PERSONAS = {
+    local: { label: 'Local service business', who: 'A family dental practice with two offices, leads by phone and web form, no CRM.',
+      path: [['0,1', 'Finds the “Where should you start?” widget on a bigleap.com blog post.'], ['1,2', 'Builds a Business Profile: B2C, two locations, leads, $2,500 a month.'], ['2,2', 'Fixes Google Business Profile listings (Local search), then connects web forms to a CRM (Lead capture).'], ['2,4', 'Opts in to email their plan, becomes a Lead, then an MQL after a second toolkit.'], ['3,2', 'Runs Google Ads ready? and learns location assets need Google Business Profile linked.'], ['4,1', 'Clicks Talk to Scott from First campaigns with the plan attached.'], ['5,4', 'Signs a paid search + local SEO engagement that starts at month two, not month zero.']],
+      out: 'Outcome: a smaller, faster first engagement, and a client who trusts the advice because it already worked.' },
+    b2b: { label: 'B2B firm with HubSpot', who: 'A 20-person IT services firm with HubSpot Starter and leads going cold.',
+      path: [['0,2', 'Sees the Hours lost widget in a RevOps proposal deck and scans the QR code.'], ['1,2', 'Runs the Time audit: 30 to 50 hours a month lost to hand work.'], ['2,2', 'Builds Lead capture, Speed to lead and Lead routing in HubSpot.'], ['2,4', 'Three toolkits done plus a HubSpot fit: MQL.'], ['3,2', 'Plans a pipeline dashboard, then hits multi-pipeline attribution in “Where it gets complex”.'], ['4,4', 'Books with Dallas: SQL, tagged revops-06.'], ['5,1', 'Engagement scoped to attribution and reporting, since the basics are done.']],
+      out: 'Outcome: the prospect arrives already sold on RevOps, because they felt the hours come back.' },
+    ecom: { label: 'Shopify brand', who: 'A direct-to-consumer coffee brand on Shopify, running Meta ads with no conversion tracking.',
+      path: [['0,3', 'Clicks the Free Toolkits link in the bigleap.com nav.'], ['1,2', 'Business Profile flags Shopping and Performance Max as a fit, and missing tracking as the first gap.'], ['2,2', 'Installs the Google & YouTube app, GA4 and the Meta pixel with Conversions API (RevOps 7), then plans purchase events (Paid 3).'], ['3,2', 'Google Ads ready? shows Merchant Center feed issues; First campaigns suggests Standard Shopping under $1,500.'], ['3,4', 'Repeat visits to First campaigns raise their score.'], ['4,1', 'Talks to Scott about feed tiering by margin.'], ['5,4', 'Closes as a paid media client with clean tracking from day one.']],
+      out: 'Outcome: no first month lost to tracking setup, so results show up sooner.' },
+    launch: { label: 'Founder with a launch', who: 'A startup founder launching an app in 90 days who wants press and podcasts.',
+      path: [['0,1', 'Finds the toolkits landing page from search.'], ['1,2', 'Business Profile marks the app and recommends the PR path plus tracking.'], ['2,2', 'Runs the Pitch-ready check: needs bios, headshots and a press page.'], ['3,2', 'Builds a media kit with short and long bios, a podcast intro and talking points.'], ['2,2', 'Sets up the app event chain in the Conversion plan (install, first open, subscribe).'], ['4,1', 'Talks to Kristina about a 90-day launch push.'], ['5,1', 'Engagement starts with pitching, not questionnaires, because the media kit is done.']],
+      out: 'Outcome: Kristina’s team pitches in week one instead of week four.' }
+  };
+
+  /* Connections between toolkits */
+  var CONN = {
+    paid1: { from: [], to: ['paid2', 'trk1', 'seo2', 'rv1', 'pr1'], why: 'The shared start. It recommends a path across every service.' },
+    paid2: { from: ['paid1'], to: ['paid3', 'trk1', 'trk2', 'rv1', 'seo2'], why: 'Catches setup gaps that would waste ad spend.' },
+    paid3: { from: ['paid2', 'trk2'], to: ['trk2', 'rv2'], why: 'Turns a ready account into a first campaign plan.' },
+    trk1: { from: ['paid1', 'paid2', 'seo1', 'rv1'], to: ['trk2', 'seo1', 'rv1'], why: 'RevOps 7. The measurement base every channel depends on: Tag Manager, GA4, consent, ad tags and lead source.' },
+    trk2: { from: ['trk1', 'paid2'], to: ['paid3', 'rv1'], why: 'Paid 3. Decides which results steer ad bidding, and what to send back from the CRM.' },
+    seo1: { from: ['paid1', 'trk1'], to: ['seo2', 'trk1', 'pr2'], why: 'Makes sure search and AI search can reach the site.' },
+    seo2: { from: ['paid1', 'seo1', 'paid2'], to: ['paid2', 'rv1'], why: 'For businesses with locations. Also powers ad location assets.' },
+    rv1: { from: ['paid1', 'trk1', 'seo2'], to: ['rv2', 'trk1', 'paid2', 'seo1'], why: 'Makes sure every lead the marketing earns reaches the CRM.' },
+    rv2: { from: ['rv1', 'paid3'], to: ['rv3'], why: 'The first reply, written and automated.' },
+    rv3: { from: ['rv2'], to: ['rv4', 'paid2', 'pr1'], why: 'Clear ownership for every new lead.' },
+    rv4: { from: ['rv3', 'rv5'], to: ['rv6'], why: 'Pipeline admin that runs itself.' },
+    rv5: { from: [], to: ['rv1', 'rv2', 'rv3', 'rv4', 'rv6'], why: 'The RevOps start-here. Ranks which RevOps toolkit to do first.' },
+    rv6: { from: ['rv4', 'rv5'], to: ['paid2', 'seo1', 'pr1'], why: 'Pipeline visibility once the data is clean.' },
+    pr1: { from: ['paid1', 'rv3'], to: ['pr2', 'seo1', 'trk1'], why: 'Readiness before any pitching starts.' },
+    pr2: { from: ['pr1', 'seo1'], to: ['seo1', 'trk1'], why: 'Bios, talking points and a press kit, written for them.' }
+  };
+  var CAMPAIGN = { paid1: 'paid-01', paid2: 'paid-02', trk2: 'paid-03', paid3: 'paid-04', trk1: 'revops-07', seo1: 'seo-01', seo2: 'seo-02', rv1: 'revops-01', rv2: 'revops-02', rv3: 'revops-03', rv4: 'revops-04', rv5: 'revops-05', rv6: 'revops-06', pr1: 'pr-01', pr2: 'pr-02' };
+
+  function chip(id, asButton) {
+    var k = K[id]; if (!k) return '';
+    var style = 'style="--c:var(--c-' + k[0] + ')"';
+    return asButton
+      ? '<button type="button" class="chip" data-k="' + id + '" ' + style + '>' + esc(k[2]) + '</button>'
+      : '<a class="chip" href="' + esc(k[1]) + '" data-k="' + id + '" ' + style + ' title="' + esc(SERIES[k[0]][0]) + ': open toolkit">' + esc(k[2]) + '</a>';
+  }
+
+  /* Build the swimlane: cells first, then interleave with stage headers (stage order also drives the phone layout) */
+  var cellsHtml = '';
+  STAGES.forEach(function (s, si) {
+    LANES.forEach(function (l, li) {
+      var c = CELLS[si + ',' + li] || {}, inner = '<span class="step-badge" aria-hidden="true"></span>';
+      if (c.k) inner += '<div style="display:flex;flex-wrap:wrap;gap:6px">' + c.k.map(function (id) { return chip(id, false); }).join('') + '</div>';
+      if (c.t) inner += '<p>' + esc(c.t) + '</p>';
+      if (c.tp) inner += c.tp.map(function (t) { return '<div class="tp"><i class="' + (t[1] ? 'live">Live' : 'plan">Planned') + '</i><span>' + esc(t[0]) + '</span></div>'; }).join('');
+      if (c.pl) inner += '<span class="stage-tag">' + esc(c.pl) + '</span><span class="signal">' + esc(c.s) + '</span>';
+      cellsHtml += '<div class="cell lane-' + li + '" id="c-' + si + '-' + li + '" data-lane="' + esc(l[0]) + '" style="grid-row:' + (li + 2) + ';grid-column:' + (si + 2) + '">' + inner + '</div>';
+    });
+  });
+  var out = '<div aria-hidden="true" style="grid-row:1;grid-column:1"></div>';
+  LANES.forEach(function (l, li) { out += '<div class="lane-h" style="grid-row:' + (li + 2) + ';grid-column:1"><span>' + esc(l[0]) + '<small>' + esc(l[1]) + '</small></span></div>'; });
+  var tmp = document.createElement('div'); tmp.innerHTML = cellsHtml;
+  STAGES.forEach(function (s, si) {
+    out += '<div class="stage-h" style="grid-row:1;grid-column:' + (si + 2) + '"><small>Stage ' + (si + 1) + ' · ' + esc(s[1]) + '</small><strong>' + esc(s[0]) + '</strong></div>';
+    LANES.forEach(function (l, li) { var el = tmp.querySelector('#c-' + si + '-' + li); out += el.outerHTML; });
+  });
+  $('grid').innerHTML = out;
+  $('legend').innerHTML = SERIES_ORDER.map(function (s) { return '<span class="chip" style="--c:var(--c-' + s + ')">' + esc(SERIES[s][0]) + ' · ' + esc(SERIES[s][2]) + '</span>'; }).join('') +
+    '<span class="tp"><i class="live">Live</i> in place today</span><span class="tp"><i class="plan">Planned</i> still to build</span>';
+
+  /* Personas */
+  var picker = document.querySelector('.picker');
+  Object.keys(PERSONAS).forEach(function (id) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'persona'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('data-p', id); b.textContent = PERSONAS[id].label; picker.appendChild(b);
+  });
+  function setPersona(id) {
+    Array.prototype.forEach.call(picker.querySelectorAll('.persona'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-p') === id); });
+    Array.prototype.forEach.call(document.querySelectorAll('.cell'), function (c) { c.classList.remove('hit'); var sb = c.querySelector('.step-badge'); if (sb) sb.textContent = ''; });
+    var board = $('board'), story = $('story');
+    if (id === 'none') { board.classList.remove('focus'); story.hidden = true; return; }
+    var p = PERSONAS[id]; board.classList.add('focus');
+    p.path.forEach(function (st, i) {
+      var c = $('c-' + st[0].replace(',', '-'));
+      if (c) { c.classList.add('hit'); var sb = c.querySelector('.step-badge'); sb.textContent = sb.textContent ? sb.textContent + ',' + (i + 1) : (i + 1); }
+    });
+    story.innerHTML = '<h3>' + esc(p.label) + '</h3><p style="margin:4px 0 0;color:var(--muted)">' + esc(p.who) + '</p><ol>' + p.path.map(function (st) { return '<li>' + esc(st[1]) + '</li>'; }).join('') + '</ol><p class="out">' + esc(p.out) + '</p>';
+    story.hidden = false;
+  }
+  picker.addEventListener('click', function (e) { var b = e.target.closest('.persona'); if (b) setPersona(b.getAttribute('data-p')); });
+
+  /* Connections */
+  $('series-col').innerHTML = SERIES_ORDER.map(function (s) {
+    var ids = Object.keys(K).filter(function (id) { return K[id][0] === s; });
+    return '<div><h4>' + esc(SERIES[s][0]) + ' <span style="font:400 13px var(--body);color:var(--muted)">· ' + esc(SERIES[s][1]) + '</span></h4><div class="chips">' + ids.map(function (id) { return chip(id, true); }).join('') + '</div></div>';
+  }).join('');
+  function showConn(id) {
+    var k = K[id], c = CONN[id], s = SERIES[k[0]];
+    Array.prototype.forEach.call(document.querySelectorAll('#series-col .chip'), function (b) { b.classList.toggle('on', b.getAttribute('data-k') === id); b.setAttribute('aria-pressed', b.getAttribute('data-k') === id); });
+    function list(a, empty) { return a.length ? a.map(function (x) { return chip(x, false); }).join('') : '<span class="signal">' + empty + '</span>'; }
+    $('detail').innerHTML = '<h3>' + esc(k[2]) + '</h3><p class="who">' + esc(s[0]) + ' · written by ' + esc(s[1]) + '. ' + esc(c.why) + '</p>' +
+      '<div class="flow"><div class="col"><h5>Usually comes after</h5>' + list(c.from, 'A starting point') + '</div><div class="arrow" aria-hidden="true">→</div>' +
+      '<div class="me" style="--c:var(--c-' + k[0] + ')">' + esc(k[2]) + '</div><div class="arrow" aria-hidden="true">→</div>' +
+      '<div class="col"><h5>Sends people to</h5>' + list(c.to, 'Hand-off to sales') + '</div></div>' +
+      '<div class="handoff"><b>Hand-off to sales:</b> “Talk to ' + esc(s[2]) + ' about building it”, tagged <code>utm_campaign=' + CAMPAIGN[id] + '</code>. A booked call becomes an SQL with the toolkit as its source.</div>' +
+      '<a class="open" href="' + esc(k[1]) + '">Open this toolkit</a>';
+  }
+  $('series-col').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) showConn(b.getAttribute('data-k')); });
+  showConn('paid1');
+
+  /* Instrumentation */
+  var CHECKS = [
+    [1, 'UTM-tagged “Talk to …” buttons', 'Every toolkit’s CTA carries utm_source=diy-toolkits and a utm_campaign per toolkit, so HubSpot attributes booked calls.'],
+    [1, 'Shared Business Profile', 'One set of answers fills every toolkit. The same fields can become HubSpot contact properties.'],
+    [1, 'Cross-links and next steps', 'Every page links to the dashboard, this map, the previous and next toolkit, and the relevant other services.'],
+    [0, '“Email me my plan” opt-in', 'A short form on each results panel that creates a HubSpot contact (Lead) with the plan and profile attached. Needs the ecosystem form or a HubSpot form.'],
+    [0, 'HubSpot properties and MQL rule', 'Properties for toolkit used, profile answers and plan gaps, plus a scoring rule: profile fit and two or more toolkits = MQL.'],
+    [0, 'Owner check-in sequence', 'Dallas’s “how did it go?” emails from the toolkit owner a few days after a plan is sent. Not a sales push, a genuine check-in.'],
+    [0, 'Owner scheduler links', 'Swap the contact-page placeholder for each owner’s meeting link so the SQL lands on the right calendar.'],
+    [0, 'Site analytics and a toolkit report', 'GA4 or ecosystem tracking on the hub, plus a HubSpot report: toolkit → Lead → MQL → SQL → closed-won.']
+  ];
+  $('checks').innerHTML = CHECKS.map(function (c) { return '<div class="check"><span class="st ' + (c[0] ? 'live">Live' : 'plan">To build') + '</span><h4>' + esc(c[1]) + '</h4><p>' + esc(c[2]) + '</p></div>'; }).join('');
+
+  try { var t = localStorage.getItem('bl_hub_theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+})();
+</script>
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+</body>
+</html>

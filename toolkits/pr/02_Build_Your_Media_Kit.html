@@ -386,9 +386,32 @@ body { font-size: 12pt; }
 a { color: #000; }
 }
 </style>
+<style id="bl-sitenav-css">
+/* Site navigation shared by every toolkit (added Oct 19, 2026) */
+.bl-sitenav { background: var(--surface, #F7F9FB); border-bottom: 1px solid var(--line, #D4DADF); font-family: var(--font, Arial, sans-serif); }
+.bl-sitenav .bl-in { max-width: 1240px; margin: 0 auto; padding: 6px max(16px, env(safe-area-inset-left)) 6px max(16px, env(safe-area-inset-right)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 14px; }
+.bl-sitenav .bl-home { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; }
+.bl-sitenav a { color: var(--heading, #143D55); text-decoration: none; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.bl-sitenav a:hover { color: var(--blue-ink, #246D96); text-decoration: underline; }
+.bl-sitenav a:focus-visible { outline: 3px solid var(--focus, #3187B5); outline-offset: 2px; border-radius: 6px; }
+.bl-sitenav .bl-where { font-size: 13px; color: var(--muted, #5F6E79); }
+.bl-sitenav .bl-pn { display: flex; gap: 8px; flex-wrap: wrap; }
+.bl-sitenav .bl-pn a { border: 1px solid var(--line, #D4DADF); background: var(--bg, #fff); border-radius: 999px; padding: 6px 14px; font-weight: 600; max-width: 330px; }
+.bl-sitenav .bl-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+.bl-sitenav .bl-pn a b { font-weight: 700; flex: 0 0 auto; }
+@media (max-width: 640px) {
+  .bl-sitenav .bl-in { flex-direction: column; align-items: stretch; }
+  .bl-sitenav .bl-pn { display: grid; grid-template-columns: 1fr 1fr; }
+  .bl-sitenav .bl-pn a { max-width: none; justify-content: center; }
+  .bl-sitenav .bl-pn a span { display: none; }
+  .bl-sitenav .bl-where { display: none; }
+}
+@media print { .bl-sitenav { display: none !important; } }
+</style>
 </head>
 <body>
 <div class="draft-banner" role="note">Draft v1 for internal review · Built Oct 19, 2026 from the Agency Brands call · Owner: <b>Kristina Ainge</b></div>
+<!-- bl-sitenav --><nav class="bl-sitenav" aria-label="Toolkit navigation"><div class="bl-in"><div class="bl-home"><a href="../../index.html">← Dashboard</a><a href="../../journey.html">Journey map</a><span class="bl-where">Digital PR · Toolkit 2 of 2</span></div><div class="bl-pn"><a href="01_Are_You_Ready_to_Be_Pitched.html" title="Are You Ready to Be Pitched?">← <b>Previous</b><span>Are You Ready to Be Pitched?</span></a><a href="../../index.html"><b>Next</b><span>All toolkits</span> →</a></div></div></nav><!-- /bl-sitenav -->
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· DIGITAL PR</span></div>
@@ -506,7 +529,7 @@ a { color: #000; }
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <button type="button" class="btn btn-line" id="dl-btn">Download as .txt</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Kristina about building it</a>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=pr-02" target="_blank" rel="noopener">Talk to Kristina about building it</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -548,7 +571,7 @@ LINKS: every Big Leap DIY toolkit this series can point to (relative
 URLs, same tab). A link only shows when the answers make it relevant.
 ===================================================================== */
 const OWNER = { name: 'Kristina Ainge', first: 'Kristina' };
-const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Kristina's meeting scheduler link
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=pr-02'; // swap for Kristina's meeting scheduler link
 const SERIES = [
 { n: 1, short: 'Get pitch-ready', title: 'Are You Ready to Be Pitched?', file: '01_Are_You_Ready_to_Be_Pitched.html' },
 { n: 2, short: 'Build your media kit', title: 'Build Your Media Kit', file: '02_Build_Your_Media_Kit.html' },

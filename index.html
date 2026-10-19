@@ -92,7 +92,8 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 
 /* Tabs */
 .tabs-bar { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
-.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.tabs-bar .wrap { overflow: hidden; }
+.tabs { display: flex; gap: 4px; max-width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab { flex: 0 0 auto; min-height: 52px; padding: 0 18px; border: 0; background: none; color: var(--muted); font: 700 15px/1 var(--head); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
 .tab[aria-selected="true"] { color: var(--navy); border-bottom-color: var(--red); }
@@ -124,6 +125,7 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .stop a { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--text); width: 100%; }
 .dot { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 800 16px/1 var(--head); background: var(--c, var(--blue)); color: #fff; border: 4px solid var(--paper); box-shadow: 0 0 0 2px var(--c, var(--blue)); }
 .draft-line .dot { background: var(--paper); color: var(--c, var(--blue)); box-shadow: 0 0 0 2px var(--c, var(--blue)); border-style: solid; }
+.stop.is-draft .dot { background: var(--paper); color: var(--c, var(--blue)); }
 .stop .lbl { font-size: 13px; line-height: 1.25; font-weight: 600; color: var(--navy); overflow-wrap: normal; word-break: normal; hyphens: auto; white-space: normal; }
 .stop a:hover .dot { transform: scale(1.08); }
 .stop-filler { flex: 1 1 0; }
@@ -173,6 +175,22 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .tag { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--tint); color: var(--navy); font-weight: 600; font-size: 13px; }
 .item .area { color: var(--muted); }
 
+
+/* Team review */
+.review-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.agenda-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 22px; }
+.agenda-card h3 { font-size: 22px; }
+.agenda-card .sub { margin: 4px 0 14px; color: var(--muted); font-size: 15px; }
+.agenda { list-style: none; counter-reset: a; margin: 0; padding: 0; display: grid; gap: 0; }
+.agenda li { counter-increment: a; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.agenda li::before { content: counter(a); width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: var(--paper); font: 800 15px/34px var(--head); text-align: center; }
+.agenda b { font: 700 17px var(--head); color: var(--navy); }
+.agenda .mins { font-size: 13px; color: var(--muted); margin-left: 6px; white-space: nowrap; }
+.agenda p { margin: 4px 0 0; font-size: 15px; }
+button.link { background: none; border: 0; padding: 0; color: var(--blue-ink); font: 700 15px var(--body); text-decoration: underline; cursor: pointer; min-height: 32px; }
+.mini-steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15px; }
+@media (max-width: 960px) { .review-grid { grid-template-columns: 1fr; } }
+
 /* Widgets */
 .widget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; }
 .widget-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; display: flex; flex-direction: column; }
@@ -220,6 +238,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   .stop .lbl { font-size: 11px; }
   .item { grid-template-columns: 1fr; }
   .item .side { grid-row: auto; grid-column: 1; flex-direction: row; flex-wrap: wrap; align-items: center; text-align: left; }
+  .tab { padding: 0 10px; font-size: 14px; }
   .top .wrap { min-height: 60px; }
   .logo span { display: none; }
   .top-actions .btn-ghost { display: none; }
@@ -236,20 +255,91 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   body { background: #fff; }
 }
 </style>
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 52px; padding-top: 4px; padding-bottom: 4px; }
+.blh-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; }
+.blh-crumb .home { font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; text-decoration: none; margin-right: 10px; }
+.blh-tabs { display: flex; flex-wrap: wrap; gap: 2px; }
+.blh-tabs a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.blh-where { font-size: 13px; color: #5F6E79; }
+.blh-pn { display: flex; gap: 8px; }
+.blh-pn a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; max-width: 300px; padding: 6px 14px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; font: 600 13.5px "Open Sans", Arial, sans-serif; text-decoration: none; }
+.blh-pn a:hover { border-color: #3187B5; }
+.blh-pn a b { flex: 0 0 auto; }
+.blh-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { flex-direction: column; align-items: stretch; padding-top: 6px; padding-bottom: 8px; }
+  .blh-crumb { justify-content: space-between; }
+  .blh-crumb .home { width: 100%; }
+  .blh-tabs { width: 100%; }
+  .blh-tabs a { flex: 1 1 auto; justify-content: center; padding: 6px 8px; }
+  .blh-right { justify-content: space-between; }
+  .blh-where { display: none; }
+  .blh-pn { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  .blh-pn a { max-width: none; justify-content: center; }
+  .blh-pn a span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+@media print { .blh { display: none !important; } }
+</style>
 </head>
 <body>
-<div class="draft-strip" role="note">Draft for internal review · Built Oct 19, 2026 from the Agency Brands call · Paid, Tracking, SEO and Digital PR toolkits are first drafts</div>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><div class="blh-crumb"><a class="home" href="index.html">DIY Toolkits</a><nav class="blh-tabs" aria-label="DIY Toolkits"><a href="index.html" aria-current="page">Dashboard</a><a href="journey.html">Journey map</a><a href="index.html#review">Team review</a></nav></div><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button></div></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft for internal review · Built Oct 19, 2026 from the Agency Brands call · new Paid, SEO, Digital PR and RevOps 7 toolkits are first drafts</div>
 
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="./" aria-label="Big Leap DIY Toolkits home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="104" height="34"><span>DIY Toolkits</span></a>
-    <div class="top-actions">
-      <button class="theme-btn" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button>
-      <a class="btn btn-ghost" href="https://www.bigleap.com/" target="_blank" rel="noopener">bigleap.com</a>
-      <a class="btn btn-red" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to a strategist</a>
-    </div>
-  </div>
-</header>
 
 <section class="hero" aria-labelledby="hero-h">
   <div class="wrap">
@@ -277,8 +367,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="tabs" role="tablist" id="tablist">
       <button class="tab" role="tab" id="tab-toolkits" aria-controls="toolkits" aria-selected="true">Toolkits</button>
       <button class="tab" role="tab" id="tab-widgets" aria-controls="widgets" aria-selected="false" tabindex="-1">Widgets &amp; embeds</button>
-      <button class="tab" role="tab" id="tab-open" aria-controls="open-items" aria-selected="false" tabindex="-1">Open items <span class="count" id="open-count">0</span></button>
-      <button class="tab" role="tab" id="tab-how" aria-controls="how" aria-selected="false" tabindex="-1">How to use this</button>
+      <button class="tab" role="tab" id="tab-review" aria-controls="review" aria-selected="false" tabindex="-1">Team review <span class="count" id="open-count">0</span></button>
     </div>
   </div>
 </nav>
@@ -317,48 +406,56 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     </div>
   </section>
 
-  <section class="panel" id="open-items" role="tabpanel" aria-labelledby="tab-open" hidden>
+  <section class="panel" id="review" role="tabpanel" aria-labelledby="tab-review" hidden>
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2>Open questions, blockers and outstanding items</h2>
-          <p id="open-src">Everything that has to be answered or done before these toolkits are ready to launch, plus the other follow-ups from the call.</p>
+          <h2>Team review</h2>
+          <p id="open-src">The master agenda for toolkit reviews: what to look at, how to review it, and every open question, blocker and follow-up in one place.</p>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap" id="owner-filters"></div>
+        <a class="btn btn-ghost" href="journey.html">Open the journey map</a>
       </div>
-      <div class="summary" id="summary"></div>
-      <div id="groups"></div>
-    </div>
-  </section>
 
-  <section class="panel" id="how" role="tabpanel" aria-labelledby="tab-how" hidden>
-    <div class="wrap">
-      <div class="section-head"><div><h2>How to review the toolkits</h2><p>For Coby, Scott, Kristina, Shema and anyone else looking at the drafts before next Monday's call.</p></div></div>
-      <div class="how">
-        <ol class="steps-list">
-          <li><h4>Open the Business Profile first</h4><p>Click “Build your Business Profile” at the top. Answer as if you were a real prospect, or keep the example answers. Your profile is saved in this browser and fills in the other toolkits automatically.</p></li>
-          <li><h4>Follow the path it gives you</h4><p>The profile recommends which toolkits to do and in what order. Open one from the map or the list. Each toolkit opens with example answers, so you can see a finished plan right away.</p></li>
-          <li><h4>Change the answers and watch the plan update</h4><p>Results update as you answer. There is no submit button. Try edge cases from real clients: no website, an app, a franchise with ten locations, a B2B firm with HubSpot.</p></li>
-          <li><h4>Check the hand-offs</h4><p>At the bottom of every plan: “Copy my plan”, the “Talk to …” button for that service's owner, the next toolkit, and links to other services. Make sure each one goes somewhere sensible.</p></li>
-          <li><h4>Leave feedback where Dallas will see it</h4><p>Reply in the toolkit thread in Slack with the toolkit name and what to change. Owners: answer your items on the Open items tab so the drafts can move to v2.</p></li>
-        </ol>
+      <div class="review-grid">
+        <div class="agenda-card">
+          <h3>Agenda · Toolkit review, Monday Oct 26</h3>
+          <p class="sub">About 45 minutes. Each owner walks their toolkits, then the group clears decisions and blockers.</p>
+          <ol class="agenda">
+            <li><div><b>The big picture</b> <span class="mins">5 min · Dallas</span><p>Walk the <a href="journey.html">journey map</a>: how a visitor moves from a free toolkit to a booked call and a deal.</p></div></li>
+            <li><div><b>Business Profile and Paid Media</b> <span class="mins">10 min · Scott</span><p>Profile, ads readiness, conversions, first campaigns. <button class="link" type="button" data-owner="Scott Smoot">Scott's open items</button></p></div></li>
+            <li><div><b>SEO</b> <span class="mins">7 min · Shema</span><p>Foundations and local search. <button class="link" type="button" data-owner="Shema Al-Darwish">Shema's open items</button></p></div></li>
+            <li><div><b>Digital PR</b> <span class="mins">7 min · Kristina</span><p>Pitch-ready check and media kit. <button class="link" type="button" data-owner="Kristina Ainge">Kristina's open items</button></p></div></li>
+            <li><div><b>RevOps, including tracking</b> <span class="mins">5 min · Dallas</span><p>The six live toolkits plus the new Toolkit 7 for the tracking stack. <button class="link" type="button" data-owner="Dallas Olsen">Dallas's open items</button></p></div></li>
+            <li><div><b>Decisions and blockers</b> <span class="mins">8 min · Coby</span><p>Public vs. private, website placement, the follow-up email and analytics. <button class="link" type="button" data-owner="Coby Bush">Coby's open items</button></p></div></li>
+            <li><div><b>Owners and dates</b> <span class="mins">3 min · All</span><p>Confirm who does what before the next call. <button class="link" type="button" data-owner="all">Show everything</button></p></div></li>
+          </ol>
+        </div>
         <div class="aside">
+          <h3>Before the meeting: review in 10 minutes</h3>
+          <ol class="mini-steps">
+            <li><b>Build a Business Profile.</b> Answer as a real prospect. It's saved in your browser and fills every other toolkit.</li>
+            <li><b>Open your toolkits.</b> Each opens with example answers, so you see a finished plan right away.</li>
+            <li><b>Try edge cases.</b> No website, an app, ten locations, a B2B firm on HubSpot. Results update live.</li>
+            <li><b>Check the hand-offs.</b> Copy my plan, the “Talk to …” button, Previous and Next, and the links to other services.</li>
+            <li><b>Answer your open items</b> below, and post toolkit feedback in the Slack thread with the toolkit name.</li>
+          </ol>
           <h3>Good to know</h3>
           <ul>
-            <li><b>Drafts</b> show a “Draft v1 for internal review” strip at the top and a Draft tag on this page. RevOps toolkits are the live v2 set.</li>
-            <li>The site is <b>public to anyone with the link</b> and hidden from search engines. Don't put client data into it.</li>
-            <li>Nothing you type is sent anywhere. Answers stay in your browser.</li>
-            <li>Works on phones, tablets and desktops, in light or dark mode.</li>
-          </ul>
-          <h3>Updating the site</h3>
-          <ul>
-            <li>Toolkits live in the GitHub repo <code>bigL3ap/bigleap-diy-toolkits</code>, one folder per service.</li>
-            <li>The list on this page comes from <code>toolkits.json</code>. Open items come from <code>data/open-items.json</code>.</li>
-            <li>Changes go live about a minute after they're pushed.</li>
+            <li><b>Drafts</b> show a “Draft v1 for internal review” strip and a Draft tag. RevOps 1–6 are the live v2 set.</li>
+            <li>The site is <b>public to anyone with the link</b> and hidden from search engines. Don't enter client data.</li>
+            <li>Nothing typed into a toolkit is sent anywhere. Answers stay in the browser.</li>
+            <li>Toolkits live in <code>bigL3ap/bigleap-diy-toolkits</code>. The list comes from <code>toolkits.json</code>, open items from <code>data/open-items.json</code>. Changes go live about a minute after a push.</li>
             <li>Website ideas: <a href="mockups/homepage.html">homepage mockup</a> and <a href="mockups/toolkits-landing.html">landing page mockup</a>.</li>
           </ul>
         </div>
       </div>
+
+      <div class="section-head" id="open-items" style="margin-top:44px">
+        <div><h2>Open questions, blockers and follow-ups</h2><p id="open-showing">Everything that has to be answered or done before launch, plus the other follow-ups from the call.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="owner-filters"></div>
+      </div>
+      <div class="summary" id="summary"></div>
+      <div id="groups"></div>
     </div>
   </section>
 </main>
@@ -373,8 +470,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 <script>
 (function () {
   'use strict';
-  var COLORS = { revops: '#143D55', paid: '#EA4335', tracking: '#3187B5', seo: '#0F7B5F', pr: '#7A4E9C' };
-  var DARK_COLORS = { revops: '#6FB3DA', paid: '#F0675B', tracking: '#8CC4E4', seo: '#4CC9A3', pr: '#B78ED6' };
+  var COLORS = { revops: '#143D55', paid: '#EA4335', seo: '#0F7B5F', pr: '#7A4E9C' };
+  var DARK_COLORS = { revops: '#6FB3DA', paid: '#F0675B', seo: '#4CC9A3', pr: '#B78ED6' };
   var TYPE_ORDER = ['Blocker', 'Waiting on', 'Decision', 'Owner review', 'To do', 'Other from the call'];
   var TYPE_COLORS = { 'Owner review': '#0F7B5F', 'Blocker': '#EA4335', 'Waiting on': '#A15C07', 'Decision': '#3187B5', 'To do': '#143D55', 'Other from the call': '#7F8F9A' };
   var data = null, items = null, widgets = null;
@@ -403,7 +500,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   });
 
   /* Tabs with hash routing */
-  var TABS = [['toolkits', 'tab-toolkits'], ['widgets', 'tab-widgets'], ['open-items', 'tab-open'], ['how', 'tab-how']];
+  var TABS = [['toolkits', 'tab-toolkits'], ['widgets', 'tab-widgets'], ['review', 'tab-review']];
+  var ALIAS = { 'open-items': 'review', 'how': 'review', 'team-review': 'review' };
   function showTab(panelId, focus) {
     TABS.forEach(function (t) {
       var on = t[0] === panelId;
@@ -422,7 +520,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       try { history.replaceState(null, '', '#' + n[0]); } catch (e2) {}
     });
   });
-  function fromHash() { var h = (location.hash || '').slice(1); if (TABS.some(function (t) { return t[0] === h; })) showTab(h); }
+  function fromHash() { var h = (location.hash || '').slice(1); var target = ALIAS[h] || h; if (TABS.some(function (t) { return t[0] === target; })) { showTab(target); if (h === 'open-items') { setTimeout(function () { var el = $('open-items'); if (el) el.scrollIntoView(); }, 50); } } }
   window.addEventListener('hashchange', fromHash);
   fromHash();
 
@@ -444,11 +542,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var h = '<div class="map-start"><a class="start-node" href="' + esc(data.start.file) + '"><small>Start here</small><strong>' + esc(data.start.title) + '</strong></a></div>';
     data.series.forEach(function (s) {
       var c = color(s.id);
-      var draft = s.status !== 'live';
+      var draft = s.toolkits.every(function (t) { return t.status !== 'live'; });
       h += '<div class="line"><div class="line-name">' + esc(s.name) + '<small>' + esc(s.first) + ' · ' + s.toolkits.length + ' toolkit' + (s.toolkits.length === 1 ? '' : 's') + '</small></div>';
       h += '<ol class="stops' + (draft ? ' draft-line' : '') + '" style="--c:' + c + ';--n:' + s.toolkits.length + '">';
       s.toolkits.forEach(function (t) {
-        h += '<li class="stop"><a href="' + esc(t.file) + '" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (draft ? ' (draft)' : '') + '</span></span></a></li>';
+        h += '<li class="stop' + (t.status !== 'live' ? ' is-draft' : '') + '"><a href="' + esc(t.file) + '" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (t.status !== 'live' ? ' (draft)' : '') + '</span></span></a></li>';
       });
       for (var i = s.toolkits.length; i < 6; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
       h += '</ol></div>';
@@ -489,7 +587,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var ownerList = Object.keys(owners).sort();
     $('owner-filters').innerHTML = '<label class="sr" for="owner-sel">Filter by owner</label><select id="owner-sel" class="search" style="flex:0 1 240px;min-height:44px"><option value="all">Everyone</option>' + ownerList.map(function (o) { return '<option' + (state.owner === o ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select>';
     $('owner-sel').addEventListener('change', function (e) { state.owner = e.target.value; renderOpenList(); });
-    if (items.source) $('open-src').innerHTML = 'Everything that has to be answered or done before these toolkits launch, plus the other follow-ups from <a href="' + esc(items.source.url) + '" target="_blank" rel="noopener">' + esc(items.source.title) + '</a>.';
+    if (items.source) $('open-showing').innerHTML = 'Everything that has to be answered or done before launch, plus the other follow-ups from <a href="' + esc(items.source.url) + '" target="_blank" rel="noopener">' + esc(items.source.title) + '</a>.';
     renderOpenList();
   }
   function renderOpenList() {
@@ -531,6 +629,12 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   }
 
   $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); renderSeries(); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('button.link[data-owner]') : null; if (!b || !items) return;
+    state.owner = b.getAttribute('data-owner'); renderOpen();
+    var sel = $('owner-sel'); if (sel) sel.value = state.owner;
+    $('open-items').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { renderMap(); renderSeries(); }); } catch (e) {} }
 
   Promise.all([
@@ -544,6 +648,19 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   }).catch(function () {
     $('series-list').innerHTML = '<div class="empty">The toolkit list could not load. Refresh the page; if it keeps happening, check that toolkits.json is valid.</div>';
   });
+})();
+</script>
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>
 </body>
