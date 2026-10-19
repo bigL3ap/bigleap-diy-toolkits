@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Is Your Google Ads Account Ready?</title>
+<meta name="description" content="Quick checks before you spend on Google Ads. Get a Launch Readiness List of OK items and gaps, in build order, with steps and time estimates.">
+<style>
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim series path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 16%; right: 16%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt:has(input:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-wrap .opt, .opt-wrap .opt:hover, .opt-wrap .opt:has(input:checked) { border: 0; box-shadow: none; background: transparent; }
+.opt-wrap:has(input[type="radio"]:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+
+/* ---------- Paid Media series additions (draft banner, profile strip, OK/gap lists, print) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; overflow-wrap: break-word; }
+.draft-banner {
+background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line);
+font-size: 12.5px; line-height: 1.4; text-align: center; overflow-wrap: anywhere;
+padding: calc(7px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px));
+}
+.draft-banner b { font-weight: 700; }
+/* Tap targets and Safari-safe focus (no :has() needed) */
+.seg label { min-height: 44px; min-width: 0; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -4px; }
+.seg.wrap3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 420px) { .seg.wrap3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.seg.stack { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+.opt { min-height: 44px; }
+.opt.is-checked { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.text-btn { min-height: 44px; display: inline-flex; align-items: center; }
+.btn-plain { min-height: 44px; }
+select.text-field { appearance: auto; -webkit-appearance: menulist; font-weight: 700; }
+.q-rows { display: grid; gap: 12px; }
+.q-sub { display: grid; gap: 6px; padding: 10px 0 0 12px; border-left: 2px solid var(--tint-line); }
+.q-sub .q-label { font-size: 14px; }
+.row-label { font-size: 14px; font-weight: 700; color: var(--heading); }
+.pf-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+/* Business Profile strip */
+.profile-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 10px 16px; border: 1px solid var(--tint-line); background: var(--surface); border-radius: var(--radius); margin-bottom: 18px; font-size: 14px; }
+.profile-strip .ps-text { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; }
+.profile-strip .ps-text b { color: var(--heading); }
+.profile-strip .ps-text a { font-weight: 700; }
+.ps-actions { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.ps-actions a { font-weight: 700; font-size: 13.5px; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
+.ps-paste { flex-basis: 100%; min-width: 0; }
+.ps-paste summary { cursor: pointer; font-weight: 700; color: var(--heading); font-size: 13.5px; min-height: 44px; display: flex; align-items: center; }
+.ps-paste-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-bottom: 6px; }
+.ps-paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.ps-status { font-size: 13px; color: var(--muted); flex-basis: 100%; }
+.ps-status:empty { display: none; }
+/* Status chips */
+.chip.ok { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.gap { background: transparent; color: var(--text); border: 1px dashed var(--line-strong); }
+.chip.fits { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.maybe { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.notyet { background: transparent; color: var(--muted); border: 1px dashed var(--line-strong); }
+.chip-row { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.steps ol.how { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 13.5px; }
+.steps ol.how li { padding-left: 2px; }
+.st-time { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+.kit-link a { overflow-wrap: anywhere; }
+.steps > li.is-ok { background: transparent; border-style: dashed; }
+.is-ok .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.is-ok .st-title { color: var(--muted); }
+/* Sub-sections inside a deliverable */
+.sub { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.sub h3 { font-size: 16px; line-height: 1.3; }
+.sub-lede { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.fit-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.fit-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.fit-name { font-weight: 700; color: var(--heading); font-size: 14.5px; }
+.fit-line { grid-column: 1 / -1; font-size: 13.5px; }
+.callout { display: grid; gap: 6px; padding: 14px 16px; border: 1px solid var(--tint-line); border-left: 4px solid var(--heading); border-radius: 8px; background: var(--tint); font-size: 14px; }
+.callout b { color: var(--heading); }
+.callout .callout-title { font-weight: 700; color: var(--heading); font-size: 15px; }
+.bullets { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+.bullets b { color: var(--heading); }
+.dl { display: grid; grid-template-columns: minmax(0, 10.5rem) minmax(0, 1fr); gap: 0; margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); font-size: 14px; }
+.dl dt, .dl dd { margin: 0; padding: 7px 10px; border-bottom: 1px solid var(--line); min-width: 0; overflow-wrap: anywhere; }
+.dl dt { color: var(--muted); font-weight: 700; font-size: 13px; }
+.dl dd { color: var(--heading); font-weight: 700; }
+.dl dt:nth-last-of-type(1), .dl dd:last-of-type { border-bottom: 0; }
+@media (max-width: 420px) { .dl { grid-template-columns: minmax(0, 1fr); } .dl dt { border-bottom: 0; padding-bottom: 0; } }
+.code-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.code-row .text-field { flex: 1 1 14rem; font-family: ui-monospace, Menlo, Consolas, "Courier New", monospace; font-weight: 400; font-size: 16px; }
+.save-status { font-size: 13px; color: var(--muted); }
+.table-wrap table td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.week { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.week-title { font-weight: 700; color: var(--heading); font-size: 14.5px; }
+.week ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; }
+.weeks { display: grid; gap: 8px; }
+@media (min-width: 1100px) { .weeks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.camp { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--tint-line); border-radius: 8px; background: var(--tint); }
+.camp.second { background: var(--bg); border-color: var(--line); }
+.camp-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.camp-name { font-weight: 700; color: var(--heading); font-size: 15.5px; }
+.camp-why { font-size: 14px; }
+.foot a { color: var(--heading); font-weight: 700; }
+@media (max-width: 879px) { .is-sticky { position: static !important; } }
+@media print {
+.draft-banner { background: none; border-bottom: 1px solid #999; }
+.stepper, .col-q, .profile-strip, .closing-actions, .copy-status, #copy-host, .see-results, .text-btn, .ps-paste, .code-row button, .method-foot { display: none !important; }
+.layout { display: block !important; }
+.results, .method { display: block !important; }
+.panel, .closing, .method { break-inside: avoid-page; border-color: #999; }
+.closing { background: none !important; color: #000 !important; border: 1px solid #999; }
+.closing * { color: #000 !important; }
+.next, .xlinks li { background: none !important; }
+.method { display: block; }
+.method:not([open]) { display: none !important; }
+.steps > li { break-inside: avoid; }
+a { color: #000; text-decoration: underline; }
+body { background: #fff; color: #000; }
+}
+.bullets .applies, .steps .applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--seg-on); color: var(--on-seg); vertical-align: 1px; }
+.path-owner { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+.st-title a { color: var(--heading); }
+.sub.sub-first { border-top: 0; padding-top: 0; }
+.camps { display: grid; gap: 8px; }
+.camp ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; }
+.q-row .seg.inline { max-width: 100%; }
+@media (max-width: 400px) { .q-row .seg.inline { display: grid; flex: 1 1 100%; } .seg label { padding: 7px 6px; font-size: 13.5px; } }
+@media (max-width: 560px) {
+.stack-sm thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.stack-sm table, .stack-sm tbody, .stack-sm tr, .stack-sm th, .stack-sm td { display: block; width: 100%; }
+.stack-sm tr { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.stack-sm tbody tr:last-child { border-bottom: 0; }
+.stack-sm th, .stack-sm td { border-bottom: 0; padding: 4px 12px; }
+.stack-sm td { display: flex; justify-content: space-between; gap: 12px; }
+.stack-sm td::before { content: attr(data-l); color: var(--muted); font-weight: 700; font-size: 13px; }
+}
+
+</style>
+</head>
+<body>
+<div class="draft-banner" role="note">Draft v1 for internal review · Built Oct 19, 2026 from the Agency Brands call · Owner: Scott Smoot</div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· PAID MEDIA</span></div>
+<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 2 of 3</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Is Your Google Ads Account Ready?</h1>
+<p class="lede">A few quick checks before you spend a dollar. You get a Launch Readiness List: what is OK, what is a gap, and how to fix each gap in build order.</p>
+</header>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The Paid Media DIY path</h2>
+<p class="stepper-note"><a href="01_What_Kind_of_Business_Are_You.html">Start here: Build your Business Profile</a></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Before you spend a dollar</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Your business</span></legend>
+<div class="q-rows">
+<div class="q-row"><span class="row-label" id="offer-q">What you sell <span class="pf-tag" id="pf-offer" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="offer-q"><input type="radio" id="offer-products" name="offer" value="products"><label for="offer-products">Products</label><input type="radio" id="offer-services" name="offer" value="services" checked><label for="offer-services">Services</label><input type="radio" id="offer-both" name="offer" value="both"><label for="offer-both">Both</label></div></div>
+<div class="q-row" id="ecom-row" hidden><span class="row-label" id="ecommerce-q">Online checkout <span class="pf-tag" id="pf-ecommerce" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="ecommerce-q"><input type="radio" id="ecommerce-shopify" name="ecommerce" value="shopify"><label for="ecommerce-shopify">Shopify</label><input type="radio" id="ecommerce-other" name="ecommerce" value="other"><label for="ecommerce-other">Other</label><input type="radio" id="ecommerce-none" name="ecommerce" value="none" checked><label for="ecommerce-none">None</label></div></div>
+<div class="q-row"><span class="row-label" id="locations-q">Places customers visit <span class="pf-tag" id="pf-locations" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="locations-q"><input type="radio" id="locations-none" name="locations" value="none"><label for="locations-none">None</label><input type="radio" id="locations-one" name="locations" value="one" checked><label for="locations-one">One</label><input type="radio" id="locations-multi" name="locations" value="multi"><label for="locations-multi">Several</label></div></div>
+<div class="q-row"><span class="row-label" id="crm-q">Leads live in <span class="pf-tag" id="pf-crm" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="crm-q"><input type="radio" id="crm-hubspot" name="crm" value="hubspot" checked><label for="crm-hubspot">HubSpot</label><input type="radio" id="crm-other" name="crm" value="other"><label for="crm-other">Other CRM</label><input type="radio" id="crm-none" name="crm" value="none"><label for="crm-none">Inbox</label></div></div>
+<div class="q-row"><span class="row-label" id="app-q">A mobile app <span class="pf-tag" id="pf-app" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="app-q"><input type="radio" id="app-yes" name="app" value="yes"><label for="app-yes">Yes</label><input type="radio" id="app-no" name="app" value="no" checked><label for="app-no">No</label></div></div>
+</div>
+<p class="q-help">These decide which checks apply to you. Build your profile once and they fill in on their own.</p>
+</fieldset>
+<div class="q"><span class="q-label" id="account-q">Your Google Ads account</span><div class="seg stack" role="radiogroup" aria-labelledby="account-q"><input type="radio" id="account-own" name="account" value="own"><label for="account-own">I own it, with admin access and billing set up</label><input type="radio" id="account-agency" name="account" value="agency" checked><label for="account-agency">It exists, but an agency or past vendor controls it</label><input type="radio" id="account-nobilling" name="account" value="nobilling"><label for="account-nobilling">I own it, but billing is not set up</label><input type="radio" id="account-none" name="account" value="none"><label for="account-none">No account yet</label></div><p class="q-help">Own it means your company email is an <b>Admin</b> on the account and the payment method is yours. If an agency leaves, you keep your history.</p></div>
+<fieldset class="q">
+<legend><span class="q-label">Tracking basics</span></legend>
+<div class="q-rows">
+<div class="q-row"><span class="row-label" id="gtm-q">Google Tag Manager on your site <span class="pf-tag" id="pf-gtm" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="gtm-q"><input type="radio" id="gtm-yes" name="gtm" value="yes"><label for="gtm-yes">Yes</label><input type="radio" id="gtm-no" name="gtm" value="no" checked><label for="gtm-no">No</label><input type="radio" id="gtm-unsure" name="gtm" value="unsure"><label for="gtm-unsure">Not sure</label></div></div>
+<div class="q-row"><span class="row-label" id="ga4-q">Google Analytics 4 (GA4) on your site <span class="pf-tag" id="pf-ga4" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="ga4-q"><input type="radio" id="ga4-yes" name="ga4" value="yes"><label for="ga4-yes">Yes</label><input type="radio" id="ga4-no" name="ga4" value="no"><label for="ga4-no">No</label><input type="radio" id="ga4-unsure" name="ga4" value="unsure" checked><label for="ga4-unsure">Not sure</label></div></div>
+<div class="q-row"><span class="row-label" id="ga4link-q">GA4 linked to Google Ads</span><div class="seg inline" role="radiogroup" aria-labelledby="ga4link-q"><input type="radio" id="ga4link-yes" name="ga4link" value="yes"><label for="ga4link-yes">Yes</label><input type="radio" id="ga4link-no" name="ga4link" value="no"><label for="ga4link-no">No</label><input type="radio" id="ga4link-unsure" name="ga4link" value="unsure" checked><label for="ga4link-unsure">Not sure</label></div></div>
+<div class="q-row"><span class="row-label" id="autotag-q">Auto-tagging turned on</span><div class="seg inline" role="radiogroup" aria-labelledby="autotag-q"><input type="radio" id="autotag-yes" name="autotag" value="yes"><label for="autotag-yes">Yes</label><input type="radio" id="autotag-no" name="autotag" value="no"><label for="autotag-no">No</label><input type="radio" id="autotag-unsure" name="autotag" value="unsure" checked><label for="autotag-unsure">Not sure</label></div></div>
+</div>
+<p class="q-help"><b>Auto-tagging</b> adds a click ID to every ad click so GA4 and your CRM know the visit came from an ad. It is one switch in Google Ads.</p>
+</fieldset>
+<div class="q"><span class="q-label" id="conv-q">Is there a conversion action that fires?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="conv-q"><input type="radio" id="conv-tested" name="conv" value="tested"><label for="conv-tested">Yes, and we tested it</label><input type="radio" id="conv-untested" name="conv" value="untested"><label for="conv-untested">One exists, never tested</label><input type="radio" id="conv-none" name="conv" value="none" checked><label for="conv-none">No</label><input type="radio" id="conv-unsure" name="conv" value="unsure"><label for="conv-unsure">Not sure</label></div><p class="q-help">A <b>conversion action</b> tells Google Ads what a win looks like: a form sent, a call, a purchase. Without one, Google cannot tell good clicks from bad.</p></div>
+<fieldset class="q">
+<legend><span class="q-label">The page your ads will send people to</span></legend>
+<div class="q-rows">
+<div class="q-row"><span class="row-label" id="lpaction-q">One clear action to take</span><div class="seg inline" role="radiogroup" aria-labelledby="lpaction-q"><input type="radio" id="lpaction-yes" name="lpaction" value="yes"><label for="lpaction-yes">Yes</label><input type="radio" id="lpaction-no" name="lpaction" value="no" checked><label for="lpaction-no">No</label></div></div>
+<div class="q-row"><span class="row-label" id="lpspeed-q">Loads fast on a phone</span><div class="seg inline" role="radiogroup" aria-labelledby="lpspeed-q"><input type="radio" id="lpspeed-yes" name="lpspeed" value="yes"><label for="lpspeed-yes">Yes</label><input type="radio" id="lpspeed-slow" name="lpspeed" value="slow"><label for="lpspeed-slow">Slow</label><input type="radio" id="lpspeed-unsure" name="lpspeed" value="unsure" checked><label for="lpspeed-unsure">Not sure</label></div></div>
+</div>
+<p class="q-help">One clear action means one form, one button or one phone number to tap, not a menu of choices. Check speed free at <b>pagespeed.web.dev</b>.</p>
+</fieldset>
+<fieldset class="q" id="extra-q" hidden>
+<legend><span class="q-label">Checks for your kind of business</span></legend>
+<div class="q-rows">
+<div class="q-row" id="gbp-row" hidden><span class="row-label" id="gbp-q">Google Business Profile verified and current <span class="pf-tag" id="pf-gbp" hidden>From your profile</span></span><div class="seg inline" role="radiogroup" aria-labelledby="gbp-q"><input type="radio" id="gbp-yes" name="gbp" value="yes" checked><label for="gbp-yes">Yes</label><input type="radio" id="gbp-stale" name="gbp" value="stale"><label for="gbp-stale">Out of date</label><input type="radio" id="gbp-no" name="gbp" value="no"><label for="gbp-no">No</label></div></div>
+<div class="q-row" id="mc-row" hidden><span class="row-label" id="mc-q">Merchant Center linked to Google Ads</span><div class="seg inline" role="radiogroup" aria-labelledby="mc-q"><input type="radio" id="mc-yes" name="mc" value="yes"><label for="mc-yes">Yes</label><input type="radio" id="mc-partial" name="mc" value="partial"><label for="mc-partial">Set up</label><input type="radio" id="mc-no" name="mc" value="no" checked><label for="mc-no">No</label></div></div>
+<div class="q-row" id="crmimport-row" hidden><span class="row-label" id="crmimport-q">CRM sends lead results to Google Ads</span><div class="seg inline" role="radiogroup" aria-labelledby="crmimport-q"><input type="radio" id="crmimport-yes" name="crmimport" value="yes"><label for="crmimport-yes">Yes</label><input type="radio" id="crmimport-no" name="crmimport" value="no" checked><label for="crmimport-no">No</label><input type="radio" id="crmimport-unsure" name="crmimport" value="unsure"><label for="crmimport-unsure">Not sure</label></div></div>
+<div class="q-row" id="sdk-row" hidden><span class="row-label" id="sdk-q">App measured with Firebase, AppsFlyer or Kochava</span><div class="seg inline" role="radiogroup" aria-labelledby="sdk-q"><input type="radio" id="sdk-yes" name="sdk" value="yes"><label for="sdk-yes">Yes</label><input type="radio" id="sdk-no" name="sdk" value="no" checked><label for="sdk-no">No</label><input type="radio" id="sdk-unsure" name="sdk" value="unsure"><label for="sdk-unsure">Not sure</label></div></div>
+</div>
+<p class="q-help" id="extra-help"></p>
+</fieldset>
+<div class="q"><div class="q-row"><label class="q-label" for="adBudget">Monthly ad budget <span class="opt-tag">Optional</span> <span class="pf-tag" id="pf-adBudget" hidden>From your profile</span></label><div class="field"><span class="affix pre">$</span><input id="adBudget" name="adBudget" type="number" inputmode="numeric" min="0" max="10000000" step="50" value="3000"><span class="affix">/ mo</span></div></div><p class="q-help">What you plan to pay Google each month. Leave blank if you have not decided.</p></div>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See my readiness list</button>
+</form>
+</section>
+<div class="results" id="results">
+
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your readiness</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">0</span><span class="hero-unit" id="out-unit">gaps would waste spend</span></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Launch Readiness List</h2>
+<p class="deliv-sub" id="deliv-sub">Every check that applies to you, in build order. Fix the gaps from the top down; each one has the steps and a time estimate.</p>
+</div>
+<ol class="strip" id="strip" aria-label="Your checks at a glance"></ol>
+<ol class="steps" id="plan"></ol>
+</section>
+<section class="panel deliv" aria-labelledby="complex-h"><div class="deliv-head"><h2 id="complex-h">Where it gets complex</h2><p class="deliv-sub">These need expert judgment. Items marked "Applies to you" match your answers.</p></div><ul class="bullets" id="complex-list"></ul></section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h" data-closing-h></h2>
+<p id="closing-p"></p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Scott about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we calculate this</summary>
+<div class="method-body">
+<p>Each check is OK or a gap. "Not sure" counts as a gap until you check, because an unverified setting is the most common reason spend gets wasted.</p>
+<p>A gap <b>wastes spend</b> when ads could run but the money would be lost or unmeasured: no conversion that fires, auto-tagging off, no clear action on the page, a slow mobile page, a stale Business Profile, products not in Merchant Center, an app without measurement, or a budget too thin to learn. Account access and setup gaps block launch instead of wasting money, so they are listed but not counted in the red number.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Rule of thumb</th><th scope="col">Value</th></tr></thead><tbody id="assume-rows"></tbody></table></div>
+<p class="fine">Time estimates assume someone comfortable with the tools working on one site. They are ranges, not quotes.</p>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build. Nothing here is a promise of results; any number marked rule of thumb is a starting point, not a measurement of your account.</p>
+<p>© Big Leap · Paid Media DIY Toolkit 2 of 3 · Draft v1 · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all three Paid Media DIY toolkits.
+OWNER: the Big Leap expert named on the CTA.
+CTA_URL: where "Talk to Scott about building it" goes.
+SERIES: the three Paid Media toolkits, in order (stepper + next links).
+LINKS: the cross-link map shared by every Big Leap DIY series. Relative
+URLs, so they work on GitHub Pages and on a local copy of the repo.
+===================================================================== */
+const OWNER = { name: 'Scott Smoot', first: 'Scott' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Scott's meeting scheduler link
+const SERIES = [
+{ n: 1, short: 'Profile', title: 'What Kind of Business Are You?', file: '01_What_Kind_of_Business_Are_You.html' },
+{ n: 2, short: 'Get ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
+{ n: 3, short: 'Launch plan', title: 'Which Campaigns Should You Run First?', file: '03_Which_Campaigns_Should_You_Run_First.html' },
+];
+const LINKS = {
+profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
+adsReady:  { name: 'Is Your Google Ads Account Ready?',      url: '../paid/02_Is_Your_Google_Ads_Account_Ready.html',     owner: 'Scott Smoot' },
+campaigns: { name: 'Which Campaigns Should You Run First?',  url: '../paid/03_Which_Campaigns_Should_You_Run_First.html', owner: 'Scott Smoot' },
+tracking:  { name: 'Can You See What Your Marketing Does?',  url: '../tracking/01_Can_You_See_What_Your_Marketing_Does.html', owner: 'Scott Smoot' },
+conversions:{ name: 'Which Conversions Should You Track?',   url: '../tracking/02_Which_Conversions_Should_You_Track.html', owner: 'Scott Smoot' },
+seoBasics: { name: 'Can Google Find and Trust Your Site?',   url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',   owner: 'Shema Al-Darwish' },
+local:     { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html', owner: 'Shema Al-Darwish' },
+prReady:   { name: 'Are You Ready to Be Pitched?',           url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',            owner: 'Kristina Ainge' },
+mediaKit:  { name: 'Build Your Media Kit',                   url: '../pr/02_Build_Your_Media_Kit.html',                   owner: 'Kristina Ainge' },
+leadCapture:{ name: 'Is Every Lead Reaching Your CRM?',      url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',    owner: 'Dallas Olsen' },
+speedToLead:{ name: 'Never Let a Lead Go Cold',              url: '../revops/02_Never_Let_a_Lead_Go_Cold.html',           owner: 'Dallas Olsen' },
+pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?', url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', owner: 'Dallas Olsen' },
+hub:       { name: 'All DIY Toolkits',                       url: '../../index.html',                                     owner: '' },
+};
+
+/* =====================================================================
+SHARED BUSINESS PROFILE: identical in every Big Leap DIY toolkit.
+Paid 01 builds it; every other toolkit reads it. Stored in this
+browser (localStorage) and as a copy/paste code that starts "BL1.".
+===================================================================== */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* Plain-English labels for profile values */
+const LABELS = {
+model: { b2b: 'Sells to businesses (B2B)', b2c: 'Sells to consumers (B2C)', both: 'Sells to businesses and consumers' },
+modelShort: { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' },
+offer: { products: 'Products', services: 'Services', both: 'Products and services' },
+ecommerce: { shopify: 'Shopify store', other: 'Online store (not Shopify)', none: 'No online checkout' },
+locations: { none: 'No physical location customers visit', one: 'One location', multi: 'Several locations' },
+reach: { local: 'Local', regional: 'Regional', national: 'National', international: 'International' },
+crm: { hubspot: 'HubSpot', other: 'Another CRM', none: 'No CRM yet' },
+goal: { leads: 'More leads (forms)', calls: 'More phone calls', sales: 'More online sales', visits: 'More store or office visits', installs: 'More app installs', awareness: 'More people knowing the brand' },
+yn: { yes: 'Yes', no: 'No', unsure: 'Not sure', na: 'Not needed' },
+};
+function lab(group, v) { return (LABELS[group] && LABELS[group][v]) || ''; }
+
+/* Industries Google treats with extra rules. Matched against the profile's industry text. */
+const SPECIAL_VERTICALS = [
+{ key: 'auto', label: 'Auto dealers', re: /dealership|\b(auto|car|vehicle|truck|rv|motorcycle|boat)s?\b.*\b(dealer|sales)\b/i, note: 'Vehicle ads use their own formats and inventory feeds, and state advertising rules apply.' },
+{ key: 'legal', label: 'Legal services', re: /\b(law|legal|lawyer|attorney|bail)/i, note: 'Some legal services need Google certification or are restricted in some places.' },
+{ key: 'health', label: 'Healthcare and pharma', re: /health ?care|medical|clinic|doctor|dental|dentist|pharma|drug|addiction|rehab|telehealth|mental health|supplement/i, note: 'Healthcare and medicine ads are restricted, some need certification, and you cannot remarket on health conditions.' },
+{ key: 'finance', label: 'Financial services', re: /financ|loan|lend|credit|mortgage|insurance|\bbank|invest|crypto|\bdebt/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
+{ key: 'housing', label: 'Housing, employment or credit', re: /real estate|realtor|housing|apartment|rental|property management|home ?builder|staffing|recruit|hiring|employment|\bjobs?\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
+];
+function detectSpecial(industry) { const s = String(industry || ''); if (!s.trim()) return null; for (const v of SPECIAL_VERTICALS) { if (v.re.test(s)) return v; } return null; }
+
+/* ---------- small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function numOrNull(v) { if (v === '' || v == null) return null; const n = parseFloat(v); return Number.isFinite(n) && n >= 0 ? Math.min(n, 1e8) : null; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return '$' + fmt(Math.round(Number(n) || 0)); }
+function roundNice(n) { if (n >= 1000) return Math.round(n / 50) * 50; if (n >= 100) return Math.round(n / 10) * 10; return Math.round(n); }
+function moneyRange(a, b) { const x = roundNice(Math.min(a, b)), y = roundNice(Math.max(a, b)); return x === y ? money(x) : money(x) + '–' + money(y); }
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkHtml(key, label) { const L = LINKS[key]; if (!L) return esc(label || ''); return '<a href="' + esc(L.url) + '">' + esc(label || L.name) + '</a>'; }
+function linkPlain(key) { const L = LINKS[key]; return L ? L.name + ' (' + absUrl(L.url) + ')' : ''; }
+function radioVal(name) { const r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
+function setRadio(name, value) { const el = document.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function syncOptChecked(root) { [].forEach.call((root || document).querySelectorAll('.opt'), (o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); }); }
+
+/* ---------- series stepper ---------- */
+function renderStepper(current) {
+$('stepper-list').innerHTML = SERIES.map((k) => {
+const cur = k.n === current;
+const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+return '<li>' + (cur
+? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+: '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+}).join('');
+}
+
+/* ---------- build-order list: items { title, ok, why, steps[], time, links:[key], waste } ---------- */
+function renderSteps(el, items) {
+let open = 0;
+el.innerHTML = items.map((t, i) => {
+const first = !t.ok && open++ < 3;
+return '<li class="' + (t.ok ? 'is-ok' : first ? 'is-first' : '') + '">' +
+'<span class="sn" aria-hidden="true">' + (t.ok ? '✓' : i + 1) + '</span><div class="sb">' +
+'<div class="st-top"><span class="st-title">' + esc(t.title) + '</span><span class="chip-row">' +
+(t.ok ? '<span class="chip ok">OK</span>' : '<span class="chip gap">Gap</span>') +
+(first ? '<span class="chip first">Do first</span>' : '') + '</span></div>' +
+(t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+(!t.ok && t.steps && t.steps.length ? '<ol class="how">' + t.steps.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ol>' : '') +
+(!t.ok && t.time ? '<p class="st-time">Time: ' + esc(t.time) + '</p>' : '') +
+(!t.ok && t.links && t.links.length ? '<p class="kit-link">Free toolkit: ' + t.links.map((k) => linkHtml(k)).join(' · ') + '</p>' : '') +
+'</div></li>';
+}).join('');
+}
+function stepsText(items) {
+const out = [];
+let open = 0;
+items.forEach((t, i) => {
+const first = !t.ok && open++ < 3;
+out.push((i + 1) + '. [' + (t.ok ? 'OK' : 'GAP') + '] ' + t.title + (first ? ' (do this first)' : ''));
+if (t.why) out.push('   ' + t.why);
+if (!t.ok) {
+(t.steps || []).forEach((x, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + x));
+if (t.time) out.push('   Time: ' + t.time);
+(t.links || []).forEach((k) => out.push('   Free toolkit: ' + linkPlain(k)));
+}
+});
+return out;
+}
+
+/* ---------- where it gets complex ---------- */
+function renderComplex(list, flags) {
+const f = flags || {};
+const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+$('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+return sorted;
+}
+function complexText(list, flags) { const f = flags || {}; return list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0)).map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text); }
+
+/* ---------- cross-links and next step ---------- */
+function renderXlinks(links) {
+const seen = {}, live = links.filter((l) => LINKS[l.key] && !seen[l.key] && (seen[l.key] = true));
+$('xlinks').hidden = live.length === 0;
+$('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+return live;
+}
+function xlinksText(links) { const seen = {}; return links.filter((l) => LINKS[l.key] && !seen[l.key] && (seen[l.key] = true)).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url)); }
+function renderNext(key, why) {
+const box = $('next');
+if (!key || !LINKS[key]) { box.hidden = true; return; }
+box.hidden = false;
+$('next-title').innerHTML = linkHtml(key);
+$('next-why').textContent = why;
+}
+function planFooter(nextKey) {
+const L = [];
+if (nextKey && LINKS[nextKey]) L.push('', 'NEXT TOOLKIT: ' + linkPlain(nextKey));
+L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
+return L;
+}
+
+/* ---------- example answers state ---------- */
+function setExampleState(isExample, exampleText, yoursText) {
+const pill = $('example-pill');
+pill.textContent = isExample ? 'Example answers' : 'Your answers';
+pill.classList.toggle('is-yours', !isExample);
+$('example-text').textContent = isExample ? exampleText : (yoursText || 'Your results update as you go.');
+$('restore-example').hidden = isExample;
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+const el = $('answer');
+if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+lastHeadline = key;
+}
+
+/* ---------- copy: Clipboard API, then execCommand, then a selectable textarea ---------- */
+function legacyCopy(text) {
+try {
+const ta = document.createElement('textarea');
+ta.value = text; ta.setAttribute('readonly', '');
+ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '-9999px'; ta.style.fontSize = '16px';
+document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+const ok = document.execCommand && document.execCommand('copy');
+document.body.removeChild(ta);
+return !!ok;
+} catch (e) { return false; }
+}
+function copyWithFallback(text, onDone, host) {
+const show = () => {
+let box = host.querySelector('.copy-fallback');
+if (!box) {
+box = document.createElement('div');
+box.className = 'copy-fallback';
+const id = host.id + '-text';
+box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+host.appendChild(box);
+}
+const ta = box.querySelector('textarea');
+ta.value = text; ta.focus(); ta.select();
+};
+const legacy = () => { if (legacyCopy(text)) onDone(); else show(); };
+try {
+if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) navigator.clipboard.writeText(text).then(onDone, legacy);
+else legacy();
+} catch (err) { legacy(); }
+}
+function initCopyButton(btnId, hostId, statusId, getText, idleLabel, doneMsg) {
+const btn = $(btnId);
+let timer = null;
+btn.addEventListener('click', () => {
+copyWithFallback(getText(), () => {
+btn.textContent = 'Copied';
+btn.classList.add('is-copied');
+if (statusId) $(statusId).textContent = doneMsg;
+clearTimeout(timer);
+timer = setTimeout(() => { btn.textContent = idleLabel; btn.classList.remove('is-copied'); if (statusId) $(statusId).textContent = ''; }, 3000);
+}, $(hostId));
+});
+return () => { const ta = $(hostId).querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+
+/* ---------- the shorter column sticks on desktop, only when it fits ---------- */
+function initSticky() {
+const q = $('col-q'), r = $('results');
+const wide = window.matchMedia ? window.matchMedia('(min-width: 880px)') : { matches: false };
+function update() {
+q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+if (!wide.matches) return;
+const room = window.innerHeight - 32;
+if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+}
+window.addEventListener('resize', update);
+if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+return update;
+}
+function initShell(current, onRestore) {
+renderStepper(current);
+$('cta-link').href = CTA_URL;
+$('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+$('hub-link').href = LINKS.hub.url;
+$('restore-example').addEventListener('click', onRestore);
+$('see-results').addEventListener('click', () => {
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+try { $('answer').focus({ preventScroll: true }); } catch (e) { $('answer').focus(); }
+});
+}
+
+/* ---------- Business Profile strip (every toolkit except Paid 01) ---------- */
+function profileName(p) { return (p && (String(p.name || '').trim() || String(p.industry || '').trim())) || 'Your business'; }
+function renderProfileStrip(p, onLoad, onClear) {
+const el = $('profile-strip');
+if (p) {
+const bits = [lab('modelShort', p.model), lab('reach', p.reach)].filter(Boolean);
+el.innerHTML = '<p class="ps-text">Using your Business Profile: <b>' + esc(profileName(p)) + '</b>' + (bits.length ? ' · ' + esc(bits.join(' · ')) : '') + '. Answers marked <span class="pf-tag">From your profile</span> came from it, and you can still change them.</p>' +
+'<div class="ps-actions"><a href="' + esc(LINKS.profile.url) + '">Change</a><a href="#" id="ps-clear" role="button">Clear</a></div>';
+$('ps-clear').addEventListener('click', (e) => { e.preventDefault(); clearProfile(); onClear(); });
+} else {
+el.innerHTML = '<p class="ps-text">Answer 8 questions once and every toolkit fills itself in. <a href="' + esc(LINKS.profile.url) + '">Build your Business Profile →</a></p>' +
+'<details class="ps-paste"><summary>Paste a profile code</summary><div class="ps-paste-row"><label class="sr-only" for="ps-code">Profile code</label>' +
+'<input class="text-field" id="ps-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…"><button type="button" class="btn btn-plain" id="ps-load">Load profile</button></div></details>' +
+'<p class="ps-status" id="ps-status" role="status" aria-live="polite"></p>';
+const go = () => {
+const prof = decodeProfile($('ps-code').value);
+if (!prof) { $('ps-status').textContent = 'That code did not work. It should start with BL1. and come from the Business Profile Builder.'; return; }
+saveProfile(prof); onLoad(prof);
+};
+$('ps-load').addEventListener('click', go);
+$('ps-code').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+}
+}
+function markFromProfile(ids, on) { ids.forEach((id) => { const el = $(id); if (el) el.hidden = !on; }); }
+
+/* =====================================================================
+EXAMPLE: prefilled answers when no Business Profile is loaded.
+ASSUMPTIONS: rules of thumb used in the readiness checks. Big Leap
+starting points, not Google requirements. Confirm with Scott.
+===================================================================== */
+const EXAMPLE = { offer: 'services', ecommerce: 'none', locations: 'one', crm: 'hubspot', app: 'no', account: 'agency', gtm: 'no', ga4: 'unsure', ga4link: 'unsure', autotag: 'unsure', conv: 'none', lpaction: 'no', lpspeed: 'unsure', gbp: 'yes', mc: 'no', crmimport: 'no', sdk: 'no', adBudget: 3000 };
+const ASSUMPTIONS = {
+minBudget: 1000,        // $/mo: below this, one Search campaign rarely gets enough clicks to learn in a month (rule of thumb)
+learnDays: [14, 30],    // days to let a new campaign settle before judging it (rule of thumb)
+};
+const EXAMPLE_TEXT = 'Example: a local service business whose Google Ads account sits with a past agency and has no tested conversion. Change any answer to make it yours.';
+const FIELDS = ['offer', 'ecommerce', 'locations', 'crm', 'app', 'account', 'gtm', 'ga4', 'ga4link', 'autotag', 'conv', 'lpaction', 'lpspeed', 'gbp', 'mc', 'crmimport', 'sdk'];
+const COMPLEX = [
+{ key: 'special', title: 'Special-rule industries', text: 'Auto, legal, healthcare, finance, housing, employment and credit ads need extra verification or have targeting limits. Talk to Scott before launch.' },
+{ key: 'offline', title: 'Value-based bidding from CRM data', text: 'Sending qualified, opportunity and closed-won stages with dollar values, then bidding on value, takes clean CRM data and careful testing.' },
+{ key: 'consent', title: 'Consent Mode and enhanced conversions', text: 'Needed for visitors in the EU and UK, and helpful everywhere. Getting the cookie banner, Tag Manager and Google Ads to agree is fiddly.' },
+{ key: 'cross', title: 'Checkout or booking on another domain', text: 'Third-party checkouts, schedulers and booking widgets often break tracking and need cross-domain setup.' },
+{ key: 'calls', title: 'Call tracking', text: 'Counting calls from your website (not just from the ad) needs Google forwarding numbers or a call-tracking tool.' },
+{ key: 'app', title: 'App measurement', text: 'Mapping installs, sign-ups, subscriptions and refunds from an SDK to Google Ads, and keeping iOS privacy rules in mind.' },
+{ key: 'multi', title: 'Several locations', text: 'Many Business Profiles, location groups and per-location reporting in one account.' },
+];
+
+/* ---------- read, write and prefill answers ---------- */
+function readInput() { const o = {}; FIELDS.forEach((k) => { o[k] = radioVal(k); }); o.adBudgetRaw = $('adBudget').value; return o; }
+function applyAnswers(a) { FIELDS.forEach((k) => { if (a[k]) setRadio(k, a[k]); }); if ('adBudget' in a) $('adBudget').value = a.adBudget == null ? '' : a.adBudget; }
+function fromProfile(p) {
+const m = {};
+if (!p) return m;
+if (p.offer) m.offer = p.offer;
+if (p.ecommerce) m.ecommerce = p.ecommerce;
+if (p.locations) m.locations = p.locations;
+if (p.crm) m.crm = p.crm;
+if (typeof p.app === 'boolean') m.app = p.app ? 'yes' : 'no';
+if (p.gtm) m.gtm = p.gtm;
+if (p.ga4) m.ga4 = p.ga4;
+if (p.gbp === 'yes' || p.gbp === 'no') m.gbp = p.gbp;
+if ('adBudget' in p) m.adBudget = p.adBudget;
+return m;
+}
+
+/* ---------- the readiness model ---------- */
+function model(i, prof) {
+const sells = i.offer !== 'services', store = sells && i.ecommerce !== 'none';
+const hasLoc = i.locations !== 'none', hasCrm = i.crm !== 'none', hasApp = i.app === 'yes';
+const b2bish = !prof || prof.model !== 'b2c' || prof.goal === 'leads';
+const budget = numOrNull(i.adBudgetRaw);
+const items = [];
+// 1. Account
+const acctOk = i.account === 'own';
+items.push({ key: 'account', short: 'Account', ok: acctOk, waste: false, blocker: !acctOk,
+title: i.account === 'none' ? 'Open a Google Ads account you own' : i.account === 'nobilling' ? 'Set up billing in your own name' : i.account === 'agency' ? 'Take admin ownership of your account' : 'Account, admin access and billing are yours',
+why: acctOk ? 'You hold admin access and the payment method, so your data stays with you.' : i.account === 'agency' ? 'If the agency or vendor leaves, you could lose your history and conversion data. Get your own admin access first.' : i.account === 'nobilling' ? 'Ads will not run until a payment method is added.' : 'Every other step needs an account under your company’s control.',
+steps: i.account === 'none' ? ['Go to ads.google.com and sign in with a company Google account (not a personal Gmail you might lose).', 'When it offers a guided campaign, choose to switch to Expert mode or create an account without a campaign, so nothing starts spending yet.', 'Billing → Settings: add a payment profile in your company’s legal name.', 'Admin → Access and security: add a second admin from your team so you are never locked out.']
+: i.account === 'nobilling' ? ['Billing → Settings → add a payment method in your company’s legal name.', 'Choose automatic payments unless your finance team needs invoicing.', 'Check Admin → Access and security for at least two admins from your team.']
+: ['Ask the agency to add your company email as Admin (Google Ads: Admin → Access and security → + Users).', 'If the account sits under their manager account (MCC), ask them to keep the link but confirm you are an Admin, or unlink it if you are parting ways.', 'Billing → Settings: confirm the payment profile is your company’s, not the agency’s card.', 'If they will not grant access, open a new account. You lose history, but you own what comes next.'],
+time: i.account === 'agency' ? '15 minutes of work, 1–5 days of waiting' : '20–45 minutes' });
+// 2. Tag Manager
+items.push({ key: 'gtm', short: 'Tag Manager', ok: i.gtm === 'yes', waste: false,
+title: i.gtm === 'yes' ? 'Google Tag Manager is on the site' : i.gtm === 'unsure' ? 'Check whether Google Tag Manager is installed' : 'Install Google Tag Manager',
+why: i.gtm === 'yes' ? 'One container holds your tracking, so new tags do not need a developer.' : 'Tag Manager holds every tracking code in one place, so adding the Google Ads tag later takes minutes.',
+steps: i.gtm === 'unsure' ? ['Install the free Tag Assistant Companion extension, or open tagassistant.google.com and enter your site.', 'Look for a container ID starting with GTM-. If you find one, ask who owns it and get admin access at tagmanager.google.com.', 'If there is none, follow the install steps in the tracking toolkit.']
+: ['Go to tagmanager.google.com → Create account → Container → Web.', 'Paste the two snippets it gives you into every page (most site builders and the WordPress Site Kit plugin have a field for this).', 'Click Preview, open your site, and confirm Tag Assistant says the container loaded.', 'Add a second admin from your team under Admin → User management.'],
+time: '30–60 minutes', links: ['tracking'] });
+// 3. GA4
+items.push({ key: 'ga4', short: 'GA4', ok: i.ga4 === 'yes', waste: false,
+title: i.ga4 === 'yes' ? 'GA4 is collecting data' : i.ga4 === 'unsure' ? 'Check whether GA4 is collecting data' : 'Set up Google Analytics 4',
+why: i.ga4 === 'yes' ? 'You can see what ad visitors do after they click.' : 'GA4 shows what ad visitors do after the click, and gives Google Ads a second view of your results.',
+steps: ['Go to analytics.google.com → Admin → Create → Property, then add a Web data stream for your domain.', 'Copy the Measurement ID (starts with G-).', 'In Tag Manager, add a Google tag with that ID, set to fire on All Pages, then Submit to publish.', 'Back in GA4, open Reports → Realtime and visit your site from your phone to see yourself appear.'],
+time: '30–60 minutes', links: ['tracking'] });
+// 4. Conversion action
+const convOk = i.conv === 'tested';
+items.push({ key: 'conv', short: 'Conversion fires', ok: convOk, waste: !convOk,
+title: convOk ? 'A conversion action fires and was tested' : i.conv === 'untested' ? 'Test the conversion action you have' : 'Create one conversion action that fires',
+why: convOk ? 'Google Ads can tell good clicks from bad, so bidding can learn.' : 'Without a working conversion, Google spends to get clicks, not customers, and you cannot tell which keywords pay off.',
+steps: i.conv === 'untested' ? ['In Google Ads: Goals → Conversions → Summary. Check the status column for each action.', 'Submit your own form (or make a test purchase or call) from your phone.', 'Use Tag Assistant to confirm the conversion tag fired on the thank-you step.', 'Within a day the status should show Recording conversions. If it says Inactive or Unverified, the tag is not firing.']
+: ['Decide the one action that counts (a form sent, a call, a purchase). The conversions toolkit helps you pick.', 'Google Ads: Goals → Conversions → Summary → + New conversion action → Website.', 'Install it through Tag Manager: add a Google Ads Conversion Tracking tag with the ID and label, triggered on the thank-you page or the form success event.', 'Test it with Tag Assistant and a real submission, then check the status says Recording conversions.', 'Set it as a Primary action; leave page views and button clicks as Secondary.'],
+time: '1–3 hours', links: ['conversions', 'tracking'] });
+// 5. GA4 link
+items.push({ key: 'ga4link', short: 'GA4 linked', ok: i.ga4link === 'yes', waste: false,
+title: i.ga4link === 'yes' ? 'GA4 is linked to Google Ads' : 'Link GA4 to Google Ads',
+why: i.ga4link === 'yes' ? 'Ad costs and clicks show up next to on-site behavior.' : 'Linking lets you see ad clicks inside GA4 and import GA4 key events or audiences into Google Ads.',
+steps: ['In GA4: Admin → Product links → Google Ads links → Link.', 'Choose your Google Ads account (you need admin access in both).', 'Leave personalized advertising on unless your privacy policy says otherwise, then Submit.', 'In Google Ads: Tools → Data manager should now show Google Analytics as linked.'],
+time: '10–15 minutes' });
+// 6. Auto-tagging
+const atOk = i.autotag === 'yes';
+items.push({ key: 'autotag', short: 'Auto-tagging', ok: atOk, waste: !atOk,
+title: atOk ? 'Auto-tagging is on' : 'Turn on auto-tagging',
+why: atOk ? 'Every ad click carries a click ID that GA4 and your CRM can read.' : 'Without it, ad visits can show up as other traffic and your CRM cannot tie a lead back to the ad that paid for it.',
+steps: ['In Google Ads: Admin → Account settings → Auto-tagging.', 'Tick “Tag the URL that people click through from my ad” and Save.', 'Click one of your ads from a search preview and check the page address ends with gclid=.', 'If your site strips the gclid (some redirects do), ask your web person to keep URL parameters.'],
+time: '5 minutes' });
+// 7. GBP (locations only)
+if (hasLoc) {
+const gOk = i.gbp === 'yes';
+items.push({ key: 'gbp', short: 'Business Profile', ok: gOk, waste: !gOk,
+title: gOk ? 'Google Business Profile is verified and current' : i.gbp === 'stale' ? 'Update your Google Business Profile, then link it' : 'Claim and verify your Google Business Profile',
+why: gOk ? 'Ads can show your address, hours, phone and directions. Link it in Data manager if you have not.' : 'Location ads pull your address, hours and phone from the profile. Wrong details on an ad send paying clicks to a closed door.',
+steps: [i.gbp === 'no' ? 'Go to business.google.com, search for your business, and claim or create it. Verification can take a few days.' : 'Open business.google.com and check name, address, phone, hours, categories and holiday hours.', 'Use the exact name customers see on your sign, not a keyword-stuffed version.', 'In Google Ads: Tools → Data manager → Google Business Profile → Link, and approve the request from the profile’s owner account.', 'Then add Location assets (Ads → Assets → + → Location) so your address shows on ads.'],
+time: i.gbp === 'no' ? '30 minutes, plus 1–14 days for verification' : '20–40 minutes', links: ['local'] });
+}
+// 8. Merchant Center (products with checkout)
+if (store) {
+const mOk = i.mc === 'yes';
+items.push({ key: 'mc', short: 'Merchant Center', ok: mOk, waste: false, blocker: !mOk,
+title: mOk ? 'Merchant Center is linked to Google Ads' : i.ecommerce === 'shopify' ? 'Connect Shopify to Merchant Center and Google Ads' : 'Send your products to Merchant Center and link it',
+why: mOk ? 'Your products can show in Shopping and Performance Max with price and photo.' : 'Shopping and Performance Max read your products from Merchant Center. Without approved products they cannot run.',
+steps: i.ecommerce === 'shopify' ? ['In Shopify, install the free Google & YouTube app from the Shopify App Store.', 'Connect your Google account, then create or choose a Merchant Center account inside the app.', 'Fix any product warnings it shows (missing GTINs, shipping, return policy) and wait for approvals.', 'In Merchant Center: Settings → Apps and services (or Linked accounts) → Google Ads → Link, then accept in Google Ads under Tools → Data manager.']
+: ['Create an account at merchants.google.com and verify your website.', 'Add shipping and return policies under Settings, then add products with a feed file, Google Sheet or your store platform’s Google integration.', 'Fix disapprovals in Products → Needs attention.', 'Link Google Ads under Settings → Apps and services, then accept in Google Ads under Tools → Data manager.'],
+time: i.ecommerce === 'shopify' ? '1–2 hours, plus 3–5 days for product review' : '2–6 hours, plus 3–5 days for product review' });
+}
+// 9. Landing page action
+const lpOk = i.lpaction === 'yes';
+items.push({ key: 'lpaction', short: 'One clear action', ok: lpOk, waste: !lpOk,
+title: lpOk ? 'The landing page has one clear, trackable action' : 'Give your landing page one clear action',
+why: lpOk ? 'Visitors know what to do, and every completion can be counted.' : 'When a page offers five choices, paid visitors leave. One action is easier to take and easier to track.',
+steps: ['Pick the single action for this page: the form, a call button, or Add to cart.', 'Put it near the top on a phone, so no one has to scroll to find it.', 'Cut the form to the fields you truly need to follow up (name, email or phone, one question).', 'Send people to a thank-you page or show a success message you can track.', 'Make the page match the ad: same offer, same words, same service.'],
+time: '2–6 hours', links: ['leadCapture'] });
+// 10. Mobile speed
+const spOk = i.lpspeed === 'yes';
+items.push({ key: 'lpspeed', short: 'Fast on mobile', ok: spOk, waste: !spOk,
+title: spOk ? 'The landing page loads fast on a phone' : i.lpspeed === 'slow' ? 'Speed up your landing page on mobile' : 'Test your landing page speed on mobile',
+why: spOk ? 'People who tap your ad see the page before they give up.' : 'You pay for the click whether or not the page finishes loading.',
+steps: ['Run the page through pagespeed.web.dev and look at the Mobile tab.', 'Google’s own guide: the main content should appear within about 2.5 seconds (Largest Contentful Paint).', 'Shrink large images (WebP, under a few hundred KB) and remove sliders or videos at the top.', 'Turn off plugins, chat widgets and scripts the page does not need.', 'Test again after each change.'],
+time: '1–4 hours', links: ['seoBasics'] });
+// 11. CRM
+if (!hasCrm) {
+items.push({ key: 'crm', short: 'Leads in a CRM', ok: false, waste: false,
+title: 'Send ad leads to a CRM, not an inbox',
+why: 'Inbox leads get missed, and you cannot tell which ads produced paying customers.',
+steps: ['Pick a CRM. HubSpot’s free tools work for most small teams.', 'Connect your website forms so every submission creates a contact.', 'Save the campaign and gclid on each contact with hidden fields.', 'The RevOps toolkit walks through each step.'],
+time: '2–4 hours', links: ['leadCapture'] });
+} else if (b2bish) {
+const cOk = i.crmimport === 'yes';
+items.push({ key: 'crmimport', short: 'CRM to Ads', ok: cOk, waste: false,
+title: cOk ? 'Your CRM sends lead results back to Google Ads' : 'Send lead results from your CRM back to Google Ads',
+why: cOk ? 'Google can learn which clicks become qualified leads and customers.' : 'Not needed on day one, but soon: without it Google treats a junk lead and a closed deal the same.',
+steps: i.crm === 'hubspot' ? ['In HubSpot: Marketing → Ads → Connect account → Google Ads.', 'In the Ads settings, open Events and create events for the lifecycle stages that matter (for example MQL, SQL, Customer).', 'Make sure auto-tagging is on so contacts carry the gclid.', 'In Google Ads: Goals → Conversions, confirm the HubSpot events appear and keep them as Secondary until they have a few weeks of data.']
+: ['Check that your forms save the gclid on each lead (a hidden field filled from the page address).', 'In Google Ads: Goals → Conversions → + New conversion action → Import → CRMs, files or other data sources.', 'Pick your CRM if it is listed (Salesforce has a direct connector) or schedule an upload from a sheet.', 'Start with one stage, such as qualified lead, and keep it Secondary until the data looks right.'],
+time: '1–3 hours', links: ['conversions', 'leadCapture'] });
+}
+// 12. App SDK
+if (hasApp) {
+const sOk = i.sdk === 'yes';
+items.push({ key: 'sdk', short: 'App SDK', ok: sOk, waste: !sOk,
+title: sOk ? 'Your app reports installs and in-app actions' : 'Add an attribution SDK to your app',
+why: sOk ? 'App campaigns can learn from installs and in-app events.' : 'App campaigns cannot see installs or purchases without an SDK, so they optimize blind.',
+steps: ['Choose one: Firebase (free, Google’s own) or an attribution partner like AppsFlyer or Kochava.', 'Have your developer add the SDK and log events: first_open, sign_up, purchase or subscribe.', 'In Google Ads: Tools → Data manager → link Firebase, or turn on the Google Ads integration in your partner’s dashboard.', 'Goals → Conversions → + New conversion action → App, and import the events.'],
+time: '1–3 days of developer time' });
+}
+// 13. Budget sanity
+const bOk = budget != null && budget >= ASSUMPTIONS.minBudget;
+items.push({ key: 'budget', short: 'Budget', ok: bOk, waste: budget != null && budget > 0 && budget < ASSUMPTIONS.minBudget,
+title: bOk ? 'Your budget can support a first campaign' : budget == null || budget === 0 ? 'Set a monthly ad budget' : 'Raise the budget or narrow the start',
+why: bOk ? money(budget) + ' a month is about ' + money(budget / 30.4) + ' a day. Start with one or two campaigns so each gets enough clicks to learn.' : budget == null || budget === 0 ? 'Google spends up to your daily budget. Pick a monthly number you can hold for at least 60 days before judging results.' : money(budget) + ' a month is about ' + money(budget / 30.4) + ' a day, which buys only a handful of clicks in most industries. Spread thin, nothing learns.',
+steps: budget != null && budget > 0 && budget < ASSUMPTIONS.minBudget ? ['Run one Search campaign only, on your highest-intent keywords.', 'Narrow the area to where your best customers are.', 'Use Keyword Planner (Tools → Planning → Keyword Planner) to see typical cost per click for your terms.', 'Aim for a daily budget of at least 10 times your expected cost per click (rule of thumb).']
+: ['Use Keyword Planner (Tools → Planning → Keyword Planner) to see typical cost per click for your terms.', 'Multiply expected clicks a day by cost per click, then by 30.4 for a month.', 'Plan to hold the budget steady for ' + ASSUMPTIONS.learnDays[0] + '–' + ASSUMPTIONS.learnDays[1] + ' days before judging.'],
+time: '30 minutes' });
+const gaps = items.filter((x) => !x.ok), waste = gaps.filter((x) => x.waste), blockers = gaps.filter((x) => x.blocker);
+// Build order: account, tracking, conversion, links, profile/feed, page, CRM, app, budget (already in order).
+return { items, gaps, waste, blockers, store, hasLoc, hasCrm, hasApp, budget, i };
+}
+
+(function () {
+const form = $('answers');
+let last = null, profile = loadProfile(), pmap = fromProfile(profile);
+const PF = ['offer', 'ecommerce', 'locations', 'crm', 'app', 'gtm', 'ga4', 'gbp', 'adBudget'];
+$('assume-rows').innerHTML = [
+['Lowest monthly budget we call ready for one Search campaign', money(ASSUMPTIONS.minBudget)],
+['Daily budget vs. expected cost per click', 'At least 10×'],
+['Days before judging a new campaign', ASSUMPTIONS.learnDays[0] + '–' + ASSUMPTIONS.learnDays[1]],
+].map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td class="num">' + esc(r[1]) + '</td></tr>').join('');
+function visibility(i) {
+const store = i.offer !== 'services';
+$('ecom-row').hidden = !store;
+$('gbp-row').hidden = i.locations === 'none';
+$('mc-row').hidden = !(store && i.ecommerce !== 'none');
+const showImport = i.crm !== 'none' && (!profile || profile.model !== 'b2c' || profile.goal === 'leads');
+$('crmimport-row').hidden = !showImport;
+$('sdk-row').hidden = i.app !== 'yes';
+const any = !$('gbp-row').hidden || !$('mc-row').hidden || !$('crmimport-row').hidden || !$('sdk-row').hidden;
+$('extra-q').hidden = !any;
+const helps = [];
+if (!$('mc-row').hidden) helps.push('<b>Merchant Center</b> holds your product list for Shopping ads.');
+if (!$('crmimport-row').hidden) helps.push('<b>Lead results</b> means stages like qualified or closed, sent back so Google learns which clicks became customers.');
+if (!$('sdk-row').hidden) helps.push('An <b>SDK</b> is a code kit your developer adds to the app to report installs and in-app actions.');
+$('extra-help').innerHTML = helps.join(' ');
+$('extra-help').hidden = helps.length === 0;
+}
+function pfTags(i) {
+PF.forEach((k) => {
+const el = $('pf-' + k); if (!el) return;
+const has = profile && (k in pmap);
+const cur = k === 'adBudget' ? numOrNull(i.adBudgetRaw) : i[k];
+el.hidden = !(has && String(cur) === String(pmap[k]));
+});
+}
+function isExample(i) { return FIELDS.every((k) => i[k] === EXAMPLE[k]) && toNum(i.adBudgetRaw) === EXAMPLE.adBudget && String(i.adBudgetRaw).trim() !== ''; }
+function xlinks(m) {
+const L = [];
+if (m.i.gtm !== 'yes' || m.i.ga4 !== 'yes') L.push({ key: 'tracking', why: 'install Tag Manager and GA4 step by step.' });
+if (m.i.conv !== 'tested' || (m.hasCrm && m.i.crmimport !== 'yes')) L.push({ key: 'conversions', why: 'choose the right conversion, and which CRM stages to send back.' });
+if (!m.hasCrm || m.i.lpaction !== 'yes') L.push({ key: 'leadCapture', why: 'make sure every ad lead reaches your CRM with its source.' });
+if (m.hasLoc && m.i.gbp !== 'yes') L.push({ key: 'local', why: 'get your Business Profile accurate before you link it to ads.' });
+if (m.i.lpspeed !== 'yes') L.push({ key: 'seoBasics', why: 'the same speed and page fixes help organic search too.' });
+if (m.hasCrm) L.push({ key: 'speedToLead', why: 'paid leads cool fast; reply in minutes, not days.' });
+return L;
+}
+function complexFlags(m) {
+const sp = profile && detectSpecial(profile.industry);
+return { special: !!sp, offline: m.hasCrm, consent: profile && profile.reach === 'international', cross: m.store, calls: profile && profile.goal === 'calls', app: m.hasApp, multi: m.i.locations === 'multi' };
+}
+function headline(m) {
+const w = m.waste.length, g = m.gaps.length, b = m.blockers.length;
+if (g === 0) return { num: '0', unit: 'gaps. You are ready to launch', zero: true, line: 'Every check that applies to you is in place. Next, plan your first campaigns.' };
+const parts = [];
+if (b) parts.push('<b>' + b + (b === 1 ? ' setup item blocks' : ' setup items block') + ' launch</b>');
+const other = g - w - b;
+if (other > 0) parts.push(other + ' more ' + (other === 1 ? 'gap is' : 'gaps are') + ' worth fixing soon');
+return { num: String(w), unit: w === 1 ? 'gap would waste spend' : 'gaps would waste spend', zero: w === 0,
+line: (w ? 'Fix these before ads go live, or you pay for clicks you cannot measure or convert. ' : 'Nothing here would waste money once ads run. ') + (parts.length ? parts.join(', and ') + '.' : '') };
+}
+function planText(m) {
+const h = headline(m);
+const L = ['YOUR LAUNCH READINESS LIST', 'Is Your Google Ads Account Ready? (Big Leap Paid Media DIY Toolkit 2 of 3)', ''];
+if (profile) L.push('Business Profile: ' + profileName(profile));
+L.push(h.num + ' ' + h.unit + ' · ' + m.gaps.length + ' gaps in total · ' + (m.items.length - m.gaps.length) + ' of ' + m.items.length + ' checks OK');
+L.push(m.items.map((x) => (x.ok ? '[ok] ' : '[gap] ') + x.short).join(' > '));
+L.push('', 'IN BUILD ORDER');
+stepsText(m.items).forEach((l) => L.push(l));
+const xl = xlinksText(xlinks(m));
+if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
+L.push('', 'WHERE IT GETS COMPLEX');
+complexText(COMPLEX, complexFlags(m)).forEach((l) => L.push(l));
+return L.concat(planFooter('campaigns')).join('\n');
+}
+function render() {
+const i = readInput();
+visibility(i); pfTags(i);
+const m = model(i, profile);
+last = m;
+setExampleState(!profile && isExample(i), EXAMPLE_TEXT, profile ? 'Answers marked “From your profile” came from your Business Profile. Change any of them.' : 'Your results update as you go.');
+if (profile) $('restore-example').hidden = true;
+const h = headline(m);
+$('out-num').textContent = h.num;
+$('out-num').classList.toggle('is-zero', h.zero);
+$('out-unit').textContent = h.unit;
+$('out-line').innerHTML = h.line;
+$('answer').classList.toggle('is-done', m.gaps.length === 0);
+flashIfChanged(h.num + '|' + m.gaps.length);
+$('strip').innerHTML = m.items.map((x) => '<li><span class="' + (x.ok ? 'ok' : 'no') + '"><span class="mark" aria-hidden="true">' + (x.ok ? '✓' : '✕') + '</span>' + esc(x.short) + '<span class="sr-only">' + (x.ok ? ', OK' : ', gap') + '</span></span></li>').join('');
+renderSteps($('plan'), m.items);
+renderComplex(COMPLEX, complexFlags(m));
+$('closing-h').textContent = m.gaps.length ? 'Want the foundation built for you?' : 'Ready for a strategy conversation';
+$('closing-p').textContent = m.gaps.length ? 'Copy your readiness list and work through it, or bring it to a call. It is the exact setup ' + OWNER.first + '’s team would otherwise spend the first weeks on.' : 'Your foundation is in place, so a call with ' + OWNER.first + ' can go straight to strategy.';
+renderXlinks(xlinks(m));
+renderNext('campaigns', m.gaps.length ? 'While you close these gaps, plan what to launch: your first campaigns, structure and budget split.' : 'You are ready. Plan your first campaigns, structure and budget split.');
+syncCopy(); sticky();
+}
+function loadProfileIntoForm(p) { profile = p; pmap = fromProfile(p); applyAnswers(pmap); stripRender(); render(); }
+function stripRender() { renderProfileStrip(profile, loadProfileIntoForm, () => { profile = null; pmap = {}; stripRender(); render(); }); }
+initShell(2, () => { applyAnswers(EXAMPLE); render(); const f = document.querySelector('input[name="offer"]:checked'); if (f) f.focus(); });
+const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your readiness list is copied. Paste it into an email, a doc or a task list.');
+const sticky = initSticky();
+form.addEventListener('submit', (e) => e.preventDefault());
+form.addEventListener('input', render);
+form.addEventListener('change', render);
+applyAnswers(EXAMPLE);
+if (profile) applyAnswers(pmap);
+stripRender();
+render();
+})();
+
+</script>
+</body>
+</html>

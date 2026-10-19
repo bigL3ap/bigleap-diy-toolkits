@@ -345,7 +345,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         <div class="aside">
           <h3>Good to know</h3>
           <ul>
-            <li><b>Drafts</b> have an amber “Draft v1” banner. RevOps toolkits are the live v2 set.</li>
+            <li><b>Drafts</b> show a “Draft v1 for internal review” strip at the top and a Draft tag on this page. RevOps toolkits are the live v2 set.</li>
             <li>The site is <b>public to anyone with the link</b> and hidden from search engines. Don't put client data into it.</li>
             <li>Nothing you type is sent anywhere. Answers stay in your browser.</li>
             <li>Works on phones, tablets and desktops, in light or dark mode.</li>
@@ -375,8 +375,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   'use strict';
   var COLORS = { revops: '#143D55', paid: '#EA4335', tracking: '#3187B5', seo: '#0F7B5F', pr: '#7A4E9C' };
   var DARK_COLORS = { revops: '#6FB3DA', paid: '#F0675B', tracking: '#8CC4E4', seo: '#4CC9A3', pr: '#B78ED6' };
-  var TYPE_ORDER = ['Blocker', 'Waiting on', 'Decision', 'To do', 'Other from the call'];
-  var TYPE_COLORS = { 'Blocker': '#EA4335', 'Waiting on': '#A15C07', 'Decision': '#3187B5', 'To do': '#143D55', 'Other from the call': '#7F8F9A' };
+  var TYPE_ORDER = ['Blocker', 'Waiting on', 'Decision', 'Owner review', 'To do', 'Other from the call'];
+  var TYPE_COLORS = { 'Owner review': '#0F7B5F', 'Blocker': '#EA4335', 'Waiting on': '#A15C07', 'Decision': '#3187B5', 'To do': '#143D55', 'Other from the call': '#7F8F9A' };
   var data = null, items = null, widgets = null;
   var state = { q: '', series: 'all', owner: 'all' };
 
@@ -501,6 +501,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     $('groups').innerHTML = TYPE_ORDER.filter(function (t) { return counts[t]; }).map(function (t) {
       return '<div class="group"><h3>' + esc(t) + ' <span class="n">' + counts[t] + '</span></h3><ul class="items">' + list.filter(function (i) { return i.type === t; }).map(function (i) {
         var watch = (src && typeof i.ts === 'number') ? '<a href="' + esc(src) + '?timestamp=' + i.ts + '" target="_blank" rel="noopener">Watch on Fathom</a>' : '';
+        if (i.link) watch += '<a href="' + esc(i.link) + '" target="_blank" rel="noopener">All questions</a>';
         return '<li class="item" style="--k:' + (TYPE_COLORS[t] || '#3187B5') + '"><h4>' + esc(i.title) + '</h4><div class="side"><span class="tag">' + esc(i.owner) + '</span><span class="area">' + esc(i.area) + ' · ' + esc(i.status) + '</span>' + watch + '</div><p>' + esc(i.detail) + '</p></li>';
       }).join('') + '</ul></div>';
     }).join('') || '<div class="empty">Nothing open for this owner.</div>';
@@ -512,7 +513,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     $('widget-list').innerHTML = '<div class="widget-grid">' + widgets.widgets.map(function (w) {
       var src = base + w.file;
       var code = '<iframe src="' + src + '" title="' + w.title.replace(/"/g, '&quot;') + '" width="100%" height="' + w.height + '" style="border:0;max-width:' + (w.maxWidth || 420) + 'px" loading="lazy"></iframe>';
-      return '<article class="widget-card"><iframe src="' + esc(w.file) + '" title="' + esc(w.title) + '" height="' + w.height + '" loading="lazy"></iframe><div class="wc-body"><h4>' + esc(w.title) + '</h4><p>' + esc(w.use) + '</p><div class="code"><label class="sr" for="code-' + esc(w.id) + '">Embed code</label><textarea id="code-' + esc(w.id) + '" readonly>' + esc(code) + '</textarea></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="copy" type="button" data-copy="code-' + esc(w.id) + '">Copy embed code</button><a class="copy" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(w.file) + '" target="_blank" rel="noopener">Open on its own</a></div></div></article>';
+      return '<article class="widget-card"><iframe src="' + esc(w.file) + '" title="' + esc(w.title) + '" height="' + (w.height + 70) + '" loading="lazy"></iframe><div class="wc-body"><h4>' + esc(w.title) + '</h4><p>' + esc(w.use) + '</p><div class="code"><label class="sr" for="code-' + esc(w.id) + '">Embed code</label><textarea id="code-' + esc(w.id) + '" readonly>' + esc(code) + '</textarea></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="copy" type="button" data-copy="code-' + esc(w.id) + '">Copy embed code</button><a class="copy" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(w.file) + '" target="_blank" rel="noopener">Open on its own</a></div></div></article>';
     }).join('') + '</div>';
     if (widgets.tiles && widgets.tiles.length) {
       $('tile-list').innerHTML = '<div class="section-head" style="margin-top:44px"><div><h2>Slide tiles</h2><p>Static images sized for proposal decks (16:9 and square). Each one has the toolkit link printed on it.</p></div></div><div class="tiles">' + widgets.tiles.map(function (t) {
