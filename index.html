@@ -119,7 +119,7 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .line-name { font: 700 16px/1.2 var(--head); color: var(--navy); }
 .line-name small { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); margin-top: 2px; }
 .stops { position: relative; display: flex; justify-content: space-between; gap: 6px; list-style: none; margin: 0; padding: 0; }
-.stops::before { content: ""; position: absolute; left: calc(100% / 12); width: calc((var(--n, 6) - 1) * 100% / 6); top: 21px; height: 4px; background: var(--c, var(--blue)); border-radius: 2px; }
+.stops::before { content: ""; position: absolute; left: calc(100% / (2 * var(--s, 6))); width: calc((var(--n, 6) - 1) * 100% / var(--s, 6)); top: 21px; height: 4px; background: var(--c, var(--blue)); border-radius: 2px; }
 .stops.draft-line::before { background: repeating-linear-gradient(90deg, var(--c, var(--blue)) 0 10px, transparent 10px 16px); }
 .stop { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .stop a { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--text); width: 100%; }
@@ -246,6 +246,15 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   .top-actions .btn-red { padding: 8px 14px; font-size: 14px; }
   .logo img { height: 28px; }
 }
+@media (max-width: 400px) {
+  .map { padding: 14px 10px; }
+  .dot { width: 30px; height: 30px; font-size: 12px; border-width: 2px; }
+  .stops::before { top: 14px; height: 3px; }
+  .stop .lbl { font-size: 10px; }
+  .tabs-bar .wrap { padding-left: 10px; padding-right: 10px; }
+  .tab { padding: 0 8px; }
+}
+@media (max-width: 360px) { .stop .lbl { font-size: 9px; letter-spacing: -0.2px; } .map { padding: 12px 6px; } }
 @media (prefers-reduced-motion: no-preference) {
   .dot { transition: transform .15s ease; }
 }
@@ -539,16 +548,17 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   }
 
   function renderMap() {
+    var SLOTS = Math.max(6, Math.max.apply(null, data.series.map(function (s) { return s.toolkits.length; })));
     var h = '<div class="map-start"><a class="start-node" href="' + esc(data.start.file) + '"><small>Start here</small><strong>' + esc(data.start.title) + '</strong></a></div>';
     data.series.forEach(function (s) {
       var c = color(s.id);
       var draft = s.toolkits.every(function (t) { return t.status !== 'live'; });
       h += '<div class="line"><div class="line-name">' + esc(s.name) + '<small>' + esc(s.first) + ' · ' + s.toolkits.length + ' toolkit' + (s.toolkits.length === 1 ? '' : 's') + '</small></div>';
-      h += '<ol class="stops' + (draft ? ' draft-line' : '') + '" style="--c:' + c + ';--n:' + s.toolkits.length + '">';
+      h += '<ol class="stops' + (draft ? ' draft-line' : '') + '" style="--c:' + c + ';--n:' + s.toolkits.length + ';--s:' + SLOTS + '">';
       s.toolkits.forEach(function (t) {
         h += '<li class="stop' + (t.status !== 'live' ? ' is-draft' : '') + '"><a href="' + esc(t.file) + '" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (t.status !== 'live' ? ' (draft)' : '') + '</span></span></a></li>';
       });
-      for (var i = s.toolkits.length; i < 6; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
+      for (var i = s.toolkits.length; i < SLOTS; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
       h += '</ol></div>';
     });
     h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft v1, in review</span><span>Numbers show the order to do them in</span></div>';

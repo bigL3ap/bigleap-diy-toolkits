@@ -33,7 +33,7 @@ Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready
 
 **Profile mapping.** `ecommerce: shopify` → platform = Shopify. `ga4` → GA4 question. `locations` one/multi or `reach: local` → "local customers" box (LocalBusiness schema). `reach: international` → multi-country box. `website: false` → a note that says to use the list as a launch checklist. `goal`, `crm` and `adBudget` only affect cross-links.
 
-**Where it sends people next.** Next: Local (if there are locations or a local area), otherwise Tracking (no GA4), otherwise Conversions. Cross-links shown only when relevant: tracking/conversions, local, leadCapture (leads/calls goal or CRM), prReady (no About/trust basics), adsReady (ad budget > 0). The next toolkit is never listed again under cross-links.
+**Where it sends people next.** Next: Local (if there are locations or a local area), otherwise Tracking (no GA4), otherwise Conversions. Cross-links shown only when relevant: tracking (RevOps 7) or conversions (Paid 3), local, leadCapture (leads/calls goal or CRM), prReady (no About/trust basics), adsReady (ad budget > 0). The next toolkit is never listed again under cross-links.
 
 ---
 

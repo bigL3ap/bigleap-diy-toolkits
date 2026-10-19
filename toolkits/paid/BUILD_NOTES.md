@@ -138,4 +138,4 @@ The helper is inlined verbatim (`encodeProfile`, `decodeProfile`, `loadProfile`,
 - Safari: no regex lookbehind, `structuredClone`, top-level await or `dvh`. The base shell's `:has()` rules are cosmetic only; selected options use `.is-checked` and focus uses `input:focus-visible + label`. `localStorage` is wrapped in try/catch.
 - Tap targets are ≥ 44px, inputs are 16px, and number fields use `inputmode="numeric"`. Sticky positioning is off under 880px, safe-area padding is applied, motion is reduced when requested, and the print view shows the deliverable only.
 - Not tested: real Firefox, WebKit or Samsung Internet (no binaries here).
-- Cross-links to tracking/seo/pr pages will 404 until those series land.
+- Cross-links to the SEO, PR and RevOps 7 (tracking stack) pages will 404 until those land. (Tracking now lives in RevOps 7 and Paid 3; there is no separate Tracking series.)

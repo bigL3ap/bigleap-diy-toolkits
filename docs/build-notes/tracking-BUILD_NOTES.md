@@ -1,3 +1,5 @@
+> **Update Oct 19, 2026:** there is no separate Tracking series any more. Toolkit 1 (tracking stack) is now **RevOps Toolkit 7** (`toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html`, owner Dallas Olsen) and Toolkit 2 (conversions) is now **Paid Media Toolkit 3** (`toolkits/paid/03_Which_Conversions_Should_You_Track.html`, owner Scott Smoot). The notes below are kept as written for the original build.
+
 # Tracking & Measurement DIY Toolkits — Build Notes (Draft v1, Oct 19, 2026)
 
 **Owner:** Scott Smoot (CTA: "Talk to Scott about building it")
