@@ -285,8 +285,6 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 .check input:checked + label:hover { background: var(--seg-on); }
 .sub-q { display: grid; gap: 8px; padding: 10px 12px; border-left: 2px solid var(--tint-line); margin-top: 2px; }
 .sub-q .q-label { font-size: 14px; }
-.seg.cols3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-@media (max-width: 420px) { .seg.cols3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .seg.stack { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
 .seg.stack label { justify-items: start; text-align: left; place-items: center start; }
 .money-row { display: flex; flex-wrap: wrap; gap: 10px 16px; }
@@ -451,7 +449,7 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 <p class="q-help">Each ad platform needs its own small piece of code (a "tag" or "pixel") on your site so it can learn who converts. Pick none if you don't advertise yet.</p>
 <div class="sub-q" id="tags-wrap">
 <span class="q-label" id="tags-l">Are those ad tags already on your site?</span>
-<div class="seg cols3" role="radiogroup" aria-labelledby="tags-l">
+<div class="seg stack" role="radiogroup" aria-labelledby="tags-l">
 <input type="radio" id="tags-all" name="tags" value="all"><label for="tags-all">All of them</label>
 <input type="radio" id="tags-some" name="tags" value="some"><label for="tags-some">Some, or not sure</label>
 <input type="radio" id="tags-none" name="tags" value="none"><label for="tags-none">None yet</label>
@@ -865,7 +863,8 @@ function model(i, a) {
       title: i.banner === 'basic' ? 'Connect your banner to Google Consent Mode' : 'Add a consent banner with Google Consent Mode',
       why: i.banner === 'cm' ? 'Your banner passes Accept or Decline to Google. Recheck it after any change to the banner.' : i.eu === 'unsure' ? 'Check GA4 → Reports → Demographics → Country. If any EU, UK or EEA visitors show up, set this up before ad tags.' : 'Without it, Google limits ads measurement and remarketing for EEA and UK visitors. It goes in before GA4 and the ad tags so they respect the choice from the first page.',
       warn: 'This is the technical setup, not legal advice. Have whoever owns your privacy policy confirm what the banner must say.',
-      steps: [nativeStep, 'Install it through its Tag Manager template (Templates → Tag Templates → Search Gallery) firing on "Consent Initialization – All Pages", or through its plugin or app.', 'Set the default to "denied" for EEA, UK and Swiss visitors, and to update when they click Accept.', 'In Tag Manager: Admin → Container settings → turn on "Enable consent overview", then check every tag has consent settings.', 'Test in Tag Assistant: the Consent tab should show a default state, then an update after you click Accept.'],
+      steps: shop ? [nativeStep, 'Set the banner region to cover the EEA, UK and Switzerland, and make Decline as easy to click as Accept.', 'Check the Facebook & Instagram app also respects the choice: its data sharing settings follow Shopify\'s customer privacy settings.', 'Test in Tag Assistant: the Consent tab should show a default state, then an update after you click Accept.']
+        : [nativeStep, 'Install it through its Tag Manager template (Templates → Tag Templates → Search Gallery) firing on "Consent Initialization – All Pages", or through its plugin or app.', 'Set the default to "denied" for EEA, UK and Swiss visitors, and to update when they click Accept.', 'In Tag Manager: Admin → Container settings → turn on "Enable consent overview", then check every tag has consent settings.', 'Test in Tag Assistant: the Consent tab should show a default state, then an update after you click Accept.'],
       time: timeRange(T('consent')[0], T('consent')[1]), t: T('consent') });
   } else if (ch.length) {
     items.push({ key: 'usPrivacy', core: false, status: i.banner === 'none' ? 'later' : 'ok', title: 'Check US state privacy rules',
@@ -1040,7 +1039,7 @@ function stripText(t) { return t.replace(/<[^>]+>/g, ''); }
   function complexFlags(m, i) { return { consent: m.euCore, doubleTag: m.doubleRisk || i.ga4 === 'unsure' || i.gtm === 'unsure', calls: i.calls === 'lot', enhanced: m.ch.length > 0 && i.crm !== 'none' }; }
   function headline(m) {
     if (m.missing === 0 && m.check === 0) return { num: 'All ' + m.core, unit: 'core pieces are in place', zero: true, plain: 'All ' + m.core + ' core pieces are in place.' };
-    const unit = (m.missing === 1 ? 'core piece is' : 'core pieces are') + ' missing';
+    const unit = 'core pieces missing';
     return { num: m.missing + ' of ' + m.core, unit, zero: m.missing === 0, plain: m.missing + ' of ' + m.core + ' ' + unit + (m.check ? ', plus ' + m.check + ' to check' : '') + '.' };
   }
   function render() {

@@ -389,6 +389,15 @@ body { overflow-wrap: anywhere; }
   .is-sticky { position: static !important; }
   a { color: #000; }
 }
+/* QA fixes */
+.mini-table th, .mini-table td { overflow-wrap: normal; word-break: normal; }
+.mini-table tbody th { white-space: nowrap; }
+.mini-table td:nth-child(2) { white-space: nowrap; }
+.seg.wrap3 label:last-of-type { grid-column: 1 / -1; }
+.profile-strip details summary::before { content: "\25B8"; margin-right: 6px; display: inline-block; transition: transform .15s ease; }
+.profile-strip details[open] summary::before { transform: rotate(90deg); }
+.profile-strip details summary::-webkit-details-marker { display: none; }
+.profile-strip details summary { list-style: none; }
 
 </style>
 </head>
@@ -626,6 +635,7 @@ const LINKS = {
   pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?', url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', owner: 'Dallas Olsen' },
   hub:       { name: 'All DIY Toolkits',                       url: '../../index.html',                                     owner: '' },
 };
+
 /* EXAMPLE: the answers a first-time visitor sees. */
 const EXAMPLE = { cms: 'wordpress', domain: '', gsc: 'nomap', bing: 'no', robots: 'unsure', idx: 'some', has: ['https', 'about'], ga4: 'yes', size: 'small', plan: ['local'] };
 /* ASSUMPTIONS: rough first-time times in minutes [low, high]. Rules of thumb, not measurements. */
@@ -821,13 +831,13 @@ function complexText(list, flags) {
 }
 
 /* ---------- cross-links and next ---------- */
-function renderXlinks(list) {
-  const live = list.filter((l) => LINKS[l.key]);
+function renderXlinks(list, skip) {
+  const live = list.filter((l) => LINKS[l.key] && l.key !== skip);
   $('xlinks').hidden = live.length === 0;
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
-function xlinksText(list) {
-  return list.filter((l) => LINKS[l.key]).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+function xlinksText(list, skip) {
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
 }
 function renderNext(key, why) {
   const l = LINKS[key];
@@ -1346,7 +1356,7 @@ let SNIPS = {};
       unit: n === 1 ? 'blocker stops Google or AI search from seeing your site' : n === 0 ? 'blockers: Google and AI search can reach your site' : 'blockers stop Google or AI search from seeing your site',
       line: (n > 0 ? 'Fix ' + (n === 1 ? 'it' : 'those') + ' first. ' : '') +
         (m.items.length === 0 ? 'Every foundation check is in place. Your site is ready for an SEO strategy conversation.'
-          : 'Your list has ' + (m.checks ? m.checks + ' quick ' + (m.checks === 1 ? 'check' : 'checks') + ' and ' : '') + m.fixes + ' ' + (m.fixes === 1 ? 'fix' : 'fixes') + ' after that' + (n ? '' : '') + ', about ' + timeRange(m.totalLo, m.totalHi) + ' of work in total.'),
+          : 'Your full list has ' + m.items.length + ' ' + (m.items.length === 1 ? 'item' : 'items') + (m.checks ? ' (' + m.checks + ' quick ' + (m.checks === 1 ? 'check' : 'checks') + ')' : '') + ', about ' + timeRange(m.totalLo, m.totalHi) + ' of work in total.'),
     };
   }
   function planText(m) {
@@ -1363,7 +1373,7 @@ let SNIPS = {};
     L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
     const nx = nextFor(m);
     L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
-    const xl = xlinksText(xlinks(m));
+    const xl = xlinksText(xlinks(m), nx.key);
     if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
     L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
     return L.join('\n');
@@ -1400,8 +1410,8 @@ let SNIPS = {};
     $('done-wrap').hidden = m.done.length === 0;
     $('done-list').innerHTML = m.done.map((x) => '<li><span aria-hidden="true">✓ </span>' + esc(x) + '</li>').join('');
     renderComplex(COMPLEX, m.flags);
-    renderXlinks(xlinks(m));
     const nx = nextFor(m);
+    renderXlinks(xlinks(m), nx.key);
     renderNext(nx.key, nx.why);
     syncChoiceStyles(form);
     syncCopy();
