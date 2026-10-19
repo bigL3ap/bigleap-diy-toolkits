@@ -221,6 +221,15 @@
       "ts": 1008
     },
     {
+      "id": "revops7-order",
+      "type": "Decision",
+      "title": "Where tracking sits in the RevOps path",
+      "detail": "Tracking moved out of its own series. The stack check is now RevOps Toolkit 7 (added at the end so the live 1–6 keep their numbers), and conversions are Paid Toolkit 3. Install order suggests tracking could come first in RevOps; say if you want it renumbered.",
+      "owner": "Dallas Olsen",
+      "area": "RevOps",
+      "status": "Open"
+    },
+    {
       "id": "verticals",
       "type": "Decision",
       "title": "Special verticals in Paid",

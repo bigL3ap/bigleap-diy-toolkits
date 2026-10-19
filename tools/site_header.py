@@ -204,4 +204,5 @@ if __name__ == '__main__':
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button>'
     apply('index.html', header('index.html', 'dashboard', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
+    apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
     print('index.html, journey.html')
