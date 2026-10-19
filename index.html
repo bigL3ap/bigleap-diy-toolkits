@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big Leap DIY Toolkits</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --text: #16202c; --muted: #5b6776;
+    --line: #e2e6eb; --accent: #1f6feb; --accent-soft: #e8f0fe; --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f141a; --surface: #171e26; --text: #e8edf2; --muted: #9aa6b2;
+            --line: #26303b; --accent: #58a6ff; --accent-soft: #16263a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 16px 64px; }
+  header h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.01em; }
+  header p { margin: 0; color: var(--muted); }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 20px; }
+  .controls input { flex: 1 1 260px; padding: 10px 14px; border: 1px solid var(--line);
+         border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }
+  .chip { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+          background: var(--surface); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .card { display: flex; flex-direction: column; gap: 6px; padding: 20px; background: var(--surface);
+          border: 1px solid var(--line); border-radius: var(--radius); color: inherit; text-decoration: none;
+          transition: border-color .15s, transform .15s; }
+  .card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
+  .card .tag { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); }
+  .card h2 { margin: 0; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .empty { padding: 48px 24px; text-align: center; color: var(--muted); background: var(--surface);
+           border: 1px dashed var(--line); border-radius: var(--radius); }
+  footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>DIY Toolkits</h1>
+    <p>Big Leap · Agency Brands · Set Fire Creative · RevOps</p>
+  </header>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search toolkits…" aria-label="Search toolkits">
+    <div id="filters" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+
+  <main id="grid" class="grid"></main>
+  <div id="empty" class="empty" hidden>No toolkits yet. Add one to <code>toolkits.json</code>.</div>
+
+  <footer>Each toolkit opens in its own page. To add one, drop the HTML file in <code>toolkits/</code> and list it in <code>toolkits.json</code>.</footer>
+</div>
+
+<script>
+(async () => {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const q = document.getElementById('q');
+  const filters = document.getElementById('filters');
+  let items = [];
+  try { items = await (await fetch('toolkits.json', { cache: 'no-store' })).json(); } catch (e) {}
+
+  const cats = ['All', ...new Set(items.map(t => t.category).filter(Boolean))];
+  let active = 'All';
+  if (cats.length > 2) {
+    cats.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = c; b.setAttribute('aria-pressed', c === active);
+      b.onclick = () => { active = c; [...filters.children].forEach(x => x.setAttribute('aria-pressed', x === b)); render(); };
+      filters.appendChild(b);
+    });
+  }
+
+  function render() {
+    const term = q.value.trim().toLowerCase();
+    const shown = items.filter(t =>
+      (active === 'All' || t.category === active) &&
+      (!term || [t.title, t.description, t.category].join(' ').toLowerCase().includes(term)));
+    grid.innerHTML = '';
+    shown.forEach(t => {
+      const a = document.createElement('a');
+      a.className = 'card'; a.href = t.file;
+      a.innerHTML = (t.category ? `<span class="tag"></span>` : '') + '<h2></h2><p></p>';
+      if (t.category) a.querySelector('.tag').textContent = t.category;
+      a.querySelector('h2').textContent = t.title;
+      a.querySelector('p').textContent = t.description || '';
+      grid.appendChild(a);
+    });
+    empty.hidden = shown.length > 0;
+  }
+  q.addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>
