@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "title": "1. Is Every Lead Reaching Your CRM?",
+    "description": "Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.",
+    "category": "Lead capture",
+    "file": "toolkits/01_Is_Every_Lead_Reaching_Your_CRM.html"
+  },
+  {
+    "title": "2. Never Let a Lead Go Cold",
+    "description": "Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.",
+    "category": "Lead follow-up",
+    "file": "toolkits/02_Never_Let_a_Lead_Go_Cold.html"
+  },
+  {
+    "title": "3. Who Should Own Each New Lead?",
+    "description": "Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.",
+    "category": "Lead routing",
+    "file": "toolkits/03_Who_Should_Own_Each_New_Lead.html"
+  },
+  {
+    "title": "4. Which Sales Steps Should Run Themselves?",
+    "description": "Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.",
+    "category": "Sales automation",
+    "file": "toolkits/04_Which_Sales_Steps_Should_Run_Themselves.html"
+  },
+  {
+    "title": "5. How Much Time Is Your Sales Process Wasting?",
+    "description": "Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.",
+    "category": "Sales automation",
+    "file": "toolkits/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html"
+  },
+  {
+    "title": "6. Is Your Pipeline Ready for a Dashboard?",
+    "description": "Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.",
+    "category": "Reporting",
+    "file": "toolkits/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html"
+  }
+]

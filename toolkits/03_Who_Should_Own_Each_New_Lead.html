@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Who Should Own Each New Lead?</title>
+<meta name="description" content="Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.">
+<style>
+/* Big Leap RevOps DIY Toolkit series: shared shell, v2.
+Layout: masthead, slim six-step path, then questions left and results right on desktop (the shorter column sticks); one column under 880px.
+Results read top to bottom as: the answer, the deliverable, then what to do next. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt:has(input:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-wrap .opt, .opt-wrap .opt:hover, .opt-wrap .opt:has(input:checked) { border: 0; box-shadow: none; background: transparent; }
+.opt-wrap:has(input[type="radio"]:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 3 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Who Should Own Each New Lead?</h1>
+<p class="lede">Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.</p>
+</header>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The RevOps DIY path</h2>
+<p class="stepper-note" id="stepper-note">Not sure where to start? Toolkit 5 ranks all six for you.</p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your sales team</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text">Example: four reps on HubSpot Professional, routing by location and service. Change any answer to make it yours.</p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<div class="q">
+<div class="q-row">
+<label class="q-label" for="reps">People who can own a new lead</label>
+<div class="field">
+<input id="reps" name="reps" type="number" inputmode="numeric" min="0" max="500" step="1" value="4">
+<span class="affix">people</span>
+</div>
+</div>
+</div>
+<div class="q">
+<span class="q-label" id="plan-q">Which HubSpot plan do you have?</span>
+<div class="seg" role="radiogroup" aria-labelledby="plan-q">
+<input type="radio" id="plan-free" name="plan" value="free"><label for="plan-free">Free tools</label>
+<input type="radio" id="plan-starter" name="plan" value="starter"><label for="plan-starter">Starter</label>
+<input type="radio" id="plan-pro" name="plan" value="pro" checked><label for="plan-pro">Professional or Enterprise</label>
+</div>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">What decides who owns a lead?</span></legend>
+<div class="opts">
+<label class="opt" for="d-location"><input type="checkbox" id="d-location" name="d" value="location" checked><span class="opt-text"><span class="opt-title">Location</span></span></label>
+<label class="opt" for="d-service"><input type="checkbox" id="d-service" name="d" value="service" checked><span class="opt-text"><span class="opt-title">The service they asked about</span></span></label>
+<label class="opt" for="d-size"><input type="checkbox" id="d-size" name="d" value="size"><span class="opt-text"><span class="opt-title">Company size</span></span></label>
+<label class="opt" for="d-source"><input type="checkbox" id="d-source" name="d" value="source"><span class="opt-text"><span class="opt-title">Where it came from</span><span class="opt-sub">A partner, referral or specific campaign</span></span></label>
+</div>
+<p class="q-help">Leave all unticked if any rep can take any lead. Rules can only read what your forms collect: <span data-kit="1">Toolkit 1</span> adds the fields.</p>
+</fieldset>
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="share-q">Share leads evenly inside a group?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="share-q">
+<input type="radio" id="share-yes" name="share" value="yes" checked><label for="share-yes">Yes</label>
+<input type="radio" id="share-no" name="share" value="no"><label for="share-no">No</label>
+</div>
+</div>
+<p class="q-help">For example, two reps who both cover the North take turns.</p>
+</div>
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="today-q">How do leads get an owner today?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="today-q">
+<input type="radio" id="today-hand" name="today" value="hand" checked><label for="today-hand">By hand</label>
+<input type="radio" id="today-auto" name="today" value="auto"><label for="today-auto">Rules</label>
+</div>
+</div>
+</div>
+<div class="q">
+<div class="q-row">
+<label class="q-label" for="leads">New leads a month</label>
+<div class="field">
+<input id="leads" name="leads" type="number" inputmode="numeric" min="0" max="1000000" step="1" value="100">
+<span class="affix">/ mo</span>
+</div>
+</div>
+<p class="q-help">Sizes the time you get back. Don't know? <span data-kit="1">Toolkit 1</span> counts them.</p>
+</div>
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Routing Rules</button>
+</form>
+</section>
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your routing model</h2>
+<p class="hero-rec" id="out-model"></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Routing Rules</h2>
+<p class="deliv-sub" id="deliv-sub">Your rules, first match wins, and the steps to put them live. Fill in the bracketed names and values as you go.</p>
+</div>
+<div class="tabs" role="tablist" aria-label="Your routing rules" id="kit-tabs">
+<button type="button" class="tab" role="tab" id="tab-rules" aria-controls="panel-rules">Rules <span class="tab-count" id="count-rules"></span></button>
+<button type="button" class="tab" role="tab" id="tab-build" aria-controls="panel-build">Build steps <span class="tab-count" id="count-build"></span></button>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-rules" aria-labelledby="tab-rules">
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Order</th><th scope="col">If</th><th scope="col">Is any of</th><th scope="col">Then owner</th></tr></thead>
+<tbody id="rules"></tbody>
+</table>
+</div>
+<p class="fine">HubSpot stops at the first match, so the narrowest rule goes first and the fallback goes last.</p>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-build" aria-labelledby="tab-build" hidden>
+<ol class="steps" id="build"></ol>
+</div>
+</section>
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want your routing built for you?</h2>
+<p>Copy your rules and steps and build them this afternoon, or bring them to a call. The rule list is the exact scope of what we'd build.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next on your path</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+<details class="limits" id="limits">
+<summary>Where the DIY version stops (<span id="limits-count"></span>)</summary>
+<ul id="limits-list"></ul>
+</details>
+</section>
+</div>
+<details class="method" id="method">
+<summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
+<div class="method-body">
+<p>Handing out a lead by hand takes a few minutes to read it, decide and pass it on. The middle of this range matches Toolkit 5.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Assumption</th><th scope="col">Low</th><th scope="col">High</th></tr></thead>
+<tbody>
+<tr><th scope="row">Minutes to hand out one lead</th>
+<td><span class="cell"><input class="num-in" id="a-lo" type="number" min="0" step="0.5" inputmode="decimal" aria-label="Minutes per lead, low"><span class="unit">min</span></span></td>
+<td><span class="cell"><input class="num-in" id="a-hi" type="number" min="0" step="0.5" inputmode="decimal" aria-label="Minutes per lead, high"><span class="unit">min</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="method-foot">
+<button type="button" class="btn btn-plain" id="reset-assumptions">Reset to defaults</button>
+<span class="reset-status" id="reset-status" role="status" aria-live="polite"></span>
+</div>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Estimates built from typical small-business sales teams, not a measurement of your account. HubSpot features and plan limits change, so check what your account includes.</p>
+<p>Big Leap · RevOps DIY Toolkit 3 of 6 · Notice Different · Align to Genuine</p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all six RevOps DIY toolkits.
+CTA_URL: where "Talk to Big Leap" goes.
+TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
+and its name shows as plain text instead of a link.
+SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
+cross-link only appears once its url is filled in.
+===================================================================== */
+const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
+const TOOLKIT_URLS = {
+1: '', // Is Every Lead Reaching Your CRM?
+2: '', // Never Let a Lead Go Cold
+3: '', // Who Should Own Each New Lead?
+4: '', // Which Sales Steps Should Run Themselves?
+5: '', // How Much Time Is Your Sales Process Wasting?
+6: '', // Is Your Pipeline Ready for a Dashboard?
+};
+const SERVICE_TOOLKITS = {
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
+paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
+pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+};
+/* =====================================================================
+ASSUMPTIONS: Big Leap's model defaults for this toolkit.
+Minutes to hand out one lead by hand, [low, high]. The middle matches
+Toolkit 5's lead-assignment estimate of 3 minutes.
+===================================================================== */
+const ASSUMPTIONS = {
+assignMinutes: [2, 4],
+};
+const EXAMPLE = { reps: 4, plan: 'pro', d: ['location', 'service'], share: 'yes', today: 'hand', leads: 100 };
+/* ---------- series helpers (shared by all six toolkits) ---------- */
+const SERIES = [
+{ n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
+{ n: 2, short: 'Reply', name: 'Speed-to-Lead Workflow Builder', title: 'Never Let a Lead Go Cold' },
+{ n: 3, short: 'Route', name: 'Lead Routing Template', title: 'Who Should Own Each New Lead?' },
+{ n: 4, short: 'Automate', name: 'Sales Process Automation Checklist', title: 'Which Sales Steps Should Run Themselves?' },
+{ n: 5, short: 'Find waste', name: 'Sales Time Audit', title: 'How Much Time Is Your Sales Process Wasting?' },
+{ n: 6, short: 'Report', name: 'SMB Sales Dashboard Template', title: 'Is Your Pipeline Ready for a Dashboard?' },
+];
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0, minimumFractionDigits: 0 }); }
+function hoursRange(lowMin, highMin, suffix) {
+const sfx = suffix == null ? ' a month' : suffix;
+if (highMin <= 0) return '0 hours' + sfx;
+if (highMin < 60) {
+const a = fmt(Math.round(lowMin)), b = fmt(Math.round(highMin));
+return (a === b ? 'about ' + a : a + '–' + b) + ' minutes' + sfx;
+}
+const d = highMin / 60 < 10 ? 1 : 0;
+const a = fmt(lowMin / 60, d), b = fmt(highMin / 60, d);
+return (a === b ? 'about ' + a : a + '–' + b) + ' hours' + sfx;
+}
+function heroHours(min) {
+if (min <= 0) return { num: '0', unit: 'hours a month', zero: true };
+if (min < 60) return { num: '≈ ' + fmt(Math.round(min)), unit: 'minutes a month', zero: false };
+const h = min / 60, s = fmt(h, h < 10 ? 1 : 0);
+return { num: '≈ ' + s, unit: (s === '1' ? 'hour' : 'hours') + ' a month', zero: false };
+}
+function kitUrl(n) { return (TOOLKIT_URLS && TOOLKIT_URLS[n]) || ''; }
+function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
+function kitRef(n, label) {
+const text = esc(label || ('Toolkit ' + n));
+const url = kitUrl(n);
+return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+}
+// Fills every <span data-kit="N"> with a link to that toolkit.
+function fillKitRefs(root) {
+(root || document).querySelectorAll('[data-kit]').forEach((el) => { el.innerHTML = kitRef(+el.getAttribute('data-kit'), el.textContent || null); });
+}
+function renderStepper(current) {
+$('stepper-list').innerHTML = SERIES.map((k) => {
+const cur = k.n === current, url = kitUrl(k.n);
+const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+return '<li>' + (cur || !url
+? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
+: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+}).join('');
+if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
+}
+// items: [{ title, why, how, meta, kit, where, done }]. The first three open items are marked "Do first".
+function renderSteps(el, items) {
+let open = 0;
+el.innerHTML = items.map((t, i) => {
+const first = !t.done && open++ < 3;
+return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+'<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+'<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+(t.meta ? '<span class="st-meta">' + esc(t.meta) + '</span>' : first ? '<span class="chip first">Do first</span>' : '') + '</div>' +
+(t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+(t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
+(t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
+(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+'</div></li>';
+}).join('');
+}
+function stepsText(items) {
+const out = [];
+let open = 0;
+items.forEach((t, i) => {
+const first = !t.done && open++ < 3;
+out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.meta + ')' : '') + (first ? ', do this first' : ''));
+if (t.why) out.push('   ' + t.why);
+if (t.how) out.push('   How: ' + t.how);
+(t.list || []).forEach((x) => out.push('   - ' + x));
+if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+});
+return out;
+}
+function renderLimits(list, flags) {
+const f = flags || {};
+const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+$('limits-count').textContent = list.length;
+$('limits-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+const any = list.some((c) => f[c.key]);
+if (any) $('limits').open = true;
+}
+function limitsText(list, flags) { const f = flags || {}; return list.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '')); }
+// links: [{ key, why }]. Shows only service toolkits that have a url.
+function renderXlinks(links) {
+const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
+$('xlinks').hidden = live.length === 0;
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+return live;
+}
+function xlinksText(links) {
+return links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url).map((l) => '- ' + SERVICE_TOOLKITS[l.key].name + ': ' + l.why + ' ' + SERVICE_TOOLKITS[l.key].url);
+}
+function renderNext(n, why) {
+const box = $('next');
+if (!n) { box.hidden = true; return; }
+box.hidden = false;
+$('next-title').innerHTML = kitRef(n, 'Toolkit ' + n + ': ' + SERIES[n - 1].title);
+$('next-why').textContent = why;
+}
+function setExampleState(isExample, exampleText) {
+const pill = $('example-pill');
+pill.textContent = isExample ? 'Example answers' : 'Your answers';
+pill.classList.toggle('is-yours', !isExample);
+$('example-text').textContent = isExample ? exampleText : 'Your results update as you go.';
+$('restore-example').hidden = isExample;
+}
+// Brief highlight on the answer when its headline changes (skipped with reduced motion).
+let lastHeadline = null;
+function flashIfChanged(key) {
+const el = $('answer');
+if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+lastHeadline = key;
+}
+function copyWithFallback(text, onDone, host) {
+const fallback = () => {
+let box = host.querySelector('.copy-fallback');
+if (!box) {
+box = document.createElement('div');
+box.className = 'copy-fallback';
+const id = host.id + '-text';
+box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+host.appendChild(box);
+}
+const ta = box.querySelector('textarea');
+ta.value = text; ta.focus(); ta.select();
+};
+try {
+if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(onDone, fallback);
+else fallback();
+} catch (err) { fallback(); }
+}
+function initCopy(getText) {
+const btn = $('copy-btn');
+let timer = null;
+btn.addEventListener('click', () => {
+copyWithFallback(getText(), () => {
+btn.textContent = 'Copied';
+btn.classList.add('is-copied');
+$('copy-status').textContent = 'Your plan is copied. Paste it into an email, a doc or your CRM notes.';
+clearTimeout(timer);
+timer = setTimeout(() => { btn.textContent = 'Copy my plan'; btn.classList.remove('is-copied'); $('copy-status').textContent = ''; }, 3000);
+}, $('copy-host'));
+});
+return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+// The shorter column sticks on desktop, but only when it fits the screen.
+function initSticky() {
+const q = $('col-q'), r = $('results');
+const wide = window.matchMedia('(min-width: 880px)');
+function update() {
+q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+if (!wide.matches) return;
+const room = window.innerHeight - 32;
+if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+}
+window.addEventListener('resize', update);
+if (wide.addEventListener) wide.addEventListener('change', update);
+if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+return update;
+}
+// Accessible tabs: <div role="tablist"> of .tab buttons with aria-controls.
+function initTabs(root) {
+const tabs = [...root.querySelectorAll('[role="tab"]')];
+function select(t, focus) {
+tabs.forEach((x) => {
+const on = x === t;
+x.setAttribute('aria-selected', on ? 'true' : 'false');
+x.tabIndex = on ? 0 : -1;
+$(x.getAttribute('aria-controls')).hidden = !on;
+});
+if (focus) t.focus();
+}
+tabs.forEach((t, i) => {
+t.addEventListener('click', () => select(t));
+t.addEventListener('keydown', (e) => {
+const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+});
+});
+select(tabs[0]);
+}
+function initShell(current, onRestore) {
+renderStepper(current);
+fillKitRefs();
+$('cta-link').href = CTA_URL;
+$('restore-example').addEventListener('click', onRestore);
+$('see-results').addEventListener('click', () => {
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+$('answer').focus({ preventScroll: true });
+});
+}
+function planFooter(nextN) {
+const L = [];
+if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
+L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+return L;
+}
+/* ---------- Toolkit 3: Who Should Own Each New Lead? ---------- */
+const PLAN_LABEL = { free: 'Free tools', starter: 'Starter', pro: 'Professional or Enterprise' };
+// Narrowest to broadest: the order rules run in.
+const DECIDERS = [
+{ key: 'source', label: 'where it came from', prop: 'How did you hear about us? · Original Traffic Source', values: 'Referral · Partner', owner: 'Partner or referral rep', field: 'How did you hear about us?' },
+{ key: 'size', label: 'company size', prop: 'Number of employees', values: '200 or more', owner: 'Senior rep', field: 'Number of employees' },
+{ key: 'service', label: 'service', prop: 'Service interest', values: 'Service A', owner: 'Rep for service A', field: 'Service interest' },
+{ key: 'location', label: 'location', prop: 'Service area', values: 'North · Ogden · Logan', owner: 'Rep for that area', field: 'Service area' },
+];
+const LIMITS = [
+{ key: 'caps', title: 'Round-robin with capacity limits', text: 'Capping each rep’s leads and skipping anyone who is full takes more than a rotation action.' },
+{ key: 'overlap', title: 'Overlapping territories', text: 'Tie-break rules and reporting to keep it fair when two reps cover the same ground.' },
+{ key: 'partner', title: 'Partner and referral routing', text: 'Their own properties, owners and reporting, so partners see their leads handled.' },
+{ key: 'quiet', title: 'Reassigning when a rep goes quiet', text: 'Timers, checks and alerts that move a lead when its owner doesn’t follow up.' },
+{ key: 'enrich', title: 'Routing on data you don’t collect', text: 'Revenue or industry from a data provider, set up and trusted first.' },
+];
+function joinList(arr) { return arr.length <= 1 ? arr.join('') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1]; }
+function model(input, a) {
+const reps = Math.round(clamp(toNum(input.reps), 0, 500));
+const leads = clamp(toNum(input.leads), 0, 1e6);
+const plan = input.plan, share = input.share === 'yes', pro = plan === 'pro';
+const ds = DECIDERS.filter((d) => input.d.indexOf(d.key) >= 0);
+const needsWorkflow = ds.some((d) => d.key === 'size' || d.key === 'source');
+let rec, rules = [];
+if (reps < 1) rec = 'Name at least one person who owns new leads';
+else if (reps === 1) { rec = 'Send every new lead to one owner'; rules = [{ prop: 'Every new contact', values: '', owner: '[Your name]' }]; }
+else if (!ds.length) {
+rec = share ? 'Share every new lead evenly across the team' : 'One owner for new leads, with a backup';
+rules = [{ prop: 'Every new contact', values: '', owner: share ? '[Your team], rotated evenly' : '[Lead owner]' }];
+} else {
+rec = 'Route by ' + joinList(ds.map((d) => d.label)) + (share ? ', taking turns inside each group' : ', one owner per rule');
+rules = ds.map((d) => ({ prop: d.prop, values: '[' + d.values + ']', owner: '[' + d.owner + (share ? ', rotated' : '') + ']' }));
+}
+if (reps >= 2) rules.push({ prop: 'Nothing above matched', values: '', owner: '[Fallback owner]', fallback: true });
+let method;
+if (reps <= 1) method = 'a hidden owner field on each form, on any plan';
+else if (pro) method = share ? 'one routing workflow with Rotate record to owner (Sales or Service Hub Professional)' : 'one routing workflow with if/then branches (Professional)';
+else if (!ds.length && share) method = plan === 'starter' ? 'a round-robin meeting page (Sales or Service Hub Starter)' : 'a coordinator handing leads out in turn, since rotation needs Starter';
+else method = 'one form per location or service page, each with its own hidden owner field';
+const manual = input.today === 'hand';
+const lowMin = manual ? leads * Math.min(a.assignMinutes[0], a.assignMinutes[1]) : 0;
+const highMin = manual ? leads * Math.max(a.assignMinutes[0], a.assignMinutes[1]) : 0;
+// One build list: prerequisites, agreeing the rules, plan-specific build, test.
+const items = [];
+const S = (o) => items.push(Object.assign({ self: 3 }, o));
+const fields = ds.map((d) => d.field);
+if (fields.length) S({ title: 'Collect what the rules read', why: 'Make sure ' + joinList(fields) + ' land on every new contact as dropdowns.' + (ds.some((d) => d.key === 'size') ? ' If you’d rather not ask for company size, that rule depends on enrichment data.' : ''), kit: 1, where: 'Step 4' });
+if (reps >= 2) S({ title: 'List who can own a lead', why: 'One row per rep: their HubSpot login, what they cover, and who only takes overflow.', kit: 3, where: 'Step 2' });
+if (reps >= 1) S({ title: reps >= 2 ? 'Agree the rules' : 'Name a backup owner', why: reps >= 2 ? 'Fill in the bracketed names and values on the Rules tab, and have whoever runs sales sign off.' : 'Someone who covers when the owner is out.', kit: 3, where: 'Step 3' });
+if (reps <= 1 && reps >= 1) {
+S({ title: 'Set the owner on every form', meta: 'All plans', why: 'Add a hidden Contact owner field to each lead form, and alert the backup in the form’s notification settings.' });
+} else if (reps >= 2 && pro) {
+S({ title: 'Create the routing workflow', meta: 'Professional', why: 'Automation → Workflows → contact-based, from scratch. Trigger: Create date is known AND Contact owner is unknown. Re-enrollment off.' });
+S({ title: 'Add one branch per rule', meta: 'Professional', why: 'An if/then branch with the rules in the same order as the Rules tab. HubSpot sends each contact down the first branch it matches.' });
+S({ title: 'Set the owner in each branch', meta: share ? 'Sales or Service Pro' : 'Professional',
+why: (share ? 'Use Rotate record to owner for groups that take turns, or an edit-record action for a single rep.' : 'An edit-record action that sets Contact owner to that rule’s rep.') + ' The none-met branch gets the fallback owner.' });
+S({ title: 'Make it the only thing that sets an owner', meta: 'All plans', why: 'Turn off owner fields on forms and owner columns in imports. Save the workflow as “Lead routing — new contacts” without turning it on.' });
+} else if (reps >= 2) {
+S({ title: 'One form per location or service', meta: PLAN_LABEL[plan], why: 'Give each page its own form with a hidden Contact owner field set to that page’s rep. Your main contact form goes to the fallback owner.' });
+if (share) S({ title: plan === 'starter' ? 'Share bookings with a round-robin page' : 'Take turns by hand for now', meta: plan === 'starter' ? 'Starter' : 'Free tools',
+why: plan === 'starter' ? 'A round-robin meeting page per group. When someone books, HubSpot makes the organizer the owner of an unowned contact.' : 'Round-robin pages need Sales or Service Hub Starter. Until then, the fallback owner hands leads out in turn.' });
+if (needsWorkflow) S({ title: 'Park the size and source rules', meta: 'Needs Professional', why: 'Rules that read company size or lead source need workflow branches. Until then, those leads reach the fallback owner, who passes them on.' });
+}
+if (reps >= 1) S({ title: 'Test every rule, then turn it on', why: 'For new contacts only. Create one test contact per rule plus one that matches nothing, check each owner, then delete them.', kit: 3, where: 'Step 5' });
+const flags = {};
+if (ds.some((d) => d.key === 'source')) flags.partner = true;
+if (ds.some((d) => d.key === 'size')) flags.enrich = true;
+return { reps, leads, plan, share, ds, rec, rules, method, manual, lowMin, highMin, items, flags };
+}
+(function () {
+const form = $('answers');
+let last = null;
+function readA() { return { assignMinutes: [Math.max(0, toNum($('a-lo').value)), Math.max(0, toNum($('a-hi').value))] }; }
+function writeA(a) { $('a-lo').value = a.assignMinutes[0]; $('a-hi').value = a.assignMinutes[1]; }
+function edited(a) { return a.assignMinutes[0] !== ASSUMPTIONS.assignMinutes[0] || a.assignMinutes[1] !== ASSUMPTIONS.assignMinutes[1]; }
+function readInput() {
+const el = form.elements, v = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
+return { reps: $('reps').value, plan: v('plan'), d: [...form.querySelectorAll('input[name="d"]:checked')].map((i) => i.value), share: v('share'), today: v('today'), leads: $('leads').value };
+}
+const same = (a, b) => a.slice().sort().join() === b.slice().sort().join();
+function isExample(i) { return toNum(i.reps) === EXAMPLE.reps && i.plan === EXAMPLE.plan && same(i.d, EXAMPLE.d) && i.share === EXAMPLE.share && i.today === EXAMPLE.today && toNum(i.leads) === EXAMPLE.leads; }
+function applyExample() {
+$('reps').value = EXAMPLE.reps; $('leads').value = EXAMPLE.leads;
+['plan', 'share', 'today'].forEach((k) => { $(k + '-' + EXAMPLE[k]).checked = true; });
+form.querySelectorAll('input[name="d"]').forEach((c) => { c.checked = EXAMPLE.d.indexOf(c.value) >= 0; });
+}
+function xlinks(m) { return m.ds.some((d) => d.key === 'source') ? [{ key: 'pr', why: 'so press and referral leads get their own owner and path.' }, { key: 'paid', why: 'so ad leads reach the rep who knows those campaigns.' }] : []; }
+function nextWhy() { return 'Every lead now has an owner. Next, make sure that owner replies fast: this toolkit builds the first-reply workflow and writes the emails.'; }
+function planText(m, ed) {
+const L = ['YOUR ROUTING RULES', 'Who Should Own Each New Lead? (Big Leap RevOps DIY Toolkit 3 of 6)', ''];
+L.push(m.rec + '.', 'Built with ' + m.method + '.');
+if (m.manual) L.push('Time handing out leads by hand today: ' + hoursRange(m.lowMin, m.highMin));
+L.push('', 'RULES (first match wins)');
+m.rules.forEach((r, i) => L.push((r.fallback ? 'Fallback' : (i + 1) + '.') + ' IF ' + r.prop + (r.values ? ' is any of ' + r.values : '') + ' THEN ' + r.owner));
+L.push('', 'BUILD STEPS (' + PLAN_LABEL[m.plan] + ')', ...stepsText(m.items));
+const xl = xlinksText(xlinks(m));
+if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
+L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS, m.flags));
+L.push('', ed ? 'Assumptions: edited from Big Leap defaults.' : "Assumptions: Big Leap's default estimates.");
+return L.concat(planFooter(2)).join('\n');
+}
+function render() {
+const input = readInput(), a = readA(), m = model(input, a), ed = edited(a);
+last = { m, ed };
+setExampleState(isExample(input), 'Example: four reps on HubSpot Professional, routing by location and service. Change any answer to make it yours.');
+$('edited-pill').hidden = !ed;
+$('out-model').textContent = m.rec;
+$('out-line').innerHTML = m.reps < 1 ? 'Every lead needs one owner the moment it arrives. Start with whoever answers new inquiries today.'
+: 'Built with ' + esc(m.method) + '. ' + (m.manual ? 'It gives back about <b>' + esc(hoursRange(m.lowMin, m.highMin)) + '</b> spent handing leads out.' : 'Use it to check the rules you already run.');
+flashIfChanged(m.rec);
+$('rules').innerHTML = m.rules.length ? m.rules.map((r, i) => '<tr><th scope="row">' + (r.fallback ? 'Last' : i + 1) + '</th><td>' + esc(r.prop) + '</td>' +
+'<td>' + (r.values ? '<span class="ph">' + esc(r.values) + '</span>' : '—') + '</td><td><span class="ph">' + esc(r.owner) + '</span></td></tr>').join('')
+: '<tr><td colspan="4">Add at least one person who can own a lead.</td></tr>';
+renderSteps($('build'), m.items);
+$('count-rules').textContent = m.rules.length;
+$('count-build').textContent = m.items.length;
+renderLimits(LIMITS, m.flags);
+renderXlinks(xlinks(m));
+renderNext(2, nextWhy());
+syncCopy();
+sticky();
+}
+initShell(3, () => { applyExample(); render(); $('reps').focus(); });
+initTabs($('kit-tabs'));
+const syncCopy = initCopy(() => planText(last.m, last.ed));
+const sticky = initSticky();
+form.addEventListener('submit', (e) => e.preventDefault());
+form.addEventListener('input', render);
+form.addEventListener('change', render);
+$('method').addEventListener('input', () => { $('reset-status').textContent = ''; render(); });
+$('reset-assumptions').addEventListener('click', () => { writeA(ASSUMPTIONS); render(); $('reset-status').textContent = 'Assumptions reset to Big Leap defaults.'; });
+writeA(ASSUMPTIONS);
+render();
+})();
+</script>
+</body>
+</html>

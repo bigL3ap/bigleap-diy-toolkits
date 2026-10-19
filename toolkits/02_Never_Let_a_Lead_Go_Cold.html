@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Never Let a Lead Go Cold</title>
+<meta name="description" content="Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.">
+<style>
+/* Big Leap RevOps DIY Toolkit series: shared shell, v2.
+Layout: masthead, slim six-step path, then questions left and results right on desktop (the shorter column sticks); one column under 880px.
+Results read top to bottom as: the answer, the deliverable, then what to do next. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt:has(input:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-wrap .opt, .opt-wrap .opt:hover, .opt-wrap .opt:has(input:checked) { border: 0; box-shadow: none; background: transparent; }
+.opt-wrap:has(input[type="radio"]:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 2 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Never Let a Lead Go Cold</h1>
+<p class="lede">Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.</p>
+</header>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The RevOps DIY path</h2>
+<p class="stepper-note" id="stepper-note">Not sure where to start? Toolkit 5 ranks all six for you.</p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your lead follow-up</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text">Example: a home-services business on HubSpot Starter. Change any answer to make it yours.</p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<div class="q">
+<label class="q-label" for="business-name">Your business name</label>
+<input class="text-field" type="text" id="business-name" name="business" value="Example Co." autocomplete="organization" maxlength="80">
+<p class="q-help">Your emails are written in its name.</p>
+</div>
+<div class="q">
+<span class="q-label" id="plan-q">Which HubSpot plan do you have?</span>
+<div class="seg" role="radiogroup" aria-labelledby="plan-q">
+<input type="radio" id="plan-free" name="plan" value="free"><label for="plan-free">Free tools</label>
+<input type="radio" id="plan-starter" name="plan" value="starter" checked><label for="plan-starter">Starter</label>
+<input type="radio" id="plan-pro" name="plan" value="pro"><label for="plan-pro">Professional or Enterprise</label>
+</div>
+</div>
+<fieldset class="q" id="q1">
+<legend><span class="q-label">What did the prospect inquire about?</span></legend>
+<div class="opts">
+<label class="opt" for="q1-quote"><input type="radio" id="q1-quote" name="inquiry" value="quote"><span class="opt-text"><span class="opt-title">A quote or estimate</span></span></label>
+<label class="opt" for="q1-consult"><input type="radio" id="q1-consult" name="inquiry" value="consult"><span class="opt-text"><span class="opt-title">A consultation or demo</span></span></label>
+<label class="opt" for="q1-question"><input type="radio" id="q1-question" name="inquiry" value="question"><span class="opt-text"><span class="opt-title">A general question</span></span></label>
+<div class="opt-wrap">
+<label class="opt" for="q1-service"><input type="radio" id="q1-service" name="inquiry" value="service" checked><span class="opt-text"><span class="opt-title">A specific service</span><span class="opt-sub">Name it and the emails will use it</span></span></label>
+<div class="opt-extra">
+<label for="service-name">Service name</label>
+<input class="text-field" type="text" id="service-name" name="service" value="kitchen remodel" maxlength="60">
+</div>
+</div>
+</div>
+</fieldset>
+<fieldset class="q" id="q2">
+<legend><span class="q-label">Who should own the lead?</span></legend>
+<div class="opts">
+<label class="opt" for="q2-one"><input type="radio" id="q2-one" name="owner" value="one" checked><span class="opt-text"><span class="opt-title">One person</span></span></label>
+<label class="opt" for="q2-team"><input type="radio" id="q2-team" name="owner" value="team"><span class="opt-text"><span class="opt-title">Shared evenly across a team</span></span></label>
+<label class="opt" for="q2-territory"><input type="radio" id="q2-territory" name="owner" value="territory"><span class="opt-text"><span class="opt-title">Depends on location or service</span></span></label>
+</div>
+<p class="q-help">Depends on location or service? <span data-kit="3">Toolkit 3</span> writes those rules.</p>
+<p class="q-help" id="hint-owner" hidden></p>
+</fieldset>
+<fieldset class="q" id="q3">
+<legend><span class="q-label">What should the prospect immediately receive?</span></legend>
+<div class="opts">
+<label class="opt" for="q3-confirm"><input type="radio" id="q3-confirm" name="instant" value="confirm"><span class="opt-text"><span class="opt-title">A confirmation email</span></span></label>
+<label class="opt" for="q3-booking"><input type="radio" id="q3-booking" name="instant" value="booking" checked><span class="opt-text"><span class="opt-title">Confirmation plus a booking link</span><span class="opt-sub">They can pick a time to talk right away</span></span></label>
+<label class="opt" for="q3-resource"><input type="radio" id="q3-resource" name="instant" value="resource"><span class="opt-text"><span class="opt-title">Confirmation plus a helpful resource</span><span class="opt-sub">For example, a pricing guide</span></span></label>
+</div>
+</fieldset>
+<fieldset class="q" id="q4">
+<legend><span class="q-label">How quickly should a rep respond?</span></legend>
+<div class="seg wrap2" role="radiogroup" aria-label="Response time">
+<input type="radio" id="q4-5m" name="sla" value="5m"><label for="q4-5m">Within 5 minutes</label>
+<input type="radio" id="q4-1h" name="sla" value="1h" checked><label for="q4-1h">Within 1 hour</label>
+<input type="radio" id="q4-sameday" name="sla" value="sameday"><label for="q4-sameday">Same business day</label>
+<input type="radio" id="q4-nextday" name="sla" value="nextday"><label for="q4-nextday">Next business day</label>
+</div>
+</fieldset>
+<fieldset class="q" id="q5">
+<legend><span class="q-label">What happens if the prospect doesn't reply?</span></legend>
+<div class="opts">
+<label class="opt" for="q5-two"><input type="radio" id="q5-two" name="followup" value="two" checked><span class="opt-text"><span class="opt-title">Two more emails over a week</span><span class="opt-sub">Days 2 and 6</span></span></label>
+<label class="opt" for="q5-four"><input type="radio" id="q5-four" name="followup" value="four"><span class="opt-text"><span class="opt-title">Four more emails over three weeks</span><span class="opt-sub">Days 2, 5, 10 and 20</span></span></label>
+<label class="opt" for="q5-call"><input type="radio" id="q5-call" name="followup" value="call"><span class="opt-text"><span class="opt-title">The rep calls; no more emails</span></span></label>
+<label class="opt" for="q5-newsletter"><input type="radio" id="q5-newsletter" name="followup" value="newsletter"><span class="opt-text"><span class="opt-title">Move them to the monthly newsletter</span></span></label>
+</div>
+<p class="q-help" id="hint-followup" hidden></p>
+</fieldset>
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Lead Follow-Up Kit</button>
+</form>
+</section>
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your workflow</h2>
+<p class="hero-fig"><span class="hero-num" id="out-auto">8 of 8</span><span class="hero-unit" id="out-unit">steps run on their own</span></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Lead Follow-Up Kit</h2>
+<p class="deliv-sub" id="deliv-sub">Build steps for your plan, the workflow they create, and every email, ready to paste.</p>
+</div>
+<div class="tabs" role="tablist" aria-label="Your lead follow-up kit" id="kit-tabs">
+<button type="button" class="tab" role="tab" id="tab-build" aria-controls="panel-build">Build steps <span class="tab-count" id="count-build"></span></button>
+<button type="button" class="tab" role="tab" id="tab-flow" aria-controls="panel-flow">Workflow <span class="tab-count" id="count-flow"></span></button>
+<button type="button" class="tab" role="tab" id="tab-emails" aria-controls="panel-emails">Emails <span class="tab-count" id="count-emails"></span></button>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-build" aria-labelledby="tab-build">
+<ol class="steps" id="build"></ol>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-flow" aria-labelledby="tab-flow" hidden>
+<p class="deliv-sub" id="workflow-sub"></p>
+<ol class="flow" id="flow"></ol>
+<p class="fine">Solid outline: HubSpot runs it. Dashed: a person does it.</p>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-emails" aria-labelledby="tab-emails" hidden>
+<p class="token-note">In HubSpot, <code>[First name]</code> becomes the first-name token. Swap the other bracketed items, like <code>[Your name]</code> or a link, before you save.</p>
+<div class="emails" id="emails"></div>
+</div>
+</section>
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want it built for you?</h2>
+<p>Copy the whole kit, with the steps, workflow and emails, and build it this week. Or bring it to a call and we'll build it with you.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next on your path</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+<details class="limits" id="limits">
+<summary>Where the DIY version stops (<span id="limits-count"></span>)</summary>
+<ul id="limits-list"></ul>
+</details>
+</section>
+</div>
+</div>
+<footer class="foot">
+<p>HubSpot features and plan limits change. Check what your account includes, and test the workflow with a form submission of your own. Built from typical small-business follow-up, not a review of your account.</p>
+<p>Big Leap · RevOps DIY Toolkit 2 of 6 · Notice Different · Align to Genuine</p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all six RevOps DIY toolkits.
+CTA_URL: where "Talk to Big Leap" goes.
+TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
+and its name shows as plain text instead of a link.
+SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
+cross-link only appears once its url is filled in.
+===================================================================== */
+const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
+const TOOLKIT_URLS = {
+1: '', // Is Every Lead Reaching Your CRM?
+2: '', // Never Let a Lead Go Cold
+3: '', // Who Should Own Each New Lead?
+4: '', // Which Sales Steps Should Run Themselves?
+5: '', // How Much Time Is Your Sales Process Wasting?
+6: '', // Is Your Pipeline Ready for a Dashboard?
+};
+const SERVICE_TOOLKITS = {
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
+paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
+pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+};
+/* =====================================================================
+EXAMPLE: the answers the page opens with. This toolkit builds a plan
+rather than a number, so it has no time or cost assumptions.
+Plan limits it describes are listed with each HubSpot step.
+===================================================================== */
+const DEFAULTS = Object.freeze({
+business: 'Example Co.', plan: 'starter', inquiry: 'service', service: 'kitchen remodel',
+owner: 'one', instant: 'booking', sla: '1h', followup: 'two'
+});
+/* ---------- series helpers (shared by all six toolkits) ---------- */
+const SERIES = [
+{ n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
+{ n: 2, short: 'Reply', name: 'Speed-to-Lead Workflow Builder', title: 'Never Let a Lead Go Cold' },
+{ n: 3, short: 'Route', name: 'Lead Routing Template', title: 'Who Should Own Each New Lead?' },
+{ n: 4, short: 'Automate', name: 'Sales Process Automation Checklist', title: 'Which Sales Steps Should Run Themselves?' },
+{ n: 5, short: 'Find waste', name: 'Sales Time Audit', title: 'How Much Time Is Your Sales Process Wasting?' },
+{ n: 6, short: 'Report', name: 'SMB Sales Dashboard Template', title: 'Is Your Pipeline Ready for a Dashboard?' },
+];
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0, minimumFractionDigits: 0 }); }
+function hoursRange(lowMin, highMin, suffix) {
+const sfx = suffix == null ? ' a month' : suffix;
+if (highMin <= 0) return '0 hours' + sfx;
+if (highMin < 60) {
+const a = fmt(Math.round(lowMin)), b = fmt(Math.round(highMin));
+return (a === b ? 'about ' + a : a + '–' + b) + ' minutes' + sfx;
+}
+const d = highMin / 60 < 10 ? 1 : 0;
+const a = fmt(lowMin / 60, d), b = fmt(highMin / 60, d);
+return (a === b ? 'about ' + a : a + '–' + b) + ' hours' + sfx;
+}
+function heroHours(min) {
+if (min <= 0) return { num: '0', unit: 'hours a month', zero: true };
+if (min < 60) return { num: '≈ ' + fmt(Math.round(min)), unit: 'minutes a month', zero: false };
+const h = min / 60, s = fmt(h, h < 10 ? 1 : 0);
+return { num: '≈ ' + s, unit: (s === '1' ? 'hour' : 'hours') + ' a month', zero: false };
+}
+function kitUrl(n) { return (TOOLKIT_URLS && TOOLKIT_URLS[n]) || ''; }
+function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
+function kitRef(n, label) {
+const text = esc(label || ('Toolkit ' + n));
+const url = kitUrl(n);
+return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+}
+// Fills every <span data-kit="N"> with a link to that toolkit.
+function fillKitRefs(root) {
+(root || document).querySelectorAll('[data-kit]').forEach((el) => { el.innerHTML = kitRef(+el.getAttribute('data-kit'), el.textContent || null); });
+}
+function renderStepper(current) {
+$('stepper-list').innerHTML = SERIES.map((k) => {
+const cur = k.n === current, url = kitUrl(k.n);
+const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+return '<li>' + (cur || !url
+? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
+: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+}).join('');
+if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
+}
+// items: [{ title, why, how, meta, kit, where, done }]. The first three open items are marked "Do first".
+function renderSteps(el, items) {
+let open = 0;
+el.innerHTML = items.map((t, i) => {
+const first = !t.done && open++ < 3;
+return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+'<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+'<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+(t.meta ? '<span class="st-meta">' + esc(t.meta) + '</span>' : first ? '<span class="chip first">Do first</span>' : '') + '</div>' +
+(t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+(t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
+(t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
+(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+'</div></li>';
+}).join('');
+}
+function stepsText(items) {
+const out = [];
+let open = 0;
+items.forEach((t, i) => {
+const first = !t.done && open++ < 3;
+out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.meta + ')' : '') + (first ? ', do this first' : ''));
+if (t.why) out.push('   ' + t.why);
+if (t.how) out.push('   How: ' + t.how);
+(t.list || []).forEach((x) => out.push('   - ' + x));
+if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+});
+return out;
+}
+function renderLimits(list, flags) {
+const f = flags || {};
+const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+$('limits-count').textContent = list.length;
+$('limits-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+const any = list.some((c) => f[c.key]);
+if (any) $('limits').open = true;
+}
+function limitsText(list, flags) { const f = flags || {}; return list.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '')); }
+// links: [{ key, why }]. Shows only service toolkits that have a url.
+function renderXlinks(links) {
+const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
+$('xlinks').hidden = live.length === 0;
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+return live;
+}
+function xlinksText(links) {
+return links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url).map((l) => '- ' + SERVICE_TOOLKITS[l.key].name + ': ' + l.why + ' ' + SERVICE_TOOLKITS[l.key].url);
+}
+function renderNext(n, why) {
+const box = $('next');
+if (!n) { box.hidden = true; return; }
+box.hidden = false;
+$('next-title').innerHTML = kitRef(n, 'Toolkit ' + n + ': ' + SERIES[n - 1].title);
+$('next-why').textContent = why;
+}
+function setExampleState(isExample, exampleText) {
+const pill = $('example-pill');
+pill.textContent = isExample ? 'Example answers' : 'Your answers';
+pill.classList.toggle('is-yours', !isExample);
+$('example-text').textContent = isExample ? exampleText : 'Your results update as you go.';
+$('restore-example').hidden = isExample;
+}
+// Brief highlight on the answer when its headline changes (skipped with reduced motion).
+let lastHeadline = null;
+function flashIfChanged(key) {
+const el = $('answer');
+if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+lastHeadline = key;
+}
+function copyWithFallback(text, onDone, host) {
+const fallback = () => {
+let box = host.querySelector('.copy-fallback');
+if (!box) {
+box = document.createElement('div');
+box.className = 'copy-fallback';
+const id = host.id + '-text';
+box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+host.appendChild(box);
+}
+const ta = box.querySelector('textarea');
+ta.value = text; ta.focus(); ta.select();
+};
+try {
+if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(onDone, fallback);
+else fallback();
+} catch (err) { fallback(); }
+}
+function initCopy(getText) {
+const btn = $('copy-btn');
+let timer = null;
+btn.addEventListener('click', () => {
+copyWithFallback(getText(), () => {
+btn.textContent = 'Copied';
+btn.classList.add('is-copied');
+$('copy-status').textContent = 'Your plan is copied. Paste it into an email, a doc or your CRM notes.';
+clearTimeout(timer);
+timer = setTimeout(() => { btn.textContent = 'Copy my plan'; btn.classList.remove('is-copied'); $('copy-status').textContent = ''; }, 3000);
+}, $('copy-host'));
+});
+return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+// The shorter column sticks on desktop, but only when it fits the screen.
+function initSticky() {
+const q = $('col-q'), r = $('results');
+const wide = window.matchMedia('(min-width: 880px)');
+function update() {
+q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+if (!wide.matches) return;
+const room = window.innerHeight - 32;
+if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+}
+window.addEventListener('resize', update);
+if (wide.addEventListener) wide.addEventListener('change', update);
+if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+return update;
+}
+// Accessible tabs: <div role="tablist"> of .tab buttons with aria-controls.
+function initTabs(root) {
+const tabs = [...root.querySelectorAll('[role="tab"]')];
+function select(t, focus) {
+tabs.forEach((x) => {
+const on = x === t;
+x.setAttribute('aria-selected', on ? 'true' : 'false');
+x.tabIndex = on ? 0 : -1;
+$(x.getAttribute('aria-controls')).hidden = !on;
+});
+if (focus) t.focus();
+}
+tabs.forEach((t, i) => {
+t.addEventListener('click', () => select(t));
+t.addEventListener('keydown', (e) => {
+const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+});
+});
+select(tabs[0]);
+}
+function initShell(current, onRestore) {
+renderStepper(current);
+fillKitRefs();
+$('cta-link').href = CTA_URL;
+$('restore-example').addEventListener('click', onRestore);
+$('see-results').addEventListener('click', () => {
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+$('answer').focus({ preventScroll: true });
+});
+}
+function planFooter(nextN) {
+const L = [];
+if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
+L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+return L;
+}
+/* PLAN-CORE START: pure plan generation, no DOM. */
+const LABELS = {
+plan: { free: 'Free tools', starter: 'Starter', pro: 'Professional or Enterprise' },
+inquiry: { quote: 'A quote or estimate', consult: 'A consultation or demo', question: 'A general question', service: 'A specific service' },
+owner: { one: 'One person', team: 'Shared evenly across a team', territory: 'Depends on location or service' },
+instant: { confirm: 'A confirmation email', booking: 'Confirmation plus a booking link', resource: 'Confirmation plus a helpful resource' },
+sla: { '5m': 'Within 5 minutes', '1h': 'Within 1 hour', sameday: 'Same business day', nextday: 'Next business day' },
+followup: {
+two: 'Two more emails over a week (days 2 and 6)',
+four: 'Four more emails over three weeks (days 2, 5, 10 and 20)',
+call: 'The rep calls; no more emails',
+newsletter: 'Move them to the monthly newsletter'
+}
+};
+const SCHEDULE = { two: [2, 6], four: [2, 5, 10, 20], call: [], newsletter: [] };
+const SLA = {
+'5m': { short: '5 minutes', task: 'Respond within 5 minutes', promise: 'in the next few minutes during business hours', window: 'five minutes' },
+'1h': { short: '1 hour', task: 'Respond within 1 hour', promise: 'within the hour during business hours', window: 'one hour' },
+sameday: { short: 'Same business day', task: 'Respond by end of business day', promise: 'before the end of the business day', window: 'the end of the business day' },
+nextday: { short: 'Next business day', task: 'Respond by end of next business day', promise: 'by the end of the next business day', window: 'the end of the next business day' }
+};
+function pick(value, allowed, fallback) {
+return Object.prototype.hasOwnProperty.call(allowed, value) ? value : fallback;
+}
+function normalize(input) {
+const a = input || {};
+const business = String(a.business == null ? '' : a.business).replace(/\s+/g, ' ').trim();
+const service = String(a.service == null ? '' : a.service).replace(/\s+/g, ' ').trim();
+return {
+business, service,
+businessName: business || '[Business name]',
+serviceName: service || '[service]',
+plan: pick(a.plan, LABELS.plan, DEFAULTS.plan),
+inquiry: pick(a.inquiry, LABELS.inquiry, DEFAULTS.inquiry),
+owner: pick(a.owner, LABELS.owner, DEFAULTS.owner),
+instant: pick(a.instant, LABELS.instant, DEFAULTS.instant),
+sla: pick(a.sla, LABELS.sla, DEFAULTS.sla),
+followup: pick(a.followup, LABELS.followup, DEFAULTS.followup)
+};
+}
+function isExampleAnswers(input) {
+const A = normalize(input);
+return A.business === DEFAULTS.business && A.plan === DEFAULTS.plan && A.inquiry === DEFAULTS.inquiry &&
+A.service === DEFAULTS.service && A.owner === DEFAULTS.owner && A.instant === DEFAULTS.instant &&
+A.sla === DEFAULTS.sla && A.followup === DEFAULTS.followup;
+}
+function topicFor(A) {
+const biz = A.businessName, s = A.serviceName;
+switch (A.inquiry) {
+case 'quote': return {
+summary: 'Quote or estimate',
+formDetail: 'A prospect asks for a quote or estimate on your website form.',
+plain: 'a quote', short: 'your quote request',
+subject: 'Your quote request with ' + biz,
+opener: 'Thanks for asking ' + biz + ' for a quote.',
+expect: 'To put an accurate quote together, we may ask a few questions about scope and timing.',
+helpful: 'To get the numbers right, it helps to know your timeline, a rough budget, and anything you have already decided.',
+valueSubject: 'What goes into your quote',
+value: 'Most people asking for a quote want to know three things: what drives the price, how long the work takes, and what happens after they say yes. We can go through all three in a short call.',
+stillSubject: 'Still need that quote?',
+resource: 'pricing guide', resourceIntro: 'While you wait, here is our pricing guide:'
+};
+case 'consult': return {
+summary: 'Consultation or demo',
+formDetail: 'A prospect asks for a consultation or demo on your website form.',
+plain: 'a consultation', short: 'your consultation request',
+subject: 'Your consultation request with ' + biz,
+opener: endSentence('Thanks for asking for a consultation with ' + biz),
+expect: 'The first conversation is short, and there is nothing you need to prepare.',
+helpful: 'The first conversation is short. We ask what you want to solve, and you leave with clear next steps whether or not we work together.',
+valueSubject: 'What the first conversation covers',
+value: 'We talk through where things stand today, what you would like to change, and what a sensible first step looks like. There is nothing to prepare.',
+stillSubject: 'Still want to talk?',
+resource: 'how-we-work guide', resourceIntro: 'While you wait, here is a short guide to how we work:'
+};
+case 'question': return {
+summary: 'General question',
+formDetail: 'A prospect sends a general question through your website form.',
+plain: 'your question', short: 'your question',
+subject: 'Your question for ' + biz,
+opener: endSentence('Thanks for sending your question to ' + biz),
+expect: '',
+helpful: 'If you still need an answer, reply with any extra details and we will give you a straight one.',
+valueSubject: 'One short call instead of a long thread',
+value: 'Questions like yours often lead to a few more. If that is the case, we can cover them all in one short call instead of a long email thread.',
+stillSubject: 'Did you get your answer?',
+resource: 'common-questions guide', resourceIntro: 'While you wait, here are answers to the questions we hear most:'
+};
+default: return {
+summary: s,
+formDetail: 'A prospect asks about your ' + s + ' service on your website form.',
+plain: 'your ' + s, short: 'your ' + s + ' inquiry',
+subject: 'Your ' + s + ' inquiry with ' + biz,
+opener: endSentence('Thanks for contacting ' + biz + ' about your ' + s),
+expect: "We'll start with a few questions about scope, timing and budget.",
+helpful: 'The first step is a short conversation about scope, timing and budget. From there we can tell you what it would take.',
+valueSubject: 'Planning your ' + s,
+value: 'When people plan their ' + s + ', they usually ask about cost, timing and what to decide first. We can answer all three in a short call.',
+stillSubject: 'Is your ' + s + ' still on the list?',
+resource: s + ' pricing guide', resourceIntro: 'While you wait, here is our ' + s + ' pricing guide:'
+};
+}
+}
+function wordCount(text) {
+return (String(text).match(/\S+/g) || []).length;
+}
+// Ends a sentence without doubling a period that a name like "Example Co." already carries.
+function endSentence(text) {
+return /[.!?]$/.test(text) ? text : text + '.';
+}
+function buildPlan(input) {
+const A = normalize(input);
+const biz = A.businessName;
+const T = topicFor(A);
+const S = SLA[A.sla];
+const days = SCHEDULE[A.followup];
+const plan = A.plan;
+const one = A.owner === 'one';
+const booking = A.instant === 'booking';
+const v = (single, team) => (one ? single : team);
+const signoff = one ? 'Thanks,\n[Your name]\n' + biz : 'Thanks,\nThe ' + biz + ' team';
+/* ---------- Emails ---------- */
+const q3Line = A.instant === 'booking'
+? (A.inquiry === 'consult'
+? 'If you would like to lock in a time now, you can book your consultation here:\n[Booking link]'
+: 'If you would rather pick a time to talk now, you can book a call here:\n[Booking link]')
+: A.instant === 'resource'
+? T.resourceIntro + '\n[Resource link]'
+: 'If anything else comes to mind before then, just reply to this email.';
+const ownerLine = A.owner === 'one'
+? "I'll get back to you personally " + S.promise + '.'
+: A.owner === 'team'
+? 'Someone from our team will get back to you ' + S.promise + '.'
+: 'The right person on our team will get back to you ' + S.promise + '.';
+const confirmParts = ['Hi [First name],', T.opener + ' ' + ownerLine];
+if (T.expect) confirmParts.push(T.expect);
+confirmParts.push(q3Line, signoff);
+const emails = [{
+id: 'email-0', kind: 'confirm', name: 'Confirmation email', when: 'Sent right away',
+sentBy: plan === 'free' ? "Sent by the form's automation" : plan === 'starter' ? "Sent by the form's simple workflow" : 'Sent by the lead workflow',
+subject: T.subject, body: confirmParts.join('\n\n')
+}];
+const cta = booking
+? 'If a quick call is easier, you can pick a time here:\n[Booking link]'
+: "If it's easier, reply with a good time to talk and the best number to reach you.";
+const kinds = days.length === 2 ? ['checkin', 'close'] : days.length === 4 ? ['checkin', 'value', 'still', 'close'] : [];
+// On Starter the first two follow-ups are automated and can't stop on a reply, so their wording must survive one.
+const isAuto = (i) => plan === 'pro' || (plan === 'starter' && i < 2);
+const sentByFor = (i) => plan === 'pro' ? 'Sent by the sales sequence'
+: plan === 'starter' && i < 2 ? "Sent by the form's simple workflow"
+: 'Sent by hand from the task queue';
+kinds.forEach((kind, i) => {
+const day = days[i];
+const safe = plan === 'starter' && i < 2;
+const safeLine = "If we've already spoken, thank you. There's nothing you need to do with this email.";
+let subject, parts;
+if (kind === 'checkin') {
+subject = 'Following up on ' + T.short;
+parts = ['Hi [First name],', v("I'm", "We're") + ' following up on ' + T.short + '. ' + T.helpful, cta];
+if (safe) parts.push(safeLine);
+} else if (kind === 'value') {
+subject = T.valueSubject;
+parts = ['Hi [First name],', T.value, cta];
+if (safe) parts.push(safeLine);
+} else if (kind === 'still') {
+subject = T.stillSubject;
+parts = ['Hi [First name],',
+(safe ? "If we haven't connected yet, a" : 'Plans change, so a') +
+' one-word reply is plenty: "yes" if you would still like to talk, or "later" and ' + v("I'll", "we'll") + ' check back another time.'];
+if (safe) parts.push("If we're already talking, you can ignore this one.");
+} else {
+subject = 'Closing the loop on ' + T.short;
+parts = ['Hi [First name],',
+safe
+? "If we haven't connected yet, " + v("I'll", "we'll") + " assume now isn't the right time, and that's fine."
+: v("I haven't heard back, so I'll", "We haven't heard back, so we'll") + " assume now isn't the right time. That's fine.",
+'If you would still like help with ' + T.plain + ', reply to this email whenever you are ready and we will pick it up from there.'];
+if (safe) parts.push("If we're already talking, you can ignore this note.");
+}
+parts.push(signoff);
+emails.push({
+id: 'email-' + (i + 1), kind: kind, name: 'Follow-up ' + (i + 1), day: day,
+when: 'Day ' + day + ', if no reply', sentBy: sentByFor(i), auto: isAuto(i),
+subject: subject, body: parts.join('\n\n')
+});
+});
+emails.forEach((e) => { e.words = wordCount(e.body); });
+let emailNote = '';
+if (A.followup === 'call') emailNote = 'You chose phone follow-up, so there are no follow-up emails. If the prospect does not reply, the owner calls instead.';
+if (A.followup === 'newsletter') emailNote = 'You chose the newsletter, so there are no follow-up emails. Prospects who do not reply move to your monthly newsletter, but only if they agreed to receive marketing email.';
+/* ---------- Workflow nodes ---------- */
+const nodes = [];
+const add = (node) => { node.n = nodes.length + 1; nodes.push(node); return node; };
+add({ kind: 'trigger', title: 'Form submitted', detail: T.formDetail, tool: 'HubSpot form' });
+let ownerNode;
+if (A.owner === 'one') {
+ownerNode = { kind: 'auto', title: 'Owner assigned', detail: "The form's hidden Contact owner field makes your rep the owner.", tool: 'Form: hidden Contact owner field' };
+} else if (A.owner === 'team') {
+ownerNode = plan === 'pro'
+? { kind: 'auto', title: 'Owner assigned', detail: 'Each new lead rotates to the next rep on the team.', tool: 'Workflow: Rotate record to owner' }
+: { kind: 'manual', title: 'Owner assigned', detail: 'The form makes a coordinator the owner, who hands each lead to the next rep in turn.', tool: 'Hidden owner field, then by hand' };
+} else {
+ownerNode = plan === 'pro'
+? { kind: 'auto', title: 'Owner assigned', detail: 'The workflow sets the owner from your routing rules (Toolkit 3).', tool: 'Workflow: set owner' }
+: { kind: 'auto', title: 'Owner assigned', detail: 'One form per location or service, each with its own owner (Toolkit 3).', tool: 'Form: hidden Contact owner field' };
+}
+add(ownerNode);
+const q3Item = A.instant === 'booking' ? 'confirmation + booking link'
+: A.instant === 'resource' ? 'confirmation + ' + T.resource : 'confirmation email';
+add({
+kind: 'auto', title: 'Instant ' + q3Item + ' sent',
+detail: 'Goes out as soon as the form is submitted, so they know you heard them.',
+tool: plan === 'free' ? 'Form automation (one email)' : plan === 'starter' ? 'Form simple workflow' : 'Workflow: send email'
+});
+add({
+kind: 'auto', title: 'Rep alerted', detail: 'The owner gets an email with the prospect’s details.',
+tool: plan === 'free' ? 'Form notification' : plan === 'starter' ? 'Simple automation: internal email' : 'Workflow: internal email notification'
+});
+const taskNode = add({
+kind: plan === 'free' ? 'manual' : 'auto',
+title: 'Task: ' + S.task.charAt(0).toLowerCase() + S.task.slice(1),
+detail: plan === 'free' ? 'The owner adds it to the new-lead task queue and works it.'
+: plan === 'starter' ? 'Created for the owner as soon as the contact is created.'
+: 'Created for the owner, due when the response window closes.',
+tool: plan === 'free' ? 'Task queue, by hand' : plan === 'starter' ? 'Simple automation: create task' : 'Workflow: create task'
+});
+if (plan === 'pro') {
+taskNode.branch = {
+title: 'Task overdue → manager alerted',
+detail: 'After ' + S.window + ', if Last contacted is still unknown, the manager gets an email.',
+tool: 'Workflow: delay + if/then branch'
+};
+}
+days.forEach((day, i) => {
+const e = emails[i + 1];
+const manual = plan === 'free' || (plan === 'starter' && i >= 2);
+add({
+kind: manual ? 'manual' : 'auto',
+wait: i === 0 ? 'No reply: wait until day ' + day : 'Still no reply: wait ' + (day - days[i - 1]) + ' more days, to day ' + day,
+title: 'Day ' + day + ': follow-up email ' + (i + 1),
+detail: '“' + e.subject + '”',
+tool: plan === 'pro' ? 'Sales sequence' : manual ? 'Saved template, sent by hand' : 'Form simple workflow'
+});
+});
+if (A.followup === 'call') {
+add({
+kind: 'manual', wait: 'No reply after the first outreach',
+title: 'Rep calls; no more emails', detail: 'The owner picks up the phone instead of sending more email.',
+tool: plan === 'free' ? 'Task queue, by hand' : plan === 'starter' ? 'Simple automation: call task' : 'Workflow: call task'
+});
+}
+if (A.followup === 'newsletter') {
+add({
+kind: 'manual', wait: 'No reply after the first outreach',
+title: 'Moved to the monthly newsletter', detail: 'Only if they agreed to receive marketing email.',
+tool: 'Newsletter list, by hand'
+});
+}
+let endDetail, endTool;
+if (days.length) {
+if (plan === 'pro') { endDetail = 'The sequence unenrolls them automatically when they reply or book a meeting.'; endTool = 'Sales sequence'; }
+else if (plan === 'starter') {
+endDetail = days.length === 4
+? "Starter can't stop the first two emails on its own, so they're worded to read fine after a reply. The rep skips days 10 and 20 for anyone who has replied."
+: "Starter can't stop the emails on its own, so each one is worded to read fine even after a reply.";
+endTool = 'No automatic stop on Starter';
+} else { endDetail = 'Every follow-up is sent by hand, so the rep skips the rest once they reply or book.'; endTool = 'By hand'; }
+} else if (A.followup === 'call') { endDetail = 'The rep stops calling once they reply or book.'; endTool = 'By hand'; }
+else { endDetail = 'Sales follow-up ends here. The newsletter keeps going for anyone who opted in.'; endTool = 'By hand'; }
+add({ kind: 'end', title: 'Stops when they reply or book', detail: endDetail, tool: endTool, caution: plan === 'starter' && days.length > 0 });
+/* ---------- Build steps ---------- */
+const steps = [];
+const step = (title, scope, paras, extra) => steps.push(Object.assign({ title: title, scope: scope, paras: paras }, extra || {}));
+const planName = LABELS.plan[plan];
+// 1. Owner
+if (A.owner === 'one') {
+step('Set the owner on the form', 'All plans', [
+'Add a hidden "Contact owner" field to your inquiry form and set it to the rep who owns these leads. This sets one rep per form.'
+]);
+} else if (A.owner === 'team') {
+if (plan === 'pro') {
+step('Leave the owner to the workflow', planName, [
+'Your workflow will rotate each new lead to the next rep, so the form does not need to set an owner. Rotate record to owner needs Sales or Service Hub Professional.',
+'If you ever need a fixed owner instead, a hidden "Contact owner" field on the form sets one rep per form.'
+]);
+} else {
+step('Set a coordinator as owner on the form', planName, [
+'Add a hidden "Contact owner" field to the form and set it to the person who hands out new leads. It sets one rep per form, so sharing leads evenly is done by hand: the coordinator reassigns each new lead to the next rep in turn.',
+'Rotating leads automatically needs Sales or Service Hub Professional.'
+]);
+}
+} else {
+if (plan === 'pro') {
+step('Map your routing first', planName, [
+'Use Toolkit 3, Lead Routing Template, to decide who owns which location or service. You will set the owner from those rules in the workflow below.',
+'For a simpler start, one form per location or service, each with its own hidden "Contact owner" field, also works.'
+]);
+} else {
+step('One form per location or service', planName, [
+'Use Toolkit 3, Lead Routing Template, to decide who owns which location or service.',
+'A hidden "Contact owner" field sets one rep per form, so the simple version is one form per location or service, each with the right owner in its hidden field.'
+]);
+}
+}
+// 2. Notifications
+const notifyParas = [
+'In the form’s notification settings, send submission notifications to the contact owner and to any named users who should see every lead, such as a manager.'
+];
+if (plan === 'pro' && A.owner !== 'one') {
+notifyParas.push('Nothing is sent to the owner if the contact has no owner yet. Because the workflow assigns the owner, name the users who should always hear about new leads here and let the workflow alert the owner.');
+} else {
+notifyParas.push('Nothing is sent to the owner if the contact has no owner, so make sure step 1 always sets one.' + (plan === 'free' ? ' On free tools, this notification is your rep alert.' : ''));
+}
+step('Turn on form notifications', 'All plans', notifyParas);
+// 3. Booking link
+if (booking) {
+const meet = [
+'Set up a meeting scheduling page and paste its link wherever the emails say [Booking link]. Free tools include one scheduling page per user.',
+'When a prospect books, HubSpot creates the contact and makes the organizer the owner if the contact does not have one yet.'
+];
+if (A.owner === 'team') {
+meet.push(plan === 'free'
+? 'Round-robin meeting pages, which share bookings across a team, need Sales or Service Hub Starter or higher. On free tools, each rep shares their own page.'
+: 'To share bookings across the team, use a round-robin meeting page. It needs Sales or Service Hub Starter or higher.');
+}
+step('Create the booking link', 'All plans', meet);
+}
+const resourceNote = A.instant === 'resource' ? ' Replace [Resource link] with a link to your ' + T.resource + '.' : '';
+const deltas = days.map((d, i) => (i === 0 ? d : d - days[i - 1]));
+if (plan === 'free') {
+step('Send the confirmation from the form', 'Free tools', [
+'In the form editor’s Automation tab, set up the one email the form can send after a submission. Paste in the confirmation email from Your emails.' + resourceNote
+]);
+step('Set up a new-lead task queue', 'Free tools', [
+'On free tools, follow-up tasks are done by hand. Create a task queue for new leads. When a notification comes in, the owner adds a task called "' + S.task + '" and works the queue in order.'
+]);
+if (days.length) {
+step('Save the follow-ups as templates', 'Free tools', [
+'Save each follow-up email as a template. On days ' + listDays(days) + ', the owner sends the next template from the task queue, skipping anyone who has replied or booked.'
+]);
+} else if (A.followup === 'call') {
+step('Add the follow-up call', 'Free tools', [
+'If there is no reply after the first outreach, the owner adds a call task to the queue and phones. No more emails go out.'
+]);
+} else {
+step('Move quiet leads to the newsletter', 'Free tools', [
+'If there is no reply after the first outreach, add them to your newsletter list, but only if they agreed to receive marketing email.'
+]);
+}
+}
+if (plan === 'starter') {
+let flow = 'send the confirmation email';
+const autoDays = days.slice(0, 2);
+autoDays.forEach((d, i) => { flow += ', wait ' + deltas[i] + ' days, send follow-up ' + (i + 1); });
+step('Build the form’s simple workflow', 'Starter', [
+'In the form editor’s Automation tab, build a simple workflow: ' + flow + '.' + resourceNote,
+'Marketing Hub Starter allows up to 10 actions here; other Starter plans allow 3. If yours won’t fit every email, send the later follow-ups from a task queue.'
+]);
+const autoParas = [
+'From the Contacts index page, create a simple automation with the trigger "record created". Add a "send internal email notification" action to alert the owner, then a "create task" action called "' + S.task + '".'
+];
+if (A.followup === 'call') autoParas.push('Then add a delay and a second "create task" action: call the prospect if they have not replied.');
+autoParas.push('This covers new contacts. The form notification from step 2 still reaches the owner when an existing contact fills in the form.');
+step('Add the rep alert and response task', 'Starter', autoParas);
+if (days.length) {
+const caution = days.length === 4
+? 'You chose four follow-ups. Automate the first two (days 2 and 5) in the form’s simple workflow. Save days 10 and 20 as templates that reps send from a task queue, so nobody who has replied gets them.'
+: 'Each follow-up is written to read fine even if the prospect already replied. If that is not good enough, have reps send the follow-ups from a task queue instead.';
+step('Know the Starter limit', 'Starter', [], {
+caution: { label: 'Starter limit', text: 'Starter automations cannot branch, so follow-up emails do not stop when the prospect replies. ' + caution }
+});
+}
+if (A.followup === 'newsletter') {
+step('Move quiet leads to the newsletter', 'Starter', [
+'If there is no reply after the first outreach, add them to your newsletter list, but only if they agreed to receive marketing email.'
+]);
+}
+}
+if (plan === 'pro') {
+const ownerAction = A.owner === 'one' ? 'Set the owner to your rep, or rely on the hidden field from step 1.'
+: A.owner === 'team' ? 'Rotate record to owner across the team (needs Sales or Service Hub Professional).'
+: 'Set the owner to match your routing rules from Toolkit 3.';
+const actions = [
+ownerAction,
+'Send email: your confirmation email.' + resourceNote,
+'Send internal email notification to the owner.',
+'Create task: "' + S.task + '", due when that window closes.'
+];
+if (A.followup === 'call') actions.push('After a delay, create a second task: call the prospect if they have not replied.');
+step('Build the lead workflow', 'Professional or Enterprise', [
+'Create a contact-based workflow triggered by a submission of this form. Add these actions in order:'
+], { list: actions });
+step('Add the overdue alert', 'Professional or Enterprise', [
+'After the task, add a delay until the response window has passed (' + S.window + '). Then add an if/then branch: if "Last contacted" is unknown, send an internal email to the manager. If/then branches need Professional.'
+]);
+if (days.length) {
+step('Build the follow-up sequence', 'Professional or Enterprise', [
+'Create a sales sequence with your ' + days.length + ' follow-up emails on days ' + listDays(days) + '. Sequences need Sales or Service Hub Professional, and the sender needs a Sales or Service seat.',
+'Sequences unenroll the contact automatically when they reply or book a meeting, so nobody gets a follow-up after they have answered.'
+]);
+step('Enroll new leads in the sequence', 'Professional or Enterprise', [
+'On Enterprise, add the workflow’s "enroll in a sequence" action. On Professional, that action is not available: enroll from the sequence’s own automation settings, or have the rep enroll the contact from the task.'
+]);
+}
+if (A.followup === 'newsletter') {
+step('Move quiet leads to the newsletter', 'Professional or Enterprise', [
+'If there is no reply after the first outreach, add them to your newsletter list, but only if they agreed to receive marketing email.'
+]);
+}
+}
+const measure = {
+title: 'Measure it',
+paras: [
+'HubSpot’s "Lead response time" contact property and report measure the time from owner assignment to the owner’s first logged outreach. Both need Sales Hub Starter or higher' +
+(plan === 'free' ? ', so on free tools, spot-check a few leads by hand for now.' : '.') +
+' Outreach only counts once it is logged, so ask reps to log their calls and emails.',
+'Compare the result with your target (' + LABELS.sla[A.sla].toLowerCase() + '). To put it on a dashboard, use Toolkit 6, SMB Sales Dashboard Template.'
+]
+};
+/* ---------- Hints for the questions ---------- */
+const hints = { owner: '', followup: '' };
+if (A.owner === 'territory') {
+hints.owner = '<b>Use Toolkit 3, Lead Routing Template,</b> to decide who owns which location or service. This plan assumes those rules set the owner.';
+} else if (A.owner === 'team' && plan !== 'pro') {
+hints.owner = 'On ' + (plan === 'free' ? 'free tools' : 'Starter') + ', leads are shared by hand. Rotating them automatically needs Sales or Service Hub Professional.';
+}
+if (plan === 'starter' && A.followup === 'four') {
+hints.followup = '<b>On Starter, follow-ups don’t stop when someone replies.</b> The plan automates the first two and has reps send days 10 and 20 by hand.';
+} else if (plan === 'free' && days.length) {
+hints.followup = 'On free tools, follow-ups are sent by hand as saved templates.';
+}
+/* ---------- Summary ---------- */
+const manualCount = nodes.filter((n) => n.kind === 'manual').length;
+const summary = {
+title: 'Plan for ' + biz,
+facts: [
+['HubSpot plan', planName],
+['Inquiry', T.summary],
+['Owner', A.owner === 'one' ? 'One rep' : A.owner === 'team' ? 'Shared across a team' : 'By location or service'],
+['Sent right away', A.instant === 'booking' ? 'Confirmation + booking link' : A.instant === 'resource' ? 'Confirmation + ' + T.resource : 'Confirmation email'],
+['Response target', S.short],
+['If no reply', days.length ? days.length + ' emails, days ' + listDays(days).replace(' and ', ' and' + String.fromCharCode(160)) : A.followup === 'call' ? 'Rep calls' : 'Monthly newsletter']
+],
+counts: [
+[nodes.length, 'workflow steps'],
+[emails.length, emails.length === 1 ? 'email to write' : 'emails to write'],
+[manualCount, manualCount === 1 ? 'step done by hand' : 'steps done by hand']
+]
+};
+const plan_ = { answers: A, topic: T, summary: summary, nodes: nodes, emails: emails, emailNote: emailNote, steps: steps, measure: measure, hints: hints };
+plan_.text = planToText(plan_);
+return plan_;
+}
+function listDays(days) {
+if (days.length <= 1) return days.join('');
+return days.slice(0, -1).join(', ') + ' and ' + days[days.length - 1];
+}
+function planToText(p) {
+const A = p.answers;
+const out = [];
+out.push('NEVER LET A LEAD GO COLD');
+out.push('Speed-to-lead plan for ' + A.businessName);
+out.push('Big Leap RevOps DIY Toolkit 2 of 6: Speed-to-Lead Workflow Builder');
+out.push('');
+out.push('YOUR ANSWERS');
+out.push('HubSpot plan: ' + LABELS.plan[A.plan]);
+out.push('Inquiry: ' + LABELS.inquiry[A.inquiry] + (A.inquiry === 'service' ? ' (' + A.serviceName + ')' : ''));
+out.push('Lead owner: ' + LABELS.owner[A.owner]);
+out.push('Sent right away: ' + LABELS.instant[A.instant]);
+out.push('Rep responds: ' + LABELS.sla[A.sla]);
+out.push('If no reply: ' + LABELS.followup[A.followup]);
+out.push('');
+out.push('A. YOUR WORKFLOW');
+p.nodes.forEach((n) => {
+if (n.wait) out.push('   ... ' + n.wait);
+out.push(n.n + '. ' + n.title + (n.kind === 'manual' ? ' (by hand)' : ''));
+out.push('   ' + n.detail);
+out.push('   Tool: ' + n.tool);
+if (n.branch) {
+out.push('   Side branch: ' + n.branch.title);
+out.push('   ' + n.branch.detail);
+out.push('   Tool: ' + n.branch.tool);
+}
+});
+out.push('');
+out.push('B. YOUR EMAILS');
+out.push('In HubSpot, [First name] becomes the first-name personalization token. Replace the other bracketed items before you save.');
+p.emails.forEach((e) => {
+out.push('');
+out.push('--- ' + e.name + ' (' + e.when + '; ' + e.sentBy.charAt(0).toLowerCase() + e.sentBy.slice(1) + ') ---');
+out.push('Subject: ' + e.subject);
+out.push('');
+out.push(e.body);
+});
+if (p.emailNote) { out.push(''); out.push(p.emailNote); }
+out.push('');
+out.push('C. BUILD IT IN HUBSPOT (' + LABELS.plan[A.plan] + ')');
+p.steps.forEach((s, i) => {
+out.push((i + 1) + '. ' + s.title);
+s.paras.forEach((t) => out.push('   ' + t));
+(s.list || []).forEach((t) => out.push('   - ' + t));
+if (s.caution) out.push('   ' + s.caution.label + ': ' + s.caution.text);
+});
+out.push('');
+out.push(p.measure.title.toUpperCase());
+p.measure.paras.forEach((t) => out.push(t));
+return out.join('\n');
+}
+/* PLAN-CORE END */
+/* ---------- series layer ---------- */
+const LIMITS = [
+{ key: 'scoring', title: 'Lead scoring for the fast lane', text: 'Deciding which leads get a five-minute reply starts with agreeing what a good lead looks like.' },
+{ key: 'branching', title: 'Branching by service or deal size', text: 'Different owners, emails and timing per branch, each one built and tested.' },
+{ key: 'sequences', title: 'Rep-personal sequences', text: 'Follow-ups from each rep in their own voice, with seats and templates set up rep by rep.' },
+{ key: 'sla', title: 'Response-time reporting', text: 'Hitting the target by rep and by week takes clean owner data and a dashboard people check.' },
+];
+function limitFlags(A) {
+return { scoring: A.sla === '5m', branching: A.owner === 'territory', sequences: A.owner !== 'one' && SCHEDULE[A.followup].length > 0 };
+}
+function stepKit(s, A) {
+const t = s.title.toLowerCase();
+if (t.indexOf('routing') >= 0 || t.indexOf('per location') >= 0 || (t.indexOf('owner') >= 0 && A.owner !== 'one')) return { kit: 3, where: 'routing rules' };
+if (t.indexOf('owner on the form') >= 0 || t.indexOf('notifications') >= 0) return { kit: 1, where: 'Step 6' };
+return null;
+}
+function buildItems(p) {
+const A = p.answers;
+const items = p.steps.map((s) => {
+const k = stepKit(s, A);
+return { title: s.title, meta: s.scope, why: s.paras.join(' '), list: s.list, how: s.caution ? s.caution.label + ': ' + s.caution.text : '', kit: k ? k.kit : 0, where: k ? k.where : '', self: 2 };
+});
+items.push({ title: p.measure.title, meta: 'Starter or higher', why: p.measure.paras.join(' ').replace(/To put it on a dashboard, use Toolkit 6, SMB Sales Dashboard Template\./, 'Put it on a dashboard with Toolkit 6.'), kit: 6, where: 'Lead response time report', self: 2 });
+return items;
+}
+function nextFor(A) {
+if (A.owner !== 'one') return { n: 3, why: 'Your leads are shared across ' + (A.owner === 'team' ? 'a team' : 'locations or services') + '. Write the routing rules once, and this workflow always reaches the right owner.' };
+return { n: 4, why: 'Once the first reply runs itself, the next time sink is what follows it: meeting prep, follow-up tasks and stalled deals.' };
+}
+function xlinks(A) {
+const out = [{ key: 'email', why: 'for the longer nurture that picks up where these follow-ups stop.' }];
+if (A.instant === 'resource') out.push({ key: 'content', why: 'to decide which guide is worth sending in that first email.' });
+return out;
+}
+(function () {
+const form = $('answers');
+const live = document.createElement('p');
+live.className = 'sr-only';
+live.setAttribute('aria-live', 'polite');
+document.body.appendChild(live);
+let current = null;
+function readAnswers() {
+const el = form.elements, val = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
+return { business: val('business'), plan: val('plan'), inquiry: val('inquiry'), service: val('service'), owner: val('owner'), instant: val('instant'), sla: val('sla'), followup: val('followup') };
+}
+function applyAnswers(a) {
+$('business-name').value = a.business;
+$('service-name').value = a.service;
+const ids = { plan: 'plan-', inquiry: 'q1-', owner: 'q2-', instant: 'q3-', sla: 'q4-', followup: 'q5-' };
+Object.keys(ids).forEach((k) => { const r = $(ids[k] + a[k]); if (r) r.checked = true; });
+}
+function renderAnswer() {
+const total = current.nodes.length, manual = current.nodes.filter((n) => n.kind === 'manual').length;
+const A = current.answers, S = SLA[A.sla];
+$('out-auto').textContent = (total - manual) + ' of ' + total;
+$('out-auto').classList.toggle('is-zero', manual === 0);
+$('out-unit').textContent = 'steps run on their own';
+$('out-line').innerHTML = (manual === 0 ? 'Nobody has to remember anything. ' : '<b>' + manual + (manual === 1 ? ' step is' : ' steps are') + ' done by hand</b> on ' + esc(LABELS.plan[A.plan]) + '. ') +
+'Every lead hears back <b>' + esc(S.short.toLowerCase().replace('same business day', 'the same business day').replace('next business day', 'by the next business day').replace(/^(\d)/, 'within $1')) + '</b>, with <b>' + current.emails.length + ' email' + (current.emails.length === 1 ? '' : 's') + '</b> written for you.';
+$('answer').classList.toggle('is-done', manual === 0);
+flashIfChanged(manual + '/' + total);
+}
+function renderHints() {
+const h = current.hints;
+const owner = current.answers.owner === 'territory' ? '' : h.owner;
+[['hint-owner', owner], ['hint-followup', h.followup]].forEach(([id, html]) => { const el = $(id); el.innerHTML = html || ''; el.hidden = !html; });
+}
+function chip(text, cls) { return '<span class="chip ' + (cls || '') + '">' + esc(text) + '</span>'; }
+function renderFlow() {
+let html = '';
+current.nodes.forEach((n) => {
+if (n.wait) html += '<li class="wait">' + esc(n.wait) + '</li>';
+html += '<li class="k-' + n.kind + '"><span class="fnum" aria-hidden="true">' + n.n + '</span><div class="card">' +
+'<div class="card-top"><p class="card-title"><span class="sr-only">Step ' + n.n + (n.kind === 'manual' ? ', done by hand' : '') + ': </span>' + esc(n.title) + '</p>' + chip(n.tool, n.kind === 'manual' ? 'manual' : '') + '</div>' +
+'<p class="card-detail">' + esc(n.detail) + '</p>' +
+(n.branch ? '<p class="card-detail"><b>If it’s overdue:</b> ' + esc(n.branch.detail) + '</p>' : '') + '</div></li>';
+});
+$('flow').innerHTML = html;
+$('workflow-sub').textContent = 'What happens from the moment the form is submitted, on ' + LABELS.plan[current.answers.plan] + '.';
+}
+function renderEmails() {
+let html = current.emails.map((e, i) =>
+'<article class="email" id="' + e.id + '"><div class="email-head"><p class="email-name">' + esc(e.name) +
+'<span class="email-when">' + esc(e.when) + ' · ' + esc(e.sentBy) + '</span></p>' +
+'<button type="button" class="btn btn-plain" data-copy="' + i + '" aria-label="Copy ' + esc(e.name.toLowerCase()) + '">Copy</button></div>' +
+'<p class="email-subject"><span>Subject</span><b>' + esc(e.subject) + '</b></p>' +
+'<div class="email-body">' + esc(e.body) + '</div><div id="host-' + e.id + '"></div></article>').join('');
+if (current.emailNote) html += '<p class="fine">' + esc(current.emailNote) + '</p>';
+$('emails').innerHTML = html;
+}
+function planText() {
+const A = current.answers;
+const t = current.text.split('\n');
+const L = ['YOUR LEAD FOLLOW-UP KIT', 'Never Let a Lead Go Cold (Big Leap RevOps DIY Toolkit 2 of 6)', t[1]].concat(t.slice(3));
+const xl = xlinksText(xlinks(A));
+if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
+L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS, limitFlags(A)));
+return L.concat(planFooter(nextFor(A).n)).join('\n');
+}
+function render() {
+const a = readAnswers();
+current = buildPlan(a);
+setExampleState(isExampleAnswers(a), 'Example: a home-services business on HubSpot Starter. Change any answer to make it yours.');
+renderHints();
+renderAnswer();
+const items = buildItems(current);
+renderSteps($('build'), items);
+renderFlow();
+renderEmails();
+$('count-build').textContent = items.length;
+$('count-flow').textContent = current.nodes.length;
+$('count-emails').textContent = current.emails.length;
+renderLimits(LIMITS, limitFlags(current.answers));
+renderXlinks(xlinks(current.answers));
+const nx = nextFor(current.answers);
+renderNext(nx.n, nx.why);
+syncCopy();
+sticky();
+}
+$('emails').addEventListener('click', (ev) => {
+const btn = ev.target.closest('[data-copy]');
+if (!btn || !current) return;
+const e = current.emails[Number(btn.getAttribute('data-copy'))];
+if (!e) return;
+copyWithFallback('Subject: ' + e.subject + '\n\n' + e.body, () => {
+btn.textContent = 'Copied'; btn.classList.add('is-copied'); live.textContent = 'Email copied';
+clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('is-copied'); }, 2000);
+}, $('host-' + e.id));
+});
+initShell(2, () => { applyAnswers(DEFAULTS); render(); live.textContent = 'Example answers restored'; });
+initTabs($('kit-tabs'));
+const syncCopy = initCopy(planText);
+const sticky = initSticky();
+form.addEventListener('input', render);
+form.addEventListener('change', render);
+form.addEventListener('submit', (ev) => ev.preventDefault());
+$('service-name').addEventListener('focus', () => { if (!$('q1-service').checked) { $('q1-service').checked = true; render(); } });
+render();
+})();
+</script>
+</body>
+</html>

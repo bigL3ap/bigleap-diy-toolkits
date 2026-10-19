@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Is Your Pipeline Ready for a Dashboard?</title>
+<meta name="description" content="Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.">
+<style>
+/* Big Leap RevOps DIY Toolkit series: shared shell, v2.
+Layout: masthead, slim six-step path, then questions left and results right on desktop (the shorter column sticks); one column under 880px.
+Results read top to bottom as: the answer, the deliverable, then what to do next. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt:has(input:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-wrap .opt, .opt-wrap .opt:hover, .opt-wrap .opt:has(input:checked) { border: 0; box-shadow: none; background: transparent; }
+.opt-wrap:has(input[type="radio"]:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 6 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Is Your Pipeline Ready for a Dashboard?</h1>
+<p class="lede">Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.</p>
+</header>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The RevOps DIY path</h2>
+<p class="stepper-note" id="stepper-note">Not sure where to start? Toolkit 5 ranks all six for you.</p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your pipeline reporting</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text">Example: a team on HubSpot Starter rebuilding a pipeline spreadsheet every week. Change any answer to make it yours.</p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<div class="q">
+<span class="q-label" id="plan-q">Which HubSpot Sales Hub plan do you have?</span>
+<div class="seg" role="radiogroup" aria-labelledby="plan-q">
+<input type="radio" id="plan-free" name="plan" value="free"><label for="plan-free">Free tools</label>
+<input type="radio" id="plan-starter" name="plan" value="starter" checked><label for="plan-starter">Starter</label>
+<input type="radio" id="plan-pro" name="plan" value="pro"><label for="plan-pro">Professional or Enterprise</label>
+</div>
+</div>
+<div class="q">
+<div class="q-row">
+<label class="q-label" for="hours">Hours a week building pipeline numbers</label>
+<div class="field">
+<input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="3">
+<span class="affix">hrs</span>
+</div>
+</div>
+<p class="q-help">Exporting, pasting, fixing formulas, making the slide.</p>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Which of these can you prove with a HubSpot view today?</span></legend>
+<div class="opts" id="ready-opts"></div>
+<p class="q-help">This is the readiness check. Each one names the toolkit that fixes it.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Which questions does HubSpot already answer for you?</span></legend>
+<div class="opts" id="have-opts"></div>
+</fieldset>
+<div class="q">
+<div class="q-row">
+<label class="q-label" for="rate">Their hourly cost <span class="opt-tag">Optional</span></label>
+<div class="field">
+<span class="affix pre">$</span>
+<input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="10000" step="1" value="50">
+<span class="affix">/ hr</span>
+</div>
+</div>
+<p class="q-help">Adds a dollar figure to your result.</p>
+</div>
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Dashboard Plan</button>
+</form>
+</section>
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your reporting time</h2>
+<p class="hero-fig"><span class="hero-num" id="out-total">≈ 13</span><span class="hero-unit" id="out-unit">hours a month</span></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Dashboard Plan</h2>
+<p class="deliv-sub" id="deliv-sub">Data fixes first, then the six reports in dashboard order, then retire the spreadsheet for good.</p>
+</div>
+<ol class="strip" id="strip" aria-label="Readiness check at a glance"></ol>
+<ol class="steps" id="plan"></ol>
+</section>
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want your dashboard built for you?</h2>
+<p>Copy your dashboard plan and build it report by report, or bring it to a call. It's the exact scope of what we'd fix and build first.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next on your path</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+<details class="limits" id="limits">
+<summary>Where the DIY version stops (<span id="limits-count"></span>)</summary>
+<ul id="limits-list"></ul>
+</details>
+</section>
+</div>
+<details class="method" id="method">
+<summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
+<div class="method-body">
+<p>Time today is your weekly hours × 4.33 weeks a month. Time you could get back runs from what's left after the checklist's target (the low end) to all of it (the high end). Cost is hours × your hourly cost.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Assumption</th><th scope="col">Value</th></tr></thead>
+<tbody>
+<tr><th scope="row">Weekly time still spent once the dashboard is live (the checklist target)</th>
+<td><span class="cell"><input class="num-in" id="a-target" type="number" min="0" step="0.25" inputmode="decimal" aria-label="Hours a week at target"><span class="unit">hrs / wk</span></span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="fine">Fixed: 4.33 weeks a month.</p>
+<div class="method-foot">
+<button type="button" class="btn btn-plain" id="reset-assumptions">Reset to defaults</button>
+<span class="reset-status" id="reset-status" role="status" aria-live="polite"></span>
+</div>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Estimates built from your answers and typical small-business sales teams, not a measurement of your account. HubSpot reports and plan limits change, so check what your account includes.</p>
+<p>Big Leap · RevOps DIY Toolkit 6 of 6 · Notice Different · Align to Genuine</p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all six RevOps DIY toolkits.
+CTA_URL: where "Talk to Big Leap" goes.
+TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
+and its name shows as plain text instead of a link.
+SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
+cross-link only appears once its url is filled in.
+===================================================================== */
+const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
+const TOOLKIT_URLS = {
+1: '', // Is Every Lead Reaching Your CRM?
+2: '', // Never Let a Lead Go Cold
+3: '', // Who Should Own Each New Lead?
+4: '', // Which Sales Steps Should Run Themselves?
+5: '', // How Much Time Is Your Sales Process Wasting?
+6: '', // Is Your Pipeline Ready for a Dashboard?
+};
+const SERVICE_TOOLKITS = {
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
+paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
+pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+};
+/* =====================================================================
+ASSUMPTIONS: Big Leap's model defaults for this toolkit.
+targetHoursPerWeek is the checklist's 30-day target: under 0.5 hours a
+week on pipeline numbers. Visitors can tune it.
+===================================================================== */
+const ASSUMPTIONS = {
+targetHoursPerWeek: 0.5,
+weeksPerMonth: 52 / 12,
+};
+const EXAMPLE = { plan: 'starter', hours: 3, rate: 50, ready: ['source', 'stages', 'owner'], have: ['pipeline'] };
+/* ---------- series helpers (shared by all six toolkits) ---------- */
+const SERIES = [
+{ n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
+{ n: 2, short: 'Reply', name: 'Speed-to-Lead Workflow Builder', title: 'Never Let a Lead Go Cold' },
+{ n: 3, short: 'Route', name: 'Lead Routing Template', title: 'Who Should Own Each New Lead?' },
+{ n: 4, short: 'Automate', name: 'Sales Process Automation Checklist', title: 'Which Sales Steps Should Run Themselves?' },
+{ n: 5, short: 'Find waste', name: 'Sales Time Audit', title: 'How Much Time Is Your Sales Process Wasting?' },
+{ n: 6, short: 'Report', name: 'SMB Sales Dashboard Template', title: 'Is Your Pipeline Ready for a Dashboard?' },
+];
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0, minimumFractionDigits: 0 }); }
+function hoursRange(lowMin, highMin, suffix) {
+const sfx = suffix == null ? ' a month' : suffix;
+if (highMin <= 0) return '0 hours' + sfx;
+if (highMin < 60) {
+const a = fmt(Math.round(lowMin)), b = fmt(Math.round(highMin));
+return (a === b ? 'about ' + a : a + '–' + b) + ' minutes' + sfx;
+}
+const d = highMin / 60 < 10 ? 1 : 0;
+const a = fmt(lowMin / 60, d), b = fmt(highMin / 60, d);
+return (a === b ? 'about ' + a : a + '–' + b) + ' hours' + sfx;
+}
+function heroHours(min) {
+if (min <= 0) return { num: '0', unit: 'hours a month', zero: true };
+if (min < 60) return { num: '≈ ' + fmt(Math.round(min)), unit: 'minutes a month', zero: false };
+const h = min / 60, s = fmt(h, h < 10 ? 1 : 0);
+return { num: '≈ ' + s, unit: (s === '1' ? 'hour' : 'hours') + ' a month', zero: false };
+}
+function kitUrl(n) { return (TOOLKIT_URLS && TOOLKIT_URLS[n]) || ''; }
+function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
+function kitRef(n, label) {
+const text = esc(label || ('Toolkit ' + n));
+const url = kitUrl(n);
+return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+}
+// Fills every <span data-kit="N"> with a link to that toolkit.
+function fillKitRefs(root) {
+(root || document).querySelectorAll('[data-kit]').forEach((el) => { el.innerHTML = kitRef(+el.getAttribute('data-kit'), el.textContent || null); });
+}
+function renderStepper(current) {
+$('stepper-list').innerHTML = SERIES.map((k) => {
+const cur = k.n === current, url = kitUrl(k.n);
+const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+return '<li>' + (cur || !url
+? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
+: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+}).join('');
+if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
+}
+// items: [{ title, why, how, meta, kit, where, done }]. The first three open items are marked "Do first".
+function renderSteps(el, items) {
+let open = 0;
+el.innerHTML = items.map((t, i) => {
+const first = !t.done && open++ < 3;
+return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+'<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+'<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+(t.meta ? '<span class="st-meta">' + esc(t.meta) + '</span>' : first ? '<span class="chip first">Do first</span>' : '') + '</div>' +
+(t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+(t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
+(t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
+(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+'</div></li>';
+}).join('');
+}
+function stepsText(items) {
+const out = [];
+let open = 0;
+items.forEach((t, i) => {
+const first = !t.done && open++ < 3;
+out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.meta + ')' : '') + (first ? ', do this first' : ''));
+if (t.why) out.push('   ' + t.why);
+if (t.how) out.push('   How: ' + t.how);
+(t.list || []).forEach((x) => out.push('   - ' + x));
+if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+});
+return out;
+}
+function renderLimits(list, flags) {
+const f = flags || {};
+const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+$('limits-count').textContent = list.length;
+$('limits-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+const any = list.some((c) => f[c.key]);
+if (any) $('limits').open = true;
+}
+function limitsText(list, flags) { const f = flags || {}; return list.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '')); }
+// links: [{ key, why }]. Shows only service toolkits that have a url.
+function renderXlinks(links) {
+const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
+$('xlinks').hidden = live.length === 0;
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+return live;
+}
+function xlinksText(links) {
+return links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url).map((l) => '- ' + SERVICE_TOOLKITS[l.key].name + ': ' + l.why + ' ' + SERVICE_TOOLKITS[l.key].url);
+}
+function renderNext(n, why) {
+const box = $('next');
+if (!n) { box.hidden = true; return; }
+box.hidden = false;
+$('next-title').innerHTML = kitRef(n, 'Toolkit ' + n + ': ' + SERIES[n - 1].title);
+$('next-why').textContent = why;
+}
+function setExampleState(isExample, exampleText) {
+const pill = $('example-pill');
+pill.textContent = isExample ? 'Example answers' : 'Your answers';
+pill.classList.toggle('is-yours', !isExample);
+$('example-text').textContent = isExample ? exampleText : 'Your results update as you go.';
+$('restore-example').hidden = isExample;
+}
+// Brief highlight on the answer when its headline changes (skipped with reduced motion).
+let lastHeadline = null;
+function flashIfChanged(key) {
+const el = $('answer');
+if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+lastHeadline = key;
+}
+function copyWithFallback(text, onDone, host) {
+const fallback = () => {
+let box = host.querySelector('.copy-fallback');
+if (!box) {
+box = document.createElement('div');
+box.className = 'copy-fallback';
+const id = host.id + '-text';
+box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+host.appendChild(box);
+}
+const ta = box.querySelector('textarea');
+ta.value = text; ta.focus(); ta.select();
+};
+try {
+if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(onDone, fallback);
+else fallback();
+} catch (err) { fallback(); }
+}
+function initCopy(getText) {
+const btn = $('copy-btn');
+let timer = null;
+btn.addEventListener('click', () => {
+copyWithFallback(getText(), () => {
+btn.textContent = 'Copied';
+btn.classList.add('is-copied');
+$('copy-status').textContent = 'Your plan is copied. Paste it into an email, a doc or your CRM notes.';
+clearTimeout(timer);
+timer = setTimeout(() => { btn.textContent = 'Copy my plan'; btn.classList.remove('is-copied'); $('copy-status').textContent = ''; }, 3000);
+}, $('copy-host'));
+});
+return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+// The shorter column sticks on desktop, but only when it fits the screen.
+function initSticky() {
+const q = $('col-q'), r = $('results');
+const wide = window.matchMedia('(min-width: 880px)');
+function update() {
+q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+if (!wide.matches) return;
+const room = window.innerHeight - 32;
+if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+}
+window.addEventListener('resize', update);
+if (wide.addEventListener) wide.addEventListener('change', update);
+if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+return update;
+}
+// Accessible tabs: <div role="tablist"> of .tab buttons with aria-controls.
+function initTabs(root) {
+const tabs = [...root.querySelectorAll('[role="tab"]')];
+function select(t, focus) {
+tabs.forEach((x) => {
+const on = x === t;
+x.setAttribute('aria-selected', on ? 'true' : 'false');
+x.tabIndex = on ? 0 : -1;
+$(x.getAttribute('aria-controls')).hidden = !on;
+});
+if (focus) t.focus();
+}
+tabs.forEach((t, i) => {
+t.addEventListener('click', () => select(t));
+t.addEventListener('keydown', (e) => {
+const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+});
+});
+select(tabs[0]);
+}
+function initShell(current, onRestore) {
+renderStepper(current);
+fillKitRefs();
+$('cta-link').href = CTA_URL;
+$('restore-example').addEventListener('click', onRestore);
+$('see-results').addEventListener('click', () => {
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+$('answer').focus({ preventScroll: true });
+});
+}
+function planFooter(nextN) {
+const L = [];
+if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
+L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+return L;
+}
+/* ---------- Toolkit 6: Is Your Pipeline Ready for a Dashboard? ---------- */
+const PLAN_LABEL = { free: 'Free tools', starter: 'Starter', pro: 'Professional or Enterprise' };
+const READY = [
+{ key: 'source', short: 'Sources', label: 'New contacts carry a source', check: '90%+ of last month’s new contacts have an online Original Traffic Source', kit: 1, where: 'Steps 3–5' },
+{ key: 'owner', short: 'Owners', label: 'New leads get an owner on creation', check: 'a view of owner unknown, created in the last 7 days, returns nothing', kit: 3, where: 'Steps 4–5' },
+{ key: 'amount', short: 'Amounts', label: 'Every open deal has an Amount and Close date', check: 'a view of open deals missing either returns nothing', kit: 4, where: 'Step 3' },
+{ key: 'stages', short: 'Stages', label: 'Deals move through stages in order', check: 'five won deals each show a date for every stage', kit: 4, where: 'Step 2' },
+{ key: 'lost', short: 'Loss reasons', label: 'Closed lost deals carry a reason', check: 'a view of Closed lost reason unknown returns nothing', kit: 4, where: 'Step 7' },
+];
+const REPORTS = [
+{ key: 'pipeline', name: 'Pipeline value by stage', q: 'What’s actually in the pipeline?', step: 'Step 3', needs: ['amount'], starter: false,
+how: 'Report library: deals by stage, total Amount, open deals only, bar chart. Library templates are on every plan.' },
+{ key: 'leads', name: 'New leads by source', q: 'Which channels produce leads, week by week?', step: 'Step 4', needs: ['source'], starter: false,
+how: 'Report library: new contacts by source, last 12 weeks, weekly. No template in your library? Save a Contacts view grouped by Original Traffic Source.' },
+{ key: 'response', name: 'Lead response time', q: 'How fast do reps reach new leads?', step: 'Step 5', needs: ['owner'], starter: true,
+how: 'Sales analytics: Lead response time, last 30 days, by contact owner.', free: 'Needs Sales Hub Starter. On free tools, save a Contacts view: created in the last 7 days, Last contacted unknown.' },
+{ key: 'conversion', name: 'Stage conversion', q: 'Where do deals drop out?', step: 'Step 6', needs: ['stages'], starter: true,
+how: 'Sales analytics: Deal funnel, first stage to Closed won, deals created in the last 6 months.', free: 'The Sales analytics suite needs Sales Hub Starter or higher.' },
+{ key: 'aging', name: 'Deal aging', q: 'Which deals are stuck?', step: 'Step 7', needs: ['stages'], starter: true,
+how: 'Sales analytics: Time spent in deal stage, last 6 months, plus a Deals view sorted by Date entered current stage.', free: 'Needs Sales Hub Starter. On free tools, use the Deals view sorted by Date entered current stage.' },
+{ key: 'winloss', name: 'Wins and losses', q: 'Are we winning more, and why do we lose?', step: 'Step 8', needs: ['lost'], starter: true,
+how: 'Sales analytics: Deals won and lost, last 6 months, by month, plus a Closed lost Deals view with reasons.', free: 'Needs Sales Hub Starter. On free tools, save the Closed lost Deals view with its reasons.' },
+];
+const LIMITS = [
+{ key: 'attrib', title: 'Attribution reporting', text: 'Which marketing produced revenue, not only which channel produced the lead.' },
+{ key: 'multi', title: 'Multi-touch models', text: 'Credit across every touch before a deal closes.' },
+{ key: 'forecast', title: 'Revenue forecasting', text: 'A forecast leadership can plan against needs clean stages and close dates first.' },
+{ key: 'cohort', title: 'Cohort and lifecycle reporting', text: 'Following groups of leads from first touch to customer over months.' },
+{ key: 'blend', title: 'Blended dashboards', text: 'Ads, web analytics and CRM in one place, kept in step.' },
+];
+function model(input, a) {
+const plan = input.plan;
+const hours = clamp(toNum(input.hours), 0, 80);
+const rate = clamp(toNum(input.rate), 0, 1e4);
+const w = a.weeksPerMonth, target = Math.max(0, a.targetHoursPerWeek);
+const totalMin = hours * w * 60;
+const fail = READY.filter((r) => input.ready.indexOf(r.key) < 0);
+const failKeys = fail.map((r) => r.key);
+const items = [];
+const S = (o) => items.push(Object.assign({ self: 6 }, o));
+fail.forEach((c) => S({ title: 'Fix: ' + c.label.charAt(0).toLowerCase() + c.label.slice(1), meta: 'Data first', why: 'Passes when ' + c.check + '. Reports that read it are wrong until then.', kit: c.kit, where: c.where }));
+const have = [];
+REPORTS.forEach((r) => {
+if (input.have.indexOf(r.key) >= 0) { have.push({ title: r.name + ' is already in HubSpot', done: true }); return; }
+const blocked = READY.filter((c) => r.needs.indexOf(c.key) >= 0 && failKeys.indexOf(c.key) >= 0);
+S({ title: 'Build "' + r.name + '"', why: 'Answers: ' + r.q + (blocked.length ? ' Build it after the ' + blocked.map((b) => b.short.toLowerCase()).join(' and ') + ' fix above.' : ''), how: plan === 'free' && r.starter ? r.free : r.how, kit: 6, where: r.step });
+});
+if (input.have.length < 6) S({ title: 'Put all six on one dashboard', why: 'Name it "Sales Pipeline — Weekly", add the reports in this order, and schedule a Monday-morning email to the team.', kit: 6, where: 'Step 9' });
+if (hours > 0) S({ title: 'Retire the spreadsheet', why: 'Match the dashboard total to the Deals view, rename the old file "RETIRED — see HubSpot dashboard", and tell the team.', kit: 6, where: 'Step 10' });
+return {
+plan, hours, rate: rate > 0 ? rate : null, totalMin,
+recLowMin: Math.max(0, hours - target) * w * 60, recHighMin: totalMin,
+pass: READY.length - fail.length, fail, items: items.concat(have),
+};
+}
+(function () {
+const form = $('answers');
+let last = null;
+$('ready-opts').innerHTML = READY.map((r) => '<label class="opt" for="r-' + r.key + '"><input type="checkbox" id="r-' + r.key + '" name="ready" value="' + r.key + '"' +
+(EXAMPLE.ready.indexOf(r.key) >= 0 ? ' checked' : '') + '><span class="opt-text"><span class="opt-title">' + esc(r.label) + '</span><span class="opt-sub">Fixed by <span data-kit="' + r.kit + '">Toolkit ' + r.kit + '</span></span></span></label>').join('');
+$('have-opts').innerHTML = REPORTS.map((r) => '<label class="opt" for="h-' + r.key + '"><input type="checkbox" id="h-' + r.key + '" name="have" value="' + r.key + '"' +
+(EXAMPLE.have.indexOf(r.key) >= 0 ? ' checked' : '') + '><span class="opt-text"><span class="opt-title">' + esc(r.q) + '</span></span></label>').join('');
+function readA() { return { targetHoursPerWeek: Math.max(0, toNum($('a-target').value)), weeksPerMonth: ASSUMPTIONS.weeksPerMonth }; }
+function writeA(a) { $('a-target').value = a.targetHoursPerWeek; }
+function edited(a) { return Math.abs(a.targetHoursPerWeek - ASSUMPTIONS.targetHoursPerWeek) > 1e-9; }
+function readInput() {
+const el = form.elements, v = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
+const boxes = (n) => [...form.querySelectorAll('input[name="' + n + '"]:checked')].map((i) => i.value);
+return { plan: v('plan'), hours: $('hours').value, rate: $('rate').value, ready: boxes('ready'), have: boxes('have') };
+}
+const same = (a, b) => a.slice().sort().join() === b.slice().sort().join();
+function isExample(i) { return i.plan === EXAMPLE.plan && toNum(i.hours) === EXAMPLE.hours && toNum(i.rate) === EXAMPLE.rate && same(i.ready, EXAMPLE.ready) && same(i.have, EXAMPLE.have); }
+function applyExample() {
+$('hours').value = EXAMPLE.hours; $('rate').value = EXAMPLE.rate; $('plan-' + EXAMPLE.plan).checked = true;
+['ready', 'have'].forEach((n) => form.querySelectorAll('input[name="' + n + '"]').forEach((c) => { c.checked = EXAMPLE[n].indexOf(c.value) >= 0; }));
+}
+function nextFor(m) {
+if (m.fail.length) { const c = m.fail[0]; return { n: c.kit, why: '"' + c.label + '" doesn’t pass yet. This toolkit fixes the data your dashboard will read.' }; }
+return { n: 5, why: 'Your data is ready and that’s the end of the path. Rerun the time audit each quarter to catch new hand work early.' };
+}
+function xlinks() {
+return [
+{ key: 'paid', why: 'to act on what "New leads by source" shows about your ads.' },
+{ key: 'seo', why: 'to grow the organic line on the same report.' },
+{ key: 'pr', why: 'to see press and referral traffic turn into leads.' },
+];
+}
+function planText(m, ed) {
+const hp = heroHours(m.totalMin);
+const L = ['YOUR DASHBOARD PLAN', 'Is Your Pipeline Ready for a Dashboard? (Big Leap RevOps DIY Toolkit 6 of 6)', ''];
+L.push('Sales Hub plan: ' + PLAN_LABEL[m.plan] + ' · Hours a week on pipeline numbers: ' + fmt(m.hours, 1));
+L.push('Reporting time: ' + hp.num.replace('≈ ', 'about ') + ' ' + hp.unit + (m.rate ? ' (' + money((m.totalMin / 60) * m.rate) + ' a month)' : '') + ' · Readiness: ' + m.pass + ' of 5 checks pass');
+L.push(READY.map((r) => (m.fail.indexOf(r) < 0 ? '[ok] ' : '[fix] ') + r.short).join(' · '));
+L.push('', 'THE PLAN', ...stepsText(m.items));
+const xl = xlinksText(xlinks());
+if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
+L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS));
+L.push('', ed ? 'Assumptions: edited from Big Leap defaults.' : "Assumptions: Big Leap's default estimates.");
+return L.concat(planFooter(nextFor(m).n)).join('\n');
+}
+function render() {
+const input = readInput(), a = readA(), m = model(input, a), ed = edited(a);
+last = { m, ed };
+setExampleState(isExample(input), 'Example: a team on HubSpot Starter rebuilding a pipeline spreadsheet every week. Change any answer to make it yours.');
+$('edited-pill').hidden = !ed;
+const hp = heroHours(m.totalMin);
+$('out-total').textContent = hp.num;
+$('out-total').classList.toggle('is-zero', hp.zero);
+$('out-unit').textContent = hp.unit;
+const cost = m.rate && m.totalMin > 0 ? ', about <b>' + money((m.totalMin / 60) * m.rate) + ' a month</b>' : '';
+$('out-line').innerHTML = (hp.zero ? 'spent rebuilding pipeline numbers. ' : 'spent rebuilding pipeline numbers by hand' + cost + '. ') +
+'<b>' + m.pass + ' of 5</b> readiness checks pass' + (m.fail.length ? ', so fix ' + (m.fail.length === 1 ? 'that one' : 'those') + ' before you build.' : ', so you’re ready to build.');
+$('answer').classList.toggle('is-done', !m.fail.length && hp.zero);
+flashIfChanged(hp.num + m.pass);
+$('strip').innerHTML = READY.map((r) => { const ok = m.fail.indexOf(r) < 0; return '<li><span class="' + (ok ? 'ok' : 'no') + '"><span class="mark" aria-hidden="true">' + (ok ? '✓' : '✕') + '</span>' + esc(r.short) + '<span class="sr-only">' + (ok ? ', passes' : ', needs a fix') + '</span></span></li>'; }).join('');
+renderSteps($('plan'), m.items);
+renderLimits(LIMITS, {});
+renderXlinks(xlinks());
+const nx = nextFor(m);
+renderNext(nx.n, nx.why);
+syncCopy();
+sticky();
+}
+initShell(6, () => { applyExample(); render(); $('hours').focus(); });
+const syncCopy = initCopy(() => planText(last.m, last.ed));
+const sticky = initSticky();
+form.addEventListener('submit', (e) => e.preventDefault());
+form.addEventListener('input', render);
+form.addEventListener('change', render);
+$('method').addEventListener('input', () => { $('reset-status').textContent = ''; render(); });
+$('reset-assumptions').addEventListener('click', () => { writeA(ASSUMPTIONS); render(); $('reset-status').textContent = 'Assumptions reset to Big Leap defaults.'; });
+writeA(ASSUMPTIONS);
+render();
+})();
+</script>
+</body>
+</html>
