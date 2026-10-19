@@ -398,6 +398,8 @@ body { overflow-wrap: anywhere; }
 .profile-strip details[open] summary::before { transform: rotate(90deg); }
 .profile-strip details summary::-webkit-details-marker { display: none; }
 .profile-strip details summary { list-style: none; }
+.seg label { overflow-wrap: normal; word-break: normal; hyphens: manual; min-width: 0; padding-inline: 6px; }
+@media (max-width: 360px) { .seg label { font-size: 13px; } }
 
 </style>
 </head>
@@ -1342,6 +1344,7 @@ let currentProfile = null;
     $('out-num').classList.toggle('is-zero', m.missing === 0);
     $('out-unit').textContent = h.unit;
     $('out-line').textContent = h.line;
+    $('out-line').hidden = m.online;
     $('answer').classList.toggle('is-done', m.online || m.missing === 0);
     flashIfChanged(m.online ? 'skip' : m.missing);
     // Wording that depends on the setup
