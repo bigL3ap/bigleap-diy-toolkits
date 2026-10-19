@@ -1,38 +1,185 @@
-[
-  {
-    "title": "1. Is Every Lead Reaching Your CRM?",
-    "description": "Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.",
-    "category": "Lead capture",
-    "file": "toolkits/01_Is_Every_Lead_Reaching_Your_CRM.html"
+{
+  "updated": "2026-10-19",
+  "start": {
+    "title": "Build your Business Profile",
+    "file": "toolkits/paid/01_What_Kind_of_Business_Are_You.html",
+    "description": "Eight questions about your business. Every other toolkit uses your answers to fill itself in."
   },
-  {
-    "title": "2. Never Let a Lead Go Cold",
-    "description": "Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.",
-    "category": "Lead follow-up",
-    "file": "toolkits/02_Never_Let_a_Lead_Go_Cold.html"
-  },
-  {
-    "title": "3. Who Should Own Each New Lead?",
-    "description": "Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.",
-    "category": "Lead routing",
-    "file": "toolkits/03_Who_Should_Own_Each_New_Lead.html"
-  },
-  {
-    "title": "4. Which Sales Steps Should Run Themselves?",
-    "description": "Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.",
-    "category": "Sales automation",
-    "file": "toolkits/04_Which_Sales_Steps_Should_Run_Themselves.html"
-  },
-  {
-    "title": "5. How Much Time Is Your Sales Process Wasting?",
-    "description": "Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.",
-    "category": "Sales automation",
-    "file": "toolkits/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html"
-  },
-  {
-    "title": "6. Is Your Pipeline Ready for a Dashboard?",
-    "description": "Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.",
-    "category": "Reporting",
-    "file": "toolkits/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html"
-  }
-]
+  "series": [
+    {
+      "id": "revops",
+      "name": "RevOps",
+      "owner": "Dallas Olsen",
+      "first": "Dallas",
+      "status": "live",
+      "promise": "Catch every lead, answer it fast, and see your pipeline without a spreadsheet.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Capture",
+          "title": "Is Every Lead Reaching Your CRM?",
+          "file": "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html",
+          "description": "Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.",
+          "status": "live"
+        },
+        {
+          "n": 2,
+          "short": "Reply",
+          "title": "Never Let a Lead Go Cold",
+          "file": "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html",
+          "description": "Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.",
+          "status": "live"
+        },
+        {
+          "n": 3,
+          "short": "Route",
+          "title": "Who Should Own Each New Lead?",
+          "file": "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html",
+          "description": "Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.",
+          "status": "live"
+        },
+        {
+          "n": 4,
+          "short": "Automate",
+          "title": "Which Sales Steps Should Run Themselves?",
+          "file": "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html",
+          "description": "Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.",
+          "status": "live"
+        },
+        {
+          "n": 5,
+          "short": "Find waste",
+          "title": "How Much Time Is Your Sales Process Wasting?",
+          "file": "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html",
+          "description": "Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.",
+          "status": "live"
+        },
+        {
+          "n": 6,
+          "short": "Report",
+          "title": "Is Your Pipeline Ready for a Dashboard?",
+          "file": "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html",
+          "description": "Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.",
+          "status": "live"
+        }
+      ],
+      "headline": "Catch every lead."
+    },
+    {
+      "id": "paid",
+      "name": "Paid Media",
+      "owner": "Scott Smoot",
+      "first": "Scott",
+      "status": "draft",
+      "promise": "Get your Google Ads account ready before you spend a dollar, then launch the right first campaign.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Profile",
+          "title": "What Kind of Business Are You?",
+          "file": "toolkits/paid/01_What_Kind_of_Business_Are_You.html",
+          "description": "Build your Business Profile once. You get the campaign types that fit, a code that fills in every other toolkit, and your DIY path across all services.",
+          "status": "draft"
+        },
+        {
+          "n": 2,
+          "short": "Ready",
+          "title": "Is Your Google Ads Account Ready?",
+          "file": "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html",
+          "description": "Check accounts, access, tracking, landing pages and feeds before launch. You get a readiness list of the gaps that would waste spend.",
+          "status": "draft"
+        },
+        {
+          "n": 3,
+          "short": "Launch",
+          "title": "Which Campaigns Should You Run First?",
+          "file": "toolkits/paid/03_Which_Campaigns_Should_You_Run_First.html",
+          "description": "Your first one or two campaigns, a start-tight structure, a budget split and what to check each week for the first month.",
+          "status": "draft"
+        }
+      ],
+      "headline": "Ready before you spend."
+    },
+    {
+      "id": "tracking",
+      "name": "Tracking",
+      "owner": "Scott Smoot",
+      "first": "Scott",
+      "status": "draft",
+      "promise": "See what your marketing actually does: Tag Manager, GA4, Search Console and conversions, in the right order.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Install",
+          "title": "Can You See What Your Marketing Does?",
+          "file": "toolkits/tracking/01_Can_You_See_What_Your_Marketing_Does.html",
+          "description": "Check your tracking stack. You get an install-order build list for your website platform and a test-it checklist.",
+          "status": "draft"
+        },
+        {
+          "n": 2,
+          "short": "Measure",
+          "title": "Which Conversions Should You Track?",
+          "file": "toolkits/tracking/02_Which_Conversions_Should_You_Track.html",
+          "description": "Tell us how you make money. You get a named event plan, which ones count as key events, and what to send back to your ad platforms.",
+          "status": "draft"
+        }
+      ],
+      "headline": "See what your marketing does."
+    },
+    {
+      "id": "seo",
+      "name": "SEO",
+      "owner": "Shema Al-Darwish",
+      "first": "Shema",
+      "status": "draft",
+      "promise": "Make sure Google and AI search can find, read and trust your site before anyone writes a word.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Foundations",
+          "title": "Can Google Find and Trust Your Site?",
+          "file": "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html",
+          "description": "Check Search Console, indexing, crawler access, speed and trust signals. You get a foundation fix list in order.",
+          "status": "draft"
+        },
+        {
+          "n": 2,
+          "short": "Local",
+          "title": "Is Your Business Ready for Local Search?",
+          "file": "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html",
+          "description": "For businesses with locations or a service area. You get a Google Business Profile and local checklist, plus a review request you can copy.",
+          "status": "draft"
+        }
+      ],
+      "headline": "Be found by Google and AI search."
+    },
+    {
+      "id": "pr",
+      "name": "Digital PR",
+      "owner": "Kristina Ainge",
+      "first": "Kristina",
+      "status": "draft",
+      "promise": "Be ready the day a journalist or podcast says yes: spokesperson, bios, topics and a media kit.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Ready",
+          "title": "Are You Ready to Be Pitched?",
+          "file": "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html",
+          "description": "Check spokesperson, availability, approvals, story and assets. You get a pitch-ready checklist and a 90-day prep plan.",
+          "status": "draft"
+        },
+        {
+          "n": 2,
+          "short": "Media kit",
+          "title": "Build Your Media Kit",
+          "file": "toolkits/pr/02_Build_Your_Media_Kit.html",
+          "description": "Answer a few questions about your spokesperson. You get short and long bios, a podcast intro, talking points and a press kit outline.",
+          "status": "draft"
+        }
+      ],
+      "headline": "Ready when the press calls."
+    }
+  ]
+}

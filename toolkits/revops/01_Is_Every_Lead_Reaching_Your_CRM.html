@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Is Your Pipeline Ready for a Dashboard?</title>
-<meta name="description" content="Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.">
+<title>Is Every Lead Reaching Your CRM?</title>
+<meta name="description" content="Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.">
 <style>
 /* Big Leap RevOps DIY Toolkit series: shared shell, v2.
 Layout: masthead, slim six-step path, then questions left and results right on desktop (the shorter column sticks); one column under 880px.
@@ -321,9 +321,9 @@ tbody th { font-weight: 700; color: var(--heading); }
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
-<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 6 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
-<h1>Is Your Pipeline Ready for a Dashboard?</h1>
-<p class="lede">Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.</p>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 1 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Is Every Lead Reaching Your CRM?</h1>
+<p class="lede">Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.</p>
 </header>
 <nav class="stepper" aria-labelledby="stepper-h">
 <div class="stepper-head">
@@ -337,73 +337,91 @@ tbody th { font-weight: 700; color: var(--heading); }
 <form id="answers" novalidate>
 <div class="q-head">
 <div class="q-head-row">
-<h2 id="q-title" class="label">Your pipeline reporting</h2>
+<h2 id="q-title" class="label">Your website forms</h2>
 <span class="pill" id="example-pill">Example answers</span>
 </div>
-<p class="example-text" id="example-text">Example: a team on HubSpot Starter rebuilding a pipeline spreadsheet every week. Change any answer to make it yours.</p>
+<p class="example-text" id="example-text">Example: 100 form leads a month, and some forms still email an inbox. Change any answer to make it yours.</p>
 <button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
 </div>
 <div class="q">
-<span class="q-label" id="plan-q">Which HubSpot Sales Hub plan do you have?</span>
-<div class="seg" role="radiogroup" aria-labelledby="plan-q">
-<input type="radio" id="plan-free" name="plan" value="free"><label for="plan-free">Free tools</label>
-<input type="radio" id="plan-starter" name="plan" value="starter" checked><label for="plan-starter">Starter</label>
-<input type="radio" id="plan-pro" name="plan" value="pro"><label for="plan-pro">Professional or Enterprise</label>
+<div class="q-row">
+<label class="q-label" for="leads">Form leads a month</label>
+<div class="field">
+<input id="leads" name="leads" type="number" inputmode="numeric" min="0" max="1000000" step="1" value="100">
+<span class="affix">/ mo</span>
 </div>
+</div>
+<p class="q-help">Count last month's form emails if you're not sure.</p>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Where do form submissions land?</span></legend>
+<div class="opts">
+<label class="opt" for="dest-all"><input type="radio" id="dest-all" name="dest" value="all"><span class="opt-text"><span class="opt-title">Every form creates a HubSpot contact</span></span></label>
+<label class="opt" for="dest-some"><input type="radio" id="dest-some" name="dest" value="some" checked><span class="opt-text"><span class="opt-title">Some in HubSpot, some only in an inbox</span></span></label>
+<label class="opt" for="dest-none"><input type="radio" id="dest-none" name="dest" value="none"><span class="opt-text"><span class="opt-title">An inbox or spreadsheet only</span></span></label>
+</div>
+</fieldset>
+<div class="q">
+<span class="q-label" id="track-q">Is the HubSpot tracking code on every form page?</span>
+<div class="seg" role="radiogroup" aria-labelledby="track-q">
+<input type="radio" id="track-yes" name="track" value="yes"><label for="track-yes">Yes</label>
+<input type="radio" id="track-unsure" name="track" value="unsure" checked><label for="track-unsure">Not sure</label>
+<input type="radio" id="track-no" name="track" value="no"><label for="track-no">No</label>
+</div>
+<p class="q-help">Check in two minutes: Settings → Tracking Code → Validate your tracking code.</p>
 </div>
 <div class="q">
 <div class="q-row">
-<label class="q-label" for="hours">Hours a week building pipeline numbers</label>
-<div class="field">
-<input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="3">
-<span class="affix">hrs</span>
+<span class="q-label" id="utm-q">Do contacts keep the campaign that sent them?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="utm-q">
+<input type="radio" id="utm-yes" name="utm" value="yes"><label for="utm-yes">Yes</label>
+<input type="radio" id="utm-no" name="utm" value="no" checked><label for="utm-no">No</label>
 </div>
 </div>
-<p class="q-help">Exporting, pasting, fixing formulas, making the slide.</p>
+<p class="q-help">UTM source, medium and campaign saved on the contact.</p>
 </div>
-<fieldset class="q">
-<legend><span class="q-label">Which of these can you prove with a HubSpot view today?</span></legend>
-<div class="opts" id="ready-opts"></div>
-<p class="q-help">This is the readiness check. Each one names the toolkit that fixes it.</p>
-</fieldset>
-<fieldset class="q">
-<legend><span class="q-label">Which questions does HubSpot already answer for you?</span></legend>
-<div class="opts" id="have-opts"></div>
-</fieldset>
 <div class="q">
 <div class="q-row">
-<label class="q-label" for="rate">Their hourly cost <span class="opt-tag">Optional</span></label>
-<div class="field">
-<span class="affix pre">$</span>
-<input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="10000" step="1" value="50">
-<span class="affix">/ hr</span>
+<span class="q-label" id="owner-q">Does every new lead get an owner on its own?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="owner-q">
+<input type="radio" id="owner-yes" name="owner" value="yes"><label for="owner-yes">Yes</label>
+<input type="radio" id="owner-no" name="owner" value="no" checked><label for="owner-no">No</label>
 </div>
 </div>
-<p class="q-help">Adds a dollar figure to your result.</p>
+<p class="q-help">Several reps share leads? <span data-kit="3">Toolkit 3</span> writes the routing rules.</p>
 </div>
-<button type="button" class="btn btn-strong see-results" id="see-results">See your Dashboard Plan</button>
+<fieldset class="q">
+<legend><span class="q-label">Right after someone submits, what goes out on its own?</span></legend>
+<div class="opts">
+<label class="opt" for="notify-both"><input type="radio" id="notify-both" name="notify" value="both"><span class="opt-text"><span class="opt-title">A rep alert and a confirmation to the prospect</span></span></label>
+<label class="opt" for="notify-one"><input type="radio" id="notify-one" name="notify" value="one"><span class="opt-text"><span class="opt-title">Only one of those</span></span></label>
+<label class="opt" for="notify-none"><input type="radio" id="notify-none" name="notify" value="none" checked><span class="opt-text"><span class="opt-title">Nothing until someone reads the email</span></span></label>
+</div>
+<p class="q-help">Need the confirmation email itself? <span data-kit="2">Toolkit 2</span> writes it for you.</p>
+</fieldset>
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Intake Map</button>
 </form>
 </section>
 <div class="results" id="results">
 <section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
-<h2 class="label" id="answer-h">Your reporting time</h2>
-<p class="hero-fig"><span class="hero-num" id="out-total">≈ 13</span><span class="hero-unit" id="out-unit">hours a month</span></p>
+<h2 class="label" id="answer-h">Your intake</h2>
+<p class="hero-fig"><span class="hero-num" id="out-gaps">5 of 5</span><span class="hero-unit" id="out-unit">handoffs need a person</span></p>
 <p class="answer-line" id="out-line"></p>
 </section>
 <section class="panel deliv" aria-labelledby="deliv-h">
 <div class="deliv-head">
-<h2 id="deliv-h">Your Dashboard Plan</h2>
-<p class="deliv-sub" id="deliv-sub">Data fixes first, then the six reports in dashboard order, then retire the spreadsheet for good.</p>
+<h2 id="deliv-h">Your Intake Map</h2>
+<p class="deliv-sub" id="deliv-sub">Five handoffs sit between a form submit and the first reply. Here's each one, and the fix for every gap, in build order.</p>
 </div>
-<ol class="strip" id="strip" aria-label="Readiness check at a glance"></ol>
+<ol class="strip" id="strip" aria-label="Your intake chain at a glance"></ol>
 <ol class="steps" id="plan"></ol>
 </section>
 <section class="closing" aria-labelledby="closing-h">
-<h2 id="closing-h">Want your dashboard built for you?</h2>
-<p>Copy your dashboard plan and build it report by report, or bring it to a call. It's the exact scope of what we'd fix and build first.</p>
+<h2 id="closing-h">Want every lead captured for you?</h2>
+<p>Copy your intake map and work through the fixes, or bring it to a call. It's the exact scope of what we'd connect first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Dallas about building it</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -425,17 +443,13 @@ tbody th { font-weight: 700; color: var(--heading); }
 <details class="method" id="method">
 <summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
 <div class="method-body">
-<p>Time today is your weekly hours × 4.33 weeks a month. Time you could get back runs from what's left after the checklist's target (the low end) to all of it (the high end). Cost is hours × your hourly cost.</p>
+<p>Hand work is the minutes below, per lead, for each handoff a person does. The middle of each range matches Toolkit 5. When only some forms reach HubSpot, a share of leads still arrives by inbox. When only one of the alert and confirmation is automatic, half the time counts.</p>
 <div class="table-wrap">
 <table>
-<thead><tr><th scope="col">Assumption</th><th scope="col">Value</th></tr></thead>
-<tbody>
-<tr><th scope="row">Weekly time still spent once the dashboard is live (the checklist target)</th>
-<td><span class="cell"><input class="num-in" id="a-target" type="number" min="0" step="0.25" inputmode="decimal" aria-label="Hours a week at target"><span class="unit">hrs / wk</span></span></td></tr>
-</tbody>
+<thead><tr><th scope="col">Assumption</th><th scope="col">Low</th><th scope="col">High</th></tr></thead>
+<tbody id="assume-rows"></tbody>
 </table>
 </div>
-<p class="fine">Fixed: 4.33 weeks a month.</p>
 <div class="method-foot">
 <button type="button" class="btn btn-plain" id="reset-assumptions">Reset to defaults</button>
 <span class="reset-status" id="reset-status" role="status" aria-live="polite"></span>
@@ -444,14 +458,15 @@ tbody th { font-weight: 700; color: var(--heading); }
 </details>
 </div>
 <footer class="foot">
-<p>Estimates built from your answers and typical small-business sales teams, not a measurement of your account. HubSpot reports and plan limits change, so check what your account includes.</p>
-<p>Big Leap · RevOps DIY Toolkit 6 of 6 · Notice Different · Align to Genuine</p>
+<p><a href="../../index.html">← All Big Leap DIY Toolkits</a></p>
+<p>Estimates built from typical small-business lead intake, not a measurement of your account. The checklist's first step measures your real numbers. HubSpot features and plan limits change, so check what your account includes.</p>
+<p>Big Leap · RevOps DIY Toolkit 1 of 6 · Notice Different · Align to Genuine</p>
 </footer>
 </div>
 <script>
 /* =====================================================================
 SERIES SETTINGS: the same in all six RevOps DIY toolkits.
-CTA_URL: where "Talk to Big Leap" goes.
+CTA_URL: where "Talk to Dallas" goes.
 TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
 and its name shows as plain text instead of a link.
 SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
@@ -459,30 +474,33 @@ cross-link only appears once its url is filled in.
 ===================================================================== */
 const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
 const TOOLKIT_URLS = {
-1: '', // Is Every Lead Reaching Your CRM?
-2: '', // Never Let a Lead Go Cold
-3: '', // Who Should Own Each New Lead?
-4: '', // Which Sales Steps Should Run Themselves?
-5: '', // How Much Time Is Your Sales Process Wasting?
-6: '', // Is Your Pipeline Ready for a Dashboard?
+1: '01_Is_Every_Lead_Reaching_Your_CRM.html', // Is Every Lead Reaching Your CRM?
+2: '02_Never_Let_a_Lead_Go_Cold.html', // Never Let a Lead Go Cold
+3: '03_Who_Should_Own_Each_New_Lead.html', // Who Should Own Each New Lead?
+4: '04_Which_Sales_Steps_Should_Run_Themselves.html', // Which Sales Steps Should Run Themselves?
+5: '05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', // How Much Time Is Your Sales Process Wasting?
+6: '06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', // Is Your Pipeline Ready for a Dashboard?
 };
 const SERVICE_TOOLKITS = {
-email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
-paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
-seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
-pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
-content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder (not built yet)
+paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/01_What_Kind_of_Business_Are_You.html' },          // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html' },            // Shema Al-Darwish
+pr:      { name: 'Digital PR DIY Toolkit', url: '../pr/01_Are_You_Ready_to_Be_Pitched.html' },              // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen (not built yet)
+tracking:{ name: 'Tracking DIY Toolkit', url: '../tracking/01_Can_You_See_What_Your_Marketing_Does.html' }, // Scott Smoot
 };
 /* =====================================================================
 ASSUMPTIONS: Big Leap's model defaults for this toolkit.
-targetHoursPerWeek is the checklist's 30-day target: under 0.5 hours a
-week on pipeline numbers. Visitors can tune it.
+Minutes per task match Toolkit 5 (entry 5, assignment 3) as the middle
+of each range. Visitors can tune these under "How we calculate this".
 ===================================================================== */
 const ASSUMPTIONS = {
-targetHoursPerWeek: 0.5,
-weeksPerMonth: 52 / 12,
+entryMinutes: [4, 6],          // typing an inbox lead into the CRM, per lead
+assignMinutes: [2, 4],         // picking an owner and passing the lead on, per lead
+notifyMinutes: [1, 3],         // forwarding the alert and confirming by hand, per lead
+someFormsInboxShare: [0.25, 0.75], // share of leads still arriving by inbox when only some forms reach HubSpot
 };
-const EXAMPLE = { plan: 'starter', hours: 3, rate: 50, ready: ['source', 'stages', 'owner'], have: ['pipeline'] };
+const EXAMPLE = { leads: 100, dest: 'some', track: 'unsure', utm: 'no', owner: 'no', notify: 'none' };
 /* ---------- series helpers (shared by all six toolkits) ---------- */
 const SERIES = [
 { n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
@@ -522,7 +540,7 @@ function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
 function kitRef(n, label) {
 const text = esc(label || ('Toolkit ' + n));
 const url = kitUrl(n);
-return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+return url ? '<a href="' + esc(url) + '">' + text + '</a>' : '<b>' + text + '</b>';
 }
 // Fills every <span data-kit="N"> with a link to that toolkit.
 function fillKitRefs(root) {
@@ -534,7 +552,7 @@ const cur = k.n === current, url = kitUrl(k.n);
 const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
 return '<li>' + (cur || !url
 ? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
-: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+: '<a class="st" href="' + esc(url) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
 }).join('');
 if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
 }
@@ -580,7 +598,7 @@ function limitsText(list, flags) { const f = flags || {}; return list.map((c) =>
 function renderXlinks(links) {
 const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
 $('xlinks').hidden = live.length === 0;
-$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
 return live;
 }
 function xlinksText(links) {
@@ -690,133 +708,142 @@ $('answer').focus({ preventScroll: true });
 function planFooter(nextN) {
 const L = [];
 if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
-L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+L.push('', 'Talk to Dallas about building it: ' + CTA_URL);
 return L;
 }
-/* ---------- Toolkit 6: Is Your Pipeline Ready for a Dashboard? ---------- */
-const PLAN_LABEL = { free: 'Free tools', starter: 'Starter', pro: 'Professional or Enterprise' };
-const READY = [
-{ key: 'source', short: 'Sources', label: 'New contacts carry a source', check: '90%+ of last month’s new contacts have an online Original Traffic Source', kit: 1, where: 'Steps 3–5' },
-{ key: 'owner', short: 'Owners', label: 'New leads get an owner on creation', check: 'a view of owner unknown, created in the last 7 days, returns nothing', kit: 3, where: 'Steps 4–5' },
-{ key: 'amount', short: 'Amounts', label: 'Every open deal has an Amount and Close date', check: 'a view of open deals missing either returns nothing', kit: 4, where: 'Step 3' },
-{ key: 'stages', short: 'Stages', label: 'Deals move through stages in order', check: 'five won deals each show a date for every stage', kit: 4, where: 'Step 2' },
-{ key: 'lost', short: 'Loss reasons', label: 'Closed lost deals carry a reason', check: 'a view of Closed lost reason unknown returns nothing', kit: 4, where: 'Step 7' },
-];
-const REPORTS = [
-{ key: 'pipeline', name: 'Pipeline value by stage', q: 'What’s actually in the pipeline?', step: 'Step 3', needs: ['amount'], starter: false,
-how: 'Report library: deals by stage, total Amount, open deals only, bar chart. Library templates are on every plan.' },
-{ key: 'leads', name: 'New leads by source', q: 'Which channels produce leads, week by week?', step: 'Step 4', needs: ['source'], starter: false,
-how: 'Report library: new contacts by source, last 12 weeks, weekly. No template in your library? Save a Contacts view grouped by Original Traffic Source.' },
-{ key: 'response', name: 'Lead response time', q: 'How fast do reps reach new leads?', step: 'Step 5', needs: ['owner'], starter: true,
-how: 'Sales analytics: Lead response time, last 30 days, by contact owner.', free: 'Needs Sales Hub Starter. On free tools, save a Contacts view: created in the last 7 days, Last contacted unknown.' },
-{ key: 'conversion', name: 'Stage conversion', q: 'Where do deals drop out?', step: 'Step 6', needs: ['stages'], starter: true,
-how: 'Sales analytics: Deal funnel, first stage to Closed won, deals created in the last 6 months.', free: 'The Sales analytics suite needs Sales Hub Starter or higher.' },
-{ key: 'aging', name: 'Deal aging', q: 'Which deals are stuck?', step: 'Step 7', needs: ['stages'], starter: true,
-how: 'Sales analytics: Time spent in deal stage, last 6 months, plus a Deals view sorted by Date entered current stage.', free: 'Needs Sales Hub Starter. On free tools, use the Deals view sorted by Date entered current stage.' },
-{ key: 'winloss', name: 'Wins and losses', q: 'Are we winning more, and why do we lose?', step: 'Step 8', needs: ['lost'], starter: true,
-how: 'Sales analytics: Deals won and lost, last 6 months, by month, plus a Closed lost Deals view with reasons.', free: 'Needs Sales Hub Starter. On free tools, save the Closed lost Deals view with its reasons.' },
-];
+/* ---------- Toolkit 1: Is Every Lead Reaching Your CRM? ---------- */
 const LIMITS = [
-{ key: 'attrib', title: 'Attribution reporting', text: 'Which marketing produced revenue, not only which channel produced the lead.' },
-{ key: 'multi', title: 'Multi-touch models', text: 'Credit across every touch before a deal closes.' },
-{ key: 'forecast', title: 'Revenue forecasting', text: 'A forecast leadership can plan against needs clean stages and close dates first.' },
-{ key: 'cohort', title: 'Cohort and lifecycle reporting', text: 'Following groups of leads from first touch to customer over months.' },
-{ key: 'blend', title: 'Blended dashboards', text: 'Ads, web analytics and CRM in one place, kept in step.' },
+{ key: 'phone', title: 'Phone and chat leads', text: 'Call tracking and chat capture, so leads that never touch a form still land with a source.' },
+{ key: 'multi', title: 'Several sites or brands in one account', text: 'Properties, routing and reporting designed together so each brand stays separate.' },
+{ key: 'iframe', title: 'Third-party forms that have to stay', text: 'A direct integration when a booking widget or outside form can’t become a HubSpot form.' },
+{ key: 'dedupe', title: 'Cross-channel deduplication', text: 'One record per person across form, phone and email, without merging by hand.' },
+{ key: 'attribution', title: 'Multi-touch attribution', text: 'Credit for every touch before the form, once first-touch source is reliable.' },
 ];
 function model(input, a) {
-const plan = input.plan;
-const hours = clamp(toNum(input.hours), 0, 80);
-const rate = clamp(toNum(input.rate), 0, 1e4);
-const w = a.weeksPerMonth, target = Math.max(0, a.targetHoursPerWeek);
-const totalMin = hours * w * 60;
-const fail = READY.filter((r) => input.ready.indexOf(r.key) < 0);
-const failKeys = fail.map((r) => r.key);
-const items = [];
-const S = (o) => items.push(Object.assign({ self: 6 }, o));
-fail.forEach((c) => S({ title: 'Fix: ' + c.label.charAt(0).toLowerCase() + c.label.slice(1), meta: 'Data first', why: 'Passes when ' + c.check + '. Reports that read it are wrong until then.', kit: c.kit, where: c.where }));
-const have = [];
-REPORTS.forEach((r) => {
-if (input.have.indexOf(r.key) >= 0) { have.push({ title: r.name + ' is already in HubSpot', done: true }); return; }
-const blocked = READY.filter((c) => r.needs.indexOf(c.key) >= 0 && failKeys.indexOf(c.key) >= 0);
-S({ title: 'Build "' + r.name + '"', why: 'Answers: ' + r.q + (blocked.length ? ' Build it after the ' + blocked.map((b) => b.short.toLowerCase()).join(' and ') + ' fix above.' : ''), how: plan === 'free' && r.starter ? r.free : r.how, kit: 6, where: r.step });
+const leads = clamp(toNum(input.leads), 0, 1e6);
+const lo = (v) => Math.min(v[0], v[1]), hi = (v) => Math.max(v[0], v[1]);
+const share = input.dest === 'all' ? [0, 0] : input.dest === 'none' ? [1, 1] : [lo(a.someFormsInboxShare), hi(a.someFormsInboxShare)];
+const nf = input.notify === 'both' ? 0 : input.notify === 'one' ? 0.5 : 1;
+const own = input.owner === 'no' ? 1 : 0;
+const lowMin = leads * (lo(a.entryMinutes) * share[0] + lo(a.assignMinutes) * own + lo(a.notifyMinutes) * nf);
+const highMin = leads * (hi(a.entryMinutes) * share[1] + hi(a.assignMinutes) * own + hi(a.notifyMinutes) * nf);
+// The five handoffs, at a glance
+const handoffs = [
+{ label: 'Contact created', ok: input.dest === 'all' },
+{ label: 'Source captured', ok: input.track === 'yes' && input.utm === 'yes' },
+{ label: 'Owner assigned', ok: input.owner === 'yes' },
+{ label: 'Rep alerted', ok: input.notify === 'both' },
+{ label: 'Prospect confirmed', ok: input.notify === 'both' },
+];
+const gaps = handoffs.filter((h) => !h.ok).length;
+// The plan, in build order. Done items sit at the end.
+const open = [], done = [];
+if (input.track !== 'yes') open.push({
+title: 'Install and check the tracking code', self: 1, kit: 1, where: 'Step 3',
+why: input.track === 'no' ? 'Right now new contacts arrive with no traffic source, so no report can say which marketing worked.' : 'Check this first. Every source report you build later depends on it.',
+how: 'Settings → Tracking Code → Validate, for each domain. WordPress uses HubSpot’s plugin; Webflow and Wix have HubSpot apps; Squarespace uses Code Injection.',
 });
-if (input.have.length < 6) S({ title: 'Put all six on one dashboard', why: 'Name it "Sales Pipeline — Weekly", add the reports in this order, and schedule a Monday-morning email to the team.', kit: 6, where: 'Step 9' });
-if (hours > 0) S({ title: 'Retire the spreadsheet', why: 'Match the dashboard total to the Deals view, rename the old file "RETIRED — see HubSpot dashboard", and tell the team.', kit: 6, where: 'Step 10' });
-return {
-plan, hours, rate: rate > 0 ? rate : null, totalMin,
-recLowMin: Math.max(0, hours - target) * w * 60, recHighMin: totalMin,
-pass: READY.length - fail.length, fail, items: items.concat(have),
-};
+if (input.utm === 'no') open.push({
+title: 'Save the campaign on every contact', self: 1, kit: 1, where: 'Step 4',
+why: 'Add three hidden UTM fields, plus Inquiry type, Service interest, How did you hear about us and Service area as dropdowns.',
+});
+if (input.track === 'yes' && input.utm === 'yes') done.push({ title: 'Source and campaign land on every contact', done: true });
+if (input.dest !== 'all') open.push({
+title: 'Connect every form to HubSpot', self: 1, kit: 1, where: 'Steps 2 and 5',
+why: input.dest === 'some' ? 'List every form on every domain. Any that only emails an inbox is a lead HubSpot never sees.' : 'Today a lead exists in HubSpot only if someone types it in.',
+how: 'HubSpot forms work on every plan. Site-builder forms can use non-HubSpot form capture (plain HTML only, answers land as text). Forms inside an iframe or outside tool need an embedded HubSpot form.',
+});
+else done.push({ title: 'Every form creates a contact', done: true });
+if (input.owner === 'no') open.push({
+title: 'Set an owner on every form', self: 1, kit: 1, where: 'Step 6',
+why: 'Add a hidden Contact owner field with that form’s rep. Sharing leads across reps? Use routing rules instead.',
+});
+else done.push({ title: 'Every lead gets an owner', done: true });
+if (input.notify !== 'both') open.push({
+title: input.notify === 'one' ? 'Add the missing alert or confirmation' : 'Alert the rep and confirm the prospect', self: 1, kit: 1, where: 'Step 6',
+why: 'Notify the contact owner and a backup, and send a confirmation that says who will reply and when.',
+how: 'The confirmation lives in the form’s Automation tab. Free tools allow one email per form; Starter allows a short series. Nothing reaches "contact owner" until an owner is set.',
+});
+else done.push({ title: 'The rep and the prospect both hear right away', done: true });
+if (open.length) open.push({
+title: 'Test every form end to end', self: 1, kit: 1, where: 'Step 7',
+why: 'Submit each form from a private window with a test UTM link, then check source, owner, alert and confirmation on the contact.',
+});
+return { leads, handoffs, gaps, lowMin, highMin, items: open.concat(done), sourceGap: input.track !== 'yes' || input.utm === 'no', ownerGap: input.owner === 'no' };
 }
 (function () {
 const form = $('answers');
 let last = null;
-$('ready-opts').innerHTML = READY.map((r) => '<label class="opt" for="r-' + r.key + '"><input type="checkbox" id="r-' + r.key + '" name="ready" value="' + r.key + '"' +
-(EXAMPLE.ready.indexOf(r.key) >= 0 ? ' checked' : '') + '><span class="opt-text"><span class="opt-title">' + esc(r.label) + '</span><span class="opt-sub">Fixed by <span data-kit="' + r.kit + '">Toolkit ' + r.kit + '</span></span></span></label>').join('');
-$('have-opts').innerHTML = REPORTS.map((r) => '<label class="opt" for="h-' + r.key + '"><input type="checkbox" id="h-' + r.key + '" name="have" value="' + r.key + '"' +
-(EXAMPLE.have.indexOf(r.key) >= 0 ? ' checked' : '') + '><span class="opt-text"><span class="opt-title">' + esc(r.q) + '</span></span></label>').join('');
-function readA() { return { targetHoursPerWeek: Math.max(0, toNum($('a-target').value)), weeksPerMonth: ASSUMPTIONS.weeksPerMonth }; }
-function writeA(a) { $('a-target').value = a.targetHoursPerWeek; }
-function edited(a) { return Math.abs(a.targetHoursPerWeek - ASSUMPTIONS.targetHoursPerWeek) > 1e-9; }
+const ROWS = [
+{ key: 'entryMinutes', label: 'Typing a lead into the CRM', unit: 'min', step: 0.5 },
+{ key: 'assignMinutes', label: 'Picking an owner', unit: 'min', step: 0.5 },
+{ key: 'notifyMinutes', label: 'Alert and confirmation by hand', unit: 'min', step: 0.5 },
+{ key: 'someFormsInboxShare', label: 'Leads still arriving by inbox, when only some forms connect', unit: '%', pct: true, step: 5 },
+];
+$('assume-rows').innerHTML = ROWS.map((r) => '<tr><th scope="row">' + esc(r.label) + '</th>' +
+['lo', 'hi'].map((s) => '<td><span class="cell"><input class="num-in" id="a-' + r.key + '-' + s + '" type="number" min="0"' + (r.pct ? ' max="100"' : '') + ' step="' + r.step + '" inputmode="decimal" aria-label="' + esc(r.label) + ', ' + (s === 'lo' ? 'low' : 'high') + '"><span class="unit">' + r.unit + '</span></span></td>').join('') + '</tr>').join('');
+function writeA(a) { ROWS.forEach((r) => ['lo', 'hi'].forEach((s, i) => { $('a-' + r.key + '-' + s).value = r.pct ? Math.round(a[r.key][i] * 100) : a[r.key][i]; })); }
+function readA() {
+const a = {};
+ROWS.forEach((r) => { a[r.key] = ['lo', 'hi'].map((s) => { const n = Math.max(0, toNum($('a-' + r.key + '-' + s).value)); return r.pct ? clamp(n, 0, 100) / 100 : n; }); });
+return a;
+}
+function edited(a) { return ROWS.some((r) => [0, 1].some((i) => Math.abs(a[r.key][i] - ASSUMPTIONS[r.key][i]) > 1e-9)); }
 function readInput() {
 const el = form.elements, v = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
-const boxes = (n) => [...form.querySelectorAll('input[name="' + n + '"]:checked')].map((i) => i.value);
-return { plan: v('plan'), hours: $('hours').value, rate: $('rate').value, ready: boxes('ready'), have: boxes('have') };
+return { leads: $('leads').value, dest: v('dest'), track: v('track'), utm: v('utm'), owner: v('owner'), notify: v('notify') };
 }
-const same = (a, b) => a.slice().sort().join() === b.slice().sort().join();
-function isExample(i) { return i.plan === EXAMPLE.plan && toNum(i.hours) === EXAMPLE.hours && toNum(i.rate) === EXAMPLE.rate && same(i.ready, EXAMPLE.ready) && same(i.have, EXAMPLE.have); }
-function applyExample() {
-$('hours').value = EXAMPLE.hours; $('rate').value = EXAMPLE.rate; $('plan-' + EXAMPLE.plan).checked = true;
-['ready', 'have'].forEach((n) => form.querySelectorAll('input[name="' + n + '"]').forEach((c) => { c.checked = EXAMPLE[n].indexOf(c.value) >= 0; }));
+function isExample(i) { return toNum(i.leads) === EXAMPLE.leads && ['dest', 'track', 'utm', 'owner', 'notify'].every((k) => i[k] === EXAMPLE[k]); }
+function applyExample() { $('leads').value = EXAMPLE.leads; ['dest', 'track', 'utm', 'owner', 'notify'].forEach((k) => { $(k + '-' + EXAMPLE[k]).checked = true; }); }
+function xlinks(m) {
+return m.sourceGap ? [
+{ key: 'tracking', why: 'set up GA4, Tag Manager and conversion events so every lead keeps the campaign that sent it.' },
+{ key: 'paid', why: 'once campaigns are saved on contacts, see which ads actually produce leads.' },
+{ key: 'seo', why: 'so organic leads are counted as search, not lost as direct traffic.' },
+] : [];
 }
 function nextFor(m) {
-if (m.fail.length) { const c = m.fail[0]; return { n: c.kit, why: '"' + c.label + '" doesn’t pass yet. This toolkit fixes the data your dashboard will read.' }; }
-return { n: 5, why: 'Your data is ready and that’s the end of the path. Rerun the time audit each quarter to catch new hand work early.' };
-}
-function xlinks() {
-return [
-{ key: 'paid', why: 'to act on what "New leads by source" shows about your ads.' },
-{ key: 'seo', why: 'to grow the organic line on the same report.' },
-{ key: 'pr', why: 'to see press and referral traffic turn into leads.' },
-];
+return { n: 2, why: m.gaps === 0 ? 'Every lead lands with an owner. The next leak is the wait for a first reply.' : 'Once every lead lands with an owner, make sure that owner replies fast. This toolkit builds the workflow and writes the emails.' };
 }
 function planText(m, ed) {
-const hp = heroHours(m.totalMin);
-const L = ['YOUR DASHBOARD PLAN', 'Is Your Pipeline Ready for a Dashboard? (Big Leap RevOps DIY Toolkit 6 of 6)', ''];
-L.push('Sales Hub plan: ' + PLAN_LABEL[m.plan] + ' · Hours a week on pipeline numbers: ' + fmt(m.hours, 1));
-L.push('Reporting time: ' + hp.num.replace('≈ ', 'about ') + ' ' + hp.unit + (m.rate ? ' (' + money((m.totalMin / 60) * m.rate) + ' a month)' : '') + ' · Readiness: ' + m.pass + ' of 5 checks pass');
-L.push(READY.map((r) => (m.fail.indexOf(r) < 0 ? '[ok] ' : '[fix] ') + r.short).join(' · '));
-L.push('', 'THE PLAN', ...stepsText(m.items));
-const xl = xlinksText(xlinks());
+const L = ['YOUR INTAKE MAP', 'Is Every Lead Reaching Your CRM? (Big Leap RevOps DIY Toolkit 1 of 6)', ''];
+L.push('Form leads a month: ' + fmt(m.leads));
+L.push(m.gaps + ' of 5 handoffs need a person · Hand work: ' + hoursRange(m.lowMin, m.highMin));
+L.push(m.handoffs.map((h) => (h.ok ? '[ok] ' : '[gap] ') + h.label).join(' > '));
+L.push('', 'FIXES, IN BUILD ORDER');
+stepsText(m.items).forEach((l) => L.push(l));
+const xl = xlinksText(xlinks(m));
 if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
 L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS));
 L.push('', ed ? 'Assumptions: edited from Big Leap defaults.' : "Assumptions: Big Leap's default estimates.");
-return L.concat(planFooter(nextFor(m).n)).join('\n');
+return L.concat(planFooter(2)).join('\n');
 }
 function render() {
 const input = readInput(), a = readA(), m = model(input, a), ed = edited(a);
 last = { m, ed };
-setExampleState(isExample(input), 'Example: a team on HubSpot Starter rebuilding a pipeline spreadsheet every week. Change any answer to make it yours.');
+setExampleState(isExample(input), 'Example: 100 form leads a month, and some forms still email an inbox. Change any answer to make it yours.');
 $('edited-pill').hidden = !ed;
-const hp = heroHours(m.totalMin);
-$('out-total').textContent = hp.num;
-$('out-total').classList.toggle('is-zero', hp.zero);
-$('out-unit').textContent = hp.unit;
-const cost = m.rate && m.totalMin > 0 ? ', about <b>' + money((m.totalMin / 60) * m.rate) + ' a month</b>' : '';
-$('out-line').innerHTML = (hp.zero ? 'spent rebuilding pipeline numbers. ' : 'spent rebuilding pipeline numbers by hand' + cost + '. ') +
-'<b>' + m.pass + ' of 5</b> readiness checks pass' + (m.fail.length ? ', so fix ' + (m.fail.length === 1 ? 'that one' : 'those') + ' before you build.' : ', so you’re ready to build.');
-$('answer').classList.toggle('is-done', !m.fail.length && hp.zero);
-flashIfChanged(hp.num + m.pass);
-$('strip').innerHTML = READY.map((r) => { const ok = m.fail.indexOf(r) < 0; return '<li><span class="' + (ok ? 'ok' : 'no') + '"><span class="mark" aria-hidden="true">' + (ok ? '✓' : '✕') + '</span>' + esc(r.short) + '<span class="sr-only">' + (ok ? ', passes' : ', needs a fix') + '</span></span></li>'; }).join('');
+const allGood = m.gaps === 0;
+$('out-gaps').textContent = allGood ? 'All 5' : m.gaps + ' of 5';
+$('out-gaps').classList.toggle('is-zero', allGood);
+$('out-unit').textContent = allGood ? 'handoffs run on their own' : m.gaps === 1 ? 'handoff needs a person' : 'handoffs need a person';
+$('out-line').innerHTML = allGood
+? 'Every lead lands in HubSpot with a source and an owner, and both sides hear about it right away.'
+: 'Each one is a place a lead can wait or slip, and together they cost about <b>' + esc(hoursRange(m.lowMin, m.highMin)) + '</b> of hand work.';
+$('answer').classList.toggle('is-done', allGood);
+flashIfChanged(m.gaps);
+$('strip').innerHTML = '<li><span class="neutral">Form submitted</span></li>' + m.handoffs.map((h) =>
+'<li><span class="' + (h.ok ? 'ok' : 'no') + '"><span class="mark" aria-hidden="true">' + (h.ok ? '✓' : '✕') + '</span>' + esc(h.label) +
+'<span class="sr-only">' + (h.ok ? ', automatic' : ', needs a person') + '</span></span></li>').join('');
 renderSteps($('plan'), m.items);
 renderLimits(LIMITS, {});
-renderXlinks(xlinks());
+renderXlinks(xlinks(m));
 const nx = nextFor(m);
 renderNext(nx.n, nx.why);
 syncCopy();
 sticky();
 }
-initShell(6, () => { applyExample(); render(); $('hours').focus(); });
+initShell(1, () => { applyExample(); render(); $('leads').focus(); });
 const syncCopy = initCopy(() => planText(last.m, last.ed));
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());

@@ -1,0 +1,102 @@
+{
+  "widgets": [
+    {
+      "id": "profile-start",
+      "title": "Where should your business start?",
+      "service": "Start here",
+      "owner": "Scott Smoot",
+      "file": "widgets/profile-start.html",
+      "height": 640,
+      "maxWidth": 460,
+      "use": "General entry point. Good on the homepage, the Resources menu and the first slide of any proposal."
+    },
+    {
+      "id": "revops-hours",
+      "title": "How many hours does hand work cost your team?",
+      "service": "RevOps",
+      "owner": "Dallas Olsen",
+      "file": "widgets/revops-hours.html",
+      "height": 670,
+      "maxWidth": 460,
+      "use": "Sales calls and RevOps proposals. The one number makes the case for automation."
+    },
+    {
+      "id": "paid-ready",
+      "title": "Is your Google Ads account ready to spend?",
+      "service": "Paid Media",
+      "owner": "Scott Smoot",
+      "file": "widgets/paid-ready.html",
+      "height": 670,
+      "maxWidth": 460,
+      "use": "Paid media proposals and PPC landing pages. Surfaces setup gaps before a client pays for management."
+    },
+    {
+      "id": "tracking-check",
+      "title": "Can you see what your marketing does?",
+      "service": "Tracking",
+      "owner": "Scott Smoot",
+      "file": "widgets/tracking-check.html",
+      "height": 670,
+      "maxWidth": 460,
+      "use": "Any proposal kickoff slide, or the onboarding email. Most clients score lower than they expect."
+    },
+    {
+      "id": "seo-foundations",
+      "title": "Can Google and AI search find your site?",
+      "service": "SEO",
+      "owner": "Shema Al-Darwish",
+      "file": "widgets/seo-foundations.html",
+      "height": 720,
+      "maxWidth": 460,
+      "use": "SEO and AI SEO proposals, blog sidebars, and the AI SEO service page."
+    },
+    {
+      "id": "pr-ready",
+      "title": "Could you say yes to a journalist this week?",
+      "service": "Digital PR",
+      "owner": "Kristina Ainge",
+      "file": "widgets/pr-ready.html",
+      "height": 700,
+      "maxWidth": 460,
+      "use": "Digital PR proposals and thought-leadership pages. Shows what a client must have ready before pitching starts."
+    }
+  ],
+  "tiles": [
+    {
+      "id": "profile-start",
+      "title": "Where should your business start?",
+      "file": "tiles/profile-start-16x9.png",
+      "alt": "Slide tile: Not sure where to start? Start here DIY toolkit by Big Leap"
+    },
+    {
+      "id": "revops-hours",
+      "title": "How many hours does hand work cost your team?",
+      "file": "tiles/revops-hours-16x9.png",
+      "alt": "Slide tile: Hand work has a price. RevOps DIY toolkit by Big Leap"
+    },
+    {
+      "id": "paid-ready",
+      "title": "Is your Google Ads account ready to spend?",
+      "file": "tiles/paid-ready-16x9.png",
+      "alt": "Slide tile: Ready before you spend. Paid Media DIY toolkit by Big Leap"
+    },
+    {
+      "id": "tracking-check",
+      "title": "Can you see what your marketing does?",
+      "file": "tiles/tracking-check-16x9.png",
+      "alt": "Slide tile: See what your marketing does. Tracking DIY toolkit by Big Leap"
+    },
+    {
+      "id": "seo-foundations",
+      "title": "Can Google and AI search find your site?",
+      "file": "tiles/seo-foundations-16x9.png",
+      "alt": "Slide tile: Can search find you? SEO DIY toolkit by Big Leap"
+    },
+    {
+      "id": "pr-ready",
+      "title": "Could you say yes to a journalist this week?",
+      "file": "tiles/pr-ready-16x9.png",
+      "alt": "Slide tile: Ready when the press calls. Digital PR DIY toolkit by Big Leap"
+    }
+  ]
+}

@@ -445,7 +445,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 <p>Copy the whole kit, with the steps, workflow and emails, and build it this week. Or bring it to a call and we'll build it with you.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Dallas about building it</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -466,6 +466,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </div>
 </div>
 <footer class="foot">
+<p><a href="../../index.html">← All Big Leap DIY Toolkits</a></p>
 <p>HubSpot features and plan limits change. Check what your account includes, and test the workflow with a form submission of your own. Built from typical small-business follow-up, not a review of your account.</p>
 <p>Big Leap · RevOps DIY Toolkit 2 of 6 · Notice Different · Align to Genuine</p>
 </footer>
@@ -473,7 +474,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 <script>
 /* =====================================================================
 SERIES SETTINGS: the same in all six RevOps DIY toolkits.
-CTA_URL: where "Talk to Big Leap" goes.
+CTA_URL: where "Talk to Dallas" goes.
 TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
 and its name shows as plain text instead of a link.
 SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
@@ -481,19 +482,20 @@ cross-link only appears once its url is filled in.
 ===================================================================== */
 const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
 const TOOLKIT_URLS = {
-1: '', // Is Every Lead Reaching Your CRM?
-2: '', // Never Let a Lead Go Cold
-3: '', // Who Should Own Each New Lead?
-4: '', // Which Sales Steps Should Run Themselves?
-5: '', // How Much Time Is Your Sales Process Wasting?
-6: '', // Is Your Pipeline Ready for a Dashboard?
+1: '01_Is_Every_Lead_Reaching_Your_CRM.html', // Is Every Lead Reaching Your CRM?
+2: '02_Never_Let_a_Lead_Go_Cold.html', // Never Let a Lead Go Cold
+3: '03_Who_Should_Own_Each_New_Lead.html', // Who Should Own Each New Lead?
+4: '04_Which_Sales_Steps_Should_Run_Themselves.html', // Which Sales Steps Should Run Themselves?
+5: '05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', // How Much Time Is Your Sales Process Wasting?
+6: '06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', // Is Your Pipeline Ready for a Dashboard?
 };
 const SERVICE_TOOLKITS = {
-email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
-paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
-seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
-pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
-content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder (not built yet)
+paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/01_What_Kind_of_Business_Are_You.html' },          // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html' },            // Shema Al-Darwish
+pr:      { name: 'Digital PR DIY Toolkit', url: '../pr/01_Are_You_Ready_to_Be_Pitched.html' },              // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen (not built yet)
+tracking:{ name: 'Tracking DIY Toolkit', url: '../tracking/01_Can_You_See_What_Your_Marketing_Does.html' }, // Scott Smoot
 };
 /* =====================================================================
 EXAMPLE: the answers the page opens with. This toolkit builds a plan
@@ -543,7 +545,7 @@ function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
 function kitRef(n, label) {
 const text = esc(label || ('Toolkit ' + n));
 const url = kitUrl(n);
-return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+return url ? '<a href="' + esc(url) + '">' + text + '</a>' : '<b>' + text + '</b>';
 }
 // Fills every <span data-kit="N"> with a link to that toolkit.
 function fillKitRefs(root) {
@@ -555,7 +557,7 @@ const cur = k.n === current, url = kitUrl(k.n);
 const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
 return '<li>' + (cur || !url
 ? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
-: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+: '<a class="st" href="' + esc(url) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
 }).join('');
 if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
 }
@@ -601,7 +603,7 @@ function limitsText(list, flags) { const f = flags || {}; return list.map((c) =>
 function renderXlinks(links) {
 const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
 $('xlinks').hidden = live.length === 0;
-$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
 return live;
 }
 function xlinksText(links) {
@@ -711,7 +713,7 @@ $('answer').focus({ preventScroll: true });
 function planFooter(nextN) {
 const L = [];
 if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
-L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+L.push('', 'Talk to Dallas about building it: ' + CTA_URL);
 return L;
 }
 /* PLAN-CORE START: pure plan generation, no DOM. */

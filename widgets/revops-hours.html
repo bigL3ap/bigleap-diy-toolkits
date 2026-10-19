@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many hours does hand work cost your team? · Big Leap</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root { --navy:#143D55; --blue:#3187B5; --blue-ink:#246D96; --tint:#DAE9F2; --sky:#EEF3F8; --paper:#FFFFFF; --line:#D4DADF; --text:#243642; --muted:#5F6E79; --red:#EA4335; --accent:#143D55; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#6FB3DA; color-scheme: dark; } }
+:root[data-theme="dark"] { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:#6FB3DA; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: transparent; }
+body { font: 15px/1.5 "Open Sans", "Segoe UI", Arial, sans-serif; color: var(--text); -webkit-text-size-adjust: 100%; }
+.w { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--accent); border-radius: 14px; padding: 18px 18px 16px; max-width: 460px; margin: 0 auto; }
+.k { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 700 12px/1 "Open Sans", Arial, sans-serif; color: var(--muted); }
+.k b { color: var(--accent); font-weight: 700; }
+h1 { font: 800 21px/1.2 "Raleway", "Segoe UI", Arial, sans-serif; color: var(--navy); margin: 8px 0 12px; letter-spacing: -0.01em; }
+fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+legend { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--navy); padding: 0; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { flex: 1 1 auto; min-height: 40px; min-width: 64px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--text); font: 600 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+input[type=number] { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--text); font: 16px "Open Sans", Arial, sans-serif; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.out { background: var(--sky); border-radius: 12px; padding: 14px 14px 12px; margin-top: 4px; }
+.big { font: 800 30px/1.1 "Raleway", "Segoe UI", Arial, sans-serif; color: var(--navy); }
+.big.hot { color: var(--red); }
+.out p { margin: 6px 0 0; font-size: 14px; }
+.cta { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; min-height: 46px; padding: 10px 16px; border-radius: 14px; background: #EA4335; color: #fff; font: 700 15px "Open Sans", Arial, sans-serif; text-decoration: none; text-align: center; }
+.cta:hover { background: #C5372B; }
+.foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.foot a { color: var(--blue-ink); }
+@media (max-width: 340px) { .w { padding: 14px; } h1 { font-size: 19px; } .big { font-size: 26px; } }
+</style>
+</head>
+<body>
+<main class="w" aria-labelledby="h">
+  <div class="k"><b>RevOps · Free DIY toolkit</b><span>1 minute</span></div>
+  <h1 id="h">How many hours does hand work cost your team?</h1>
+  <form id="f" onsubmit="return false"></form>
+  <div class="out" aria-live="polite"><div class="big" id="big"></div><p id="det"></p></div>
+  <a class="cta" id="cta" href="../toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html" target="_blank" rel="noopener">Get the full time audit</a>
+  <div class="foot"><span>Big Leap · Nothing you enter is stored</span><a href="../index.html" target="_blank" rel="noopener">All toolkits</a></div>
+</main>
+<script>
+(function(){
+'use strict';
+var Q = [{"id": "leads", "label": "New leads a month", "type": "number", "max": 20000}, {"id": "entry", "label": "Does someone type leads into the CRM by hand?", "options": [["yes", "Yes"], ["no", "No"]], "type": "choice"}, {"id": "assign", "label": "Does someone hand out leads by hand?", "options": [["yes", "Yes"], ["no", "No"]], "type": "choice"}, {"id": "first", "label": "Do reps write the first follow-up by hand?", "options": [["yes", "Yes"], ["no", "No"]], "type": "choice"}];
+var A = {"leads": 100, "entry": "yes", "assign": "yes", "first": "yes"};
+function compute(a){ var lo = 0, hi = 0, n = Math.max(0, a.leads || 0);
+if (a.entry === 'yes') { lo += 4; hi += 6; }
+if (a.assign === 'yes') { lo += 2; hi += 4; }
+if (a.first === 'yes') { lo += 5; hi += 8; }
+var L = Math.round(n * lo / 60), H = Math.round(n * hi / 60);
+if (!lo || !n) return { big: 'Under an hour a month', detail: 'Your intake already runs itself. The full audit checks reporting and pipeline admin too.' };
+return { big: L + '–' + H + ' hours a month', hot: H >= 10, detail: 'Spent on tasks HubSpot can do on its own. Rule-of-thumb minutes per lead; the full audit lets you tune them and ranks what to automate first.' }; }
+var f = document.getElementById('f');
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+Q.forEach(function(q){
+  var fs = document.createElement('fieldset');
+  var lg = '<legend id="l-' + q.id + '">' + esc(q.label) + '</legend>';
+  if (q.type === 'number') {
+    fs.innerHTML = lg + '<input type="number" inputmode="numeric" min="0" max="' + (q.max || 100000) + '" id="i-' + q.id + '" aria-labelledby="l-' + q.id + '" value="' + A[q.id] + '">';
+    fs.querySelector('input').addEventListener('input', function(e){ var v = parseFloat(e.target.value); A[q.id] = isFinite(v) && v >= 0 ? Math.min(v, q.max || 100000) : 0; run(); });
+  } else {
+    var opts = q.options || [['yes','Yes'],['no','No'],['unsure','Not sure']];
+    fs.innerHTML = lg + '<div class="seg" role="group" aria-labelledby="l-' + q.id + '">' + opts.map(function(o){ return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + (A[q.id] === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>';
+    Array.prototype.forEach.call(fs.querySelectorAll('button'), function(b){ b.addEventListener('click', function(){ A[q.id] = b.getAttribute('data-v'); Array.prototype.forEach.call(fs.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', x === b); }); run(); }); });
+  }
+  f.appendChild(fs);
+});
+function run(){ var r = compute(A) || {}; var big = document.getElementById('big'); big.textContent = r.big || ''; big.className = 'big' + (r.hot ? ' hot' : ''); document.getElementById('det').textContent = r.detail || ''; if (r.link) document.getElementById('cta').href = r.link; if (r.cta) document.getElementById('cta').textContent = r.cta; }
+try { var t = new URLSearchParams(location.search).get('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch(e) {}
+run();
+})();
+</script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>How Much Time Is Your Sales Process Wasting?</title>
-<meta name="description" content="Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.">
+<title>Which Sales Steps Should Run Themselves?</title>
+<meta name="description" content="Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.">
 <style>
 /* Big Leap RevOps DIY Toolkit series: shared shell, v2.
 Layout: masthead, slim six-step path, then questions left and results right on desktop (the shorter column sticks); one column under 880px.
@@ -321,14 +321,14 @@ tbody th { font-weight: 700; color: var(--heading); }
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
-<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 5 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
-<h1>How Much Time Is Your Sales Process Wasting?</h1>
-<p class="lede">Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.</p>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 4 of 6</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Which Sales Steps Should Run Themselves?</h1>
+<p class="lede">Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.</p>
 </header>
 <nav class="stepper" aria-labelledby="stepper-h">
 <div class="stepper-head">
 <h2 id="stepper-h" class="label">The RevOps DIY path</h2>
-<p class="stepper-note" id="stepper-note">Start here. This audit ranks the other five for your business.</p>
+<p class="stepper-note" id="stepper-note">Not sure where to start? Toolkit 5 ranks all six for you.</p>
 </div>
 <ol id="stepper-list"></ol>
 </nav>
@@ -337,100 +337,84 @@ tbody th { font-weight: 700; color: var(--heading); }
 <form id="answers" novalidate>
 <div class="q-head">
 <div class="q-head-row">
-<h2 id="q-title" class="label">How leads move today</h2>
+<h2 id="q-title" class="label">Your deal pipeline</h2>
 <span class="pill" id="example-pill">Example answers</span>
 </div>
-<p class="example-text" id="example-text">Example: 100 leads a month, every step done by hand. Change any answer to make it yours.</p>
+<p class="example-text" id="example-text">Example: three reps on HubSpot Starter doing most follow-up by hand. Change any answer to make it yours.</p>
 <button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
 </div>
 <div class="q">
+<span class="q-label" id="plan-q">Which HubSpot Sales Hub plan do you have?</span>
+<div class="seg" role="radiogroup" aria-labelledby="plan-q">
+<input type="radio" id="plan-free" name="plan" value="free"><label for="plan-free">Free tools</label>
+<input type="radio" id="plan-starter" name="plan" value="starter" checked><label for="plan-starter">Starter</label>
+<input type="radio" id="plan-pro" name="plan" value="pro"><label for="plan-pro">Professional or Enterprise</label>
+</div>
+</div>
+<div class="q">
 <div class="q-row">
-<label class="q-label" for="leads">New leads a month</label>
+<label class="q-label" for="reps">Reps working deals</label>
 <div class="field">
-<input id="leads" name="leads" type="number" inputmode="numeric" min="0" max="1000000" step="1" value="100">
-<span class="affix">/ mo</span>
-</div>
-</div>
-<p class="q-help">Forms, calls, emails and chats. Don't know? <span data-kit="1">Toolkit 1</span> counts them in its first step.</p>
-</div>
-<div class="q">
-<div class="q-row">
-<span class="q-label" id="entry-q">Does someone type leads into the CRM?</span>
-<div class="seg inline" role="radiogroup" aria-labelledby="entry-q">
-<input type="radio" id="entry-yes" name="entry" value="yes" checked><label for="entry-yes">Yes</label>
-<input type="radio" id="entry-no" name="entry" value="no"><label for="entry-no">No</label>
+<input id="reps" name="reps" type="number" inputmode="numeric" min="0" max="500" step="1" value="3">
+<span class="affix">reps</span>
 </div>
 </div>
 </div>
 <div class="q">
 <div class="q-row">
-<span class="q-label" id="assignment-q">Does someone hand each lead to a rep?</span>
-<div class="seg inline" role="radiogroup" aria-labelledby="assignment-q">
-<input type="radio" id="assignment-yes" name="assignment" value="yes" checked><label for="assignment-yes">Yes</label>
-<input type="radio" id="assignment-no" name="assignment" value="no"><label for="assignment-no">No</label>
-</div>
-</div>
-</div>
-<div class="q">
-<div class="q-row">
-<span class="q-label" id="followup-q">Do reps write the first reply by hand?</span>
-<div class="seg inline" role="radiogroup" aria-labelledby="followup-q">
-<input type="radio" id="followup-yes" name="followup" value="yes" checked><label for="followup-yes">Yes</label>
-<input type="radio" id="followup-no" name="followup" value="no"><label for="followup-no">No</label>
-</div>
-</div>
-</div>
-<div class="q">
-<div class="q-row">
-<span class="q-label" id="tasks-q">Do reps set their own follow-up reminders?</span>
-<div class="seg inline" role="radiogroup" aria-labelledby="tasks-q">
-<input type="radio" id="tasks-yes" name="tasks" value="yes" checked><label for="tasks-yes">Yes</label>
-<input type="radio" id="tasks-no" name="tasks" value="no"><label for="tasks-no">No</label>
-</div>
-</div>
-</div>
-<div class="q">
-<div class="q-row">
-<span class="q-label" id="reporting-q">Does someone update a pipeline spreadsheet each week?</span>
-<div class="seg inline" role="radiogroup" aria-labelledby="reporting-q">
-<input type="radio" id="reporting-yes" name="reporting" value="yes" checked><label for="reporting-yes">Yes</label>
-<input type="radio" id="reporting-no" name="reporting" value="no"><label for="reporting-no">No</label>
-</div>
-</div>
-</div>
-<div class="q">
-<div class="q-row">
-<label class="q-label" for="rate">Their hourly cost <span class="opt-tag">Optional</span></label>
+<label class="q-label" for="hours">Admin hours per rep, per week</label>
 <div class="field">
-<span class="affix pre">$</span>
-<input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="10000" step="1" value="35">
-<span class="affix">/ hr</span>
+<input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="5">
+<span class="affix">hrs</span>
 </div>
 </div>
-<p class="q-help">Pay plus overhead. Adds a dollar figure to your result.</p>
+<p class="q-help">Logging, chasing, creating tasks. Not sure? <span data-kit="5">Toolkit 5</span> estimates it.</p>
 </div>
-<button type="button" class="btn btn-strong see-results" id="see-results">See your Time Audit</button>
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="rules-q">Does every deal stage have a written entry rule?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="rules-q">
+<input type="radio" id="rules-yes" name="rules" value="yes"><label for="rules-yes">Yes</label>
+<input type="radio" id="rules-no" name="rules" value="no" checked><label for="rules-no">No</label>
+</div>
+</div>
+<p class="q-help">Like "a first meeting is booked", not "interested".</p>
+</div>
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="req-q">Are Amount and Close date required before Contract sent?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="req-q">
+<input type="radio" id="req-yes" name="req" value="yes"><label for="req-yes">Yes</label>
+<input type="radio" id="req-no" name="req" value="no" checked><label for="req-no">No</label>
+</div>
+</div>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Which of these do reps still do by hand?</span></legend>
+<div class="opts" id="manual-opts"></div>
+</fieldset>
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Pipeline Build Sheet</button>
 </form>
 </section>
 <div class="results" id="results">
 <section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
-<h2 class="label" id="answer-h">Your hand work</h2>
-<p class="hero-fig"><span class="hero-num" id="out-total">≈ 31</span><span class="hero-unit" id="out-unit">hours a month</span></p>
+<h2 class="label" id="answer-h">Your rep admin</h2>
+<p class="hero-fig"><span class="hero-num" id="out-total">≈ 65</span><span class="hero-unit" id="out-unit">hours a month</span></p>
 <p class="answer-line" id="out-line"></p>
 </section>
 <section class="panel deliv" aria-labelledby="deliv-h">
 <div class="deliv-head">
-<h2 id="deliv-h">Your Time Audit</h2>
-<p class="deliv-sub" id="deliv-sub">Your hand work, biggest first. Each fix links to the free toolkit that walks you through it.</p>
+<h2 id="deliv-h">Your Pipeline Build Sheet</h2>
+<p class="deliv-sub" id="deliv-sub">Groundwork first, then each stage in pipeline order with what should run on its own and how to build it on your plan.</p>
 </div>
 <ol class="steps" id="plan"></ol>
 </section>
 <section class="closing" aria-labelledby="closing-h">
-<h2 id="closing-h">Your audit is a build list</h2>
-<p>The ranked list is exactly what a Big Leap engagement would build first. Copy it and work through the free toolkits, or bring it to a call and we'll scope it with you.</p>
+<h2 id="closing-h">Want your pipeline built for you?</h2>
+<p>Copy your build sheet and work through it stage by stage, or bring it to a call. It's the exact scope of what we'd set up first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Big Leap about building it</a>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to Dallas about building it</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -452,14 +436,18 @@ tbody th { font-weight: 700; color: var(--heading); }
 <details class="method" id="method">
 <summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
 <div class="method-body">
-<p>Each Yes adds its minutes for every lead. The spreadsheet is weekly, so it counts 4.33 times a month. Automation gives back part of each task, not all of it, so time back is a range.</p>
+<p>Rep admin time is reps × hours a week × 4.33 weeks a month. Time you could get back is a share of that: the high end is the checklist's 30-day target of one third, and the low end allows for a slower start.</p>
 <div class="table-wrap">
 <table>
-<thead><tr><th scope="col">Task</th><th scope="col">Minutes</th><th scope="col">Back, low</th><th scope="col">Back, high</th></tr></thead>
-<tbody id="assume-rows"></tbody>
+<thead><tr><th scope="col">Assumption</th><th scope="col">Low</th><th scope="col">High</th></tr></thead>
+<tbody>
+<tr><th scope="row">Share of rep admin time automation gives back</th>
+<td><span class="cell"><input class="num-in" id="a-lo" type="number" min="0" max="100" step="1" inputmode="numeric" aria-label="Share recovered, low"><span class="unit">%</span></span></td>
+<td><span class="cell"><input class="num-in" id="a-hi" type="number" min="0" max="100" step="1" inputmode="numeric" aria-label="Share recovered, high"><span class="unit">%</span></span></td></tr>
+</tbody>
 </table>
 </div>
-<p class="fine">Fixed: 4.33 weeks a month. One full-time person works 160 hours a month.</p>
+<p class="fine">Fixed: 4.33 weeks a month.</p>
 <div class="method-foot">
 <button type="button" class="btn btn-plain" id="reset-assumptions">Reset to defaults</button>
 <span class="reset-status" id="reset-status" role="status" aria-live="polite"></span>
@@ -468,14 +456,15 @@ tbody th { font-weight: 700; color: var(--heading); }
 </details>
 </div>
 <footer class="foot">
-<p>Estimates built from typical small-business sales teams, not a measurement of your account. Adjust the minutes under How we calculate this if your team runs faster or slower.</p>
-<p>Big Leap · RevOps DIY Toolkit 5 of 6 · Notice Different · Align to Genuine</p>
+<p><a href="../../index.html">← All Big Leap DIY Toolkits</a></p>
+<p>Estimates built from your answers and typical small-business sales teams, not a measurement of your account. HubSpot features and plan limits change, so check what your account includes.</p>
+<p>Big Leap · RevOps DIY Toolkit 4 of 6 · Notice Different · Align to Genuine</p>
 </footer>
 </div>
 <script>
 /* =====================================================================
 SERIES SETTINGS: the same in all six RevOps DIY toolkits.
-CTA_URL: where "Talk to Big Leap" goes.
+CTA_URL: where "Talk to Dallas" goes.
 TOOLKIT_URLS: the live page for each RevOps toolkit. Leave one blank
 and its name shows as plain text instead of a link.
 SERVICE_TOOLKITS: Big Leap's other service-line DIY toolkits. A
@@ -483,51 +472,31 @@ cross-link only appears once its url is filled in.
 ===================================================================== */
 const CTA_URL = 'https://www.bigleap.com/contact-us/'; // swap for Dallas Olsen's meeting scheduler link
 const TOOLKIT_URLS = {
-1: '', // Is Every Lead Reaching Your CRM?
-2: '', // Never Let a Lead Go Cold
-3: '', // Who Should Own Each New Lead?
-4: '', // Which Sales Steps Should Run Themselves?
-5: '', // How Much Time Is Your Sales Process Wasting?
-6: '', // Is Your Pipeline Ready for a Dashboard?
+1: '01_Is_Every_Lead_Reaching_Your_CRM.html', // Is Every Lead Reaching Your CRM?
+2: '02_Never_Let_a_Lead_Go_Cold.html', // Never Let a Lead Go Cold
+3: '03_Who_Should_Own_Each_New_Lead.html', // Who Should Own Each New Lead?
+4: '04_Which_Sales_Steps_Should_Run_Themselves.html', // Which Sales Steps Should Run Themselves?
+5: '05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', // How Much Time Is Your Sales Process Wasting?
+6: '06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', // Is Your Pipeline Ready for a Dashboard?
 };
 const SERVICE_TOOLKITS = {
-email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder
-paid:    { name: 'Google Ads DIY Toolkit', url: '' },         // Scott Smoot
-seo:     { name: 'SEO DIY Toolkit', url: '' },                // owner not yet named
-pr:      { name: 'Digital PR DIY Toolkit', url: '' },         // Kristina Ainge
-content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen
+email:   { name: 'Email Marketing DIY Toolkit', url: '' },   // Erica Pounder (not built yet)
+paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/01_What_Kind_of_Business_Are_You.html' },          // Scott Smoot
+seo:     { name: 'SEO DIY Toolkit', url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html' },            // Shema Al-Darwish
+pr:      { name: 'Digital PR DIY Toolkit', url: '../pr/01_Are_You_Ready_to_Be_Pitched.html' },              // Kristina Ainge
+content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen (not built yet)
+tracking:{ name: 'Tracking DIY Toolkit', url: '../tracking/01_Can_You_See_What_Your_Marketing_Does.html' }, // Scott Smoot
 };
 /* =====================================================================
 ASSUMPTIONS: Big Leap's model defaults for this toolkit.
-Every number the calculator uses lives here. Visitors can tune them
-under "How we calculate this"; their edits are not saved.
+recovery[1] is the checklist's 30-day target: rep admin down by a third.
+recovery[0] allows for a slower start. Visitors can tune both.
 ===================================================================== */
 const ASSUMPTIONS = {
-// Minutes of manual work per lead, for each task answered "Yes".
-minutesPerLead: {
-entry: 5,        // typing the lead into the CRM
-assignment: 3,   // choosing a rep and handing the lead over
-followup: 6,     // writing and sending the first follow-up
-tasks: 2,        // creating the follow-up task or reminder
-},
-reportingMinutesPerWeek: 60, // reporting is a weekly chore, not per lead
-weeksPerMonth: 52 / 12,      // 4.33 weeks, so 60 min a week = 260 min a month
-// Share of each task's time that automation gives back: [low, high].
-recovery: {
-entry:      [0.75, 0.90],
-assignment: [0.75, 0.90],
-followup:   [0.50, 0.65],  // reps still personalize some replies
-tasks:      [0.80, 0.90],
-reporting:  [0.65, 0.80],
-},
-fteHoursPerMonth: 160,       // one full-time person
+recovery: [0.25, 0.33],
+weeksPerMonth: 52 / 12,
 };
-// The example the page opens with.
-const EXAMPLE = {
-leads: 100,
-rate: 35,
-answers: { entry: true, assignment: true, followup: true, tasks: true, reporting: true },
-};
+const EXAMPLE = { plan: 'starter', reps: 3, hours: 5, rules: 'no', req: 'no', manual: ['booking', 'prep', 'contract', 'stalled', 'handoff'] };
 /* ---------- series helpers (shared by all six toolkits) ---------- */
 const SERIES = [
 { n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
@@ -567,7 +536,7 @@ function kitPlain(n) { return 'Toolkit ' + n + ', ' + SERIES[n - 1].title; }
 function kitRef(n, label) {
 const text = esc(label || ('Toolkit ' + n));
 const url = kitUrl(n);
-return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + text + '</a>' : '<b>' + text + '</b>';
+return url ? '<a href="' + esc(url) + '">' + text + '</a>' : '<b>' + text + '</b>';
 }
 // Fills every <span data-kit="N"> with a link to that toolkit.
 function fillKitRefs(root) {
@@ -579,7 +548,7 @@ const cur = k.n === current, url = kitUrl(k.n);
 const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
 return '<li>' + (cur || !url
 ? '<div class="st' + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="step"' : '') + ' title="' + esc(k.title) + '">' + inner + '</div>'
-: '<a class="st" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+: '<a class="st" href="' + esc(url) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
 }).join('');
 if (current !== 5) $('stepper-note').innerHTML = 'Not sure where to start? ' + kitRef(5) + ' ranks all six for you.';
 }
@@ -625,7 +594,7 @@ function limitsText(list, flags) { const f = flags || {}; return list.map((c) =>
 function renderXlinks(links) {
 const live = links.filter((l) => SERVICE_TOOLKITS[l.key] && SERVICE_TOOLKITS[l.key].url);
 $('xlinks').hidden = live.length === 0;
-$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '" target="_blank" rel="noopener">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
+$('xlinks-list').innerHTML = live.map((l) => '<li><a href="' + esc(SERVICE_TOOLKITS[l.key].url) + '">' + esc(SERVICE_TOOLKITS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
 return live;
 }
 function xlinksText(links) {
@@ -735,156 +704,131 @@ $('answer').focus({ preventScroll: true });
 function planFooter(nextN) {
 const L = [];
 if (nextN) L.push('', 'NEXT: ' + kitPlain(nextN));
-L.push('', 'Talk to Big Leap about building it: ' + CTA_URL);
+L.push('', 'Talk to Dallas about building it: ' + CTA_URL);
 return L;
 }
-/* ---------- Toolkit 5: How Much Time Is Your Sales Process Wasting? ---------- */
-const TASKS = [
-{ key: 'entry', label: 'Typing leads into the CRM', action: 'Capture leads automatically', done: 'Leads reach the CRM on their own',
-why: 'Every form fill becomes a contact with its source, so nobody retypes it.', kit: 1 },
-{ key: 'assignment', label: 'Handing leads to reps', action: 'Route leads to the right rep', done: 'Leads get an owner on their own',
-why: 'A few written rules give every lead one owner the moment it arrives.', kit: 3 },
-{ key: 'followup', label: 'Writing the first reply', action: 'Automate the first reply', done: 'The first reply goes out on its own',
-why: 'An instant confirmation plus timed follow-ups, so no lead waits on a rep.', kit: 2 },
-{ key: 'tasks', label: 'Setting follow-up reminders', action: 'Create follow-up tasks automatically', done: 'Follow-up tasks appear on their own',
-why: 'Each stage move creates its own task, so reps work a queue instead of a memory.', kit: 4 },
-{ key: 'reporting', label: 'The weekly pipeline spreadsheet', action: 'Replace the spreadsheet with a dashboard', done: 'Pipeline numbers come from the CRM',
-why: 'Six saved reports and one dashboard, emailed every Monday.', kit: 6 },
+/* ---------- Toolkit 4: Which Sales Steps Should Run Themselves? ---------- */
+const PLAN_LABEL = { free: 'Free tools', starter: 'Starter', pro: 'Professional or Enterprise' };
+const MANUAL = [
+{ key: 'booking', label: 'Booking meetings by back-and-forth email' },
+{ key: 'prep', label: 'Prep tasks before first meetings' },
+{ key: 'qual', label: 'Telling the sales lead a deal qualified' },
+{ key: 'recap', label: 'Sending the recap once a proposal is booked' },
+{ key: 'contract', label: 'Chasing unsigned contracts' },
+{ key: 'stalled', label: 'Spotting deals that went quiet' },
+{ key: 'handoff', label: 'Telling delivery about a won deal' },
+{ key: 'lost', label: 'Adding lost deals to a nurture list' },
+];
+// Pipeline order. Stage rules and required fields come from the checklist template.
+const AUTOS = [
+{ key: 'prep', stage: 'Appointment scheduled', rule: 'a first meeting is booked with a real buyer', req: 'Amount (estimate) and Close date', title: 'First-meeting prep task', step: 'Step 5',
+how: { starter: 'Pipeline Automate tab: a task for the deal owner, due the day before the meeting.', pro: 'A deal workflow on this stage with a create-task action.' } },
+{ key: 'qual', stage: 'Qualified to buy', rule: 'need, budget and timeline are confirmed', req: 'Deal type and Service interest', title: 'Qualification alert', step: 'Step 5',
+how: { starter: 'A Deals index automation: when Deal stage changes, send an internal email to the owner and sales lead.', pro: 'A deal workflow on this stage with a send-internal-email action.' } },
+{ key: 'recap', stage: 'Presentation scheduled', rule: 'a proposal or demo date is booked', req: 'Next step date', title: 'Recap and agenda task', step: 'Step 5',
+how: { starter: 'Pipeline Automate tab: a task for the owner, due in 1 business day.', pro: 'A deal workflow on this stage with a create-task action.' } },
+{ key: 'contract', stage: 'Contract sent', rule: 'the contract or proposal is out for signature', req: 'Amount (final)', title: 'Contract follow-up task', step: 'Step 5',
+how: { starter: 'Pipeline Automate tab: a follow-up task due in 3 business days.', pro: 'A deal workflow on this stage with a create-task action.' } },
+{ key: 'stalled', stage: 'Any open stage', rule: 'a deal has no activity for 14 days', req: '', title: 'Stalled-deal catch', step: 'Step 6',
+how: { starter: 'A saved Deals view, "Stalled deals": open, last activity over 14 days ago, oldest first. Review it in every pipeline meeting.', pro: 'The saved view, plus a deal workflow that creates a re-engage task at 14 days.' },
+free: 'A saved Deals view, "Stalled deals", reviewed weekly. Saved views work on every plan.' },
+{ key: 'handoff', stage: 'Closed won', rule: 'it’s signed', req: 'Closed won reason and Start date', title: 'Closed-won handoff', step: 'Step 7',
+how: { starter: 'Pipeline Automate tab for the onboarding task, plus a Deals index automation that emails the delivery lead.', pro: 'A deal workflow on Closed won: email the delivery lead and create the onboarding task.' } },
+{ key: 'lost', stage: 'Closed lost', rule: 'the buyer said no, or went silent after 3 follow-ups', req: 'Closed lost reason, as a dropdown', title: 'Lost-deal nurture', step: 'Step 7',
+how: { starter: 'A Deals index automation that adds the contact to a static nurture segment.', pro: 'A deal workflow on Closed lost that adds the contact to your nurture list.' } },
 ];
 const LIMITS = [
-{ key: 'sync', title: 'Two-way syncs between systems', text: 'Keeping the CRM, billing, scheduling or a project tool in step in both directions.' },
-{ key: 'hygiene', title: 'Data hygiene rules', text: 'Standardizing, merging and cleaning records as they arrive, so automation runs on data people trust.' },
-{ key: 'objects', title: 'Custom objects', text: 'Tracking things the CRM has no place for, such as locations, projects or contracts.' },
-{ key: 'middleware', title: 'Middleware', text: 'Connections with no native integration, built in a tool such as Zapier or Make and kept running.' },
+{ key: 'pipes', title: 'Pipelines per service line', text: 'When services sell very differently, each pipeline needs its own stages, rules and reports.' },
+{ key: 'forecast', title: 'Forecasting', text: 'Weighted forecasts need clean stage data, categories and close-date discipline first.' },
+{ key: 'quotes', title: 'Quote and e-sign integration', text: 'Mapping products, prices and statuses between the quote tool and the deal.' },
+{ key: 'onboard', title: 'Handoff into project tools', text: 'Creating projects in Asana, Monday or similar from a won deal, reliably.' },
 ];
-function calc(input, a) {
-const leads = clamp(toNum(input.leads), 0, 1e6);
-const rate = clamp(toNum(input.rate), 0, 1e4);
-const tasks = TASKS.map((t, i) => {
-const yes = !!input.answers[t.key];
-const minutes = !yes ? 0 : t.key === 'reporting' ? a.reportingMinutesPerWeek * a.weeksPerMonth : a.minutesPerLead[t.key] * leads;
-const r = a.recovery[t.key];
-const lo = clamp(Math.min(r[0], r[1]), 0, 1), hi = clamp(Math.max(r[0], r[1]), 0, 1);
-return Object.assign({}, t, { order: i, yes, minutes, recLowMin: minutes * lo, recHighMin: minutes * hi });
+function model(input, a) {
+const plan = input.plan;
+const reps = Math.round(clamp(toNum(input.reps), 0, 500));
+const hours = clamp(toNum(input.hours), 0, 60);
+const totalMin = reps * hours * a.weeksPerMonth * 60;
+const lo = clamp(Math.min(a.recovery[0], a.recovery[1]), 0, 1), hi = clamp(Math.max(a.recovery[0], a.recovery[1]), 0, 1);
+const by = (k) => input.manual.indexOf(k) >= 0;
+const items = [];
+const S = (o) => items.push(Object.assign({ self: 4 }, o));
+if (input.rules === 'no') S({ title: 'Agree the stages and entry rules', meta: 'Groundwork', why: 'Six to eight stages, each with one observable rule that moves a deal into it. Every automation below fires on a stage move.', kit: 4, where: 'Step 2' });
+if (input.req === 'no') S({ title: 'Require the fields that matter', meta: 'Groundwork', why: 'Amount and Close date before Contract sent, and a reason before Closed won or lost, so reports read real data.', how: 'Set required properties per stage in the pipeline settings. If your plan doesn’t offer them, put the fields on the create-deal form.', kit: 4, where: 'Step 3' });
+if (by('booking')) S({ title: 'Give every rep a meeting link', meta: 'Groundwork', why: 'Each rep connects their calendar and shares a scheduling page, so buyers book without the back-and-forth.', how: 'Free tools include one scheduling page per user; paid Sales seats get more.', kit: 4, where: 'Step 4' });
+const doneStages = [];
+AUTOS.forEach((x) => {
+if (!by(x.key)) { doneStages.push({ title: x.stage + ': ' + x.title.toLowerCase() + ' already handled', done: true }); return; }
+const how = plan === 'free' ? (x.free || 'On free tools this stays a manual task from the template until you move to Sales Hub Starter.') : x.how[plan];
+S({ title: x.title, meta: x.stage, why: 'Fires when ' + x.rule + '.' + (x.req ? ' Required to enter: ' + x.req + '.' : ''), how, kit: 4, where: x.step });
 });
-const sum = (k) => tasks.reduce((s, t) => s + t[k], 0);
-const totalMin = sum('minutes');
-const ranked = tasks.filter((t) => t.yes && t.minutes > 0).sort((x, y) => (y.minutes - x.minutes) || (x.order - y.order));
-return {
-leads, rate: rate > 0 ? rate : null, tasks, ranked, anyYes: tasks.some((t) => t.yes),
-totalMin, recLowMin: sum('recLowMin'), recHighMin: sum('recHighMin'),
-fteShare: totalMin / 60 / a.fteHoursPerMonth,
-monthlyCost: rate > 0 ? (totalMin / 60) * rate : null,
-};
-}
-function rowTime(min) {
-if (min < 60) return fmt(Math.round(min)) + ' min/mo';
-const h = min / 60;
-return fmt(h, h < 10 ? 1 : 0) + ' hrs/mo';
-}
-function pctText(share) {
-const p = share * 100;
-return p <= 0 ? '0%' : p < 1 ? 'under 1%' : fmt(Math.round(p)) + '%';
-}
-function planItems(r) {
-const open = r.ranked.map((t) => ({ title: t.action, meta: rowTime(t.minutes), why: t.why, kit: t.kit, self: 5 }));
-const done = r.tasks.filter((t) => !t.yes).map((t) => ({ title: t.done, done: true }));
-return open.concat(done);
-}
-function nextFor(r) {
-if (r.ranked.length) {
-const t = r.ranked[0];
-return { n: t.kit, why: t.label + ' is your biggest time sink at ' + rowTime(t.minutes) + '. This toolkit fixes it step by step.' };
-}
-return { n: 6, why: 'None of these steps runs by hand. Check that your pipeline data is ready to report on.' };
-}
-function answerLine(r) {
-if (!r.anyYes) return 'None of these five steps is done by hand. Nice work.';
-if (r.totalMin <= 0) return 'Add your monthly leads to see the hours.';
-let s = 'That’s <b>' + pctText(r.fteShare) + '</b> of one full-time person';
-if (r.rate) s += ', about <b>' + money(r.monthlyCost) + ' a month</b>';
-return s + '. Automation could give back <b>' + hoursRange(r.recLowMin, r.recHighMin) + '</b>.';
+const autos = items.filter((i) => i.meta !== 'Groundwork').length;
+if (items.length) S({ title: 'Run one test deal through every stage', why: 'Move "TEST — automation check" one stage at a time and check each prompt, task and email fires.', kit: 4, where: 'Step 8' });
+let method;
+if (plan === 'pro') method = 'one deal workflow per stage';
+else if (plan === 'starter') method = 'the pipeline Automate tab and simple automations';
+else method = 'saved views and tasks from the template, since stage automations need Sales Hub Starter';
+return { plan, reps, hours, totalMin, recLowMin: totalMin * lo, recHighMin: totalMin * hi, items: items.concat(doneStages), autos, method, lostByHand: by('lost') };
 }
 (function () {
 const form = $('answers');
 let last = null;
-$('assume-rows').innerHTML = TASKS.map((t) => {
-const per = t.key === 'reporting' ? 'per week' : 'per lead';
-return '<tr><th scope="row">' + esc(t.label) + '</th>' +
-'<td><span class="cell"><input class="num-in" id="a-' + t.key + '-min" type="number" min="0" step="' + (t.key === 'reporting' ? 5 : 0.5) + '" inputmode="decimal" aria-label="' + esc(t.label) + ', minutes ' + per + '"><span class="unit">' + per + '</span></span></td>' +
-['low', 'high'].map((s) => '<td><span class="cell"><input class="num-in" id="a-' + t.key + '-' + s + '" type="number" min="0" max="100" step="1" inputmode="numeric" aria-label="' + esc(t.label) + ', percent back, ' + s + '"><span class="unit">%</span></span></td>').join('') + '</tr>';
-}).join('');
-function writeA(a) {
-TASKS.forEach((t) => {
-$('a-' + t.key + '-min').value = t.key === 'reporting' ? a.reportingMinutesPerWeek : a.minutesPerLead[t.key];
-$('a-' + t.key + '-low').value = Math.round(a.recovery[t.key][0] * 100);
-$('a-' + t.key + '-high').value = Math.round(a.recovery[t.key][1] * 100);
-});
-}
-function readA() {
-const a = { minutesPerLead: {}, reportingMinutesPerWeek: 0, weeksPerMonth: ASSUMPTIONS.weeksPerMonth, recovery: {}, fteHoursPerMonth: ASSUMPTIONS.fteHoursPerMonth };
-TASKS.forEach((t) => {
-const m = Math.max(0, toNum($('a-' + t.key + '-min').value));
-if (t.key === 'reporting') a.reportingMinutesPerWeek = m; else a.minutesPerLead[t.key] = m;
-a.recovery[t.key] = [clamp(toNum($('a-' + t.key + '-low').value), 0, 100) / 100, clamp(toNum($('a-' + t.key + '-high').value), 0, 100) / 100];
-});
-return a;
-}
-function edited(a) {
-const close = (x, y) => Math.abs(x - y) < 1e-9;
-return TASKS.some((t) => {
-const m0 = t.key === 'reporting' ? ASSUMPTIONS.reportingMinutesPerWeek : ASSUMPTIONS.minutesPerLead[t.key];
-const m1 = t.key === 'reporting' ? a.reportingMinutesPerWeek : a.minutesPerLead[t.key];
-return !close(m0, m1) || !close(ASSUMPTIONS.recovery[t.key][0], a.recovery[t.key][0]) || !close(ASSUMPTIONS.recovery[t.key][1], a.recovery[t.key][1]);
-});
-}
+$('manual-opts').innerHTML = MANUAL.map((m) => '<label class="opt" for="m-' + m.key + '"><input type="checkbox" id="m-' + m.key + '" name="manual" value="' + m.key + '"' +
+(EXAMPLE.manual.indexOf(m.key) >= 0 ? ' checked' : '') + '><span class="opt-text"><span class="opt-title">' + esc(m.label) + '</span></span></label>').join('');
+function readA() { return { recovery: [clamp(toNum($('a-lo').value), 0, 100) / 100, clamp(toNum($('a-hi').value), 0, 100) / 100], weeksPerMonth: ASSUMPTIONS.weeksPerMonth }; }
+function writeA(a) { $('a-lo').value = Math.round(a.recovery[0] * 100); $('a-hi').value = Math.round(a.recovery[1] * 100); }
+function edited(a) { return Math.abs(a.recovery[0] - ASSUMPTIONS.recovery[0]) > 0.005 || Math.abs(a.recovery[1] - ASSUMPTIONS.recovery[1]) > 0.005; }
 function readInput() {
-const answers = {};
-TASKS.forEach((t) => { answers[t.key] = $(t.key + '-yes').checked; });
-return { leads: $('leads').value, rate: $('rate').value, answers };
+const el = form.elements, v = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
+return { plan: v('plan'), reps: $('reps').value, hours: $('hours').value, rules: v('rules'), req: v('req'), manual: [...form.querySelectorAll('input[name="manual"]:checked')].map((i) => i.value) };
 }
-function isExample(i) {
-return toNum(i.leads) === EXAMPLE.leads && toNum(i.rate) === EXAMPLE.rate && TASKS.every((t) => i.answers[t.key] === EXAMPLE.answers[t.key]);
-}
+const same = (a, b) => a.slice().sort().join() === b.slice().sort().join();
+function isExample(i) { return i.plan === EXAMPLE.plan && toNum(i.reps) === EXAMPLE.reps && toNum(i.hours) === EXAMPLE.hours && i.rules === EXAMPLE.rules && i.req === EXAMPLE.req && same(i.manual, EXAMPLE.manual); }
 function applyExample() {
-$('leads').value = EXAMPLE.leads; $('rate').value = EXAMPLE.rate;
-TASKS.forEach((t) => { $(t.key + (EXAMPLE.answers[t.key] ? '-yes' : '-no')).checked = true; });
+$('reps').value = EXAMPLE.reps; $('hours').value = EXAMPLE.hours;
+['plan', 'rules', 'req'].forEach((k) => { $(k + '-' + EXAMPLE[k]).checked = true; });
+form.querySelectorAll('input[name="manual"]').forEach((c) => { c.checked = EXAMPLE.manual.indexOf(c.value) >= 0; });
 }
-function planText(input, r, ed) {
-const hp = heroHours(r.totalMin);
-const L = ['YOUR TIME AUDIT', 'How Much Time Is Your Sales Process Wasting? (Big Leap RevOps DIY Toolkit 5 of 6)', ''];
-L.push('Leads a month: ' + fmt(r.leads) + (r.rate ? ' · Hourly cost: ' + money(r.rate) : ''));
-L.push('Hand work: ' + hp.num.replace('≈ ', 'about ') + ' ' + hp.unit + ' (' + pctText(r.fteShare) + ' of one full-time person' + (r.rate ? ', ' + money(r.monthlyCost) + ' a month' : '') + ')');
-L.push('Automation could give back: ' + hoursRange(r.recLowMin, r.recHighMin));
-L.push('', 'WHAT TO AUTOMATE, BIGGEST FIRST');
-stepsText(planItems(r)).forEach((l) => L.push(l));
-L.push('', 'WHERE THE DIY VERSION STOPS');
-limitsText(LIMITS).forEach((l) => L.push(l));
+function xlinks(m) { return m.lostByHand ? [{ key: 'email', why: 'to write the nurture your lost deals drop into.' }] : []; }
+function nextWhy(input) {
+return input.req === 'yes' && input.rules === 'yes'
+? 'Stages and required fields are in place, so your pipeline data is ready to report on.'
+: 'Once stages have rules and Amount and Close date are required, your pipeline is clean enough for one dashboard.';
+}
+function planText(input, m, ed) {
+const hp = heroHours(m.totalMin);
+const L = ['YOUR PIPELINE BUILD SHEET', 'Which Sales Steps Should Run Themselves? (Big Leap RevOps DIY Toolkit 4 of 6)', ''];
+L.push('Sales Hub plan: ' + PLAN_LABEL[m.plan] + ' · Reps: ' + m.reps + ' · Admin hours per rep per week: ' + fmt(m.hours, 1));
+L.push('Rep admin: ' + hp.num.replace('≈ ', 'about ') + ' ' + hp.unit + ' · Automation could give back: ' + hoursRange(m.recLowMin, m.recHighMin));
+L.push('Built with ' + m.method + '.');
+L.push('', 'BUILD SHEET', ...stepsText(m.items));
+const xl = xlinksText(xlinks(m));
+if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
+L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS));
 L.push('', ed ? 'Assumptions: edited from Big Leap defaults.' : "Assumptions: Big Leap's default estimates.");
-return L.concat(planFooter(nextFor(r).n)).join('\n');
+return L.concat(planFooter(6)).join('\n');
 }
 function render() {
-const input = readInput(), a = readA(), r = calc(input, a), ed = edited(a);
-last = { input, r, ed };
-setExampleState(isExample(input), 'Example: 100 leads a month, every step done by hand. Change any answer to make it yours.');
+const input = readInput(), a = readA(), m = model(input, a), ed = edited(a);
+last = { input, m, ed };
+setExampleState(isExample(input), 'Example: three reps on HubSpot Starter doing most follow-up by hand. Change any answer to make it yours.');
 $('edited-pill').hidden = !ed;
-const hp = heroHours(r.totalMin);
+const hp = heroHours(m.totalMin);
 $('out-total').textContent = hp.num;
 $('out-total').classList.toggle('is-zero', hp.zero);
 $('out-unit').textContent = hp.unit;
-$('out-line').innerHTML = answerLine(r);
-$('answer').classList.toggle('is-done', !r.anyYes);
+$('out-line').innerHTML = hp.zero ? 'Add your reps and their weekly admin hours to size this.'
+: 'of rep time goes to sales admin. Automation could give back <b>' + esc(hoursRange(m.recLowMin, m.recHighMin)) + '</b>' +
+(m.autos ? ', with <b>' + m.autos + ' automation' + (m.autos === 1 ? '' : 's') + '</b> built using ' + esc(m.method) + '.' : '.');
 flashIfChanged(hp.num);
-renderSteps($('plan'), planItems(r));
+renderSteps($('plan'), m.items);
 renderLimits(LIMITS, {});
-renderXlinks(input.answers.followup ? [{ key: 'email', why: 'once the first reply is automated, plan the nurture emails that keep quiet leads warm.' }] : []);
-const nx = nextFor(r);
-renderNext(nx.n, nx.why);
+renderXlinks(xlinks(m));
+renderNext(6, nextWhy(input));
 syncCopy();
 sticky();
 }
-initShell(5, () => { applyExample(); render(); $('leads').focus(); });
-const syncCopy = initCopy(() => planText(last.input, last.r, last.ed));
+initShell(4, () => { applyExample(); render(); $('reps').focus(); });
+const syncCopy = initCopy(() => planText(last.input, last.m, last.ed));
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
 form.addEventListener('input', render);

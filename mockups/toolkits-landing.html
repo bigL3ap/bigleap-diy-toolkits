@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toolkits Landing Mockup · Big Leap</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+.hero { background: linear-gradient(180deg, #F3E3E6 0%, #E4E6F0 38%, #D3E3F0 100%); }
+.hero .c { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 460px); gap: 56px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
+.kicker { font: italic 700 15px "Raleway", Arial, sans-serif; margin: 0 0 16px; }
+.hero h1 { font-size: clamp(40px, 5.6vw, 64px); line-height: 1.1; font-weight: 700; }
+.hero h1 span { display: block; color: var(--blue); }
+.hero p { font-size: 18px; margin: 20px 0 0; max-width: 32em; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 28px; }
+.hero .actions a.text { font-weight: 700; color: var(--navy); }
+.hero .facts { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 26px; font-size: 14px; color: var(--muted); }
+.hero .facts b { color: var(--navy); }
+.experts { border-bottom: 1px solid var(--line); }
+.experts .c { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; padding-top: 24px; padding-bottom: 24px; }
+.experts p { margin: 0; font: 700 18px "Raleway", Arial, sans-serif; }
+.people { display: flex; flex-wrap: wrap; gap: 14px 26px; }
+.person { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.3; }
+.person i { width: 44px; height: 44px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 700 15px "Raleway", Arial, sans-serif; font-style: normal; }
+.person b { display: block; color: var(--navy); }
+.how ol { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: s; }
+.how li { counter-increment: s; background: #fff; border-radius: 14px; padding: 26px; border: 1px solid var(--line); }
+.how li::before { content: counter(s); display: block; width: 48px; height: 48px; border-radius: 50%; background: var(--navy); color: #fff; font: 800 20px/48px "Raleway", Arial, sans-serif; text-align: center; margin-bottom: 14px; }
+.how h3 { font-size: 22px; }
+.how p { margin: 8px 0 0; }
+.map { margin-top: 36px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: clamp(18px, 3vw, 30px); }
+.line { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.line:last-child { border-bottom: 0; }
+.line b { font: 700 17px "Raleway", Arial, sans-serif; }
+.line b small { display: block; font: 400 13px "Open Sans", Arial, sans-serif; color: var(--muted); }
+.stops { position: relative; display: flex; list-style: none; margin: 0; padding: 0; }
+.stops::before { content: ""; position: absolute; top: 21px; left: calc(100% / 12); width: calc((var(--n) - 1) * 100% / 6); height: 4px; background: var(--c); border-radius: 2px; }
+.stop, .fill { flex: 1 1 0; min-width: 0; }
+.stop a { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; text-align: center; color: var(--navy); font-size: 13px; font-weight: 600; line-height: 1.25; overflow-wrap: normal; hyphens: auto; }
+.stop i { position: relative; width: 44px; height: 44px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 800 16px "Raleway", Arial, sans-serif; font-style: normal; border: 4px solid #fff; box-shadow: 0 0 0 2px var(--c); }
+.svc { padding: clamp(48px, 6vw, 80px) 0; border-top: 1px solid var(--line); }
+.svc:nth-of-type(even) { background: var(--sky); }
+.svc .c { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 56px; align-items: start; }
+.svc.flip .c > .copy { order: 2; }
+.svc .label { font: 700 14px "Open Sans", Arial, sans-serif; color: var(--c); }
+.svc h2 { font-size: clamp(28px, 3.4vw, 40px); margin-top: 6px; }
+.svc .promise { font-size: 18px; margin: 12px 0 0; }
+.kits { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 12px; }
+.kits a { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: start; padding: 16px 18px; background: #fff; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--text); }
+.kits a:hover { border-color: var(--c); }
+.kits .n { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #fff; font: 800 15px "Raleway", Arial, sans-serif; }
+.kits strong { display: block; font: 700 18px/1.3 "Raleway", Arial, sans-serif; color: var(--navy); }
+.kits small { display: block; font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 2px; }
+.kits em { font-style: normal; font-size: 12px; font-weight: 700; color: #A15C07; background: rgba(161,92,7,.1); border-radius: 999px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px; }
+.owner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 22px; font-size: 15px; }
+.owner-row i { width: 44px; height: 44px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 700 15px "Raleway", Arial, sans-serif; font-style: normal; }
+.limits .c { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.limits ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.limits li { padding: 14px 18px; border-radius: 12px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+.limits li b { color: #fff; }
+.limits p { color: #DCE9F2; font-size: 18px; }
+.faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+.faq summary { cursor: pointer; font: 700 20px "Raleway", Arial, sans-serif; color: var(--navy); }
+.faq details p { margin: 10px 0 0; }
+@media (max-width: 960px) {
+  .hero .c, .svc .c, .limits .c { grid-template-columns: 1fr; }
+  .svc.flip .c > .copy { order: 0; }
+  .how ol { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) { .line { grid-template-columns: 1fr; gap: 10px; } }
+@media (max-width: 480px) { .stop i { width: 38px; height: 38px; font-size: 14px; border-width: 3px; } .stops::before { top: 18px; } .stop a { font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="mock-bar" role="note">Mockup of a bigleap.com landing page for the DIY toolkits (suggested URL: bigleap.com/free-toolkits). Links and widgets work.
+  <a href="homepage.html">See the homepage mockup</a>
+  <a href="../index.html">Back to the dashboard</a>
+</div>
+
+<header class="site-head">
+  <div class="c">
+    <a href="homepage.html" aria-label="Big Leap home"><img src="../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="caret" href="#">Services</a>
+      <a class="caret" href="#">Who We Serve</a>
+      <a class="caret" href="#">Case Studies</a>
+      <a class="caret" href="#">Resources</a>
+      <a href="toolkits-landing.html" aria-current="page" style="border-bottom:3px solid var(--red);padding-bottom:4px">Free Toolkits</a>
+      <a class="caret" href="#">About</a>
+      <a class="pill" href="#">Get Your Custom Strategy</a>
+    </nav>
+    <button class="menu-btn" type="button" id="menu" aria-expanded="false" aria-controls="nav" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="c">
+      <div>
+        <p class="kicker">Free DIY Toolkits from Big Leap</p>
+        <h1 id="h1">Do the setup yourself. <span>Spend your budget on strategy.</span></h1>
+        <p>Tracking installed, ad accounts connected, every lead landing in your CRM, a spokesperson ready for the press. These toolkits walk you through the groundwork you can do on your own, in the right order, so your marketing budget goes to growth instead of setup.</p>
+        <div class="actions">
+          <a class="btn" href="../toolkits/paid/01_What_Kind_of_Business_Are_You.html">Build your Business Profile</a>
+          <a class="text" href="#toolkits">Browse all toolkits</a>
+        </div>
+        <div class="facts"><span><b id="n-kits">15</b> free toolkits</span><span><b>3–5</b> minutes each</span><span><b>No</b> sign-up, nothing stored</span></div>
+      </div>
+      <div><iframe class="widget" src="../widgets/profile-start.html" title="Where should your business start?" height="640"></iframe></div>
+    </div>
+  </section>
+
+  <section class="experts" aria-label="Who wrote the toolkits">
+    <div class="c">
+      <p>Written by the Big Leap experts who do this every day</p>
+      <div class="people">
+        <span class="person"><i style="--c:#143D55">DO</i><span><b>Dallas Olsen</b>RevOps</span></span>
+        <span class="person"><i style="--c:#EA4335">SS</i><span><b>Scott Smoot</b>Paid Media &amp; Tracking</span></span>
+        <span class="person"><i style="--c:#0F7B5F">SA</i><span><b>Shema Al-Darwish</b>SEO</span></span>
+        <span class="person"><i style="--c:#7A4E9C">KA</i><span><b>Kristina Ainge</b>Digital PR</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band sky how" aria-labelledby="how-h">
+    <div class="c">
+      <div class="center"><h2 class="h2" id="how-h">How it works</h2><p class="lead">Three to five minutes per toolkit. Every plan is yours to keep.</p></div>
+      <ol>
+        <li><h3>Build your profile once</h3><p>Eight quick questions about your business. Every toolkit uses your answers to fill itself in.</p></li>
+        <li><h3>Follow your path</h3><p>Your profile shows which toolkits matter for your business and the order to do them in.</p></li>
+        <li><h3>Copy the plan and build it</h3><p>Each toolkit gives step-by-step instructions for free tools you already have. When you hit the hard part, talk to the expert who wrote it.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="toolkits" aria-labelledby="map-h">
+    <div class="c">
+      <div class="center"><h2 class="h2" id="map-h">Every toolkit, in order</h2><p class="lead">Each line is a service. Numbers show the order to do them in.</p></div>
+      <div class="map" id="map"></div>
+    </div>
+  </section>
+
+  <div id="services"></div>
+
+  <section class="band navy limits" aria-labelledby="lim-h">
+    <div class="c">
+      <div>
+        <h2 class="h2" id="lim-h" style="color:#fff">Where DIY stops</h2>
+        <p>Every toolkit tells you plainly where its advice ends. These are the parts where an expert saves more than they cost.</p>
+        <a class="btn" href="#" style="margin-top:18px">Get Your Custom Strategy</a>
+      </div>
+      <ul>
+        <li><b>Strategy and positioning.</b> Which audiences, offers and channels to bet on, and how much to spend.</li>
+        <li><b>Attribution across channels.</b> Connecting ads, search, PR and your CRM into one honest view of revenue.</li>
+        <li><b>Scale.</b> Multi-location, multi-brand and enterprise setups with lots of moving parts.</li>
+        <li><b>Relationships.</b> Media lists, journalist relationships and the judgment behind every pitch.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band faq" aria-labelledby="faq-h">
+    <div class="c" style="max-width:900px">
+      <h2 class="h2 center" id="faq-h">Free toolkit FAQs</h2>
+      <div style="margin-top:28px">
+        <details open><summary>Are the toolkits really free?</summary><p>Yes. No sign-up, no email gate. Use as many as you like.</p></details>
+        <details><summary>Do you store what I enter?</summary><p>No. Your answers stay in your own browser. Your Business Profile is saved there too, so the next toolkit can fill itself in. Clear it anytime.</p></details>
+        <details><summary>Which tools do I need?</summary><p>Mostly free ones: Google Tag Manager, GA4, Search Console, Google Business Profile and the free tier of HubSpot. Each toolkit says when something needs a paid plan.</p></details>
+        <details><summary>What if I get stuck?</summary><p>Every plan ends with a button to talk to the Big Leap expert who wrote it. Bring your plan and we'll pick up where you left off.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="c">
+      <div class="cols">
+        <div><img src="../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40" style="background:#fff;border-radius:8px;padding:6px 10px;height:46px;width:auto"></div>
+        <div><h4>Services</h4><ul><li><a href="#">SEO Marketing</a></li><li><a href="#">Paid Advertising</a></li><li><a href="#">RevOps</a></li><li><a href="#">Content Marketing</a></li></ul></div>
+        <div><h4>Free resources</h4><ul><li><a href="toolkits-landing.html">DIY Toolkits</a></li><li><a href="#">Budget Calculator</a></li><li><a href="#">Site Health Checklist</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li>Lehi, Utah</li><li><a href="#">Get Your Custom Strategy</a></li></ul></div>
+      </div>
+      <div class="legal"><span>© Big Leap. All rights reserved.</span><span>Privacy Policy · Terms of Use</span></div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var C = { revops: '#143D55', paid: '#EA4335', tracking: '#3187B5', seo: '#0F7B5F', pr: '#7A4E9C' };
+  var WIDGET = { revops: ['revops-hours', 670], paid: ['paid-ready', 670], tracking: ['tracking-check', 670], seo: ['seo-foundations', 720], pr: ['pr-ready', 700] };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function ini(n) { return n.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2).toUpperCase(); }
+  fetch('../toolkits.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+    var total = 0; d.series.forEach(function (s) { total += s.toolkits.length; });
+    document.getElementById('n-kits').textContent = total;
+    document.getElementById('map').innerHTML = d.series.map(function (s) {
+      return '<div class="line" style="--c:' + C[s.id] + '"><b>' + esc(s.name) + '<small>' + s.toolkits.length + ' toolkits · ' + esc(s.first) + '</small></b><ol class="stops" style="--n:' + s.toolkits.length + '">' +
+        s.toolkits.map(function (t) { return '<li class="stop"><a href="../' + esc(t.file) + '"><i>' + t.n + '</i>' + esc(t.short) + '<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">: ' + esc(t.title) + '</span></a></li>'; }).join('') +
+        new Array(Math.max(0, 6 - s.toolkits.length) + 1).join('<li class="fill" aria-hidden="true"></li>') + '</ol></div>';
+    }).join('');
+    document.getElementById('services').innerHTML = d.series.map(function (s, i) {
+      var w = WIDGET[s.id];
+      return '<section class="svc' + (i % 2 ? ' flip' : '') + '" style="--c:' + C[s.id] + '" aria-labelledby="sv-' + s.id + '"><div class="c"><div class="copy"><div class="label">' + esc(s.name) + ' · ' + s.toolkits.length + ' toolkits</div><h2 id="sv-' + s.id + '">' + esc(s.headline || s.name) + '</h2><p class="promise">' + esc(s.promise) + '</p><ul class="kits">' +
+        s.toolkits.map(function (t) { return '<li><a href="../' + esc(t.file) + '"><span class="n">' + t.n + '</span><span><strong>' + esc(t.title) + (t.status !== 'live' ? '<em>Draft</em>' : '') + '</strong><small>' + esc(t.description) + '</small></span></a></li>'; }).join('') +
+        '</ul><div class="owner-row"><i>' + ini(s.owner) + '</i><span>Written by <b>' + esc(s.owner) + '</b></span><a class="btn outline" href="#">Talk to ' + esc(s.first) + '</a></div></div>' +
+        (w ? '<div><iframe class="widget" src="../widgets/' + w[0] + '.html" title="' + esc(s.name) + ' quick check" height="' + w[1] + '" loading="lazy"></iframe></div>' : '<div></div>') + '</div></section>';
+    }).join('');
+  });
+  var mb = document.getElementById('menu'), nav = document.getElementById('nav');
+  mb.addEventListener('click', function () { var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
+})();
+</script>
+</body>
+</html>
