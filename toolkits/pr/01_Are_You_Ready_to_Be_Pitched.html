@@ -470,7 +470,7 @@ a { color: #000; }
 :root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
 
 /* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
-.q-row .seg.inline { display: grid; width: min(100%, 300px); flex: 0 0 auto; }
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
 .seg.inline label { min-width: 0; padding-inline: 12px; }
 @media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
 .st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
@@ -483,6 +483,27 @@ a { color: #000; }
 .blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  #answers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); column-gap: 36px; align-items: start; }
+  #answers > .q-head, #answers > .bl-wide, #answers > details, #answers > .profile-box, #answers > [class*="profile"], #answers > .applies, #answers > p, #answers > .text-btn { grid-column: 1 / -1; }
+  #answers > fieldset, #answers > .q { margin-top: 0; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
 @media print { .blh { display: none !important; } }
 </style>
 <script id="bl-track-js">
@@ -1161,6 +1182,27 @@ applyProfile(p0);
     d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
     d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
   }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See your plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
   var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
   window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
