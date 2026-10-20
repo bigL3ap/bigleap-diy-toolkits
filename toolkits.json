@@ -169,6 +169,41 @@
         }
       ],
       "headline": "Ready when the press calls."
+    },
+    {
+      "id": "email",
+      "name": "Email Marketing",
+      "owner": "Erica Pounder",
+      "first": "Erica",
+      "status": "draft",
+      "headline": "Land in the inbox.",
+      "promise": "Reach the inbox, automate the emails that should send themselves, and know whether your program is working.",
+      "toolkits": [
+        {
+          "n": 1,
+          "short": "Inbox",
+          "title": "Will Your Emails Reach the Inbox?",
+          "file": "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html",
+          "description": "Check your sending domain, SPF, DKIM, DMARC, unsubscribe and consent. You get an inbox readiness list in fix order for your email platform.",
+          "status": "draft"
+        },
+        {
+          "n": 2,
+          "short": "Automate",
+          "title": "Which Emails Should Send Themselves?",
+          "file": "toolkits/email/02_Which_Emails_Should_Send_Themselves.html",
+          "description": "Tell us how you sell. You get the automated flows to build first, with triggers, timing, subject lines and a first email drafted for you.",
+          "status": "draft"
+        },
+        {
+          "n": 3,
+          "short": "Measure",
+          "title": "Is Your Email Program Working?",
+          "file": "toolkits/email/03_Is_Your_Email_Program_Working.html",
+          "description": "Enter a few numbers from your last campaigns. You get a scorecard of what's healthy, what to watch, and the three fixes to make first.",
+          "status": "draft"
+        }
+      ]
     }
   ]
 }

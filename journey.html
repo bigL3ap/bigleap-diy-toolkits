@@ -14,7 +14,7 @@
   --line: #D4DADF; --text: #243642; --muted: #5F6E79; --red: #EA4335; --green: #0F7B5F; --amber: #A15C07;
   --head: "Raleway", "Segoe UI", Arial, sans-serif; --body: "Open Sans", "Segoe UI", Arial, sans-serif;
   --shadow: 0 1px 2px rgba(20,61,85,.06), 0 8px 24px rgba(20,61,85,.06);
-  --c-revops: #143D55; --c-paid: #EA4335; --c-seo: #0F7B5F; --c-pr: #7A4E9C;
+  --c-revops: #143D55; --c-paid: #EA4335; --c-seo: #0F7B5F; --c-pr: #7A4E9C; --c-email: #B45309;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -22,14 +22,14 @@
     --navy: #DCE9F2; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26; --tint: #1D3A4C; --paper: #142632;
     --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD; --red: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
-    --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; color-scheme: dark;
+    --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; --c-email: #E7A64A; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --navy: #DCE9F2; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26; --tint: #1D3A4C; --paper: #142632;
   --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD; --red: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
-  --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; color-scheme: dark;
+  --c-revops: #6FB3DA; --c-paid: #F0675B; --c-seo: #4CC9A3; --c-pr: #B78ED6; --c-email: #E7A64A; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -59,8 +59,38 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
 .hero h1 span { color: var(--blue); }
 .hero p { font-size: clamp(16px, 1.5vw, 18px); max-width: 46em; margin: 16px 0 0; }
 
+
+/* Small leaps stepping stones */
+.leaps { margin-top: 26px; }
+.stones { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.25fr); gap: 14px; align-items: end; }
+.stones li { position: relative; }
+.stones li:not(:last-child)::after { content: ""; position: absolute; right: -12px; top: 50%; width: 10px; height: 10px; border-top: 3px solid var(--blue); border-right: 3px solid var(--blue); transform: translateY(-50%) rotate(45deg); }
+.stones a { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); color: var(--text); text-decoration: none; min-height: 116px; }
+.stones li:nth-child(1) a { min-height: 104px; } .stones li:nth-child(2) a { min-height: 116px; } .stones li:nth-child(3) a { min-height: 128px; }
+.stones a:hover { border-color: var(--blue); }
+.stones small { font: 700 12px var(--body); color: var(--blue-ink); }
+.stones b { font: 800 18px/1.25 var(--head); color: var(--navy); }
+.stones span { font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.stones .big a { background: #143D55; border-color: #143D55; min-height: 150px; }
+.stones .big small { color: #F0675B; font-size: 13px; }
+.stones .big b { color: #fff; font-size: 24px; }
+.stones .big span { color: #DCE9F2; }
+@media (max-width: 860px) { .stones { grid-template-columns: 1fr 1fr; } .stones li::after { display: none; } .stones a, .stones .big a { min-height: 0; } }
+@media (max-width: 480px) { .stones { grid-template-columns: 1fr; } }
+/* Persona story */
+.story .seg { display: inline-block; margin-top: 6px; font: 700 12.5px var(--body); color: var(--blue-ink); }
+.story h4 { font: 700 15px var(--head); color: var(--navy); margin: 14px 0 4px; }
+.story .leap { margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: #143D55; color: #DCE9F2; }
+.story .leap h4 { color: #fff; margin: 0 0 6px; }
+.story .leap .svc { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 8px; }
+.story .leap .svc span { padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; font: 600 12.5px var(--body); }
+.story .pipe { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; font-size: 13px; }
+.story .pipe span { padding: 4px 9px; border-radius: 8px; background: var(--tint); color: var(--navy); font-weight: 700; }
+.story .pipe i { font-style: normal; color: var(--muted); }
+.story ol li b { color: var(--navy); }
+
 /* Persona picker */
-.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 26px 0 0; }
+.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 30px 0 0; }
 .picker > span { font: 700 15px var(--head); color: var(--navy); margin-right: 4px; }
 .persona { min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 600 14px var(--body); cursor: pointer; }
 .persona[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
@@ -200,23 +230,30 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
 .blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
 .blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
-/* Tier 2: toolkit bar */
+/* Tier 2: one flat toolkit bar */
 .blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
-.blh-sub .blh-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 52px; padding-top: 4px; padding-bottom: 4px; }
-.blh-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; }
-.blh-crumb .home { font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; text-decoration: none; margin-right: 10px; }
-.blh-tabs { display: flex; flex-wrap: wrap; gap: 2px; }
-.blh-tabs a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
-.blh-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.blh-where { font-size: 13px; color: #5F6E79; }
-.blh-pn { display: flex; gap: 8px; }
-.blh-pn a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; max-width: 300px; padding: 6px 14px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; font: 600 13.5px "Open Sans", Arial, sans-serif; text-decoration: none; }
-.blh-pn a:hover { border-color: #3187B5; }
-.blh-pn a b { flex: 0 0 auto; }
-.blh-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
 @media (max-width: 1080px) {
   .blh-burger { display: inline-flex; }
   .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
@@ -231,39 +268,38 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 @media (max-width: 640px) {
   .blh-bar .blh-in { min-height: 64px; }
   .blh-logo img { height: 32px; }
-  .blh-sub .blh-in { flex-direction: column; align-items: stretch; padding-top: 6px; padding-bottom: 8px; }
-  .blh-crumb { justify-content: space-between; }
-  .blh-crumb .home { width: 100%; }
-  .blh-sub .blh-in { position: relative; }
-  .blh-tabs { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-  .blh-tabs a { justify-content: center; padding: 6px 8px; background: #fff; border: 1px solid #D4DADF; }
-  .blh-crumb .home { min-height: 44px; display: flex; align-items: center; }
-  .blh-theme { position: absolute; right: max(20px, env(safe-area-inset-right)); top: 8px; min-height: 36px; min-width: 36px; width: 36px; height: 36px; padding: 0; }
-  .blh-right:empty { display: none; }
-  .blh-right { justify-content: space-between; }
-  .blh-where { display: none; }
-  .blh-pn { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-  .blh-pn a { max-width: none; justify-content: center; }
-  .blh-pn a span { display: none; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
 @media print { .blh { display: none !important; } }
 </style>
 </head>
 <body>
-<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><div class="blh-crumb"><a class="home" href="index.html">DIY Toolkits</a><nav class="blh-tabs" aria-label="DIY Toolkits"><a href="index.html#toolkits" data-tab="toolkits">Toolkits</a><a href="index.html#widgets" data-tab="widgets">Widgets &amp; embeds</a><a href="journey.html" data-tab="journey" aria-current="page">Journey map</a><a href="index.html#review" data-tab="review">Team review</a></nav></div><div class="blh-right"></div></div></div></header><!-- /bl-header -->
-<div class="draft-strip" role="note">Draft for internal review · How the DIY toolkits turn into pipeline</div>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey" aria-current="page">Journey map</a><a href="index.html#review" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft 1 for internal review · How Small Leaps turn into pipeline and closed deals</div>
 
 <main class="wrap">
   <section class="hero" aria-labelledby="h1">
-    <p class="kicker">Buyer journey map</p>
-    <h1 id="h1">Help first. <span>Earn the conversation.</span></h1>
-    <p>Every toolkit gives a prospect real progress on their own. Each one also ends at the same place: the moment their plan needs an expert. This map shows how a visitor moves from a free tool to a booked call and a signed deal, which toolkit feeds which, and where each step lands in the HubSpot pipeline.</p>
-    <div class="picker" role="group" aria-label="Follow a sample prospect">
-      <span>Follow a prospect:</span>
-      <button class="persona" type="button" aria-pressed="true" data-p="none">Show everything</button>
-    </div>
+    <p class="kicker">Small Leaps → The Big Leap · Buyer journey map</p>
+    <h1 id="h1">Small leaps on their own. <span>One big leap with us.</span></h1>
+    <p>Every free toolkit is a small leap: a real piece of progress a prospect makes on their own, like tracking installed, leads reaching the CRM, a domain that lands in the inbox, or a spokesperson ready for press. Each small leap ends at the same place: the moment the next step needs an expert. That's when they make the Big Leap and hire Big Leap. This map shows the full path, from first visit through every HubSpot stage to a closed deal.</p>
   </section>
+
+  <section class="leaps" aria-label="Small Leaps to the Big Leap">
+    <ol class="stones">
+      <li><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html"><small>Small leap 1</small><b>Know where you stand</b><span>Business Profile: 3 minutes, a path across every service</span></a></li>
+      <li><a href="index.html#toolkits"><small>Small leap 2</small><b>Fix the foundations</b><span>Tracking, lead capture, search basics, inbox, spokesperson</span></a></li>
+      <li><a href="index.html#toolkits"><small>Small leap 3</small><b>Get ready to grow</b><span>Ads readiness, first campaigns, email flows, dashboards, media kit</span></a></li>
+      <li class="big"><a href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&amp;utm_medium=journey-map"><small>The Big Leap</small><b>Hire Big Leap</b><span>Their plan becomes the scope. Work they already did lowers the cost.</span></a></li>
+    </ol>
+  </section>
+
+  <div class="picker" role="group" aria-label="Follow a sample prospect">
+    <span>Follow a real-world prospect:</span>
+    <button class="persona" type="button" aria-pressed="true" data-p="none">Show everything</button>
+  </div>
 
   <div class="board" id="board" aria-label="Swimlane: stages across, lanes down">
     <div class="lane-grid" id="grid"></div>
@@ -280,17 +316,17 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   </section>
 
   <section class="block" aria-labelledby="inst-h">
-    <div class="block-head"><div><h2 id="inst-h">What makes this measurable</h2><p>The journey only becomes pipeline if HubSpot can see it. Here's what is in place today and what still has to be built. Each open piece is also on the dashboard's Open items tab.</p></div></div>
+    <div class="block-head"><div><h2 id="inst-h">What makes this measurable</h2><p>The journey only becomes pipeline if HubSpot can see it. Here's what is in place today and what still has to be built. Each open piece is also on the dashboard's Team review tab.</p></div></div>
     <div class="checks" id="checks"></div>
   </section>
 
   <section class="block" aria-labelledby="trust-h">
-    <div class="block-head"><div><h2 id="trust-h">Why this builds trust</h2><p>The toolkits sell by being useful. Four rules keep them that way.</p></div></div>
+    <div class="block-head"><div><h2 id="trust-h">Why this builds trust</h2><p>Small Leaps sell by being useful. Four rules keep them that way.</p></div></div>
     <div class="principles">
       <div><b>Real value, no gate</b><p>No email wall. A visitor gets a complete plan for free, and leaves better off even if they never call.</p></div>
       <div><b>Honest about limits</b><p>Every plan ends with “Where it gets complex”. Saying where DIY stops is what makes the expert credible.</p></div>
-      <div><b>A named expert</b><p>Each toolkit is written by, and hands off to, a real person: Dallas, Scott, Shema or Kristina.</p></div>
-      <div><b>Their plan becomes the scope</b><p>The visitor brings their plan to the call. The gaps they couldn't close become the proposal, and the work they already did lowers its cost.</p></div>
+      <div><b>A named expert</b><p>Each toolkit is written by, and hands off to, a real person: Dallas, Scott, Shema, Kristina or Erica.</p></div>
+      <div><b>Small leaps make the Big Leap easier</b><p>The visitor brings their plan to the call. The gaps they couldn't close become the proposal, and the small leaps they already made lower its cost.</p></div>
     </div>
   </section>
 
@@ -309,16 +345,16 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   var STAGES = [
-    ['Discover', 'They notice a problem'],
-    ['Self-assess', 'They size it up'],
-    ['Build the foundation', 'They fix the basics'],
-    ['Get ready to grow', 'They plan the next move'],
-    ['Hit the hard part', 'They need an expert'],
-    ['Partner with Big Leap', 'They become a client']
+    ['Notice the gap', 'They feel the problem'],
+    ['First small leap', 'They size it up'],
+    ['Small leaps: foundations', 'They fix the basics'],
+    ['Small leaps: ready to grow', 'They plan the next move'],
+    ['Ready for more', 'They need an expert'],
+    ['The Big Leap', 'They hire Big Leap']
   ];
   var LANES = [
     ['What they think', 'The prospect’s mindset'],
-    ['What they do', 'Actions on our site'],
+    ['What they do', 'Their small leaps'],
     ['DIY toolkits', 'Click one to open it'],
     ['Big Leap touchpoints', 'Live, or planned'],
     ['HubSpot pipeline', 'Lifecycle stage and signal']
@@ -327,96 +363,152 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   var K = {
     paid1: ['paid', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'Business Profile'],
     paid2: ['paid', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html', 'Google Ads ready?'],
-    trk2: ['paid', 'toolkits/paid/03_Which_Conversions_Should_You_Track.html', 'Conversion plan'],
-    paid3: ['paid', 'toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html', 'First campaigns'],
-    seo1: ['seo', 'toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html', 'SEO foundations'],
-    seo2: ['seo', 'toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html', 'Local search'],
+    paid3: ['paid', 'toolkits/paid/03_Which_Conversions_Should_You_Track.html', 'Conversion plan'],
+    paid4: ['paid', 'toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html', 'First campaigns'],
     rv1: ['revops', 'toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html', 'Lead capture'],
     rv2: ['revops', 'toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html', 'Speed to lead'],
     rv3: ['revops', 'toolkits/revops/03_Who_Should_Own_Each_New_Lead.html', 'Lead routing'],
     rv4: ['revops', 'toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html', 'Sales automation'],
     rv5: ['revops', 'toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', 'Time audit'],
     rv6: ['revops', 'toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', 'Pipeline dashboard'],
-    trk1: ['revops', 'toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html', 'Tracking stack'],
+    rv7: ['revops', 'toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html', 'Tracking stack'],
+    seo1: ['seo', 'toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html', 'SEO foundations'],
+    seo2: ['seo', 'toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html', 'Local search'],
     pr1: ['pr', 'toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html', 'Pitch-ready check'],
-    pr2: ['pr', 'toolkits/pr/02_Build_Your_Media_Kit.html', 'Media kit']
+    pr2: ['pr', 'toolkits/pr/02_Build_Your_Media_Kit.html', 'Media kit'],
+    em1: ['email', 'toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html', 'Inbox ready?'],
+    em2: ['email', 'toolkits/email/02_Which_Emails_Should_Send_Themselves.html', 'Email flows'],
+    em3: ['email', 'toolkits/email/03_Is_Your_Email_Program_Working.html', 'Email health']
   };
-  var SERIES = { paid: ['Paid Media', 'Scott Smoot', 'Scott'], seo: ['SEO', 'Shema Al-Darwish', 'Shema'], revops: ['RevOps', 'Dallas Olsen', 'Dallas'], pr: ['Digital PR', 'Kristina Ainge', 'Kristina'] };
-  var SERIES_ORDER = ['paid', 'revops', 'seo', 'pr'];
+  var SERIES = { paid: ['Paid Media', 'Scott Smoot', 'Scott'], revops: ['RevOps', 'Dallas Olsen', 'Dallas'], seo: ['SEO', 'Shema Al-Darwish', 'Shema'], pr: ['Digital PR', 'Kristina Ainge', 'Kristina'], email: ['Email Marketing', 'Erica Pounder', 'Erica'] };
+  var SERIES_ORDER = ['paid', 'revops', 'seo', 'pr', 'email'];
 
   /* Cells: [stage, lane] -> content. Types: t = text, k = toolkit chips, tp = touchpoints [label, live?], pl = pipeline */
   var CELLS = {
-    '0,0': { t: '“Why aren’t we getting more leads?” “Are our ads even working?”' },
-    '0,1': { t: 'Lands on bigleap.com, a blog post, or a widget embedded on a partner page. Sees a slide tile in a proposal or on a sales call.' },
-    '0,2': { k: ['rv5'], t: 'Widgets: Where should you start? · Hours lost · Ads ready? · Tracking check · SEO check · Pitch-ready' },
-    '0,3': { tp: [['Homepage DIY band and nav link', 0], ['Widgets on service pages and blog', 0], ['Slide tiles with QR in proposals', 1], ['Organic and AI search to the landing page', 0]] },
-    '0,4': { pl: 'Anonymous visitor', s: 'Source and UTM captured by the HubSpot tracking code once the hub is on bigleap.com.' },
+    '0,0': { t: '“Why aren’t we getting more leads?” “Are our ads even working?” “Why did our emails stop landing?”' },
+    '0,1': { t: 'Lands on bigleap.com, a blog post, a podcast mention or a widget on a service page. Or sees a slide tile with a QR code in a proposal or webinar.' },
+    '0,2': { k: ['rv5'], t: 'Widgets: Where should you start? · Hours lost · Ads ready? · Tracking check · SEO check · Pitch-ready · Inbox ready?' },
+    '0,3': { tp: [['Slide tiles with QR codes in proposals and webinars', 1], ['Free Toolkits link in the bigleap.com nav and homepage band', 0], ['Widgets on service pages and blog posts', 0], ['Organic and AI search to the landing page', 0]] },
+    '0,4': { pl: 'Anonymous visitor', s: 'Source and UTM captured by the HubSpot tracking code once the hub runs on bigleap.com.' },
 
-    '1,0': { t: '“What kind of help do we actually need?”' },
-    '1,1': { t: 'Answers eight questions once. Gets their campaign fit and a recommended path across every service.' },
+    '1,0': { t: '“What kind of help do we actually need, and what can we do ourselves?”' },
+    '1,1': { t: 'Answers eight questions once. Gets the campaign types that fit and a recommended path across every service.' },
     '1,2': { k: ['paid1', 'rv5'] },
     '1,3': { tp: [['Business Profile with a shareable code', 1], ['“Email me my path” opt-in', 0]] },
-    '1,4': { pl: 'Visitor → Lead', s: 'Becomes a Lead when they opt in to receive their plan. Profile answers map to contact properties (industry, B2B/B2C, locations, CRM, budget).' },
+    '1,4': { pl: 'Visitor → Lead', s: 'Becomes a Lead when they opt in to get their plan. Profile answers map to contact properties: industry, B2B/B2C, locations, CRM, budget.' },
 
     '2,0': { t: '“Okay, I can do some of this myself.”' },
-    '2,1': { t: 'Installs Tag Manager and GA4, verifies Search Console, connects forms to a CRM, lines up a spokesperson.' },
-    '2,2': { k: ['trk1', 'trk2', 'seo1', 'seo2', 'rv1', 'rv2', 'rv3', 'pr1'] },
-    '2,3': { tp: [['Copy-my-plan on every toolkit', 1], ['Cross-links to the next relevant toolkit', 1], ['“How did it go?” check-in from the toolkit owner', 0]] },
-    '2,4': { pl: 'Lead → MQL', s: 'Scored as MQL on profile fit plus two or more toolkits finished, or a budget that fits.' },
+    '2,1': { t: 'Installs Tag Manager and GA4, connects forms to the CRM, verifies Search Console, fixes business listings, authenticates their email domain, lines up a spokesperson.' },
+    '2,2': { k: ['rv7', 'rv1', 'rv2', 'rv3', 'paid3', 'seo1', 'seo2', 'em1', 'pr1'] },
+    '2,3': { tp: [['Copy my plan on every toolkit', 1], ['Next-step and cross-service links', 1], ['“How did it go?” check-in from the toolkit owner', 0]] },
+    '2,4': { pl: 'Lead → MQL', s: 'MQL on profile fit (segment, budget, locations) plus two or more toolkits finished.' },
 
-    '3,0': { t: '“The basics work. What should we spend on next?”' },
-    '3,1': { t: 'Checks ad-account readiness, plans first campaigns, automates sales steps, builds a dashboard and a media kit.' },
-    '3,2': { k: ['paid2', 'paid3', 'rv4', 'rv6', 'pr2'] },
-    '3,3': { tp: [['“Where it gets complex” panel on every plan', 1], ['Case studies matched to their profile', 0], ['Masterclass invite', 0]] },
-    '3,4': { pl: 'MQL', s: 'Nurture continues. Each toolkit visited adds intent; repeat visits to Paid 03 or RevOps 06 are strong signals.' },
+    '3,0': { t: '“The basics work. What should we invest in next?”' },
+    '3,1': { t: 'Checks ad-account readiness, plans first campaigns, maps email flows, automates sales steps, plans a pipeline dashboard, builds a media kit.' },
+    '3,2': { k: ['paid2', 'paid4', 'em2', 'em3', 'rv4', 'rv6', 'pr2'] },
+    '3,3': { tp: [['“Where it gets complex” panel on every plan', 1], ['Case studies matched to their segment', 0], ['Masterclass invite', 0]] },
+    '3,4': { pl: 'MQL, rising intent', s: 'Repeat visits to Paid 4, Email 3 or RevOps 6, or a blocker flagged in Paid 2, are strong buying signals.' },
 
     '4,0': { t: '“This needs someone who has done it a hundred times.”' },
-    '4,1': { t: 'Clicks “Talk to Scott / Shema / Kristina / Dallas about building it” and books a call, with their plan copied in.' },
-    '4,2': { t: 'Every toolkit’s closing panel', k: [] },
-    '4,3': { tp: [['“Talk to [owner]” CTA, UTM-tagged per toolkit', 1], ['Owner scheduler links', 0], ['Plan pasted into the booking form', 0]] },
-    '4,4': { pl: 'SQL', s: 'Meeting booked. utm_campaign shows which toolkit sent them (for example paid-02), so the owner knows the context before the call.' },
+    '4,1': { t: 'Clicks “Talk to Scott / Dallas / Shema / Kristina / Erica about building it” and books a call with their plan attached.' },
+    '4,2': { t: 'Every toolkit’s closing panel hands off to its named expert.' },
+    '4,3': { tp: [['“Talk to [owner]” CTA, UTM-tagged per toolkit', 1], ['Owner scheduler links', 0], ['Plan and profile attached to the booking', 0]] },
+    '4,4': { pl: 'SQL', s: 'Meeting booked. utm_campaign shows which toolkit sent them (for example paid-02), so the owner walks in knowing their gaps.' },
 
     '5,0': { t: '“They already know where we are. That saves us time and money.”' },
-    '5,1': { t: 'Strategy call reviews their plan. The gaps they couldn’t close become the scope. Foundations they already built lower the upfront cost.' },
-    '5,2': { t: 'Their plan and Business Profile feed the gap audit and the 90-day foundational model.' },
-    '5,3': { tp: [['Strategy call with the toolkit owner', 1], ['Proposal scoped from their gap list', 0], ['Onboarding that skips work they already did', 0]] },
-    '5,4': { pl: 'Deal → Customer', s: 'Deal created with source “DIY toolkit”. Closed-won reports back to the toolkit that started it.' }
+    '5,1': { t: 'Strategy call reviews their plan. The gaps they couldn’t close become the scope. The small leaps they already made lower the upfront cost.' },
+    '5,2': { t: 'Their plan and Business Profile feed Coby’s gap audit and the 90-day foundational model.' },
+    '5,3': { tp: [['Strategy call with the toolkit owner', 1], ['Proposal scoped from their gap list', 0], ['Agency Brands routing: Big Leap or LeadGenix by fit', 0], ['Onboarding that skips work they already did', 0]] },
+    '5,4': { pl: 'Opportunity → Customer', s: 'Deal created with original source “DIY toolkit”. Closed-won reports back to the toolkit that started it.' }
   };
 
+  /* Real-world prospect cases, built on Big Leap's Who We Serve segments and recent client patterns (no client names) */
   var PERSONAS = {
-    local: { label: 'Local service business', who: 'A family dental practice with two offices, leads by phone and web form, no CRM.',
-      path: [['0,1', 'Finds the “Where should you start?” widget on a bigleap.com blog post.'], ['1,2', 'Builds a Business Profile: B2C, two locations, leads, $2,500 a month.'], ['2,2', 'Fixes Google Business Profile listings (Local search), then connects web forms to a CRM (Lead capture).'], ['2,4', 'Opts in to email their plan, becomes a Lead, then an MQL after a second toolkit.'], ['3,2', 'Runs Google Ads ready? and learns location assets need Google Business Profile linked.'], ['4,1', 'Clicks Talk to Scott from First campaigns with the plan attached.'], ['5,4', 'Signs a paid search + local SEO engagement that starts at month two, not month zero.']],
-      out: 'Outcome: a smaller, faster first engagement, and a client who trusts the advice because it already worked.' },
-    b2b: { label: 'B2B firm with HubSpot', who: 'A 20-person IT services firm with HubSpot Starter and leads going cold.',
-      path: [['0,2', 'Sees the Hours lost widget in a RevOps proposal deck and scans the QR code.'], ['1,2', 'Runs the Time audit: 30 to 50 hours a month lost to hand work.'], ['2,2', 'Builds Lead capture, Speed to lead and Lead routing in HubSpot.'], ['2,4', 'Three toolkits done plus a HubSpot fit: MQL.'], ['3,2', 'Plans a pipeline dashboard, then hits multi-pipeline attribution in “Where it gets complex”.'], ['4,4', 'Books with Dallas: SQL, tagged revops-06.'], ['5,1', 'Engagement scoped to attribution and reporting, since the basics are done.']],
-      out: 'Outcome: the prospect arrives already sold on RevOps, because they felt the hours come back.' },
-    ecom: { label: 'Shopify brand', who: 'A direct-to-consumer coffee brand on Shopify, running Meta ads with no conversion tracking.',
-      path: [['0,3', 'Clicks the Free Toolkits link in the bigleap.com nav.'], ['1,2', 'Business Profile flags Shopping and Performance Max as a fit, and missing tracking as the first gap.'], ['2,2', 'Installs the Google & YouTube app, GA4 and the Meta pixel with Conversions API (RevOps 7), then plans purchase events (Paid 3).'], ['3,2', 'Google Ads ready? shows Merchant Center feed issues; First campaigns suggests Standard Shopping under $1,500.'], ['3,4', 'Repeat visits to First campaigns raise their score.'], ['4,1', 'Talks to Scott about feed tiering by margin.'], ['5,4', 'Closes as a paid media client with clean tracking from day one.']],
-      out: 'Outcome: no first month lost to tracking setup, so results show up sooner.' },
-    launch: { label: 'Founder with a launch', who: 'A startup founder launching an app in 90 days who wants press and podcasts.',
-      path: [['0,1', 'Finds the toolkits landing page from search.'], ['1,2', 'Business Profile marks the app and recommends the PR path plus tracking.'], ['2,2', 'Runs the Pitch-ready check: needs bios, headshots and a press page.'], ['3,2', 'Builds a media kit with short and long bios, a podcast intro and talking points.'], ['2,2', 'Sets up the app event chain in the Conversion plan (install, first open, subscribe).'], ['4,1', 'Talks to Kristina about a 90-day launch push.'], ['5,1', 'Engagement starts with pitching, not questionnaires, because the media kit is done.']],
-      out: 'Outcome: Kristina’s team pitches in week one instead of week four.' }
+    local: { label: 'Multi-location home services',
+      seg: ['Multi-Location & Franchise · Contractor / HVAC', 'https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/'],
+      who: 'A three-location HVAC and plumbing company. Calls and web forms land in a shared inbox, Google Ads run in an account a former agency owns, and review requests go out from a personal Gmail. About $6,000 a month to spend.',
+      path: [
+        ['0,1', '<b>Notices the gap:</b> searches “how to get more HVAC leads” and lands on a Big Leap blog post with the “Where should you start?” widget.'],
+        ['1,2', '<b>Small leap 1:</b> Business Profile: B2C, services, three locations, no CRM. Path: Local search → Lead capture → Inbox ready → Google Ads ready.'],
+        ['1,4', 'Taps “Email me my path” and becomes a <b>Lead</b>.'],
+        ['2,2', '<b>Small leap 2:</b> fixes name, address and phone across three Google Business Profiles and copies the review-request text (SEO 2). Connects web forms to a free CRM (RevOps 1). Authenticates the domain so review requests stop landing in spam (Email 1).'],
+        ['2,4', 'Three toolkits finished, multi-location, budget fits: <b>MQL</b>. Shema’s check-in email asks how the listings went.'],
+        ['3,2', '<b>Small leap 3:</b> Google Ads ready? flags two launch blockers: the account belongs to the old agency, and calls aren’t tracked as conversions.'],
+        ['4,1', 'Clicks <b>Talk to Scott</b> from Paid 2 and books with the plan attached: <b>SQL</b> (paid-02).'],
+        ['5,1', '<b>The Big Leap:</b> Scott scopes account ownership, call tracking, location pages and a review program, skipping the listings and CRM work they already did.']
+      ],
+      leap: { services: ['Paid search', 'Local SEO', 'RevOps: call tracking'], scope: 'Starts at campaigns, not cleanup. Routing rule to confirm: multi-location goes to Big Leap; single-location, smaller budgets fit LeadGenix.' },
+      pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
+
+    ecom: { label: 'Shopify DTC brand',
+      seg: ['Ecommerce & DTC', 'https://www.bigleap.com/who-we-serve/ecommerce/'],
+      who: 'A $3M-a-year Shopify brand with 400 products. Meta ads run in-house, the email platform only sends newsletters, there’s no Google Shopping, and no one trusts the revenue numbers.',
+      path: [
+        ['0,3', '<b>Notices the gap:</b> reads an ecommerce case study and clicks <b>Free Toolkits</b> in the bigleap.com nav.'],
+        ['1,2', '<b>Small leap 1:</b> Business Profile: B2C, products on Shopify, national. Shopping and Performance Max fit; tracking is the first gap.'],
+        ['2,2', '<b>Small leap 2:</b> installs the Google & YouTube app, GA4 and the Meta pixel with Conversions API (RevOps 7). Plans purchase events with values (Paid 3). Adds DMARC to meet Google and Yahoo sender rules (Email 1).'],
+        ['2,4', 'Opts in for the plan, then hits the ecommerce fit rule: <b>Lead → MQL</b>.'],
+        ['3,2', '<b>Small leap 3:</b> maps welcome, abandoned-cart and post-purchase flows (Email 2). Finds Merchant Center feed disapprovals (Paid 2). First campaigns suggests Standard Shopping to start (Paid 4).'],
+        ['3,4', 'Returns to Paid 4 and Email 3 twice in a week: rising intent.'],
+        ['4,1', 'Clicks <b>Talk to Scott</b> about feed tiering by margin: <b>SQL</b> (paid-04). Erica joins the call for the flows.'],
+        ['5,4', '<b>The Big Leap:</b> closes a Shopping and Performance Max engagement plus email flows, with clean tracking from day one.']
+      ],
+      leap: { services: ['Paid: Shopping & PMax', 'Email Marketing', 'SEO: product pages (phase 2)'], scope: 'No first month lost to tracking setup, so results show up sooner and the retainer goes to growth.' },
+      pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
+
+    b2b: { label: 'B2B SaaS on HubSpot',
+      seg: ['B2B · SaaS', 'https://www.bigleap.com/who-we-serve/saas/'],
+      who: 'A 40-person B2B software company on HubSpot Sales Pro. Leads come from LinkedIn and Google Ads, MQLs sit untouched, and the CEO wants to know which channels produce pipeline and why competitors show up in AI answers.',
+      path: [
+        ['0,2', '<b>Notices the gap:</b> sees the “Hours lost” slide tile in a Big Leap webinar and scans the QR code.'],
+        ['1,2', '<b>Small leap 1:</b> Time audit (RevOps 5): 40–60 hours a month lost to hand work.'],
+        ['2,2', '<b>Small leap 2:</b> builds lead capture, speed to lead and routing in HubSpot (RevOps 1–3) and tags campaigns with UTMs (RevOps 7). Opens AI search crawler access (SEO 1).'],
+        ['2,4', 'HubSpot fit plus four toolkits: <b>MQL</b>.'],
+        ['3,2', '<b>Small leap 3:</b> plans sending MQL, SQL and closed-won back to Google Ads (Paid 3), then plans a pipeline dashboard (RevOps 6) and hits multi-touch attribution under “Where it gets complex”.'],
+        ['4,4', 'Books with <b>Dallas</b> from RevOps 6: <b>SQL</b> (revops-06). Dallas brings in Scott.'],
+        ['5,1', '<b>The Big Leap:</b> engagement scoped to attribution and reporting, value-based bidding on offline conversions, and AI SEO. The basics are already done.']
+      ],
+      leap: { services: ['RevOps: attribution', 'Paid search', 'AI SEO'], scope: 'The prospect arrives already sold on RevOps because they felt the hours come back.' },
+      pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
+
+    pro: { label: 'Law firm building authority',
+      seg: ['Legal · also fits medical practices', 'https://www.bigleap.com/who-we-serve/legal/'],
+      who: 'A two-partner personal injury firm in one metro. They want to be the attorneys reporters quote, to show up when people ask AI tools for a lawyer, and to stop losing intake calls after hours.',
+      path: [
+        ['0,1', '<b>Notices the gap:</b> hears about the toolkits on the Sweet Takes podcast and finds the landing page.'],
+        ['1,2', '<b>Small leap 1:</b> Business Profile flags legal as a regulated category for ads (talk to Scott) and recommends the PR and SEO paths.'],
+        ['2,2', '<b>Small leap 2:</b> Pitch-ready check (PR 1): no bios, no headshots, no press page. Fixes the About page, adds Legal Service schema and sets up Bing Webmaster Tools (SEO 1).'],
+        ['2,4', 'Opts in, then hits the fit rule after a second toolkit: <b>Lead → MQL</b>.'],
+        ['3,2', '<b>Small leap 3:</b> builds bios, a podcast intro and talking points (PR 2). Sets up an intake follow-up flow and a monthly newsletter (Email 2).'],
+        ['4,1', 'Clicks <b>Talk to Kristina</b> about a 90-day authority push: <b>SQL</b> (pr-02).'],
+        ['5,4', '<b>The Big Leap:</b> closes Digital PR plus AI SEO, with local SEO and compliant paid search as phase two.']
+      ],
+      leap: { services: ['Digital PR', 'AI SEO', 'Local SEO (phase 2)'], scope: 'Kristina’s team pitches in week one instead of week four, because the media kit is already done.' },
+      pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] }
   };
 
   /* Connections between toolkits */
   var CONN = {
-    paid1: { from: [], to: ['paid2', 'trk1', 'seo2', 'rv1', 'pr1'], why: 'The shared start. It recommends a path across every service.' },
-    paid2: { from: ['paid1'], to: ['paid3', 'trk1', 'trk2', 'rv1', 'seo2'], why: 'Catches setup gaps that would waste ad spend.' },
-    paid3: { from: ['paid2', 'trk2'], to: ['trk2', 'rv2'], why: 'Turns a ready account into a first campaign plan.' },
-    trk1: { from: ['paid1', 'paid2', 'seo1', 'rv1'], to: ['trk2', 'seo1', 'rv1'], why: 'RevOps 7. The measurement base every channel depends on: Tag Manager, GA4, consent, ad tags and lead source.' },
-    trk2: { from: ['trk1', 'paid2'], to: ['paid3', 'rv1'], why: 'Paid 3. Decides which results steer ad bidding, and what to send back from the CRM.' },
-    seo1: { from: ['paid1', 'trk1'], to: ['seo2', 'trk1', 'pr2'], why: 'Makes sure search and AI search can reach the site.' },
-    seo2: { from: ['paid1', 'seo1', 'paid2'], to: ['paid2', 'rv1'], why: 'For businesses with locations. Also powers ad location assets.' },
-    rv1: { from: ['paid1', 'trk1', 'seo2'], to: ['rv2', 'trk1', 'paid2', 'seo1'], why: 'Makes sure every lead the marketing earns reaches the CRM.' },
-    rv2: { from: ['rv1', 'paid3'], to: ['rv3'], why: 'The first reply, written and automated.' },
+    paid1: { from: [], to: ['paid2', 'rv7', 'seo2', 'rv1', 'em1', 'pr1'], why: 'The first small leap for everyone. It recommends a path across every service.' },
+    paid2: { from: ['paid1'], to: ['paid3', 'paid4', 'rv7', 'rv1', 'seo2'], why: 'Catches setup gaps that would waste ad spend.' },
+    paid3: { from: ['rv7', 'paid2'], to: ['paid4', 'rv1'], why: 'Decides which results steer ad bidding, and what to send back from the CRM.' },
+    paid4: { from: ['paid2', 'paid3'], to: ['rv2', 'em2'], why: 'Turns a ready account into a first campaign plan.' },
+    rv1: { from: ['paid1', 'rv7', 'seo2'], to: ['rv2', 'rv7', 'paid2', 'em1'], why: 'Makes sure every lead the marketing earns reaches the CRM.' },
+    rv2: { from: ['rv1', 'paid4'], to: ['rv3', 'em2'], why: 'The first reply, written and automated.' },
     rv3: { from: ['rv2'], to: ['rv4', 'paid2', 'pr1'], why: 'Clear ownership for every new lead.' },
     rv4: { from: ['rv3', 'rv5'], to: ['rv6'], why: 'Pipeline admin that runs itself.' },
-    rv5: { from: [], to: ['rv1', 'rv2', 'rv3', 'rv4', 'rv6'], why: 'The RevOps start-here. Ranks which RevOps toolkit to do first.' },
-    rv6: { from: ['rv4', 'rv5'], to: ['paid2', 'seo1', 'pr1'], why: 'Pipeline visibility once the data is clean.' },
-    pr1: { from: ['paid1', 'rv3'], to: ['pr2', 'seo1', 'trk1'], why: 'Readiness before any pitching starts.' },
-    pr2: { from: ['pr1', 'seo1'], to: ['seo1', 'trk1'], why: 'Bios, talking points and a press kit, written for them.' }
+    rv5: { from: [], to: ['rv1', 'rv2', 'rv3', 'rv4', 'rv6'], why: 'The RevOps start here. Ranks which RevOps toolkit to do first.' },
+    rv6: { from: ['rv4', 'rv5'], to: ['rv7', 'paid2', 'seo1'], why: 'Pipeline visibility once the data is clean.' },
+    rv7: { from: ['paid1', 'paid2', 'seo1', 'rv1'], to: ['paid3', 'seo1', 'rv1'], why: 'The measurement base every channel depends on: Tag Manager, GA4, consent, ad tags and lead source.' },
+    seo1: { from: ['paid1', 'rv7'], to: ['seo2', 'rv7', 'pr2'], why: 'Makes sure search and AI search can reach and trust the site.' },
+    seo2: { from: ['paid1', 'seo1', 'paid2'], to: ['paid2', 'rv1', 'em2'], why: 'For businesses with locations. Also powers ad location assets and review requests.' },
+    pr1: { from: ['paid1', 'rv3'], to: ['pr2', 'seo1', 'rv7'], why: 'Readiness before any pitching starts.' },
+    pr2: { from: ['pr1', 'seo1'], to: ['seo1', 'em2'], why: 'Bios, talking points and a press kit, written for them.' },
+    em1: { from: ['paid1', 'rv1'], to: ['em2', 'rv7', 'rv1'], why: 'Makes sure email lands in the inbox and follows the rules before anything is automated.' },
+    em2: { from: ['em1', 'rv2', 'seo2'], to: ['em3', 'rv2'], why: 'The emails that should send themselves: welcome, cart, post-purchase, nurture, win-back.' },
+    em3: { from: ['em2'], to: ['rv7', 'rv6'], why: 'A health scorecard for the email program, and the three fixes to make first.' }
   };
-  var CAMPAIGN = { paid1: 'paid-01', paid2: 'paid-02', trk2: 'paid-03', paid3: 'paid-04', trk1: 'revops-07', seo1: 'seo-01', seo2: 'seo-02', rv1: 'revops-01', rv2: 'revops-02', rv3: 'revops-03', rv4: 'revops-04', rv5: 'revops-05', rv6: 'revops-06', pr1: 'pr-01', pr2: 'pr-02' };
+  var CAMPAIGN = { paid1: 'paid-01', paid2: 'paid-02', paid3: 'paid-03', paid4: 'paid-04', rv1: 'revops-01', rv2: 'revops-02', rv3: 'revops-03', rv4: 'revops-04', rv5: 'revops-05', rv6: 'revops-06', rv7: 'revops-07', seo1: 'seo-01', seo2: 'seo-02', pr1: 'pr-01', pr2: 'pr-02', em1: 'email-01', em2: 'email-02', em3: 'email-03' };
 
   function chip(id, asButton) {
     var k = K[id]; if (!k) return '';
@@ -464,7 +556,10 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       var c = $('c-' + st[0].replace(',', '-'));
       if (c) { c.classList.add('hit'); var sb = c.querySelector('.step-badge'); sb.textContent = sb.textContent ? sb.textContent + ',' + (i + 1) : (i + 1); }
     });
-    story.innerHTML = '<h3>' + esc(p.label) + '</h3><p style="margin:4px 0 0;color:var(--muted)">' + esc(p.who) + '</p><ol>' + p.path.map(function (st) { return '<li>' + esc(st[1]) + '</li>'; }).join('') + '</ol><p class="out">' + esc(p.out) + '</p>';
+    story.innerHTML = '<h3>' + esc(p.label) + '</h3><a class="seg" href="' + esc(p.seg[1]) + '" target="_blank" rel="noopener">Big Leap segment: ' + esc(p.seg[0]) + '</a><p style="margin:6px 0 0">' + esc(p.who) + '</p>' +
+      '<h4>Their small leaps</h4><ol>' + p.path.map(function (st) { return '<li>' + st[1] + '</li>'; }).join('') + '</ol>' +
+      '<div class="pipe" aria-label="HubSpot lifecycle path">' + p.pipe.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('<i aria-hidden="true">\u2192</i>') + '</div>' +
+      '<div class="leap"><h4>The Big Leap</h4><div class="svc">' + p.leap.services.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div><p style="margin:0">' + esc(p.leap.scope) + '</p></div>';
     story.hidden = false;
   }
   picker.addEventListener('click', function (e) { var b = e.target.closest('.persona'); if (b) setPersona(b.getAttribute('data-p')); });
@@ -492,7 +587,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   var CHECKS = [
     [1, 'UTM-tagged “Talk to …” buttons', 'Every toolkit’s CTA carries utm_source=diy-toolkits and a utm_campaign per toolkit, so HubSpot attributes booked calls.'],
     [1, 'Shared Business Profile', 'One set of answers fills every toolkit. The same fields can become HubSpot contact properties.'],
-    [1, 'Cross-links and next steps', 'Every page links to the dashboard, this map, the previous and next toolkit, and the relevant other services.'],
+    [1, 'One nav and next steps', 'Every page shares one flat toolkit bar (services, journey map, team review), plus previous and next toolkit and cross-service links.'],
     [0, '“Email me my plan” opt-in', 'A short form on each results panel that creates a HubSpot contact (Lead) with the plan and profile attached. Needs the ecosystem form or a HubSpot form.'],
     [0, 'HubSpot properties and MQL rule', 'Properties for toolkit used, profile answers and plan gaps, plus a scoring rule: profile fit and two or more toolkits = MQL.'],
     [0, 'Owner check-in sequence', 'Dallas’s “how did it go?” emails from the toolkit owner a few days after a plan is sent. Not a sales push, a genuine check-in.'],
@@ -508,6 +603,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 (function () {
   var h = document.querySelector('.blh'); if (!h) return;
   var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });

@@ -59,6 +59,16 @@
       "height": 700,
       "maxWidth": 460,
       "use": "Digital PR proposals and thought-leadership pages. Shows what a client must have ready before pitching starts."
+    },
+    {
+      "id": "email-inbox",
+      "title": "Will your emails reach the inbox?",
+      "service": "Email Marketing",
+      "owner": "Erica Pounder",
+      "file": "widgets/email-inbox.html",
+      "height": 700,
+      "maxWidth": 460,
+      "use": "Email marketing proposals, ecommerce pages and onboarding. Since Google and Yahoo tightened bulk-sender rules, most lists have a gap here."
     }
   ],
   "tiles": [
@@ -97,6 +107,12 @@
       "title": "Could you say yes to a journalist this week?",
       "file": "tiles/pr-ready-16x9.png",
       "alt": "Slide tile: Ready when the press calls. Digital PR DIY toolkit by Big Leap"
+    },
+    {
+      "id": "email-inbox",
+      "title": "Will your emails reach the inbox?",
+      "file": "tiles/email-inbox-16x9.png",
+      "alt": "Slide tile: Land in the inbox. Email Marketing DIY toolkit by Big Leap"
     }
   ]
 }

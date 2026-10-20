@@ -74,23 +74,30 @@ CSS = r"""<style id="bl-header-css">
 .blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
 .blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
 .blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
-/* Tier 2: toolkit bar */
+/* Tier 2: one flat toolkit bar */
 .blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
-.blh-sub .blh-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; min-height: 52px; padding-top: 4px; padding-bottom: 4px; }
-.blh-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; }
-.blh-crumb .home { font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; text-decoration: none; margin-right: 10px; }
-.blh-tabs { display: flex; flex-wrap: wrap; gap: 2px; }
-.blh-tabs a { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
-.blh-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.blh-where { font-size: 13px; color: #5F6E79; }
-.blh-pn { display: flex; gap: 8px; }
-.blh-pn a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; max-width: 300px; padding: 6px 14px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; font: 600 13.5px "Open Sans", Arial, sans-serif; text-decoration: none; }
-.blh-pn a:hover { border-color: #3187B5; }
-.blh-pn a b { flex: 0 0 auto; }
-.blh-pn a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
 @media (max-width: 1080px) {
   .blh-burger { display: inline-flex; }
   .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
@@ -105,20 +112,9 @@ CSS = r"""<style id="bl-header-css">
 @media (max-width: 640px) {
   .blh-bar .blh-in { min-height: 64px; }
   .blh-logo img { height: 32px; }
-  .blh-sub .blh-in { flex-direction: column; align-items: stretch; padding-top: 6px; padding-bottom: 8px; }
-  .blh-crumb { justify-content: space-between; }
-  .blh-crumb .home { width: 100%; }
-  .blh-sub .blh-in { position: relative; }
-  .blh-tabs { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-  .blh-tabs a { justify-content: center; padding: 6px 8px; background: #fff; border: 1px solid #D4DADF; }
-  .blh-crumb .home { min-height: 44px; display: flex; align-items: center; }
-  .blh-theme { position: absolute; right: max(20px, env(safe-area-inset-right)); top: 8px; min-height: 36px; min-width: 36px; width: 36px; height: 36px; padding: 0; }
-  .blh-right:empty { display: none; }
-  .blh-right { justify-content: space-between; }
-  .blh-where { display: none; }
-  .blh-pn { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-  .blh-pn a { max-width: none; justify-content: center; }
-  .blh-pn a span { display: none; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
 @media print { .blh { display: none !important; } }
@@ -128,6 +124,9 @@ JS = r"""<script id="bl-header-js">
 (function () {
   var h = document.querySelector('.blh'); if (!h) return;
   var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
@@ -142,7 +141,7 @@ def rel(frm, to):
     r = os.path.relpath(os.path.join(ROOT, to), os.path.dirname(os.path.join(ROOT, frm))).replace(os.sep, '/')
     return r
 
-def header(page, current, where='', prev=None, nxt=None, extra=''):
+def header(page, current, where='', prev=None, nxt=None, extra='', service=None):
     e = html.escape
     hub = rel(page, 'index.html')
     items = []
@@ -154,8 +153,13 @@ def header(page, current, where='', prev=None, nxt=None, extra=''):
         items.append(f'<li class="blh-li{" r" if i >= 3 else ""}"><button class="blh-top" type="button" aria-expanded="false">{e(label)}<span class="car" aria-hidden="true"></span></button><div class="blh-dd">{dd}</div></li>')
         if label == 'Resources':
             items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
-    tabs = [('Toolkits', 'index.html#toolkits', 'toolkits'), ('Widgets & embeds', 'index.html#widgets', 'widgets'), ('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review')]
-    tab_html = ''.join(f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current else '') + f'>{e(t)}</a>' for t, f, key in tabs)
+    SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email')]
+    tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
+    tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
+    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
+    def tab(t_, f, key):
+        return f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current or key == service else '') + f'>{e(t_)}</a>'
+    tab_html = ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
@@ -172,11 +176,23 @@ def header(page, current, where='', prev=None, nxt=None, extra=''):
             f'<a class="blh-cta" href="{BL}/get-started/{UTM}">Get Your Custom Strategy</a></nav>'
             '</div></div>'
             '<div class="blh-sub"><div class="blh-in">'
-            f'<div class="blh-crumb"><a class="home" href="{hub}">DIY Toolkits</a><nav class="blh-tabs" aria-label="DIY Toolkits">{tab_html}</nav></div>'
-            f'<div class="blh-right">' + (f'<span class="blh-where">{e(where)}</span>' if where else '') + pn + extra + '</div>'
+            f'<nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span>{tab_html}</nav>'
+            + (f'<div class="blh-right">{extra}</div>' if extra else '') +
             '</div></div></header><!-- /bl-header -->')
 
-def apply(page, block, before_selector=None):
+def pager(page, prev, nxt, where):
+    e = html.escape
+    hub = rel(page, 'index.html')
+    def lk(item, label, back):
+        if not item:
+            return f'<a class="blp-a{" back" if back else ""}" href="{hub}"><small>{label}</small><b>All toolkits</b></a>'
+        title, f = item
+        return f'<a class="blp-a{" back" if back else ""}" href="{rel(page, f)}"><small>{"← " if back else ""}{label}{"" if back else " →"}</small><b>{e(title)}</b></a>'
+    return ('<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in">'
+            + lk(prev, 'Previous', True) + f'<a class="blp-hub" href="{hub}"><small>{e(where)}</small><b>All toolkits</b></a>' + lk(nxt, 'Next', False)
+            + '</div></nav><!-- /bl-pager -->')
+
+def apply(page, block, before_selector=None, bottom=''):
     p = os.path.join(ROOT, page)
     s = open(p, encoding='utf-8').read()
     # strip old versions (this header + the earlier bl-sitenav bar)
@@ -184,26 +200,29 @@ def apply(page, block, before_selector=None):
     s = re.sub(r'<!-- bl-sitenav -->.*?<!-- /bl-sitenav -->\n?', '', s, flags=re.S)
     s = re.sub(r'<style id="bl-(?:sitenav|header)-css">.*?</style>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
     s = s.replace('</head>', CSS + '\n</head>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', JS + '\n</body>', 1)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
     import sys
     only_pages = 'pages-only' in sys.argv
     d = json.load(open(os.path.join(ROOT, 'toolkits.json')))
-    ORDER = ['paid', 'revops', 'seo', 'pr']           # journey order: Business Profile first
+    ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
     by = {s['id']: s for s in d['series']}
     seq = [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
     for i, (s, t) in enumerate(seq if not only_pages else []):
         prev = seq[i - 1] if i else None
         nxt = seq[i + 1] if i + 1 < len(seq) else None
         fmt = lambda it: None if not it else ((it[1]['title'] if it[0]['id'] == s['id'] else f"{it[0]['name']}: {it[1]['title']}"), it[1]['file'])
-        apply(t['file'], header(t['file'], 'toolkit', f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}", fmt(prev) if prev else False, fmt(nxt) if nxt else False))
+        cur = 'start' if t['file'].endswith('paid/01_What_Kind_of_Business_Are_You.html') else 'toolkit'
+        apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
+              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}"))
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))

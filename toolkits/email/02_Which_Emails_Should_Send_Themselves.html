@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Which Emails Should Send Themselves?</title>
+<meta name="description" content="Seven quick answers about your business and your email list. You get your Automated Email Plan: the flows to build first, their triggers and timing, subject lines, a first email to edit, and the build steps for your platform.">
+<style>
+/* Big Leap DIY Toolkit shell (from the RevOps series, v2) + SEO series additions + Email series additions.
+Layout: masthead, series stepper, then questions left and results right on desktop; one column under 880px. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+/* ---------- SEO series additions (draft banner, profile strip, checks, snippets, print) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-wrap: anywhere; }
+.draft-banner { background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line); font-size: 12.5px; line-height: 1.4; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); padding-top: max(7px, env(safe-area-inset-top, 0px)); text-align: center; }
+.draft-banner b { font-weight: 700; }
+.min-h { min-height: 100vh; min-height: 100dvh; }
+/* Stepper for a two-toolkit series */
+.stepper ol.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.stepper ol.n2::before { left: 25%; right: 25%; }
+.stepper a.st { min-height: 44px; }
+.start-here { font-size: 12.5px; }
+.start-here a { font-weight: 700; color: var(--heading); }
+/* Profile strip */
+.profile-strip { display: grid; gap: 8px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.profile-row .p-text { flex: 1 1 18rem; min-width: 0; }
+.profile-row .p-text b { color: var(--heading); }
+.profile-row a, .profile-strip summary { font-weight: 700; color: var(--heading); }
+.profile-strip a { display: inline-flex; align-items: center; min-height: 44px; }
+.profile-strip .text-btn { min-height: 44px; }
+.profile-strip details summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+.paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.paste-status { font-size: 13px; color: var(--muted); }
+.from-profile { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); vertical-align: 1px; white-space: nowrap; }
+.profile-note { font-size: 13.5px; color: var(--muted); }
+/* Focus and checked states without :has() (Safari-safe) */
+.text-btn { display: inline-flex; align-items: center; min-height: 44px; }
+.seg label { min-height: 44px; }
+.seg.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opt { min-height: 44px; }
+.opt.is-checked { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { width: 18px; height: 18px; }
+.opt input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.wrap3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 420px) { .seg.wrap3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sub-q { display: grid; gap: 6px; padding-top: 6px; }
+.sub-q .q-label { font-size: 14px; }
+.opts.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+/* Deliverable items */
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chip.block { background: var(--field); color: var(--heading); border-color: var(--heading); }
+.chip.check { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.st-time { font-size: 13px; color: var(--muted); }
+.st-time b { color: var(--heading); }
+.how-list { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.cms-note { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+.cms-note b { color: var(--heading); }
+.done-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.done-list li { font-size: 13px; font-weight: 700; color: var(--heading); padding: 3px 10px; border-radius: 999px; background: var(--tint); border: 1px solid var(--tint-line); }
+.snippet { display: grid; gap: 6px; }
+.snippet pre { margin: 0; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 12.5px/1.5 "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.snippet-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.snippet-head span { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mini-table { font-size: 13px; }
+.mini-table th, .mini-table td { padding: 7px 8px; }
+.complex ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.complex li b { color: var(--heading); }
+.complex .applies { background: var(--seg-on); color: var(--on-seg); }
+.complex-cta { font-size: 14px; }
+.complex-cta a { font-weight: 700; }
+.skip { display: grid; gap: 10px; }
+.skip h2 { font-size: 19px; }
+.templates { display: grid; gap: 12px; }
+.email-head .btn-plain { min-height: 44px; }
+.btn-plain { min-height: 44px; }
+.loc-meta { font-size: 13px; color: var(--muted); }
+@media print {
+  .draft-banner, .stepper, .profile-strip, .col-q, .closing-actions, .closing .next, .closing .xlinks, .btn, .text-btn, .method, .see-results, .copy-fallback { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .page { max-width: none; padding: 0; }
+  .layout { display: block; }
+  .results { display: block; }
+  .panel, .closing { border: 1px solid #999; background: #fff !important; color: #000 !important; break-inside: auto; margin-bottom: 12px; }
+  .closing h2, .closing p { color: #000 !important; }
+  .steps > li { break-inside: avoid; background: #fff !important; }
+  .is-sticky { position: static !important; }
+  a { color: #000; }
+}
+/* QA fixes */
+.mini-table th, .mini-table td { overflow-wrap: normal; word-break: normal; }
+.mini-table tbody th { white-space: nowrap; }
+.mini-table td:nth-child(2) { white-space: nowrap; }
+.seg.wrap3 label:last-of-type { grid-column: 1 / -1; }
+.profile-strip details summary::before { content: "\25B8"; margin-right: 6px; display: inline-block; transition: transform .15s ease; }
+.profile-strip details[open] summary::before { transform: rotate(90deg); }
+.profile-strip details summary::-webkit-details-marker { display: none; }
+.profile-strip details summary { list-style: none; }
+.seg label { overflow-wrap: normal; word-break: normal; hyphens: manual; min-width: 0; padding-inline: 6px; }
+@media (max-width: 360px) { .seg label { font-size: 13px; } }
+
+/* ---------- Email series additions ---------- */
+.stepper ol.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
+.stepper ol.n3::before { left: 16.6%; right: 16.6%; }
+.q-row + .q-row { margin-top: 4px; }
+.q-sub { font-weight: 700; color: var(--heading); font-size: 14px; flex: 1 1 9rem; min-width: 0; }
+.q-sub small { display: block; font-weight: 400; color: var(--muted); font-size: 12.5px; }
+.fields { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.fld { display: grid; gap: 4px; min-width: 0; }
+.fld > span { font-size: 13.5px; font-weight: 700; color: var(--heading); }
+.fld .field { width: 100%; }
+.fld .field input { width: 100%; flex: 1 1 auto; }
+.chip.good { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.watch { background: var(--field); color: var(--heading); border: 1px dashed var(--line-strong); }
+.chip.fix { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.none { background: transparent; color: var(--muted); border-color: var(--line); }
+.chip.run { background: var(--tint); color: var(--blue-ink); border-color: var(--tint-line); }
+.meta-grid { display: grid; gap: 4px 14px; grid-template-columns: max-content minmax(0, 1fr); margin: 2px 0 0; font-size: 14px; }
+.meta-grid dt { font-weight: 700; color: var(--heading); }
+.meta-grid dd { margin: 0; min-width: 0; }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: minmax(0, 1fr); } .meta-grid dd { margin-bottom: 4px; } }
+.subj-list { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 14px; }
+.score td, .score th { vertical-align: middle; }
+.score td.yours { font-weight: 700; color: var(--heading); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.score .rng { font-size: 13px; color: var(--muted); }
+.score tbody th { min-width: 9rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; color: var(--muted); align-items: center; }
+.note-box { font-size: 14px; padding: 10px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); }
+.note-box b { color: var(--heading); }
+.consent-table td, .consent-table th { font-size: 13.5px; }
+.consent-table tbody th { white-space: nowrap; }
+.est { font-size: 14px; color: var(--text); }
+.seg.wrap3.p5 label:last-of-type { grid-column: span 2; }
+@media (max-width: 420px) { .seg.wrap3.p5 label:last-of-type { grid-column: 1 / -1; } }
+.method .num-in { font-size: 16px; }
+@media print { .email .btn, .snippet .btn { display: none !important; } }
+
+</style>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+@media print { .blh { display: none !important; } }
+</style>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email" aria-current="page">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../index.html#review" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-banner" role="note">Draft 1 for internal review · Built Oct 19, 2026 · Owner: <b>Erica Pounder</b></div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· EMAIL MARKETING</span></div>
+<p class="eyebrow"><span class="kit">Email Marketing DIY Toolkit 2 of 3</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Which Emails Should Send Themselves?</h1>
+<p class="lede">Seven quick answers. You get the automated emails to build first, ranked for your kind of business, with subject lines, a first email to edit, and the steps for your platform.</p>
+</header>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile" tabindex="-1"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The Email Marketing DIY path</h2>
+<p class="stepper-note start-here" id="start-here"></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your business and your list</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">What kind of business are you?<span data-pf="btype"></span></span></legend>
+<div class="opts "><label class="opt" for="btype-ecom"><input type="radio" id="btype-ecom" name="btype" value="ecom"><span class="opt-text"><span class="opt-title">Online store</span><span class="opt-sub">People buy products on your website</span></span></label><label class="opt" for="btype-b2b"><input type="radio" id="btype-b2b" name="btype" value="b2b"><span class="opt-text"><span class="opt-title">B2B, we win leads</span><span class="opt-sub">Other businesses enquire, then talk to sales</span></span></label><label class="opt" for="btype-local"><input type="radio" id="btype-local" name="btype" value="local"><span class="opt-text"><span class="opt-title">Local services</span><span class="opt-sub">Trades, clinics, shops or services in an area</span></span></label><label class="opt" for="btype-booking"><input type="radio" id="btype-booking" name="btype" value="booking"><span class="opt-text"><span class="opt-title">Bookings or appointments</span><span class="opt-sub">Salons, studios, practices, classes</span></span></label><label class="opt" for="btype-saas"><input type="radio" id="btype-saas" name="btype" value="saas"><span class="opt-text"><span class="opt-title">Software or app</span><span class="opt-sub">People sign up, try it, then pay</span></span></label></div>
+<p class="q-help">The plan ranks flows differently for each. Pick the closest one.</p>
+</fieldset>
+<div class="q"><label class="q-label" for="bizname">Your business name<span data-pf="bizname"></span></label><input class="text-field" id="bizname" name="bizname" type="text" autocomplete="organization" placeholder="Your business"><p class="q-help">Merged into the subject lines and first email. Used only on this page.</p></div>
+<fieldset class="q">
+<legend><span class="q-label">Which email platform do you use?<span data-pf="platform"></span></span></legend>
+<div class="seg wrap3 p5"><input type="radio" id="platform-mailchimp" name="platform" value="mailchimp"><label for="platform-mailchimp">Mailchimp</label><input type="radio" id="platform-klaviyo" name="platform" value="klaviyo"><label for="platform-klaviyo">Klaviyo</label><input type="radio" id="platform-hubspot" name="platform" value="hubspot"><label for="platform-hubspot">HubSpot</label><input type="radio" id="platform-constantcontact" name="platform" value="constantcontact"><label for="platform-constantcontact">Constant Contact</label><input type="radio" id="platform-other" name="platform" value="other"><label for="platform-other">Other</label></div>
+<p class="q-help">The build steps use your platform's menus.</p>
+</fieldset>
+<div class="q">
+<div class="q-row">
+<span class="q-label" id="connected-q">Is your store, booking tool or CRM connected to your email platform?</span>
+<div class="seg inline" role="radiogroup" aria-labelledby="connected-q"><input type="radio" id="connected-yes" name="connected" value="yes"><label for="connected-yes">Yes</label><input type="radio" id="connected-no" name="connected" value="no"><label for="connected-no">No</label><input type="radio" id="connected-unsure" name="connected" value="unsure"><label for="connected-unsure">Not sure</label></div>
+</div>
+<p class="q-help">Cart, after-purchase, reminder and win-back emails start from what people do in those tools. Without a connection, your email platform can't see it.</p>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Which automated emails are already running? <span class="opt-tag">(tick all that apply)</span></span></legend>
+<div class="opts two"><label class="opt" for="running-welcome"><input type="checkbox" id="running-welcome" name="running" value="welcome"><span class="opt-text"><span class="opt-title">Welcome series</span></span></label><label class="opt" for="running-cart"><input type="checkbox" id="running-cart" name="running" value="cart"><span class="opt-text"><span class="opt-title">Abandoned cart or checkout</span></span></label><label class="opt" for="running-browse"><input type="checkbox" id="running-browse" name="running" value="browse"><span class="opt-text"><span class="opt-title">Browse abandonment</span></span></label><label class="opt" for="running-post"><input type="checkbox" id="running-post" name="running" value="post"><span class="opt-text"><span class="opt-title">After-purchase or review request</span></span></label><label class="opt" for="running-nurture"><input type="checkbox" id="running-nurture" name="running" value="nurture"><span class="opt-text"><span class="opt-title">Lead nurture or onboarding</span></span></label><label class="opt" for="running-reminder"><input type="checkbox" id="running-reminder" name="running" value="reminder"><span class="opt-text"><span class="opt-title">Appointment reminders</span></span></label><label class="opt" for="running-winback"><input type="checkbox" id="running-winback" name="running" value="winback"><span class="opt-text"><span class="opt-title">Win-back or re-engagement</span></span></label><label class="opt" for="running-sunset"><input type="checkbox" id="running-sunset" name="running" value="sunset"><span class="opt-text"><span class="opt-title">Sunset (clean-out of inactive people)</span></span></label></div>
+<p class="q-help">"Running" means it is switched on and has sent in the last month. A one-off newsletter doesn't count.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Your list and what a customer is worth</span></legend>
+<div class="fields"><label class="fld" for="size"><span>Contacts on your list</span><span class="field"><input id="size" name="size" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 3000"></span></label><label class="fld" for="value"><span>Average order or customer value</span><span class="field"><span class="affix pre">$</span><input id="value" name="value" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 120"></span></label></div>
+<p class="q-help">Both are optional. They only feed the rough estimate in the headline.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Who follows up with a new lead?</span></legend>
+<div class="opts "><label class="opt" for="follow-person"><input type="radio" id="follow-person" name="follow" value="person"><span class="opt-text"><span class="opt-title">A person on our team</span><span class="opt-sub">Calls or one-to-one emails</span></span></label><label class="opt" for="follow-none"><input type="radio" id="follow-none" name="follow" value="none"><span class="opt-text"><span class="opt-title">Nobody yet, it's all marketing email</span></span></label><label class="opt" for="follow-na"><input type="radio" id="follow-na" name="follow" value="na"><span class="opt-text"><span class="opt-title">Doesn't apply, people buy or book online</span></span></label></div>
+<p class="q-help">Marketing emails go to your list from your email platform. A rep's personal reply to a new lead is sales follow-up, and is set up differently.</p>
+</fieldset>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See your email plan</button>
+</form>
+</section>
+
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your automated email</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">0</span><span class="hero-unit" id="out-unit"></span></p>
+<p class="hero-rec" id="out-rec"></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Automated Email Plan</h2>
+<p class="deliv-sub" id="deliv-sub"></p>
+</div>
+<p class="note-box" id="sales-note" hidden></p>
+<ol class="steps" id="plan"></ol>
+</section>
+
+<section class="panel deliv" aria-labelledby="first-h">
+<div class="deliv-head">
+<h2 id="first-h">Your first email, ready to edit</h2>
+<p class="deliv-sub" id="first-sub"></p>
+</div>
+<p class="token-note">Fill in anything in <code>[square brackets]</code>. Swap <code>{first name}</code> for your platform's first-name merge tag, with a fallback like "there".</p>
+<div class="emails" id="emails"></div>
+</section>
+
+<section class="panel complex" aria-labelledby="complex-h">
+<div class="deliv-head">
+<h2 id="complex-h" style="font-size:19px">Where it gets complex</h2>
+<p class="deliv-sub">These need expert judgment. Do your list above first; these can wait for a conversation.</p>
+</div>
+<ul id="complex-list"></ul>
+<p class="complex-cta" id="complex-cta"></p>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want it built for you?</h2>
+<p>Copy your plan and work through it, or bring it to a call. With these basics in place, our time together goes to strategy, not setup.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=email-02" target="_blank" rel="noopener">Talk to Erica about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we calculate this</summary>
+<div class="method-body">
+<p>The <b>recommended flows</b> depend on your kind of business. A flow counts as <b>missing</b> when it is recommended for you and you didn't tick it as running. Flows are ranked by how directly they lead to a sale, booking or conversation for that kind of business. Sunset always comes last: it earns nothing directly, but it protects your inbox placement.</p>
+<p>The headline estimate is a <b>rule of thumb, not a forecast</b>. For each missing flow: contacts on your list × the share who enter that flow in a month × the share of those who take the goal action, times your average value. Change the shares below to match your own numbers; the plan updates.</p>
+<div class="table-wrap">
+<table class="mini-table">
+<thead><tr><th scope="col">Flow</th><th scope="col">Enter each month (% of list)</th><th scope="col">Take the goal action (%)</th></tr></thead>
+<tbody id="assume-rows"></tbody>
+</table>
+</div>
+<div class="method-foot"><button type="button" class="btn btn-plain" id="reset-assume">Reset to defaults</button><span class="reset-status" id="reset-status" role="status" aria-live="polite"></span></div>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build. This is general guidance, not legal advice.</p>
+<p>© Big Leap · Email Marketing DIY Toolkit 2 of 3 · Draft 1 for internal review · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all three Email Marketing DIY toolkits.
+OWNER: the Big Leap expert named on the CTA.
+CTA_URL: where "Talk to Erica about building it" goes.
+SERIES: every toolkit in the Email Marketing series (file = relative link).
+LINKS: the shared cross-link map for all DIY series (relative URLs).
+===================================================================== */
+const OWNER = { name: 'Erica Pounder', first: 'Erica' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=email-02'; // swap for Erica's meeting scheduler link
+const SERIES = [
+  { n: 1, short: 'Inbox', title: 'Will Your Emails Reach the Inbox?', file: '01_Will_Your_Emails_Reach_the_Inbox.html' },
+  { n: 2, short: 'Automate', title: 'Which Emails Should Send Themselves?', file: '02_Which_Emails_Should_Send_Themselves.html' },
+  { n: 3, short: 'Measure', title: 'Is Your Email Program Working?', file: '03_Is_Your_Email_Program_Working.html' },
+];
+const LINKS = {
+  profile:{name:'Build Your Business Profile',url:'../paid/01_What_Kind_of_Business_Are_You.html',owner:'Scott Smoot'},
+  adsReady:{name:'Is Your Google Ads Account Ready?',url:'../paid/02_Is_Your_Google_Ads_Account_Ready.html',owner:'Scott Smoot'},
+  conversions:{name:'Which Conversions Should You Track?',url:'../paid/03_Which_Conversions_Should_You_Track.html',owner:'Scott Smoot'},
+  campaigns:{name:'Which Campaigns Should You Run First?',url:'../paid/04_Which_Campaigns_Should_You_Run_First.html',owner:'Scott Smoot'},
+  tracking:{name:'Can You See What Your Marketing Does?',url:'../revops/07_Can_You_See_What_Your_Marketing_Does.html',owner:'Dallas Olsen'},
+  leadCapture:{name:'Is Every Lead Reaching Your CRM?',url:'../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',owner:'Dallas Olsen'},
+  speedToLead:{name:'Never Let a Lead Go Cold',url:'../revops/02_Never_Let_a_Lead_Go_Cold.html',owner:'Dallas Olsen'},
+  pipelineDash:{name:'Is Your Pipeline Ready for a Dashboard?',url:'../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html',owner:'Dallas Olsen'},
+  seoBasics:{name:'Can Google Find and Trust Your Site?',url:'../seo/01_Can_Google_Find_and_Trust_Your_Site.html',owner:'Shema Al-Darwish'},
+  local:{name:'Is Your Business Ready for Local Search?',url:'../seo/02_Is_Your_Business_Ready_for_Local_Search.html',owner:'Shema Al-Darwish'},
+  prReady:{name:'Are You Ready to Be Pitched?',url:'../pr/01_Are_You_Ready_to_Be_Pitched.html',owner:'Kristina Ainge'},
+  mediaKit:{name:'Build Your Media Kit',url:'../pr/02_Build_Your_Media_Kit.html',owner:'Kristina Ainge'},
+  inbox:{name:'Will Your Emails Reach the Inbox?',url:'01_Will_Your_Emails_Reach_the_Inbox.html',owner:'Erica Pounder'},
+  flows:{name:'Which Emails Should Send Themselves?',url:'02_Which_Emails_Should_Send_Themselves.html',owner:'Erica Pounder'},
+  emailHealth:{name:'Is Your Email Program Working?',url:'03_Is_Your_Email_Program_Working.html',owner:'Erica Pounder'},
+  hub:{name:'All DIY Toolkits',url:'../../index.html',owner:''},
+};
+
+/* EXAMPLE: the answers a first-time visitor sees. */
+const EXAMPLE = { btype: 'ecom', bizname: '', platform: 'klaviyo', connected: 'yes', running: ['welcome'], size: '3000', value: '85', follow: 'na' };
+/* ASSUMPTIONS: rough monthly shares per flow, used only for the headline estimate. Rules of thumb, not benchmarks.
+   enter = % of the list that enters the flow in a month; act = % of those who take the goal action. Editable on the page. */
+const ASSUMPTIONS = {
+  welcome:  { enter: 3, act: 3 },
+  cart:     { enter: 4, act: 5 },
+  browse:   { enter: 8, act: 1 },
+  post:     { enter: 3, act: 5 },
+  nurture:  { enter: 4, act: 2 },
+  reminder: { enter: 5, act: 8 },
+  winback:  { enter: 5, act: 2 },
+  sunset:   { enter: 0, act: 0 },
+};
+
+/* ---------- Shared Business Profile (same helper in every DIY toolkit) ---------- */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* ---------- small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+// minutes -> "about 2 hours" / "30–45 minutes" / "2–4 hours"
+function timeRange(lo, hi) {
+  lo = Math.max(0, lo || 0); hi = Math.max(lo, hi || 0);
+  if (hi <= 0) return 'no time';
+  if (hi < 60) return (Math.round(lo) === Math.round(hi) ? 'about ' + fmt(Math.round(hi)) : fmt(Math.round(lo)) + '–' + fmt(Math.round(hi))) + ' minutes';
+  const d = hi / 60 < 10 ? 1 : 0;
+  const a = fmt(lo / 60, d), b = fmt(hi / 60, d);
+  return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
+}
+function link(key) { return LINKS[key] || null; }
+function linkHtml(key, label) { const l = link(key); return l ? '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>' : esc(label || ''); }
+
+/* ---------- stepper ---------- */
+function renderStepper(current) {
+  const ol = $('stepper-list');
+  ol.className = 'n' + SERIES.length;
+  ol.innerHTML = SERIES.map((k) => {
+    const cur = k.n === current;
+    const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+    return '<li>' + (cur
+      ? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+      : '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+  }).join('');
+  const sh = $('start-here');
+  if (sh) sh.innerHTML = 'Start here: ' + linkHtml('profile', 'Build your Business Profile');
+}
+
+/* ---------- profile strip ---------- */
+const MODEL_LABEL = { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' };
+const REACH_LABEL = { local: 'local', regional: 'regional', national: 'national', international: 'international' };
+function profileSummary(p) {
+  const bits = [];
+  bits.push(p.name || p.industry || 'Your business');
+  if (MODEL_LABEL[p.model]) bits.push(MODEL_LABEL[p.model]);
+  if (REACH_LABEL[p.reach]) bits.push(REACH_LABEL[p.reach]);
+  return bits.join(' · ');
+}
+function initProfileStrip(onChange) {
+  const host = $('profile-strip');
+  function draw() {
+    const p = loadProfile();
+    if (p && p.v === 1) {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Using your Business Profile: <b>' + esc(profileSummary(p)) + '</b></p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Change</a>' +
+        '<button type="button" class="text-btn" id="profile-clear">Clear</button></div>';
+      $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onChange(null); $('profile-strip').focus(); });
+    } else {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Answer 8 questions once and every toolkit fills itself in.</p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Build your Business Profile →</a></div>' +
+        '<details id="paste-details"><summary>Paste a profile code</summary>' +
+        '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
+        '<input class="text-field" id="profile-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…">' +
+        '<button type="button" class="btn btn-plain" id="profile-apply">Use this profile</button></div>' +
+        '<p class="paste-status" id="paste-status" role="status" aria-live="polite"></p></details>';
+      $('profile-apply').addEventListener('click', () => {
+        const p2 = decodeProfile($('profile-code').value);
+        if (!p2) { $('paste-status').textContent = 'That code did not work. Copy the whole code, starting with BL1.'; return; }
+        saveProfile(p2); draw(); onChange(p2);
+      });
+    }
+  }
+  draw();
+  return loadProfile();
+}
+// Shows a "From your profile" tag next to a question label; hides it once the visitor changes that answer.
+function markFromProfile(names) {
+  document.querySelectorAll('[data-pf]').forEach((el) => {
+    const on = names.indexOf(el.getAttribute('data-pf')) !== -1;
+    el.innerHTML = on ? '<span class="from-profile">From your profile</span>' : '';
+  });
+}
+function unmarkProfile(name) {
+  document.querySelectorAll('[data-pf="' + name + '"]').forEach((el) => { el.innerHTML = ''; });
+}
+
+/* ---------- form state (no :has(), Safari-safe) ---------- */
+function syncChoiceStyles(root) {
+  root.querySelectorAll('.opt').forEach((o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); });
+}
+// Visible focus ring on segmented buttons for keyboard users (the radio itself is visually hidden).
+let usingKeyboard = false;
+document.addEventListener('keydown', () => { usingKeyboard = true; }, true);
+document.addEventListener('pointerdown', () => { usingKeyboard = false; }, true);
+document.addEventListener('mousedown', () => { usingKeyboard = false; }, true);
+function initSegFocus(root) {
+  const segOf = (el) => (el && el.closest) ? el.closest('.seg') : null;
+  root.addEventListener('focusin', (e) => { const s = segOf(e.target); if (s && usingKeyboard) s.classList.add('is-focus'); });
+  root.addEventListener('focusout', (e) => { const s = segOf(e.target); if (s) s.classList.remove('is-focus'); });
+  root.addEventListener('keyup', (e) => { const s = segOf(e.target); if (s && e.target === document.activeElement) s.classList.add('is-focus'); });
+}
+function radioVal(form, name) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value;
+  return '';
+}
+function setRadio(form, name, value) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) els[i].checked = els[i].value === value;
+}
+function checkVals(form, name) {
+  return Array.prototype.filter.call(form.querySelectorAll('input[name="' + name + '"]'), (i) => i.checked).map((i) => i.value);
+}
+function setChecks(form, name, values) {
+  form.querySelectorAll('input[name="' + name + '"]').forEach((i) => { i.checked = values.indexOf(i.value) !== -1; });
+}
+
+/* ---------- deliverable list ---------- */
+// item: { id, title, sev:'block'|'check'|'fix', done, why, steps:[], cms:'', time:[lo,hi], per:'', kit:{key, why}, snippetId }
+/* Severity labels; each page can change SEV_TEXT before its first render. */
+const SEV_TEXT = { block: 'Blocker', check: 'Check this' };
+const SEV_CHIP = { get block() { return '<span class="chip block">' + esc(SEV_TEXT.block) + '</span>'; }, get check() { return '<span class="chip check">' + esc(SEV_TEXT.check) + '</span>'; }, fix: '' };
+function renderItems(el, items, extraHtml) {
+  let open = 0;
+  el.innerHTML = items.map((t, i) => {
+    const first = !t.done && open++ < 3;
+    const chips = t.done ? '' : (first ? '<span class="chip first">Do these first</span>' : '') + (SEV_CHIP[t.sev] || '');
+    return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+      '<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+      '<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+      (chips ? '<span class="chips">' + chips + '</span>' : '') + '</div>' +
+      (t.done ? (t.doneNote ? '<p class="st-time">' + esc(t.doneNote) + '</p>' : '') :
+        (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+        (t.steps && t.steps.length ? '<ol class="how-list">' + t.steps.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') +
+        (t.cms ? '<p class="cms-note"><b>' + esc(t.cmsLabel || 'On your platform') + ':</b> ' + esc(t.cms) + '</p>' : '') +
+        (extraHtml && extraHtml[t.id] ? extraHtml[t.id] : '') +
+        (t.time ? '<p class="st-time">Time: <b>' + esc(timeRange(t.time[0], t.time[1])) + '</b>' + (t.per ? ' ' + esc(t.per) : '') + (t.wait ? ' · ' + esc(t.wait) : '') + '</p>' : '') +
+        (t.kit && LINKS[t.kit.key] ? '<p class="kit-link">Free toolkit: ' + linkHtml(t.kit.key) + ' · ' + esc(t.kit.why) + '</p>' : '')) +
+      '</div></li>';
+  }).join('');
+}
+function itemsText(items, extraText) {
+  const out = [];
+  let open = 0;
+  items.forEach((t, i) => {
+    const first = !t.done && open++ < 3;
+    if (t.done) { out.push('[done] ' + t.title); return; }
+    out.push((i + 1) + '. ' + t.title + (t.sev === 'block' ? ' [' + SEV_TEXT.block.toUpperCase() + ']' : t.sev === 'check' ? ' [' + SEV_TEXT.check.toUpperCase() + ']' : '') + (first ? ', do this first' : ''));
+    if (t.why) out.push('   ' + t.why);
+    (t.steps || []).forEach((s, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + s));
+    if (t.cms) out.push('   ' + (t.cmsLabel || 'On your platform') + ': ' + t.cms);
+    if (extraText && extraText[t.id]) extraText[t.id].forEach((l) => out.push('   ' + l));
+    if (t.time) out.push('   Time: ' + timeRange(t.time[0], t.time[1]) + (t.per ? ' ' + t.per : '') + (t.wait ? ' · ' + t.wait : ''));
+    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + LINKS[t.kit.key].name + ' (' + t.kit.why + ')');
+  });
+  return out;
+}
+
+/* ---------- where it gets complex ---------- */
+function renderComplex(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  $('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+}
+function complexText(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  return sorted.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text);
+}
+
+/* ---------- cross-links and next ---------- */
+function renderXlinks(list, skip) {
+  const live = list.filter((l) => LINKS[l.key] && l.key !== skip);
+  $('xlinks').hidden = live.length === 0;
+  $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+}
+function xlinksText(list, skip) {
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+}
+function renderNext(key, why) {
+  const l = LINKS[key];
+  if (!l) { $('next').hidden = true; return; }
+  $('next').hidden = false;
+  $('next-title').innerHTML = linkHtml(key);
+  $('next-why').textContent = why;
+}
+
+/* ---------- example pill ---------- */
+function setExampleState(state, exampleText) {
+  const pill = $('example-pill');
+  pill.textContent = state === 'example' ? 'Example answers' : state === 'profile' ? 'From your profile' : 'Your answers';
+  pill.classList.toggle('is-yours', state !== 'example');
+  $('example-text').textContent = state === 'example' ? exampleText
+    : state === 'profile' ? 'Some answers came from your Business Profile. Change any of them.'
+    : 'Your results update as you go.';
+  $('restore-example').hidden = state === 'example';
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+  const el = $('answer');
+  if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+  lastHeadline = key;
+}
+
+/* ---------- copy ---------- */
+function copyWithFallback(text, onDone, host) {
+  const fallback = () => {
+    let box = host.querySelector('.copy-fallback');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'copy-fallback';
+      const id = host.id + '-text';
+      box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+      host.appendChild(box);
+    }
+    const ta = box.querySelector('textarea');
+    ta.value = text; ta.focus(); ta.select();
+    try { if (document.execCommand && document.execCommand('copy')) { onDone(); } } catch (e) {}
+  };
+  const legacy = () => {
+    // Second try: a hidden textarea + execCommand. If that fails too, show the text to copy by hand.
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) { onDone(); return; }
+    } catch (e) {}
+    fallback();
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) navigator.clipboard.writeText(text).then(onDone, legacy);
+    else legacy();
+  } catch (err) { legacy(); }
+}
+function initCopyButton(btn, statusEl, host, getText, label, msg) {
+  let timer = null;
+  btn.addEventListener('click', () => {
+    copyWithFallback(getText(), () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      if (statusEl) statusEl.textContent = msg;
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = label; btn.classList.remove('is-copied'); if (statusEl) statusEl.textContent = ''; }, 3000);
+    }, host);
+  });
+}
+function initCopy(getText) {
+  initCopyButton($('copy-btn'), $('copy-status'), $('copy-host'), getText, 'Copy my plan', 'Your plan is copied. Paste it into an email, a doc or your notes.');
+  return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+
+/* ---------- layout ---------- */
+function initSticky() {
+  const q = $('col-q'), r = $('results');
+  const wide = window.matchMedia('(min-width: 880px)');
+  function update() {
+    q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+    if (!wide.matches) return;
+    const room = window.innerHeight - 32;
+    if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+    else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+  }
+  window.addEventListener('resize', update);
+  if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+  return update;
+}
+function initShell(current, onRestore) {
+  renderStepper(current);
+  $('cta-link').href = CTA_URL;
+  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+  $('complex-cta').innerHTML = 'Any of these sound like you? ' + esc(OWNER.name) + ' leads email marketing at Big Leap. Ready for the big leap? <a href="' + esc(CTA_URL) + '" target="_blank" rel="noopener">Talk to ' + esc(OWNER.first) + ' about building it</a>.';
+  $('hub-link').href = LINKS.hub.url;
+  $('restore-example').addEventListener('click', onRestore);
+  $('see-results').addEventListener('click', () => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { $('answer').focus({ preventScroll: true }); } catch (e) { $('answer').focus(); }
+  });
+}
+
+
+
+
+/* ---------- Toolkit 2: Which Emails Should Send Themselves? ---------- */
+const DEFAULT_ASSUMPTIONS = JSON.parse(JSON.stringify(ASSUMPTIONS));
+const PLATFORM = { mailchimp: 'Mailchimp', klaviyo: 'Klaviyo', hubspot: 'HubSpot', constantcontact: 'Constant Contact', other: 'your platform' };
+const TYPE = {
+  ecom: { label: 'an online store', unit: 'orders', tool: 'store', rank: ['welcome', 'cart', 'post', 'browse', 'winback', 'sunset'] },
+  b2b: { label: 'a B2B business', unit: 'sales conversations', tool: 'CRM', rank: ['welcome', 'nurture', 'winback', 'sunset'] },
+  local: { label: 'a local service business', unit: 'jobs', tool: 'CRM or job tool', rank: ['welcome', 'post', 'reminder', 'winback', 'sunset'] },
+  booking: { label: 'a bookings business', unit: 'bookings', tool: 'booking tool', rank: ['reminder', 'welcome', 'post', 'winback', 'sunset'] },
+  saas: { label: 'a software business', unit: 'paying customers', tool: 'app or CRM', rank: ['nurture', 'welcome', 'winback', 'sunset'] },
+};
+// One entry per flow. "by" overrides fields for a business type. Text uses NAME for the business name.
+const FLOWS = {
+  welcome: { name: 'Welcome series', trigger: 'Someone joins your list: a sign-up form, pop-up or checkout opt-in', timing: 'Right away, then day 2 and day 5', emails: 3, needs: false, exit: 'buy, book or reply',
+    goal: { ecom: 'A first order', b2b: 'A first conversation', local: 'A first booking or quote request', booking: 'A first booking', saas: 'A sign-up or trial' },
+    subjects: ['Welcome to NAME: here\'s what to expect', 'The NAME story, in a minute', 'Ready when you are'],
+    cta: { ecom: 'Ready to start? Our most popular picks are here: [link]', b2b: 'Have a project in mind? Book a 20-minute call: [link]', local: 'Need help now? Request a quote: [link] or call [phone].', booking: 'Book your first visit here: [link]', saas: 'Start here: [link to the one thing new users should do first]' },
+    body: 'Hi {first name},\n\nThanks for joining the NAME list. Here\'s what you\'ll get from us: [one line, e.g. one practical tip a month and first look at what\'s new]. You can unsubscribe any time.\n\n[One or two sentences on who you are and what you\'re best at.]\n\nCTA\n\nTalk soon,\n[Your name]\nNAME' },
+  cart: { name: 'Abandoned cart reminder', trigger: 'Someone starts checkout or adds to cart and doesn\'t buy', timing: '1–4 hours after, then 1 day, then 2–3 days', emails: 3, needs: true, exit: 'complete the order',
+    goal: { ecom: 'Recover the order' },
+    subjects: ['You left something at NAME', 'Still thinking it over?', 'Any questions before you check out?'],
+    body: 'Hi {first name},\n\nYou left a few things in your cart at NAME:\n\n[cart items block from your platform]\n\nThey\'re saved for you here: [checkout link]\n\nQuestions about sizing, delivery or returns? Just reply. A real person reads every email.\n\n[Your name]\nNAME' },
+  browse: { name: 'Browse abandonment', trigger: 'A subscriber views a product but doesn\'t add it to the cart', timing: '2–4 hours after, then 1 day later', emails: 2, needs: true, exit: 'add to cart or buy',
+    goal: { ecom: 'Bring them back to the product' },
+    subjects: ['Still looking at this?', 'A closer look at what you viewed'],
+    body: 'Hi {first name},\n\nSaw you looking at [product block from your platform]. Here\'s what people like about it: [one or two honest lines or a short review].\n\nTake another look: [product link]\n\n[Your name]\nNAME' },
+  post: { name: 'After-purchase thank-you and review request', trigger: 'An order is delivered (or placed, if you can\'t track delivery)', timing: 'Thank-you on day 0–1, review ask 7–14 days after delivery, a related product at about day 30', emails: 3, needs: true, exit: 'leave a review or buy again',
+    goal: { ecom: 'Reviews and a second order', local: 'Google reviews and referrals', booking: 'Reviews and the next booking' },
+    by: {
+      local: { name: 'Thank-you and review request', trigger: 'A job is marked complete in your CRM or job tool', timing: 'Thank-you the same day, review ask 2–3 days later, one reminder a week after' },
+      booking: { name: 'After-visit thank-you and rebook', trigger: 'An appointment is marked complete', timing: 'Thank-you the same day, review ask 2 days later, a rebook nudge when they\'re usually due' },
+    },
+    subjects: ['Thanks for choosing NAME', 'How did we do?', 'A quick favour?'],
+    body: 'Hi {first name},\n\nThank you for choosing NAME. We hope [it\'s everything you wanted / everything went smoothly].\n\nIf you have a minute, a short review helps other people find us: [review link]\n\nAnything not right? Reply to this email and we\'ll put it right.\n\n[Your name]\nNAME' },
+  nurture: { name: 'Lead nurture series', trigger: 'Someone downloads a guide, subscribes for updates or asks a question, but isn\'t ready to talk', timing: 'One email every 5–7 days', emails: 5, needs: false, exit: 'book a call or become a customer',
+    goal: { b2b: 'A booked sales conversation', saas: 'The first key action, then an upgrade' },
+    by: { saas: { name: 'Trial or onboarding series', trigger: 'Someone starts a trial or creates an account', timing: 'Day 0, 1, 3 and 7, then 2 days before the trial ends', needs: true } },
+    subjects: ['The guide you asked for', 'The mistake we see most in [your industry]', 'How [type of client] solved [problem]', 'Worth a 20-minute call?'],
+    subjectsBy: { saas: ['Welcome to NAME: start here', 'Do this one thing first', 'Your trial ends in 2 days'] },
+    body: 'Hi {first name},\n\nHere\'s the [guide] you asked for: [link]\n\nMost [type of business] we talk to are trying to [problem]. Over the next few weeks I\'ll send a few short emails on [topic], one practical idea each.\n\nIf you\'d rather talk it through now, pick a time here: [booking link]\n\n[Your name]\nNAME',
+    bodyBy: { saas: 'Hi {first name},\n\nWelcome to NAME. The fastest way to see what it can do: [the one key action]. It takes about [x] minutes: [link]\n\nStuck? Reply to this email and we\'ll help.\n\n[Your name]\nNAME' } },
+  reminder: { name: 'Appointment reminders', trigger: 'An appointment is booked', timing: 'Confirmation right away, a reminder 1 day before, and a short one 2 hours before if your tool allows', emails: 3, needs: true, exit: 'cancel or reschedule',
+    goal: { booking: 'Fewer no-shows', local: 'Fewer missed visits' },
+    subjects: ['You\'re booked with NAME: [date]', 'See you tomorrow at [time]', 'Need to change your time?'],
+    body: 'Hi {first name},\n\nYou\'re booked with NAME on [date] at [time], at [address or "we\'ll come to you"].\n\nNeed to change it? Use this link: [reschedule link] or call [phone].\n\nSee you then,\n[Your name]\nNAME' },
+  winback: { name: 'Win-back', trigger: 'No order in your normal buying gap (often 60–120 days)', timing: '3 emails, about a week apart', emails: 3, needs: true, exit: 'buy or book again',
+    goal: { ecom: 'A repeat order', local: 'The next job', booking: 'The next booking', b2b: 'A reply or a booked call', saas: 'An active user again' },
+    by: {
+      local: { name: 'Service-due reminder and win-back', trigger: 'Time since the last job passes your usual service interval' },
+      booking: { name: 'Win-back and rebook', trigger: 'No visit in your usual gap between appointments' },
+      b2b: { name: 'Re-engage cold leads', trigger: 'No email click or site visit in 90 days, and no open deal', needs: false },
+      saas: { name: 'Re-engagement', trigger: 'No log-in for 30 days' },
+    },
+    subjects: ['We miss you at NAME', 'It\'s been a while: here\'s what\'s new', 'Should we stay in touch?'],
+    body: 'Hi {first name},\n\nIt\'s been a while since we heard from you at NAME. [One line on what\'s new or what you can help with now.]\n\n[Link to come back, book or reply]\n\nIf now isn\'t the time, no problem. Just reply and tell us what would be useful.\n\n[Your name]\nNAME' },
+  sunset: { name: 'Sunset (clean-out)', trigger: 'No opens or clicks in 6–12 months (90 days if you email weekly)', timing: 'One or two "still want these?" emails, then stop sending to them', emails: 2, needs: false, exit: 'click',
+    goal: { all: 'Protect inbox placement' },
+    subjects: ['Do you still want to hear from NAME?', 'Last email unless you click'],
+    body: 'Hi {first name},\n\nWe haven\'t heard from you in a while, so we\'re checking: do you still want emails from NAME?\n\n[Yes, keep me on the list] (one click)\n\nIf we don\'t hear back, we\'ll stop emailing you. No hard feelings.\n\n[Your name]\nNAME' },
+};
+const BUILD = {
+  mailchimp: (f) => ['Automations → Customer Journeys (called Flows in some accounts) → Create, and start from a matching pre-built journey if there is one.', 'Set the starting point to: ' + f.trigger.charAt(0).toLowerCase() + f.trigger.slice(1) + '.', 'Add ' + f.emails + ' emails with the waits above.', 'Add a rule so people leave the journey when they ' + f.exit + '.', 'Send yourself a test of each email, then turn it on.'],
+  klaviyo: (f) => ['Flows → Create flow → browse the pre-built flows and pick the closest to "' + f.name + '".', 'Check the trigger matches: ' + f.trigger.charAt(0).toLowerCase() + f.trigger.slice(1) + '.', 'Add a flow filter or exit rule so people stop getting it once they ' + f.exit + '.', 'Edit the ' + f.emails + ' emails and the time delays to match the plan above.', 'Preview with a real profile, then set each email to Live.'],
+  hubspot: (f) => ['Automation → Workflows → Create workflow → contact-based. (Multi-step email workflows need a higher Marketing Hub plan; if Workflows is locked, check your plan.)', 'Set the enrollment trigger: ' + f.trigger.charAt(0).toLowerCase() + f.trigger.slice(1) + '.', 'Add "Send marketing email" actions with delays between them, ' + f.emails + ' in all.', 'Set a goal or unenrollment rule for when they ' + f.exit + '.', 'Test with your own contact record, then turn it on.'],
+  constantcontact: (f) => ['Campaigns → Create → Email Automation (or Automated Path for several steps).', 'Choose the trigger closest to: ' + f.trigger.charAt(0).toLowerCase() + f.trigger.slice(1) + '.', 'Add the ' + f.emails + ' emails and the waits above.', 'Send a test of each email, then activate.'],
+  other: (f) => ['Look for Automations, Flows, Journeys or Autoresponders in your platform.', 'Set the trigger: ' + f.trigger.charAt(0).toLowerCase() + f.trigger.slice(1) + '.', 'Add the ' + f.emails + ' emails and waits above, plus an exit when they ' + f.exit + '.', 'Test each email, then turn it on.'],
+};
+const CONNECT = {
+  mailchimp: 'Integrations → find your store or booking tool (for example Shopify, WooCommerce or Square) → Connect.',
+  klaviyo: 'Integrations → Add integration → pick your store or tool (for example Shopify, WooCommerce or BigCommerce).',
+  hubspot: 'App Marketplace → search for your store or booking tool → Install. Check the data it syncs (orders, appointments) under the app\'s settings.',
+  constantcontact: 'Integrations → search for your store or tool → Connect.',
+  other: 'Look for Integrations or Apps in settings. If your tool isn\'t listed, a connector service can pass events across.',
+};
+const COMPLEX = [
+  { key: 'personal', title: 'Product feeds and dynamic content', text: 'Showing the exact items someone viewed or bought, or recommending what to buy next, depends on clean store data reaching your email platform. When the emails show generic blocks instead, the fix is usually in the integration, not the email.' },
+  { key: 'branching', title: 'Branching and suppression rules', text: 'Once several flows run at once, someone can be in a welcome, a cart and a win-back the same week. Deciding who gets what, and when to stop, needs a plan across all flows.' },
+  { key: 'sms', title: 'Adding text messages', text: 'SMS needs separate consent, quiet hours and its own costs. It works best added to flows that already work by email.' },
+  { key: 'crm', title: 'Syncing with your CRM', text: 'If sales works in a CRM and marketing in an email platform, lifecycle stages, owners and unsubscribes have to stay in step both ways. That\'s a RevOps build.' },
+  { key: 'testing', title: 'Testing and timing', text: 'Which subject line, wait or offer works best needs enough volume to test properly, and a plan so you test one thing at a time.' },
+];
+function pctNum(v) { return clamp(toNum(v), 0, 100); }
+function flowFor(key, t) {
+  const base = FLOWS[key];
+  const o = Object.assign({}, base, (base.by && base.by[t]) || {});
+  o.key = key;
+  o.goalText = base.goal[t] || base.goal.all || Object.keys(base.goal).map((k) => base.goal[k])[0];
+  o.subjectList = (base.subjectsBy && base.subjectsBy[t]) || base.subjects;
+  o.bodyText = (base.bodyBy && base.bodyBy[t]) || base.body;
+  return o;
+}
+function merge(text, name, t, f) {
+  const cta = f && f.cta ? (f.cta[t] || '') : '';
+  return String(text).replace(/CTA/g, () => cta).replace(/NAME/g, () => name);
+}
+function model(input, a) {
+  const t = TYPE[input.btype] ? input.btype : 'ecom';
+  const T = TYPE[t];
+  const pl = PLATFORM[input.platform] ? input.platform : 'other';
+  const name = String(input.bizname || '').trim().slice(0, 80) || (currentProfile && currentProfile.name) || '[Your business]';
+  const size = clamp(Math.floor(toNum(input.size)), 0, 1e9);
+  const value = clamp(toNum(input.value), 0, 1e9);
+  const recs = T.rank.map((k, i) => {
+    const f = flowFor(k, t);
+    const running = input.running.indexOf(k) !== -1;
+    const A = a[k] || { enter: 0, act: 0 };
+    const actions = size * pctNum(A.enter) / 100 * pctNum(A.act) / 100;
+    return Object.assign(f, { rank: i + 1, running, actions, money: actions * value });
+  });
+  const missing = recs.filter((f) => !f.running);
+  const needConnect = input.connected !== 'yes' && missing.some((f) => f.needs);
+  const estActions = missing.reduce((s, f) => s + f.actions, 0);
+  const estMoney = missing.reduce((s, f) => s + f.money, 0);
+  const top = missing[0] || recs[0];
+  const flags = {
+    personal: t === 'ecom' && (missing.some((f) => f.key === 'browse' || f.key === 'cart') || input.connected !== 'yes'),
+    branching: recs.filter((f) => f.running).length >= 3 || missing.length >= 4,
+    sms: t === 'booking' || t === 'local',
+    crm: input.follow === 'person' || t === 'b2b',
+    testing: size >= 10000,
+  };
+  return { t, T, pl, name, size, value, recs, missing, needConnect, estActions, estMoney, top, flags, input };
+}
+function roundish(n) { if (n <= 0) return 0; if (n < 1) return 1; if (n < 20) return Math.round(n); if (n < 200) return Math.round(n / 5) * 5; return Math.round(n / 10) * 10; }
+function money(n) { return '$' + fmt(n >= 1000 ? Math.round(n / 100) * 100 : Math.round(n)); }
+let currentProfile = null;
+(function () {
+  const form = $('answers');
+  let last = null, profileSnapshot = null;
+  function drawAssumptions() {
+    $('assume-rows').innerHTML = Object.keys(FLOWS).filter((k) => k !== 'sunset').map((k) =>
+      '<tr><th scope="row">' + esc(FLOWS[k].name) + '</th>' +
+      '<td><span class="cell"><input class="num-in" type="number" inputmode="decimal" min="0" max="100" step="any" data-k="' + k + '" data-f="enter" aria-label="' + esc(FLOWS[k].name) + ': percent of list entering each month" value="' + esc(ASSUMPTIONS[k].enter) + '"><span class="unit">%</span></span></td>' +
+      '<td><span class="cell"><input class="num-in" type="number" inputmode="decimal" min="0" max="100" step="any" data-k="' + k + '" data-f="act" aria-label="' + esc(FLOWS[k].name) + ': percent who take the goal action" value="' + esc(ASSUMPTIONS[k].act) + '"><span class="unit">%</span></span></td></tr>').join('') +
+      '<tr><th scope="row">Sunset (clean-out)</th><td colspan="2">Not counted. It protects inbox placement rather than earning directly.</td></tr>';
+  }
+  drawAssumptions();
+  $('assume-rows').addEventListener('input', (ev) => {
+    const i = ev.target; if (!i || !i.getAttribute('data-k')) return;
+    ASSUMPTIONS[i.getAttribute('data-k')][i.getAttribute('data-f')] = pctNum(i.value);
+    render();
+  });
+  $('reset-assume').addEventListener('click', () => {
+    Object.keys(DEFAULT_ASSUMPTIONS).forEach((k) => { ASSUMPTIONS[k] = Object.assign({}, DEFAULT_ASSUMPTIONS[k]); });
+    drawAssumptions(); render(); $('reset-status').textContent = 'Back to the default rules of thumb.';
+    setTimeout(() => { $('reset-status').textContent = ''; }, 3000);
+  });
+
+  function readInput() {
+    return { btype: radioVal(form, 'btype'), bizname: $('bizname').value, platform: radioVal(form, 'platform'), connected: radioVal(form, 'connected'),
+      running: checkVals(form, 'running'), size: $('size').value, value: $('value').value, follow: radioVal(form, 'follow') };
+  }
+  function applyInput(i) {
+    ['btype', 'platform', 'connected', 'follow'].forEach((k) => setRadio(form, k, i[k]));
+    $('bizname').value = i.bizname || ''; $('size').value = i.size || ''; $('value').value = i.value || '';
+    setChecks(form, 'running', i.running);
+  }
+  function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  function applyProfile(p) {
+    currentProfile = p;
+    const i = JSON.parse(JSON.stringify(EXAMPLE));
+    const used = [];
+    if (p) {
+      let t = '';
+      if (p.ecommerce === 'shopify' || p.ecommerce === 'other') t = 'ecom';
+      else if (p.app === true || p.goal === 'installs') t = 'saas';
+      else if (p.model === 'b2b') t = 'b2b';
+      else if (p.locations === 'one' || p.locations === 'multi' || p.reach === 'local') t = 'local';
+      if (t) { i.btype = t; used.push('btype'); i.follow = t === 'ecom' ? 'na' : (p.crm && p.crm !== 'none' ? 'person' : 'none'); }
+      if (p.name) { i.bizname = p.name; used.push('bizname'); }
+      if (p.crm === 'hubspot') { i.platform = 'hubspot'; used.push('platform'); }
+    }
+    applyInput(i);
+    markFromProfile(used);
+    profileSnapshot = p ? readInput() : null;
+  }
+  function state(i) {
+    if (profileSnapshot && same(i, profileSnapshot)) return 'profile';
+    if (!profileSnapshot && same(i, EXAMPLE)) return 'example';
+    return 'yours';
+  }
+  function xlinks(m) {
+    const p = currentProfile || {};
+    const L = [];
+    if (m.input.follow === 'person' || m.t === 'b2b') L.push({ key: 'speedToLead', why: 'set up the rep\'s first reply and follow-up tasks. That\'s sales follow-up, not these marketing flows.' });
+    if (p.crm === 'none' || m.input.follow === 'none') L.push({ key: 'leadCapture', why: 'get every form lead into one CRM so flows can start from it.' });
+    if (m.t === 'local' || m.t === 'booking') L.push({ key: 'local', why: 'review-request emails work best when your Google Business Profile is ready to receive them.' });
+    L.push({ key: 'tracking', why: 'add UTM tags to the links in every flow so GA4 shows what email brings in.' });
+    if (m.t === 'ecom') L.push({ key: 'conversions', why: 'count purchases from email as conversions you can see.' });
+    L.push({ key: 'inbox', why: 'make sure these emails reach the inbox: domain records, consent and unsubscribe.' });
+    return L;
+  }
+  function nextFor(m) {
+    return { key: 'emailHealth', why: 'Once your flows have run for a month, score whether your email program is working.' };
+  }
+  function headline(m) {
+    const n = m.missing.length, tot = m.recs.length;
+    let est = '';
+    if (n && m.size > 0 && m.estActions > 0) {
+      est = 'Rule of thumb: those flows could add about ' + fmt(roundish(m.estActions)) + ' ' + m.T.unit + ' a month' +
+        (m.value > 0 ? ' (around ' + money(m.estMoney) + ')' : '') + '. It\'s a rough guide; change the assumptions under "How we calculate this".';
+    } else if (n && m.size === 0) est = 'Add your list size to see a rough estimate of what they could bring in.';
+    return {
+      num: String(n),
+      unit: 'of ' + tot + ' recommended automated ' + (tot === 1 ? 'email flow' : 'email flows') + (n === 1 ? ' is' : ' are') + ' missing',
+      rec: n ? 'Start with your ' + m.top.name.charAt(0).toLowerCase() + m.top.name.slice(1) + '.' : 'Every recommended flow is running.',
+      line: n ? est : 'Next, check they are working: clicks, unsubscribes and what each flow brings in.',
+    };
+  }
+  function buildSteps(m, f) {
+    const s = BUILD[m.pl](f);
+    if (f.needs && m.input.connected !== 'yes') s.unshift('First connect your ' + m.T.tool + ' (see the top of this plan) so ' + PLATFORM[m.pl] + ' can see the trigger.');
+    if (f.key === 'post' && m.t !== 'saas') s.push('Never offer a discount or gift in exchange for a review, and ask every customer, not just happy ones. Google and US rules ban both.');
+    if (f.key === 'reminder') s.push('Many booking tools send reminders themselves. If yours does, switch those on and skip building it twice.');
+    if (f.key === 'sunset') s.push('Suppress (don\'t delete) people who don\'t click, so they never get re-imported.');
+    return s;
+  }
+  function renderPlan(m) {
+    const out = [];
+    let open = 0;
+    if (m.needConnect) {
+      open++;
+      out.push('<li class="is-first"><span class="sn" aria-hidden="true">0</span><div class="sb"><div class="st-top"><span class="st-title">Connect your ' + esc(m.T.tool) + ' to ' + esc(PLATFORM[m.pl]) + '</span><span class="chips"><span class="chip first">Do this first</span></span></div>' +
+        '<p class="st-why">' + (m.input.connected === 'unsure' ? 'Check this first. ' : '') + 'Flows marked "Needs a connection" start from what people do in your ' + esc(m.T.tool) + '. Without the connection they never trigger.</p>' +
+        '<p class="cms-note"><b>On ' + esc(PLATFORM[m.pl]) + ':</b> ' + esc(CONNECT[m.pl]) + '</p><p class="st-time">Time: <b>' + esc(timeRange(30, 90)) + '</b></p></div></li>');
+    }
+    m.recs.forEach((f) => {
+      if (f.running) {
+        out.push('<li class="is-done"><span class="sn" aria-hidden="true">✓</span><div class="sb"><div class="st-top"><span class="st-title"><span class="sr-only">Running: </span>' + esc(f.name) + '</span><span class="chips"><span class="chip run">Running</span></span></div><p class="st-time">Already running. Check it in Toolkit 3.</p></div></li>');
+        return;
+      }
+      const first = open++ < 3;
+      const chips = (first ? '<span class="chip first">Do these first</span>' : '') + (f.needs && m.input.connected !== 'yes' ? '<span class="chip check">Needs a connection</span>' : '');
+      out.push('<li class="' + (first ? 'is-first' : '') + '"><span class="sn" aria-hidden="true">' + f.rank + '</span><div class="sb">' +
+        '<div class="st-top"><span class="st-title">' + esc(f.name) + '</span>' + (chips ? '<span class="chips">' + chips + '</span>' : '') + '</div>' +
+        '<dl class="meta-grid"><dt>Trigger</dt><dd>' + esc(f.trigger) + '</dd><dt>Timing</dt><dd>' + esc(f.timing) + '</dd><dt>Emails</dt><dd>' + f.emails + '</dd><dt>Goal</dt><dd>' + esc(f.goalText) + '</dd></dl>' +
+        '<p class="label" style="margin-top:6px">Subject lines to start from</p><ul class="subj-list">' + f.subjectList.map((s) => '<li>' + esc(merge(s, m.name, m.t)) + '</li>').join('') + '</ul>' +
+        '<p class="label" style="margin-top:6px">Build it in ' + esc(PLATFORM[m.pl]) + '</p><ol class="how-list">' + buildSteps(m, f).map((s) => '<li>' + esc(s) + '</li>').join('') + '</ol>' +
+        (f.key !== 'sunset' && m.size > 0 && f.actions > 0 ? '<p class="st-time">Rule of thumb: about <b>' + fmt(roundish(f.actions)) + ' ' + esc(m.T.unit) + ' a month</b>' + (m.value > 0 ? ' (around ' + esc(money(f.money)) + ')' : '') + '</p>' : '') +
+        (f.key === 'sunset' ? '<p class="kit-link">Free toolkit: ' + linkHtml('inbox') + ' · keeps your list clean and out of spam.</p>' : '') +
+        '</div></li>');
+    });
+    $('plan').innerHTML = out.join('');
+  }
+  function planTextLines(m) {
+    const L = [];
+    let open = 0;
+    if (m.needConnect) { open++; L.push('0. Connect your ' + m.T.tool + ' to ' + PLATFORM[m.pl] + ', do this first', '   On ' + PLATFORM[m.pl] + ': ' + CONNECT[m.pl]); }
+    m.recs.forEach((f) => {
+      if (f.running) { L.push('[running] ' + f.name); return; }
+      const first = open++ < 3;
+      L.push(f.rank + '. ' + f.name + (first ? ', do this first' : '') + (f.needs && m.input.connected !== 'yes' ? ' [NEEDS A CONNECTION]' : ''));
+      L.push('   Trigger: ' + f.trigger, '   Timing: ' + f.timing, '   Emails: ' + f.emails, '   Goal: ' + f.goalText);
+      L.push('   Subject lines: ' + f.subjectList.map((s) => merge(s, m.name, m.t)).join(' | '));
+      buildSteps(m, f).forEach((s, j) => L.push('   ' + String.fromCharCode(97 + j) + ') ' + s));
+      if (f.key !== 'sunset' && m.size > 0 && f.actions > 0) L.push('   Rule of thumb: about ' + fmt(roundish(f.actions)) + ' ' + m.T.unit + ' a month' + (m.value > 0 ? ' (around ' + money(f.money) + ')' : ''));
+    });
+    return L;
+  }
+  function salesNote(m) {
+    if (m.input.follow === 'person' || m.t === 'b2b') return 'These flows are marketing email from ' + PLATFORM[m.pl] + ' to your list. A rep\'s personal reply to a new lead is sales follow-up: set that up with Never Let a Lead Go Cold.';
+    return '';
+  }
+  function emailFor(m) {
+    const f = m.top;
+    return { subject: merge(f.subjectList[0], m.name, m.t), body: merge(f.bodyText, m.name, m.t, f) };
+  }
+  function planText(m) {
+    const h = headline(m);
+    const L = ['YOUR AUTOMATED EMAIL PLAN', 'Which Emails Should Send Themselves? (Big Leap Email Marketing DIY Toolkit 2 of 3)', ''];
+    L.push('Business: ' + m.name + ' (' + m.T.label + ')', 'Platform: ' + (m.pl === 'other' ? 'Other' : PLATFORM[m.pl]));
+    L.push(h.num + ' ' + h.unit + '. ' + h.rec, h.line, '');
+    const sn = salesNote(m); if (sn) L.push(sn, '');
+    L.push('FLOWS, IN THE ORDER TO BUILD THEM', ...planTextLines(m));
+    const em = emailFor(m);
+    L.push('', 'YOUR FIRST EMAIL (' + m.top.name + ')', 'Subject: ' + em.subject, '', em.body);
+    L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
+    const nx = nextFor(m);
+    L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
+    const xl = xlinksText(xlinks(m), nx.key);
+    if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    return L.join('\n');
+  }
+  function render() {
+    const input = readInput(), m = model(input, ASSUMPTIONS);
+    last = m;
+    setExampleState(state(input), 'Example: an online store on Klaviyo with only a welcome series running. Change any answer to make it yours.');
+    const h = headline(m);
+    $('out-num').textContent = h.num;
+    $('out-num').classList.toggle('is-zero', m.missing.length === 0);
+    $('out-unit').textContent = h.unit;
+    $('out-rec').textContent = h.rec; $('out-rec').hidden = !h.rec;
+    $('out-line').textContent = h.line; $('out-line').hidden = !h.line;
+    $('answer').classList.toggle('is-done', m.missing.length === 0);
+    flashIfChanged(m.t + '/' + m.missing.length);
+    $('deliv-sub').textContent = 'Ranked for ' + m.T.label + '. Build them in this order; running flows are ticked off. Steps use ' + (m.pl === 'other' ? 'general menus.' : PLATFORM[m.pl] + ' menus.');
+    const sn = salesNote(m);
+    $('sales-note').hidden = !sn;
+    $('sales-note').innerHTML = sn ? '<b>Marketing email, not sales follow-up.</b> ' + esc(sn.replace('Never Let a Lead Go Cold.', '')) + linkHtml('speedToLead') + '.' : '';
+    renderPlan(m);
+    const em = emailFor(m);
+    $('first-sub').textContent = 'Email 1 of your ' + m.top.name.charAt(0).toLowerCase() + m.top.name.slice(1) + (m.missing.length ? ', your top missing flow.' : '.') + ' Short on purpose: one idea, one link.';
+    $('emails').innerHTML = '<article class="email" id="email-1"><div class="email-head"><p class="email-name">' + esc(m.top.name) + ', email 1<span class="email-when">' + esc(m.top.timing.split(',')[0]) + '</span></p>' +
+      '<button type="button" class="btn btn-plain" id="copy-email">Copy email</button></div>' +
+      '<p class="email-subject"><span>Subject</span><b>' + esc(em.subject) + '</b></p><div class="email-body">' + esc(em.body) + '</div><div id="host-email-1"></div></article>';
+    renderComplex(COMPLEX, m.flags);
+    const nx = nextFor(m);
+    renderXlinks(xlinks(m), nx.key);
+    renderNext(nx.key, nx.why);
+    syncChoiceStyles(form);
+    syncCopy();
+    sticky();
+  }
+  function restore() { profileSnapshot = null; applyInput(JSON.parse(JSON.stringify(EXAMPLE))); markFromProfile([]); render(); const f = form.querySelector('input[name="btype"]:checked'); if (f) f.focus(); }
+  initShell(2, restore);
+  currentProfile = initProfileStrip((p) => { applyProfile(p); render(); });
+  const syncCopy = initCopy(() => planText(last));
+  const sticky = initSticky();
+  initSegFocus(form);
+  $('emails').addEventListener('click', (ev) => {
+    const b = ev.target.closest ? ev.target.closest('#copy-email') : null;
+    if (!b || !last) return;
+    const em = emailFor(last);
+    copyWithFallback('Subject: ' + em.subject + '\n\n' + em.body, () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy email'; }, 2500); }, $('host-email-1'));
+  });
+  form.addEventListener('submit', (ev) => ev.preventDefault());
+  form.addEventListener('change', (ev) => { if (ev.target && ev.target.name) unmarkProfile(ev.target.name); render(); });
+  form.addEventListener('input', (ev) => { if (ev.target && ['bizname', 'size', 'value'].indexOf(ev.target.id) !== -1) { if (ev.target.id === 'bizname') unmarkProfile('bizname'); render(); } });
+  applyProfile(currentProfile);
+  render();
+})();
+
+</script>
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="01_Will_Your_Emails_Reach_the_Inbox.html"><small>← Previous</small><b>Will Your Emails Reach the Inbox?</b></a><a class="blp-hub" href="../../index.html"><small>Email Marketing · Toolkit 2 of 3</small><b>All toolkits</b></a><a class="blp-a" href="03_Is_Your_Email_Program_Working.html"><small>Next →</small><b>Is Your Email Program Working?</b></a></div></nav><!-- /bl-pager -->
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+</body>
+</html>

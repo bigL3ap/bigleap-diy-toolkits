@@ -98,7 +98,7 @@
       "id": "own-scott-paths",
       "type": "Owner review",
       "title": "Click through every menu path once",
-      "detail": "The RevOps 7 and Paid steps name exact menus in GA4, Tag Manager, Google Ads, Meta, LinkedIn, Shopify and more. They were written from current knowledge and need one check by a practitioner before launch.",
+      "detail": "The RevOps 7 and Paid steps name exact menus in GA4, Tag Manager, Google Ads, Meta, LinkedIn, Shopify, Mailchimp, Klaviyo and more. They were written from current knowledge and need one check by a practitioner before launch.",
       "owner": "Scott Smoot",
       "area": "RevOps 7, Paid 3",
       "status": "Open",
@@ -145,6 +145,36 @@
       "link": "toolkits/pr/BUILD_NOTES.md"
     },
     {
+      "id": "own-erica-platforms",
+      "type": "Owner review",
+      "title": "Which email platforms to support first",
+      "detail": "Drafts cover Mailchimp, Klaviyo, HubSpot and Constant Contact. Drop any, or add Brevo or ActiveCampaign? Should Mailchimp lead the examples, since Big Leap moved its own email to Mailchimp?",
+      "owner": "Erica Pounder",
+      "area": "Email Marketing",
+      "status": "Open",
+      "link": "toolkits/email/BUILD_NOTES.md"
+    },
+    {
+      "id": "own-erica-bench",
+      "type": "Owner review",
+      "title": "Email benchmarks and the dollar estimate",
+      "detail": "Are the scorecard ranges in Email 3 the ones Erica uses (for example spam complaints under 0.1%, never over 0.3%)? Should Email 2 keep its rule-of-thumb estimate of what missing flows leave on the table?",
+      "owner": "Erica Pounder",
+      "area": "Email Marketing",
+      "status": "Open",
+      "link": "toolkits/email/BUILD_NOTES.md"
+    },
+    {
+      "id": "own-erica-scope",
+      "type": "Owner review",
+      "title": "Email scope: legal table, sign-up forms, SMS",
+      "detail": "Should legal review the email-law table in Email 1? Is a 4th toolkit on sign-up forms and lead magnets wanted? Does SMS stay under “Where it gets complex”?",
+      "owner": "Erica Pounder",
+      "area": "Email Marketing",
+      "status": "Open",
+      "link": "toolkits/email/BUILD_NOTES.md"
+    },
+    {
       "id": "browsers",
       "type": "To do",
       "title": "Test on real Safari, Firefox and phones",
@@ -167,7 +197,7 @@
       "id": "cta-links",
       "type": "To do",
       "title": "Swap 'Talk to …' buttons for real scheduler links",
-      "detail": "Every 'Talk to Dallas / Scott / Shema / Kristina' button points to bigleap.com/contact-us for now. Each owner should send a meeting scheduler link.",
+      "detail": "Every “Talk to Dallas / Scott / Shema / Kristina / Erica” button points to bigleap.com/contact-us (UTM-tagged) for now. Each owner should send a meeting scheduler link.",
       "owner": "All owners",
       "area": "All",
       "status": "Open"
@@ -175,10 +205,10 @@
     {
       "id": "missing-kits",
       "type": "To do",
-      "title": "Email Marketing and Content Go/No-Go toolkits",
-      "detail": "The RevOps toolkits already have cross-link slots for Email (Erica Pounder) and Content (Whitney Sorensen). They stay hidden until those toolkits exist.",
-      "owner": "Erica Pounder, Whitney Sorensen",
-      "area": "Email, Content",
+      "title": "Content Go/No-Go toolkit",
+      "detail": "Email Marketing is now its own series (Erica Pounder, 3 draft toolkits). Content is the one service still without a toolkit; the RevOps pages keep a hidden cross-link slot for Whitney Sorensen's Content Go/No-Go toolkit.",
+      "owner": "Whitney Sorensen",
+      "area": "Content",
       "status": "Not started"
     },
     {
@@ -219,6 +249,33 @@
       "area": "All",
       "status": "Open",
       "ts": 1008
+    },
+    {
+      "id": "small-leaps",
+      "type": "Decision",
+      "title": "“Small Leaps” as the program name",
+      "detail": "The site now frames the toolkits as Small Leaps: clients make small leaps on their own with the free toolkits, then make the Big Leap when they hire us. Confirm the name for public use (hero copy, journey map, website mockups) and whether marketing wants it in the nav.",
+      "owner": "Coby Bush",
+      "area": "All",
+      "status": "Open"
+    },
+    {
+      "id": "routing",
+      "type": "Decision",
+      "title": "Agency Brands routing for toolkit leads",
+      "detail": "The journey map assumes multi-location and larger budgets go to Big Leap, and single-location, smaller-budget local leads can go to LeadGenix. Agree the routing rule and who owns it in HubSpot.",
+      "owner": "Coby Bush",
+      "area": "All",
+      "status": "Open"
+    },
+    {
+      "id": "mql-rule",
+      "type": "To do",
+      "title": "HubSpot properties and MQL rule for toolkit leads",
+      "detail": "Create contact properties for toolkit used, Business Profile answers and plan gaps, and set the scoring rule the journey map uses: profile fit plus two or more toolkits finished = MQL. Depends on the “email me my plan” opt-in.",
+      "owner": "Dallas Olsen",
+      "area": "All",
+      "status": "Open"
     },
     {
       "id": "revops7-order",

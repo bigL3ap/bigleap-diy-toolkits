@@ -103,7 +103,7 @@ body.clean .layout aside { display: none; }
         <div class="actions new">
           <span class="pin" aria-hidden="true">2</span>
           <a class="btn" href="#">Talk to a Strategist</a>
-          <a class="diy-link new-outline" href="toolkits-landing.html">Not ready to talk? Start with a free DIY toolkit</a>
+          <a class="diy-link new-outline" href="toolkits-landing.html">Not ready to talk? Take a small leap with a free DIY toolkit</a>
         </div>
       </div>
       <div class="form-card" aria-label="Talk to a Strategist form (existing)">
@@ -143,8 +143,8 @@ body.clean .layout aside { display: none; }
     <div class="c grid new">
       <span class="pin" aria-hidden="true">5</span>
       <div>
-        <h2 id="diy-h">Do the setup yourself. <span>Spend your budget on strategy.</span></h2>
-        <p class="copy">Tracking, ad accounts, lead capture, search basics, a media-ready spokesperson. Every program starts with the same groundwork. Our free toolkits walk you through the parts you can do on your own, written by the Big Leap experts who do it every day.</p>
+        <p style="font:italic 700 15px Raleway,Arial,sans-serif;margin:0 0 12px">Small Leaps · free DIY toolkits</p><h2 id="diy-h">Make small leaps on your own. <span>Make the Big Leap with us.</span></h2>
+        <p class="copy">Tracking, ad accounts, lead capture, search basics, an inbox-ready email domain, a media-ready spokesperson. Every program starts with the same groundwork. Our free toolkits walk you through the parts you can do on your own, written by the Big Leap experts who do it every day.</p>
         <ul class="paths" id="paths"></ul>
         <div class="more"><a class="btn" href="toolkits-landing.html">See all free toolkits</a><span style="font-size:14px;color:var(--muted)">No sign-up. Nothing you enter is stored.</span></div>
       </div>
@@ -189,7 +189,7 @@ body.clean .layout aside { display: none; }
       <li><span><b>Hero.</b> A quiet second path under “Talk to a Strategist” for visitors who aren't ready to talk yet.</span></li>
       <li><span><b>Form.</b> Small-budget visitors get pointed to the toolkits instead of a sales call that doesn't fit.</span></li>
       <li><span><b>Service tabs.</b> Each service shows its own free toolkits, so the DIY path sits right next to what we sell.</span></li>
-      <li><span><b>New band.</b> Placed after the 3-step process, as the step before step one. It includes the live “Where should you start?” widget and a path for each service.</span></li>
+      <li><span><b>New band.</b> “Small Leaps” placed after the 3-step process, as the step before step one: small leaps on their own, then the Big Leap with us. Live “Where should you start?” widget and a path for each of the five services.</span></li>
       <li><span><b>FAQ.</b> One new question that answers “can I do this myself?” honestly and links the toolkits.</span></li>
       <li><span><b>Footer.</b> Toolkits added to a Free resources column.</span></li>
     </ol>
@@ -227,7 +227,8 @@ body.clean .layout aside { display: none; }
     ['#143D55', 'RevOps', 'Catch every lead, answer it fast, measure what works', '7 toolkits', '../toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html'],
     ['#EA4335', 'Paid Media', 'Get your ad account ready and track what counts', '4 toolkits', '../toolkits/paid/01_What_Kind_of_Business_Are_You.html'],
     ['#0F7B5F', 'SEO', 'Let Google and AI search find and trust you', '2 toolkits', '../toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html'],
-    ['#7A4E9C', 'Digital PR', 'Be ready the day a journalist says yes', '2 toolkits', '../toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html']
+    ['#7A4E9C', 'Digital PR', 'Be ready the day a journalist says yes', '2 toolkits', '../toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html'],
+    ['#B45309', 'Email Marketing', 'Land in the inbox and automate what should send itself', '3 toolkits', '../toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html']
   ];
   document.getElementById('paths').innerHTML = PATHS.map(function (p) { return '<li><a href="' + p[4] + '" style="--c:' + p[0] + '"><i aria-hidden="true"></i><span><strong>' + p[1] + '</strong><small>' + p[2] + '</small></span><em>' + p[3] + '</em></a></li>'; }).join('');
 
