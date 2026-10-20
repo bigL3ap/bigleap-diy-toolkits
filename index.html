@@ -171,7 +171,21 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .map-detail li.none { display: block; padding: 10px 12px; border-radius: 10px; background: var(--sky); color: inherit; }
 .map-detail li a { font-weight: 700; }
 .map-detail li .x { font-size: 11.5px; font-weight: 700; color: var(--blue-ink); margin-left: 4px; }
-.map-detail .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.map-detail .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.md-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 10px 20px; }
+.map-detail h4 { margin-top: 16px !important; }
+.md-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)) !important; gap: 10px 20px !important; }
+.md-grid li { font-size: 13.5px !important; line-height: 1.45; }
+.md-grid li.none { grid-column: 1 / -1; max-width: 640px; }
+
+details.support { margin-top: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+details.support > summary { display: grid; gap: 2px; padding: 14px 18px 14px 50px; position: relative; cursor: pointer; list-style: none; }
+details.support > summary::-webkit-details-marker { display: none; }
+details.support > summary::before { content: "+"; position: absolute; left: 16px; top: 14px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: var(--navy); font-weight: 800; }
+details.support[open] > summary::before { content: "\2212"; }
+details.support > summary b { font: 700 18px var(--head); color: var(--navy); }
+details.support > summary span { font-size: 14px; color: var(--muted); }
+details.support .support-grid { padding: 4px 16px 16px; }
 .support-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; }
 .sup { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 12px; padding: 16px 18px; }
 .sup h3 { font-size: 18px; margin-bottom: 8px; }
@@ -202,7 +216,7 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .status.live { background: rgba(15,123,95,.12); color: var(--green); }
 .status.draft { background: rgba(161,92,7,.12); color: var(--amber); }
 .card h4 { margin: 0; font: 700 19px/1.3 var(--head); color: var(--navy); }
-.card p { margin: 0; font-size: 15px; color: var(--text); }
+.card p { margin: 0; font-size: 14.5px; color: var(--muted); }
 .card .go { margin-top: auto; padding-top: 6px; font-weight: 700; color: var(--blue-ink); font-size: 14px; }
 .empty { padding: 32px; text-align: center; background: var(--paper); border: 1px dashed var(--line); border-radius: var(--r-card); color: var(--muted); }
 
@@ -420,6 +434,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 @media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
 @media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
 .draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 @media print { .blh { display: none !important; } }
@@ -465,7 +482,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 </head>
 <body>
 <!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey">Journey map</a><a href="index.html#review" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a></nav><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
-<div class="draft-strip" role="note">Draft 1 for internal review · Built Oct 19, 2026 from the Agency Brands call · RevOps 1–6 are live; Paid, SEO, Digital PR, Email Marketing and RevOps 7 are first drafts</div>
+<div class="draft-strip" role="note">Draft 1 · for internal review · RevOps 1–6 are live, the rest are first drafts</div>
 
 
 <section class="hero" aria-labelledby="hero-h">
@@ -473,7 +490,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div>
       <p class="kicker">Small Leaps · free DIY toolkits from Big Leap</p>
       <h1 id="hero-h">Do the setup yourself. <span class="second">Spend your budget on strategy.</span></h1>
-      <p class="lede">Every marketing program starts with the same groundwork: tracking installed, accounts connected, leads landing in the right place, a spokesperson ready. These toolkits walk you through the parts you can do on your own, in the right order, so the first conversation with an expert starts where the real work begins. Make small leaps on your own; when you're ready, make the Big Leap with us.</p>
+      <p class="lede">These free toolkits walk you through the groundwork you can do yourself, in the right order: tracking, lead capture, search basics, inbox and press readiness. Make small leaps on your own; when the next step needs an expert, make the Big Leap with us.</p>
       <div class="hero-stats" id="hero-stats" aria-live="polite"></div>
     </div>
     <aside class="start-card" aria-labelledby="start-h">
@@ -496,7 +513,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="section-head">
         <div>
           <h2>The DIY map: one effort, five channels</h2>
-          <p>Each line is a service and each stop is a small leap, in the order to take them. The leaps aren't separate projects: tracking feeds ads, reviews feed local search, coverage feeds SEO, the CRM feeds email. Pick any stop to see what it unlocks in the other channels.</p>
+          <p>Each line is a service; each stop is a small leap. They feed each other: tracking feeds ads, reviews feed local search, the CRM feeds email. Pick a stop to see what it unlocks.</p>
         </div>
         <div class="map-tools">
           <button type="button" class="chip" id="map-all" aria-pressed="false">Show every connection</button>
@@ -506,13 +523,10 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="map" id="map" aria-label="Map of all toolkits by service. Select a stop to see its connections."></div>
       <div class="map-detail" id="map-detail" aria-live="polite"></div>
 
-      <div class="section-head" style="margin-top:40px">
-        <div>
-          <h2>How the services support each other</h2>
-          <p>Read across a row: what doing that service well gives every other channel. This is why the toolkits link to each other, and why the Big Leap engagement is holistic rather than one channel at a time.</p>
-        </div>
-      </div>
-      <div class="support-grid" id="support-grid"></div>
+      <details class="support">
+        <summary><b>How the services support each other</b><span>What doing each service well gives every other channel, and why the Big Leap engagement covers them together</span></summary>
+        <div class="support-grid" id="support-grid"></div>
+      </details>
 
       <div class="controls" role="search">
         <label class="sr" for="q">Search toolkits</label>
@@ -780,10 +794,10 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     }
     var outs = conn.edges.filter(function (e) { return e[0] === id; }), ins = conn.edges.filter(function (e) { return e[1] === id; });
     var d = $('map-detail'); d.style.setProperty('--sel', color(me.s.id));
-    d.innerHTML = '<h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p>' +
-      '<div class="cols"><div><h4>This small leap supports</h4><ul>' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul></div>' +
-      '<div><h4>It works best after</h4><ul>' + (ins.map(function (e) { return item(e, e[0]); }).join('') || '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>') + '</ul></div></div>' +
-      '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html">See it in the journey map</a></div>';
+    d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
+      '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html#connect:' + esc(id) + '">See it in the journey map</a></div></div>' +
+      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
+      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>') + '</ul>';
     if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
   function renderSupport() {
@@ -821,7 +835,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       out += '<section class="series" style="--c:' + c + '" aria-labelledby="s-' + s.id + '"><div class="series-head"><div><h3 id="s-' + s.id + '">' + esc(s.name) + '</h3><p>' + esc(s.promise) + '</p></div>' +
         '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
       list.forEach(function (t) {
-        out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">' + esc(s.name) + ' · Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">Draft 1') + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
+        out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">Draft 1') + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
       });
       out += '</div></section>';
     });
@@ -935,6 +949,12 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
   window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
   Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
   var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
   window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
