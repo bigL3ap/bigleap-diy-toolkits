@@ -71,48 +71,5 @@
       "use": "Email marketing proposals, ecommerce pages and onboarding. Since Google and Yahoo tightened bulk-sender rules, most lists have a gap here."
     }
   ],
-  "tiles": [
-    {
-      "id": "profile-start",
-      "title": "Where should your business start?",
-      "file": "tiles/profile-start-16x9.png",
-      "alt": "Slide tile: Not sure where to start? Start here DIY toolkit by Big Leap"
-    },
-    {
-      "id": "revops-hours",
-      "title": "How many hours does hand work cost your team?",
-      "file": "tiles/revops-hours-16x9.png",
-      "alt": "Slide tile: Hand work has a price. RevOps DIY toolkit by Big Leap"
-    },
-    {
-      "id": "paid-ready",
-      "title": "Is your Google Ads account ready to spend?",
-      "file": "tiles/paid-ready-16x9.png",
-      "alt": "Slide tile: Ready before you spend. Paid Media DIY toolkit by Big Leap"
-    },
-    {
-      "id": "tracking-check",
-      "title": "Can you see what your marketing does?",
-      "file": "tiles/tracking-check-16x9.png",
-      "alt": "Slide tile: See what your marketing does. RevOps DIY toolkit by Big Leap"
-    },
-    {
-      "id": "seo-foundations",
-      "title": "Can Google and AI search find your site?",
-      "file": "tiles/seo-foundations-16x9.png",
-      "alt": "Slide tile: Can search find you? SEO DIY toolkit by Big Leap"
-    },
-    {
-      "id": "pr-ready",
-      "title": "Could you say yes to a journalist this week?",
-      "file": "tiles/pr-ready-16x9.png",
-      "alt": "Slide tile: Ready when the press calls. Digital PR DIY toolkit by Big Leap"
-    },
-    {
-      "id": "email-inbox",
-      "title": "Will your emails reach the inbox?",
-      "file": "tiles/email-inbox-16x9.png",
-      "alt": "Slide tile: Land in the inbox. Email Marketing DIY toolkit by Big Leap"
-    }
-  ]
+  "tiles": []
 }

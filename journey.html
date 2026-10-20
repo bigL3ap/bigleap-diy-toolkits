@@ -165,13 +165,17 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
   .phases { grid-template-columns: 1fr; }
   .phase { border-radius: 0 !important; border-left: 1px solid var(--line) !important; }
   .phase:first-child { border-radius: 12px 12px 0 0 !important; } .phase:last-child { border-radius: 0 0 12px 12px !important; }
-  .phase:not(:last-child)::after { right: auto; left: 24px; top: auto; bottom: -11px; transform: rotate(135deg); }
+  .phase:not(:last-child)::after { display: none; }
+  .board.focus .cell:not(.hit) { display: none; }
+  .board.focus .lane-grid { gap: 10px; }
   .phase-band { display: none; }
   .turnon { grid-template-columns: 1fr; }
   .solution { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) { .phase-key { grid-template-columns: 1fr; } }
 
+#lane-all { border: 1px solid var(--line); min-height: 40px; }
+#lane-all[aria-pressed="true"] { background: #143D55; color: #fff; border-color: #143D55; }
 /* Persona picker */
 .picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 30px 0 0; }
 .picker > span { font: 700 15px var(--head); color: var(--navy); margin-right: 4px; }
@@ -204,7 +208,7 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
 .stage-tag { display: inline-block; font: 700 12px/1 var(--body); padding: 6px 9px; border-radius: 8px; background: var(--navy); color: var(--paper); align-self: flex-start; }
 .signal { font-size: 12.5px; color: var(--muted); }
 .step-badge { display: none; align-self: flex-start; width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; font: 800 13px/26px var(--head); text-align: center; }
-.board.focus .cell { opacity: .32; }
+.board.focus .cell { opacity: .5; }
 .board.focus .cell.hit { opacity: 1; border-color: var(--red); box-shadow: 0 0 0 2px rgba(234,67,53,.25); }
 .board.focus .cell.hit .step-badge { display: inline-block; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; font-size: 13px; color: var(--muted); align-items: center; }
@@ -227,16 +231,14 @@ section.block { padding: clamp(36px, 5vw, 64px) 0 0; }
 .series-col { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 14px; }
 .series-col h4 { font-size: 15px; margin-bottom: 6px; }
 .series-col .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.detail { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; position: sticky; top: 16px; }
+.detail { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c, var(--navy)); border-radius: 14px; padding: 20px; position: sticky; top: 16px; }
 .detail h3 { font-size: 22px; }
 .detail .who { color: var(--muted); font-size: 14px; margin-top: 4px; }
-.flow { display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1.1fr) 36px minmax(0, 1fr); align-items: stretch; gap: 0; margin-top: 16px; }
-.flow .col { display: flex; flex-direction: column; gap: 6px; }
-.flow .col h5 { margin: 0 0 4px; font: 700 12px var(--body); color: var(--muted); }
-.flow .arrow { display: grid; place-items: center; color: var(--muted); font-size: 20px; }
-.flow .me { display: grid; place-items: center; text-align: center; padding: 12px; border-radius: 12px; background: var(--c); color: #fff; font: 700 15px/1.3 var(--head); }
-.flow .me { align-self: center; min-height: 120px; display: grid; place-items: center; }
-.why-row { display: grid; gap: 4px; margin-bottom: 8px; }
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px 24px; margin-top: 16px; }
+.flow .col { display: flex; flex-direction: column; gap: 10px; }
+.flow .none { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--sky); font-size: 14px; }
+.flow .col h5 { margin: 0; padding-bottom: 6px; border-bottom: 1px solid var(--line); font: 700 13px var(--body); color: var(--muted); }
+.why-row { display: grid; gap: 4px; font-size: 14px; line-height: 1.45; }
 .why-row .chip { justify-self: start; }
 .handoff { margin-top: 16px; padding: 14px; border-radius: 12px; background: var(--sky); font-size: 14px; }
 .handoff b { color: var(--navy); }
@@ -273,7 +275,6 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 }
 @media (max-width: 560px) {
   .flow { grid-template-columns: 1fr; }
-  .flow .arrow { transform: rotate(90deg); height: 30px; }
   .logo span { display: none; }
   .topnav { width: 100%; }
   .topnav a { flex: 1 1 auto; justify-content: center; }
@@ -327,7 +328,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
-.blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
 /* Bottom pager on toolkit pages */
 .blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
 .blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
@@ -359,6 +360,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
 @media print { .blh { display: none !important; } }
 </style>
 <script id="bl-track-js">
@@ -737,7 +741,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var s = SEGMENTS[id];
     $('way').setAttribute('aria-labelledby', 'tab-' + id);
     $('way').innerHTML =
-      '<div class="way-top"><div><h3>' + esc(s.label) + '</h3><a class="seg" href="' + esc(s.seg[1]) + '" target="_blank" rel="noopener" style="font:700 12.5px var(--body)">Big Leap segment: ' + esc(s.seg[0]) + '</a><p class="who">' + esc(s.who) + '</p></div>' +
+      '<div class="way-top"><div><h3>' + esc(s.label) + '</h3><a class="seg" href="' + esc(s.seg[1]) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:32px;font:700 12.5px var(--body)">Big Leap segment: ' + esc(s.seg[0]) + '</a><p class="who">' + esc(s.who) + '</p></div>' +
       '<div class="pains"><h4>Their pain points</h4><ul>' + s.pains.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul></div></div>' +
       '<div class="phases">' +
         '<div class="phase ph-nd"><h3>Notice Different</h3><p class="moment">' + esc(s.notice.moment) + '</p><blockquote>“' + esc(s.notice.reframe) + '”</blockquote>' +
@@ -754,8 +758,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   function highlight(id) {
     Array.prototype.forEach.call(document.querySelectorAll('.cell'), function (c) { c.classList.remove('hit'); var sb = c.querySelector('.step-badge'); if (sb) sb.textContent = ''; });
     var board = $('board'), story = $('story'), all = $('lane-all');
-    if (!id) { board.classList.remove('focus'); story.hidden = true; all.setAttribute('aria-pressed', 'true'); return; }
-    all.setAttribute('aria-pressed', 'false');
+    if (!id) { board.classList.remove('focus'); story.hidden = true; all.setAttribute('aria-pressed', 'true'); all.textContent = 'Show only their path'; return; }
+    all.setAttribute('aria-pressed', 'false'); all.textContent = 'Show everything';
     var p = SEGMENTS[id]; board.classList.add('focus');
     p.path.forEach(function (st, i) {
       var c = $('c-' + st[0].replace(',', '-'));
@@ -789,11 +793,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var k = K[id], s = SERIES[k[0]];
     Array.prototype.forEach.call(document.querySelectorAll('#series-col .chip'), function (b) { b.classList.toggle('on', b.getAttribute('data-k') === id); b.setAttribute('aria-pressed', b.getAttribute('data-k') === id); });
     var ins = EDGES.filter(function (e) { return e[1] === id; }), outs = EDGES.filter(function (e) { return e[0] === id; });
-    function list(a, idx, empty) { return a.length ? a.map(function (e) { var o = e[idx]; return '<div class="why-row">' + chip(o, false) + '<span class="signal">' + esc(e[2]) + '</span></div>'; }).join('') : '<span class="signal">' + empty + '</span>'; }
+    function list(a, idx, empty) { return a.length ? a.map(function (e) { var o = e[idx]; return '<div class="why-row">' + chip(o, false) + '<span>' + esc(e[2]) + '</span></div>'; }).join('') : '<p class="none">' + empty + '</p>'; }
+    $('detail').style.setProperty('--c', 'var(--c-' + k[0] + ')');
     $('detail').innerHTML = '<h3>' + esc(k[2]) + '</h3><p class="who">' + esc(s[0]) + ' · written by ' + esc(s[1]) + '</p>' +
-      '<div class="flow"><div class="col"><h5>Works best after</h5>' + list(ins, 0, 'A starting point') + '</div><div class="arrow" aria-hidden="true">→</div>' +
-      '<div class="me" style="--c:var(--c-' + k[0] + ')">' + esc(k[2]) + '</div><div class="arrow" aria-hidden="true">→</div>' +
-      '<div class="col"><h5>Unlocks next</h5>' + list(outs, 1, 'Hand-off to sales') + '</div></div>' +
+      '<div class="flow"><div class="col"><h5><span aria-hidden="true">←</span> Works best after</h5>' + list(ins, 0, 'Nothing. This is a starting point.') + '</div>' +
+      '<div class="col"><h5>Unlocks next <span aria-hidden="true">→</span></h5>' + list(outs, 1, 'The hand-off to Big Leap.') + '</div></div>' +
       '<div class="handoff"><b>Hand-off to sales:</b> “Talk to ' + esc(s[2]) + ' about building it”, tagged <code>utm_campaign=' + CAMPAIGN[id] + '</code>. A booked call becomes an SQL with the toolkit as its source.</div>' +
       '<a class="open" href="' + esc(k[1]) + '">Open this toolkit</a>';
     if (!quiet && window.blTrack) window.blTrack('diy_map_select', { label: id });
@@ -878,6 +882,15 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });

@@ -85,7 +85,7 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
-.blh-theme { min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
 /* Bottom pager on toolkit pages */
 .blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
 .blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
@@ -117,6 +117,9 @@ CSS = r"""<style id="bl-header-css">
   .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
 @media print { .blh { display: none !important; } }
 </style>"""
 
@@ -127,6 +130,15 @@ JS = r"""<script id="bl-header-js">
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
@@ -274,7 +286,7 @@ if __name__ == '__main__':
         apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
               bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}"))
         print('toolkit', t['file'])
-    theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button>'
+    theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
     apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
