@@ -87,7 +87,7 @@ CSS = r"""<style id="bl-header-css">
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
 /* Bottom pager on toolkit pages */
-.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
 .blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
 .blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
 .blp a:hover { border-color: #3187B5; }
@@ -120,6 +120,18 @@ CSS = r"""<style id="bl-header-css">
 .blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
 :root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: min(100%, 300px); flex: 0 0 auto; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 @media print { .blh { display: none !important; } }
 </style>"""
 
@@ -128,7 +140,12 @@ JS = r"""<script id="bl-header-js">
   var h = document.querySelector('.blh'); if (!h) return;
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
-  function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
+  function centerCurrent() {
+    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
   function swipeHints() {
     Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
@@ -137,6 +154,21 @@ JS = r"""<script id="bl-header-js">
       else if (!over && has) h.parentNode.removeChild(h);
     });
   }
+  var SEQ = __SEQ__;
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    if (box.getAttribute('data-label')) { lab.textContent = box.getAttribute('data-label'); return; }
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
   var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
   window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
@@ -253,6 +285,8 @@ def pager(page, prev, nxt, where):
             + lk(prev, 'Previous', True) + f'<a class="blp-hub" href="{hub}"><small>{e(where)}</small><b>All toolkits</b></a>' + lk(nxt, 'Next', False)
             + '</div></nav><!-- /bl-pager -->')
 
+SEQ_JSON = '[]'
+
 def apply(page, block, before_selector=None, bottom=''):
     p = os.path.join(ROOT, page)
     s = open(p, encoding='utf-8').read()
@@ -268,7 +302,7 @@ def apply(page, block, before_selector=None, bottom=''):
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
     s = s.replace('</head>', CSS + '\n' + track_js() + '\n</head>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS + '\n</body>', 1)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
@@ -278,6 +312,7 @@ if __name__ == '__main__':
     ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
     by = {s['id']: s for s in d['series']}
     seq = [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
+    SEQ_JSON = json.dumps([t['file'] for _, t in seq])
     for i, (s, t) in enumerate(seq if not only_pages else []):
         prev = seq[i - 1] if i else None
         nxt = seq[i + 1] if i + 1 < len(seq) else None

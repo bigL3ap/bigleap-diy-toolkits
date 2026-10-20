@@ -487,7 +487,7 @@ body { overflow-wrap: anywhere; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
 /* Bottom pager on toolkit pages */
-.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 40px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
 .blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
 .blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
 .blp a:hover { border-color: #3187B5; }
@@ -520,6 +520,18 @@ body { overflow-wrap: anywhere; }
 .blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
 :root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: min(100%, 300px); flex: 0 0 auto; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 @media print { .blh { display: none !important; } }
 </style>
 <script id="bl-track-js">
@@ -904,7 +916,7 @@ function renderItems(el, items, extraHtml) {
   let open = 0;
   el.innerHTML = items.map((t, i) => {
     const first = !t.done && open++ < 3;
-    const chips = t.done ? '' : (first ? '<span class="chip first">Do these first</span>' : '') + (SEV_CHIP[t.sev] || '');
+    const chips = t.done ? '' : (first ? '<span class="chip first">Do first</span>' : '') + (SEV_CHIP[t.sev] || '');
     return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
       '<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
       '<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
@@ -1439,7 +1451,12 @@ let SNIPS = {};
   var h = document.querySelector('.blh'); if (!h) return;
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
-  function centerCurrent() { var cur = bar && bar.querySelector('a[aria-current="page"]'); if (cur && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = Math.max(0, cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2); }
+  function centerCurrent() {
+    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
   function swipeHints() {
     Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
@@ -1448,6 +1465,21 @@ let SNIPS = {};
       else if (!over && has) h.parentNode.removeChild(h);
     });
   }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    if (box.getAttribute('data-label')) { lab.textContent = box.getAttribute('data-label'); return; }
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
   var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
   window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
   function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }

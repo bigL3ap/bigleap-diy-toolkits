@@ -414,6 +414,26 @@
       "area": "Reporting",
       "status": "Open",
       "ts": 0
+    },
+    {
+      "id": "unify-profile-box",
+      "type": "To do",
+      "title": "Unify the Business Profile box across all toolkits (Draft 2)",
+      "detail": "RevOps 1–6 have no “Answer 8 questions once” box; Paid/PR and SEO/Email show it in two different layouts. Use one shared component everywhere.",
+      "owner": "Dallas Olsen",
+      "area": "Toolkit UX",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "unify-complex",
+      "type": "To do",
+      "title": "Put “Where it gets complex” in one place on every toolkit (Draft 2)",
+      "detail": "RevOps 1–6 and PR tuck it inside the dark closing panel (“Where the DIY version stops”); Paid, SEO, Email and RevOps 7 show a standalone card before it. Pick one pattern and one name.",
+      "owner": "Dallas Olsen",
+      "area": "Toolkit UX",
+      "status": "Open",
+      "ts": 0
     }
   ]
 }
