@@ -434,6 +434,42 @@ tbody th { font-weight: 700; color: var(--heading); }
 .blx-bar button:hover { background: #C5372B; }
 @media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
 @media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form refresh: light question cards, airy option pills ---- */
+.col-q.panel { background: transparent; border: 0; padding: 0; box-shadow: none; }
+.col-q .q-head { padding: 0 2px 14px; }
+#answers { row-gap: 14px; }
+#answers > .q, #answers > fieldset.q { align-content: start !important; align-items: start; background: var(--surface, #fff); border: 1px solid var(--line) !important; border-radius: 14px; padding: 16px 18px 18px !important; margin: 0 !important; box-shadow: 0 1px 2px rgba(20,61,85,.04); }
+@media (min-width: 880px) { #answers { align-items: stretch !important; row-gap: 16px; column-gap: 16px !important; } }
+@media (max-width: 879px) { #answers { display: grid; gap: 12px; } }
+.q legend { margin-bottom: 10px; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* option pills */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { border-color: var(--line-strong) !important; background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt { border-color: var(--line) !important; border-radius: 10px !important; }
+.opt:hover { border-color: var(--line-strong) !important; }
+.opt:has(input:checked) { border-color: var(--seg-on) !important; box-shadow: inset 0 0 0 1px var(--seg-on) !important; }
+.opt-wrap { border-color: var(--line) !important; border-radius: 10px !important; }
+.text-field, .field { border-color: var(--line) !important; border-radius: 10px !important; }
+.text-field:hover, .field:hover { border-color: var(--line-strong) !important; }
+select.text-field, .q select { border-radius: 10px; }
+
+@media (min-width: 880px) {
+  #answers.blx-masonry { grid-auto-rows: 4px; row-gap: 0 !important; align-items: start !important; }
+  #answers.blx-masonry > * { margin-bottom: 16px !important; }
+}
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
 @media print { .blh { display: none !important; } }
 </style>
 <script id="bl-track-js">
@@ -1104,7 +1140,7 @@ render();
     var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
     if (!ans || !res || !q || !window.IntersectionObserver) return;
     var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
-    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See your plan ↓</button>';
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
     document.body.appendChild(bar);
     var label = bar.querySelector('b');
     function summary() {
@@ -1119,6 +1155,24 @@ render();
     new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
     new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
     bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q') || !window.ResizeObserver) return;
+    var wide = window.matchMedia('(min-width: 880px)'), raf = 0;
+    function lay() {
+      raf = 0;
+      var kids = Array.prototype.filter.call(form.children, function (k) { return k.nodeType === 1 && !k.hidden && getComputedStyle(k).display !== 'none'; });
+      if (!wide.matches) { form.classList.remove('blx-masonry'); kids.forEach(function (k) { k.style.gridRowEnd = ''; }); return; }
+      form.classList.add('blx-masonry');
+      kids.forEach(function (k) { var h = k.getBoundingClientRect().height; k.style.gridRowEnd = 'span ' + Math.max(1, Math.ceil((h + 16) / 4)); });
+    }
+    function queue() { if (!raf) raf = requestAnimationFrame(lay); }
+    var ro = new ResizeObserver(queue);
+    Array.prototype.forEach.call(form.children, function (k) { ro.observe(k); });
+    new MutationObserver(function () { Array.prototype.forEach.call(form.children, function (k) { ro.observe(k); }); queue(); }).observe(form, { childList: true, attributes: true, subtree: false, attributeFilter: ['hidden', 'class', 'style'] });
+    window.addEventListener('resize', queue); if (wide.addEventListener) wide.addEventListener('change', queue);
+    queue(); window.addEventListener('load', queue);
   })();
   var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
   window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
