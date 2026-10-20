@@ -137,6 +137,55 @@ JS = r"""<script id="bl-header-js">
 })();
 </script>"""
 
+
+# ---- Engagement tracking ---------------------------------------------------
+# Fill these in and rerun `python3 tools/site_header.py` to turn on GA4 (via Tag Manager) and HubSpot.
+# Until then, events still go into window.dataLayer, so nothing is lost in the page logic.
+GTM_ID = ''        # e.g. 'GTM-XXXXXXX' (Big Leap's container)
+HUBSPOT_ID = ''    # e.g. '1234567' (Big Leap's HubSpot Hub ID, for the tracking code)
+
+TRACK_TMPL = r"""<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '__GTM__', HUB = '__HUB__';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>"""
+
+def track_js():
+    return TRACK_TMPL.replace('__GTM__', GTM_ID).replace('__HUB__', HUBSPOT_ID)
+
 def rel(frm, to):
     r = os.path.relpath(os.path.join(ROOT, to), os.path.dirname(os.path.join(ROOT, frm))).replace(os.sep, '/')
     return r
@@ -201,10 +250,11 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<style id="bl-(?:sitenav|header)-css">.*?</style>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
-    s = s.replace('</head>', CSS + '\n</head>', 1)
+    s = s.replace('</head>', CSS + '\n' + track_js() + '\n</head>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
     s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)

@@ -133,6 +133,43 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .legend-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 6px; background: var(--blue); }
 .legend-dot.hollow { background: var(--paper); box-shadow: inset 0 0 0 2px var(--blue); }
 
+
+/* Connection map */
+.map { position: relative; }
+.map-tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.map-count { font-size: 13px; color: var(--muted); }
+.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 1; }
+.map-svg path { fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: .9; }
+.map-svg path.in { stroke-dasharray: 6 6; }
+.map-svg path.faint { stroke-width: 1.5; opacity: .35; }
+.stop button.node { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; color: var(--text); font: inherit; }
+.stop button.node:hover .dot { transform: scale(1.08); }
+.stop, .line-name { position: relative; z-index: 2; }
+.map.has-sel .stop { opacity: .35; transition: opacity .15s ease; }
+.map.has-sel .stop.sel, .map.has-sel .stop.out, .map.has-sel .stop.in { opacity: 1; }
+.stop.sel .dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--red); }
+.stop.out .dot, .stop.in .dot { box-shadow: 0 0 0 2px var(--c, var(--blue)), 0 0 0 6px rgba(49,135,181,.18); }
+.map-detail { margin-top: 14px; background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--sel, var(--navy)); border-radius: 12px; padding: 18px 20px; }
+.map-detail h3 { font-size: 20px; }
+.map-detail .meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.map-detail .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 24px; margin-top: 12px; }
+.map-detail h4 { margin: 0 0 6px; font: 700 13px var(--body); color: var(--muted); }
+.map-detail ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.map-detail li { display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 10px; font-size: 14.5px; }
+.map-detail li i { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; background: var(--c); }
+.map-detail li b { color: var(--navy); }
+.map-detail li a { font-weight: 700; }
+.map-detail li .x { font-size: 11.5px; font-weight: 700; color: var(--blue-ink); margin-left: 4px; }
+.map-detail .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.support-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; }
+.sup { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 12px; padding: 16px 18px; }
+.sup h3 { font-size: 18px; margin-bottom: 8px; }
+.sup ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.sup li { font-size: 14px; line-height: 1.5; }
+.sup li b { display: inline-flex; align-items: center; gap: 6px; color: var(--navy); font-weight: 700; }
+.sup li b::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--to); }
+@media (max-width: 720px) { .map-detail .cols { grid-template-columns: 1fr; } }
+
 /* Filters + cards */
 .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 20px; align-items: center; }
 .search { flex: 1 1 260px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--text); font: 16px var(--body); }
@@ -347,6 +384,44 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 @media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
 @media print { .blh { display: none !important; } }
 </style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
 </head>
 <body>
 <!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey">Journey map</a><a href="index.html#review" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a></nav><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode">◐</button></div></div></div></header><!-- /bl-header -->
@@ -380,11 +455,24 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2>The DIY map</h2>
-          <p>Each line is a service and each stop is a small leap, in the order to take them. Start with your Business Profile and it will tell you which lines you need. When a plan hits the hard part, its expert is one click away.</p>
+          <h2>The DIY map: one effort, five channels</h2>
+          <p>Each line is a service and each stop is a small leap, in the order to take them. The leaps aren't separate projects: tracking feeds ads, reviews feed local search, coverage feeds SEO, the CRM feeds email. Pick any stop to see what it unlocks in the other channels.</p>
+        </div>
+        <div class="map-tools">
+          <button type="button" class="chip" id="map-all" aria-pressed="false">Show every connection</button>
+          <span class="map-count" id="map-count"></span>
         </div>
       </div>
-      <div class="map" id="map" aria-label="Map of all toolkits by service"></div>
+      <div class="map" id="map" aria-label="Map of all toolkits by service. Select a stop to see its connections."></div>
+      <div class="map-detail" id="map-detail" aria-live="polite"></div>
+
+      <div class="section-head" style="margin-top:40px">
+        <div>
+          <h2>How the services support each other</h2>
+          <p>Read across a row: what doing that service well gives every other channel. This is why the toolkits link to each other, and why the Big Leap engagement is holistic rather than one channel at a time.</p>
+        </div>
+      </div>
+      <div class="support-grid" id="support-grid"></div>
 
       <div class="controls" role="search">
         <label class="sr" for="q">Search toolkits</label>
@@ -500,7 +588,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var next = isDark() ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     try { localStorage.setItem('bl_hub_theme', next); } catch (e) {}
-    renderMap(); renderSeries();
+    renderMap(); renderSupport(); renderSeries();
   });
 
   /* Sections, driven by the flat toolkit bar in the site header */
@@ -514,7 +602,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       if (k === key) a.setAttribute('aria-current', 'page'); else if (k !== 'journey' && k !== 'start') a.removeAttribute('aria-current');
     });
   }
-  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); }
+  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); if (id === 'toolkits' && typeof drawLines === 'function') setTimeout(drawLines, 30); }
   function fromHash(scroll) {
     var h = (location.hash || '').slice(1);
     if (SERVICE_IDS.indexOf(h) > -1) {
@@ -547,23 +635,93 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     if (p) { $('start-btn').textContent = 'Update your Business Profile'; }
   }
 
+  var conn = null, PFX = { revops: 'rv', paid: 'paid', seo: 'seo', pr: 'pr', email: 'em' }, selNode = null, showAll = false;
+  function nodeInfo(id) {
+    var n = conn && conn.nodes[id]; if (!n) return null;
+    var s = data.series.filter(function (x) { return x.id === n[0]; })[0]; if (!s) return null;
+    var t2 = s.toolkits.filter(function (x) { return x.n === n[1]; })[0]; if (!t2) return null;
+    return { s: s, t: t2 };
+  }
   function renderMap() {
     var SLOTS = Math.max(6, Math.max.apply(null, data.series.map(function (s) { return s.toolkits.length; })));
-    var h = '<div class="map-start"><a class="start-node" href="' + esc(data.start.file) + '"><small>Start here</small><strong>' + esc(data.start.title) + '</strong></a></div>';
+    var h = '<svg class="map-svg" id="map-svg" aria-hidden="true"></svg><div class="map-start"><a class="start-node" href="' + esc(data.start.file) + '"><small>Start here</small><strong>' + esc(data.start.title) + '</strong></a></div>';
     data.series.forEach(function (s) {
       var c = color(s.id);
       var draft = s.toolkits.every(function (t) { return t.status !== 'live'; });
       h += '<div class="line"><div class="line-name">' + esc(s.name) + '<small>' + esc(s.first) + ' · ' + s.toolkits.length + ' toolkit' + (s.toolkits.length === 1 ? '' : 's') + '</small></div>';
       h += '<ol class="stops' + (draft ? ' draft-line' : '') + '" style="--c:' + c + ';--n:' + s.toolkits.length + ';--s:' + SLOTS + '">';
       s.toolkits.forEach(function (t) {
-        h += '<li class="stop' + (t.status !== 'live' ? ' is-draft' : '') + '"><a href="' + esc(t.file) + '" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (t.status !== 'live' ? ' (draft)' : '') + '</span></span></a></li>';
+        var id = PFX[s.id] + t.n;
+        h += '<li class="stop' + (t.status !== 'live' ? ' is-draft' : '') + '" data-node="' + id + '"><button type="button" class="node" aria-pressed="false" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (t.status !== 'live' ? ' (draft)' : '') + '. Show connections</span></span></button></li>';
       });
       for (var i = s.toolkits.length; i < SLOTS; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
       h += '</ol></div>';
     });
-    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span>Numbers show the order to do them in</span></div>';
+    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span>Solid line: this leap supports · Dashed: this leap needs</span></div>';
     $('map').innerHTML = h;
+    if (conn) {
+      var cross = conn.edges.filter(function (e) { return conn.nodes[e[0]][0] !== conn.nodes[e[1]][0]; }).length;
+      $('map-count').textContent = conn.edges.length + ' connections · ' + cross + ' across services';
+    }
+    selectNode(selNode || 'paid1', true);
   }
+  function center(el, box) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top }; }
+  function drawLines() {
+    var svg = $('map-svg'), map = $('map'); if (!svg || !conn) return;
+    var box = map.getBoundingClientRect(); svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
+    var out = '';
+    function path(e, cls) {
+      var a = map.querySelector('[data-node="' + e[0] + '"] .dot'), b = map.querySelector('[data-node="' + e[1] + '"] .dot'); if (!a || !b) return;
+      var p = center(a, box), q = center(b, box), col = color(conn.nodes[e[0]][0]);
+      var d;
+      if (Math.abs(p.y - q.y) < 8) { var lift = Math.min(60, 18 + Math.abs(q.x - p.x) * 0.25); d = 'M' + p.x + ' ' + (p.y - 22) + ' C ' + p.x + ' ' + (p.y - 22 - lift) + ', ' + q.x + ' ' + (q.y - 22 - lift) + ', ' + q.x + ' ' + (q.y - 22); }
+      else { var my = (p.y + q.y) / 2; d = 'M' + p.x + ' ' + p.y + ' C ' + p.x + ' ' + my + ', ' + q.x + ' ' + my + ', ' + q.x + ' ' + q.y; }
+      out += '<path class="' + cls + '" d="' + d + '" stroke="' + col + '"/>';
+    }
+    if (showAll) conn.edges.forEach(function (e) { path(e, 'faint'); });
+    if (selNode) conn.edges.forEach(function (e) { if (e[0] === selNode) path(e, 'out'); else if (e[1] === selNode) path(e, 'in'); });
+    svg.innerHTML = out;
+  }
+  function selectNode(id, quiet) { if (!quiet && window.blTrack) window.blTrack('diy_map_select', { label: id });
+    if (!conn) return; selNode = id;
+    var map = $('map'); map.classList.toggle('has-sel', !!id && !showAll);
+    Array.prototype.forEach.call(map.querySelectorAll('.stop[data-node]'), function (li) {
+      var n = li.getAttribute('data-node');
+      var isOut = conn.edges.some(function (e) { return e[0] === id && e[1] === n; });
+      var isIn = conn.edges.some(function (e) { return e[1] === id && e[0] === n; });
+      li.classList.toggle('sel', n === id); li.classList.toggle('out', isOut); li.classList.toggle('in', isIn && !isOut);
+      li.querySelector('button').setAttribute('aria-pressed', n === id ? 'true' : 'false');
+    });
+    drawLines();
+    var me = nodeInfo(id); if (!me) return;
+    function item(e, other) {
+      var o = nodeInfo(other); if (!o) return '';
+      var x = o.s.id !== me.s.id ? '<span class="x">' + esc(o.s.name) + '</span>' : '';
+      return '<li style="--c:' + color(o.s.id) + '"><i aria-hidden="true"></i><span><a href="' + esc(o.t.file) + '">' + esc(o.t.title) + '</a>' + x + '<br>' + esc(e[2]) + '</span></li>';
+    }
+    var outs = conn.edges.filter(function (e) { return e[0] === id; }), ins = conn.edges.filter(function (e) { return e[1] === id; });
+    var d = $('map-detail'); d.style.setProperty('--sel', color(me.s.id));
+    d.innerHTML = '<h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p>' +
+      '<div class="cols"><div><h4>This small leap supports</h4><ul>' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li><span>The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</span></li>') + '</ul></div>' +
+      '<div><h4>It works best after</h4><ul>' + (ins.map(function (e) { return item(e, e[0]); }).join('') || '<li><span>Nothing. It’s a starting point.</span></li>') + '</ul></div></div>' +
+      '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html">See it in the journey map</a></div>';
+    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+  function renderSupport() {
+    if (!conn || !conn.support) return;
+    var names = {}; data.series.forEach(function (s) { names[s.id] = s.name; });
+    $('support-grid').innerHTML = data.series.map(function (s) {
+      var row = conn.support[s.id] || {};
+      return '<article class="sup" style="--c:' + color(s.id) + '"><h3>' + esc(s.name) + ' gives…</h3><ul>' +
+        Object.keys(row).map(function (to) { return '<li style="--to:' + color(to) + '"><b>' + esc(names[to] || to) + '</b> ' + esc(row[to]) + '</li>'; }).join('') + '</ul></article>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('#map .stop button.node') : null;
+    if (b) selectNode(b.parentNode.getAttribute('data-node'));
+    if (e.target.id === 'map-all') { showAll = !showAll; e.target.setAttribute('aria-pressed', showAll ? 'true' : 'false'); e.target.textContent = showAll ? 'Hide extra connections' : 'Show every connection'; $('map').classList.toggle('has-sel', !showAll); drawLines(); }
+  });
+  var rT; window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(drawLines, 120); });
 
   function renderFilters() {
     var opts = [['all', 'All services']].concat(data.series.map(function (s) { return [s.id, s.name]; }));
@@ -651,12 +809,14 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   Promise.all([
     getJSON('toolkits.json'),
     getJSON('data/open-items.json').catch(function () { return { items: [] }; }),
-    getJSON('data/widgets.json').catch(function () { return null; })
+    getJSON('data/widgets.json').catch(function () { return null; }),
+    getJSON('data/connections.json').catch(function () { return null; })
   ]).then(function (r) {
-    data = r[0]; items = r[1]; widgets = r[2];
+    data = r[0]; items = r[1]; widgets = r[2]; conn = r[3];
     $('updated').textContent = 'Updated ' + (data.updated || '');
     if (pendingSeries) { state.series = pendingSeries; pendingSeries = null; }
-    renderStats(); renderMap(); renderFilters(); renderSeries(); renderOpen(); renderWidgets();
+    renderStats(); renderMap(); renderSupport(); renderFilters(); renderSeries(); renderOpen(); renderWidgets();
+    setTimeout(drawLines, 300); if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawLines);
   }).catch(function () {
     $('series-list').innerHTML = '<div class="empty">The toolkit list could not load. Refresh the page; if it keeps happening, check that toolkits.json is valid.</div>';
   });

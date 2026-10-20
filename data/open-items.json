@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "source": {
     "title": "Agency Brands Bi-Weekly — Oct 19, 2026",
     "url": "https://fathom.video/share/Fyx5Np4pU598jfPhL5Z8QD9hxL_-xBrm"
@@ -341,6 +341,76 @@
       "title": "Reporting gap Oct 1–5 vs. client hub start Oct 12",
       "detail": "Scott flagged a drop-off around Oct 1–5. Dallas confirmed only email marketing moved to Mailchimp, and offered to dig in with Kevin.",
       "owner": "Scott Smoot",
+      "area": "Reporting",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "bigleap-way",
+      "type": "Decision",
+      "title": "Confirm the “Notice Different / Align to Genuine” definitions",
+      "detail": "The journey map reads them as: Notice Different = the moment a prospect sees we're not another agency pitch; Align to Genuine = help that fits their real situation (honest limits, named experts, proof from their segment); Convert = trigger + offer → booked call. Confirm or correct the wording, and the four segment stories.",
+      "owner": "Coby",
+      "area": "Journey map",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "gtm-id",
+      "type": "Blocker",
+      "title": "Add the Tag Manager container ID and HubSpot Hub ID",
+      "detail": "Engagement events (diy_*) already go into the dataLayer on every page and widget. Put GTM_ID and HUBSPOT_ID in tools/site_header.py and rerun to send them to GA4 and HubSpot, then add the GA4 event tag on diy_* and mark diy_cta_click and diy_plan_copy as key events.",
+      "owner": "Dallas Olsen",
+      "area": "Tracking",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "hs-report",
+      "type": "To do",
+      "title": "Save the HubSpot report for toolkit-sourced pipeline",
+      "detail": "Contacts and deals with original source campaign diy-toolkits, by lifecycle stage, utm_campaign (toolkit) and brand. Counts toward the $400K new marketing-sourced MRR goal.",
+      "owner": "Dallas Olsen",
+      "area": "Reporting",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "followup-seq",
+      "type": "To do",
+      "title": "Build the plan-delivery and owner check-in email sequence",
+      "detail": "Day 0 plan, Day 3 owner check-in, Day 7 next small leap, Day 14 segment case study, Day 21 plan review. Exits on meeting booked. Needs the “Email me my plan” opt-in form connected first.",
+      "owner": "Erica Pounder",
+      "area": "Campaigns",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "intent-alert",
+      "type": "To do",
+      "title": "High-intent sales alert workflow",
+      "detail": "HubSpot workflow + Slack post when a prospect hits a launch blocker, finishes 3+ toolkits in 14 days, or revisits Paid 4, RevOps 6 or Email 3.",
+      "owner": "Dallas Olsen",
+      "area": "Campaigns",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "retarget",
+      "type": "To do",
+      "title": "Retargeting audiences for toolkit visitors",
+      "detail": "Started-not-finished and finished-not-booked audiences in Google Ads and Meta; exclude customers and open deals.",
+      "owner": "Scott Smoot",
+      "area": "Campaigns",
+      "status": "Open",
+      "ts": 0
+    },
+    {
+      "id": "kpi-targets",
+      "type": "Decision",
+      "title": "Confirm the example KPI targets",
+      "detail": "Example targets on the journey page (e.g. 3–5% talk-to clicks, 15%+ plans taken) are starting points. Set real targets after 60 days of baseline data.",
+      "owner": "Coby",
       "area": "Reporting",
       "status": "Open",
       "ts": 0
