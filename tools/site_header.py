@@ -3,7 +3,9 @@
 
 Tier 1 copies the bigleap.com header (logo, Services / Who We Serve / Case Studies / Resources / About menus,
 "Get Your Custom Strategy"), with links to the live site, so the toolkits read as part of bigleap.com.
-Tier 2 is the toolkit bar: Dashboard · Journey map · Team review, plus Previous / Next on toolkit pages.
+Tier 2 is the toolkit bar: All toolkits · Start here · the five services · Journey map · Team review · Widgets,
+plus Previous / Next on public toolkit pages. Preview pages (toolkits.json "previews") and review.html get the
+header but are never added to the Previous / Next sequence.
 
 Run from the repo root after any change to toolkits.json or the menu below:  python3 tools/site_header.py
 It is idempotent: it replaces everything between <!-- bl-header --> and <!-- /bl-header -->.
@@ -82,7 +84,7 @@ CSS = r"""<style id="bl-header-css">
 .blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
 .blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
-.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
@@ -132,7 +134,7 @@ CSS = r"""<style id="bl-header-css">
 .draft-banner .nw, .draft-banner b { white-space: nowrap; }
 .blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
 .blx-rel > summary::-webkit-details-marker { display: none; }
-.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 
@@ -214,7 +216,7 @@ JS = r"""<script id="bl-header-js">
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() {
-    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
     if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
     var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
@@ -317,7 +319,7 @@ JS = r"""<script id="bl-header-js">
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   });
   if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>"""
@@ -325,6 +327,8 @@ JS = r"""<script id="bl-header-js">
 
 # ---- Engagement tracking ---------------------------------------------------
 # Fill these in and rerun `python3 tools/site_header.py` to turn on GA4 (via Tag Manager) and HubSpot.
+# Do NOT fill them in until the site is hosted where a cookie-consent banner controls these tags (e.g. bigleap.com),
+# or a consent default is added here: as written, both load as soon as an ID is set, with no consent check.
 # Until then, events still go into window.dataLayer, so nothing is lost in the page logic.
 GTM_ID = ''        # e.g. 'GTM-XXXXXXX' (Big Leap's container)
 HUBSPOT_ID = ''    # e.g. '1234567' (Big Leap's HubSpot Hub ID, for the tracking code)
@@ -419,7 +423,9 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
     tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
     def tab(t_, f, key):
-        return f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current or key == service else '') + f'>{e(t_)}</a>'
+        # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
+        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
+        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
     tab_html = ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
     pn = ''
     if prev is not None or nxt is not None:
