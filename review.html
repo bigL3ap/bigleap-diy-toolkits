@@ -537,7 +537,34 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   track(m ? 'diy_toolkit_view' : 'diy_page_view');
   var started = false, profiled = false;
   function inMain(el) { return !el.closest('.blh, .blp'); }
-  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
   document.addEventListener('change', onStart, true);
   document.addEventListener('input', onStart, true);
   try {
@@ -549,8 +576,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
     if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
-    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
-    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
     if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
   }, true);

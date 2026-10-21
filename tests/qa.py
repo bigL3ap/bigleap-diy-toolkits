@@ -217,7 +217,7 @@ def browser_checks(data):
         return
     httpd, base = serve()
     tk = data.get('toolkits.json') or {'series': []}
-    kits = [t['file'] for s in tk['series'] for t in s['toolkits']] + [p['file'] for p in tk.get('previews', [])]
+    kits = [t['file'] for s in tk['series'] for t in s['toolkits']] + [p['file'] for p in tk.get('previews', []) if p['file'].startswith('toolkits/')]
     with sync_playwright() as pw:
         b = pw.chromium.launch()
 

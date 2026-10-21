@@ -254,6 +254,18 @@
       "description": "A customer delight and referral check: nine moments after the sale, fixes in order, when and how to ask for reviews and referrals within platform rules, and what to measure.",
       "reviewer": "Erica Pounder and Coby Bush",
       "review": "Does it complement Email 02 and SEO 02 without overlapping? Are the review and referral rules stated correctly for our clients' platforms?"
+    },
+    {
+      "id": "roadmap",
+      "n": 5,
+      "group": "Shared output",
+      "statusLabel": "Internal draft",
+      "title": "Your Marketing Roadmap",
+      "short": "Roadmap",
+      "file": "roadmap.html",
+      "description": "Three priorities built from the Business Profile, the strategy starters and toolkit progress, with explained rules, prerequisites, progress and done marks.",
+      "reviewer": "Dallas Olsen and Coby Bush",
+      "review": "Do the priority rules make sense for real prospects? Where should 'My roadmap' live in the public navigation once approved?"
     }
   ]
 }
