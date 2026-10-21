@@ -234,6 +234,10 @@ tbody th { font-weight: 700; color: var(--heading); }
 .closing h2 { color: var(--cta-fg); font-size: 19px; }
 .closing p { color: var(--cta-muted); }
 .closing > p { max-width: 60ch; }
+.podcast { background: var(--cta-card); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+.podcast .label { color: var(--cta-muted); margin: 0; }
+.podcast p { margin: 0; color: var(--cta-muted); max-width: 64ch; }
+.podcast a { color: var(--cta-fg); font-weight: 700; }
 .closing :focus-visible { outline-color: var(--cta-fg); }
 .closing a { color: var(--cta-fg); }
 .closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -884,6 +888,12 @@ body { background: #fff; color: #000; }
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
+<div class="podcast" id="sweet-takes">
+<p class="label">Sweet Takes podcast</p>
+<p><b style="color:var(--cta-fg)">Try your messaging out loud.</b> Words on a page read differently from words you say. Big Leap&rsquo;s podcast, Sweet Takes, can be a place to practice your positioning, promise and point of view in a real conversation, or simply to talk about your business.</p>
+<p><a href="https://www.bigleap.com/podcasts/?utm_source=diy-toolkits&utm_medium=sweet-takes&utm_campaign=plan-03" target="_blank" rel="noopener">Listen to Sweet Takes</a> &middot; <a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=sweet-takes-guest&utm_campaign=plan-03" target="_blank" rel="noopener">Ask about being a guest</a></p>
+<p style="font-size:13px">Guests are chosen by the show&rsquo;s team, so asking doesn&rsquo;t book a spot.</p>
+</div>
 <div class="next" id="next">
 <span class="next-label">Next</span>
 <p class="next-title" id="next-title"></p>
@@ -1071,6 +1081,7 @@ $('next-why').textContent = why;
 function planFooter(nextKey) {
 const L = [];
 if (nextKey && LINKS[nextKey]) L.push('', 'NEXT TOOLKIT: ' + linkPlain(nextKey));
+L.push('', "Try your messaging out loud: Big Leap's podcast, Sweet Takes, can be a place to practice your positioning and point of view in a real conversation. Listen: https://www.bigleap.com/podcasts/ · Ask about being a guest: https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=sweet-takes-guest&utm_campaign=plan-03");
 L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
 return L;
 }
@@ -1535,6 +1546,5 @@ profileStrip(); render();
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>
-<script id="bl-version-js" src="../../assets/version-switch.js"></script>
 </body>
 </html>

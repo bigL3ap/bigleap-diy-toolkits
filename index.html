@@ -673,9 +673,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="section-head">
         <div>
           <h2>Toolkits buildout · October 2026</h2>
-          <p>An optimization pass on the whole site, plus five new strategy drafts. Nothing was redesigned: the layout, categories and every toolkit link are the same. Use the <b>Review mode</b> switch at the top of any page to compare the Original and Updated versions side by side.</p>
+          <p>An optimization pass on the whole site, plus five new strategy drafts. Nothing was redesigned: the layout, categories and every toolkit link are the same. All of it is live on this site now.</p>
         </div>
-        <span class="status draft">In review</span>
+        <span class="status live">Live</span>
       </div>
 
       <div class="bo-stats">
@@ -707,6 +707,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
               <li>The toolkit connection map: 42 links checked in both directions.</li>
               <li>Unapproved promises in toolkit copy softened to “what we’d look at first”.</li>
               <li>Tracking event names are unchanged, so reporting continues without a break.</li>
+              <li>Coby’s Sweet Takes idea: PR 01, PR 02 and the brand starter now invite visitors to practice their angle on the podcast.</li>
             </ul>
           </div>
           <div class="card" style="--c: var(--navy)">
@@ -714,7 +715,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
             <ul>
               <li>Automated checks for every page and eight visitor journeys.</li>
               <li>Guides for storage, authoring and QA, so future toolkits match.</li>
-              <li>The Original / Updated / Final review switch.</li>
+              <li>A Buildout summary (this page) so everyone can see what changed.</li>
             </ul>
           </div>
         </div>
@@ -747,9 +748,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="bo-block">
         <h3>How to review</h3>
         <ol class="bo-steps">
-          <li>Open any page and use the <b>Review mode</b> switch at the top to flip between <b>Original</b> (what’s live) and <b>Updated</b> (this buildout).</li>
-          <li>Try the toolkits you own, and the new drafts above. Add anything that needs changing to <a href="review.html">Team review</a>.</li>
-          <li>Approved changes move to <b>Final</b>, which appears as a third option in the switch. Final goes live only after sign-off.</li>
+          <li>Try the toolkits you own, and the new drafts above. Everything you see on this site is the current version.</li>
+          <li>Add anything that needs changing to <a href="review.html">Team review</a>, with the toolkit name and what should change.</li>
+          <li>The new drafts stay out of the public toolkit list until the decisions above are made.</li>
         </ol>
       </div>
     </div>
@@ -1148,6 +1149,5 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>
-<script id="bl-version-js" src="assets/version-switch.js"></script>
 </body>
 </html>
