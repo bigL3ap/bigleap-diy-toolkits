@@ -482,6 +482,31 @@ TRY_JS = r"""<script id="bl-try-js">
 })();
 </script>"""
 
+# Expert card: the service owner's photo, name and title, placed above the "Talk to ..." buttons in a
+# toolkit's closing section. Data comes from data/widgets.json (people) at build time.
+OWNER_TMPL = r"""<script id="bl-owner-js">
+(function () {
+  var P = __OWNER__;
+  var box = document.querySelector('section.closing .closing-actions');
+  if (!box || !P.name || document.querySelector('.bl-expert')) return;
+  var st = document.createElement('style');
+  st.textContent = '.bl-expert{display:flex;align-items:center;gap:14px;margin:2px 0}.bl-expert img,.bl-expert .ini{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 0 0 3px rgba(255,255,255,.85)}.bl-expert .ini{display:grid;place-items:center;background:rgba(255,255,255,.18);font:800 18px "Raleway",Arial,sans-serif}.bl-expert b{display:block;font-size:16px;line-height:1.3}.bl-expert span{display:block;font-size:14px;color:var(--cta-muted,inherit)}@media print{.bl-expert img{box-shadow:none}}';
+  document.head.appendChild(st);
+  var d = document.createElement('div'); d.className = 'bl-expert';
+  var ini = P.name.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2);
+  d.innerHTML = (P.photo ? '<img src="' + P.photo + '" alt="" width="56" height="56">' : '<span class="ini" aria-hidden="true">' + ini + '</span>') +
+    '<div><b></b><span></span></div>';
+  d.querySelector('b').textContent = P.name;
+  d.querySelector('span').textContent = (P.title ? P.title + ' · ' : '') + 'Your Big Leap expert';
+  box.parentNode.insertBefore(d, box);
+})();
+</script>"""
+
+def owner_js(page, name, people):
+    pp = people.get(name, {})
+    photo = rel(page, pp['photo']) if pp.get('photo') else ''
+    return OWNER_TMPL.replace('__OWNER__', json.dumps({'name': name, 'title': pp.get('title', ''), 'photo': photo}))
+
 def track_js():
     return TRACK_TMPL.replace('__GTM__', GTM_ID).replace('__HUB__', HUBSPOT_ID)
 
@@ -561,6 +586,7 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-try-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-owner-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-version-js"[^>]*></script>\n?', '', s)   # removes the retired version switch
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
@@ -574,6 +600,7 @@ if __name__ == '__main__':
     import sys
     only_pages = 'pages-only' in sys.argv
     d = json.load(open(os.path.join(ROOT, 'toolkits.json')))
+    PEOPLE = json.load(open(os.path.join(ROOT, 'data', 'widgets.json'))).get('people', {})
     ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email', 'strategy'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
     by = {s['id']: s for s in d['series']}
     seq = [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
@@ -584,7 +611,7 @@ if __name__ == '__main__':
         fmt = lambda it: None if not it else ((it[1]['title'] if it[0]['id'] == s['id'] else f"{it[0]['name']}: {it[1]['title']}"), it[1]['file'])
         cur = 'start' if t['file'].endswith('paid/01_What_Kind_of_Business_Are_You.html') else 'toolkit'
         apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
-              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}"))
+              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}") + '\n' + owner_js(t['file'], s['owner'], PEOPLE))
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))

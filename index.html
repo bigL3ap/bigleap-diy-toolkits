@@ -118,6 +118,8 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .owner { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
 .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c, var(--blue)); color: #fff; font: 700 14px var(--head); flex: 0 0 auto; }
 .owner a { font-weight: 700; }
+.owner > span:last-child { max-width: 250px; }
+.avatar.photo { width: 48px; height: 48px; object-fit: cover; padding: 0; box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--c, var(--blue)); }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; margin-top: 16px; }
 .card { position: relative; display: flex; flex-direction: column; gap: 8px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 20px; text-decoration: none; color: var(--text); }
 .card:hover { border-color: var(--c, var(--blue)); }
@@ -759,6 +761,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     });
   }
 
+  function ownerPic(n) {
+    var pp = widgets && widgets.people && widgets.people[n];
+    return pp && pp.photo ? '<img class="avatar photo" src="' + esc(pp.photo) + '" alt="" width="48" height="48">' : '<span class="avatar" aria-hidden="true">' + initials(n) + '</span>';
+  }
+  function ownerTitle(n) { var pp = widgets && widgets.people && widgets.people[n]; return pp && pp.title || ''; }
   function renderSeries() {
     var q = state.q.toLowerCase(), out = '', shown = 0;
     data.series.forEach(function (s) {
@@ -768,7 +775,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       shown += list.length;
       var c = color(s.id);
       out += '<section class="series" style="--c:' + c + '" aria-labelledby="s-' + s.id + '"><div class="series-head"><div><h3 id="s-' + s.id + '">' + esc(s.name) + '</h3><p>' + esc(s.promise) + '</p></div>' +
-        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=hub-' + esc(s.id) + '" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
+        '<div class="owner">' + ownerPic(s.owner) + '<span>Owner: ' + esc(s.owner) + (ownerTitle(s.owner) ? ', ' + esc(ownerTitle(s.owner)) : '') + '<br><a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=hub-' + esc(s.id) + '" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
       list.forEach(function (t) {
         out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">' + esc(t.statusLabel || 'Draft 1')) + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
       });

@@ -1700,6 +1700,23 @@ let SNIPS = {};
 
 </script>
 <!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="../revops/07_Can_You_See_What_Your_Marketing_Does.html"><small>← Previous</small><b>RevOps: Can You See What Your Marketing Does?</b></a><a class="blp-hub" href="../../index.html"><small>SEO · Toolkit 1 of 2</small><b>All toolkits</b></a><a class="blp-a" href="02_Is_Your_Business_Ready_for_Local_Search.html"><small>Next →</small><b>Is Your Business Ready for Local Search?</b></a></div></nav><!-- /bl-pager -->
+<script id="bl-owner-js">
+(function () {
+  var P = {"name": "Shemmah Al-Darweesh", "title": "Director of Organic Growth", "photo": "../../assets/people/shemmah-al-darweesh.jpg"};
+  var box = document.querySelector('section.closing .closing-actions');
+  if (!box || !P.name || document.querySelector('.bl-expert')) return;
+  var st = document.createElement('style');
+  st.textContent = '.bl-expert{display:flex;align-items:center;gap:14px;margin:2px 0}.bl-expert img,.bl-expert .ini{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 0 0 3px rgba(255,255,255,.85)}.bl-expert .ini{display:grid;place-items:center;background:rgba(255,255,255,.18);font:800 18px "Raleway",Arial,sans-serif}.bl-expert b{display:block;font-size:16px;line-height:1.3}.bl-expert span{display:block;font-size:14px;color:var(--cta-muted,inherit)}@media print{.bl-expert img{box-shadow:none}}';
+  document.head.appendChild(st);
+  var d = document.createElement('div'); d.className = 'bl-expert';
+  var ini = P.name.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2);
+  d.innerHTML = (P.photo ? '<img src="' + P.photo + '" alt="" width="56" height="56">' : '<span class="ini" aria-hidden="true">' + ini + '</span>') +
+    '<div><b></b><span></span></div>';
+  d.querySelector('b').textContent = P.name;
+  d.querySelector('span').textContent = (P.title ? P.title + ' · ' : '') + 'Your Big Leap expert';
+  box.parentNode.insertBefore(d, box);
+})();
+</script>
 <script id="bl-header-js">
 (function () {
   var h = document.querySelector('.blh'); if (!h) return;
