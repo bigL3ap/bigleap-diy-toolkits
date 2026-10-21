@@ -396,6 +396,29 @@ def browser_checks(data):
         rec(not errs and stops == nkits and paths > 0 and sel == 'plan3', 'DIY map on the journey page: every stop, links drawn, #connect:<id> selects it (dark)', f'{stops} stops, {paths} lines, selected {sel}; ' + '; '.join(errs[:2]))
         ctx.close()
 
+        # 7b. widgets: each loads cleanly, every answer gives a result, its link resolves; 3+ per service
+        wj = data.get('data/widgets.json') or {'widgets': []}
+        per = {}
+        for w in wj['widgets']:
+            per[w['service']] = per.get(w['service'], 0) + 1
+        thin = [k for k, v in per.items() if k != 'Start here' and v < 3]
+        rec(not thin, 'widgets: at least three per service', ', '.join(thin))
+        ctx, pg, errs = new(storage={})
+        badw = []
+        for w in wj['widgets']:
+            del errs[:]
+            pg.goto(base + w['file']); pg.wait_for_timeout(150)
+            empty = 0
+            for btn in pg.query_selector_all('.seg button'):
+                btn.click()
+                if not pg.inner_text('#big').strip():
+                    empty += 1
+            href = (pg.get_attribute('#cta', 'href') or '').split('?')[0]
+            if errs or empty or not os.path.exists(os.path.normpath(os.path.join(ROOT, 'widgets', href))):
+                badw.append(f"{w['id']} (errors {len(errs)}, empty {empty}, link {href})")
+        ctx.close()
+        rec(not badw, 'every widget answers every option and links to a real toolkit', '; '.join(badw[:5]))
+
         # 8. roadmap (when present): empty state and personalized state
         if os.path.exists(os.path.join(ROOT, 'roadmap.html')):
             ctx, pg, errs = new(storage={})

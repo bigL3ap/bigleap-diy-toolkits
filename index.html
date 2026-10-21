@@ -194,6 +194,26 @@ button.link { background: none; border: 0; padding: 0; color: var(--blue-ink); f
 .code { position: relative; }
 .code textarea { width: 100%; min-height: 86px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--sky); color: var(--text); resize: vertical; }
 .copy { min-height: 40px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 700 14px var(--body); cursor: pointer; }
+.wjump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 8px; position: sticky; top: 0; z-index: 5; padding: 10px 0; background: var(--sky); }
+.wjump > span { font-weight: 700; color: var(--navy); font-size: 14px; margin-right: 4px; }
+.wjump .chip { display: inline-flex; align-items: center; gap: 8px; border-left: 4px solid var(--c); }
+.wjump .chip .n { font: 700 12px var(--body); color: var(--muted); }
+.wsec { margin-top: 36px; scroll-margin-top: 70px; }
+.wsec-head { display: grid; grid-template-columns: auto minmax(0, auto) minmax(0, 1fr) auto; align-items: center; gap: 6px 16px; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 3px solid var(--c); }
+.ava { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: grid; place-items: center; color: #fff; font: 800 18px var(--head); box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--c); flex: 0 0 auto; }
+.wsec-who h3 { font-size: 24px; }
+.wsec-who p { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.wsec-who p b { color: var(--text); font-weight: 600; }
+.wsec-blurb { margin: 0; font-size: 15px; color: var(--muted); max-width: 40em; }
+.wsec-n { font: 700 13px var(--body); color: var(--muted); white-space: nowrap; }
+@media (max-width: 760px) { .wjump { position: static; } .wsec { scroll-margin-top: 10px; } }
+@media (max-width: 760px) { .wsec-head { grid-template-columns: auto minmax(0, 1fr); } .wsec-blurb { grid-column: 1 / -1; } .wsec-n { display: none; } }
+.wc-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.wc-acts a.copy { text-decoration: none; display: inline-flex; align-items: center; }
+.widget-card p b { color: var(--navy); }
+.embed > summary { cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--blue-ink); }
+.embed textarea { margin-top: 8px; width: 100%; min-height: 86px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--sky); color: var(--text); resize: vertical; }
+.wc-kit { font-size: 13.5px !important; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 16px; margin-top: 16px; }
 .tile-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 12px; display: grid; gap: 8px; }
 .tile-card img { width: 100%; height: auto; border-radius: 8px; display: block; }
@@ -546,7 +566,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="section-head">
         <div>
           <h2>Widgets and tiles</h2>
-          <p>Small versions of the toolkits for proposal decks, sales calls and anywhere on bigleap.com. Each widget asks two or three questions, gives an instant answer and links to the full toolkit. Copy the embed code into any page, or download a tile image for slides.</p>
+          <p>Small versions of the toolkits for sales calls, proposal decks and any page on bigleap.com. Each one asks two to four questions, gives an instant answer and links to its full toolkit. Every service has its own set: copy the embed code, open it on its own during a call, or download its slide tile.</p>
           <p style="margin-top:10px"><b>See them in place:</b> <a href="mockups/homepage.html">bigleap.com homepage mockup</a> · <a href="mockups/toolkits-landing.html">toolkits landing page mockup</a></p>
         </div>
       </div>
@@ -760,26 +780,50 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   function renderWidgets() {
     if (!widgets || !widgets.widgets || !widgets.widgets.length) return;
     var base = location.href.replace(/[#?].*$/, '').replace(/index\.html$/, '');
-    $('widget-list').innerHTML = '<div class="widget-grid">' + widgets.widgets.map(function (w) {
-      var src = base + w.file;
-      var code = '<iframe src="' + src + '" title="' + w.title.replace(/"/g, '&quot;') + '" width="100%" height="' + w.height + '" style="border:0;max-width:' + (w.maxWidth || 420) + 'px" loading="lazy" data-bl-widget></iframe>\n<script>addEventListener("message",function(e){var d=e.data;if(d&&d.source==="bl-diy-widget"&&d.type==="height"){document.querySelectorAll("iframe[data-bl-widget]").forEach(function(f){if(f.contentWindow===e.source)f.style.height=d.height+"px";});}});<\/script>';
-      return '<article class="widget-card"><iframe src="' + esc(w.file) + '" title="' + esc(w.title) + '" height="' + w.height + '" loading="lazy"></iframe><div class="wc-body"><h4>' + esc(w.title) + '</h4><p>' + esc(w.use) + '</p><div class="code"><label class="sr" for="code-' + esc(w.id) + '">Embed code</label><textarea id="code-' + esc(w.id) + '" readonly>' + esc(code) + '</textarea></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="copy" type="button" data-copy="code-' + esc(w.id) + '">Copy embed code</button><a class="copy" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(w.file) + '" target="_blank" rel="noopener">Open on its own</a></div></div></article>';
-    }).join('') + '</div>';
-    if (widgets.tiles && widgets.tiles.length) {
-      $('tile-list').innerHTML = '<div class="section-head" style="margin-top:44px"><div><h2>Slide tiles</h2><p>Static images sized for proposal decks (16:9 and square). Each one has the toolkit link printed on it.</p></div></div><div class="tiles">' + widgets.tiles.map(function (t) {
-        return '<figure class="tile-card" style="margin:0"><img src="' + esc(t.file) + '" alt="' + esc(t.alt) + '" loading="lazy"><figcaption style="font-size:14px"><b>' + esc(t.title) + '</b><br><a href="' + esc(t.file) + '" download>Download PNG</a></figcaption></figure>';
-      }).join('') + '</div>';
+    var SID = { 'Start here': 'paid', 'RevOps': 'revops', 'Paid Media': 'paid', 'SEO': 'seo', 'Digital PR': 'pr', 'Email Marketing': 'email', 'Strategy': 'strategy' };
+    var people = widgets.people || {}, tiles = {};
+    (widgets.tiles || []).forEach(function (t) { tiles[t.id] = t; });
+    var services = (widgets.services || []).filter(function (sv) { return widgets.widgets.some(function (w) { return w.service === sv.name; }); });
+    function slug(n) { return 'w-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
+    function avatar(name, c) {
+      var pp = people[name] || {};
+      return pp.photo ? '<img class="ava" src="' + esc(pp.photo) + '" alt="" loading="lazy">' : '<span class="ava" style="background:' + c + '" aria-hidden="true">' + esc(initials(name)) + '</span>';
     }
+    function card(w) {
+      var src = base + w.file, t = tiles[w.id];
+      var code = '<iframe src="' + src + '" title="' + w.title.replace(/"/g, '&quot;') + '" width="100%" height="' + w.height + '" style="border:0;max-width:' + (w.maxWidth || 420) + 'px" loading="lazy" data-bl-widget></iframe>\n<script>addEventListener("message",function(e){var d=e.data;if(d&&d.source==="bl-diy-widget"&&d.type==="height"){document.querySelectorAll("iframe[data-bl-widget]").forEach(function(f){if(f.contentWindow===e.source)f.style.height=d.height+"px";});}});<\/script>';
+      return '<article class="widget-card"><iframe src="' + esc(w.file) + '" title="' + esc(w.title) + '" height="' + w.height + '" loading="lazy"></iframe><div class="wc-body"><p><b>Use it for:</b> ' + esc(w.use) + '</p>' +
+        '<div class="wc-acts"><button class="copy" type="button" data-copy="code-' + esc(w.id) + '">Copy embed code</button><a class="copy" href="' + esc(w.file) + '" target="_blank" rel="noopener">Open on its own</a>' +
+        (t ? '<a class="copy" href="' + esc(t.file) + '" download>Slide tile (PNG)</a>' : '') + '</div>' +
+        '<details class="embed"><summary>Show embed code</summary><label class="sr" for="code-' + esc(w.id) + '">Embed code</label><textarea id="code-' + esc(w.id) + '" readonly>' + esc(code) + '</textarea></details>' +
+        (w.kit ? '<p class="wc-kit">Opens the full toolkit: <a href="' + esc(w.kit) + '">' + esc(kitTitle(w.kit)) + '</a></p>' : '') + '</div></article>';
+    }
+    function kitTitle(f) { var t = ''; (data && data.series || []).forEach(function (s) { s.toolkits.forEach(function (k) { if (k.file === f) t = k.title; }); }); return t || 'Open toolkit'; }
+    var jump = '<nav class="wjump" aria-label="Widgets by service"><span>Jump to</span>' + services.map(function (sv) {
+      var n = widgets.widgets.filter(function (w) { return w.service === sv.name; }).length;
+      return '<button type="button" class="chip" data-jump="' + slug(sv.name) + '" style="--c:' + color(SID[sv.name]) + '">' + esc(sv.name) + ' <span class="n">' + n + '</span></button>';
+    }).join('') + '</nav>';
+    var secs = services.map(function (sv) {
+      var list = widgets.widgets.filter(function (w) { return w.service === sv.name; }), c = color(SID[sv.name]), pp = people[sv.owner] || {};
+      return '<section class="wsec" id="' + slug(sv.name) + '" style="--c:' + c + '" aria-labelledby="' + slug(sv.name) + '-h">' +
+        '<header class="wsec-head">' + avatar(sv.owner, c) + '<div class="wsec-who"><h3 id="' + slug(sv.name) + '-h">' + esc(sv.name) + '</h3><p><b>' + esc(sv.owner) + '</b>' + (pp.title ? ' · ' + esc(pp.title) : '') + '</p></div>' +
+        '<p class="wsec-blurb">' + esc(sv.blurb || '') + '</p><span class="wsec-n">' + list.length + ' widget' + (list.length === 1 ? '' : 's') + '</span></header>' +
+        '<div class="widget-grid">' + list.map(card).join('') + '</div></section>';
+    }).join('');
+    $('widget-list').innerHTML = jump + secs;
+    $('tile-list').innerHTML = '';
+    Array.prototype.forEach.call(document.querySelectorAll('.wjump [data-jump]'), function (b) {
+      b.addEventListener('click', function () { var el = $(b.getAttribute('data-jump')); if (el) el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); });
+    });
     Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
       b.addEventListener('click', function () {
         var ta = $(b.getAttribute('data-copy')), txt = ta.value;
         function done() { var o = b.textContent; b.textContent = 'Copied'; setTimeout(function () { b.textContent = o; }, 1600); }
-        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(done, function () { ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }); }
-        else { ta.focus(); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(done, function () { ta.closest('details').open = true; ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }); }
+        else { ta.closest('details').open = true; ta.focus(); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
       });
     });
   }
-
   $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); renderSeries(); });
   if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { renderSeries(); }); } catch (e) {} }
 

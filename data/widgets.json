@@ -8,27 +8,19 @@
       "file": "widgets/profile-start.html",
       "height": 640,
       "maxWidth": 460,
-      "use": "General entry point. Good on the homepage, the Resources menu and the first slide of any proposal."
+      "use": "General entry point. Good on the homepage, the Resources menu and the first slide of any proposal.",
+      "kit": "toolkits/paid/01_What_Kind_of_Business_Are_You.html"
     },
     {
-      "id": "revops-hours",
-      "title": "How many hours does hand work cost your team?",
+      "id": "lead-speed",
+      "title": "How fast does a new lead hear back?",
       "service": "RevOps",
       "owner": "Dallas Olsen",
-      "file": "widgets/revops-hours.html",
-      "height": 670,
+      "file": "widgets/lead-speed.html",
+      "height": 614,
       "maxWidth": 460,
-      "use": "Sales calls and RevOps proposals. The one number makes the case for automation."
-    },
-    {
-      "id": "paid-ready",
-      "title": "Is your Google Ads account ready to spend?",
-      "service": "Paid Media",
-      "owner": "Scott Smoot",
-      "file": "widgets/paid-ready.html",
-      "height": 670,
-      "maxWidth": 460,
-      "use": "Paid media proposals and PPC landing pages. Surfaces setup gaps before a client pays for management."
+      "use": "RevOps discovery calls and the speed-to-lead section of any proposal.",
+      "kit": "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html"
     },
     {
       "id": "tracking-check",
@@ -38,7 +30,52 @@
       "file": "widgets/tracking-check.html",
       "height": 670,
       "maxWidth": 460,
-      "use": "Any proposal kickoff slide, or the onboarding email. Most clients score lower than they expect."
+      "use": "Any proposal kickoff slide, or the onboarding email. Most clients score lower than they expect.",
+      "kit": "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html"
+    },
+    {
+      "id": "revops-hours",
+      "title": "How many hours does hand work cost your team?",
+      "service": "RevOps",
+      "owner": "Dallas Olsen",
+      "file": "widgets/revops-hours.html",
+      "height": 670,
+      "maxWidth": 460,
+      "use": "Sales calls and RevOps proposals. The one number makes the case for automation.",
+      "kit": "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html"
+    },
+    {
+      "id": "paid-ready",
+      "title": "Is your Google Ads account ready to spend?",
+      "service": "Paid Media",
+      "owner": "Scott Smoot",
+      "file": "widgets/paid-ready.html",
+      "height": 670,
+      "maxWidth": 460,
+      "use": "Paid media proposals and PPC landing pages. Surfaces setup gaps before a client pays for management.",
+      "kit": "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html"
+    },
+    {
+      "id": "conversions-check",
+      "title": "Is Google Ads learning from the right results?",
+      "service": "Paid Media",
+      "owner": "Scott Smoot",
+      "file": "widgets/conversions-check.html",
+      "height": 593,
+      "maxWidth": 460,
+      "use": "Paid media audits and kickoff calls, before anyone debates bids or budgets.",
+      "kit": "toolkits/paid/03_Which_Conversions_Should_You_Track.html"
+    },
+    {
+      "id": "campaign-pick",
+      "title": "Which Google Ads campaign should you run first?",
+      "service": "Paid Media",
+      "owner": "Scott Smoot",
+      "file": "widgets/campaign-pick.html",
+      "height": 674,
+      "maxWidth": 460,
+      "use": "First paid media calls with new advertisers deciding where to start.",
+      "kit": "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html"
     },
     {
       "id": "seo-foundations",
@@ -48,7 +85,30 @@
       "file": "widgets/seo-foundations.html",
       "height": 720,
       "maxWidth": 460,
-      "use": "SEO and AI SEO proposals, blog sidebars, and the AI SEO service page."
+      "use": "SEO and AI SEO proposals, blog sidebars, and the AI SEO service page.",
+      "kit": "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html"
+    },
+    {
+      "id": "local-ready",
+      "title": "Are you ready to show up in local search?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/local-ready.html",
+      "height": 693,
+      "maxWidth": 460,
+      "use": "Multi-location and local service prospects; the Local SEO service page.",
+      "kit": "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html"
+    },
+    {
+      "id": "review-health",
+      "title": "How healthy are your Google reviews?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/review-health.html",
+      "height": 595,
+      "maxWidth": 460,
+      "use": "Local businesses, reputation conversations and the Local SEO page.",
+      "kit": "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html"
     },
     {
       "id": "pr-ready",
@@ -58,7 +118,30 @@
       "file": "widgets/pr-ready.html",
       "height": 700,
       "maxWidth": 460,
-      "use": "Digital PR proposals and thought-leadership pages. Shows what a client must have ready before pitching starts."
+      "use": "Digital PR proposals and thought-leadership pages. Shows what a client must have ready before pitching starts.",
+      "kit": "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html"
+    },
+    {
+      "id": "media-kit",
+      "title": "Is your media kit ready for a journalist?",
+      "service": "Digital PR",
+      "owner": "Kristina Ainge",
+      "file": "widgets/media-kit.html",
+      "height": 651,
+      "maxWidth": 460,
+      "use": "Digital PR proposals, after the pitch-ready check.",
+      "kit": "toolkits/pr/02_Build_Your_Media_Kit.html"
+    },
+    {
+      "id": "podcast-ready",
+      "title": "Are you ready to be a podcast guest?",
+      "service": "Digital PR",
+      "owner": "Kristina Ainge",
+      "file": "widgets/podcast-ready.html",
+      "height": 547,
+      "maxWidth": 460,
+      "use": "Thought-leadership and PR conversations; pairs with a Sweet Takes invite.",
+      "kit": "toolkits/pr/02_Build_Your_Media_Kit.html"
     },
     {
       "id": "email-inbox",
@@ -68,8 +151,262 @@
       "file": "widgets/email-inbox.html",
       "height": 700,
       "maxWidth": 460,
-      "use": "Email marketing proposals, ecommerce pages and onboarding. Since Google and Yahoo tightened bulk-sender rules, most lists have a gap here."
+      "use": "Email marketing proposals, ecommerce pages and onboarding. Since Google and Yahoo tightened bulk-sender rules, most lists have a gap here.",
+      "kit": "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html"
+    },
+    {
+      "id": "email-flows",
+      "title": "Which emails should be sending themselves?",
+      "service": "Email Marketing",
+      "owner": "Erica Pounder",
+      "file": "widgets/email-flows.html",
+      "height": 672,
+      "maxWidth": 460,
+      "use": "Email and ecommerce calls: shows the automations a business is missing.",
+      "kit": "toolkits/email/02_Which_Emails_Should_Send_Themselves.html"
+    },
+    {
+      "id": "email-health",
+      "title": "Is your email program healthy?",
+      "service": "Email Marketing",
+      "owner": "Erica Pounder",
+      "file": "widgets/email-health.html",
+      "height": 614,
+      "maxWidth": 460,
+      "use": "Email audits and renewals, especially for list-heavy senders.",
+      "kit": "toolkits/email/03_Is_Your_Email_Program_Working.html"
+    },
+    {
+      "id": "situation-check",
+      "title": "Are you solving the right marketing problem?",
+      "service": "Strategy",
+      "owner": "Coby Bush",
+      "file": "widgets/situation-check.html",
+      "height": 731,
+      "maxWidth": 460,
+      "use": "Opening a strategy conversation: what problem are we really solving?",
+      "kit": "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html"
+    },
+    {
+      "id": "foundations-check",
+      "title": "Which marketing foundation do you fix first?",
+      "service": "Strategy",
+      "owner": "Coby Bush",
+      "file": "widgets/foundations-check.html",
+      "height": 672,
+      "maxWidth": 460,
+      "use": "Scoping calls: what already exists, and what to fix first.",
+      "kit": "toolkits/plan/02_What_Do_You_Already_Have.html"
+    },
+    {
+      "id": "referral-ready",
+      "title": "Would your customers recommend you?",
+      "service": "Strategy",
+      "owner": "Coby Bush",
+      "file": "widgets/referral-ready.html",
+      "height": 614,
+      "maxWidth": 460,
+      "use": "Client experience and retention conversations; post-sale check-ins.",
+      "kit": "toolkits/plan/04_Would_Your_Customers_Recommend_You.html"
     }
   ],
-  "tiles": []
+  "tiles": [
+    {
+      "id": "profile-start",
+      "title": "Where should your business start?",
+      "service": "Start here",
+      "file": "tiles/profile-start-16x9.png",
+      "alt": "Slide tile: Where should your business start? Scan the QR code to try it free."
+    },
+    {
+      "id": "lead-speed",
+      "title": "How fast does a new lead hear back?",
+      "service": "RevOps",
+      "file": "tiles/lead-speed-16x9.png",
+      "alt": "Slide tile: How fast does a new lead hear back? Scan the QR code to try it free."
+    },
+    {
+      "id": "tracking-check",
+      "title": "Can you see what your marketing does?",
+      "service": "RevOps",
+      "file": "tiles/tracking-check-16x9.png",
+      "alt": "Slide tile: Can you see what your marketing does? Scan the QR code to try it free."
+    },
+    {
+      "id": "revops-hours",
+      "title": "How many hours does hand work cost your team?",
+      "service": "RevOps",
+      "file": "tiles/revops-hours-16x9.png",
+      "alt": "Slide tile: How many hours does hand work cost your team? Scan the QR code to try it free."
+    },
+    {
+      "id": "paid-ready",
+      "title": "Is your Google Ads account ready to spend?",
+      "service": "Paid Media",
+      "file": "tiles/paid-ready-16x9.png",
+      "alt": "Slide tile: Is your Google Ads account ready to spend? Scan the QR code to try it free."
+    },
+    {
+      "id": "conversions-check",
+      "title": "Is Google Ads learning from the right results?",
+      "service": "Paid Media",
+      "file": "tiles/conversions-check-16x9.png",
+      "alt": "Slide tile: Is Google Ads learning from the right results? Scan the QR code to try it free."
+    },
+    {
+      "id": "campaign-pick",
+      "title": "Which Google Ads campaign should you run first?",
+      "service": "Paid Media",
+      "file": "tiles/campaign-pick-16x9.png",
+      "alt": "Slide tile: Which Google Ads campaign should you run first? Scan the QR code to try it free."
+    },
+    {
+      "id": "seo-foundations",
+      "title": "Can Google and AI search find your site?",
+      "service": "SEO",
+      "file": "tiles/seo-foundations-16x9.png",
+      "alt": "Slide tile: Can Google and AI search find your site? Scan the QR code to try it free."
+    },
+    {
+      "id": "local-ready",
+      "title": "Are you ready to show up in local search?",
+      "service": "SEO",
+      "file": "tiles/local-ready-16x9.png",
+      "alt": "Slide tile: Are you ready to show up in local search? Scan the QR code to try it free."
+    },
+    {
+      "id": "review-health",
+      "title": "How healthy are your Google reviews?",
+      "service": "SEO",
+      "file": "tiles/review-health-16x9.png",
+      "alt": "Slide tile: How healthy are your Google reviews? Scan the QR code to try it free."
+    },
+    {
+      "id": "pr-ready",
+      "title": "Could you say yes to a journalist this week?",
+      "service": "Digital PR",
+      "file": "tiles/pr-ready-16x9.png",
+      "alt": "Slide tile: Could you say yes to a journalist this week? Scan the QR code to try it free."
+    },
+    {
+      "id": "media-kit",
+      "title": "Is your media kit ready for a journalist?",
+      "service": "Digital PR",
+      "file": "tiles/media-kit-16x9.png",
+      "alt": "Slide tile: Is your media kit ready for a journalist? Scan the QR code to try it free."
+    },
+    {
+      "id": "podcast-ready",
+      "title": "Are you ready to be a podcast guest?",
+      "service": "Digital PR",
+      "file": "tiles/podcast-ready-16x9.png",
+      "alt": "Slide tile: Are you ready to be a podcast guest? Scan the QR code to try it free."
+    },
+    {
+      "id": "email-inbox",
+      "title": "Will your emails reach the inbox?",
+      "service": "Email Marketing",
+      "file": "tiles/email-inbox-16x9.png",
+      "alt": "Slide tile: Will your emails reach the inbox? Scan the QR code to try it free."
+    },
+    {
+      "id": "email-flows",
+      "title": "Which emails should be sending themselves?",
+      "service": "Email Marketing",
+      "file": "tiles/email-flows-16x9.png",
+      "alt": "Slide tile: Which emails should be sending themselves? Scan the QR code to try it free."
+    },
+    {
+      "id": "email-health",
+      "title": "Is your email program healthy?",
+      "service": "Email Marketing",
+      "file": "tiles/email-health-16x9.png",
+      "alt": "Slide tile: Is your email program healthy? Scan the QR code to try it free."
+    },
+    {
+      "id": "situation-check",
+      "title": "Are you solving the right marketing problem?",
+      "service": "Strategy",
+      "file": "tiles/situation-check-16x9.png",
+      "alt": "Slide tile: Are you solving the right marketing problem? Scan the QR code to try it free."
+    },
+    {
+      "id": "foundations-check",
+      "title": "Which marketing foundation do you fix first?",
+      "service": "Strategy",
+      "file": "tiles/foundations-check-16x9.png",
+      "alt": "Slide tile: Which marketing foundation do you fix first? Scan the QR code to try it free."
+    },
+    {
+      "id": "referral-ready",
+      "title": "Would your customers recommend you?",
+      "service": "Strategy",
+      "file": "tiles/referral-ready-16x9.png",
+      "alt": "Slide tile: Would your customers recommend you? Scan the QR code to try it free."
+    }
+  ],
+  "services": [
+    {
+      "name": "Start here",
+      "owner": "Scott Smoot",
+      "blurb": "One profile that fills in every toolkit."
+    },
+    {
+      "name": "RevOps",
+      "owner": "Dallas Olsen",
+      "blurb": "Lead capture, follow-up speed and the hours hand work costs."
+    },
+    {
+      "name": "Paid Media",
+      "owner": "Scott Smoot",
+      "blurb": "Account readiness, conversions and the first campaign."
+    },
+    {
+      "name": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "blurb": "Search and AI visibility, local search and reviews."
+    },
+    {
+      "name": "Digital PR",
+      "owner": "Kristina Ainge",
+      "blurb": "Pitch readiness, media kits and podcast guesting."
+    },
+    {
+      "name": "Email Marketing",
+      "owner": "Erica Pounder",
+      "blurb": "Inbox placement, automated flows and program health."
+    },
+    {
+      "name": "Strategy",
+      "owner": "Coby Bush",
+      "blurb": "The right problem, the right foundations, customers worth keeping."
+    }
+  ],
+  "people": {
+    "Dallas Olsen": {
+      "title": "Director of RevOps",
+      "photo": ""
+    },
+    "Scott Smoot": {
+      "title": "Director of PPC",
+      "photo": ""
+    },
+    "Shemmah Al-Darweesh": {
+      "title": "Director of Organic Growth",
+      "photo": ""
+    },
+    "Kristina Ainge": {
+      "title": "Director of Digital PR",
+      "photo": ""
+    },
+    "Erica Pounder": {
+      "title": "Email Marketing",
+      "photo": ""
+    },
+    "Coby Bush": {
+      "title": "VP of Marketing",
+      "photo": ""
+    }
+  },
+  "note": "people[].photo: a square headshot path (e.g. assets/people/dallas-olsen.jpg) or URL. Empty shows initials."
 }

@@ -17,7 +17,7 @@ Live (GitHub Pages, `main` only): https://bigl3ap.github.io/bigleap-diy-toolkits
 | `roadmap.html` | Your Marketing Roadmap: next priorities from the profile, the starters and toolkit progress. |
 | `toolkits.json` | The toolkit catalog. Series drive the hub, the map and Previous and Next. Toolkits with a `review` note, and any `previews`, are listed on `review.html`. |
 | `data/` | `connections.json` (map links), `widgets.json`, `open-items.json` (Team review) |
-| `widgets/`, `tiles/` | Embeddable widgets and slide tiles |
+| `widgets/`, `tiles/` | Embeddable mini-toolkits (three or more per service) and their 16:9 slide tiles. Built with `tools/build_widgets.py` and `tools/build_tiles.py`; listed in `data/widgets.json`, which also holds each owner's title and photo. |
 | `mockups/` | Homepage and landing-page mockups |
 | `tools/site_header.py` | Adds the shared header, toolkit bar, pager and tracking to every page. Run it after changing `toolkits.json`. |
 | `tests/qa.py` | The automated QA suite |

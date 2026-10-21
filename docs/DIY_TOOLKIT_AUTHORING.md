@@ -64,3 +64,11 @@ The shared script sends `diy_*` events to `window.dataLayer` from every page: vi
 ## The strategy starters
 
 `toolkits/plan/01–04` and `roadmap.html` follow the same structure. They share one extra block (assessment storage, the three motions and their depths) and a few extra styles. These are marked "Strategy starters" in the CSS and the script. To change all four, change each file.
+
+## Widgets and slide tiles
+
+- A widget is a one-minute version of a toolkit: two to four questions, an instant answer and a link to the full toolkit. It stores nothing.
+- Add one to `WIDGETS` in `tools/build_widgets.py` (questions, default answers, a `compute(a)` that returns `{ big, detail, hot?, cta?, link? }`), then run `python3 tools/build_widgets.py`.
+- List it in `data/widgets.json` with its service, owner, height, `kit` and a one-line "use it for". Keep three or more per service; the QA suite checks.
+- Add its headline and subline to `TILES` in `tools/build_tiles.py` and run `python3 tools/build_tiles.py <id>` for its slide tile. The QR opens the full toolkit, tagged `utm_medium=slide-tile`.
+- Owner photos: put a square headshot in `assets/people/` and set `people[<name>].photo` in `data/widgets.json`. Empty shows initials.
