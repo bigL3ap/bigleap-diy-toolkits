@@ -1,0 +1,387 @@
+{
+  "deck": {
+    "title": "Big Leap DIY Toolkits: Live Sales Demo Deck",
+    "url": "https://docs.google.com/presentation/d/1HacLeKa-OoPuJjSRSrxruZsquVrpVIohIsYQIjUHaaw/edit"
+  },
+  "note": "Internal. Value points avoid pricing and promises of results; proof points carry their source. Edit here, then rebuild the deck requests with tools/build_sales_deck.py.",
+  "start": {
+    "widget": "profile-start",
+    "headline": "Start with their business, not a pitch.",
+    "points": [
+      "Eight questions build a Business Profile that fills in every other toolkit.",
+      "The result points to the service to start with, in the client's own words.",
+      "Nothing is stored on Big Leap's side. Answers stay in the client's browser."
+    ],
+    "ask": "Before I show you anything, let's answer a few questions about the business together.",
+    "listen": "What they sell, where customers come from, which CRM they use, and how many locations they have.",
+    "next": "Use the result to pick which service section of this deck to open next."
+  },
+  "services": [
+    {
+      "id": "revops",
+      "name": "RevOps",
+      "owner": "Dallas Olsen",
+      "story": "Marketing only pays off when every lead is caught, answered fast and traced to revenue.",
+      "value": [
+        "Every form, call and chat lands in the CRM with its source attached.",
+        "Fast, automatic follow-up, with a named owner on every lead.",
+        "Reporting that ties marketing spend to pipeline and closed revenue."
+      ],
+      "proof": [
+        {
+          "text": "Companies that tried to reach a new lead within an hour were 7x as likely to qualify it as those that waited longer, and over 60x as likely as those that waited 24 hours or more.",
+          "source": "Harvard Business Review, The Short Life of Online Sales Leads (2011)",
+          "url": "https://hbr.org/2011/03/the-short-life-of-online-sales-leads"
+        },
+        {
+          "text": "Only 56% of marketers have complete access to sales data. High performers are 2.4x more likely to have unified their data sources.",
+          "source": "Salesforce, State of Marketing, 10th edition (2026)",
+          "url": "https://www.salesforce.com/news/stories/state-of-marketing-2026/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "lead-speed",
+          "headline": "Reply before they move on.",
+          "points": [
+            "One minute shows whether new leads wait hours for a first reply.",
+            "An automatic first reply buys time while a person follows up.",
+            "A named owner on every lead means nothing slips through."
+          ],
+          "ask": "When a form comes in at 4:45 on a Friday, what happens next?",
+          "listen": "\"Same day\" or later, no automatic reply, or \"whoever sees it first.\"",
+          "next": "We set up instant replies, routing and owner alerts in the CRM so every lead hears back fast."
+        },
+        {
+          "widget": "tracking-check",
+          "headline": "Know what your marketing actually does.",
+          "points": [
+            "Checks whether leads, calls and sales trace back to the channel that drove them.",
+            "Gaps here mean budget decisions are made on guesswork.",
+            "Most businesses score lower than they expect, which opens the conversation."
+          ],
+          "ask": "If I asked which channel brought in last month's best customer, could you show me?",
+          "listen": "\"Not sure\", spreadsheets, or different answers from marketing and sales.",
+          "next": "We connect forms, calls, ads and the CRM into one view from source to revenue."
+        },
+        {
+          "widget": "revops-hours",
+          "headline": "Put a number on hand work.",
+          "points": [
+            "Turns copy-paste, data entry and manual follow-up into hours per month.",
+            "That number makes the case for automation in the client's own terms.",
+            "Hours back go to selling instead of updating records."
+          ],
+          "ask": "Walk me through everything that happens between a new lead and a booked meeting.",
+          "listen": "Manual steps: copying leads between tools, reminders, re-keying data, chasing status.",
+          "next": "We automate the repeatable steps in the CRM and hand the hours back to the team."
+        }
+      ]
+    },
+    {
+      "id": "paid",
+      "name": "Paid Media",
+      "owner": "Scott Smoot",
+      "story": "Ad spend works best when Google learns from real customers, not clicks.",
+      "value": [
+        "Account structure and tracking fixed before budget scales.",
+        "Bidding trained on leads and sales that matter, including offline results.",
+        "Campaign choices matched to the goal, demand and budget."
+      ],
+      "proof": [
+        {
+          "text": "Google reports that advertisers who moved from target CPA to target ROAS (value-based bidding) saw conversion value rise 14% on average.",
+          "source": "Google, Think with Google (2022, Google internal data)",
+          "url": "https://business.google.com/uk/think/ai-excellence/bidding-for-value-automation/"
+        },
+        {
+          "text": "In one Google case study, retailer MandM Direct saw 3% more conversions on Search and 20% more on YouTube after setting up enhanced conversions. Results vary.",
+          "source": "Google Ads, Enhanced conversions",
+          "url": "https://business.google.com/uk/privacy/products/enhanced-conversions/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "paid-ready",
+          "headline": "Ready before you spend.",
+          "points": [
+            "Spots the setup gaps that waste budget in the first weeks.",
+            "Shows what to fix before paying for clicks, or for management.",
+            "Gives a clear starting point instead of a vague audit."
+          ],
+          "ask": "Who set up your Google Ads account, and when did someone last review it end to end?",
+          "listen": "An old setup, a past agency, or \"we just boost what's working.\"",
+          "next": "We audit and fix the account foundation first, then scale what works."
+        },
+        {
+          "widget": "conversions-check",
+          "headline": "Teach your ads what a customer is.",
+          "points": [
+            "Shows whether Google optimizes for real leads or for clicks and page views.",
+            "Counting the wrong action trains bidding to find more of the wrong people.",
+            "Feeding CRM results back lets bidding learn from actual sales."
+          ],
+          "ask": "What does Google Ads count as a conversion in your account today?",
+          "listen": "Page views, button clicks, \"all form fills\", or nobody is sure.",
+          "next": "We set up conversion tracking, values and CRM imports so bidding learns from sales."
+        },
+        {
+          "widget": "campaign-pick",
+          "headline": "Start with the right campaign.",
+          "points": [
+            "Matches the goal, demand and budget to the first campaign worth running.",
+            "Avoids spreading a small budget across too many campaign types.",
+            "Builds a base of data the next campaigns can learn from."
+          ],
+          "ask": "If you could only run one campaign next month, what would it need to achieve?",
+          "listen": "Leads versus sales versus awareness, the monthly budget, and how many people search for what they sell.",
+          "next": "We build the first campaign around that goal, then expand as the data comes in."
+        }
+      ]
+    },
+    {
+      "id": "seo",
+      "name": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "story": "Customers find you in Google, in Maps and now in AI answers. Each one needs a solid foundation.",
+      "value": [
+        "Technical health that lets Google and AI tools crawl and trust the site.",
+        "A local presence that is complete and consistent: Business Profile, listings, reviews.",
+        "Content and authority built on that foundation."
+      ],
+      "proof": [
+        {
+          "text": "97% of consumers read online reviews, 89% expect the owner to respond, and 45% now use ChatGPT or other AI tools for local recommendations (up from 6%).",
+          "source": "BrightLocal, Local Consumer Review Survey (2026)",
+          "url": "https://www.brightlocal.com/research/local-consumer-review-survey/"
+        },
+        {
+          "text": "When a Google AI summary appeared, people clicked a regular search result in 8% of visits, versus 15% without one.",
+          "source": "Pew Research Center (July 2025)",
+          "url": "https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "seo-foundations",
+          "headline": "Findable by Google and AI search.",
+          "points": [
+            "Checks crawling, indexing and the trust signals search engines and AI tools rely on.",
+            "Problems here cap the return on every other SEO investment.",
+            "A quick way to bring up AI search visibility without the jargon."
+          ],
+          "ask": "When you ask ChatGPT or Google's AI about your category, does your business come up?",
+          "listen": "\"I've never checked\", or competitors named instead of them.",
+          "next": "We fix the foundation, then build the content and authority that AI and search tools cite."
+        },
+        {
+          "widget": "local-ready",
+          "headline": "Get found nearby.",
+          "points": [
+            "Checks the Business Profile, listing consistency and local pages.",
+            "The map results are often the first thing a local searcher sees.",
+            "Works per location, so multi-location brands see every gap."
+          ],
+          "ask": "Search \"[your service] near me\" from your phone. Where do you show up?",
+          "listen": "Missing from the map, wrong hours or phone number, or one location stronger than the rest.",
+          "next": "We manage profiles, listings and local pages for every location."
+        },
+        {
+          "widget": "review-health",
+          "headline": "Reviews people trust.",
+          "points": [
+            "Reads review count, recency and replies at a glance.",
+            "Recent reviews with owner replies help a profile earn the click.",
+            "Turns reputation into a routine instead of a scramble."
+          ],
+          "ask": "How do you ask customers for reviews today, and who replies to them?",
+          "listen": "No routine, old reviews, or negative reviews left without a reply.",
+          "next": "We set up a steady review-request and reply process across your locations."
+        }
+      ]
+    },
+    {
+      "id": "pr",
+      "name": "Digital PR",
+      "owner": "Kristina Ainge",
+      "story": "Earned coverage builds trust that ads can't buy, and it feeds SEO and AI search too.",
+      "value": [
+        "Expert positioning and story angles journalists actually use.",
+        "Coverage and links from publications your buyers trust.",
+        "A media kit and spokesperson ready before the pitch goes out."
+      ],
+      "proof": [
+        {
+          "text": "66% of journalists rely on PR-provided content for story ideas. They want original research, expert access and embargoed information.",
+          "source": "Cision, State of the Media (2026)",
+          "url": "https://www.cision.com/about/press-releases/2026-press-releases/pr-emerges-as-the-primary-source-for-journalists-in-high-pressure-newsrooms-302770936/"
+        },
+        {
+          "text": "58% of Americans 12 and older (167 million) listened to a podcast in the last month, an all-time high.",
+          "source": "Edison Research and SSRS, The Infinite Dial (2026)",
+          "url": "https://ssrs.com/insights/the-infinite-dial-2026/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "pr-ready",
+          "headline": "Ready when a journalist calls.",
+          "points": [
+            "Checks the spokesperson, story angles and proof points before pitching starts.",
+            "Journalists move fast. Being ready is the difference between a quote and a pass.",
+            "Shows what the client needs to bring to a PR program."
+          ],
+          "ask": "If a reporter called tomorrow asking for an expert quote, who would take the call?",
+          "listen": "No named spokesperson, no data or stories ready, or a slow approvals process.",
+          "next": "We shape the angles, prep the spokesperson and pitch the right outlets."
+        },
+        {
+          "widget": "media-kit",
+          "headline": "Make it easy to quote you.",
+          "points": [
+            "Checks the bio, headshots, company facts and past coverage a journalist expects.",
+            "A ready kit shortens the path from pitch to published story.",
+            "Useful well beyond press: partners, podcasts and events ask for the same things."
+          ],
+          "ask": "Where would a journalist find your founder's bio and a usable headshot today?",
+          "listen": "Scattered files, outdated bios, or \"we'd have to put that together.\"",
+          "next": "We build and maintain the media kit alongside every campaign."
+        },
+        {
+          "widget": "podcast-ready",
+          "headline": "Ready for the mic.",
+          "points": [
+            "Checks topics, story and audience fit before pitching yourself as a guest.",
+            "Podcasts give long-form time with exactly the right audience.",
+            "Pairs with an invite to pitch Big Leap's Sweet Takes podcast. Asking doesn't book a spot."
+          ],
+          "ask": "What could you talk about for 30 minutes that your best customers would want to hear?",
+          "listen": "A clear point of view, customer stories, or a founder who enjoys talking.",
+          "next": "We find shows that fit, prep the talking points, and handle the pitching."
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Email Marketing",
+      "owner": "Erica Pounder",
+      "story": "Email is the channel you own. It only pays off if it reaches the inbox and sends at the right moments.",
+      "value": [
+        "Deliverability set up right: authentication, unsubscribe and list hygiene.",
+        "Automated flows that send at the moment of intent: welcome, follow-up, win-back.",
+        "Results measured in revenue and leads, not just opens."
+      ],
+      "proof": [
+        {
+          "text": "Automated flows drive nearly 41% of email revenue from 5.3% of sends, with revenue per recipient nearly 18x higher than campaigns.",
+          "source": "Klaviyo, Email Benchmarks (2026)",
+          "url": "https://klaviyo.com/products/email-marketing/benchmarks"
+        },
+        {
+          "text": "Since February 2024, bulk senders to Gmail and Yahoo must authenticate with SPF, DKIM and DMARC, offer one-click unsubscribe, and keep spam complaints under 0.3%.",
+          "source": "Yahoo Sender Best Practices; Google (2024)",
+          "url": "https://senders.yahooinc.com/best-practices/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "email-inbox",
+          "headline": "Keep reaching the inbox.",
+          "points": [
+            "Checks the authentication, unsubscribe and complaint basics Gmail and Yahoo require of bulk senders.",
+            "Missing them can push mail to spam or get it rejected.",
+            "A fast, concrete check most senders haven't done."
+          ],
+          "ask": "Have you set up SPF, DKIM and DMARC for the domain you send from?",
+          "listen": "\"What's that?\", \"IT handled it years ago\", or open rates that dropped suddenly.",
+          "next": "We set up authentication and list hygiene, then keep an eye on deliverability."
+        },
+        {
+          "widget": "email-flows",
+          "headline": "Emails that send themselves.",
+          "points": [
+            "Finds the automated emails a business is missing.",
+            "Flows send at the moment of intent, every time, without extra work.",
+            "Usually the fastest email win for a team that only sends newsletters."
+          ],
+          "ask": "What email does a new subscriber or customer get from you in their first week?",
+          "listen": "Nothing, a single receipt, or only the monthly newsletter.",
+          "next": "We plan, write, build and test the flows in your email platform."
+        },
+        {
+          "widget": "email-health",
+          "headline": "A one-minute health check.",
+          "points": [
+            "Reads complaints, list hygiene and results in one view.",
+            "Small problems compound: a dirty list hurts every future send.",
+            "A clear before-and-after for renewals and audits."
+          ],
+          "ask": "When did you last remove subscribers who haven't opened in six months or more?",
+          "listen": "Never, a list that keeps growing while results fall, or rising complaints.",
+          "next": "We run regular audits and fix issues before they cost revenue."
+        }
+      ]
+    },
+    {
+      "id": "strategy",
+      "name": "Strategy",
+      "owner": "Coby Bush",
+      "story": "Before tactics: the right problem, the foundations already in place, and a reason customers choose you.",
+      "value": [
+        "Diagnose the real constraint before choosing channels.",
+        "Reuse what already works instead of starting over.",
+        "Build a brand and customer experience worth recommending."
+      ],
+      "proof": [
+        {
+          "text": "Recommendations from people they know are the most trusted source of advertising: 89% of US consumers trust them.",
+          "source": "Nielsen, Trust in Advertising (2021)",
+          "url": "https://develop.nielsen.com/wp-content/uploads/sites/2/2022/02/2021-Nielsen-Trust-In-Advertising-U.S.-sell-sheet.pdf"
+        },
+        {
+          "text": "73% of B2B decision-makers trust peer recommendations, more than vendor websites (55%) or search engines (54%). The study was sponsored by Reddit.",
+          "source": "Reddit and SurveyMonkey, The Hidden B2B Journey (2026)",
+          "url": "https://www.surveymonkey.com/newsroom/surveymonkey-and-reddit-the-hidden-b2b-journey-2026/"
+        }
+      ],
+      "options": [
+        {
+          "widget": "situation-check",
+          "headline": "Solve the right problem first.",
+          "points": [
+            "Two questions point to where marketing should focus right now.",
+            "Keeps the conversation on the client's real constraint, not the tactic they asked about.",
+            "A natural opener for any service conversation."
+          ],
+          "ask": "If marketing went perfectly for the next year, what would be different for the business?",
+          "listen": "Not enough demand, demand that doesn't convert, or customers who don't stick.",
+          "next": "We turn the answer into a prioritized plan and the first services to start with."
+        },
+        {
+          "widget": "foundations-check",
+          "headline": "Fix the foundation first.",
+          "points": [
+            "Four checks show which foundation everything else depends on.",
+            "Reuses what the client already has instead of starting over.",
+            "Puts the work in the order it pays off."
+          ],
+          "ask": "What do you already have that's working, even a little?",
+          "listen": "A brand guide nobody uses, a site that converts poorly, or tracking nobody trusts.",
+          "next": "We scope the work in order: foundation first, then growth."
+        },
+        {
+          "widget": "referral-ready",
+          "headline": "Worth recommending.",
+          "points": [
+            "Three habits that turn customers into reviews and referrals.",
+            "Recommendations from people they know are among the sources buyers trust most.",
+            "Strong for retention, renewals and post-sale check-ins."
+          ],
+          "ask": "When a happy customer finishes working with you, what happens next?",
+          "listen": "Nothing formal, no review ask, or referrals that happen by luck.",
+          "next": "We build follow-up, review and referral moments into the customer journey."
+        }
+      ]
+    }
+  ]
+}

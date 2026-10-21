@@ -33,6 +33,10 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
 .foot a { color: var(--blue-ink); }
 @media (max-width: 340px) { .w { padding: 14px; } h1 { font-size: 19px; } .big { font-size: 26px; } }
+/* try-me */ html.try #f > fieldset:first-of-type .seg > button[aria-pressed="false"]:not(button[aria-pressed="false"] ~ button) { position: relative; }
+html.try #f > fieldset:first-of-type .seg > button[aria-pressed="false"]:not(button[aria-pressed="false"] ~ button)::after { content: "Try me"; position: absolute; top: -10px; right: -6px; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.6 "Open Sans", Arial, sans-serif; pointer-events: none; box-shadow: 0 2px 6px rgba(20,61,85,.25); }
+@media (prefers-reduced-motion: no-preference) { html.try #f > fieldset:first-of-type .seg { animation: try-glow 2.4s ease-in-out infinite; border-radius: 10px; } }
+@keyframes try-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(49,135,181,0); } 50% { box-shadow: 0 0 0 5px rgba(49,135,181,.28); } }
 </style>
 </head>
 <body>
@@ -85,5 +89,6 @@ try { var t = new URLSearchParams(location.search).get('theme'); if (t === 'ligh
 run();
 })();
 </script>
+<script id="try-js">(function(){var r=document.documentElement,f=document.getElementById('f');if(!f||/[?&]try=0/.test(location.search))return;r.classList.add('try');function off(){r.classList.remove('try');}f.addEventListener('pointerdown',off,{once:true});f.addEventListener('keydown',off,{once:true});})();</script>
 </body>
 </html>
