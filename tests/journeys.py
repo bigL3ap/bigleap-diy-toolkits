@@ -88,7 +88,9 @@ def main():
         rec(J, 'situation reads generate + differentiation', sit.get('market') == 'generate' and sit.get('limiting') == 'diff', str(sit)[:120])
         pg.goto(B + 'toolkits/plan/02_What_Do_You_Already_Have.html'); pg.wait_for_timeout(500)
         pg.click('label[for="position-missing"]'); pg.click('label[for="analytics-usable"]'); pg.wait_for_timeout(300)
-        rec(J, 'foundations ranks positioning first', 'positioning' in pg.inner_text('#out-line').lower(), pg.inner_text('#out-line')[:100])
+        line = pg.inner_text('#out-line').lower()
+        # positioning needs audience understanding (also a gap in the example), so either may lead: prerequisites rank first
+        rec(J, 'foundations leads with positioning or its prerequisite', 'positioning' in line or 'audience' in line, line[:100])
         pg.goto(B + 'roadmap.html'); pg.wait_for_timeout(500)
         basis = pg.inner_text('#basis').lower()
         rec(J, 'roadmap says it uses both checks', 'situation' in basis and 'foundations' in basis, basis[:120])

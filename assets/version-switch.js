@@ -5,8 +5,9 @@
      /final/      Final, approved (published from the final branch)
    This script works out which version it is running in from its own address, shows a slim switch at
    the top of the page, and opens the same page in the other version. If that page doesn't exist
-   there (for example a new page), it opens that version's hub instead. Versions that aren't
-   published are hidden, and so is the whole switch when only one version exists (e.g. local preview).
+   there (for example a new page), it opens that version's hub instead. Which versions are published
+   comes from versions.json at the site root (tools/publish_version.sh keeps it current). The switch
+   hides itself when only one version is listed (e.g. a local preview of a branch).
    No data is stored or sent. Same file in every version. */
 (function () {
   'use strict';
@@ -33,8 +34,9 @@
     var target = base + v.prefix + mapFor(v);
     exists(target).then(function (ok) { location.href = ok ? target : base + v.prefix + 'index.html'; });
   }
-  Promise.all(VERSIONS.map(function (v) { return v === me ? Promise.resolve(true) : exists(base + v.prefix + 'index.html'); })).then(function (ok) {
-    var live = VERSIONS.filter(function (v, i) { return ok[i]; });
+  fetch(base + 'versions.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }, function () { return null; }).then(function (cfg) {
+    var pub = (cfg && cfg.published) || [];
+    var live = VERSIONS.filter(function (v) { return v === me || pub.indexOf(v.id) > -1; });
     if (live.length < 2) return;
     var css = document.createElement('style');
     css.textContent = '.blv{font:600 13px/1.3 "Open Sans","Segoe UI",Arial,sans-serif;background:#FFF4E2;color:#5A3B05;border-bottom:1px solid #E9C98A;padding:6px max(16px,env(safe-area-inset-left));display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px;position:relative;z-index:70}' +
