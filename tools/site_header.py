@@ -3,7 +3,9 @@
 
 Tier 1 copies the bigleap.com header (logo, Services / Who We Serve / Case Studies / Resources / About menus,
 "Get Your Custom Strategy"), with links to the live site, so the toolkits read as part of bigleap.com.
-Tier 2 is the toolkit bar: Dashboard · Journey map · Team review, plus Previous / Next on toolkit pages.
+Tier 2 is the toolkit bar: All toolkits · Start here · the five services · Journey map · Team review · Widgets,
+plus Previous / Next on public toolkit pages. Preview pages (toolkits.json "previews") and review.html get the
+header but are never added to the Previous / Next sequence.
 
 Run from the repo root after any change to toolkits.json or the menu below:  python3 tools/site_header.py
 It is idempotent: it replaces everything between <!-- bl-header --> and <!-- /bl-header -->.
@@ -82,7 +84,7 @@ CSS = r"""<style id="bl-header-css">
 .blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
 .blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
-.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
@@ -132,7 +134,7 @@ CSS = r"""<style id="bl-header-css">
 .draft-banner .nw, .draft-banner b { white-space: nowrap; }
 .blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
 .blx-rel > summary::-webkit-details-marker { display: none; }
-.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 
@@ -164,8 +166,12 @@ CSS = r"""<style id="bl-header-css">
 .q > legend + * { clear: both; }
 .q-label { font-size: 15.5px; }
 .q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
 @media (min-width: 880px) {
-  #answers .q.blx-split { display: flow-root !important; }
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
   .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
   .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
   .q.blx-split > .blx-qh:empty { display: none; }
@@ -214,7 +220,7 @@ JS = r"""<script id="bl-header-js">
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() {
-    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
     if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
     var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
@@ -233,7 +239,8 @@ JS = r"""<script id="bl-header-js">
   function labelNext() {
     var box = document.getElementById('next'); if (!box || me < 0) return;
     var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
-    if (box.getAttribute('data-label')) { lab.textContent = box.getAttribute('data-label'); return; }
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
     if (!a) { lab.textContent = 'Next toolkit'; return; }
     var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
     var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
@@ -317,7 +324,7 @@ JS = r"""<script id="bl-header-js">
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   });
   if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>"""
@@ -325,6 +332,8 @@ JS = r"""<script id="bl-header-js">
 
 # ---- Engagement tracking ---------------------------------------------------
 # Fill these in and rerun `python3 tools/site_header.py` to turn on GA4 (via Tag Manager) and HubSpot.
+# Do NOT fill them in until the site is hosted where a cookie-consent banner controls these tags (e.g. bigleap.com),
+# or a consent default is added here: as written, both load as soon as an ID is set, with no consent check.
 # Until then, events still go into window.dataLayer, so nothing is lost in the page logic.
 GTM_ID = ''        # e.g. 'GTM-XXXXXXX' (Big Leap's container)
 HUBSPOT_ID = ''    # e.g. '1234567' (Big Leap's HubSpot Hub ID, for the tracking code)
@@ -348,7 +357,34 @@ TRACK_TMPL = r"""<script id="bl-track-js">
   track(m ? 'diy_toolkit_view' : 'diy_page_view');
   var started = false, profiled = false;
   function inMain(el) { return !el.closest('.blh, .blp'); }
-  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
   document.addEventListener('change', onStart, true);
   document.addEventListener('input', onStart, true);
   try {
@@ -360,8 +396,8 @@ TRACK_TMPL = r"""<script id="bl-track-js">
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
     if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
-    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
-    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
     if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
   }, true);
@@ -390,9 +426,11 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email')]
     tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
     tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
+    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets'), ('Buildout', 'index.html#buildout', 'buildout')]
     def tab(t_, f, key):
-        return f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current or key == service else '') + f'>{e(t_)}</a>'
+        # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
+        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
+        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
     tab_html = ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
     pn = ''
     if prev is not None or nxt is not None:
@@ -438,6 +476,7 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-version-js"[^>]*></script>\n?', '', s)   # removes the retired version switch
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
@@ -466,4 +505,14 @@ if __name__ == '__main__':
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
     apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
-    print('index.html, journey.html')
+    # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
+    if os.path.exists(os.path.join(ROOT, 'review.html')):
+        apply('review.html', header('review.html', 'review', '', None, None, theme))
+    # Preview modules: drafts listed under "previews" in toolkits.json. They get the site header but
+    # no Previous/Next pager, and they are never added to SEQ, so the public sequence is unchanged
+    # until a draft is approved and moved into a series.
+    for pv in d.get('previews', []):
+        if os.path.exists(os.path.join(ROOT, pv['file'])):
+            apply(pv['file'], header(pv['file'], 'preview', '', None, None, ''))
+            print('preview', pv['file'])
+    print('index.html, journey.html, review.html')

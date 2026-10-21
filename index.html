@@ -218,6 +218,22 @@ details.support .support-grid { padding: 4px 16px 16px; }
 .card h4 { margin: 0; font: 700 19px/1.3 var(--head); color: var(--navy); }
 .card p { margin: 0; font-size: 14.5px; color: var(--muted); }
 .card .go { margin-top: auto; padding-top: 6px; font-weight: 700; color: var(--blue-ink); font-size: 14px; }
+/* Buildout */
+.bo-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0 0 32px; }
+.bo-stat { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 14px 16px; }
+.bo-stat b { display: block; font: 800 28px/1.1 var(--head); color: var(--navy); }
+.bo-stat span { font-size: 14px; color: var(--muted); }
+.bo-block { margin-top: 36px; }
+.bo-block > h3 { font-size: 22px; }
+.bo-block > p { margin: 6px 0 0; color: var(--muted); max-width: 46em; }
+.bo-block .card ul { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--muted); }
+.bo-block .card li + li { margin-top: 4px; }
+.bo-steps { margin: 14px 0 0; padding-left: 22px; max-width: 46em; }
+.bo-steps li + li { margin-top: 8px; }
+.bo-dec { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.bo-dec li { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--amber); border-radius: var(--r-card); padding: 12px 16px; }
+.bo-dec b { color: var(--navy); }
+.bo-dec span { display: block; font-size: 14px; color: var(--muted); }
 .empty { padding: 32px; text-align: center; background: var(--paper); border: 1px dashed var(--line); border-radius: var(--r-card); color: var(--muted); }
 
 /* Open items */
@@ -386,7 +402,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
 .blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
-.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
@@ -436,7 +452,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .draft-banner .nw, .draft-banner b { white-space: nowrap; }
 .blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
 .blx-rel > summary::-webkit-details-marker { display: none; }
-.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 
@@ -468,8 +484,12 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .q > legend + * { clear: both; }
 .q-label { font-size: 15.5px; }
 .q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
 @media (min-width: 880px) {
-  #answers .q.blx-split { display: flow-root !important; }
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
   .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
   .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
   .q.blx-split > .blx-qh:empty { display: none; }
@@ -530,7 +550,34 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   track(m ? 'diy_toolkit_view' : 'diy_page_view');
   var started = false, profiled = false;
   function inMain(el) { return !el.closest('.blh, .blp'); }
-  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
   document.addEventListener('change', onStart, true);
   document.addEventListener('input', onStart, true);
   try {
@@ -542,8 +589,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
     if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
-    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
-    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
     if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
   }, true);
@@ -551,8 +598,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 </script>
 </head>
 <body>
-<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey">Journey map</a><a href="index.html#review" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a></nav><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
-<div class="draft-strip" role="note">Draft 1 · for internal review · RevOps 1–6 are live, the rest are first drafts</div>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey">Journey map</a><a href="review.html" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a><a href="index.html#buildout" data-tab="buildout">Buildout</a></nav><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft 1 · for internal review · RevOps 1–6 are live, the rest are first drafts · <a href="#buildout"><b>See what changed and the 5 new strategy drafts →</b></a></div>
 
 
 <section class="hero" aria-labelledby="hero-h">
@@ -621,64 +668,99 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     </div>
   </section>
 
-  <section class="panel" id="review" aria-label="Team review" hidden>
+  <section class="panel" id="buildout" aria-label="Toolkits buildout" data-preview hidden>
     <div class="wrap">
       <div class="section-head">
         <div>
-          <h2>Team review</h2>
-          <p id="open-src">The master agenda for toolkit reviews: what to look at, how to review it, and every open question, blocker and follow-up in one place.</p>
+          <h2>Toolkits buildout · October 2026</h2>
+          <p>An optimization pass on the whole site, plus five new strategy drafts. Nothing was redesigned: the layout, categories and every toolkit link are the same. All of it is live on this site now.</p>
         </div>
-        <a class="btn btn-ghost" href="journey.html">Open the journey map</a>
+        <span class="status live">Live</span>
       </div>
 
-      <div class="review-grid">
-        <div class="agenda-card">
-          <h3>Agenda · Toolkit review, Monday Oct 26</h3>
-          <p class="sub">About 45 minutes. Each owner walks their toolkits, then the group clears decisions and blockers.</p>
-          <ol class="agenda">
-            <li><div><b>The big picture</b> <span class="mins">5 min · Dallas</span><p>Walk the <a href="journey.html">journey map</a>: how a visitor moves from a free toolkit to a booked call and a deal.</p></div></li>
-            <li><div><b>Business Profile and Paid Media</b> <span class="mins">8 min · Scott</span><p>Profile, ads readiness, conversions, first campaigns. <button class="link" type="button" data-owner="Scott Smoot">Scott's open items</button></p></div></li>
-            <li><div><b>SEO</b> <span class="mins">6 min · Shema</span><p>Foundations and local search. <button class="link" type="button" data-owner="Shema Al-Darwish">Shema's open items</button></p></div></li>
-            <li><div><b>Digital PR</b> <span class="mins">6 min · Kristina</span><p>Pitch-ready check and media kit. <button class="link" type="button" data-owner="Kristina Ainge">Kristina's open items</button></p></div></li>
-            <li><div><b>Email Marketing</b> <span class="mins">6 min · Erica</span><p>Inbox readiness, automated flows, program health. <button class="link" type="button" data-owner="Erica Pounder">Erica's open items</button></p></div></li>
-            <li><div><b>RevOps, including tracking</b> <span class="mins">5 min · Dallas</span><p>The six live toolkits plus Toolkit 7 for the tracking stack. <button class="link" type="button" data-owner="Dallas Olsen">Dallas's open items</button></p></div></li>
-            <li><div><b>Decisions and blockers</b> <span class="mins">7 min · Coby</span><p>Public vs. private, website placement, the follow-up email and analytics. <button class="link" type="button" data-owner="Coby Bush">Coby's open items</button></p></div></li>
-            <li><div><b>Owners and dates</b> <span class="mins">2 min · All</span><p>Confirm who does what before the next call. <button class="link" type="button" data-owner="all">Show everything</button></p></div></li>
-          </ol>
-        </div>
-        <div class="aside">
-          <h3>Before the meeting: review in 10 minutes</h3>
-          <ol class="mini-steps">
-            <li><b>Build a Business Profile.</b> Answer as a real prospect. It's saved in your browser and fills every other toolkit.</li>
-            <li><b>Open your toolkits.</b> Each opens with example answers, so you see a finished plan right away.</li>
-            <li><b>Try edge cases.</b> No website, an app, ten locations, a B2B firm on HubSpot. Results update live.</li>
-            <li><b>Check the hand-offs.</b> Copy my plan, the “Talk to …” button, Previous and Next, and the links to other services.</li>
-            <li><b>Answer your open items</b> below, and post toolkit feedback in the Slack thread with the toolkit name.</li>
-          </ol>
-          <h3>Good to know</h3>
-          <ul>
-            <li><b>Drafts</b> show a “Draft 1 for internal review” strip and a Draft tag. RevOps 1–6 are the live v2 set; everything else is Draft 1.</li>
-            <li>The site is <b>public to anyone with the link</b> and hidden from search engines. Don't enter client data.</li>
-            <li>Nothing typed into a toolkit is sent anywhere. Answers stay in the browser.</li>
-            <li>Toolkits live in <code>bigL3ap/bigleap-diy-toolkits</code>. The list comes from <code>toolkits.json</code>, open items from <code>data/open-items.json</code>. Changes go live about a minute after a push.</li>
-            <li>Website ideas: <a href="mockups/homepage.html">homepage mockup</a> and <a href="mockups/toolkits-landing.html">landing page mockup</a>.</li>
-          </ul>
+      <div class="bo-stats">
+        <div class="bo-stat"><b>107</b><span>issues logged in a full audit</span></div>
+        <div class="bo-stat"><b>76</b><span>fixed and retested</span></div>
+        <div class="bo-stat"><b>5</b><span>new drafts, preview only</span></div>
+        <div class="bo-stat"><b>46/46</b><span>site checks pass (1 known gap)</span></div>
+        <div class="bo-stat"><b>35/35</b><span>visitor journey checks pass</span></div>
+      </div>
+
+      <div class="bo-block">
+        <h3>What changed</h3>
+        <div class="cards">
+          <div class="card" style="--c: var(--green)">
+            <h4>Fixed</h4>
+            <ul>
+              <li>SEO 02 froze the page after an answer.</li>
+              <li>Team Review dropped items and owners; it now has its own page.</li>
+              <li>Example numbers showed as the visitor’s own answers once a profile was saved.</li>
+              <li>Industry checks sent ordinary businesses to “Talk to Scott first”.</li>
+              <li>Widget buttons kept saying “ready” after a visitor changed to an answer with gaps.</li>
+              <li>Text contrast, keyboard focus and the mobile menu.</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--blue)">
+            <h4>Aligned</h4>
+            <ul>
+              <li>The journey map uses Notice Different, Align to Genuine and Recommend Delight as overlapping motions, with Purchase as the pivot.</li>
+              <li>The toolkit connection map: 42 links checked in both directions.</li>
+              <li>Unapproved promises in toolkit copy softened to “what we’d look at first”.</li>
+              <li>Tracking event names are unchanged, so reporting continues without a break.</li>
+              <li>Coby’s Sweet Takes idea: PR 01, PR 02 and the brand starter now invite visitors to practice their angle on the podcast.</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--navy)">
+            <h4>Added for the team</h4>
+            <ul>
+              <li>Automated checks for every page and eight visitor journeys.</li>
+              <li>Guides for storage, authoring and QA, so future toolkits match.</li>
+              <li>A Buildout summary (this page) so everyone can see what changed.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="section-head" id="open-items" style="margin-top:44px">
-        <div><h2>Open questions, blockers and follow-ups</h2><p id="open-showing">Everything that has to be answered or done before launch, plus the other follow-ups from the call.</p></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap" id="owner-filters"></div>
+      <div class="bo-block">
+        <h3>New strategy drafts</h3>
+        <p>Four short starters feed a Personalized Marketing Roadmap that picks the next few actions and says why. Answers stay in the visitor’s browser. These are drafts for team review and aren’t in the public toolkit list yet.</p>
+        <div class="cards">
+          <a class="card" href="toolkits/plan/01_Are_You_Solving_the_Right_Problem.html"><div class="meta"><span class="step">Starter 1</span><span class="status draft">Preview</span></div><h4>Are You Solving the Right Problem?</h4><p>Situation and opportunity: the market you’re in and what’s holding growth back.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/02_What_Do_You_Already_Have.html"><div class="meta"><span class="step">Starter 2</span><span class="status draft">Preview</span></div><h4>What Do You Already Have?</h4><p>Foundations and gaps: what’s usable, what isn’t carrying weight, what’s missing.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/03_What_Makes_You_Worth_Choosing.html"><div class="meta"><span class="step">Starter 3</span><span class="status draft">Internal draft</span></div><h4>What Makes You Worth Choosing?</h4><p>Brand and messaging clarity, with drafts to edit.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/04_Would_Your_Customers_Recommend_You.html"><div class="meta"><span class="step">Starter 4</span><span class="status draft">Internal draft</span></div><h4>Would Your Customers Recommend You?</h4><p>Customer delight and referral, within review-platform rules.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="roadmap.html"><div class="meta"><span class="step">Shared output</span><span class="status draft">Preview</span></div><h4>Your Marketing Roadmap</h4><p>The next few actions from the profile, the starters and the toolkits already used, each with the reason it was picked.</p><span class="go">Open the roadmap →</span></a>
+        </div>
       </div>
-      <div class="summary" id="summary"></div>
-      <div id="groups"></div>
+
+      <div class="bo-block">
+        <h3>Decisions needed</h3>
+        <p>The first four come before anything new goes into the public journey.</p>
+        <ul class="bo-dec">
+          <li><b>1. Approve the adapted strategy methodology for public use</b><span>Coby Bush · the starters and roadmap restate the Agency Brands approach for a self-serve audience</span></li>
+          <li><b>2. Where the roadmap and starters appear in the public navigation</b><span>Marketing / web owner</span></li>
+          <li><b>3. Consent model for analytics</b><span>RevOps · no tags load today; events reach the page only</span></li>
+          <li><b>4. Should RevOps 01–06 fill in from the Business Profile?</b><span>RevOps owner · they’re live and the only toolkits that don’t</span></li>
+          <li><b>5–8. Scheduler links, Team Review visibility, DIY credit and discovery fee, the “load-bearing” standard</b><span>Can wait; each blocks specific future work</span></li>
+        </ul>
+      </div>
+
+      <div class="bo-block">
+        <h3>How to review</h3>
+        <ol class="bo-steps">
+          <li>Try the toolkits you own, and the new drafts above. Everything you see on this site is the current version.</li>
+          <li>Add anything that needs changing to <a href="review.html">Team review</a>, with the toolkit name and what should change.</li>
+          <li>The new drafts stay out of the public toolkit list until the decisions above are made.</li>
+        </ol>
+      </div>
     </div>
   </section>
+
 </main>
 
 <footer class="foot">
   <div class="wrap">
-    <span>© Big Leap · Notice Different · Align to Genuine</span>
+    <span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight</span>
     <span id="updated"></span>
   </div>
 </footer>
@@ -688,10 +770,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   'use strict';
   var COLORS = { revops: '#143D55', paid: '#EA4335', seo: '#0F7B5F', pr: '#7A4E9C', email: '#B45309' };
   var DARK_COLORS = { revops: '#6FB3DA', paid: '#F0675B', seo: '#4CC9A3', pr: '#B78ED6', email: '#E7A64A' };
-  var TYPE_ORDER = ['Blocker', 'Waiting on', 'Decision', 'Owner review', 'To do', 'Other from the call'];
-  var TYPE_COLORS = { 'Owner review': '#0F7B5F', 'Blocker': '#EA4335', 'Waiting on': '#A15C07', 'Decision': '#3187B5', 'To do': '#143D55', 'Other from the call': '#7F8F9A' };
-  var data = null, items = null, widgets = null;
-  var state = { q: '', series: 'all', owner: 'all' };
+  var data = null, widgets = null;
+  var state = { q: '', series: 'all' };
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -716,9 +796,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   });
 
   /* Sections, driven by the flat toolkit bar in the site header */
-  var PANELS = ['toolkits', 'widgets', 'review'];
+  var PANELS = ['toolkits', 'widgets', 'buildout'];
   var SERVICE_IDS = ['revops', 'paid', 'seo', 'pr', 'email'];
-  var ALIAS = { 'open-items': 'review', 'how': 'review', 'team-review': 'review', '': 'toolkits' };
+  var ALIAS = { '': 'toolkits' };
+  /* Team review moved to review.html (internal). Old links keep working. */
+  var REVIEW_HASHES = { 'review': '', 'team-review': '', 'how': '', 'open-items': '#open-items' };
   var pendingSeries = null;
   function mark(key) {
     Array.prototype.forEach.call(document.querySelectorAll('.blh-tabs a[data-tab]'), function (a) {
@@ -727,9 +809,10 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     });
   }
   window.addEventListener('message', function (e) { var d = e.data; if (!d || d.source !== 'bl-diy-widget' || d.type !== 'height') return; Array.prototype.forEach.call(document.querySelectorAll('.widget-card iframe'), function (f) { if (f.contentWindow === e.source) f.style.height = d.height + 'px'; }); });
-  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); var hero = document.querySelector('.hero'); if (hero) hero.hidden = (id === 'review' || id === 'widgets'); if (id === 'toolkits' && typeof drawLines === 'function') setTimeout(drawLines, 30); }
+  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); var hero = document.querySelector('.hero'); if (hero) hero.hidden = (id === 'widgets' || id === 'buildout'); if (id === 'toolkits' && typeof drawLines === 'function') setTimeout(drawLines, 30); }
   function fromHash(scroll) {
     var h = (location.hash || '').slice(1);
+    if (REVIEW_HASHES.hasOwnProperty(h)) { location.replace('review.html' + REVIEW_HASHES[h]); return; }
     if (SERVICE_IDS.indexOf(h) > -1) {
       showTab('toolkits'); mark(h);
       if (data) { state.series = h; state.q = ''; $('q').value = ''; renderFilters(); renderSeries(); } else { pendingSeries = h; }
@@ -740,8 +823,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     if (PANELS.indexOf(id) < 0) return;
     showTab(id); mark(id);
     if (id === 'toolkits' && data && state.series !== 'all' && h === 'toolkits') { state.series = 'all'; renderFilters(); renderSeries(); }
-    if (h === 'open-items') { setTimeout(function () { var el = $('open-items'); if (el) el.scrollIntoView(); }, 50); }
-    else if (scroll) { var m = document.querySelector('main'); if (m) m.scrollIntoView({ block: 'start' }); }
+    if (scroll) { var m = document.querySelector('main'); if (m) m.scrollIntoView({ block: 'start' }); }
   }
   window.addEventListener('hashchange', function () { fromHash(true); });
   showTab('toolkits'); fromHash(false);
@@ -782,7 +864,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       for (var i = s.toolkits.length; i < SLOTS; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
       h += '</ol></div>';
     });
-    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span class="lg-wide">Solid line: this leap supports · Dashed: this leap needs</span><span class="lg-narrow">Tap a stop: the stops it connects to stay bright, and the list below explains each link.</span></div>';
+    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span class="lg-wide">Solid line: unlocks next · Dashed line: works best after</span><span class="lg-narrow">Tap a stop: the stops it connects to stay bright, and the list below explains each link.</span></div>';
     $('map').innerHTML = h;
     if (conn) {
       var cross = conn.edges.filter(function (e) { return conn.nodes[e[0]][0] !== conn.nodes[e[1]][0]; }).length;
@@ -867,8 +949,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
       '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html#connect:' + esc(id) + '">See it in the journey map</a></div></div>' +
       '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
-      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>') + '</ul>';
-    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || (id === 'paid1' ? '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>' : '<li class="none"><b>Nothing required first.</b> A good place to start for ' + esc(me.s.name) + '.</li>')) + '</ul>';
+    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
   function renderSupport() {
     if (!conn || !conn.support) return;
@@ -903,38 +985,13 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       shown += list.length;
       var c = color(s.id);
       out += '<section class="series" style="--c:' + c + '" aria-labelledby="s-' + s.id + '"><div class="series-head"><div><h3 id="s-' + s.id + '">' + esc(s.name) + '</h3><p>' + esc(s.promise) + '</p></div>' +
-        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
+        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=hub-' + esc(s.id) + '" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
       list.forEach(function (t) {
         out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">Draft 1') + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
       });
       out += '</div></section>';
     });
     $('series-list').innerHTML = shown ? out : '<div class="empty">No toolkit matches “' + esc(state.q) + '”. Try a broader word, like “ads” or “leads”.</div>';
-  }
-
-  function renderOpen() {
-    var owners = {};
-    items.items.forEach(function (i) { String(i.owner).split(/,\s*/).forEach(function (o) { owners[o] = 1; }); });
-    var ownerList = Object.keys(owners).sort();
-    $('owner-filters').innerHTML = '<label class="sr" for="owner-sel">Filter by owner</label><select id="owner-sel" class="search" style="flex:0 1 240px;min-height:44px"><option value="all">Everyone</option>' + ownerList.map(function (o) { return '<option' + (state.owner === o ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') + '</select>';
-    $('owner-sel').addEventListener('change', function (e) { state.owner = e.target.value; renderOpenList(); });
-    if (items.source) $('open-showing').innerHTML = 'Everything that has to be answered or done before launch, plus the other follow-ups from <a href="' + esc(items.source.url) + '" target="_blank" rel="noopener">' + esc(items.source.title) + '</a>.';
-    renderOpenList();
-  }
-  function renderOpenList() {
-    var list = items.items.filter(function (i) { return state.owner === 'all' || String(i.owner).split(/,\s*/).indexOf(state.owner) > -1; });
-    var counts = {}; list.forEach(function (i) { counts[i.type] = (counts[i.type] || 0) + 1; });
-    $('summary').innerHTML = TYPE_ORDER.filter(function (t) { return counts[t]; }).map(function (t) { return '<div class="sum' + (t === 'Blocker' ? ' block' : '') + '"><b>' + counts[t] + '</b><span>' + esc(t) + '</span></div>'; }).join('');
-    var oc = items.items.filter(function (i) { return i.type !== 'Other from the call'; }).length;
-    var rl = document.querySelector('.blh-tabs a[data-tab="review"]'); if (rl && !rl.querySelector('.count')) { var c = document.createElement('span'); c.className = 'count'; c.style.marginLeft = '6px'; rl.appendChild(c); } if (rl) rl.querySelector('.count').textContent = oc;
-    var src = items.source ? items.source.url : '';
-    $('groups').innerHTML = TYPE_ORDER.filter(function (t) { return counts[t]; }).map(function (t) {
-      return '<div class="group"><h3>' + esc(t) + ' <span class="n">' + counts[t] + '</span></h3><ul class="items">' + list.filter(function (i) { return i.type === t; }).map(function (i) {
-        var watch = (src && typeof i.ts === 'number') ? '<a href="' + esc(src) + '?timestamp=' + i.ts + '" target="_blank" rel="noopener">Watch on Fathom</a>' : '';
-        if (i.link) watch += '<a href="' + esc(i.link) + '" target="_blank" rel="noopener">All questions</a>';
-        return '<li class="item" style="--k:' + (TYPE_COLORS[t] || '#3187B5') + '"><h4>' + esc(i.title) + '</h4><div class="side"><span class="tag">' + esc(i.owner) + '</span><span class="area">' + esc(i.area) + ' · ' + esc(i.status) + '</span>' + watch + '</div><p>' + esc(i.detail) + '</p></li>';
-      }).join('') + '</ul></div>';
-    }).join('') || '<div class="empty">Nothing open for this owner.</div>';
   }
 
   function renderWidgets() {
@@ -961,24 +1018,17 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   }
 
   $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); renderSeries(); });
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest ? e.target.closest('button.link[data-owner]') : null; if (!b || !items) return;
-    state.owner = b.getAttribute('data-owner'); renderOpen();
-    var sel = $('owner-sel'); if (sel) sel.value = state.owner;
-    $('open-items').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
   if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { renderMap(); renderSeries(); }); } catch (e) {} }
 
   Promise.all([
     getJSON('toolkits.json'),
-    getJSON('data/open-items.json').catch(function () { return { items: [] }; }),
     getJSON('data/widgets.json').catch(function () { return null; }),
     getJSON('data/connections.json').catch(function () { return null; })
   ]).then(function (r) {
-    data = r[0]; items = r[1]; widgets = r[2]; conn = r[3];
+    data = r[0]; widgets = r[1]; conn = r[2];
     $('updated').textContent = 'Updated ' + (data.updated || '');
     if (pendingSeries) { state.series = pendingSeries; pendingSeries = null; }
-    renderStats(); renderMap(); renderSupport(); renderFilters(); renderSeries(); renderOpen(); renderWidgets();
+    renderStats(); renderMap(); renderSupport(); renderFilters(); renderSeries(); renderWidgets();
     setTimeout(drawLines, 300); if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawLines);
   }).catch(function () {
     $('series-list').innerHTML = '<div class="empty">The toolkit list could not load. Refresh the page; if it keeps happening, check that toolkits.json is valid.</div>';
@@ -991,7 +1041,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() {
-    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
     if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
     var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
@@ -1010,7 +1060,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   function labelNext() {
     var box = document.getElementById('next'); if (!box || me < 0) return;
     var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
-    if (box.getAttribute('data-label')) { lab.textContent = box.getAttribute('data-label'); return; }
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
     if (!a) { lab.textContent = 'Next toolkit'; return; }
     var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
     var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
@@ -1094,10 +1145,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   });
   if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>
-<script id="bl-version-js" src="assets/version-switch.js"></script>
 </body>
 </html>

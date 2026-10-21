@@ -1,0 +1,49 @@
+PASS   JSON parses: toolkits.json
+PASS   JSON parses: data/connections.json
+PASS   JSON parses: data/widgets.json
+PASS   JSON parses: data/open-items.json
+PASS   toolkits.json: every toolkit file exists
+PASS   toolkits.json: revops numbered 1..n
+PASS   toolkits.json: paid numbered 1..n
+PASS   toolkits.json: seo numbered 1..n
+PASS   toolkits.json: pr numbered 1..n
+PASS   toolkits.json: email numbered 1..n
+PASS   toolkits.json: start file exists
+PASS   toolkits.json: every preview file exists
+PASS   previews are not listed in the public series
+PASS   connections: every node maps to a public toolkit
+PASS   connections: every edge references known nodes
+PASS   connections: no duplicate edges
+PASS   connections: no self-links
+PASS   connections: every edge explains why
+PASS   connections: preview edges reference known nodes or previews
+PASS   widgets.json: every widget and tile file exists
+PASS   open-items: every item has title/owner/type/area/status/detail
+PASS   open-items: owner names are canonical full names
+PASS   open-items: every type is a known type
+PASS   every relative href/src resolves to a file
+PASS   same-page anchors exist
+PASS   no JavaScript features that break older Safari
+PASS   preview pages stay out of the public sequence and hub
+PASS   no console errors on any page at 1280px
+PASS   no horizontal page scroll at 1280px
+PASS   no console errors on any page at 390px
+PASS   no horizontal page scroll at 390px
+PASS   every toolkit shows the saved Business Profile
+KNOWN  RevOps toolkits that do not read the Business Profile yet (owner decision)  ->  RevOps 01, 02, 03, 04, 05, 06
+PASS   no toolkit overwrites the saved Business Profile on load
+PASS   Business Profile builder does not save example answers automatically
+PASS   Business Profile builder saves the visitor's own answers (non-ASCII safe)
+PASS   BL1 profile code round-trips
+PASS   "Copy my plan" produces a plan on every toolkit
+PASS   Team Review renders every open item
+PASS   Team Review owner filter shows each owner's items plus team-wide items
+PASS   every agenda owner button shows items
+PASS   Team Review explains when open items fail to load
+PASS   Team review link scrolls into view when focused on a phone
+PASS   first form control shows a visible keyboard focus
+PASS   hub renders in dark mode with the full map
+PASS   roadmap: useful empty state with no saved data
+PASS   roadmap: three priorities from a profile alone
+
+46 passed, 0 failed, 0 skipped, 1 known

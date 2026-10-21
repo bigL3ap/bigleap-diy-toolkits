@@ -205,5 +205,67 @@
         }
       ]
     }
+  ],
+  "previews": [
+    {
+      "id": "plan1",
+      "n": 1,
+      "group": "Strategy starter 1 of 4",
+      "statusLabel": "Internal draft",
+      "title": "Are You Solving the Right Problem?",
+      "short": "Situation",
+      "file": "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html",
+      "description": "A preliminary situation read: market (capture, generate or expand), the business-health axis holding growth back, the three motions, and the next three priorities.",
+      "reviewer": "Coby Bush",
+      "review": "Do the market, health and motion rules match the Situation Audit? Calibrate the base depths and the tie-break rule of thumb."
+    },
+    {
+      "id": "plan2",
+      "n": 2,
+      "group": "Strategy starter 2 of 4",
+      "statusLabel": "Internal draft",
+      "title": "What Do You Already Have?",
+      "short": "Foundations",
+      "file": "toolkits/plan/02_What_Do_You_Already_Have.html",
+      "description": "A foundations and gap check: usable, needs work, missing or not sure for 13 areas from brand foundation to revenue engine, with what to fix first and why.",
+      "reviewer": "Coby Bush",
+      "review": "Does the layer order and the 'usable means' test for each area match the Gap Audit? Who sets the written standard for 'not load-bearing'?"
+    },
+    {
+      "id": "plan3",
+      "n": 3,
+      "group": "Strategy starter 3 of 4",
+      "statusLabel": "Internal draft",
+      "title": "What Makes You Worth Choosing?",
+      "short": "Brand",
+      "file": "toolkits/plan/03_What_Makes_You_Worth_Choosing.html",
+      "description": "A brand and messaging starter: eight finish-the-sentence answers become a first-draft positioning, promise, value proposition, themes and channel lines.",
+      "reviewer": "Coby Bush",
+      "review": "Is this the smallest useful question set? Confirm it stays clearly separate from the full Brand Ideology process before any public release."
+    },
+    {
+      "id": "plan4",
+      "n": 4,
+      "group": "Strategy starter 4 of 4",
+      "statusLabel": "Internal draft",
+      "title": "Would Your Customers Recommend You?",
+      "short": "Delight",
+      "file": "toolkits/plan/04_Would_Your_Customers_Recommend_You.html",
+      "description": "A customer delight and referral check: nine moments after the sale, fixes in order, when and how to ask for reviews and referrals within platform rules, and what to measure.",
+      "reviewer": "Erica Pounder and Coby Bush",
+      "review": "Does it complement Email 02 and SEO 02 without overlapping? Are the review and referral rules stated correctly for our clients' platforms?"
+    },
+    {
+      "id": "roadmap",
+      "n": 5,
+      "group": "Shared output",
+      "statusLabel": "Internal draft",
+      "title": "Your Marketing Roadmap",
+      "short": "Roadmap",
+      "file": "roadmap.html",
+      "description": "Three priorities built from the Business Profile, the strategy starters and toolkit progress, with explained rules, prerequisites, progress and done marks.",
+      "reviewer": "Dallas Olsen and Coby Bush",
+      "review": "Do the priority rules make sense for real prospects? Where should 'My roadmap' live in the public navigation once approved?"
+    }
   ]
 }

@@ -1,0 +1,37 @@
+PASS  [1 First-time owner] "Start here" opens the Business Profile
+PASS  [1 First-time owner] profile saved after real answers
+PASS  [1 First-time owner] roadmap shows three priorities
+PASS  [1 First-time owner] first priority opens a toolkit
+PASS  [1 First-time owner] no script errors
+PASS  [2 Specific problem, direct link] toolkit works without a profile or assessments
+PASS  [2 Specific problem, direct link] pill switches to the visitor's answers
+PASS  [2 Specific problem, direct link] copied plan uses absolute links
+PASS  [2 Specific problem, direct link] no script errors
+PASS  [3 Experienced leader] situation reads generate + differentiation
+PASS  [3 Experienced leader] foundations leads with positioning or its prerequisite
+PASS  [3 Experienced leader] roadmap says it uses both checks
+PASS  [3 Experienced leader] positioning is a top priority; usable analytics is not
+PASS  [3 Experienced leader] no script errors
+PASS  [4 Returning visitor] started toolkit shows "In progress"
+PASS  [4 Returning visitor] worked toolkit listed with its result
+PASS  [4 Returning visitor] "I've done this" moves the roadmap on
+PASS  [4 Returning visitor] done mark persists after reload
+PASS  [4 Returning visitor] profile prefills a later toolkit
+PASS  [4 Returning visitor] no script errors
+PASS  [5 Incomplete information] situation says it is not clear yet, without guessing
+PASS  [5 Incomplete information] every unknown gets a "how to find out"
+PASS  [5 Incomplete information] all-unknown foundations still give a useful next step
+PASS  [5 Incomplete information] no script errors
+PASS  [6 Skips optional assessments] roadmap works from the profile alone
+PASS  [6 Skips optional assessments] assessments offered as optional
+PASS  [6 Skips optional assessments] every public toolkit gives a result with no prerequisite
+PASS  [6 Skips optional assessments] no script errors
+PASS  [7 Mobile visitor] no sideways scrolling on key pages
+PASS  [7 Mobile visitor] answer buttons are large enough to tap (40px+)
+PASS  [7 Mobile visitor] no script errors
+PASS  [8 Keyboard only] Tab reaches the goal choice
+PASS  [8 Keyboard only] arrow keys change the goal and save it
+PASS  [8 Keyboard only] Tab and Space mark a priority done
+PASS  [8 Keyboard only] no script errors
+
+35 passed, 0 failed

@@ -482,7 +482,7 @@ body { overflow-wrap: anywhere; }
 .blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
 .blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
-.blh-tabs a[aria-current="page"] { background: #143D55; color: #fff; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
@@ -532,7 +532,7 @@ body { overflow-wrap: anywhere; }
 .draft-banner .nw, .draft-banner b { white-space: nowrap; }
 .blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
 .blx-rel > summary::-webkit-details-marker { display: none; }
-.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "2  "; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
 :root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 
@@ -564,8 +564,12 @@ body { overflow-wrap: anywhere; }
 .q > legend + * { clear: both; }
 .q-label { font-size: 15.5px; }
 .q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
 @media (min-width: 880px) {
-  #answers .q.blx-split { display: flow-root !important; }
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
   .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
   .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
   .q.blx-split > .blx-qh:empty { display: none; }
@@ -626,7 +630,34 @@ body { overflow-wrap: anywhere; }
   track(m ? 'diy_toolkit_view' : 'diy_page_view');
   var started = false, profiled = false;
   function inMain(el) { return !el.closest('.blh, .blp'); }
-  function onStart(e) { if (started || !m || !e.target || !inMain(e.target)) return; started = true; track('diy_toolkit_start'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
   document.addEventListener('change', onStart, true);
   document.addEventListener('input', onStart, true);
   try {
@@ -638,8 +669,8 @@ body { overflow-wrap: anywhere; }
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
     if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
-    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) return track('diy_plan_copy', { label: txt });
-    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) return track('diy_plan_download', { label: txt });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
     if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
   }, true);
@@ -647,7 +678,7 @@ body { overflow-wrap: anywhere; }
 </script>
 </head>
 <body>
-<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email" aria-current="page">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../index.html#review" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a></nav></div></div></header><!-- /bl-header -->
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email" aria-current="true">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../review.html" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a><a href="../../index.html#buildout" data-tab="buildout">Buildout</a></nav></div></div></header><!-- /bl-header -->
 <div class="draft-banner" role="note">Draft 1 · for internal review · Owner: <b>Erica Pounder</b></div>
 <div class="page">
 <header class="masthead">
@@ -1040,8 +1071,10 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')');
 }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
   const l = LINKS[key];
   if (!l) { $('next').hidden = true; return; }
@@ -1201,7 +1234,7 @@ const COMPLEX = [
   { key: 'multibrand', title: 'Several brands or domains', text: 'Each brand needs its own authenticated domain, consent and unsubscribe handling, and a clear rule for who gets which emails, or one brand\'s complaints can hurt the others.' },
 ];
 const LAWS = {
-  us: ['United States', 'CAN-SPAM', 'You may email without opt-in, but every email needs honest From and subject lines, your postal address and a working unsubscribe. Honour unsubscribes within 10 business days.'],
+  us: ['United States', 'CAN-SPAM', 'You may email without opt-in, but every email needs honest From and subject lines, your postal address and a working unsubscribe. Honour unsubscribes within 10 business days (Gmail and Yahoo expect bulk senders to process them within 2 days).'],
   ca: ['Canada', 'CASL', 'You need consent first: express (they agreed) or implied (for example a purchase, which lasts two years). Identify yourself, include an unsubscribe, and keep proof of consent.'],
   eu: ['UK or EU', 'GDPR, UK GDPR, PECR', 'You need clear opt-in consent (no pre-ticked boxes) and a record of when and how it was given. In the UK, a "soft opt-in" lets you email existing customers about similar products if they could opt out when they bought.'],
 };
@@ -1289,12 +1322,12 @@ function model(input, a) {
     time: a.bought });
 
   // 5. Stale or quiet list
-  if (size > 0 && (input.last === 'stale' || input.last === 'cold')) items.push({ id: 'stale', sev: 'block',
+  if (input.last === 'stale' || input.last === 'cold') items.push({ id: 'stale', sev: 'block',
     title: 'Clean your list before you send to it again',
     why: 'After six months without email, some addresses are dead and some have become spam traps. A big first send to a cold list is one of the fastest ways into the spam folder.',
     steps: ['Export the list and remove obvious bad addresses: typos, role addresses like info@ you didn\'t sign up, and old hard bounces.', 'Run the rest through an email verification service, then suppress anything marked invalid.', 'Send first to the people most likely to know you: recent customers and recent sign-ups.', 'Send a short "do you still want to hear from us?" email to the rest. Keep the people who click; suppress the rest after a second try.', 'Grow volume over a few sends rather than mailing everyone at once.'],
     time: a.stale });
-  else if (size > 0 && input.last === 'months') items.push({ id: 'warm', sev: 'fix',
+  else if (input.last === 'months') items.push({ id: 'warm', sev: 'fix',
     title: 'Ease back in after a quiet spell',
     why: 'A gap of a month or more is fine, but start your next sends with your most engaged people so the first results are good ones.',
     steps: ['Send the next campaign to people who opened or clicked in the last 90 days, or bought recently.', 'Send to the rest of the list a few days later.', 'Watch bounces and complaints on both sends before going back to full volume.'],
@@ -1318,7 +1351,7 @@ function model(input, a) {
       title: high ? 'Find out why bounces or complaints are high' : 'Look up your bounce and spam complaint rates',
       why: high ? 'Inboxes judge you on these numbers. Google asks senders to keep spam complaints under 0.1% and never reach 0.3%.'
         : 'These two numbers decide whether inboxes trust you. Rules of thumb: bounces under 2%, spam complaints under 0.1%, never 0.3% or more.',
-      steps: (high ? ['Compare recent campaigns: is one segment, import or email type behind the spike?', 'Suppress hard bounces and anyone who complained (most platforms do this for you).', 'Stop sending to contacts who haven\'t opened or clicked in 6–12 months until you\'ve run a re-permission email.', 'Check the sign-up form isn\'t letting in fake or mistyped addresses: add double opt-in or a CAPTCHA.']
+      steps: (high ? ['Compare recent campaigns: is one segment, import or email type behind the spike?', 'Suppress hard bounces and anyone who complained (most platforms do this for you).', 'Stop sending to contacts who haven\'t clicked (or bought) in 6–12 months until you\'ve run a re-permission email.', 'Check the sign-up form isn\'t letting in fake or mistyped addresses: add double opt-in or a CAPTCHA.']
         : ['Open your last three to five campaigns and note the bounce rate and spam complaint rate.']).concat([
         'Sending to Gmail addresses? Set up Google Postmaster Tools (free) at postmaster.google.com for your domain. It shows your spam rate as Gmail sees it.',
         'For a full health check of these numbers, use Toolkit 3: Is Your Email Program Working?',
@@ -1362,7 +1395,7 @@ function model(input, a) {
   const totalLo = ordered.reduce((s, t) => s + (t.time ? t.time[0] : 0), 0);
   const totalHi = ordered.reduce((s, t) => s + (t.time ? t.time[1] : 0), 0);
   const flags = {
-    warm: plan('newdomain') || input.from === 'free' || (size > 0 && (input.last === 'stale' || input.last === 'cold')),
+    warm: plan('newdomain') || input.from === 'free' || input.last === 'stale' || input.last === 'cold',
     dedicated: size >= a.dedicatedIpList,
     migrate: plan('migrate'),
     blocklist: input.rates === 'high',
@@ -1411,7 +1444,7 @@ let SNIPS = {};
     }
     applyInput(i);
     markFromProfile(used);
-    profileSnapshot = p ? readInput() : null;
+    profileSnapshot = p && used.length ? readInput() : null;
   }
   function state(i) {
     if (profileSnapshot && same(i, profileSnapshot)) return 'profile';
@@ -1485,8 +1518,9 @@ let SNIPS = {};
       : 'Everything on the inbox list is in place.';
     SNIPS = { dmarc: dmarcSnippet(m) };
     SNIPS_TEXT = { dmarc: ['DMARC record to add:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
-    renderItems($('plan'), m.items, { dmarc: m.input.dmarc === 'no' ? snippetHtml('dmarc', 'DMARC record (start here)', SNIPS.dmarc) : '' });
-    if (m.input.dmarc !== 'no') SNIPS_TEXT = {};
+    if (m.input.dmarc !== 'no') SNIPS_TEXT = { dmarc: ['DMARC record to add if none is found:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
+    renderItems($('plan'), m.items, { dmarc: m.input.dmarc === 'yes' ? '' : snippetHtml('dmarc', m.input.dmarc === 'no' ? 'DMARC record (start here)' : 'DMARC record (if none is found)', SNIPS.dmarc) });
+    if (m.input.dmarc === 'yes') SNIPS_TEXT = {};
     $('done-wrap').hidden = m.done.length === 0;
     $('done-list').innerHTML = m.done.map((x) => '<li><span aria-hidden="true">✓ </span>' + esc(x) + '</li>').join('');
     $('law-rows').innerHTML = lawRows(m).map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>').join('');
@@ -1525,7 +1559,7 @@ let SNIPS = {};
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
   function centerCurrent() {
-    var cur = bar && bar.querySelector('a[aria-current="page"]'); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
     if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
     var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
@@ -1544,7 +1578,8 @@ let SNIPS = {};
   function labelNext() {
     var box = document.getElementById('next'); if (!box || me < 0) return;
     var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
-    if (box.getAttribute('data-label')) { lab.textContent = box.getAttribute('data-label'); return; }
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
     if (!a) { lab.textContent = 'Next toolkit'; return; }
     var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
     var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
@@ -1628,10 +1663,9 @@ let SNIPS = {};
     b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   });
   if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); } });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
 })();
 </script>
-<script id="bl-version-js" src="../../assets/version-switch.js"></script>
 </body>
 </html>
