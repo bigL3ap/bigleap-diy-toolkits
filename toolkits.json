@@ -230,6 +230,18 @@
       "description": "A foundations and gap check: usable, needs work, missing or not sure for 13 areas from brand foundation to revenue engine, with what to fix first and why.",
       "reviewer": "Coby Bush",
       "review": "Does the layer order and the 'usable means' test for each area match the Gap Audit? Who sets the written standard for 'not load-bearing'?"
+    },
+    {
+      "id": "plan3",
+      "n": 3,
+      "group": "Strategy starter 3 of 4",
+      "statusLabel": "Internal draft",
+      "title": "What Makes You Worth Choosing?",
+      "short": "Brand",
+      "file": "toolkits/plan/03_What_Makes_You_Worth_Choosing.html",
+      "description": "A brand and messaging starter: eight finish-the-sentence answers become a first-draft positioning, promise, value proposition, themes and channel lines.",
+      "reviewer": "Coby Bush",
+      "review": "Is this the smallest useful question set? Confirm it stays clearly separate from the full Brand Ideology process before any public release."
     }
   ]
 }
