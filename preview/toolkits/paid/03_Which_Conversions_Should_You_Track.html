@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Which Conversions Should You Track?</title>
+<meta name="description" content="Eight quick answers about how your business makes money. You get a named conversion event plan, a UTM naming starter, and the path to send qualified leads or app events back to your ad platforms.">
+<style>
+/* Big Leap Paid Media DIY Toolkit 3: shell copied from the RevOps series (v2), plus a few additions at the end. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 44px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+
+/* ---- Toolkit additions (same tokens as the RevOps shell) ---- */
+html { overflow-wrap: anywhere; }
+body { min-height: 100vh; min-height: 100dvh; }
+.btn-plain { min-height: 44px; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -4px; }
+.stepper ol { grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); }
+.stepper ol::before { left: 12%; right: 12%; }
+.st-label { overflow-wrap: normal; word-break: normal; }
+code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-size: .92em; color: var(--heading); overflow-wrap: anywhere; }
+/* Draft banner */
+.draft-banner { background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line); font-size: 12.5px; font-weight: 700; line-height: 1.4; text-align: center; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); padding-top: max(7px, env(safe-area-inset-top, 0px)); }
+/* Business Profile strip */
+.profile { display: grid; gap: 8px; padding: 12px 16px; margin-bottom: 14px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.profile-row p { flex: 1 1 18rem; }
+.profile b { color: var(--heading); }
+.profile a { font-weight: 700; }
+.profile details summary { cursor: pointer; font-weight: 700; color: var(--heading); font-size: 13.5px; min-height: 32px; display: inline-flex; align-items: center; }
+.paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.profile-status { font-size: 13px; color: var(--muted); min-height: 1em; }
+.profile-status:empty { display: none; }
+.from-profile { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); vertical-align: 1px; }
+/* Selects and check chips */
+.select { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 10px; min-height: 44px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.checks { display: flex; flex-wrap: wrap; gap: 6px; }
+.check { position: relative; display: inline-flex; }
+.check input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.check label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); font-weight: 700; font-size: 14px; cursor: pointer; user-select: none; }
+.check label::before { content: ""; width: 14px; height: 14px; border: 2px solid var(--line-strong); border-radius: 3px; flex: none; }
+.check input:checked + label { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.check input:checked + label::before { background: var(--on-seg); border-color: var(--on-seg); box-shadow: inset 0 0 0 2px var(--seg-on); }
+.check input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.check label:hover { background: var(--hover); }
+.check input:checked + label:hover { background: var(--seg-on); }
+.sub-q { display: grid; gap: 8px; padding: 10px 12px; border-left: 2px solid var(--tint-line); margin-top: 2px; }
+.sub-q .q-label { font-size: 14px; }
+.seg.stack { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+.seg.stack label { justify-items: start; text-align: left; place-items: center start; }
+.money-row { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.money-row > div { display: grid; gap: 4px; }
+.money-row .mini { font-size: 13px; font-weight: 700; color: var(--muted); }
+/* Status chips */
+.chip.ok { background: transparent; color: var(--blue-ink); border-color: var(--tint-line); }
+.chip.gap { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.chip.later { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.st-time { font-size: 13px; color: var(--muted); }
+.st-how ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 3px; }
+.warn { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line-strong); background: var(--field); }
+.warn b { color: var(--heading); }
+.sub-h { font-size: 16px; color: var(--heading); margin-top: 4px; }
+/* Test checklist */
+.testlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.testlist li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 14px; }
+.testlist input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--seg-on); }
+.testlist label { cursor: pointer; }
+.testlist b { color: var(--heading); }
+/* Event plan table */
+.event-table { min-width: 760px; }
+.event-table td, .event-table th { font-size: 13.5px; }
+.event-table code { font-weight: 700; }
+.yes { font-weight: 700; color: var(--heading); }
+.no-val { color: var(--muted); }
+.table-note { font-size: 13px; color: var(--muted); }
+.scroll-hint { font-size: 12.5px; color: var(--muted); }
+@media (min-width: 1100px) { .scroll-hint { display: none; } }
+/* Where it gets complex */
+.complex { display: grid; gap: 10px; }
+.complex h2 { font-size: 19px; }
+.complex ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.complex li b { color: var(--heading); }
+.complex .applies { background: var(--seg-on); color: var(--on-seg); }
+.mistakes { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.mistakes b { color: var(--heading); }
+.foot a { color: var(--blue-ink); font-weight: 700; }
+.method-body p { max-width: 70ch; }
+@media (max-width: 879px) { .is-sticky { position: static !important; } }
+/* Print: the plan only */
+@media print {
+  .draft-banner, .stepper, .profile, .col-q, .closing-actions, .copy-status, #copy-host, .see-results, .method, .text-btn { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12px; }
+  .layout { display: block; }
+  .panel, .closing, .steps > li, .testlist li { break-inside: avoid; background: #fff !important; color: #000 !important; border-color: #999 !important; }
+  .closing h2, .closing p, .closing a, .next-title, .xlinks li { color: #000 !important; }
+  .table-wrap { overflow: visible; }
+  .event-table { min-width: 0; }
+  a { color: #000; }
+}
+
+</style>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form: one panel, one question per row (question left, answers right) ---- */
+.col-q.panel { padding: 0 !important; overflow: hidden; }
+.col-q .q-head { padding: 20px 28px 16px !important; border-bottom: 1px solid var(--line); }
+#answers .q { margin: 0 !important; padding: 22px 28px !important; border: 0 !important; border-top: 1px solid var(--line) !important; }
+#answers > .q-head + .q, #answers > .q:first-child, #answers > .q-head + div > .q:first-child { border-top: 0 !important; }
+#answers > div:not(.q):not(.q-head) > .q:first-child { border-top: 1px solid var(--line) !important; }
+.q legend { float: left !important; width: 100%; margin: 0 0 8px !important; }
+.q > legend + * { clear: both; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
+@media (min-width: 880px) {
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
+  .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
+  .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
+  .q.blx-split > .blx-qh:empty { display: none; }
+  .q.blx-split > .blx-qh .q-help { margin: 0; }
+  .q.blx-split > .blx-qc { margin-left: calc(41.67% + 22px); display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs > .blx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: start; }
+  #answers .q.blx-pairs > .blx-pair + .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs .blx-ph > * { margin: 8px 0 0 !important; display: block; }
+  #answers .q.blx-pairs .blx-pc { display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pairhelp { max-width: calc(41.67% - 22px); margin-top: 8px; }
+  #answers .q.blx-row > .q-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: center; }
+  #answers .q.blx-row > .q-row > :first-child { min-width: 0; }
+  #answers .q.blx-row > .q-row > :not(:first-child) { justify-self: start; }
+  #answers .q.blx-row > .q-row + .q-row { margin-top: 10px; }
+  #answers .q.blx-row > .sub-q { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; row-gap: 6px; align-items: center; margin-top: 16px; padding: 0; border: 0; }
+  #answers .q.blx-row > .sub-q > .q-label { grid-column: 1; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > :not(.q-label):not(.q-help) { grid-column: 2; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > .q-help { grid-column: 1; grid-row: 2; margin: 0; }
+  #answers .q.blx-row > .q-help { max-width: calc(41.6% - 22px); margin-top: 6px; }
+  #answers .q.blx-row .seg.inline { width: 100%; max-width: 420px; }
+  .blx-qc .seg:not(.inline) { max-width: 600px; }
+}
+#answers .q { scroll-margin-top: 16px; }
+.blx-pair + .blx-pair { margin-top: 12px; } .blx-pc { display: grid; gap: 8px; } .blx-ph > * { margin-bottom: 6px; }
+/* answer controls: lighter */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line-strong) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt, .opt-wrap, .text-field, .field { border-radius: 10px !important; }
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
+@media print { .blh { display: none !important; } }
+</style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid" aria-current="true">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../review.html" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a><a href="../../index.html#buildout" data-tab="buildout">Buildout</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-banner" role="note">Draft 1 · for internal review · Owner: Scott Smoot</div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· PAID MEDIA</span></div>
+<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 3 of 4</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Which Conversions Should You Track?</h1>
+<p class="lede">Answer a few questions about how your business makes money. You get a named event plan, which events should steer your ad bids, and a UTM naming starter.</p>
+</header>
+<section class="profile" id="profile" aria-label="Business Profile"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The Paid Media DIY path</h2>
+<p class="stepper-note" id="stepper-note"></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">How you win customers</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+
+<div class="q">
+<span class="q-label" id="wins-l">What counts as a win for you online?</span>
+<div class="checks" role="group" aria-labelledby="wins-l">
+<span class="check"><input type="checkbox" id="w-leads" name="wins" value="leads"><label for="w-leads">Form leads</label></span>
+<span class="check"><input type="checkbox" id="w-calls" name="wins" value="calls"><label for="w-calls">Phone calls</label></span>
+<span class="check"><input type="checkbox" id="w-purchases" name="wins" value="purchases"><label for="w-purchases">Online purchases</label></span>
+<span class="check"><input type="checkbox" id="w-bookings" name="wins" value="bookings"><label for="w-bookings">Bookings or appointments</label></span>
+<span class="check"><input type="checkbox" id="w-signups" name="wins" value="signups"><label for="w-signups">Sign-ups, trials or accounts</label></span>
+<span class="check"><input type="checkbox" id="w-installs" name="wins" value="installs"><label for="w-installs">App installs</label></span>
+</div>
+<p class="q-help">A conversion is an action that is worth money to you. Pick every one that applies. Page views and time on site are not wins.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="model-l">Who do you sell to?</span>
+<div class="seg" role="radiogroup" aria-labelledby="model-l">
+<input type="radio" id="model-b2b" name="model" value="b2b"><label for="model-b2b">Businesses</label>
+<input type="radio" id="model-b2c" name="model" value="b2c"><label for="model-b2c">Consumers</label>
+<input type="radio" id="model-both" name="model" value="both"><label for="model-both">Both</label>
+</div>
+<p class="q-help">B2B sales usually take weeks after the first form. That changes which conversion your ads should learn from.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="crm-l">Which CRM do you use?</span>
+<div class="seg" role="radiogroup" aria-labelledby="crm-l">
+<input type="radio" id="crm-hubspot" name="crm" value="hubspot"><label for="crm-hubspot">HubSpot</label>
+<input type="radio" id="crm-other" name="crm" value="other"><label for="crm-other">Another CRM</label>
+<input type="radio" id="crm-none" name="crm" value="none"><label for="crm-none">None</label>
+</div>
+<p class="q-help">A CRM keeps your contacts and deals. It's how you tell your ad platforms which leads turned into sales.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="channels-l">Which ad platforms do you run or plan to run?</span>
+<div class="checks" role="group" aria-labelledby="channels-l">
+<span class="check"><input type="checkbox" id="ch-google" name="channels" value="google"><label for="ch-google">Google Ads</label></span>
+<span class="check"><input type="checkbox" id="ch-meta" name="channels" value="meta"><label for="ch-meta">Meta (Facebook, Instagram)</label></span>
+<span class="check"><input type="checkbox" id="ch-linkedin" name="channels" value="linkedin"><label for="ch-linkedin">LinkedIn</label></span>
+</div>
+<p class="q-help">Pick none if you don't advertise yet. Your GA4 plan still works for SEO and email.</p>
+</div>
+
+<div class="q" id="confirm-wrap">
+<span class="q-label" id="confirm-l">What happens after someone sends your form?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="confirm-l">
+<input type="radio" id="confirm-page" name="confirm" value="page"><label for="confirm-page">They land on a thank-you page</label>
+<input type="radio" id="confirm-msg" name="confirm" value="msg"><label for="confirm-msg">A message appears on the same page</label>
+<input type="radio" id="confirm-embed" name="confirm" value="embed"><label for="confirm-embed">It's a booking tool or embedded form, or not sure</label>
+</div>
+<p class="q-help">This decides how the conversion is counted. A thank-you page is the easiest to track.</p>
+</div>
+
+<div class="q" id="store-wrap">
+<span class="q-label" id="store-l">Where is your online store?</span>
+<div class="seg" role="radiogroup" aria-labelledby="store-l">
+<input type="radio" id="store-shopify" name="store" value="shopify"><label for="store-shopify">Shopify</label>
+<input type="radio" id="store-woo" name="store" value="woo"><label for="store-woo">WooCommerce</label>
+<input type="radio" id="store-other" name="store" value="other"><label for="store-other">Other</label>
+</div>
+<p class="q-help">Shopify and WooCommerce have apps that send purchase events for you.</p>
+</div>
+
+<div class="q" id="app-wrap">
+<span class="q-label" id="sdk-l">Is an app measurement SDK in your app?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="sdk-l">
+<input type="radio" id="sdk-firebase" name="sdk" value="firebase"><label for="sdk-firebase">Firebase (Google Analytics for apps)</label>
+<input type="radio" id="sdk-mmp" name="sdk" value="mmp"><label for="sdk-mmp">AppsFlyer, Kochava, Adjust or similar</label>
+<input type="radio" id="sdk-none" name="sdk" value="none"><label for="sdk-none">None, or not sure</label>
+</div>
+<p class="q-help">An SDK is a code library your developer adds to the app. It reports installs and in-app actions to analytics and ad platforms.</p>
+<span class="q-label" id="money-l">How does the app make money?</span>
+<div class="seg" role="radiogroup" aria-labelledby="money-l">
+<input type="radio" id="money-sub" name="money" value="sub"><label for="money-sub">Subscriptions</label>
+<input type="radio" id="money-iap" name="money" value="iap"><label for="money-iap">Purchases</label>
+<input type="radio" id="money-free" name="money" value="free"><label for="money-free">Free or ads</label>
+</div>
+</div>
+
+<div class="q" id="value-wrap">
+<span class="q-label" id="value-l">What is a new customer worth? <span class="opt-tag">(optional)</span></span>
+<div class="money-row">
+<div><label class="mini" for="avg">Average first sale</label>
+<div class="field"><span class="affix pre">$</span><input id="avg" name="avg" type="number" inputmode="numeric" min="0" max="10000000" step="1"></div></div>
+<div><label class="mini" for="rate">Of 10 leads, how many buy?</label>
+<div class="field"><input id="rate" name="rate" type="number" inputmode="numeric" min="0" max="10" step="1"><span class="affix">of 10</span></div></div>
+</div>
+<p class="q-help">A rough guess is fine. It gives each lead a value, so your ad platform can tell a good lead from a cheap one.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="existing-l">Do you track any conversions today?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="existing-l">
+<input type="radio" id="existing-yes" name="existing" value="yes"><label for="existing-yes">Yes, and we trust the numbers</label>
+<input type="radio" id="existing-some" name="existing" value="some"><label for="existing-some">Some, but not sure what's counted</label>
+<input type="radio" id="existing-none" name="existing" value="none"><label for="existing-none">None yet</label>
+</div>
+<p class="q-help">If some exist, you'll check them against this plan rather than start over.</p>
+</div>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Conversion Event Plan</button>
+</form>
+</section>
+
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your conversions</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">2</span><span class="hero-unit" id="out-unit">conversions should steer your ad bids</span></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Conversion Event Plan</h2>
+<p class="deliv-sub">Use these exact names. They follow Google's recommended event names, so GA4 reports and Google Ads understand them.</p>
+</div>
+<p class="scroll-hint">Scroll the table sideways to see every column.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Conversion event plan">
+<table class="event-table">
+<thead><tr><th scope="col">Event name</th><th scope="col">Counts when</th><th scope="col">Set up in</th><th scope="col">Key event</th><th scope="col">Google Ads</th><th scope="col">Value to pass</th></tr></thead>
+<tbody id="event-rows"></tbody>
+</table>
+</div>
+<p class="table-note" id="table-note"></p>
+<h3 class="sub-h">Build it in this order</h3>
+<ol class="steps" id="plan"></ol>
+</section>
+
+<section class="panel deliv" aria-labelledby="utm-h">
+<div class="deliv-head">
+<h2 id="utm-h">Your UTM naming starter</h2>
+<p class="deliv-sub">UTMs are tags on the end of a link that tell GA4 and your CRM which campaign sent the visit. Pick one convention and never drift from it.</p>
+</div>
+<ul class="mistakes" id="utm-rules"></ul>
+<div class="table-wrap" tabindex="0" role="region" aria-label="UTM examples">
+<table>
+<thead><tr><th scope="col">Where the link goes</th><th scope="col">utm_source</th><th scope="col">utm_medium</th><th scope="col">utm_campaign</th></tr></thead>
+<tbody id="utm-rows"></tbody>
+</table>
+</div>
+</section>
+
+<section class="panel complex" aria-labelledby="mist-h">
+<h2 id="mist-h">The classic mistakes</h2>
+<ul class="mistakes" id="mistakes"></ul>
+</section>
+
+<section class="panel complex" aria-labelledby="complex-h">
+<h2 id="complex-h">Where it gets complex</h2>
+<p class="deliv-sub">These need judgment, a developer, or both. That is where Big Leap comes in.</p>
+<ul id="complex-list"></ul>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want your conversions wired up for you?</h2>
+<p>Copy your event plan and hand it to whoever manages your site, or bring it to a call. It's the exact list we'd build and test first.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-03" target="_blank" rel="noopener">Talk to Scott about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we calculate this</summary>
+<div class="method-body">
+<p><b>Lead value</b> = average first sale × (leads that buy ÷ 10). Example: a $5,000 first sale and 2 of 10 leads buying gives $1,000 a lead. It's an estimate to help ad platforms rank leads, not a forecast. Leave the fields blank and the plan passes no value.</p>
+<p><b>Primary</b> conversions are the ones Google Ads bids toward. We suggest primary only for actions that are close to money and happen often enough for the platform to learn from. Everything else is secondary: you still see it in reports, but it doesn't steer bids.</p>
+<p><b>Qualified-lead imports</b> become primary only once you have steady volume. As a rule of thumb, Google's automated bidding learns best with at least a few dozen conversions a month in a campaign. Check with your own account before switching.</p>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build. Menu paths were checked in October 2026 and may move.</p>
+<p>© Big Leap · Paid Media DIY Toolkit 3 of 4 · Draft 1 · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+   SETTINGS: edit these before launch.
+   OWNER / CTA_URL: who the closing button names and where it goes.
+   SERIES: the four Paid Media toolkits, in order (stepper + next links).
+   LINKS: the shared cross-link map (BUILD_SPEC section 5). Relative URLs.
+   ===================================================================== */
+const OWNER = { name: 'Scott Smoot', first: 'Scott' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-03'; // swap for Scott's meeting scheduler link
+const SERIES = [
+  { n: 1, short: 'Profile', title: 'What Kind of Business Are You?', file: '01_What_Kind_of_Business_Are_You.html' },
+  { n: 2, short: 'Ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
+  { n: 3, short: 'Conversions', title: 'Which Conversions Should You Track?', file: '03_Which_Conversions_Should_You_Track.html' },
+  { n: 4, short: 'Launch', title: 'Which Campaigns Should You Run First?', file: '04_Which_Campaigns_Should_You_Run_First.html' },
+];
+const LINKS = {
+  profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
+  adsReady:  { name: 'Is Your Google Ads Account Ready?',      url: '../paid/02_Is_Your_Google_Ads_Account_Ready.html',     owner: 'Scott Smoot' },
+  campaigns: { name: 'Which Campaigns Should You Run First?',  url: '../paid/04_Which_Campaigns_Should_You_Run_First.html', owner: 'Scott Smoot' },
+  tracking:  { name: 'Can You See What Your Marketing Does?',  url: '../revops/07_Can_You_See_What_Your_Marketing_Does.html', owner: 'Dallas Olsen' },
+  conversions:{ name: 'Which Conversions Should You Track?',   url: '../paid/03_Which_Conversions_Should_You_Track.html', owner: 'Scott Smoot' },
+  seoBasics: { name: 'Can Google Find and Trust Your Site?',   url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',   owner: 'Shema Al-Darwish' },
+  local:     { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html', owner: 'Shema Al-Darwish' },
+  prReady:   { name: 'Are You Ready to Be Pitched?',           url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',            owner: 'Kristina Ainge' },
+  mediaKit:  { name: 'Build Your Media Kit',                   url: '../pr/02_Build_Your_Media_Kit.html',                   owner: 'Kristina Ainge' },
+  leadCapture:{ name: 'Is Every Lead Reaching Your CRM?',      url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',    owner: 'Dallas Olsen' },
+  speedToLead:{ name: 'Never Let a Lead Go Cold',              url: '../revops/02_Never_Let_a_Lead_Go_Cold.html',           owner: 'Dallas Olsen' },
+  pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?', url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', owner: 'Dallas Olsen' },
+  hub:       { name: 'All DIY Toolkits',                       url: '../../index.html',                                     owner: '' },
+};
+const EXAMPLE = { wins: ['leads', 'calls'], model: 'b2b', crm: 'hubspot', channels: ['google', 'linkedin'], confirm: 'msg', store: 'shopify', sdk: 'none', money: 'sub', avg: '5000', rate: '2', existing: 'some' };
+/* Rule-of-thumb setup minutes [low, high] for a first-timer, per build step. */
+const ASSUMPTIONS = { perEvent: [20, 45], keyEvents: [10, 20], adsImport: [20, 45], meta: [20, 45], linkedin: [15, 30], offline: [60, 180], app: [120, 480], audit: [30, 60], test: [30, 60] };
+/* ---------- Shared Business Profile helper (identical in every DIY toolkit) ---------- */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* ---------- Series shell helpers (same as RevOps 7) ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.\-]/g, '')); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return '$' + fmt(Math.round(n)); }
+function timeRange(lowMin, highMin) {
+  if (highMin <= 0) return 'no setup time';
+  if (highMin < 60) return Math.round(lowMin) + '–' + Math.round(highMin) + ' minutes';
+  const r = (m) => { const h = m / 60; return h < 10 ? fmt(Math.round(h * 2) / 2, 1) : fmt(Math.round(h)); };
+  const a = lowMin < 60 ? Math.round(lowMin) + ' min' : r(lowMin), b = r(highMin);
+  return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
+}
+function linkHtml(key, label) {
+  const l = LINKS[key];
+  if (!l) return esc(label || '');
+  return '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>';
+}
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkText(key) { const l = LINKS[key]; return l ? l.name + ' (' + absUrl(l.url) + ')' : ''; }
+
+function renderStepper(current) {
+  const ol = $('stepper-list');
+  ol.style.setProperty('--n', SERIES.length);
+  ol.innerHTML = SERIES.map((k) => {
+    const cur = k.n === current;
+    const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+    return '<li>' + (cur
+      ? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+      : '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+  }).join('');
+  $('stepper-note').innerHTML = 'Start here: ' + linkHtml('profile', 'Build your Business Profile');
+}
+
+/* Profile strip. onApply(profile) maps profile fields onto this toolkit's questions. */
+function initProfileStrip(onApply, onClear) {
+  const box = $('profile');
+  function describe(p) {
+    const bits = [];
+    bits.push(p.name || p.industry || 'Your business');
+    const model = { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' }[p.model];
+    if (model) bits.push(model);
+    const reach = { local: 'Local', regional: 'Regional', national: 'National', international: 'International' }[p.reach];
+    if (reach) bits.push(reach);
+    return bits.join(' · ');
+  }
+  function draw() {
+    const p = loadProfile();
+    if (p && p.v === 1) {
+      box.innerHTML = '<div class="profile-row"><p>Using your Business Profile: <b>' + esc(describe(p)) + '</b></p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Change</a>' +
+        '<button type="button" class="text-btn" id="profile-clear">Clear</button></div>' +
+        '<p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>';
+      $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onClear(); $('profile-status') && ($('profile-status').textContent = ''); });
+    } else {
+      box.innerHTML = '<div class="profile-row"><p>Answer 8 questions once and every toolkit fills itself in. ' + linkHtml('profile', 'Build your Business Profile →') + '</p></div>' +
+        '<details id="paste-box"><summary>Paste a profile code</summary>' +
+        '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
+        '<input class="text-field" id="profile-code" type="text" autocomplete="off" spellcheck="false" placeholder="BL1.…">' +
+        '<button type="button" class="btn btn-plain" id="profile-load">Use this profile</button></div></details>' +
+        '<p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>';
+      $('profile-load').addEventListener('click', () => {
+        const p2 = decodeProfile($('profile-code').value);
+        if (!p2) { $('profile-status').textContent = 'That code did not work. Copy the whole code, starting with BL1.'; return; }
+        saveProfile(p2); draw(); onApply(p2);
+        $('profile-status').textContent = 'Profile loaded. Answers marked "From your profile" came from it; you can still change any of them.';
+      });
+    }
+  }
+  draw();
+  const p = loadProfile();
+  return (p && p.v === 1) ? p : null;
+}
+// Adds or removes the "From your profile" tag next to a question label.
+function markFromProfile(labelId, on) {
+  const el = $(labelId);
+  if (!el) return;
+  const tag = el.querySelector('.from-profile');
+  if (on && !tag) el.insertAdjacentHTML('beforeend', ' <span class="from-profile">From your profile</span>');
+  if (!on && tag) tag.remove();
+}
+
+/* Build-list renderer. items: [{ title, status:'ok'|'gap'|'check'|'later', why, steps:[], time, warn, link:{key,why} }]
+   The first three open items (gap or check) get "Do first". */
+const STATUS = { ok: 'OK', gap: 'Gap', check: 'Check', later: 'Optional' };
+function renderSteps(el, items) {
+  let open = 0;
+  el.innerHTML = items.map((t, i) => {
+    const isOpen = t.status === 'gap' || t.status === 'check';
+    const first = isOpen && open++ < 3;
+    const done = t.status === 'ok';
+    return '<li class="' + (done ? 'is-done' : first ? 'is-first' : '') + '">' +
+      '<span class="sn" aria-hidden="true">' + (done ? '✓' : i + 1) + '</span><div class="sb">' +
+      '<div class="st-top"><span class="st-title">' + esc(t.title) + '</span><span class="chips">' +
+      '<span class="chip ' + (t.status === 'check' ? 'gap' : t.status) + '">' + STATUS[t.status] + '</span>' +
+      (first ? '<span class="chip first">Do first</span>' : '') + '</span></div>' +
+      (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+      (t.warn ? '<p class="warn"><b>Watch out:</b> ' + esc(t.warn) + '</p>' : '') +
+      (t.steps && t.steps.length && !done ? '<div class="st-how"><b>How to do it</b><ol>' + t.steps.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ol></div>' : '') +
+      (t.time && !done ? '<p class="st-time">Time: ' + esc(t.time) + '</p>' : '') +
+      (t.link ? '<p class="kit-link">Free toolkit: ' + linkHtml(t.link.key) + (t.link.why ? ' · ' + esc(t.link.why) : '') + '</p>' : '') +
+      '</div></li>';
+  }).join('');
+}
+function stepsText(items) {
+  const out = [];
+  let open = 0;
+  items.forEach((t, i) => {
+    const isOpen = t.status === 'gap' || t.status === 'check';
+    const first = isOpen && open++ < 3;
+    const done = t.status === 'ok';
+    out.push((i + 1) + '. [' + STATUS[t.status] + '] ' + t.title + (first ? ' (do this first)' : ''));
+    if (t.why) out.push('   ' + t.why);
+    if (t.warn) out.push('   Watch out: ' + t.warn);
+    if (!done && t.steps) t.steps.forEach((x, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + x));
+    if (!done && t.time) out.push('   Time: ' + t.time);
+    if (t.link) out.push('   Free toolkit: ' + linkText(t.link.key));
+  });
+  return out;
+}
+function renderComplex(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  $('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? ' <span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+}
+function complexText(list, flags) {
+  const f = flags || {};
+  return list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0)).map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text);
+}
+// links: [{ key, why }]
+function renderXlinks(links) {
+  $('xlinks').hidden = links.length === 0;
+  $('xlinks-list').innerHTML = links.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+}
+function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url)); }
+function renderNext(key, why) {
+  $('next-title').innerHTML = linkHtml(key);
+  $('next-why').textContent = why;
+}
+function setExampleState(isExample, exampleText, profileMix) {
+  const pill = $('example-pill');
+  pill.textContent = isExample ? 'Example answers' : 'Your answers';
+  pill.classList.toggle('is-yours', !isExample);
+  $('example-text').textContent = isExample ? (profileMix ? 'Some answers came from your Business Profile (marked); the rest are examples. Change them to make them yours.' : exampleText) : 'Your results update as you go.';
+  $('restore-example').hidden = isExample;
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+  const el = $('answer');
+  if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+  lastHeadline = key;
+}
+function copyWithFallback(text, onDone, host) {
+  const fallback = () => {
+    let box = host.querySelector('.copy-fallback');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'copy-fallback';
+      const id = host.id + '-text';
+      box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+      host.appendChild(box);
+    }
+    const ta = box.querySelector('textarea');
+    ta.value = text; ta.focus(); ta.select();
+    let ok = false;
+    try { ok = document.execCommand && document.execCommand('copy'); } catch (e) { ok = false; }
+    if (ok) onDone();
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) navigator.clipboard.writeText(text).then(onDone, fallback);
+    else fallback();
+  } catch (err) { fallback(); }
+}
+function initCopy(getText) {
+  const btn = $('copy-btn');
+  let timer = null;
+  btn.addEventListener('click', () => {
+    copyWithFallback(getText(), () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      $('copy-status').textContent = 'Your plan is copied. Paste it into an email, a doc or a ticket for whoever builds it.';
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = 'Copy my plan'; btn.classList.remove('is-copied'); $('copy-status').textContent = ''; }, 3000);
+    }, $('copy-host'));
+  });
+  return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+function initSticky() {
+  const q = $('col-q'), r = $('results');
+  const wide = window.matchMedia('(min-width: 880px)');
+  function update() {
+    q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+    if (!wide.matches) return;
+    const room = window.innerHeight - 32;
+    if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+    else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+  }
+  window.addEventListener('resize', update);
+  if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+  return update;
+}
+function initShell(current, onRestore) {
+  renderStepper(current);
+  $('cta-link').href = CTA_URL;
+  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+  $('hub-link').href = LINKS.hub.url;
+  $('restore-example').addEventListener('click', onRestore);
+  $('see-results').addEventListener('click', () => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    $('answer').focus({ preventScroll: true });
+  });
+}
+// Form value helpers
+function radioVal(form, name) { const els = form.querySelectorAll('input[name="' + name + '"]'); for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value; return ''; }
+function setRadio(form, name, value) { form.querySelectorAll('input[name="' + name + '"]').forEach((el) => { if (el.value === String(value)) el.checked = true; }); } // off-list values are ignored, never thrown
+function checkedVals(form, name) { return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map((x) => x.value); }
+function setChecks(form, name, values) { form.querySelectorAll('input[name="' + name + '"]').forEach((x) => { x.checked = values.indexOf(x.value) !== -1; }); }
+function sameSet(a, b) { return a.length === b.length && a.every((x) => b.indexOf(x) !== -1); }
+
+/* ---------- Paid Media Toolkit 3: Which Conversions Should You Track? ---------- */
+const WIN_NAMES = { leads: 'form leads', calls: 'phone calls', purchases: 'online purchases', bookings: 'bookings', signups: 'sign-ups', installs: 'app installs' };
+const COMPLEX = [
+  { key: 'offline', title: 'Offline conversion import that holds up', text: 'Keeping the Google click ID on every contact, mapping lifecycle stages cleanly, and turning on enhanced conversions for leads takes CRM and ads access, plus a few weeks of checking.' },
+  { key: 'value', title: 'Value-based bidding', text: 'Telling Google Ads what each conversion is worth, then bidding for value instead of volume, needs trustworthy values and enough data first.' },
+  { key: 'app', title: 'App measurement on iOS', text: 'Apple\'s tracking prompt (ATT) and SKAdNetwork limit what ad platforms can see. Choosing an attribution partner and setting up conversion values is specialist work.' },
+  { key: 'embed', title: 'Booking tools and embedded forms', text: 'Forms inside an iframe (Calendly, many booking widgets, some HubSpot embeds) don\'t show their success to Tag Manager without a listener script or the tool\'s own integration.' },
+  { key: 'consent', title: 'Consent and modeled conversions', text: 'With Consent Mode on, Google fills gaps with modeled conversions. Reading those numbers, and explaining gaps between GA4, Google Ads and your CRM, takes experience.' },
+  { key: 'attribution', title: 'Attribution across channels', text: 'GA4, each ad platform and your CRM all give credit differently. Deciding which number you run the business on is a strategy call, not a setting.' },
+];
+function model(i, a) {
+  const has = (w) => i.wins.indexOf(w) !== -1;
+  const gads = i.channels.indexOf('google') !== -1, meta = i.channels.indexOf('meta') !== -1, li = i.channels.indexOf('linkedin') !== -1;
+  const b2bCrm = (i.model === 'b2b' || i.model === 'both') && i.crm !== 'none' && (has('leads') || has('calls') || has('bookings'));
+  const avg = clamp(toNum(i.avg), 0, 1e7), rate = clamp(toNum(i.rate), 0, 10);
+  const valueAsked = has('leads') || has('calls') || has('bookings'); // the value question is hidden otherwise
+  const leadValue = valueAsked && avg > 0 && rate > 0 ? Math.round(avg * rate / 10) : 0;
+  const lv = leadValue ? money(leadValue) + ' (your lead value)' : '';
+  const money_ = has('purchases');
+  const events = [];
+  const ads = (p) => gads ? p : '—';
+  const leadTrigger = i.confirm === 'page' ? 'The thank-you page loads (match its exact URL, for example /thank-you)'
+    : i.confirm === 'msg' ? 'The form shows its success message (Tag Manager form submission trigger with "Check validation" on, or a dataLayer event from the form)'
+    : 'The booking or form tool confirms the submission (use the tool\'s own GA4 integration or a listener script)';
+  if (has('leads')) events.push({ name: 'generate_lead', when: leadTrigger, where: 'Tag Manager → GA4 event tag', key: true,
+    ads: ads(b2bCrm ? 'Primary to start; secondary once qualified leads import' : 'Primary'), value: lv || 'None, or one fixed value per lead', primary: gads });
+  if (has('calls')) {
+    events.push({ name: 'click_to_call', when: 'Someone taps a tel: link on your site', where: 'Tag Manager → click trigger "Click URL starts with tel:" → GA4 event tag', key: true, ads: ads('Secondary (a tap is not a call)'), value: 'None', primary: false });
+    if (gads) events.push({ name: 'Calls from ads', when: 'A call from your ad\'s call asset lasts 60 seconds or more', where: 'Google Ads → Goals → Conversions → New → Phone calls', key: false, ads: 'Primary', value: lv || 'None, or one fixed value per call', primary: true, adsOnly: true });
+  }
+  if (has('bookings')) events.push({ name: 'book_appointment', when: i.confirm === 'page' ? 'The booking confirmation page loads' : 'The booking tool confirms the appointment (its GA4 integration, or a listener script)', where: 'Booking tool integration or Tag Manager → GA4 event tag', key: true, ads: ads('Primary'), value: lv || 'Average booking value, if you know it', primary: gads, custom: true });
+  if (money_) {
+    const via = i.store === 'shopify' ? 'Shopify Google & YouTube app (sends it for you)' : i.store === 'woo' ? 'WooCommerce: Google for WooCommerce plugin or GTM4WP e-commerce dataLayer' : 'Your store\'s GA4 integration, or a developer-built dataLayer push';
+    events.push({ name: 'purchase', when: 'An order is completed (once per order)', where: via, key: true, ads: ads('Primary'), value: 'Order value without tax and shipping, currency, and transaction_id', primary: gads });
+    events.push({ name: 'begin_checkout', when: 'Someone starts checkout', where: via, key: false, ads: ads('Secondary, or don\'t import'), value: 'Cart value', primary: false });
+    events.push({ name: 'add_to_cart', when: 'Someone adds a product to the cart', where: via, key: false, ads: ads('Don\'t import'), value: 'Item value', primary: false });
+  }
+  if (has('signups')) events.push({ name: 'sign_up', when: 'An account or free trial is created (not just the sign-up page viewed)', where: 'Tag Manager → GA4 event tag, or a dataLayer event from your app', key: true, ads: ads(money_ ? 'Secondary (purchases steer bids)' : 'Primary'), value: 'None, or the expected value of a trial', primary: gads && !money_ });
+  if (b2bCrm) {
+    events.push({ name: 'qualify_lead', when: 'The lead becomes a marketing- or sales-qualified lead (MQL or SQL) in your CRM', where: i.crm === 'hubspot' ? 'HubSpot ad conversion events → Google Ads' : 'CRM → Google Ads offline conversion import', key: false, ads: ads('Secondary first; primary once volume is steady'), value: lv || 'One fixed value per qualified lead', primary: false, adsOnly: true });
+    events.push({ name: 'close_convert_lead', when: 'The deal is marked closed-won in your CRM', where: i.crm === 'hubspot' ? 'HubSpot ad conversion events → Google Ads' : 'CRM → Google Ads offline conversion import', key: false, ads: ads('Secondary (for reporting and value)'), value: 'The real deal amount', primary: false, adsOnly: true });
+  }
+  if (has('installs')) {
+    events.push({ name: 'first_open', when: 'The app is opened for the first time after install', where: i.sdk === 'mmp' ? 'Your attribution SDK (AppsFlyer, Kochava…) → Google Ads link' : 'Firebase SDK (collected automatically)', key: true, ads: ads(i.money === 'free' ? 'Primary' : 'Primary at launch; secondary once in-app events have volume'), value: 'None', primary: gads, app: true });
+    if (i.money === 'sub') events.push({ name: 'subscribe', when: 'A paid subscription or trial-to-paid starts', where: i.sdk === 'mmp' ? 'Attribution SDK in-app event' : 'Firebase (subscriptions are reported automatically from the app stores once linked)', key: true, ads: ads('Primary once volume is steady'), value: 'Subscription price and currency', primary: false, app: true, custom: true });
+    if (i.money === 'iap') events.push({ name: 'purchase (in app)', when: 'An in-app purchase completes', where: i.sdk === 'mmp' ? 'Attribution SDK in-app event' : 'Firebase (in_app_purchase is automatic once the app stores are linked)', key: true, ads: ads('Primary once volume is steady'), value: 'Purchase value and currency', primary: false, app: true });
+  }
+  const primaries = events.filter((e) => e.primary).length;
+  const keys = events.filter((e) => e.key).length;
+  // Build steps
+  const T = (k) => a[k];
+  const items = [];
+  const webEvents = events.filter((e) => !e.adsOnly && !e.app);
+  items.push({ key: 'stack', status: 'check', title: 'Confirm GA4 and Tag Manager are in',
+    why: 'Every event below sits on top of them. If either is missing, or GA4 might be installed twice, fix that first.', steps: [],
+    link: { key: 'tracking', why: 'gives you the install order for your platform.' } });
+  if (i.existing !== 'none') items.push({ key: 'audit', status: i.existing === 'yes' ? 'later' : 'check', title: 'Check what you already count',
+    why: i.existing === 'yes' ? 'Compare your current names and settings with the table. Rename only if it doesn\'t break reports you rely on.' : 'Old conversions are often page views, duplicates or button clicks. Clean them up before adding new ones, or the numbers won\'t mean anything.',
+    steps: ['GA4 → Admin → Data display → Key events: list every key event and what triggers it.', gads ? 'Google Ads → Goals → Conversions → Summary: note each action, its source and whether it\'s Primary or Secondary.' : 'Note anything that fires on a plain page view, such as a contact page view.', 'Remove or demote anything not in the table above. Set duplicates to Secondary first, rather than deleting, so you keep the history.'],
+    time: timeRange(T('audit')[0], T('audit')[1]), t: i.existing === 'yes' ? [0, 0] : T('audit') });
+  if (webEvents.length) {
+    const s = [];
+    if (has('leads') || has('bookings')) s.push(i.confirm === 'page' ? 'Tag Manager → Triggers → New → Page View → "Some page views" → Page Path equals your thank-you page path.' : i.confirm === 'msg' ? 'Tag Manager → Triggers → New → Form Submission → turn on "Wait for tags" and "Check validation". Test it; if it fires on failed submits too, ask your developer for a dataLayer event on success instead.' : 'Embedded tools: use the tool\'s own GA4 connection if it has one (many booking tools do), or ask your developer for a listener that pushes a dataLayer event when the tool confirms.');
+    if (has('calls')) s.push('Tag Manager → Variables → Configure → turn on Click URL. Triggers → New → Just Links → Click URL starts with tel:.');
+    s.push('Tags → New → Google Analytics: GA4 Event → your G- ID → Event name exactly as in the table → attach the trigger.');
+    if (leadValue) s.push('For generate_lead, add event parameters value = ' + leadValue + ' and currency = USD (or your currency).');
+    if (money_) s.push(i.store === 'shopify' ? 'Shopify: purchase, begin_checkout and add_to_cart come from the Google & YouTube app. Don\'t add a second purchase tag in Tag Manager.' : 'Store events: install your platform\'s GA4 integration and check it sends transaction_id with each purchase.');
+    s.push('Preview, test each event, then Submit → Publish.');
+    items.push({ key: 'events', status: i.existing === 'yes' ? 'check' : 'gap', title: 'Create the website events in Tag Manager',
+      why: 'Use the exact names in the table: ' + webEvents.map((e) => e.name).join(', ') + '.', steps: s,
+      time: timeRange(T('perEvent')[0] * webEvents.length, T('perEvent')[1] * webEvents.length), t: [T('perEvent')[0] * webEvents.length, T('perEvent')[1] * webEvents.length] });
+  }
+  if (keys) items.push({ key: 'keyEvents', status: i.existing === 'yes' ? 'check' : 'gap', title: 'Mark the key events in GA4',
+    why: 'Key events are what GA4 calls conversions. Mark only the rows that say Yes.',
+    steps: ['Wait until each event has fired at least once (up to 24 hours to show).', 'GA4 → Admin → Data display → Events → click the star (Mark as key event) next to each Yes row.', 'Not listed yet? Admin → Key events → New key event → type the exact name.', 'For generate_lead, set the counting method to once per session so reloads don\'t count twice.'],
+    time: timeRange(T('keyEvents')[0], T('keyEvents')[1]), t: T('keyEvents') });
+  if (gads) items.push({ key: 'ads', status: i.existing === 'yes' ? 'check' : 'gap', title: 'Bring conversions into Google Ads and set Primary or Secondary',
+    why: 'Primary conversions steer your bids; secondary ones are for reporting. You have ' + primaries + ' primary ' + (primaries === 1 ? 'action' : 'actions') + ' in this plan.',
+    steps: ['Google Ads → Goals → Conversions → Summary → New conversion action → Import → Google Analytics 4 properties → Web → pick your key events. (Or create them as Google Ads tag conversions in Tag Manager; use one source per action, not both.)', 'Open each action → Edit settings → set "Action optimization" to Primary or Secondary as the table says.', 'Lead actions: set Count to "One" per click. Purchases: Count "Every".', 'Turn on enhanced conversions: Goals → Settings → Enhanced conversions. It sends a hashed email with the conversion, which improves matching.'],
+    time: timeRange(T('adsImport')[0], T('adsImport')[1]), t: T('adsImport'), link: { key: 'adsReady', why: 'the rest of the account setup before launch.' } });
+  if (meta) items.push({ key: 'meta', status: 'gap', title: 'Map your events in Meta',
+    why: 'Meta uses its own standard event names. Map yours: generate_lead → Lead, book_appointment → Schedule, sign_up → CompleteRegistration, purchase → Purchase, click_to_call → Contact.',
+    steps: ['Meta Events Manager → your dataset → Settings → Event setup tool, or add Meta Pixel event tags in Tag Manager on the same triggers.', 'Send the same events through the Conversions API (your platform\'s partner integration does this) with a matching event ID, so each counts once.', 'Events Manager → Test events: check each one arrives once.'],
+    time: timeRange(T('meta')[0], T('meta')[1]), t: T('meta') });
+  if (li) items.push({ key: 'linkedin', status: 'gap', title: 'Create conversions in LinkedIn',
+    why: 'LinkedIn needs its own conversion for each action you want to optimize toward, usually just the lead.',
+    steps: ['LinkedIn Campaign Manager → Analyze → Conversion tracking → Create conversion → Lead (or Sign up, Purchase…).', 'Choose the Insight Tag event method and give it the same thank-you page URL or Tag Manager trigger as your GA4 event.', 'Attach it to your campaigns; LinkedIn shows it as Active after the first conversion.'],
+    time: timeRange(T('linkedin')[0], T('linkedin')[1]), t: T('linkedin') });
+  if (b2bCrm) items.push({ key: 'offline', status: 'gap', title: 'Send qualified leads and closed deals back to your ad platforms',
+    why: 'A form fill is not a customer. Telling Google Ads which leads became MQLs, SQLs and closed-won deals teaches it to find more of the good ones.',
+    steps: i.crm === 'hubspot'
+      ? ['First make sure every lead lands in HubSpot with its source; the RevOps toolkit below covers that.', 'HubSpot → Marketing → Ads → connect your Google Ads (and LinkedIn or Meta) accounts with auto-tracking on, so the click ID is kept on each contact.', 'Marketing → Ads → Events (ad conversion events) → Create event → choose the lifecycle stage (MQL, SQL, Customer) → pick the ad accounts to sync to.', 'In Google Ads, those show up as conversion actions. Set them to Secondary until you see steady weekly volume.']
+      : ['Make sure every form saves the Google click ID (gclid) in a hidden field on the contact; the RevOps toolkit below shows how hidden fields work.', 'Google Ads → Goals → Conversions → New conversion action → Import → CRMs, files or other data sources → choose your CRM (Salesforce connects directly) or scheduled uploads.', 'Map your CRM stages to qualify_lead and close_convert_lead, with the deal amount as the value for closed-won.', 'Set them to Secondary until you see steady weekly volume.'],
+    time: timeRange(T('offline')[0], T('offline')[1]), t: T('offline'), link: { key: 'leadCapture', why: 'gets every lead into the CRM with its source, which this depends on.' } });
+  if (has('installs')) items.push({ key: 'app', status: i.sdk === 'none' ? 'gap' : 'check', title: 'Wire the install → first open → ' + (i.money === 'sub' ? 'subscribe' : i.money === 'iap' ? 'purchase' : 'engagement') + ' chain',
+    why: i.sdk === 'none' ? 'App campaigns can\'t optimize without an SDK in the app. Pick one with your developer: Firebase is free and links straight to GA4 and Google Ads; AppsFlyer, Kochava and Adjust are paid attribution partners that report across every ad network.' : 'Your SDK is in. Check each step of the chain reports, and is linked to your ad accounts.',
+    steps: ['Have your developer add the SDK (Firebase, or your attribution partner) and log in-app events with the names in the table.', 'Firebase: Project settings → Integrations → Google Ads → Link, and link the Firebase project to GA4.', 'Google Ads → Goals → Conversions → New → App → Google Analytics 4 properties (Firebase) → import first_open and your money event. Attribution partners link from their own dashboard.', meta ? 'For Meta, add the Meta SDK or turn on your attribution partner\'s Meta integration.' : 'Running other networks later? An attribution partner reports them all in one place.', 'Link the app stores (App Store Connect, Google Play) so purchases and subscriptions come through.'],
+    time: timeRange(T('app')[0], T('app')[1]), t: T('app') });
+  items.push({ key: 'test', status: 'check', title: 'Test every conversion once',
+    why: 'Do one real test of each row before you trust a number or launch a campaign.',
+    steps: ['Tag Manager → Preview → complete each action on your site.', 'GA4 → Admin → DebugView: each event shows once, with the right name and value.', gads ? 'Google Ads → Goals → Conversions → Summary: status changes to "Recording conversions" within a day or two.' : 'GA4 → Reports → Engagement → Key events: your events appear within a day.', 'Reload the thank-you page: it should not count a second conversion in Google Ads (Count "One").'],
+    time: timeRange(T('test')[0], T('test')[1]), t: T('test') });
+  const lo = items.reduce((s, t) => s + (t.t ? t.t[0] : 0), 0), hi = items.reduce((s, t) => s + (t.t ? t.t[1] : 0), 0);
+  return { events, items, primaries, keys, leadValue, gads, meta, li, b2bCrm, lo, hi, has };
+}
+function utmRows(m) {
+  const r = [];
+  if (m.gads) r.push(['Google Ads', 'google', 'cpc', 'Leave auto-tagging on; Google fills this in']);
+  if (m.meta) r.push(['Meta ads', 'facebook or instagram', 'paid_social', '2026_11_spring_offer']);
+  if (m.li) r.push(['LinkedIn ads', 'linkedin', 'paid_social', '2026_11_webinar']);
+  r.push(['Your email newsletter', 'newsletter', 'email', '2026_11_newsletter']);
+  r.push(['Your own social posts', 'facebook, linkedin…', 'social', '2026_11_product_launch']);
+  r.push(['Press, partners, podcasts', 'the site name, e.g. industryweekly', 'referral', '2026_11_pr_launch']);
+  return r;
+}
+const UTM_RULES = [
+  '<b>Lowercase only, with underscores, no spaces.</b> GA4 treats "Email" and "email" as two different sources.',
+  '<b>Use GA4\'s medium names</b> (cpc, paid_social, social, email, referral) so visits land in the right default channel.',
+  '<b>Campaign = year_month_offer.</b> Short, sortable, and it matches across GA4, ads and your CRM.',
+  '<b>Never put UTMs on links within your own site.</b> It overwrites the real source, so GA4 credits the wrong channel.',
+  '<b>Keep a shared list</b> of every tagged link, so the next person uses the same names.',
+];
+function mistakes(m, i) {
+  const L = [];
+  L.push({ t: 'Counting page views as conversions.', d: 'A visit to your contact or pricing page is interest, not a lead. Count the confirmed action instead.', on: i.existing !== 'none' });
+  if (m.has('purchases')) L.push({ t: 'Duplicate purchase events.', d: 'A store app plus a theme or Tag Manager tag sends purchase twice. Keep one source, and always send transaction_id so duplicates can be dropped.', on: i.store === 'shopify' });
+  const formWins = m.has('leads') || m.has('bookings'); // the form question is hidden otherwise
+  L.push({ t: 'Thank-you page reloads.', d: 'Refreshes, bookmarks and back-button visits count again. Set lead actions to count once, and keep the thank-you page out of search and menus.', on: formWins && i.confirm === 'page' });
+  L.push({ t: 'Tracking everything as primary.', d: 'If clicks, scrolls and page views steer bids, the platform finds people who click, not people who buy. Keep primary to the actions closest to money.', on: m.gads });
+  L.push({ t: 'Counting the button click, not the success.', d: 'A "Submit" click fires even when the form fails validation. Trigger on the thank-you page or the success message.', on: formWins && i.confirm === 'msg' });
+  return L;
+}
+(function () {
+  const form = $('answers');
+  let last = null;
+  const RADIOS = ['model', 'crm', 'confirm', 'store', 'sdk', 'money', 'existing'];
+  function readInput() {
+    const o = { wins: checkedVals(form, 'wins'), channels: checkedVals(form, 'channels'), avg: $('avg').value, rate: $('rate').value };
+    RADIOS.forEach((k) => { o[k] = radioVal(form, k); });
+    if (!o.model) o.model = 'b2c'; if (!o.crm) o.crm = 'none'; if (!o.confirm) o.confirm = 'embed'; if (!o.store) o.store = 'other'; if (!o.sdk) o.sdk = 'none'; if (!o.money) o.money = 'free'; if (!o.existing) o.existing = 'none';
+    return o;
+  }
+  function isExample(i) { return RADIOS.every((k) => i[k] === EXAMPLE[k]) && sameSet(i.wins, EXAMPLE.wins) && sameSet(i.channels, EXAMPLE.channels) && String(i.avg) === EXAMPLE.avg && String(i.rate) === EXAMPLE.rate; }
+  function applyValues(v) {
+    RADIOS.forEach((k) => setRadio(form, k, v[k]));
+    setChecks(form, 'wins', v.wins); setChecks(form, 'channels', v.channels);
+    $('avg').value = v.avg; $('rate').value = v.rate;
+  }
+  const PL = ['wins-l', 'model-l', 'crm-l', 'store-l', 'channels-l'];
+  function applyProfile(p) {
+    PL.forEach((id) => markFromProfile(id, false));
+    if (!p) return;
+    const w = [];
+    if (p.goal === 'leads') w.push('leads'); if (p.goal === 'calls' || p.goal === 'visits') w.push('calls'); if (p.goal === 'sales' || p.ecommerce === 'shopify' || p.ecommerce === 'other') w.push('purchases');
+    if (p.goal === 'installs' || p.app === true) w.push('installs');
+    if (w.length) { setChecks(form, 'wins', w.filter((x, n) => w.indexOf(x) === n)); markFromProfile('wins-l', true); }
+    if (['b2b', 'b2c', 'both'].indexOf(p.model) !== -1) { setRadio(form, 'model', p.model); markFromProfile('model-l', true); }
+    if (['hubspot', 'other', 'none'].indexOf(p.crm) !== -1) { setRadio(form, 'crm', p.crm); markFromProfile('crm-l', true); }
+    if (p.ecommerce === 'shopify') { setRadio(form, 'store', 'shopify'); markFromProfile('store-l', true); }
+    else if (p.ecommerce === 'other') { setRadio(form, 'store', 'other'); markFromProfile('store-l', true); }
+    if (p.adBudget && toNum(p.adBudget) > 0 && checkedVals(form, 'channels').length === 0) { setChecks(form, 'channels', ['google']); markFromProfile('channels-l', true); }
+  }
+  let profile = null, touched = false;
+  function xlinks(m, i) {
+    const L = [{ key: 'tracking', why: 'make sure Tag Manager, GA4 and your ad tags are installed first.' }];
+    if (m.has('leads') || m.has('bookings')) L.push({ key: 'leadCapture', why: 'every lead in your CRM with its source, which the offline path depends on.' });
+    if (m.b2bCrm) L.push({ key: 'pipelineDash', why: 'once closed deals carry their source, report revenue by channel.' });
+    if (i.channels.length) L.push({ key: 'campaigns', why: 'which campaign types to run against these conversions.' });
+    if (m.has('calls') && profile && (profile.locations === 'one' || profile.locations === 'multi')) L.push({ key: 'local', why: 'calls and direction requests from your Google Business Profile.' });
+    return L;
+  }
+  function complexFlags(m, i) { return { offline: m.b2bCrm, value: m.has('purchases') || !!m.leadValue, app: m.has('installs'), embed: i.confirm === 'embed' && (m.has('leads') || m.has('bookings')) }; }
+  function headline(m) {
+    if (!m.events.length) return { num: '0', unit: 'conversions planned yet', zero: true, plain: 'Pick at least one win to build your plan.' };
+    if (m.gads) return { num: String(m.primaries), unit: (m.primaries === 1 ? 'conversion should' : 'conversions should') + ' steer your ad bids', zero: m.primaries === 0, plain: m.primaries + ' of ' + m.events.length + ' tracked ' + (m.events.length === 1 ? 'action' : 'actions') + ' should steer your Google Ads bids.' };
+    return { num: String(m.keys), unit: m.keys === 1 ? 'key event to mark in GA4' : 'key events to mark in GA4', zero: m.keys === 0, plain: m.keys + ' key ' + (m.keys === 1 ? 'event' : 'events') + ' to mark in GA4.' };
+  }
+  function lineFor(m) {
+    if (!m.events.length) return 'Pick at least one win on the left to build your plan.';
+    const others = m.events.length - (m.gads ? m.primaries : m.keys);
+    const acts = (n) => n === 1 ? 'action' : 'actions';
+    let s = m.gads ? 'Track <b>' + m.events.length + '</b> ' + acts(m.events.length) + ' in all' + (others > 0 ? '; the other ' + others + (others === 1 ? ' is' : ' are') + ' for reporting only, so ' + (others === 1 ? 'it doesn\'t' : 'they don\'t') + ' pull your bids toward cheap clicks.' : '.') : 'You track <b>' + m.events.length + '</b> ' + acts(m.events.length) + '. When you start ads, the same names import straight into Google Ads.';
+    if (m.leadValue) s += ' Each lead is worth about <b>' + esc(money(m.leadValue)) + '</b> to you, so pass that as its value.';
+    s += ' Setup takes about <b>' + esc(timeRange(m.lo, m.hi)) + '</b> the first time.';
+    return s;
+  }
+  function planText(m, i) {
+    const L = ['YOUR CONVERSION EVENT PLAN', 'Which Conversions Should You Track? (Big Leap Paid Media DIY Toolkit 3 of 4)', ''];
+    L.push('Wins: ' + (i.wins.length ? i.wins.map((w) => WIN_NAMES[w]).join(', ') : 'none picked'));
+    L.push(headline(m).plain);
+    if (m.leadValue) L.push('Lead value: ' + money(m.leadValue));
+    if (m.events.length) L.push('Setup time: ' + timeRange(m.lo, m.hi) + ' (rule of thumb, first time)');
+    L.push('', 'EVENT PLAN (name | counts when | set up in | key event | Google Ads | value)');
+    m.events.forEach((e) => L.push('- ' + e.name + ' | ' + e.when + ' | ' + e.where + ' | ' + (e.adsOnly ? 'n/a' : e.key ? 'Yes' : 'No') + ' | ' + e.ads + ' | ' + e.value));
+    if (tableNote(m)) L.push(tableNote(m));
+    L.push('', 'BUILD IN THIS ORDER');
+    stepsText(m.items).forEach((l) => L.push(l));
+    L.push('', 'UTM NAMING STARTER');
+    UTM_RULES.forEach((r) => L.push('- ' + r.replace(/<[^>]+>/g, '')));
+    utmRows(m).forEach((r) => L.push('  ' + r[0] + ': utm_source=' + r[1] + ' | utm_medium=' + r[2] + ' | utm_campaign=' + r[3]));
+    L.push('', 'THE CLASSIC MISTAKES');
+    mistakes(m, i).forEach((x) => L.push('- ' + x.t + (x.on ? ' (applies to you)' : '') + ' ' + x.d));
+    L.push('', 'WHERE IT GETS COMPLEX');
+    complexText(COMPLEX, complexFlags(m, i)).forEach((l) => L.push(l));
+    L.push('', 'NEXT TOOLKIT: ' + linkText(nextFor(m, i).key));
+    L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xlinksText(xlinks(m, i)));
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
+    return L.join('\n');
+  }
+  function tableNote(m) {
+    const n = [];
+    if (m.events.some((e) => e.custom)) n.push('book_appointment and subscribe are custom names in the same style; GA4 accepts them like any other event.');
+    if (m.events.some((e) => e.adsOnly)) n.push('Rows marked n/a live in Google Ads or your CRM, not GA4.');
+    if (!m.gads) n.push('The Google Ads column fills in when you add Google Ads on the left.');
+    return n.join(' ');
+  }
+  function nextFor(m, i) {
+    if (i.channels.length) return { key: 'campaigns', name: LINKS.campaigns.name, why: 'With conversions defined, pick the campaign types that fit your business.' };
+    if (m.has('leads') || m.has('bookings')) return { key: 'leadCapture', name: LINKS.leadCapture.name, why: 'Make sure every lead reaches your CRM with its source.' };
+    return { key: 'seoBasics', name: LINKS.seoBasics.name, why: 'With measurement in place, check that Google can find and trust your site.' };
+  }
+  function render() {
+    const i = readInput(), m = model(i, ASSUMPTIONS);
+    last = { m, i };
+    const formWins = m.has('leads') || m.has('bookings');
+    $('confirm-wrap').hidden = !formWins;
+    $('store-wrap').hidden = !m.has('purchases');
+    $('app-wrap').hidden = !m.has('installs');
+    $('value-wrap').hidden = !(m.has('leads') || m.has('calls') || m.has('bookings'));
+    // With a profile, unmapped answers are still examples until the visitor changes something.
+    setExampleState(isExample(i) || (!!profile && !touched), 'Example: a B2B service firm on HubSpot that gets form leads and calls, running Google and LinkedIn ads. Change any answer to make it yours.', !!profile && !touched);
+    const h = headline(m);
+    $('out-num').textContent = h.num;
+    $('out-num').classList.toggle('is-zero', h.zero);
+    $('out-unit').textContent = h.unit;
+    $('out-line').innerHTML = lineFor(m);
+    flashIfChanged(h.num + h.unit);
+    $('event-rows').innerHTML = m.events.length ? m.events.map((e) => '<tr><th scope="row"><code>' + esc(e.name) + '</code></th><td>' + esc(e.when) + '</td><td>' + esc(e.where) + '</td><td>' +
+      (e.adsOnly ? '<span class="no-val">n/a</span>' : e.key ? '<span class="yes">Yes</span>' : '<span class="no-val">No</span>') + '</td><td>' + (e.primary ? '<span class="yes">' + esc(e.ads) + '</span>' : esc(e.ads)) + '</td><td>' + esc(e.value) + '</td></tr>').join('')
+      : '<tr><td colspan="6" class="ph">Pick at least one win on the left.</td></tr>';
+    $('table-note').textContent = tableNote(m);
+    $('table-note').hidden = !tableNote(m);
+    renderSteps($('plan'), m.items);
+    $('utm-rules').innerHTML = UTM_RULES.map((r) => '<li>' + r + '</li>').join('');
+    $('utm-rows').innerHTML = utmRows(m).map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td><code>' + esc(r[1]) + '</code></td><td><code>' + esc(r[2]) + '</code></td><td><code>' + esc(r[3]) + '</code></td></tr>').join('');
+    $('mistakes').innerHTML = mistakes(m, i).map((x) => '<li><b>' + esc(x.t) + '</b>' + (x.on ? ' <span class="applies">Applies to you</span>' : '') + ' ' + esc(x.d) + '</li>').join('');
+    renderComplex(COMPLEX, complexFlags(m, i));
+    renderXlinks(xlinks(m, i));
+    const nx = nextFor(m, i);
+    renderNext(nx.key, nx.why);
+    syncCopy();
+    sticky();
+  }
+  initShell(3, () => { applyValues(EXAMPLE); applyProfile(null); touched = true; render(); $('w-leads').focus(); });
+  const syncCopy = initCopy(() => planText(last.m, last.i));
+  const sticky = initSticky();
+  applyValues(EXAMPLE);
+  profile = initProfileStrip((p) => { profile = p; applyProfile(p); render(); }, () => { profile = null; applyProfile(null); render(); });
+  if (profile) applyProfile(profile);
+  // A changed answer is the visitor's own: drop its "From your profile" tag (as Paid 02 and 04 do).
+  const PF_LABEL = { wins: 'wins-l', model: 'model-l', crm: 'crm-l', store: 'store-l', channels: 'channels-l' };
+  const onUserChange = (e) => { touched = true; if (e.target && PF_LABEL[e.target.name]) markFromProfile(PF_LABEL[e.target.name], false); };
+  form.addEventListener('input', onUserChange, true);
+  form.addEventListener('change', onUserChange, true);
+  form.addEventListener('submit', (e) => e.preventDefault());
+  form.addEventListener('input', render);
+  form.addEventListener('change', render);
+  render();
+})();
+</script>
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="02_Is_Your_Google_Ads_Account_Ready.html"><small>← Previous</small><b>Is Your Google Ads Account Ready?</b></a><a class="blp-hub" href="../../index.html"><small>Paid Media · Toolkit 3 of 4</small><b>All toolkits</b></a><a class="blp-a" href="04_Which_Campaigns_Should_You_Run_First.html"><small>Next →</small><b>Which Campaigns Should You Run First?</b></a></div></nav><!-- /bl-pager -->
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() {
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q')) return;
+    Array.prototype.forEach.call(form.querySelectorAll('.q'), function (q) {
+      if (q.closest('.q') !== q || q.parentElement.closest('.q')) return;
+      var kids = Array.prototype.filter.call(q.children, function (c) { return !c.classList.contains('sr-only') && !c.classList.contains('sr'); });
+      if (!kids.length) return;
+      var heads = kids.filter(function (c) { return c.tagName === 'LEGEND' || c.classList.contains('q-label'); });
+      if (kids[0].classList.contains('q-row')) {
+        q.classList.add('blx-row');
+        if (heads.length) {
+          var pr = null; Array.prototype.slice.call(q.children).forEach(function (c) {
+            if (heads.indexOf(c) >= 0) { pr = document.createElement('div'); pr.className = 'blx-pair'; q.appendChild(pr); var a1 = document.createElement('div'); a1.className = 'blx-ph'; pr.appendChild(a1); a1.appendChild(c); var b1 = document.createElement('div'); b1.className = 'blx-pc'; pr.appendChild(b1); return; }
+            if (pr && c !== pr) pr.querySelector('.blx-pc').appendChild(c);
+          });
+          q.classList.add('blx-pairs');
+        }
+        return;
+      }
+      if (kids[0].tagName === 'LEGEND') heads = [kids[0]];
+      if (heads.length > 1 && kids[0] === heads[0]) {
+        var nodes = Array.prototype.slice.call(q.children), pair = null, helps = [];
+        nodes.forEach(function (c) {
+          if (c.classList.contains('q-help')) { helps.push(c); return; }
+          if (heads.indexOf(c) >= 0) { pair = document.createElement('div'); pair.className = 'blx-pair'; q.appendChild(pair); var hc = document.createElement('div'); hc.className = 'blx-ph'; pair.appendChild(hc); hc.appendChild(c); var cc = document.createElement('div'); cc.className = 'blx-pc'; pair.appendChild(cc); return; }
+          if (pair) pair.querySelector('.blx-pc').appendChild(c);
+        });
+        if (helps.length) { var hw = document.createElement('div'); hw.className = 'blx-qh blx-pairhelp'; helps.forEach(function (h) { hw.appendChild(h); }); q.appendChild(hw); }
+        q.classList.add('blx-pairs'); return;
+      }
+      if (heads.length !== 1 || kids[0] !== heads[0]) return;
+      var head = heads[0], qh = document.createElement('div'), qc = document.createElement('div');
+      qh.className = 'blx-qh'; qc.className = 'blx-qc';
+      Array.prototype.slice.call(q.children).forEach(function (c) {
+        if (c === head) return;
+        if (c.classList.contains('q-help')) qh.appendChild(c); else qc.appendChild(c);
+      });
+      q.appendChild(qh); q.appendChild(qc); q.classList.add('blx-split');
+    });
+  })();
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+<script id="bl-version-js" src="../../assets/version-switch.js"></script>
+</body>
+</html>
