@@ -18,8 +18,9 @@ branch="${1:?branch name}"; folder="${2:?folder: preview or final}"
 case "$folder" in preview|final) ;; *) echo "The folder must be preview or final." >&2; exit 1 ;; esac
 [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ] || { echo "Check out main first." >&2; exit 1; }
 git fetch origin "$branch"
+rev=$(git rev-parse FETCH_HEAD)          # works in single-branch and shallow clones too
 rm -rf "$folder"; mkdir "$folder"
-git archive "origin/$branch" | tar -x -C "$folder" \
+git archive "$rev" | tar -x -C "$folder" \
   --exclude='.claude' --exclude='tests' --exclude='tools' --exclude='docs' --exclude='.github' \
   --exclude='preview' --exclude='final' --exclude='*.md'
 # list the version in versions.json at the site root, so the switch offers it
@@ -36,5 +37,5 @@ d["published"] = [v for v in ["original", "updated", "final"] if v in pub]
 json.dump(d, open(p, "w"), indent=2); open(p, "a").write("\n")
 PY
 git add -A "$folder" versions.json
-git commit -m "Publish $branch to /$folder/ ($(git rev-parse --short "origin/$branch"))" || echo "Nothing changed."
+git commit -m "Publish $branch to /$folder/ (${rev:0:7})" || echo "Nothing changed."
 echo "Done. Push with: git push origin main"
