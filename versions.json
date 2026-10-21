@@ -1,4 +1,7 @@
 {
   "note": "Which versions the Original / Updated / Final switch offers. tools/publish_version.sh updates this file.",
-  "published": ["original"]
+  "published": [
+    "original",
+    "updated"
+  ]
 }

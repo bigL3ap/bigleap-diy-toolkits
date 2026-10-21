@@ -1,0 +1,4 @@
+{
+  "note": "Which versions the Original / Updated / Final switch offers. Only the copy at the site root (on main) is read; tools/publish_version.sh updates it. On a branch preview this lists one version, so the switch stays hidden.",
+  "published": ["original"]
+}

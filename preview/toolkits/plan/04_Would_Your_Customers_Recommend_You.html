@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Would Your Customers Recommend You?</title>
+<meta name="description" content="A customer delight and referral check: the moments after the sale, what to fix first, when to ask for reviews and referrals within the rules, and what to measure.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim series path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 12%; right: 12%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt:has(input:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-wrap .opt, .opt-wrap .opt:hover, .opt-wrap .opt:has(input:checked) { border: 0; box-shadow: none; background: transparent; }
+.opt-wrap:has(input[type="radio"]:checked) { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+
+/* ---------- Paid Media series additions (draft banner, profile strip, OK/gap lists, print) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; overflow-wrap: break-word; }
+.draft-banner {
+background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line);
+font-size: 12.5px; line-height: 1.4; text-align: center; overflow-wrap: anywhere;
+padding: calc(7px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px));
+}
+.draft-banner b { font-weight: 700; }
+/* Tap targets and Safari-safe focus (no :has() needed) */
+.seg label { min-height: 44px; min-width: 0; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -4px; }
+.seg.wrap3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 420px) { .seg.wrap3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.seg.stack { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+.opt { min-height: 44px; }
+.opt.is-checked { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.text-btn { min-height: 44px; display: inline-flex; align-items: center; }
+.btn-plain { min-height: 44px; }
+select.text-field { appearance: auto; -webkit-appearance: menulist; font-weight: 700; }
+.q-rows { display: grid; gap: 12px; }
+.q-sub { display: grid; gap: 6px; padding: 10px 0 0 12px; border-left: 2px solid var(--tint-line); }
+.q-sub .q-label { font-size: 14px; }
+.row-label { font-size: 14px; font-weight: 700; color: var(--heading); }
+.pf-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+/* Business Profile strip */
+.profile-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 10px 16px; border: 1px solid var(--tint-line); background: var(--surface); border-radius: var(--radius); margin-bottom: 18px; font-size: 14px; }
+.profile-strip .ps-text { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; }
+.profile-strip .ps-text b { color: var(--heading); }
+.profile-strip .ps-text a { font-weight: 700; }
+.ps-actions { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.ps-actions a { font-weight: 700; font-size: 13.5px; color: var(--heading); min-height: 44px; display: inline-flex; align-items: center; }
+.ps-paste { flex-basis: 100%; min-width: 0; }
+.ps-paste summary { cursor: pointer; font-weight: 700; color: var(--heading); font-size: 13.5px; min-height: 44px; display: flex; align-items: center; }
+.ps-paste-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-bottom: 6px; }
+.ps-paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.ps-status { font-size: 13px; color: var(--muted); flex-basis: 100%; }
+.ps-status:empty { display: none; }
+/* Status chips */
+.chip.ok { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.gap { background: transparent; color: var(--text); border: 1px dashed var(--line-strong); }
+.chip.fits { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.maybe { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.notyet { background: transparent; color: var(--muted); border: 1px dashed var(--line-strong); }
+.chip-row { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.steps ol.how { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 13.5px; }
+.steps ol.how li { padding-left: 2px; }
+.st-time { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+.kit-link a { overflow-wrap: anywhere; }
+.steps > li.is-ok { background: transparent; border-style: dashed; }
+.is-ok .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.is-ok .st-title { color: var(--muted); }
+/* Sub-sections inside a deliverable */
+.sub { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.sub h3 { font-size: 16px; line-height: 1.3; }
+.sub-lede { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.fit-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.fit-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.fit-name { font-weight: 700; color: var(--heading); font-size: 14.5px; }
+.fit-line { grid-column: 1 / -1; font-size: 13.5px; }
+.callout { display: grid; gap: 6px; padding: 14px 16px; border: 1px solid var(--tint-line); border-left: 4px solid var(--heading); border-radius: 8px; background: var(--tint); font-size: 14px; }
+.callout b { color: var(--heading); }
+.callout .callout-title { font-weight: 700; color: var(--heading); font-size: 15px; }
+.bullets { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+.bullets b { color: var(--heading); }
+.dl { display: grid; grid-template-columns: minmax(0, 10.5rem) minmax(0, 1fr); gap: 0; margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); font-size: 14px; }
+.dl dt, .dl dd { margin: 0; padding: 7px 10px; border-bottom: 1px solid var(--line); min-width: 0; overflow-wrap: anywhere; }
+.dl dt { color: var(--muted); font-weight: 700; font-size: 13px; }
+.dl dd { color: var(--heading); font-weight: 700; }
+.dl dt:nth-last-of-type(1), .dl dd:last-of-type { border-bottom: 0; }
+@media (max-width: 420px) { .dl { grid-template-columns: minmax(0, 1fr); } .dl dt { border-bottom: 0; padding-bottom: 0; } }
+.code-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.code-row .text-field { flex: 1 1 14rem; font-family: ui-monospace, Menlo, Consolas, "Courier New", monospace; font-weight: 400; font-size: 16px; }
+.save-status { font-size: 13px; color: var(--muted); }
+.table-wrap table td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.week { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.week-title { font-weight: 700; color: var(--heading); font-size: 14.5px; }
+.week ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; }
+.weeks { display: grid; gap: 8px; }
+@media (min-width: 1100px) { .weeks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.camp { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--tint-line); border-radius: 8px; background: var(--tint); }
+.camp.second { background: var(--bg); border-color: var(--line); }
+.camp-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.camp-name { font-weight: 700; color: var(--heading); font-size: 15.5px; }
+.camp-why { font-size: 14px; }
+.foot a { color: var(--heading); font-weight: 700; }
+@media (max-width: 879px) { .is-sticky { position: static !important; } }
+@media print {
+.draft-banner { background: none; border-bottom: 1px solid #999; }
+.stepper, .col-q, .profile-strip, .closing-actions, .copy-status, #copy-host, .see-results, .text-btn, .ps-paste, .code-row button, .method-foot { display: none !important; }
+.layout { display: block !important; }
+.results, .method { display: block !important; }
+.panel, .closing, .method { break-inside: avoid-page; border-color: #999; }
+.closing { background: none !important; color: #000 !important; border: 1px solid #999; }
+.closing * { color: #000 !important; }
+.next, .xlinks li { background: none !important; }
+.method { display: block; }
+.method:not([open]) { display: none !important; }
+.steps > li { break-inside: avoid; }
+a { color: #000; text-decoration: underline; }
+body { background: #fff; color: #000; }
+}
+.bullets .applies, .steps .applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--seg-on); color: var(--on-seg); vertical-align: 1px; }
+.path-owner { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+.st-title a { color: var(--heading); }
+.sub.sub-first { border-top: 0; padding-top: 0; }
+.camps { display: grid; gap: 8px; }
+.camp ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 13.5px; }
+.q-row .seg.inline { max-width: 100%; }
+@media (max-width: 400px) { .q-row .seg.inline { display: grid; flex: 1 1 100%; } .seg label { padding: 7px 6px; font-size: 13.5px; } }
+@media (max-width: 560px) {
+.stack-sm thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.stack-sm table, .stack-sm tbody, .stack-sm tr, .stack-sm th, .stack-sm td { display: block; width: 100%; }
+.stack-sm tr { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.stack-sm tbody tr:last-child { border-bottom: 0; }
+.stack-sm th, .stack-sm td { border-bottom: 0; padding: 4px 12px; }
+.stack-sm td { display: flex; justify-content: space-between; gap: 12px; }
+.stack-sm td::before { content: attr(data-l); color: var(--muted); font-weight: 700; font-size: 13px; }
+}
+/* ---- Strategy starters (plan series): components built on the toolkit design system ---- */
+.text-field.long { font-weight: 400; line-height: 1.45; resize: vertical; min-height: 2.6em; }
+.q-text-count { font-size: 12px; color: var(--muted); text-align: right; }
+.prelim { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border: 1px dashed var(--line-strong); border-radius: 8px; background: var(--bg); font-size: 13.5px; }
+.prelim b { color: var(--heading); }
+.prelim::before { content: "i"; flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--heading); color: var(--heading); font: 700 12px/1 Georgia, serif; margin-top: 1px; }
+.lens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 10px; }
+.lens { display: grid; gap: 4px; align-content: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.lens .lens-k { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lens .lens-v { font-size: 17px; font-weight: 700; color: var(--heading); line-height: 1.3; }
+.lens .lens-n { font-size: 13px; }
+.conf { display: inline-block; margin-top: 2px; font-size: 11.5px; font-weight: 700; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); justify-self: start; }
+.conf.low { background: transparent; border-style: dashed; color: var(--muted); border-color: var(--line-strong); }
+.axes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.axes li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.axes li.is-limit { border-color: var(--heading); box-shadow: inset 4px 0 0 var(--heading); }
+.axes .ax-name { font-weight: 700; color: var(--heading); }
+.axes .ax-why { grid-column: 1 / -1; font-size: 13.5px; }
+.lvl { font-size: 11.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-strong); white-space: nowrap; }
+.lvl.strong { background: var(--tint); border-color: var(--tint-line); color: var(--heading); }
+.lvl.watch { background: var(--bg); color: var(--text); }
+.lvl.weak { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.lvl.unknown { background: transparent; border-style: dashed; color: var(--muted); }
+.bowtie-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.bt-hint { display: none; font-size: 12.5px; color: var(--muted); margin-bottom: -6px; }
+@media (max-width: 620px) { .bt-hint { display: block; } }
+.bowtie-wrap svg { display: block; width: 100%; max-width: 760px; min-width: 560px; height: auto; margin: 0 auto; }
+.bowtie-wrap .bt-shape { fill: var(--surface); stroke: var(--line); }
+.bowtie-wrap .bt-axis { fill: var(--muted); font: 600 11px var(--font); }
+.bowtie-wrap .bt-side { font-weight: 400; font-style: italic; }
+.bowtie-wrap .bt-pivot { stroke: var(--line-strong); stroke-dasharray: 4 4; }
+.bowtie-wrap .bt-pivot-l { fill: var(--muted); font: 700 11px var(--font); letter-spacing: .06em; text-transform: uppercase; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
+.bowtie-wrap .m-nd { fill: #3187B5; } .bowtie-wrap .m-ag { fill: #0F7B5F; } .bowtie-wrap .m-rd { fill: #C26A1A; }
+.bowtie-wrap .m-line-nd { stroke: #246D96; } .bowtie-wrap .m-line-ag { stroke: #0B5E48; } .bowtie-wrap .m-line-rd { stroke: #9A5212; }
+.bowtie-wrap .m-lbl { font: 700 12.5px var(--font); fill: var(--heading); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.motions { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.motions li { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 4px 10px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.motions .sw { width: 14px; height: 14px; border-radius: 3px; margin-top: 3px; }
+.motions .sw.nd { background: #3187B5; } .motions .sw.ag { background: #0F7B5F; } .motions .sw.rd { background: #C26A1A; }
+.motions .m-name { font-weight: 700; color: var(--heading); }
+.motions .m-what { grid-column: 2 / -1; font-size: 13.5px; }
+.watch-list { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.gaps-unknown { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.gaps-unknown b { color: var(--heading); }
+/* Foundations pyramid (gap check) */
+.pyr { display: grid; gap: 6px; }
+.pyr-row { display: grid; grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr); gap: 10px; align-items: center; }
+.pyr-name { font-size: 12.5px; font-weight: 700; color: var(--muted); text-align: right; line-height: 1.25; }
+.pyr-band { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 8px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); margin: 0 auto; width: 100%; }
+.pyr-row[data-l="6"] .pyr-band { width: 62%; } .pyr-row[data-l="5"] .pyr-band { width: 70%; } .pyr-row[data-l="4"] .pyr-band { width: 78%; }
+.pyr-row[data-l="3"] .pyr-band { width: 86%; } .pyr-row[data-l="2"] .pyr-band { width: 93%; } .pyr-row[data-l="1"] .pyr-band { width: 100%; }
+@media (max-width: 520px) { .pyr-row { grid-template-columns: 1fr; gap: 4px; } .pyr-name { text-align: left; } .pyr-row .pyr-band { width: 100% !important; justify-content: flex-start; } }
+.state { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); line-height: 1.3; }
+.state::before { font-weight: 700; }
+.state.usable { background: var(--tint); border-color: var(--tint-line); color: var(--heading); } .state.usable::before { content: "✓"; }
+.state.weak { background: var(--bg); border-color: var(--heading); color: var(--heading); } .state.weak::before { content: "!"; }
+.state.missing { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); } .state.missing::before { content: "✕"; }
+.state.unknown { background: transparent; border-style: dashed; color: var(--muted); } .state.unknown::before { content: "?"; }
+.state.na { background: transparent; border-style: dotted; color: var(--muted); text-decoration: line-through; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 12.5px; }
+.gap-q .seg label { min-width: 0; font-size: 13px; padding: 6px 6px; }
+.gap-q .q-help { margin-top: 2px; }
+.dep { font-size: 13px; color: var(--muted); }
+.credit { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.credit li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14px; }
+/* Editable outputs (brand starter) */
+.out-card { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.out-card .out-h { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; justify-content: space-between; }
+.out-card h3 { font-size: 15.5px; }
+.out-card .from { font-size: 12.5px; color: var(--muted); }
+.out-card .from b { color: var(--heading); }
+.lint { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.lint li { font-size: 13px; padding: 6px 10px; border-left: 3px solid var(--blue); background: var(--surface); border-radius: 0 6px 6px 0; }
+.lint li b { color: var(--heading); }
+.edited { font-size: 11.5px; font-weight: 700; color: var(--blue-ink); }
+.channel-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.channel-list li { display: grid; gap: 3px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 14px; }
+.channel-list .ch-k { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.channel-list .ch-v { color: var(--heading); font-weight: 700; overflow-wrap: anywhere; }
+.count-ok { color: var(--muted); font-size: 12px; } .count-over { color: var(--red); font-size: 12px; font-weight: 700; }
+/* After-purchase journey (delight check) */
+.after { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); gap: 6px; counter-reset: af; }
+.after li { counter-increment: af; display: grid; gap: 4px; align-content: start; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 13px; }
+.after li::before { content: counter(af); font-size: 11px; font-weight: 700; color: var(--muted); }
+.after .af-name { font-weight: 700; color: var(--heading); font-size: 13.5px; }
+.ethics { border-left-color: var(--blue); }
+.ethics ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.closing .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+@media print { .prelim, .lint { border-color: #999; } .bowtie-wrap svg { min-width: 0; } }
+.opts-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hero-quote { font-size: 18px !important; line-height: 1.45; color: var(--heading); font-weight: 700; max-width: 62ch; }
+.after .state { justify-self: start; }
+</style>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form: one panel, one question per row (question left, answers right) ---- */
+.col-q.panel { padding: 0 !important; overflow: hidden; }
+.col-q .q-head { padding: 20px 28px 16px !important; border-bottom: 1px solid var(--line); }
+#answers .q { margin: 0 !important; padding: 22px 28px !important; border: 0 !important; border-top: 1px solid var(--line) !important; }
+#answers > .q-head + .q, #answers > .q:first-child, #answers > .q-head + div > .q:first-child { border-top: 0 !important; }
+#answers > div:not(.q):not(.q-head) > .q:first-child { border-top: 1px solid var(--line) !important; }
+.q legend { float: left !important; width: 100%; margin: 0 0 8px !important; }
+.q > legend + * { clear: both; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
+@media (min-width: 880px) {
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
+  .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
+  .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
+  .q.blx-split > .blx-qh:empty { display: none; }
+  .q.blx-split > .blx-qh .q-help { margin: 0; }
+  .q.blx-split > .blx-qc { margin-left: calc(41.67% + 22px); display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs > .blx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: start; }
+  #answers .q.blx-pairs > .blx-pair + .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs .blx-ph > * { margin: 8px 0 0 !important; display: block; }
+  #answers .q.blx-pairs .blx-pc { display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pairhelp { max-width: calc(41.67% - 22px); margin-top: 8px; }
+  #answers .q.blx-row > .q-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: center; }
+  #answers .q.blx-row > .q-row > :first-child { min-width: 0; }
+  #answers .q.blx-row > .q-row > :not(:first-child) { justify-self: start; }
+  #answers .q.blx-row > .q-row + .q-row { margin-top: 10px; }
+  #answers .q.blx-row > .sub-q { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; row-gap: 6px; align-items: center; margin-top: 16px; padding: 0; border: 0; }
+  #answers .q.blx-row > .sub-q > .q-label { grid-column: 1; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > :not(.q-label):not(.q-help) { grid-column: 2; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > .q-help { grid-column: 1; grid-row: 2; margin: 0; }
+  #answers .q.blx-row > .q-help { max-width: calc(41.6% - 22px); margin-top: 6px; }
+  #answers .q.blx-row .seg.inline { width: 100%; max-width: 420px; }
+  .blx-qc .seg:not(.inline) { max-width: 600px; }
+}
+#answers .q { scroll-margin-top: 16px; }
+.blx-pair + .blx-pair { margin-top: 12px; } .blx-pc { display: grid; gap: 8px; } .blx-ph > * { margin-bottom: 6px; }
+/* answer controls: lighter */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line-strong) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt, .opt-wrap, .text-field, .field { border-radius: 10px !important; }
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
+@media print { .blh { display: none !important; } }
+</style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../review.html" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-banner" role="note">Internal draft · for review before release · Build: Dallas Olsen · Method review: Coby Bush</div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· STRATEGY STARTERS</span></div>
+<p class="eyebrow"><span class="kit">Strategy Starter 4 of 4</span><span class="campaign">Recommend Delight</span></p>
+<h1>Would Your Customers Recommend You?</h1>
+<p class="lede">Most marketing stops at the sale. Your next customers usually start there, with someone telling a friend. Walk through what happens after someone buys. You get the moments to fix, when to ask for reviews and referrals (and how to do it within the rules), and what to measure.</p>
+</header>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">Strategy starters · optional</h2>
+<p class="stepper-note">Each one stands on its own. Do them in any order, or skip straight to a toolkit.</p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">After the sale</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<div id="moments-q"></div>
+<fieldset class="q">
+<legend><span class="q-label">What do you measure after the sale today?</span></legend>
+<div class="opts" id="measure-opts"></div>
+<p class="q-help">Tick everything you look at at least once a quarter.</p>
+</fieldset>
+<button type="button" class="btn btn-strong see-results" id="see-results">See my customer experience</button>
+</form>
+</section>
+<div class="results" id="results">
+
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">After the sale, in one line</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">0</span><span class="hero-unit" id="out-unit">moments to fix</span></p>
+<p class="answer-line" id="out-line"></p>
+<p class="callout" id="sit-note" hidden></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="journey-h">
+<div class="deliv-head">
+<h2 id="journey-h">Your customer's experience after they buy</h2>
+<p class="deliv-sub">In order, from the moment they pay. A recommendation is earned across all of these, not asked for at the end.</p>
+</div>
+<div class="legend" aria-label="Legend"><span class="state usable">Strong</span><span class="state weak">Thin</span><span class="state missing">Missing</span></div>
+<ol class="after" id="after"></ol>
+</section>
+
+<section class="panel deliv" aria-labelledby="fix-h">
+<div class="deliv-head">
+<h2 id="fix-h">What to fix, in order</h2>
+<p class="deliv-sub">Earlier moments first: a review request can't rescue a rough first week.</p>
+</div>
+<ol class="steps" id="fixes"></ol>
+</section>
+
+<section class="panel deliv" aria-labelledby="ask-h">
+<div class="deliv-head">
+<h2 id="ask-h">When to ask for a review or a referral</h2>
+<p class="deliv-sub">Ask when the customer has just felt the value, not when you need it.</p>
+</div>
+<ul class="bullets" id="moments"></ul>
+<div class="callout ethics" id="ethics"></div>
+</section>
+
+<section class="panel deliv" aria-labelledby="measure-h">
+<div class="deliv-head">
+<h2 id="measure-h">How you'll know it's working</h2>
+<p class="deliv-sub">Three numbers and one question. Check them once a month.</p>
+</div>
+<ul class="credit" id="measures"></ul>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Make it worth recommending</h2>
+<p id="closing-p">Copy or print your plan. Fix the earliest moment first, then set up the emails that carry it. If you want help designing the whole customer experience, a strategist can work through it with you; that's optional.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<button type="button" class="btn btn-line" id="print-btn">Print or save as PDF</button>
+<a class="btn btn-solid" id="cta-link" href="#" target="_blank" rel="noopener">Talk to a strategist (optional)</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+</div>
+<footer class="foot">
+<p>Built from your answers. Review platform rules change; check the current policy of each site you ask customers to use. This is general guidance, not legal advice.</p>
+<p>© Big Leap · Strategy Starter 4 of 4 · Internal draft · <a id="hub-link" href="../../index.html">All DIY Toolkits</a> · <a href="../../roadmap.html">Your roadmap</a></p>
+</footer>
+</div>
+
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all four strategy starters (internal drafts).
+OWNER: who the optional "talk to" link names. These are cross-service,
+so the link names a strategist rather than one channel owner.
+SERIES: the four strategy starters, in order (stepper).
+LINKS: every Big Leap DIY toolkit, plus the starters and the roadmap.
+Relative URLs, so they work on GitHub Pages and on a local copy.
+===================================================================== */
+const OWNER = { name: 'a Big Leap strategist', first: 'a strategist' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=plan-04';
+const CURRENT_KIT = 4;
+const SERIES = [
+{ n: 1, short: 'Situation', title: 'Are You Solving the Right Problem?', file: '01_Are_You_Solving_the_Right_Problem.html' },
+{ n: 2, short: 'Foundations', title: 'What Do You Already Have?', file: '02_What_Do_You_Already_Have.html' },
+{ n: 3, short: 'Brand', title: 'What Makes You Worth Choosing?', file: '03_What_Makes_You_Worth_Choosing.html' },
+{ n: 4, short: 'Delight', title: 'Would Your Customers Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
+];
+const LINKS = {
+profile:     { name: 'Build Your Business Profile',              url: '../paid/01_What_Kind_of_Business_Are_You.html',             owner: 'Scott Smoot' },
+adsReady:    { name: 'Is Your Google Ads Account Ready?',        url: '../paid/02_Is_Your_Google_Ads_Account_Ready.html',          owner: 'Scott Smoot' },
+conversions: { name: 'Which Conversions Should You Track?',      url: '../paid/03_Which_Conversions_Should_You_Track.html',        owner: 'Scott Smoot' },
+campaigns:   { name: 'Which Campaigns Should You Run First?',    url: '../paid/04_Which_Campaigns_Should_You_Run_First.html',      owner: 'Scott Smoot' },
+leadCapture: { name: 'Is Every Lead Reaching Your CRM?',         url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',         owner: 'Dallas Olsen' },
+speedToLead: { name: 'Never Let a Lead Go Cold',                 url: '../revops/02_Never_Let_a_Lead_Go_Cold.html',                owner: 'Dallas Olsen' },
+routing:     { name: 'Who Should Own Each New Lead?',            url: '../revops/03_Who_Should_Own_Each_New_Lead.html',            owner: 'Dallas Olsen' },
+automation:  { name: 'Which Sales Steps Should Run Themselves?', url: '../revops/04_Which_Sales_Steps_Should_Run_Themselves.html', owner: 'Dallas Olsen' },
+salesTime:   { name: 'How Much Time Is Your Sales Process Wasting?', url: '../revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html', owner: 'Dallas Olsen' },
+pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?',  url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html',  owner: 'Dallas Olsen' },
+tracking:    { name: 'Can You See What Your Marketing Does?',    url: '../revops/07_Can_You_See_What_Your_Marketing_Does.html',    owner: 'Dallas Olsen' },
+seoBasics:   { name: 'Can Google Find and Trust Your Site?',     url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',        owner: 'Shema Al-Darwish' },
+local:       { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html',    owner: 'Shema Al-Darwish' },
+prReady:     { name: 'Are You Ready to Be Pitched?',             url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',                 owner: 'Kristina Ainge' },
+mediaKit:    { name: 'Build Your Media Kit',                     url: '../pr/02_Build_Your_Media_Kit.html',                        owner: 'Kristina Ainge' },
+inbox:       { name: 'Will Your Emails Reach the Inbox?',        url: '../email/01_Will_Your_Emails_Reach_the_Inbox.html',         owner: 'Erica Pounder' },
+flows:       { name: 'Which Emails Should Send Themselves?',     url: '../email/02_Which_Emails_Should_Send_Themselves.html',      owner: 'Erica Pounder' },
+emailHealth: { name: 'Is Your Email Program Working?',           url: '../email/03_Is_Your_Email_Program_Working.html',            owner: 'Erica Pounder' },
+situation:   { name: 'Are You Solving the Right Problem?',       url: '01_Are_You_Solving_the_Right_Problem.html',                 owner: '' },
+gap:         { name: 'What Do You Already Have?',                url: '02_What_Do_You_Already_Have.html',                          owner: '' },
+brand:       { name: 'What Makes You Worth Choosing?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
+delight:     { name: 'Would Your Customers Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
+roadmap:     { name: 'Your Marketing Roadmap',                   url: '../../roadmap.html',                                        owner: '' },
+hub:         { name: 'All DIY Toolkits',                         url: '../../index.html',                                          owner: '' },
+};
+
+/* =====================================================================
+SHARED BUSINESS PROFILE: identical in every Big Leap DIY toolkit.
+Paid 01 builds it; every other toolkit reads it. Stored in this
+browser (localStorage) and as a copy/paste code that starts "BL1.".
+===================================================================== */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* Plain-English labels for profile values */
+const LABELS = {
+model: { b2b: 'Sells to businesses (B2B)', b2c: 'Sells to consumers (B2C)', both: 'Sells to businesses and consumers' },
+modelShort: { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' },
+offer: { products: 'Products', services: 'Services', both: 'Products and services' },
+ecommerce: { shopify: 'Shopify store', other: 'Online store (not Shopify)', none: 'No online checkout' },
+locations: { none: 'No physical location customers visit', one: 'One location', multi: 'Several locations' },
+reach: { local: 'Local', regional: 'Regional', national: 'National', international: 'International' },
+crm: { hubspot: 'HubSpot', other: 'Another CRM', none: 'No CRM yet' },
+goal: { leads: 'More leads (forms)', calls: 'More phone calls', sales: 'More online sales', visits: 'More store or office visits', installs: 'More app installs', awareness: 'More people knowing the brand' },
+yn: { yes: 'Yes', no: 'No', unsure: 'Not sure', na: 'Not needed' },
+};
+function lab(group, v) { return (LABELS[group] && LABELS[group][v]) || ''; }
+
+/* Industries Google treats with extra rules. Matched against the profile's industry text. */
+const SPECIAL_VERTICALS = [
+{ key: 'auto', label: 'Auto dealers', re: /dealership|\b(auto|car|vehicle|truck|rv|motorcycle|boat)s?\b.*\b(dealer|sales)\b/i, note: 'Vehicle ads use their own formats and inventory feeds, and state advertising rules apply.' },
+{ key: 'legal', label: 'Legal services', re: /\b(law|legal|lawyer|attorney|bail)/i, note: 'Some legal services need Google certification or are restricted in some places.' },
+{ key: 'health', label: 'Healthcare and pharma', re: /health ?care|medical|clinic|doctor|dental|dentist|pharma|drug|addiction|rehab|telehealth|mental health|supplement/i, note: 'Healthcare and medicine ads are restricted, some need certification, and you cannot remarket on health conditions.' },
+{ key: 'finance', label: 'Financial services', re: /financ|loan|lend|credit|mortgage|insurance|\bbank|invest|crypto|\bdebt/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
+{ key: 'housing', label: 'Housing, employment or credit', re: /real estate|realtor|housing|apartment|rental|property management|home ?builder|staffing|recruit|hiring|employment|\bjobs?\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
+];
+function detectSpecial(industry) { const s = String(industry || ''); if (!s.trim()) return null; for (const v of SPECIAL_VERTICALS) { if (v.re.test(s)) return v; } return null; }
+
+/* ---------- small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function numOrNull(v) { if (v === '' || v == null) return null; const n = parseFloat(v); return Number.isFinite(n) && n >= 0 ? Math.min(n, 1e8) : null; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return '$' + fmt(Math.round(Number(n) || 0)); }
+function roundNice(n) { if (n >= 1000) return Math.round(n / 50) * 50; if (n >= 100) return Math.round(n / 10) * 10; return Math.round(n); }
+function moneyRange(a, b) { const x = roundNice(Math.min(a, b)), y = roundNice(Math.max(a, b)); return x === y ? money(x) : money(x) + '–' + money(y); }
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkHtml(key, label) { const L = LINKS[key]; if (!L) return esc(label || ''); return '<a href="' + esc(L.url) + '">' + esc(label || L.name) + '</a>'; }
+function linkPlain(key) { const L = LINKS[key]; return L ? L.name + ' (' + absUrl(L.url) + ')' : ''; }
+function radioVal(name) { const r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
+function setRadio(name, value) { const el = document.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function syncOptChecked(root) { [].forEach.call((root || document).querySelectorAll('.opt'), (o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); }); }
+
+/* ---------- series stepper ---------- */
+function renderStepper(current) {
+$('stepper-list').innerHTML = SERIES.map((k) => {
+const cur = k.n === current;
+const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+return '<li>' + (cur
+? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+: '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+}).join('');
+}
+
+/* ---------- build-order list: items { title, ok, why, steps[], time, links:[key], waste } ---------- */
+function renderSteps(el, items) {
+let open = 0;
+el.innerHTML = items.map((t, i) => {
+const first = !t.ok && open++ < 3;
+return '<li class="' + (t.ok ? 'is-ok' : first ? 'is-first' : '') + '">' +
+'<span class="sn" aria-hidden="true">' + (t.ok ? '✓' : i + 1) + '</span><div class="sb">' +
+'<div class="st-top"><span class="st-title">' + esc(t.title) + '</span><span class="chip-row">' +
+(t.ok ? '<span class="chip ok">OK</span>' : '<span class="chip gap">Gap</span>') +
+(first ? '<span class="chip first">Do first</span>' : '') + '</span></div>' +
+(t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+(!t.ok && t.steps && t.steps.length ? '<ol class="how">' + t.steps.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ol>' : '') +
+(!t.ok && t.time ? '<p class="st-time">Time: ' + esc(t.time) + '</p>' : '') +
+(!t.ok && t.links && t.links.length ? '<p class="kit-link">Free toolkit: ' + t.links.map((k) => linkHtml(k)).join(' · ') + '</p>' : '') +
+'</div></li>';
+}).join('');
+}
+function stepsText(items) {
+const out = [];
+let open = 0;
+items.forEach((t, i) => {
+const first = !t.ok && open++ < 3;
+out.push((i + 1) + '. [' + (t.ok ? 'OK' : 'GAP') + '] ' + t.title + (first ? ' (do this first)' : ''));
+if (t.why) out.push('   ' + t.why);
+if (!t.ok) {
+(t.steps || []).forEach((x, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + x));
+if (t.time) out.push('   Time: ' + t.time);
+(t.links || []).forEach((k) => out.push('   Free toolkit: ' + linkPlain(k)));
+}
+});
+return out;
+}
+
+/* ---------- where it gets complex ---------- */
+function renderComplex(list, flags) {
+const f = flags || {};
+const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+$('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+return sorted;
+}
+function complexText(list, flags) { const f = flags || {}; return list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0)).map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text); }
+
+/* ---------- cross-links and next step ---------- */
+function renderXlinks(links) {
+const seen = {}, live = links.filter((l) => LINKS[l.key] && !seen[l.key] && (seen[l.key] = true));
+$('xlinks').hidden = live.length === 0;
+$('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+return live;
+}
+function xlinksText(links) { const seen = {}; return links.filter((l) => LINKS[l.key] && !seen[l.key] && (seen[l.key] = true)).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url)); }
+function renderNext(key, why) {
+const box = $('next');
+if (!key || !LINKS[key]) { box.hidden = true; return; }
+box.hidden = false;
+$('next-title').innerHTML = linkHtml(key);
+$('next-why').textContent = why;
+}
+function planFooter(nextKey) {
+const L = [];
+if (nextKey && LINKS[nextKey]) L.push('', 'NEXT TOOLKIT: ' + linkPlain(nextKey));
+L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
+return L;
+}
+
+/* ---------- example answers state ---------- */
+function setExampleState(isExample, exampleText, yoursText) {
+const pill = $('example-pill');
+pill.textContent = isExample ? 'Example answers' : 'Your answers';
+pill.classList.toggle('is-yours', !isExample);
+$('example-text').textContent = isExample ? exampleText : (yoursText || 'Your results update as you go.');
+$('restore-example').hidden = isExample;
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+const el = $('answer');
+if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+lastHeadline = key;
+}
+
+/* ---------- copy: Clipboard API, then execCommand, then a selectable textarea ---------- */
+function legacyCopy(text) {
+try {
+const ta = document.createElement('textarea');
+ta.value = text; ta.setAttribute('readonly', '');
+ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '-9999px'; ta.style.fontSize = '16px';
+document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+const ok = document.execCommand && document.execCommand('copy');
+document.body.removeChild(ta);
+return !!ok;
+} catch (e) { return false; }
+}
+function copyWithFallback(text, onDone, host) {
+const show = () => {
+let box = host.querySelector('.copy-fallback');
+if (!box) {
+box = document.createElement('div');
+box.className = 'copy-fallback';
+const id = host.id + '-text';
+box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+host.appendChild(box);
+}
+const ta = box.querySelector('textarea');
+ta.value = text; ta.focus(); ta.select();
+};
+const legacy = () => { if (legacyCopy(text)) onDone(); else show(); };
+try {
+if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) navigator.clipboard.writeText(text).then(onDone, legacy);
+else legacy();
+} catch (err) { legacy(); }
+}
+function initCopyButton(btnId, hostId, statusId, getText, idleLabel, doneMsg) {
+const btn = $(btnId);
+let timer = null;
+btn.addEventListener('click', () => {
+copyWithFallback(getText(), () => {
+btn.textContent = 'Copied';
+btn.classList.add('is-copied');
+if (statusId) $(statusId).textContent = doneMsg;
+clearTimeout(timer);
+timer = setTimeout(() => { btn.textContent = idleLabel; btn.classList.remove('is-copied'); if (statusId) $(statusId).textContent = ''; }, 3000);
+}, $(hostId));
+});
+return () => { const ta = $(hostId).querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+
+/* ---------- the shorter column sticks on desktop, only when it fits ---------- */
+function initSticky() {
+const q = $('col-q'), r = $('results');
+const wide = window.matchMedia ? window.matchMedia('(min-width: 880px)') : { matches: false };
+function update() {
+q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+if (!wide.matches) return;
+const room = window.innerHeight - 32;
+if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+}
+window.addEventListener('resize', update);
+if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+return update;
+}
+function initShell(current, onRestore) {
+renderStepper(current);
+$('cta-link').href = CTA_URL;
+$('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+$('hub-link').href = LINKS.hub.url;
+$('restore-example').addEventListener('click', onRestore);
+$('see-results').addEventListener('click', () => {
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+try { $('answer').focus({ preventScroll: true }); } catch (e) { $('answer').focus(); }
+});
+}
+
+/* ---------- Business Profile strip (every toolkit except Paid 01) ---------- */
+function profileName(p) { return (p && (String(p.name || '').trim() || String(p.industry || '').trim())) || 'Your business'; }
+function renderProfileStrip(p, onLoad, onClear) {
+const el = $('profile-strip');
+if (p) {
+const bits = [lab('modelShort', p.model), lab('reach', p.reach)].filter(Boolean);
+el.innerHTML = '<p class="ps-text">Using your Business Profile: <b>' + esc(profileName(p)) + '</b>' + (bits.length ? ' · ' + esc(bits.join(' · ')) : '') + '. Answers marked <span class="pf-tag">From your profile</span> came from it, and you can still change them.</p>' +
+'<div class="ps-actions"><a href="' + esc(LINKS.profile.url) + '">Change</a><a href="#" id="ps-clear" role="button">Clear</a></div>';
+$('ps-clear').addEventListener('click', (e) => { e.preventDefault(); clearProfile(); onClear(); });
+} else {
+el.innerHTML = '<p class="ps-text">Answer 8 questions once and every toolkit fills itself in. <a href="' + esc(LINKS.profile.url) + '">Build your Business Profile →</a></p>' +
+'<details class="ps-paste"><summary>Paste a profile code</summary><div class="ps-paste-row"><label class="sr-only" for="ps-code">Profile code</label>' +
+'<input class="text-field" id="ps-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…"><button type="button" class="btn btn-plain" id="ps-load">Load profile</button></div></details>' +
+'<p class="ps-status" id="ps-status" role="status" aria-live="polite"></p>';
+const go = () => {
+const prof = decodeProfile($('ps-code').value);
+if (!prof) { $('ps-status').textContent = 'That code did not work. It should start with BL1. and come from the Business Profile Builder.'; return; }
+saveProfile(prof); onLoad(prof);
+};
+$('ps-load').addEventListener('click', go);
+$('ps-code').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+}
+}
+function markFromProfile(ids, on) { ids.forEach((id) => { const el = $(id); if (el) el.hidden = !on; }); }
+
+/* =====================================================================
+SHARED ASSESSMENT STORE: identical in the four strategy starters and the
+roadmap. One key, one section per starter, so a starter never touches
+another starter's answers or the Business Profile.
+
+  bl_diy_assess_v1 = { v: 1, situation: {...}, gap: {...}, brand: {...},
+                       delight: {...}, roadmap: {...} }
+
+Each section is { v: 1, answers: {...}, result: {...}, updated: ISO }.
+Versioning: readers only use data whose v they understand. If a future
+build finds a higher version it leaves the data alone (never overwrites
+it) and writes a new key (bl_diy_assess_v2) after migrating.
+Nothing here leaves the browser.
+===================================================================== */
+const ASSESS_KEY = 'bl_diy_assess_v1';
+function loadAssess() {
+try { const d = JSON.parse(localStorage.getItem(ASSESS_KEY)); return (d && d.v === 1) ? d : { v: 1 }; } catch (e) { return { v: 1 }; }
+}
+function loadAssessPart(part) { const d = loadAssess(); const s = d[part]; return (s && s.v === 1) ? s : null; }
+function saveAssessPart(part, value) {
+try {
+const raw = localStorage.getItem(ASSESS_KEY);
+let d = raw ? JSON.parse(raw) : null;
+if (d && d.v !== 1) return false;            // a newer version owns this key: do not overwrite
+d = (d && typeof d === 'object') ? d : { v: 1 };
+d[part] = Object.assign({ v: 1 }, value, { updated: new Date().toISOString() });
+localStorage.setItem(ASSESS_KEY, JSON.stringify(d));
+return true;
+} catch (e) { return false; }
+}
+function clearAssessPart(part) {
+try { const raw = localStorage.getItem(ASSESS_KEY); const d = raw ? JSON.parse(raw) : null; if (!d || d.v !== 1) return; delete d[part]; localStorage.setItem(ASSESS_KEY, JSON.stringify(d)); } catch (e) {}
+}
+/* The three customer-experience motions, in plain words. Depth runs 1 to 3:
+   1 near the surface, 2 further down, 3 at the foundation. */
+const MOTIONS = {
+nd: { name: 'Notice Different', short: 'Get noticed for what makes you different', peak: 'It is strongest before anyone buys, at awareness.' },
+ag: { name: 'Align to Genuine', short: 'Show the right buyers you are the genuine fit', peak: 'It is strongest around the decision to buy.' },
+rd: { name: 'Recommend Delight', short: 'Give customers something worth recommending', peak: 'It grows from the purchase onward, and matters at every stage.' },
+};
+const DEPTH = { 1: 'Near the surface', 2: 'Further down', 3: 'At the foundation' };
+function printPlan() { try { window.print(); } catch (e) {} }
+function textArea(id, label, value, rows) {
+return '<label class="q-label" for="' + id + '">' + esc(label) + '</label><textarea class="text-field long" id="' + id + '" rows="' + (rows || 3) + '">' + esc(value) + '</textarea>';
+}
+function firstWords(s, n) { const w = String(s || '').trim().split(/\s+/).filter(Boolean); return w.slice(0, n).join(' ') + (w.length > n ? '…' : ''); }
+function clean(s) { return String(s || '').replace(/\s+/g, ' ').trim(); }
+function lcFirst(s) { s = clean(s); return s && !/^[A-Z]{2}/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s; }
+function noDot(s) { return clean(s).replace(/[.!\s]+$/, ''); }
+
+/* =====================================================================
+STRATEGY STARTER 4: WOULD YOUR CUSTOMERS RECOMMEND YOU? (internal draft)
+A customer delight and referral readiness check: the moments after the
+sale, in order, each rated strong / thin / missing from one question.
+Fixes run earliest moment first. Review and referral guidance stays
+inside platform rules: ask every customer, no gating, no incentives for
+reviews, disclose referral rewards, one ask and one reminder.
+Implementation hands off to the toolkits that already build it:
+Email 02 (thank-you, onboarding, review-request and win-back emails),
+SEO 02 (Google reviews), RevOps 04 (automation), RevOps 06 (dashboard).
+===================================================================== */
+const MOMENTS = [
+{ id: 'first', name: 'The first 48 hours', q: 'What happens in the first 48 hours after someone buys?',
+  opts: [['planned', 'A planned welcome with clear next steps'], ['receipt', 'A receipt or invoice, and that’s it'], ['nothing', 'Nothing planned']], score: { planned: 'strong', receipt: 'thin', nothing: 'missing' },
+  fix: ['Write the three things every new customer needs to know in week one: what happens next, when, and who to contact.', 'Send it the same day they buy, by email and in person or on the phone if you can.', 'Make the first contact come from a named person, not “the team”.'], kit: 'flows' },
+{ id: 'expect', name: 'Setting expectations', q: 'Do customers know what will happen, and when?',
+  opts: [['written', 'Yes, written down for them'], ['verbal', 'We tell them, but nothing in writing'], ['unclear', 'Not really']], score: { written: 'strong', verbal: 'thin', unclear: 'missing' },
+  fix: ['Write a one-page “what to expect” with the steps, the timing and what you need from them.', 'Include what happens if something runs late, before it does.', 'Send it with the welcome and link to it from every update.'], kit: 'flows' },
+{ id: 'deliver', name: 'Delivering the promise', q: 'How do you know you delivered what you promised?',
+  opts: [['check', 'We check with every customer'], ['hear', 'We hear about it when something’s wrong'], ['dontknow', 'We don’t really know']], score: { check: 'strong', hear: 'thin', dontknow: 'missing' },
+  fix: ['Pick the moment the customer should first feel the result, and check in right then with one question: “Is this what you expected?”', 'Log the answer in your CRM so patterns show up.', 'If the answer is no, fix it before you ask for anything.'], kit: 'automation' },
+{ id: 'recover', name: 'When something goes wrong', q: 'When something goes wrong, what happens?',
+  opts: [['process', 'A clear owner and a way to make it right'], ['case', 'We handle it case by case'], ['none', 'No set way']], score: { process: 'strong', case: 'thin', none: 'missing' },
+  fix: ['Name one person who owns problems, and a time limit for the first reply.', 'Decide in advance what you can offer to make it right, so nobody has to ask permission.', 'Follow up once it’s fixed. A problem solved well often earns more loyalty than no problem at all.'], kit: 'routing' },
+{ id: 'surprise', name: 'A useful surprise', q: 'Is there a moment where customers get something useful they didn’t expect?',
+  opts: [['planned', 'Yes, it’s planned'], ['sometimes', 'Sometimes, when someone thinks of it'], ['never', 'Not really']], score: { planned: 'strong', sometimes: 'thin', never: 'missing' },
+  fix: ['Pick one small, useful extra tied to their goal: a tip sheet, a check-up, an introduction, a shortcut.', 'Time it for a quiet moment in the journey, not with the invoice.', 'Make it the same for everyone, so it happens even on a busy week.'], kit: null },
+{ id: 'feedback', name: 'Asking for feedback', q: 'How often do you ask customers how it went?',
+  opts: [['every', 'Every customer'], ['sometimes', 'Sometimes'], ['never', 'Never']], score: { every: 'strong', sometimes: 'thin', never: 'missing' },
+  fix: ['Ask every customer the same two questions: how likely they’d be to recommend you (0–10), and why.', 'Read every answer and reply to every low score personally within two business days.', 'Share what you changed because of feedback. Customers notice.'], kit: 'flows' },
+{ id: 'reviews', name: 'Reviews', q: 'How do you ask for reviews?',
+  opts: [['every', 'We ask every customer at a good moment'], ['sometimes', 'When we remember'], ['happy', 'We only ask the happy ones'], ['incent', 'We offer something in return'], ['never', 'We don’t ask']], score: { every: 'strong', sometimes: 'thin', happy: 'risk', incent: 'risk', never: 'missing' },
+  fix: ['Ask every customer, once, right after they feel the value, with a direct link to the review form.', 'Send one reminder a week later if they haven’t left one, then stop.', 'Reply to every review, good or bad, within a few days.'], kit: 'local' },
+{ id: 'referral', name: 'Referrals', q: 'When a customer refers someone, what happens?',
+  opts: [['thank', 'We thank them and know where referrals come from'], ['untracked', 'It happens, but we don’t track it'], ['reward', 'We have a referral reward program'], ['rare', 'It rarely happens']], score: { thank: 'strong', untracked: 'thin', reward: 'strong', rare: 'missing' },
+  fix: ['Add “How did you hear about us?” to every inquiry form and record the answer in your CRM.', 'Thank every referrer personally, whether or not the referral buys.', 'Make referring easy: a short line customers can forward, with your contact link.'], kit: 'leadCapture' },
+{ id: 'repeat', name: 'Coming back', q: 'Do customers buy again, renew or come back?',
+  opts: [['remind', 'Yes, and we remind them at the right time'], ['own', 'Yes, on their own'], ['once', 'It’s a one-time purchase'], ['no', 'Not often']], score: { remind: 'strong', own: 'thin', once: 'na', no: 'missing' },
+  fix: ['Work out when a customer typically needs you again, and send one useful reminder just before.', 'Win back lapsed customers with something relevant to what they bought, not a generic discount.', 'Track repeat rate by month, so you see whether it’s moving.'], kit: 'flows' },
+];
+const MEASURES = [['repeat', 'Repeat purchase or retention rate'], ['reviews', 'Review count and average rating'], ['source', 'Where new customers came from (including referrals)'], ['recommend', 'A “how likely to recommend us” question'], ['none', 'Nothing yet']];
+const STATE_LABEL = { strong: 'Strong', thin: 'Thin', missing: 'Missing', risk: 'Against the rules', na: 'Doesn’t apply' };
+const STATE_CLASS = { strong: 'usable', thin: 'weak', missing: 'missing', risk: 'missing', na: 'na' };
+const EXAMPLE = { first: 'receipt', expect: 'verbal', deliver: 'check', recover: 'process', surprise: 'never', feedback: 'sometimes', reviews: 'sometimes', referral: 'untracked', repeat: 'own', measure: ['reviews'] };
+const EXAMPLE_TEXT = 'Example: a home-services company that does good work but lets the follow-up happen by chance. Change any answer to make it yours.';
+
+function askMoments(p) {
+const offer = p ? p.offer : 'services', b2b = p && p.model === 'b2b';
+const m = [];
+if (offer !== 'products') m.push('Right after the first visible result: the job is done, the first win lands, the problem is gone.');
+if (offer !== 'services') m.push('A few days after delivery, once they’ve used it. Not on the day it ships.');
+if (b2b) m.push('After the first results review or report that shows progress against their goal.');
+m.push('Right after you fix a problem quickly and well. People remember how you handled it.');
+m.push('When they come back or reorder: they’ve chosen you twice, which is a recommendation already.');
+return m;
+}
+
+(function () {
+const form = $('answers');
+let profile = loadProfile(), last = null;
+const saved = loadAssessPart('delight'), situation = loadAssessPart('situation');
+let touched = !!(saved && saved.answers);
+$('moments-q').innerHTML = MOMENTS.map((m) => '<div class="q"><span class="q-label" id="' + m.id + '-q">' + esc(m.q) + '</span><div class="seg stack" role="radiogroup" aria-labelledby="' + m.id + '-q">' +
+m.opts.map((o) => '<input type="radio" id="' + m.id + '-' + o[0] + '" name="' + m.id + '" value="' + o[0] + '"><label for="' + m.id + '-' + o[0] + '">' + esc(o[1]) + '</label>').join('') + '</div><p class="q-help">' + esc(m.name) + '</p></div>').join('');
+$('measure-opts').innerHTML = MEASURES.map((x) => '<label class="opt" for="measure-' + x[0] + '"><input type="checkbox" id="measure-' + x[0] + '" name="measure" value="' + x[0] + '"><span class="opt-text"><span class="opt-title">' + esc(x[1]) + '</span></span></label>').join('');
+
+function readInput() { const o = {}; MOMENTS.forEach((m) => { o[m.id] = radioVal(m.id); }); o.measure = [].map.call(form.querySelectorAll('input[name="measure"]:checked'), (i) => i.value); return o; }
+function applyInput(a) { MOMENTS.forEach((m) => { if (a[m.id]) setRadio(m.id, a[m.id]); }); [].forEach.call(form.querySelectorAll('input[name="measure"]'), (i) => { i.checked = (a.measure || []).indexOf(i.value) > -1; }); }
+
+function model(a) {
+const rated = MOMENTS.map((m) => ({ m, s: a[m.id] ? m.score[a[m.id]] : 'missing' }));
+const fixes = rated.filter((r) => r.s === 'missing' || r.s === 'thin' || r.s === 'risk');
+fixes.sort((x, y) => (y.s === 'risk') - (x.s === 'risk') || MOMENTS.indexOf(x.m) - MOMENTS.indexOf(y.m));
+const risk = rated.filter((r) => r.s === 'risk');
+const strong = rated.filter((r) => r.s === 'strong');
+return { rated, fixes, risk, strong };
+}
+function measureList(a) {
+const has = (k) => (a.measure || []).indexOf(k) > -1;
+return [
+{ k: 'repeat', on: has('repeat'), t: 'Repeat or retention rate', how: a.repeat === 'once' ? 'One-time purchase: track referrals instead, as your share of new customers who were referred.' : 'Customers who bought again (or renewed) this quarter ÷ customers you had at the start of it.' },
+{ k: 'reviews', on: has('reviews'), t: 'Reviews per month and average rating', how: 'New reviews this month ÷ customers served this month. Rising is the signal; the rating follows the experience.' },
+{ k: 'source', on: has('source'), t: 'Share of new customers from referrals', how: 'From “How did you hear about us?” on every inquiry, recorded in your CRM.' },
+{ k: 'recommend', on: has('recommend'), t: 'One question: how likely are they to recommend you, 0 to 10, and why?', how: 'Ask every customer at the same moment. The “why” matters more than the number.' },
+];
+}
+const ETHICS = [
+['Ask every customer, not just the happy ones.', 'Google’s review policy doesn’t allow selectively asking for positive reviews (sometimes called review gating) or discouraging negative ones.'],
+['Never pay or reward for reviews.', 'Google prohibits incentives for reviews, and the US FTC’s rule on consumer reviews bans buying reviews and rewards tied to what a review says.'],
+['Some sites say don’t ask at all.', 'Yelp asks businesses not to solicit reviews. Check each site’s rules before you send customers there.'],
+['Referral rewards are different, if they’re honest.', 'If you reward referrals, say so plainly, and never tie a reward to a review.'],
+['One ask, one reminder, then stop.', 'More than that turns a happy customer into an annoyed one.'],
+];
+const ETHICS_HTML = '<p class="callout-title">Ask within the rules</p><ul>' + ETHICS.map((e) => '<li><b>' + esc(e[0]) + '</b> ' + esc(e[1]) + '</li>').join('') + '</ul>';
+
+function planText(m) {
+const L = ['AFTER THE SALE: YOUR CUSTOMER EXPERIENCE PLAN', 'Would Your Customers Recommend You? (Big Leap Strategy Starter 4 of 4, internal draft)', ''];
+L.push('THE MOMENTS, IN ORDER'); m.r.rated.forEach((x, i) => L.push((i + 1) + '. ' + x.m.name + ': ' + STATE_LABEL[x.s].toUpperCase()));
+L.push('', 'WHAT TO FIX, IN ORDER'); m.r.fixes.forEach((x, i) => { L.push((i + 1) + '. ' + x.m.name + (x.s === 'risk' ? ' (AGAINST PLATFORM RULES: FIX FIRST)' : '')); x.m.fix.forEach((f, j) => L.push('   ' + String.fromCharCode(97 + j) + ') ' + f)); if (x.m.kit) L.push('   Free toolkit: ' + linkPlain(x.m.kit)); });
+L.push('', 'WHEN TO ASK FOR A REVIEW OR REFERRAL'); askMoments(profile).forEach((x) => L.push('- ' + x));
+L.push('', 'ASK WITHIN THE RULES'); ETHICS.forEach((e) => L.push('- ' + e[0] + ' ' + e[1]));
+L.push('', 'HOW YOU’LL KNOW IT’S WORKING'); measureList(m.a).forEach((x) => L.push('- ' + x.t + (x.on ? ' (you track this)' : '') + ': ' + x.how));
+return L.concat(planFooter(m.nextKey)).join('\n');
+}
+
+function render() {
+syncOptChecked(form);
+const a = readInput(), r = model(a);
+const nextKey = r.fixes.length && r.fixes[0].m.kit ? r.fixes[0].m.kit : 'flows';
+last = { a, r, nextKey };
+setExampleState(!touched, EXAMPLE_TEXT, 'Your answers save in this browser as you go. Nothing is sent anywhere.');
+if (touched) saveAssessPart('delight', { answers: a, result: { fixes: r.fixes.map((x) => x.m.id), risk: r.risk.map((x) => x.m.id), strong: r.strong.length } });
+const n = r.fixes.length;
+$('out-num').textContent = String(n);
+$('out-unit').textContent = (n === 1 ? 'moment to fix' : 'moments to fix') + ' after the sale';
+$('out-line').innerHTML = r.risk.length ? '<b>Fix how you ask for reviews first.</b> The way you ask now goes against review platform rules, and can get reviews removed.' :
+n ? 'Start with <b>' + esc(r.fixes[0].m.name.toLowerCase()) + '</b>. ' + (r.strong.length ? r.strong.length + ' moment' + (r.strong.length === 1 ? ' is' : 's are') + ' already strong: keep ' + (r.strong.length === 1 ? 'it' : 'them') + '.' : 'Nothing is strong yet, which is common. One moment at a time.') :
+'Every moment is strong. Keep measuring, and ask every happy customer for a review and a referral.';
+flashIfChanged(n + '|' + (r.fixes[0] ? r.fixes[0].m.id : ''));
+const sn = $('sit-note'); const durable = situation && situation.result && situation.result.limiting === 'durable';
+sn.hidden = !durable; if (durable) sn.innerHTML = '<b>Your situation check said durability is holding you back.</b> This is where that gets fixed: customers who stay and send friends make every other dollar of marketing go further.';
+$('after').innerHTML = r.rated.map((x) => '<li><span class="af-name">' + esc(x.m.name) + '</span><span class="state ' + STATE_CLASS[x.s] + '">' + esc(STATE_LABEL[x.s]) + '</span></li>').join('');
+$('fixes').innerHTML = r.fixes.map((x, i) => '<li class="' + (i === 0 ? 'is-first' : '') + '"><span class="sn" aria-hidden="true">' + (i + 1) + '</span><div class="sb"><div class="st-top"><span class="st-title">' + esc(x.m.name) + '</span><span class="chip-row"><span class="state ' + STATE_CLASS[x.s] + '">' + esc(STATE_LABEL[x.s]) + '</span></span></div><ol class="how">' + x.m.fix.map((f) => '<li>' + esc(f) + '</li>').join('') + '</ol>' + (x.m.kit ? '<p class="kit-link">Free toolkit: ' + linkHtml(x.m.kit) + '</p>' : '<p class="kit-link">No toolkit needed: this one is a decision, not a setup.</p>') + '</div></li>').join('') || '<li><div class="sb">Nothing to fix. Keep measuring.</div></li>';
+$('moments').innerHTML = askMoments(profile).map((x) => '<li>' + esc(x) + '</li>').join('');
+$('ethics').innerHTML = (r.risk.length ? '<p><b>Heads up:</b> you said you ' + (a.reviews === 'happy' ? 'only ask happy customers' : 'offer something in return for reviews') + '. That can get reviews removed and your listing penalized. Switch to asking everyone, with no reward.</p>' : '') + ETHICS;
+$('measures').innerHTML = measureList(a).map((x) => '<li><span class="state ' + (x.on ? 'usable' : 'unknown') + '">' + (x.on ? 'Tracking' : 'Start') + '</span><span><b>' + esc(x.t) + '.</b> ' + esc(x.how) + '</span></li>').join('');
+renderNext(nextKey, nextKey === 'flows' ? 'Most of these fixes are emails that send themselves: welcome, check-in, review request and win-back. This toolkit builds them.' : 'Your first fix runs through this toolkit. It fills itself in from your Business Profile.');
+const xl = [{ key: 'flows', why: 'builds the thank-you, onboarding, review-request and win-back emails.' }];
+if (profile && profile.locations !== 'none') xl.push({ key: 'local', why: 'sets up your Google review link and reply templates.' });
+xl.push({ key: 'pipelineDash', why: 'adds repeat and referral numbers to the dashboard you already watch.' });
+renderXlinks(xl.filter((x) => x.key !== nextKey));
+syncCopy(); sticky();
+}
+function profileStrip() { renderProfileStrip(profile, (p) => { profile = p; render(); }, () => { profile = null; profileStrip(); render(); }); }
+initShell(CURRENT_KIT, () => { touched = false; applyInput(EXAMPLE); render(); const f = form.querySelector('input[name="first"]:checked'); if (f) f.focus(); });
+$('cta-link').href = CTA_URL; $('cta-link').textContent = 'Talk to a strategist (optional)';
+$('print-btn').addEventListener('click', printPlan);
+const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your customer experience plan is copied. Paste it into a doc for your team.');
+const sticky = initSticky();
+form.addEventListener('submit', (e) => e.preventDefault());
+const onUser = (e) => { if (e.target && e.target.name === 'measure' && e.target.value === 'none' && e.target.checked) [].forEach.call(form.querySelectorAll('input[name="measure"]'), (i) => { if (i.value !== 'none') i.checked = false; }); else if (e.target && e.target.name === 'measure' && e.target.checked) { const nn = $('measure-none'); if (nn) nn.checked = false; } touched = true; render(); };
+form.addEventListener('change', onUser);
+applyInput(saved && saved.answers ? saved.answers : EXAMPLE);
+profileStrip(); render();
+})();
+
+</script>
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() {
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q')) return;
+    Array.prototype.forEach.call(form.querySelectorAll('.q'), function (q) {
+      if (q.closest('.q') !== q || q.parentElement.closest('.q')) return;
+      var kids = Array.prototype.filter.call(q.children, function (c) { return !c.classList.contains('sr-only') && !c.classList.contains('sr'); });
+      if (!kids.length) return;
+      var heads = kids.filter(function (c) { return c.tagName === 'LEGEND' || c.classList.contains('q-label'); });
+      if (kids[0].classList.contains('q-row')) {
+        q.classList.add('blx-row');
+        if (heads.length) {
+          var pr = null; Array.prototype.slice.call(q.children).forEach(function (c) {
+            if (heads.indexOf(c) >= 0) { pr = document.createElement('div'); pr.className = 'blx-pair'; q.appendChild(pr); var a1 = document.createElement('div'); a1.className = 'blx-ph'; pr.appendChild(a1); a1.appendChild(c); var b1 = document.createElement('div'); b1.className = 'blx-pc'; pr.appendChild(b1); return; }
+            if (pr && c !== pr) pr.querySelector('.blx-pc').appendChild(c);
+          });
+          q.classList.add('blx-pairs');
+        }
+        return;
+      }
+      if (kids[0].tagName === 'LEGEND') heads = [kids[0]];
+      if (heads.length > 1 && kids[0] === heads[0]) {
+        var nodes = Array.prototype.slice.call(q.children), pair = null, helps = [];
+        nodes.forEach(function (c) {
+          if (c.classList.contains('q-help')) { helps.push(c); return; }
+          if (heads.indexOf(c) >= 0) { pair = document.createElement('div'); pair.className = 'blx-pair'; q.appendChild(pair); var hc = document.createElement('div'); hc.className = 'blx-ph'; pair.appendChild(hc); hc.appendChild(c); var cc = document.createElement('div'); cc.className = 'blx-pc'; pair.appendChild(cc); return; }
+          if (pair) pair.querySelector('.blx-pc').appendChild(c);
+        });
+        if (helps.length) { var hw = document.createElement('div'); hw.className = 'blx-qh blx-pairhelp'; helps.forEach(function (h) { hw.appendChild(h); }); q.appendChild(hw); }
+        q.classList.add('blx-pairs'); return;
+      }
+      if (heads.length !== 1 || kids[0] !== heads[0]) return;
+      var head = heads[0], qh = document.createElement('div'), qc = document.createElement('div');
+      qh.className = 'blx-qh'; qc.className = 'blx-qc';
+      Array.prototype.slice.call(q.children).forEach(function (c) {
+        if (c === head) return;
+        if (c.classList.contains('q-help')) qh.appendChild(c); else qc.appendChild(c);
+      });
+      q.appendChild(qh); q.appendChild(qc); q.classList.add('blx-split');
+    });
+  })();
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+<script id="bl-version-js" src="../../assets/version-switch.js"></script>
+</body>
+</html>

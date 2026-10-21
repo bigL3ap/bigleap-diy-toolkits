@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Can You See What Your Marketing Does?</title>
+<meta name="description" content="Eight quick answers about your website and ad accounts. You get your tracking build list in install order, with how-to steps for your platform, time estimates and a test checklist.">
+<style>
+/* Big Leap RevOps DIY Toolkit 7: shell copied from the RevOps series (v2), plus a few additions at the end. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim seven-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 44px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+
+/* ---- Toolkit 7 additions (same tokens as the RevOps shell) ---- */
+html { overflow-wrap: anywhere; }
+body { min-height: 100vh; min-height: 100dvh; }
+.btn-plain { min-height: 44px; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -4px; }
+.stepper ol { grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); }
+.stepper ol::before { left: 7%; right: 7%; }
+.st-label { overflow-wrap: normal; word-break: normal; }
+code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-size: .92em; color: var(--heading); overflow-wrap: anywhere; }
+/* Draft banner */
+.draft-banner { background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line); font-size: 12.5px; font-weight: 700; line-height: 1.4; text-align: center; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); padding-top: max(7px, env(safe-area-inset-top, 0px)); }
+/* Business Profile strip */
+.profile { display: grid; gap: 8px; padding: 12px 16px; margin-bottom: 14px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.profile-row p { flex: 1 1 18rem; }
+.profile b { color: var(--heading); }
+.profile a { font-weight: 700; }
+.profile details summary { cursor: pointer; font-weight: 700; color: var(--heading); font-size: 13.5px; min-height: 32px; display: inline-flex; align-items: center; }
+.paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.profile-status { font-size: 13px; color: var(--muted); min-height: 1em; }
+.profile-status:empty { display: none; }
+.from-profile { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); vertical-align: 1px; }
+/* Selects and check chips */
+.select { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 10px; min-height: 44px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.checks { display: flex; flex-wrap: wrap; gap: 6px; }
+.check { position: relative; display: inline-flex; }
+.check input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.check label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); font-weight: 700; font-size: 14px; cursor: pointer; user-select: none; }
+.check label::before { content: ""; width: 14px; height: 14px; border: 2px solid var(--line-strong); border-radius: 3px; flex: none; }
+.check input:checked + label { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.check input:checked + label::before { background: var(--on-seg); border-color: var(--on-seg); box-shadow: inset 0 0 0 2px var(--seg-on); }
+.check input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.check label:hover { background: var(--hover); }
+.check input:checked + label:hover { background: var(--seg-on); }
+.sub-q { display: grid; gap: 8px; padding: 10px 12px; border-left: 2px solid var(--tint-line); margin-top: 2px; }
+.sub-q .q-label { font-size: 14px; }
+.seg.stack { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+.seg.stack label { justify-items: start; text-align: left; place-items: center start; }
+.money-row { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.money-row > div { display: grid; gap: 4px; }
+.money-row .mini { font-size: 13px; font-weight: 700; color: var(--muted); }
+/* Status chips */
+.chip.ok { background: transparent; color: var(--blue-ink); border-color: var(--tint-line); }
+.chip.gap { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.chip.later { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.st-time { font-size: 13px; color: var(--muted); }
+.st-how ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 3px; }
+.warn { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line-strong); background: var(--field); }
+.warn b { color: var(--heading); }
+.sub-h { font-size: 16px; color: var(--heading); margin-top: 4px; }
+/* Test checklist */
+.testlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.testlist li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 14px; }
+.testlist input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--seg-on); }
+.testlist label { cursor: pointer; }
+.testlist b { color: var(--heading); }
+/* Event plan table */
+.event-table { min-width: 760px; }
+.event-table td, .event-table th { font-size: 13.5px; }
+.event-table code { font-weight: 700; }
+.yes { font-weight: 700; color: var(--heading); }
+.no-val { color: var(--muted); }
+.table-note { font-size: 13px; color: var(--muted); }
+.scroll-hint { font-size: 12.5px; color: var(--muted); }
+@media (min-width: 1100px) { .scroll-hint { display: none; } }
+/* Where it gets complex */
+.complex { display: grid; gap: 10px; }
+.complex h2 { font-size: 19px; }
+.complex ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.complex li b { color: var(--heading); }
+.complex .applies { background: var(--seg-on); color: var(--on-seg); }
+.mistakes { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.mistakes b { color: var(--heading); }
+.foot a { color: var(--blue-ink); font-weight: 700; }
+.method-body p { max-width: 70ch; }
+@media (max-width: 879px) { .is-sticky { position: static !important; } }
+/* Print: the plan only */
+@media print {
+  .draft-banner, .stepper, .profile, .col-q, .closing-actions, .copy-status, #copy-host, .see-results, .method, .text-btn { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12px; }
+  .layout { display: block; }
+  .panel, .closing, .steps > li, .testlist li { break-inside: avoid; background: #fff !important; color: #000 !important; border-color: #999 !important; }
+  .closing h2, .closing p, .closing a, .next-title, .xlinks li { color: #000 !important; }
+  .table-wrap { overflow: visible; }
+  .event-table { min-width: 0; }
+  a { color: #000; }
+}
+
+</style>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form: one panel, one question per row (question left, answers right) ---- */
+.col-q.panel { padding: 0 !important; overflow: hidden; }
+.col-q .q-head { padding: 20px 28px 16px !important; border-bottom: 1px solid var(--line); }
+#answers .q { margin: 0 !important; padding: 22px 28px !important; border: 0 !important; border-top: 1px solid var(--line) !important; }
+#answers > .q-head + .q, #answers > .q:first-child, #answers > .q-head + div > .q:first-child { border-top: 0 !important; }
+#answers > div:not(.q):not(.q-head) > .q:first-child { border-top: 1px solid var(--line) !important; }
+.q legend { float: left !important; width: 100%; margin: 0 0 8px !important; }
+.q > legend + * { clear: both; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
+@media (min-width: 880px) {
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
+  .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
+  .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
+  .q.blx-split > .blx-qh:empty { display: none; }
+  .q.blx-split > .blx-qh .q-help { margin: 0; }
+  .q.blx-split > .blx-qc { margin-left: calc(41.67% + 22px); display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs > .blx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: start; }
+  #answers .q.blx-pairs > .blx-pair + .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs .blx-ph > * { margin: 8px 0 0 !important; display: block; }
+  #answers .q.blx-pairs .blx-pc { display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pairhelp { max-width: calc(41.67% - 22px); margin-top: 8px; }
+  #answers .q.blx-row > .q-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: center; }
+  #answers .q.blx-row > .q-row > :first-child { min-width: 0; }
+  #answers .q.blx-row > .q-row > :not(:first-child) { justify-self: start; }
+  #answers .q.blx-row > .q-row + .q-row { margin-top: 10px; }
+  #answers .q.blx-row > .sub-q { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; row-gap: 6px; align-items: center; margin-top: 16px; padding: 0; border: 0; }
+  #answers .q.blx-row > .sub-q > .q-label { grid-column: 1; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > :not(.q-label):not(.q-help) { grid-column: 2; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > .q-help { grid-column: 1; grid-row: 2; margin: 0; }
+  #answers .q.blx-row > .q-help { max-width: calc(41.6% - 22px); margin-top: 6px; }
+  #answers .q.blx-row .seg.inline { width: 100%; max-width: 420px; }
+  .blx-qc .seg:not(.inline) { max-width: 600px; }
+}
+#answers .q { scroll-margin-top: 16px; }
+.blx-pair + .blx-pair { margin-top: 12px; } .blx-pc { display: grid; gap: 8px; } .blx-ph > * { margin-bottom: 6px; }
+/* answer controls: lighter */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line-strong) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt, .opt-wrap, .text-field, .field { border-radius: 10px !important; }
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
+@media print { .blh { display: none !important; } }
+</style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops" aria-current="true">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../review.html" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-banner" role="note">Draft 1 · for internal review · Owner: Dallas Olsen</div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· REVENUE OPERATIONS</span></div>
+<p class="eyebrow"><span class="kit">RevOps DIY Toolkit 7 of 7</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Can You See What Your Marketing Does?</h1>
+<p class="lede">Eight quick answers about your website and ad accounts. You get your tracking build list in install order, with how-to steps for your platform and a test checklist.</p>
+</header>
+<section class="profile" id="profile" aria-label="Business Profile"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The RevOps DIY path</h2>
+<p class="stepper-note" id="stepper-note"></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">Your tracking today</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+
+<div class="q">
+<label class="q-label" for="platform" id="platform-l">What is your website built on?</label>
+<select class="select" id="platform" name="platform">
+<option value="wordpress">WordPress</option>
+<option value="shopify">Shopify</option>
+<option value="squarespace">Squarespace</option>
+<option value="wix">Wix</option>
+<option value="webflow">Webflow</option>
+<option value="hubspot">HubSpot CMS</option>
+<option value="custom">Custom-built by a developer</option>
+<option value="unsure">Not sure</option>
+</select>
+<p class="q-help">Not sure? The site footer often says "Powered by…", or ask whoever built it.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="gtm-l">Is Google Tag Manager installed?</span>
+<div class="seg" role="radiogroup" aria-labelledby="gtm-l">
+<input type="radio" id="gtm-yes" name="gtm" value="yes"><label for="gtm-yes">Yes</label>
+<input type="radio" id="gtm-unsure" name="gtm" value="unsure"><label for="gtm-unsure">Not sure</label>
+<input type="radio" id="gtm-no" name="gtm" value="no"><label for="gtm-no">No</label>
+</div>
+<p class="q-help">Tag Manager (GTM) is a free Google tool that holds all your tracking codes in one place, so you add them without editing the site each time.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="ga4-l">Is Google Analytics 4 installed?</span>
+<div class="seg" role="radiogroup" aria-labelledby="ga4-l">
+<input type="radio" id="ga4-yes" name="ga4" value="yes"><label for="ga4-yes">Yes</label>
+<input type="radio" id="ga4-unsure" name="ga4" value="unsure"><label for="ga4-unsure">Not sure</label>
+<input type="radio" id="ga4-no" name="ga4" value="no"><label for="ga4-no">No</label>
+</div>
+<p class="q-help">GA4 is Google's free website analytics. Its ID starts with <b>G-</b>.</p>
+<div class="sub-q" id="ga4how-wrap">
+<span class="q-label" id="ga4how-l">How was it added?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="ga4how-l">
+<input type="radio" id="ga4how-gtm" name="ga4how" value="gtm"><label for="ga4how-gtm">Through Google Tag Manager</label>
+<input type="radio" id="ga4how-site" name="ga4how" value="site"><label for="ga4how-site">A plugin, app or the site's own settings</label>
+<input type="radio" id="ga4how-both" name="ga4how" value="both"><label for="ga4how-both">More than one way, or not sure</label>
+</div>
+<p class="q-help">Adding it two ways counts page views and events twice. We check for that.</p>
+</div>
+</div>
+
+<div class="q">
+<span class="q-label" id="gsc-l">Is your site verified in Google Search Console?</span>
+<div class="seg" role="radiogroup" aria-labelledby="gsc-l">
+<input type="radio" id="gsc-yes" name="gsc" value="yes"><label for="gsc-yes">Yes</label>
+<input type="radio" id="gsc-unsure" name="gsc" value="unsure"><label for="gsc-unsure">Not sure</label>
+<input type="radio" id="gsc-no" name="gsc" value="no"><label for="gsc-no">No</label>
+</div>
+<p class="q-help">Search Console is free. It shows the Google searches that bring people to your site, and any problems Google has reading it.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="eu-l">Do you get visitors from the EU, UK or EEA?</span>
+<div class="seg" role="radiogroup" aria-labelledby="eu-l">
+<input type="radio" id="eu-yes" name="eu" value="yes"><label for="eu-yes">Yes</label>
+<input type="radio" id="eu-unsure" name="eu" value="unsure"><label for="eu-unsure">Not sure</label>
+<input type="radio" id="eu-no" name="eu" value="no"><label for="eu-no">No</label>
+</div>
+<span class="q-label" id="banner-l">Do you have a cookie consent banner?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="banner-l">
+<input type="radio" id="banner-cm" name="banner" value="cm"><label for="banner-cm">Yes, connected to Google Consent Mode</label>
+<input type="radio" id="banner-basic" name="banner" value="basic"><label for="banner-basic">Yes, but not sure it talks to Google</label>
+<input type="radio" id="banner-none" name="banner" value="none"><label for="banner-none">No banner</label>
+</div>
+<p class="q-help">Consent Mode passes the visitor's Accept or Decline to your Google tags. Google requires it for ads and measurement in the EEA and UK.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="channels-l">Which ad platforms do you run or plan to run?</span>
+<div class="checks" role="group" aria-labelledby="channels-l">
+<span class="check"><input type="checkbox" id="ch-google" name="channels" value="google"><label for="ch-google">Google Ads</label></span>
+<span class="check"><input type="checkbox" id="ch-meta" name="channels" value="meta"><label for="ch-meta">Meta (Facebook, Instagram)</label></span>
+<span class="check"><input type="checkbox" id="ch-linkedin" name="channels" value="linkedin"><label for="ch-linkedin">LinkedIn</label></span>
+</div>
+<p class="q-help">Each ad platform needs its own small piece of code (a "tag" or "pixel") on your site so it can learn who converts. Pick none if you don't advertise yet.</p>
+<div class="sub-q" id="tags-wrap">
+<span class="q-label" id="tags-l">Are those ad tags already on your site?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="tags-l">
+<input type="radio" id="tags-all" name="tags" value="all"><label for="tags-all">All of them</label>
+<input type="radio" id="tags-some" name="tags" value="some"><label for="tags-some">Some, or not sure</label>
+<input type="radio" id="tags-none" name="tags" value="none"><label for="tags-none">None yet</label>
+</div>
+</div>
+</div>
+
+<div class="q">
+<span class="q-label" id="calls-l">How much do phone calls matter to you?</span>
+<div class="seg" role="radiogroup" aria-labelledby="calls-l">
+<input type="radio" id="calls-lot" name="calls" value="lot"><label for="calls-lot">A lot</label>
+<input type="radio" id="calls-some" name="calls" value="some"><label for="calls-some">Some</label>
+<input type="radio" id="calls-no" name="calls" value="no"><label for="calls-no">Not really</label>
+</div>
+<p class="q-help">If a call is how most people reach you, form tracking alone will miss most of your leads.</p>
+</div>
+
+<div class="q">
+<span class="q-label" id="crm-l">Where do new leads end up?</span>
+<div class="seg stack" role="radiogroup" aria-labelledby="crm-l">
+<input type="radio" id="crm-source" name="crm" value="source"><label for="crm-source">In a CRM, with the campaign that sent them</label>
+<input type="radio" id="crm-nosource" name="crm" value="nosource"><label for="crm-nosource">In a CRM, but we can't see the source</label>
+<input type="radio" id="crm-none" name="crm" value="none"><label for="crm-none">An inbox or spreadsheet</label>
+</div>
+<p class="q-help">A CRM is the system that keeps your contacts and deals, like HubSpot.</p>
+</div>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See your Tracking Build List</button>
+</form>
+</section>
+
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your tracking</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">4 of 7</span><span class="hero-unit" id="out-unit">core pieces are missing</span></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Tracking Build List</h2>
+<p class="deliv-sub" id="deliv-sub">Install in this order. Each piece depends on the one before it.</p>
+</div>
+<ol class="strip" id="strip" aria-label="Your tracking stack at a glance"></ol>
+<ol class="steps" id="plan"></ol>
+<h3 class="sub-h" id="test-h">Test it</h3>
+<p class="deliv-sub">Tick these off once everything is installed. Nothing here is saved; print or copy your plan to keep it.</p>
+<ul class="testlist" id="testlist" aria-labelledby="test-h"></ul>
+</section>
+
+<section class="panel complex" aria-labelledby="complex-h">
+<h2 id="complex-h">Where it gets complex</h2>
+<p class="deliv-sub">These need judgment, a developer, or both. That is where Big Leap comes in.</p>
+<ul id="complex-list"></ul>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want it built and checked for you?</h2>
+<p>Copy your build list and work through it, or bring it to a call. It's what we'd look at first.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-07" target="_blank" rel="noopener">Talk to Dallas about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we count this</summary>
+<div class="method-body">
+<p><b>Core pieces</b> are the ones every business that markets online needs: a place to manage tags (Google Tag Manager, or Shopify's own Google and Meta apps on Shopify), GA4, Search Console, and a CRM that keeps each lead's source. Consent Mode counts when you have EU, UK or EEA visitors (or aren't sure). One ad tag counts for each ad platform you run or plan. Call tracking counts when calls matter a lot.</p>
+<p><b>Missing</b> means you answered No. <b>Check</b> means you answered Not sure or Some: it might already be done. Optional items are not counted.</p>
+<p><b>Time</b> is a rule-of-thumb range for someone doing it for the first time, added up across missing and check items. DNS changes and ad platform reviews can add waiting time on top.</p>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build. Menu paths were checked in October 2026 and may move.</p>
+<p>© Big Leap · RevOps DIY Toolkit 7 of 7 · Draft 1 · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+   SETTINGS: edit these before launch.
+   OWNER / CTA_URL: who the closing button names and where it goes.
+   SERIES: every toolkit in the RevOps series (this is toolkit 7).
+   LINKS: the shared cross-link map (BUILD_SPEC section 5). Relative URLs.
+   ===================================================================== */
+const OWNER = { name: 'Dallas Olsen', first: 'Dallas' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-07'; // swap for Dallas Olsen's meeting scheduler link
+const SERIES = [
+  { n: 1, short: 'Capture', title: 'Is Every Lead Reaching Your CRM?', file: '01_Is_Every_Lead_Reaching_Your_CRM.html' },
+  { n: 2, short: 'Reply', title: 'Never Let a Lead Go Cold', file: '02_Never_Let_a_Lead_Go_Cold.html' },
+  { n: 3, short: 'Route', title: 'Who Should Own Each New Lead?', file: '03_Who_Should_Own_Each_New_Lead.html' },
+  { n: 4, short: 'Automate', title: 'Which Sales Steps Should Run Themselves?', file: '04_Which_Sales_Steps_Should_Run_Themselves.html' },
+  { n: 5, short: 'Find waste', title: 'How Much Time Is Your Sales Process Wasting?', file: '05_How_Much_Time_Is_Your_Sales_Process_Wasting.html' },
+  { n: 6, short: 'Report', title: 'Is Your Pipeline Ready for a Dashboard?', file: '06_Is_Your_Pipeline_Ready_for_a_Dashboard.html' },
+  { n: 7, short: 'Measure', title: 'Can You See What Your Marketing Does?', file: '07_Can_You_See_What_Your_Marketing_Does.html' },
+];
+const LINKS = {
+  profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
+  adsReady:  { name: 'Is Your Google Ads Account Ready?',      url: '../paid/02_Is_Your_Google_Ads_Account_Ready.html',     owner: 'Scott Smoot' },
+  campaigns: { name: 'Which Campaigns Should You Run First?',  url: '../paid/04_Which_Campaigns_Should_You_Run_First.html', owner: 'Scott Smoot' },
+  tracking:  { name: 'Can You See What Your Marketing Does?',  url: '07_Can_You_See_What_Your_Marketing_Does.html', owner: 'Dallas Olsen' },
+  conversions:{ name: 'Which Conversions Should You Track?',   url: '../paid/03_Which_Conversions_Should_You_Track.html', owner: 'Scott Smoot' },
+  seoBasics: { name: 'Can Google Find and Trust Your Site?',   url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',   owner: 'Shema Al-Darwish' },
+  local:     { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html', owner: 'Shema Al-Darwish' },
+  prReady:   { name: 'Are You Ready to Be Pitched?',           url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',            owner: 'Kristina Ainge' },
+  mediaKit:  { name: 'Build Your Media Kit',                   url: '../pr/02_Build_Your_Media_Kit.html',                   owner: 'Kristina Ainge' },
+  leadCapture:{ name: 'Is Every Lead Reaching Your CRM?',      url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',    owner: 'Dallas Olsen' },
+  speedToLead:{ name: 'Never Let a Lead Go Cold',              url: '../revops/02_Never_Let_a_Lead_Go_Cold.html',           owner: 'Dallas Olsen' },
+  pipelineDash:{ name: 'Is Your Pipeline Ready for a Dashboard?', url: '../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html', owner: 'Dallas Olsen' },
+  hub:       { name: 'All DIY Toolkits',                       url: '../../index.html',                                     owner: '' },
+};
+const EXAMPLE = { platform: 'wordpress', gtm: 'no', ga4: 'yes', ga4how: 'site', gsc: 'unsure', eu: 'no', banner: 'none', channels: ['google', 'meta'], tags: 'none', calls: 'some', crm: 'nosource' };
+/* Rule-of-thumb setup minutes [low, high] for a first-timer. Used only for the time ranges. */
+const ASSUMPTIONS = {
+  gtm: [20, 45], consent: [60, 180], ga4: [30, 60], ga4Check: [15, 45], gsc: [15, 40],
+  googleTag: [20, 45], meta: [30, 90], linkedin: [15, 30], calls: [30, 120], crm: [60, 180], test: [30, 60],
+};
+/* ---------- Shared Business Profile helper (identical in every DIY toolkit) ---------- */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* ---------- Series shell helpers (same as Paid Media 3) ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.\-]/g, '')); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+function money(n) { return '$' + fmt(Math.round(n)); }
+function timeRange(lowMin, highMin) {
+  if (highMin <= 0) return 'no setup time';
+  if (highMin < 60) return Math.round(lowMin) + '–' + Math.round(highMin) + ' minutes';
+  const r = (m) => { const h = m / 60; return h < 10 ? fmt(Math.round(h * 2) / 2, 1) : fmt(Math.round(h)); };
+  const a = lowMin < 60 ? Math.round(lowMin) + ' min' : r(lowMin), b = r(highMin);
+  return (a === b ? 'about ' + a : a + '–' + b) + ' hours';
+}
+function linkHtml(key, label) {
+  const l = LINKS[key];
+  if (!l) return esc(label || '');
+  return '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>';
+}
+function linkText(key) { const l = LINKS[key]; return l ? l.name + ' (' + l.url + ')' : ''; }
+
+function renderStepper(current) {
+  const ol = $('stepper-list');
+  ol.style.setProperty('--n', SERIES.length);
+  ol.innerHTML = SERIES.map((k) => {
+    const cur = k.n === current;
+    const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+    return '<li>' + (cur
+      ? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+      : '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+  }).join('');
+  $('stepper-note').innerHTML = 'Not sure where to start? <a href="05_How_Much_Time_Is_Your_Sales_Process_Wasting.html">Toolkit 5</a> ranks what to fix first.';
+}
+
+/* Profile strip. onApply(profile) maps profile fields onto this toolkit's questions. */
+function initProfileStrip(onApply, onClear) {
+  const box = $('profile');
+  function describe(p) {
+    const bits = [];
+    bits.push(p.name || p.industry || 'Your business');
+    const model = { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' }[p.model];
+    if (model) bits.push(model);
+    const reach = { local: 'Local', regional: 'Regional', national: 'National', international: 'International' }[p.reach];
+    if (reach) bits.push(reach);
+    return bits.join(' · ');
+  }
+  function draw() {
+    const p = loadProfile();
+    if (p && p.v === 1) {
+      box.innerHTML = '<div class="profile-row"><p>Using your Business Profile: <b>' + esc(describe(p)) + '</b></p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Change</a>' +
+        '<button type="button" class="text-btn" id="profile-clear">Clear</button></div>' +
+        '<p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>';
+      $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onClear(); $('profile-status') && ($('profile-status').textContent = ''); });
+    } else {
+      box.innerHTML = '<div class="profile-row"><p>Answer 8 questions once and most toolkits fill themselves in. ' + linkHtml('profile', 'Build your Business Profile →') + '</p></div>' +
+        '<details id="paste-box"><summary>Paste a profile code</summary>' +
+        '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
+        '<input class="text-field" id="profile-code" type="text" autocomplete="off" spellcheck="false" placeholder="BL1.…">' +
+        '<button type="button" class="btn btn-plain" id="profile-load">Use this profile</button></div></details>' +
+        '<p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>';
+      $('profile-load').addEventListener('click', () => {
+        const p2 = decodeProfile($('profile-code').value);
+        if (!p2) { $('profile-status').textContent = 'That code did not work. Copy the whole code, starting with BL1.'; return; }
+        saveProfile(p2); draw(); onApply(p2);
+        $('profile-status').textContent = 'Profile loaded. Answers marked "From your profile" came from it; you can still change any of them.';
+      });
+    }
+  }
+  draw();
+  const p = loadProfile();
+  return (p && p.v === 1) ? p : null;
+}
+// Adds or removes the "From your profile" tag next to a question label.
+function markFromProfile(labelId, on) {
+  const el = $(labelId);
+  if (!el) return;
+  const tag = el.querySelector('.from-profile');
+  if (on && !tag) el.insertAdjacentHTML('beforeend', ' <span class="from-profile">From your profile</span>');
+  if (!on && tag) tag.remove();
+}
+
+/* Build-list renderer. items: [{ title, status:'ok'|'gap'|'check'|'later', why, steps:[], time, warn, link:{key,why} }]
+   The first three open items (gap or check) get "Do first". */
+const STATUS = { ok: 'OK', gap: 'Gap', check: 'Check', later: 'Optional' };
+function renderSteps(el, items) {
+  let open = 0;
+  el.innerHTML = items.map((t, i) => {
+    const isOpen = t.status === 'gap' || t.status === 'check';
+    const first = isOpen && open++ < 3;
+    const done = t.status === 'ok';
+    return '<li class="' + (done ? 'is-done' : first ? 'is-first' : '') + '">' +
+      '<span class="sn" aria-hidden="true">' + (done ? '✓' : i + 1) + '</span><div class="sb">' +
+      '<div class="st-top"><span class="st-title">' + esc(t.title) + '</span><span class="chips">' +
+      '<span class="chip ' + (t.status === 'check' ? 'gap' : t.status) + '">' + STATUS[t.status] + '</span>' +
+      (first ? '<span class="chip first">Do first</span>' : '') + '</span></div>' +
+      (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+      (t.warn ? '<p class="warn"><b>Watch out:</b> ' + esc(t.warn) + '</p>' : '') +
+      (t.steps && t.steps.length && !done ? '<div class="st-how"><b>How to do it</b><ol>' + t.steps.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ol></div>' : '') +
+      (t.time && !done ? '<p class="st-time">Time: ' + esc(t.time) + '</p>' : '') +
+      (t.link ? '<p class="kit-link">Free toolkit: ' + linkHtml(t.link.key) + (t.link.why ? ' · ' + esc(t.link.why) : '') + '</p>' : '') +
+      '</div></li>';
+  }).join('');
+}
+function stepsText(items) {
+  const out = [];
+  let open = 0;
+  items.forEach((t, i) => {
+    const isOpen = t.status === 'gap' || t.status === 'check';
+    const first = isOpen && open++ < 3;
+    const done = t.status === 'ok';
+    out.push((i + 1) + '. [' + STATUS[t.status] + '] ' + t.title + (first ? ' (do this first)' : ''));
+    if (t.why) out.push('   ' + t.why);
+    if (t.warn) out.push('   Watch out: ' + t.warn);
+    if (!done && t.steps) t.steps.forEach((x, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + x));
+    if (!done && t.time) out.push('   Time: ' + t.time);
+    if (t.link) out.push('   Free toolkit: ' + linkText(t.link.key));
+  });
+  return out;
+}
+function renderComplex(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  $('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? ' <span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+}
+function complexText(list, flags) {
+  const f = flags || {};
+  return list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0)).map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text);
+}
+// links: [{ key, why }]
+function renderXlinks(links) {
+  $('xlinks').hidden = links.length === 0;
+  $('xlinks-list').innerHTML = links.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+}
+function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + LINKS[l.key].url); }
+function renderNext(key, why) {
+  $('next-title').innerHTML = linkHtml(key);
+  $('next-why').textContent = why;
+}
+function setExampleState(isExample, exampleText) {
+  const pill = $('example-pill');
+  pill.textContent = isExample ? 'Example answers' : 'Your answers';
+  pill.classList.toggle('is-yours', !isExample);
+  $('example-text').textContent = isExample ? exampleText : 'Your results update as you go.';
+  $('restore-example').hidden = isExample;
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+  const el = $('answer');
+  if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+  lastHeadline = key;
+}
+function copyWithFallback(text, onDone, host) {
+  const fallback = () => {
+    let box = host.querySelector('.copy-fallback');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'copy-fallback';
+      const id = host.id + '-text';
+      box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+      host.appendChild(box);
+    }
+    const ta = box.querySelector('textarea');
+    ta.value = text; ta.focus(); ta.select();
+    let ok = false;
+    try { ok = document.execCommand && document.execCommand('copy'); } catch (e) { ok = false; }
+    if (ok) onDone();
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) navigator.clipboard.writeText(text).then(onDone, fallback);
+    else fallback();
+  } catch (err) { fallback(); }
+}
+function initCopy(getText) {
+  const btn = $('copy-btn');
+  let timer = null;
+  btn.addEventListener('click', () => {
+    copyWithFallback(getText(), () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      $('copy-status').textContent = 'Your plan is copied. Paste it into an email, a doc or a ticket for whoever builds it.';
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = 'Copy my plan'; btn.classList.remove('is-copied'); $('copy-status').textContent = ''; }, 3000);
+    }, $('copy-host'));
+  });
+  return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+function initSticky() {
+  const q = $('col-q'), r = $('results');
+  const wide = window.matchMedia('(min-width: 880px)');
+  function update() {
+    q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+    if (!wide.matches) return;
+    const room = window.innerHeight - 32;
+    if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+    else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+  }
+  window.addEventListener('resize', update);
+  if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+  return update;
+}
+function initShell(current, onRestore) {
+  renderStepper(current);
+  $('cta-link').href = CTA_URL;
+  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+  $('hub-link').href = LINKS.hub.url;
+  $('restore-example').addEventListener('click', onRestore);
+  $('see-results').addEventListener('click', () => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    $('answer').focus({ preventScroll: true });
+  });
+}
+// Form value helpers
+function radioVal(form, name) { const els = form.querySelectorAll('input[name="' + name + '"]'); for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value; return ''; }
+function setRadio(form, name, value) { const el = form.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function checkedVals(form, name) { return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map((x) => x.value); }
+function setChecks(form, name, values) { form.querySelectorAll('input[name="' + name + '"]').forEach((x) => { x.checked = values.indexOf(x.value) !== -1; }); }
+function sameSet(a, b) { return a.length === b.length && a.every((x) => b.indexOf(x) !== -1); }
+
+/* ---------- RevOps Toolkit 7: Can You See What Your Marketing Does? ---------- */
+const PLATFORM_NAME = { wordpress: 'WordPress', shopify: 'Shopify', squarespace: 'Squarespace', wix: 'Wix', webflow: 'Webflow', hubspot: 'HubSpot CMS', custom: 'your custom site', unsure: 'your site' };
+const GTM_INSTALL = {
+  wordpress: 'WordPress: Plugins → Add New → install "GTM4WP" (Google Tag Manager for WordPress), then Settings → Google Tag Manager → paste your GTM- ID. Or have your developer paste both snippets into the theme header.',
+  squarespace: 'Squarespace: Settings → Developer tools → Code injection (older menus: Settings → Advanced → Code Injection) → paste the head snippet into Header. Code injection needs a paid plan that includes it.',
+  wix: 'Wix: Marketing & SEO → Marketing Integrations → Google Tag Manager → Connect → paste your GTM- ID. Needs a premium plan and a connected domain.',
+  webflow: 'Webflow: Site settings → Custom code → paste the head snippet into Head code and the body snippet into Footer code → Save → Publish. Needs a paid site plan.',
+  hubspot: 'HubSpot CMS: Settings → Website → Pages → Templates → Site header HTML → paste the head snippet → Save.',
+  custom: 'Custom site: ask your developer to paste the head snippet as high in <head> as possible and the body snippet right after <body>, on every page template.',
+  unsure: 'Find out what the site runs on first (footer, or ask whoever built it). The install step depends on the platform.',
+};
+const SITEMAP = {
+  wordpress: 'WordPress makes /wp-sitemap.xml; SEO plugins like Yoast or Rank Math use /sitemap_index.xml.',
+  shopify: 'Shopify makes /sitemap.xml for you.', squarespace: 'Squarespace makes /sitemap.xml for you.', wix: 'Wix makes /sitemap.xml for you.',
+  webflow: 'Webflow makes /sitemap.xml once you turn it on in Site settings → SEO.', hubspot: 'HubSpot makes /sitemap.xml for you.',
+  custom: 'Ask your developer for the sitemap URL; /sitemap.xml is the usual place.', unsure: 'Try yoursite.com/sitemap.xml first.',
+};
+const COMPLEX = [
+  { key: 'serverSide', title: 'Server-side tagging', text: 'Sending events from your server instead of the browser holds up better against ad blockers and browser limits, but it needs hosting, a developer and ongoing care.' },
+  { key: 'consent', title: 'Consent rules across countries', text: 'Which tags may fire before consent, how long cookies last, and what your banner must say are legal calls as much as technical ones.' },
+  { key: 'doubleTag', title: 'Untangling an old setup', text: 'Sites that changed agencies or plugins often carry two GA4 installs, old Universal Analytics code or orphaned pixels. Cleaning it up without losing history takes care.' },
+  { key: 'crossDomain', title: 'Several domains, subdomains or a separate checkout', text: 'Booking engines, shops on another domain and subdomains need cross-domain measurement, or every hop looks like a new visit from "referral".' },
+  { key: 'calls', title: 'Call tracking tied to revenue', text: 'Matching a tracked call to the deal it became, and sending that back to Google Ads, needs your call tool, CRM and ad accounts set up to talk to each other.' },
+  { key: 'enhanced', title: 'Enhanced conversions and the Meta Conversions API by hand', text: 'Sending hashed customer details (email, phone) improves matching, but done wrong it breaks privacy rules or double-counts sales.' },
+];
+
+function model(i, a) {
+  const items = [];
+  const shop = i.platform === 'shopify';
+  const ch = i.channels;
+  const gtmLive = i.gtm === 'yes';
+  const T = (k) => a[k];
+  // 1. Tag manager
+  if (shop) {
+    items.push({ key: 'gtm', core: false, status: i.gtm === 'yes' ? 'ok' : 'later', title: 'Tag management on Shopify',
+      why: i.gtm === 'yes' ? 'You have GTM. On Shopify, keep Google and Meta tracking in Shopify\'s own apps and use GTM only for extras, so nothing fires twice.' : 'Shopify doesn\'t need Google Tag Manager to start. Its free Google & YouTube app and Facebook & Instagram app install GA4, Google Ads and the Meta pixel for you, including checkout.',
+      steps: ['Shopify admin → Sales channels → add Google & YouTube, and Facebook & Instagram.', 'Add GTM later only for tags those apps don\'t cover: Settings → Customer events → Add custom pixel.', 'Don\'t paste GA4 or Meta code into your theme as well. That is the most common way Shopify stores double-count.'],
+      time: timeRange(10, 30), t: [10, 30] });
+  } else {
+    items.push({ key: 'gtm', core: true, status: i.gtm === 'yes' ? 'ok' : i.gtm === 'no' ? 'gap' : 'check',
+      title: i.gtm === 'unsure' ? 'Check for Google Tag Manager' : 'Install Google Tag Manager',
+      why: i.gtm === 'yes' ? 'Your tags have one home. Everything below goes into this container.' : i.gtm === 'unsure' ? 'Find out first. Open your site, right-click → View page source, and search for "GTM-". If you find one, get access from whoever owns it rather than making a second container.' : 'Every tag below goes into Tag Manager, so this comes first. You make changes in one place instead of editing the site each time.',
+      steps: ['Go to tagmanager.google.com → Create account. Name the container after your domain and choose Web.', 'Copy the container ID (GTM-XXXXXXX) and the two install snippets.', GTM_INSTALL[i.platform], 'Back in Tag Manager, click Submit → Publish once, even with no tags yet, so the container goes live.', 'Check it: Tag Manager → Preview → enter your URL. Tag Assistant should say it connected.'],
+      time: timeRange(T('gtm')[0], T('gtm')[1]), t: T('gtm') });
+  }
+  // 2. Consent
+  const euCore = i.eu === 'yes' || i.eu === 'unsure';
+  if (euCore) {
+    const st = i.banner === 'cm' ? 'ok' : (i.banner === 'none' && i.eu === 'yes') ? 'gap' : 'check';
+    const nativeStep = shop ? 'Shopify: Settings → Customer privacy → Cookie banner. The Google & YouTube app reads the visitor\'s choice for you.'
+      : i.platform === 'hubspot' ? 'HubSpot CMS: Settings → Privacy & Consent → Cookies. Turn on the Google Consent Mode option in the banner settings.'
+      : i.platform === 'wordpress' ? 'WordPress: most consent tools have a plugin (Complianz and CookieYes are common). Pick one that lists Google Consent Mode v2 support.'
+      : 'Pick a consent tool from Google\'s list of certified consent platforms (Cookiebot, CookieYes, Usercentrics and OneTrust are common).';
+    items.push({ key: 'consent', core: true, status: st,
+      title: i.banner === 'basic' ? 'Connect your banner to Google Consent Mode' : 'Add a consent banner with Google Consent Mode',
+      why: i.banner === 'cm' ? 'Your banner passes Accept or Decline to Google. Recheck it after any change to the banner.' : i.eu === 'unsure' ? 'Check GA4 → Reports → Demographics → Country. If any EU, UK or EEA visitors show up, set this up before ad tags.' : 'Without it, Google limits ads measurement and remarketing for EEA and UK visitors. It goes in before GA4 and the ad tags so they respect the choice from the first page.',
+      warn: 'This is the technical setup, not legal advice. Have whoever owns your privacy policy confirm what the banner must say.',
+      steps: shop ? [nativeStep, 'Set the banner region to cover the EEA, UK and Switzerland, and make Decline as easy to click as Accept.', 'Check the Facebook & Instagram app also respects the choice: its data sharing settings follow Shopify\'s customer privacy settings.', 'Test in Tag Assistant: the Consent tab should show a default state, then an update after you click Accept.']
+        : [nativeStep, 'Install it through its Tag Manager template (Templates → Tag Templates → Search Gallery) firing on "Consent Initialization – All Pages", or through its plugin or app.', 'Set the default to "denied" for EEA, UK and Swiss visitors, and to update when they click Accept.', 'In Tag Manager: Admin → Container settings → turn on "Enable consent overview", then check every tag has consent settings.', 'Test in Tag Assistant: the Consent tab should show a default state, then an update after you click Accept.'],
+      time: timeRange(T('consent')[0], T('consent')[1]), t: T('consent') });
+  } else if (ch.length) {
+    items.push({ key: 'usPrivacy', core: false, status: i.banner === 'none' ? 'later' : 'ok', title: 'Check US state privacy rules',
+      why: i.banner === 'none' ? 'Several US states, California first, give visitors the right to opt out of ad tracking, and ad pixels count. Many sites add a "Do Not Sell or Share My Personal Information" link and honor the Global Privacy Control signal.' : 'You have a banner. Ask whoever owns your privacy policy whether it also handles US opt-outs.',
+      steps: ['Ask whoever owns your privacy policy which state laws apply to you.', 'Most consent tools above can also handle US opt-out rules, so one tool covers both.'], time: timeRange(30, 90), t: [30, 90] });
+  }
+  // 3. GA4
+  let ga4Status, ga4Title, ga4Why, ga4Warn = '', ga4Steps, ga4T;
+  const ga4Install = shop ? 'Shopify: Google & YouTube app → Settings → connect your Google account → choose this GA4 property. Don\'t also add GA4 to your theme or Tag Manager.'
+    : 'In Tag Manager: Tags → New → Google tag → Tag ID = your G- ID → Trigger: Initialization – All Pages → Save → Submit → Publish.';
+  const doubleRisk = i.ga4 === 'yes' && (i.ga4how === 'both' || (i.ga4how === 'site' && gtmLive && !shop));
+  if (i.ga4 === 'no') {
+    ga4Status = 'gap'; ga4Title = 'Set up Google Analytics 4';
+    ga4Why = 'GA4 shows where visitors come from and what they do. Your conversions, ad audiences and SEO reports all build on it.';
+    ga4Steps = ['analytics.google.com → Admin → Create → Property. Set your time zone and currency.', 'Data collection → Data streams → Add stream → Web. Enter your URL and leave Enhanced measurement on (scrolls, outbound clicks, site search, file downloads and form starts, free).', 'Copy the Measurement ID (starts with G-).', ga4Install, 'Admin → Data collection and modification → Data retention → set event data to 14 months (the default is 2).', 'Optional: Data streams → your stream → Configure tag settings → Define internal traffic, so your own visits don\'t count.'];
+    ga4T = T('ga4');
+  } else if (i.ga4 === 'unsure') {
+    ga4Status = 'check'; ga4Title = 'Check whether GA4 is installed';
+    ga4Why = 'Someone may have set it up already. Find it before making a new one, so you keep the history.';
+    ga4Steps = ['Open tagassistant.google.com → Add domain → enter your URL. Look for a Google tag whose ID starts with G-.', 'No luck? View page source and search for "G-" or "gtag".', 'Found one: ask whoever owns it to add you at Admin → Account access management (Administrator).', 'Found none: follow the setup steps for a new GA4 property (14-month data retention, Enhanced measurement on).'];
+    ga4T = T('ga4Check');
+  } else if (doubleRisk) {
+    ga4Status = 'check'; ga4Title = 'Make sure GA4 isn\'t installed twice';
+    ga4Why = 'GA4 is in, but it may be loading from two places. Duplicate tags count page views and events twice, so page views, events and conversions look inflated.';
+    ga4Warn = 'Keep exactly one install.';
+    ga4Steps = ['Open tagassistant.google.com, connect your site and load two pages.', 'If the same G- ID shows up twice, or GA4 → Reports → Realtime shows two page_view events per page, you are double-tagged.', 'Keep one install. If Tag Manager is your setup, remove GA4 from the plugin, theme or platform settings (WordPress: Site Kit or MonsterInsights; Shopify: theme code if the Google & YouTube app is connected).', 'Recheck in Tag Assistant until each page shows one page_view.'];
+    ga4T = T('ga4Check');
+  } else {
+    ga4Status = 'ok'; ga4Title = 'Google Analytics 4 is installed';
+    ga4Why = 'Two quick checks while you\'re in: Admin → Data retention set to 14 months, and Enhanced measurement on in your web data stream.';
+    if (i.ga4how === 'site' && !shop) ga4Warn = 'GA4 comes from a plugin or site setting. When you add Tag Manager, don\'t add a second GA4 tag there. Either keep the plugin, or move GA4 into Tag Manager and switch the plugin\'s tracking off.';
+    ga4T = [0, 0];
+  }
+  items.push({ key: 'ga4', core: true, status: ga4Status, title: ga4Title, why: ga4Why, warn: ga4Warn, steps: ga4Steps, time: timeRange(ga4T[0], ga4T[1]), t: ga4T });
+  // 4. Search Console
+  items.push({ key: 'gsc', core: true, status: i.gsc === 'yes' ? 'ok' : i.gsc === 'no' ? 'gap' : 'check',
+    title: i.gsc === 'unsure' ? 'Check Search Console access' : 'Verify your site in Google Search Console',
+    why: i.gsc === 'yes' ? 'Link it to GA4 if you haven\'t: GA4 Admin → Product links → Search Console links.' : i.gsc === 'unsure' ? 'Go to search.google.com/search-console. If your site is listed, you\'re in. If not, someone else may own it; ask before adding a new one.' : 'It shows which Google searches find you and flags pages Google can\'t index. AI Overview impressions are included in its totals, though not broken out separately.',
+    steps: ['search.google.com/search-console → Add property → Domain → type your domain without https://.', 'Copy the TXT record and add it in your domain registrar\'s DNS settings (GoDaddy, Namecheap, Cloudflare and so on). Click Verify. DNS can take a few hours.', 'No DNS access? Choose URL prefix instead and verify with your GA4 or Tag Manager account.', 'Sitemaps → submit your sitemap URL. ' + SITEMAP[i.platform], 'In GA4: Admin → Product links → Search Console links → Link.'],
+    time: timeRange(T('gsc')[0], T('gsc')[1]), t: T('gsc'), link: i.gsc !== 'yes' ? { key: 'seoBasics', why: 'once you\'re verified, it checks whether Google can find and trust your site.' } : null });
+  // 5. Ad tags
+  const tagStatus = i.tags === 'all' ? 'ok' : i.tags === 'none' ? 'gap' : 'check';
+  if (ch.indexOf('google') !== -1) items.push({ key: 'googleTag', core: true, status: tagStatus,
+    title: tagStatus === 'check' ? 'Check the Google Ads tag' : 'Add the Google Ads tag',
+    why: tagStatus === 'ok' ? 'Make sure GA4 and Google Ads are linked: GA4 Admin → Product links → Google Ads links.' : 'Google Ads needs its tag on every page to count conversions and build remarketing lists. Which actions count as conversions is the next toolkit.',
+    steps: ['Google Ads → Goals → Conversions → Summary → New conversion action → Website → enter your domain. Choose "Use Google Tag Manager" to see your Conversion ID (AW-…).',
+      shop ? 'Shopify: connect your Google Ads account in the Google & YouTube app. It adds the tag and purchase conversions for you.' : 'In Tag Manager: add your AW- ID to your Google tag (or a new Google tag), and add a Conversion Linker tag on All Pages. Submit → Publish.',
+      'Link GA4 and Google Ads: GA4 Admin → Product links → Google Ads links.', 'Check auto-tagging is on: Google Ads → Admin → Account settings → Auto-tagging.'],
+    time: timeRange(T('googleTag')[0], T('googleTag')[1]), t: T('googleTag'), link: { key: 'adsReady', why: 'the rest of the account setup before your first campaign.' } });
+  if (ch.indexOf('meta') !== -1) {
+    const metaInstall = shop ? 'Shopify: install the Facebook & Instagram app and set data sharing to Maximum. That turns on the pixel and the Conversions API together.'
+      : i.platform === 'wordpress' ? 'WordPress: install Meta\'s official pixel plugin, or add the Meta Pixel template in Tag Manager (Templates → Search Gallery) firing on All Pages.'
+      : (i.platform === 'wix' || i.platform === 'squarespace') ? PLATFORM_NAME[i.platform] + ': paste the pixel ID into the built-in Meta / Facebook Pixel field in your marketing integration settings.'
+      : 'In Tag Manager: Templates → Search Gallery → add the Meta Pixel template, paste your pixel ID, fire on All Pages. Submit → Publish.';
+    items.push({ key: 'meta', core: true, status: tagStatus,
+      title: tagStatus === 'check' ? 'Check the Meta pixel and Conversions API' : 'Add the Meta pixel and Conversions API',
+      why: tagStatus === 'ok' ? 'Check Events Manager → your dataset → Overview. Event match quality and "Conversions API: active" should both show.' : 'The pixel reports from the browser; the Conversions API reports from the server, so Meta still hears about sales when browsers block the pixel. You want both.',
+      steps: ['Meta Events Manager → Connect data sources → Web → name your dataset (pixel) → enter your site URL.', metaInstall,
+        'Turn on the Conversions API: Events Manager → your dataset → Settings → Conversions API → "Set up with a partner integration" if your platform is listed (Shopify, WordPress, Wix, Squarespace and HubSpot are), or use the Conversions API Gateway.',
+        'If you send the same event from both the pixel and the Conversions API yourself, give both the same event ID so Meta counts it once.', 'Events Manager → Test events: browse your site and watch events arrive.'],
+      time: timeRange(T('meta')[0], T('meta')[1]), t: T('meta') });
+  }
+  if (ch.indexOf('linkedin') !== -1) items.push({ key: 'linkedin', core: true, status: tagStatus,
+    title: tagStatus === 'check' ? 'Check the LinkedIn Insight Tag' : 'Add the LinkedIn Insight Tag',
+    why: tagStatus === 'ok' ? 'In Campaign Manager the tag should show as Active for every domain you advertise.' : 'LinkedIn needs it to count conversions and to build audiences from people who visited your site.',
+    steps: ['LinkedIn Campaign Manager → Analyze → Insight Tag → Install my Insight Tag → "I will use a tag manager" → copy your Partner ID.',
+      i.platform === 'hubspot' ? 'HubSpot CMS: connect LinkedIn Ads under Marketing → Ads and HubSpot can add the Insight Tag to your pages. Otherwise use Tag Manager as below.' : 'In Tag Manager: Tags → New → LinkedIn Insight (template gallery) → paste the Partner ID → trigger All Pages → Submit → Publish.',
+      'Back in Campaign Manager, the tag turns Active once LinkedIn sees traffic. That can take up to a day.'],
+    time: timeRange(T('linkedin')[0], T('linkedin')[1]), t: T('linkedin') });
+  // 6. Call tracking
+  if (i.calls !== 'no') items.push({ key: 'calls', core: i.calls === 'lot', status: i.calls === 'lot' ? 'check' : 'later',
+    title: 'Track phone calls',
+    why: i.calls === 'lot' ? 'Calls are your main lead source, so tracking forms alone hides most of what your marketing does. Already tracking calls? Check they show up in GA4 and your CRM.' : 'Start with tap-to-call tracking. Add a call tracking service later if calls grow.',
+    steps: ['Make every phone number on the site a tap-to-call link (tel:+15555550123), so taps can be counted.', 'Track the taps as a click_to_call event. The next toolkit sets that up.'].concat(
+      ch.indexOf('google') !== -1 ? ['Running Google Ads? Add a call asset (Ads → Assets → + → Call) and count "Calls from ads" with a minimum call length, such as 60 seconds.'] : [],
+      ['Need to know which campaign drove a call? A call tracking service (CallRail, CallTrackingMetrics, WhatConverts and others) shows a different number per traffic source and sends calls to GA4, Google Ads and your CRM. It\'s a paid tool; most install with one script through Tag Manager.']),
+    time: timeRange(T('calls')[0], T('calls')[1]), t: i.calls === 'lot' ? T('calls') : [0, 0] });
+  // 7. CRM
+  items.push({ key: 'crm', core: true, status: i.crm === 'source' ? 'ok' : 'gap',
+    title: i.crm === 'none' ? 'Get every lead into a CRM' : i.crm === 'nosource' ? 'Keep the source on every lead' : 'Leads land in your CRM with their source',
+    why: i.crm === 'source' ? 'That\'s what lets you send qualified leads and sales back to your ad platforms later.' : i.crm === 'nosource' ? 'Your analytics can see the visit, but your CRM can\'t say which campaign the lead came from. That breaks every report on cost per lead and closed revenue.' : 'Leads that only live in an inbox can\'t be traced back to the ad or search that sent them.',
+    steps: i.crm === 'source' ? [] : ['Use the RevOps toolkit below. It covers the HubSpot tracking code, hidden UTM fields on forms, and connecting every form to the CRM, in build order.', 'Using another CRM? The same idea applies: tracking code on every page, hidden UTM fields on every form.', 'HubSpot and Google Ads: connect the account under Marketing → Ads so ad clicks are kept on the contact.'],
+    time: timeRange(T('crm')[0], T('crm')[1]), t: T('crm'), link: { key: 'leadCapture', why: i.crm === 'source' ? 'a two-minute recheck of every form.' : 'the step-by-step fix, owned by Dallas Olsen.' } });
+  // 8. Test
+  items.forEach((t) => { if (t.status === 'ok' || t.status === 'later') t.t = [0, 0]; });
+  const openAny = items.some((t) => t.status === 'gap' || t.status === 'check');
+  items.push({ key: 'test', core: false, status: openAny ? 'check' : 'ok', title: 'Test everything end to end',
+    why: openAny ? 'Do this after each install, then once more at the end. Use the checklist below.' : 'Everything is in. Run the checklist below once a quarter, and after any site change.',
+    steps: ['Tag Manager → Preview, then browse your site with Tag Assistant open.', 'GA4 → Admin → DebugView, and Reports → Realtime.', 'Submit a test lead from a private window using a test UTM link, then find it in your CRM.'],
+    time: timeRange(T('test')[0], T('test')[1]), t: openAny ? T('test') : [0, 0] });
+
+  const core = items.filter((t) => t.core);
+  const missing = core.filter((t) => t.status === 'gap').length;
+  const check = core.filter((t) => t.status === 'check').length;
+  const lo = items.reduce((s, t) => s + (t.t ? t.t[0] : 0), 0), hi = items.reduce((s, t) => s + (t.t ? t.t[1] : 0), 0);
+  // Test checklist
+  const tests = [];
+  if (!shop) tests.push('<b>Tag Manager Preview</b> connects, and your tags show under "Tags Fired" on page load.');
+  tests.push('<b>Tag Assistant</b> (tagassistant.google.com) shows your G- ID <b>once</b> per page, not twice.');
+  if (euCore) tests.push('<b>Consent:</b> in Tag Assistant\'s Consent tab you see a default of "denied", then "granted" after you click Accept.');
+  tests.push('<b>GA4 DebugView</b> (Admin → DebugView) shows page_view as you click around.');
+  tests.push('<b>GA4 Realtime</b> shows you, with the right source when you arrive from a test link like ?utm_source=test&utm_medium=test.');
+  tests.push('<b>Search Console</b> shows your property as verified and your sitemap status as "Success".');
+  if (ch.indexOf('google') !== -1) tests.push('<b>Google Ads</b> → Goals → Conversions → Summary shows your tag as active within a day or two.');
+  if (ch.indexOf('meta') !== -1) tests.push('<b>Meta Events Manager</b> → Test events shows PageView from both Browser and Server.');
+  if (ch.indexOf('linkedin') !== -1) tests.push('<b>LinkedIn Campaign Manager</b> shows the Insight Tag as Active.');
+  if (i.calls !== 'no') tests.push('<b>Tap-to-call</b>: tap your number on a phone; the click shows in GA4 DebugView.');
+  tests.push('<b>CRM:</b> your test lead shows up with source = test and medium = test.');
+  return { items, core: core.length, missing, check, lo, hi, tests, shop, euCore, doubleRisk, ch };
+}
+function stripText(t) { return t.replace(/<[^>]+>/g, ''); }
+(function () {
+  const form = $('answers');
+  let last = null;
+  const FIELDS = ['platform', 'gtm', 'ga4', 'ga4how', 'gsc', 'eu', 'banner', 'tags', 'calls', 'crm'];
+  function readInput() {
+    const o = { platform: $('platform').value || 'unsure', channels: checkedVals(form, 'channels') };
+    FIELDS.forEach((k) => { if (k !== 'platform') o[k] = radioVal(form, k); });
+    if (!o.ga4how) o.ga4how = 'both';
+    if (!o.tags) o.tags = 'none';
+    return o;
+  }
+  function isExample(i) { return FIELDS.every((k) => i[k] === EXAMPLE[k]) && sameSet(i.channels, EXAMPLE.channels); }
+  function applyValues(v) {
+    $('platform').value = v.platform;
+    FIELDS.forEach((k) => { if (k !== 'platform') setRadio(form, k, v[k]); });
+    setChecks(form, 'channels', v.channels);
+  }
+  const PROFILE_LABELS = ['platform-l', 'gtm-l', 'ga4-l', 'eu-l', 'channels-l', 'calls-l', 'crm-l'];
+  function applyProfile(p) {
+    PROFILE_LABELS.forEach((id) => markFromProfile(id, false));
+    if (!p) return;
+    if (p.ecommerce === 'shopify') { $('platform').value = 'shopify'; markFromProfile('platform-l', true); }
+    if (['yes', 'no', 'unsure'].indexOf(p.gtm) !== -1) { setRadio(form, 'gtm', p.gtm); markFromProfile('gtm-l', true); }
+    if (['yes', 'no', 'unsure'].indexOf(p.ga4) !== -1) { setRadio(form, 'ga4', p.ga4); markFromProfile('ga4-l', true); }
+    if (p.reach === 'international') { setRadio(form, 'eu', 'yes'); markFromProfile('eu-l', true); }
+    else if (p.reach) { setRadio(form, 'eu', 'no'); markFromProfile('eu-l', true); }
+    if (p.adBudget && toNum(p.adBudget) > 0 && checkedVals(form, 'channels').length === 0) { setChecks(form, 'channels', ['google']); markFromProfile('channels-l', true); }
+    if (p.goal === 'calls') { setRadio(form, 'calls', 'lot'); markFromProfile('calls-l', true); }
+    else if (p.locations === 'one' || p.locations === 'multi') { setRadio(form, 'calls', 'some'); markFromProfile('calls-l', true); }
+    if (p.crm === 'none') { setRadio(form, 'crm', 'none'); markFromProfile('crm-l', true); }
+    else if ((p.crm === 'hubspot' || p.crm === 'other') && radioVal(form, 'crm') === 'none') { setRadio(form, 'crm', 'nosource'); markFromProfile('crm-l', true); }
+  }
+  let profile = null;
+  let mixed = false; // profile answers applied over example answers, not yet edited
+  function xlinks(m, i) {
+    const L = [];
+    if (i.crm !== 'source') L.push({ key: 'leadCapture', why: 'gets every form lead into your CRM with its source. It already covers the HubSpot tracking code and UTM fields.' });
+    if (i.gsc !== 'yes') L.push({ key: 'seoBasics', why: 'picks up where Search Console leaves off: indexing, sitemaps and the basics Google checks.' });
+    if (m.ch.indexOf('google') !== -1) L.push({ key: 'adsReady', why: 'the account settings to finish before your first Google Ads campaign.' });
+    if (m.ch.length) L.push({ key: 'campaigns', why: 'which campaign types fit your business, once tracking is in.' });
+    if (profile && (profile.locations === 'one' || profile.locations === 'multi')) L.push({ key: 'local', why: 'your Google Business Profile counts calls and direction requests too.' });
+    if (i.crm === 'source') L.push({ key: 'pipelineDash', why: 'with sources on every lead, you can report pipeline by channel.' });
+    return L;
+  }
+  function planText(m, i) {
+    const L = ['YOUR TRACKING BUILD LIST', 'Can You See What Your Marketing Does? (Big Leap RevOps DIY Toolkit 7 of 7)', ''];
+    L.push('Website: ' + PLATFORM_NAME[i.platform] + ' · Ad platforms: ' + (m.ch.length ? m.ch.map((c) => ({ google: 'Google Ads', meta: 'Meta', linkedin: 'LinkedIn' }[c])).join(', ') : 'none yet'));
+    L.push(headline(m).plain);
+    if (m.hi > 0) L.push('Setup time: ' + timeRange(m.lo, m.hi) + ' (rule of thumb, first time)');
+    L.push('', 'BUILD IN THIS ORDER');
+    stepsText(m.items).forEach((l) => L.push(l));
+    L.push('', 'TEST IT');
+    m.tests.forEach((t) => L.push('[ ] ' + stripText(t)));
+    L.push('', 'WHERE IT GETS COMPLEX');
+    complexText(COMPLEX, complexFlags(m, i)).forEach((l) => L.push(l));
+    const xl = xlinksText(xlinks(m, i));
+    L.push('', 'NEXT TOOLKIT: ' + LINKS.conversions.name + ' ' + LINKS.conversions.url);
+    if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    return L.join('\n');
+  }
+  function complexFlags(m, i) { return { consent: m.euCore, doubleTag: m.doubleRisk || i.ga4 === 'unsure' || i.gtm === 'unsure', calls: i.calls === 'lot', enhanced: m.ch.length > 0 && i.crm !== 'none' }; }
+  function headline(m) {
+    if (m.missing === 0 && m.check === 0) return { num: 'All ' + m.core, unit: 'core pieces are in place', zero: true, plain: 'All ' + m.core + ' core pieces are in place.' };
+    const unit = 'core pieces missing';
+    return { num: m.missing + ' of ' + m.core, unit, zero: m.missing === 0, plain: m.missing + ' of ' + m.core + ' ' + unit + (m.check ? ', plus ' + m.check + ' to check' : '') + '.' };
+  }
+  function render() {
+    const i = readInput(), m = model(i, ASSUMPTIONS);
+    last = { m, i };
+    $('ga4how-wrap').hidden = i.ga4 !== 'yes';
+    $('tags-wrap').hidden = i.channels.length === 0;
+    const mix = !!profile && mixed;
+    setExampleState(isExample(i) || mix, mix ? 'Answers marked "From your profile" are yours; the rest are example answers. Change any answer to make it yours.' : 'Example: a WordPress site with GA4 from a plugin, no Tag Manager, planning Google and Meta ads. Change any answer to make it yours.');
+    const h = headline(m);
+    $('out-num').textContent = h.num;
+    $('out-num').classList.toggle('is-zero', h.zero);
+    $('out-unit').textContent = h.unit;
+    let line;
+    if (m.missing === 0 && m.check === 0) line = 'You can see what your marketing does. Run the test checklist after any site change, then plan your conversions.';
+    else line = (m.check ? '<b>' + m.check + '</b> more ' + (m.check === 1 ? 'piece needs' : 'pieces need') + ' a quick check. ' : '') +
+      'Working through the list takes about <b>' + esc(timeRange(m.lo, m.hi)) + '</b> if it\'s your first time.';
+    $('out-line').innerHTML = line;
+    $('answer').classList.toggle('is-done', m.missing === 0 && m.check === 0);
+    flashIfChanged(h.num);
+    const short = { gtm: m.shop ? 'Shopify apps' : 'Tag Manager', consent: 'Consent', usPrivacy: 'Privacy', ga4: 'GA4', gsc: 'Search Console', googleTag: 'Google Ads tag', meta: 'Meta', linkedin: 'LinkedIn', calls: 'Calls', crm: 'CRM source', test: 'Test' };
+    $('strip').innerHTML = m.items.filter((t) => t.key !== 'test' && t.status !== 'later').map((t) => {
+      const ok = t.status === 'ok';
+      return '<li><span class="' + (ok ? 'ok' : t.status === 'check' ? 'neutral' : 'no') + '"><span class="mark" aria-hidden="true">' + (ok ? '✓' : t.status === 'check' ? '?' : '✕') + '</span>' + esc(short[t.key]) +
+        '<span class="sr-only">, ' + (ok ? 'in place' : t.status === 'check' ? 'to check' : 'missing') + '</span></span></li>';
+    }).join('');
+    renderSteps($('plan'), m.items);
+    $('testlist').innerHTML = m.tests.map((t, n) => '<li><input type="checkbox" id="test-' + n + '"><label for="test-' + n + '">' + t + '</label></li>').join('');
+    renderComplex(COMPLEX, complexFlags(m, i));
+    renderXlinks(xlinks(m, i));
+    renderNext('conversions', m.missing + m.check > 0 ? 'Once the tags are in, decide which actions count as conversions, what to name them and which ones steer your ad bids.' : 'Your stack is ready. Next, decide which actions count as conversions and which ones steer your ad bids.');
+    syncCopy();
+    sticky();
+  }
+  initShell(7, () => { mixed = false; applyValues(EXAMPLE); applyProfile(null); render(); $('platform').focus(); });
+  const syncCopy = initCopy(() => planText(last.m, last.i));
+  const sticky = initSticky();
+  applyValues(EXAMPLE);
+  profile = initProfileStrip((p) => { profile = p; mixed = true; applyProfile(p); render(); }, () => { profile = null; mixed = false; applyProfile(null); render(); });
+  if (profile) { mixed = true; applyProfile(profile); }
+  form.addEventListener('submit', (e) => e.preventDefault());
+  form.addEventListener('input', () => { mixed = false; render(); });
+  form.addEventListener('change', () => { mixed = false; render(); });
+  render();
+})();
+</script>
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="06_Is_Your_Pipeline_Ready_for_a_Dashboard.html"><small>← Previous</small><b>Is Your Pipeline Ready for a Dashboard?</b></a><a class="blp-hub" href="../../index.html"><small>RevOps · Toolkit 7 of 7</small><b>All toolkits</b></a><a class="blp-a" href="../seo/01_Can_Google_Find_and_Trust_Your_Site.html"><small>Next →</small><b>SEO: Can Google Find and Trust Your Site?</b></a></div></nav><!-- /bl-pager -->
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() {
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q')) return;
+    Array.prototype.forEach.call(form.querySelectorAll('.q'), function (q) {
+      if (q.closest('.q') !== q || q.parentElement.closest('.q')) return;
+      var kids = Array.prototype.filter.call(q.children, function (c) { return !c.classList.contains('sr-only') && !c.classList.contains('sr'); });
+      if (!kids.length) return;
+      var heads = kids.filter(function (c) { return c.tagName === 'LEGEND' || c.classList.contains('q-label'); });
+      if (kids[0].classList.contains('q-row')) {
+        q.classList.add('blx-row');
+        if (heads.length) {
+          var pr = null; Array.prototype.slice.call(q.children).forEach(function (c) {
+            if (heads.indexOf(c) >= 0) { pr = document.createElement('div'); pr.className = 'blx-pair'; q.appendChild(pr); var a1 = document.createElement('div'); a1.className = 'blx-ph'; pr.appendChild(a1); a1.appendChild(c); var b1 = document.createElement('div'); b1.className = 'blx-pc'; pr.appendChild(b1); return; }
+            if (pr && c !== pr) pr.querySelector('.blx-pc').appendChild(c);
+          });
+          q.classList.add('blx-pairs');
+        }
+        return;
+      }
+      if (kids[0].tagName === 'LEGEND') heads = [kids[0]];
+      if (heads.length > 1 && kids[0] === heads[0]) {
+        var nodes = Array.prototype.slice.call(q.children), pair = null, helps = [];
+        nodes.forEach(function (c) {
+          if (c.classList.contains('q-help')) { helps.push(c); return; }
+          if (heads.indexOf(c) >= 0) { pair = document.createElement('div'); pair.className = 'blx-pair'; q.appendChild(pair); var hc = document.createElement('div'); hc.className = 'blx-ph'; pair.appendChild(hc); hc.appendChild(c); var cc = document.createElement('div'); cc.className = 'blx-pc'; pair.appendChild(cc); return; }
+          if (pair) pair.querySelector('.blx-pc').appendChild(c);
+        });
+        if (helps.length) { var hw = document.createElement('div'); hw.className = 'blx-qh blx-pairhelp'; helps.forEach(function (h) { hw.appendChild(h); }); q.appendChild(hw); }
+        q.classList.add('blx-pairs'); return;
+      }
+      if (heads.length !== 1 || kids[0] !== heads[0]) return;
+      var head = heads[0], qh = document.createElement('div'), qc = document.createElement('div');
+      qh.className = 'blx-qh'; qc.className = 'blx-qc';
+      Array.prototype.slice.call(q.children).forEach(function (c) {
+        if (c === head) return;
+        if (c.classList.contains('q-help')) qh.appendChild(c); else qc.appendChild(c);
+      });
+      q.appendChild(qh); q.appendChild(qc); q.classList.add('blx-split');
+    });
+  })();
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+<script id="bl-version-js" src="../../assets/version-switch.js"></script>
+</body>
+</html>
