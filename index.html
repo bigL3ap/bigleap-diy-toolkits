@@ -310,6 +310,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-int { flex: 0 0 auto; margin-left: auto; display: flex; align-items: center; gap: 2px; padding-left: 12px; border-left: 1px solid #B9C6CF; }
+.blh-int-l { flex: 0 0 auto; font: 800 11px/1 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #5F6E79; margin-right: 6px; white-space: nowrap; }
+.blh-int a { font-weight: 600; color: #3D5566; }
+:root[data-theme="dark"] .blh-int { border-left-color: #2D4556; } :root[data-theme="dark"] .blh-int-l, :root[data-theme="dark"] .blh-int a:not([aria-current]) { color: #9AAFBD; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-int { border-left-color: #2D4556; } :root:not([data-theme="light"]) .blh-int-l, :root:not([data-theme="light"]) .blh-int a:not([aria-current]) { color: #9AAFBD; } }
 .blh-sub .blh-in { position: relative; }
 .blh-tbtn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; cursor: pointer; white-space: nowrap; }
 .blh-tbtn:hover, .blh-tbtn[aria-expanded="true"] { background: #DAE9F2; }
@@ -518,8 +523,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 </script>
 </head>
 <body>
-<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><button type="button" class="blh-tbtn is-current" aria-expanded="false" aria-controls="blh-tmenu">Toolkits<span class="car" aria-hidden="true"></span></button><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="roadmap.html" data-tab="roadmap">Roadmap</a><a href="journey.html" data-tab="journey">Journey map</a><span class="blh-div" aria-hidden="true"></span><a href="index.html#widgets" data-tab="widgets">Widgets</a><a href="sales.html" data-tab="sales">Sales assets</a><a href="mockups/homepage.html" data-tab="mockups">Mockups</a><a href="index.html#buildout" data-tab="buildout">Buildout</a><a href="review.html" data-tab="review">Team review</a></nav><div class="blh-tmenu" id="blh-tmenu" hidden><ul><li><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a></li><li><a href="index.html#revops" data-tab="revops">RevOps</a></li><li><a href="index.html#paid" data-tab="paid">Paid Media</a></li><li><a href="index.html#seo" data-tab="seo">SEO</a></li><li><a href="index.html#pr" data-tab="pr">Digital PR</a></li><li><a href="index.html#email" data-tab="email">Email Marketing</a></li><li><a href="index.html#strategy" data-tab="strategy">Strategy</a></li></ul></div><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
-<div class="draft-strip" role="note">Draft 1 · for internal review · RevOps 1–6 are live, the rest are first drafts · <a href="#buildout"><b>What changed in the buildout →</b></a> · <a href="review.html"><b>Team review →</b></a></div>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><button type="button" class="blh-tbtn is-current" aria-expanded="false" aria-controls="blh-tmenu">Toolkits<span class="car" aria-hidden="true"></span></button><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="roadmap.html" data-tab="roadmap">Roadmap</a><span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span><a href="journey.html" data-tab="journey">Journey map</a><a href="sales.html" data-tab="sales">Sales assets</a><a href="index.html#widgets" data-tab="widgets">Widgets</a><a href="mockups/homepage.html" data-tab="mockups">Mockups</a><a href="review.html" data-tab="review">Status &amp; review</a></span></nav><div class="blh-tmenu" id="blh-tmenu" hidden><ul><li><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a></li><li><a href="index.html#revops" data-tab="revops">RevOps</a></li><li><a href="index.html#paid" data-tab="paid">Paid Media</a></li><li><a href="index.html#seo" data-tab="seo">SEO</a></li><li><a href="index.html#pr" data-tab="pr">Digital PR</a></li><li><a href="index.html#email" data-tab="email">Email Marketing</a></li><li><a href="index.html#strategy" data-tab="strategy">Strategy</a></li></ul></div><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft 1 · for internal review · not launched yet · <a href="review.html"><b>Status &amp; review →</b></a></div>
 
 
 <section class="hero" aria-labelledby="hero-h">
@@ -550,7 +555,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div class="section-head">
         <div>
           <h2>All toolkits</h2>
-          <p>Pick a service or search by task. Every toolkit works on its own, and your Business Profile fills them in. To see how they feed each other, open the <a href="journey.html#connect">DIY map</a>.</p>
+          <p>Pick a service or search by task. Every toolkit works on its own, and your Business Profile fills them in.</p>
         </div>
       </div>
 
@@ -577,99 +582,12 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     </div>
   </section>
 
-  <section class="panel" id="buildout" aria-label="Toolkits buildout" data-preview hidden>
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Toolkits buildout · October 2026</h2>
-          <p>An optimization pass on the whole site, plus five new strategy drafts. Nothing was redesigned: the layout, categories and every toolkit link are the same. All of it is live on this site now.</p>
-        </div>
-        <span class="status live">Live</span>
-      </div>
-
-      <div class="bo-stats">
-        <div class="bo-stat"><b>107</b><span>issues logged in a full audit</span></div>
-        <div class="bo-stat"><b>76</b><span>fixed and retested</span></div>
-        <div class="bo-stat"><b>5</b><span>new strategy tools, now in the toolkit list</span></div>
-        <div class="bo-stat"><b>46/46</b><span>site checks pass (1 known gap)</span></div>
-        <div class="bo-stat"><b>35/35</b><span>visitor journey checks pass</span></div>
-      </div>
-
-      <div class="bo-block">
-        <h3>What changed</h3>
-        <div class="cards">
-          <div class="card" style="--c: var(--green)">
-            <h4>Fixed</h4>
-            <ul>
-              <li>SEO 02 froze the page after an answer.</li>
-              <li>Team Review dropped items and owners; it now has its own page.</li>
-              <li>Example numbers showed as the visitor’s own answers once a profile was saved.</li>
-              <li>Industry checks sent ordinary businesses to “Talk to Scott first”.</li>
-              <li>Widget buttons kept saying “ready” after a visitor changed to an answer with gaps.</li>
-              <li>Text contrast, keyboard focus and the mobile menu.</li>
-            </ul>
-          </div>
-          <div class="card" style="--c: var(--blue)">
-            <h4>Aligned</h4>
-            <ul>
-              <li>The journey map uses Notice Different, Align to Genuine and Recommend Delight as overlapping motions, with Purchase as the pivot.</li>
-              <li>The toolkit connection map: 42 links checked in both directions.</li>
-              <li>Unapproved promises in toolkit copy softened to “what we’d look at first”.</li>
-              <li>Tracking event names are unchanged, so reporting continues without a break.</li>
-              <li>Coby’s Sweet Takes idea: PR 01, PR 02 and the brand starter now invite visitors to practice their angle on the podcast.</li>
-            </ul>
-          </div>
-          <div class="card" style="--c: var(--navy)">
-            <h4>Added for the team</h4>
-            <ul>
-              <li>Automated checks for every page and eight visitor journeys.</li>
-              <li>Guides for storage, authoring and QA, so future toolkits match.</li>
-              <li>A Buildout summary (this page) so everyone can see what changed.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="bo-block">
-        <h3>New strategy drafts</h3>
-        <p>Four short starters feed a Personalized Marketing Roadmap that picks the next few actions and says why. Answers stay in the visitor’s browser. They’re now in the toolkit list as the <a href="#strategy">Strategy</a> group, and the roadmap has its own tab. Starters 3 and 4 are still internal drafts until Coby signs off.</p>
-        <div class="cards">
-          <a class="card" href="toolkits/plan/01_Are_You_Solving_the_Right_Problem.html"><div class="meta"><span class="step">Starter 1</span><span class="status draft">Preview</span></div><h4>Are You Solving the Right Problem?</h4><p>Situation and opportunity: the market you’re in and what’s holding growth back.</p><span class="go">Open the draft →</span></a>
-          <a class="card" href="toolkits/plan/02_What_Do_You_Already_Have.html"><div class="meta"><span class="step">Starter 2</span><span class="status draft">Preview</span></div><h4>What Do You Already Have?</h4><p>Foundations and gaps: what’s usable, what isn’t carrying weight, what’s missing.</p><span class="go">Open the draft →</span></a>
-          <a class="card" href="toolkits/plan/03_What_Makes_You_Worth_Choosing.html"><div class="meta"><span class="step">Starter 3</span><span class="status draft">Internal draft</span></div><h4>What Makes You Worth Choosing?</h4><p>Brand and messaging clarity, with drafts to edit.</p><span class="go">Open the draft →</span></a>
-          <a class="card" href="toolkits/plan/04_Would_Your_Customers_Recommend_You.html"><div class="meta"><span class="step">Starter 4</span><span class="status draft">Internal draft</span></div><h4>Would Your Customers Recommend You?</h4><p>Customer delight and referral, within review-platform rules.</p><span class="go">Open the draft →</span></a>
-          <a class="card" href="roadmap.html"><div class="meta"><span class="step">Shared output</span><span class="status draft">Preview</span></div><h4>Your Marketing Roadmap</h4><p>The next few actions from the profile, the starters and the toolkits already used, each with the reason it was picked.</p><span class="go">Open the roadmap →</span></a>
-        </div>
-      </div>
-
-      <div class="bo-block">
-        <h3>Decisions needed</h3>
-        <p>The first four come before anything new goes into the public journey.</p>
-        <ul class="bo-dec">
-          <li><b>1. Approve the adapted strategy methodology for public use</b><span>Coby Bush · the starters and roadmap restate the Agency Brands approach for a self-serve audience</span></li>
-          <li><b>2. Where the roadmap and starters appear in the public navigation</b><span>Marketing / web owner</span></li>
-          <li><b>3. Consent model for analytics</b><span>RevOps · no tags load today; events reach the page only</span></li>
-          <li><b>4. Should RevOps 01–06 fill in from the Business Profile?</b><span>RevOps owner · they’re live and the only toolkits that don’t</span></li>
-          <li><b>5–8. Scheduler links, Team Review visibility, DIY credit and discovery fee, the “load-bearing” standard</b><span>Can wait; each blocks specific future work</span></li>
-        </ul>
-      </div>
-
-      <div class="bo-block">
-        <h3>How to review</h3>
-        <ol class="bo-steps">
-          <li>Try the toolkits you own, and the new drafts above. Everything you see on this site is the current version.</li>
-          <li>Add anything that needs changing to <a href="review.html">Team review</a>, with the toolkit name and what should change.</li>
-          <li>Starters 3 and 4 adapt Coby’s methodology, so they stay labeled as drafts until he signs off.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
 
 </main>
 
 <footer class="foot">
   <div class="wrap">
-    <span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight · <a href="#buildout">Buildout</a> · <a href="review.html">Team review</a></span>
+    <span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight · <a href="review.html">Status &amp; review</a></span>
     <span id="updated"></span>
   </div>
 </footer>
@@ -705,11 +623,11 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   });
 
   /* Sections, driven by the flat toolkit bar in the site header */
-  var PANELS = ['toolkits', 'widgets', 'buildout'];
+  var PANELS = ['toolkits', 'widgets'];
   var SERVICE_IDS = ['revops', 'paid', 'seo', 'pr', 'email', 'strategy'];
   var ALIAS = { '': 'toolkits' };
   /* Team review moved to review.html (internal). Old links keep working. */
-  var REVIEW_HASHES = { 'review': '', 'team-review': '', 'how': '', 'open-items': '#open-items' };
+  var REVIEW_HASHES = { 'review': '', 'team-review': '', 'how': '', 'open-items': '#open-items', 'buildout': '#built' };
   var pendingSeries = null;
   function mark(key) {
     Array.prototype.forEach.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) {
@@ -718,7 +636,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     });
   }
   window.addEventListener('message', function (e) { var d = e.data; if (!d || d.source !== 'bl-diy-widget' || d.type !== 'height') return; Array.prototype.forEach.call(document.querySelectorAll('.widget-card iframe'), function (f) { if (f.contentWindow === e.source) f.style.height = d.height + 'px'; }); });
-  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); var hero = document.querySelector('.hero'); if (hero) hero.hidden = (id === 'widgets' || id === 'buildout'); }
+  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); var hero = document.querySelector('.hero'); if (hero) hero.hidden = (id === 'widgets'); }
   function fromHash(scroll) {
     var h = (location.hash || '').slice(1);
     if (REVIEW_HASHES.hasOwnProperty(h)) { location.replace('review.html' + REVIEW_HASHES[h]); return; }
