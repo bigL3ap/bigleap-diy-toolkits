@@ -205,5 +205,19 @@
         }
       ]
     }
+  ],
+  "previews": [
+    {
+      "id": "plan1",
+      "n": 1,
+      "group": "Strategy starter 1 of 4",
+      "statusLabel": "Internal draft",
+      "title": "Are You Solving the Right Problem?",
+      "short": "Situation",
+      "file": "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html",
+      "description": "A preliminary situation read: market (capture, generate or expand), the business-health axis holding growth back, the three motions, and the next three priorities.",
+      "reviewer": "Coby Bush",
+      "review": "Do the market, health and motion rules match the Situation Audit? Calibrate the base depths and the tie-break rule of thumb."
+    }
   ]
 }
