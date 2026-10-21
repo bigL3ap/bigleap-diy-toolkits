@@ -515,6 +515,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
 .cf-st.s-live { background: rgba(15,123,95,.14); color: var(--green); }
 .cf-st.s-built { background: rgba(49,135,181,.15); color: var(--blue-ink); }
 .cf-st.s-prog { background: rgba(161,92,7,.14); color: var(--amber); }
+.cf-st.s-draft { background: rgba(122,78,156,.14); color: var(--c-pr); }
 .cf-st.s-plan { background: rgba(95,110,121,.14); color: var(--muted); }
 
 .cf-flow { margin-top: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px 16px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); column-gap: 18px; row-gap: 0; }
@@ -992,7 +993,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     </div>
     <ul class="cf-legend" aria-label="Status key">
       <li><i class="cf-st s-live">Live</i> running today</li>
-      <li><i class="cf-st s-built">Built</i> ready, not switched on everywhere</li>
+      <li><i class="cf-st s-draft">Drafted</i> written, in review, not launched</li>
       <li><i class="cf-st s-prog">In progress</i> being built or fixed</li>
       <li><i class="cf-st s-plan">Planned</i> not built yet</li>
     </ul>
@@ -1687,7 +1688,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
   'use strict';
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  var ST = { live: ['s-live', 'Live'], built: ['s-built', 'Built'], prog: ['s-prog', 'In progress'], plan: ['s-plan', 'Planned'] };
+  var ST = { live: ['s-live', 'Live'], built: ['s-built', 'Built'], prog: ['s-prog', 'In progress'], plan: ['s-plan', 'Planned'], draft: ['s-draft', 'Drafted'] };
   function chip(s) { var x = ST[s] || ST.plan; return '<i class="cf-st ' + x[0] + '">' + x[1] + '</i>'; }
   var C = { capture: '#EA4335', email: '#B45309', self: '#0F7B5F', hand: '#7A4E9C', close: '#143D55', loop: '#EA4335', measure: '#246D96' };
 
@@ -1708,21 +1709,21 @@ details.support .support-grid { padding: 4px 16px 16px; }
       kpi: ['Landing page sessions and engagement', 'Click-through from landing page to a toolkit or the signup form', 'Signup rate by source'],
       open: ['Point every landing page at a toolkit or the signup form, not a dead end.', 'Send the Masterclass signup address so the toolkits can link to it (Team review item).'],
       links: [['Team review', 'review.html']] },
-    { k: 'signup', n: 'Stage 1', t: 'Sign up', sub: 'Masterclass signup form', st: 'prog', c: C.capture, start: true,
-      runs: ['Mailchimp form (replacing HubSpot)', '“Choose My Tracks” page'],
+    { k: 'signup', n: 'Stage 1', t: 'Sign up', sub: 'Masterclass signup form', st: 'live', c: C.capture, start: true,
+      runs: ['Mailchimp form', 'Big Leap website', '“Choose My Tracks” page'],
       lead: 'This is where the campaign starts. Someone signs up for the Masterclass and picks the topics they want to learn about.',
-      what: ['Fields: first name, last name, email, and “I want to learn more about:” with a track choice.', 'New contacts come in as Subscribers. They are not routed to sales.', 'Whitney and Coby get a notification for each signup.', 'The HubSpot form is being replaced with a Mailchimp-integrated form so signups go straight into the right groups. Test submissions ran Oct 19.'],
+      what: ['Fields: first name, last name, email, and “I want to learn more about:” with a track choice.', 'New contacts come in as Subscribers. They are not routed to sales.', 'Whitney and Coby get a notification for each signup.', 'Live on the Big Leap website as of Oct 21. It replaced the HubSpot form and feeds Mailchimp directly, so signups land in the right groups.'],
       people: ['Phil', 'Dallas Olsen', 'Whitney Sorensen', 'Coby Bush'],
       kpi: ['Signups per week', 'Form completion rate', 'Tracks picked per signup'],
-      open: ['Confirm the Mailchimp form is live and the test signups landed in the right groups.', 'Confirm the public signup address for the toolkits and ads.'] },
-    { k: 'invite', n: 'Stage 2', t: 'Masterclass Invitational', sub: '4 emails that invite them in', st: 'prog', c: C.email,
+      open: ['Share the signup page address so the toolkits, ads and track emails can link to it.'] },
+    { k: 'invite', n: 'Stage 2', t: 'Masterclass Invitational', sub: '4 emails that invite them in', st: 'live', c: C.email,
       runs: ['Mailchimp journey', 'Group = Invitational'],
       lead: 'A four-email series that introduces the Masterclass and asks people to pick their tracks. Anyone in the Invitational group gets it, synced from the ecosystem.',
       emails: ['Invitational email 1', 'Invitational email 2', 'Invitational email 3', 'Invitational email 4'],
       what: ['Trigger: the contact is in the Invitational group, synced from the ecosystem.', 'No exit until they unsubscribe.', 'Starting audience: 833 contacts emailed in the last 180 days who haven’t opted out.', 'Closed-lost contacts join this group when their nurture ends (see the loop).'],
       people: ['Whitney Sorensen', 'Dallas Olsen', 'Vitor', 'Kevin'],
       kpi: ['Open and click rate per email', 'Share who pick a track', 'Unsubscribes'],
-      open: ['The send window was set to Wednesdays 10 to 10:30am, which is why it hadn’t sent (Mailchimp support, Oct 16). Confirm it’s fixed and the first send went out.', 'Whitney’s content review.', 'Mobile CSS fix (Dallas).'] },
+      open: [] },
     { k: 'tracks', n: 'Stage 3', t: 'Masterclass tracks', sub: '7 topics, one a day', st: 'live', c: C.email,
       runs: ['Mailchimp', 'Preference center groups'],
       lead: 'Subscribers get the tracks they picked. Each track has its own day of the week at 10am, and new content is added every month.',
@@ -1731,18 +1732,18 @@ details.support .support-grid { padding: 4px 16px 16px; }
       people: ['Whitney Sorensen', 'Alexandra Johnson', 'Erica Pounder'],
       kpi: ['Opens and clicks per track', 'Clicks from a track email to a toolkit', 'Engaged subscribers per track'],
       open: ['No Email Marketing track yet, even though Email has its own toolkits.', 'Confirm the send cadence after the Mailchimp move.', 'Link each track email to its matching toolkits, so reading turns into doing.'] },
-    { k: 'diy', n: 'Stage 4', t: 'DIY toolkits', sub: 'Small leaps they take on their own', st: 'live', c: C.self,
+    { k: 'diy', n: 'Stage 4', t: 'DIY toolkits', sub: 'Small leaps they take on their own', st: 'draft', c: C.self,
       runs: ['DIY toolkit site', 'Business Profile'],
-      lead: 'The free toolkits turn interest into progress. The Business Profile takes 3 minutes and maps a path across every service. Each toolkit ends with a plan they can copy.',
+      lead: 'Drafted and in review, not launched yet. Once live, the free toolkits turn interest into progress. The Business Profile takes 3 minutes and maps a path across every service. Each toolkit ends with a plan they can copy.',
       what: ['Business Profile → service toolkits → plan, widgets and roadmap.', 'Answers stay in the visitor’s browser. Nothing is sent anywhere.', 'Every toolkit names its Big Leap expert, with a photo.', 'Each toolkit sends engagement events: views, first answers, plans copied, Talk-to clicks.'],
       people: ['Dallas Olsen', 'Scott Smoot', 'Shemmah Al-Darweesh', 'Kristina Ainge', 'Erica Pounder', 'Coby Bush'],
       kpi: ['Toolkit starts and completions', 'Plans copied', 'Profiles completed'],
-      open: ['Owner sign-off on each toolkit (Team review).', 'Tag Manager ID so the events reach GA4 (Measure it).'],
+      open: ['Owner sign-off on each toolkit (Team review).', 'Decide where the toolkits live on bigleap.com, then launch.', 'Tag Manager ID so the events reach GA4 (Measure it).'],
       links: [['Browse the toolkits', 'index.html#toolkits'], ['Start with the Business Profile', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html']] },
-    { k: 'expert', n: 'Stage 5', t: 'Talk to an expert', sub: 'The hand-off to a person', st: 'built', c: C.hand,
+    { k: 'expert', n: 'Stage 5', t: 'Talk to an expert', sub: 'The hand-off to a person', st: 'draft', c: C.hand,
       runs: ['“Talk to [owner]” CTA', 'UTM per toolkit'],
       lead: 'When the next step needs an expert, the toolkit says so and names one: “Talk to Shemmah about building it.” This click is the moment interest becomes a sales conversation.',
-      what: ['Every toolkit has a “Talk to [owner]” button, tagged by toolkit and service.', 'They bring their plan to the call, so it starts at strategy, not setup.', 'Planned: each owner’s own meeting link, the plan attached to the booking, and an alert when someone shows high intent.'],
+      what: ['Every drafted toolkit has a “Talk to [owner]” button, tagged by toolkit and service. It goes live when the toolkits launch.', 'They bring their plan to the call, so it starts at strategy, not setup.', 'Planned: each owner’s own meeting link, the plan attached to the booking, and an alert when someone shows high intent.'],
       people: ['Dallas Olsen', 'Scott Smoot', 'Shemmah Al-Darweesh', 'Kristina Ainge', 'Erica Pounder', 'Coby Bush'],
       kpi: ['Talk-to clicks per toolkit', 'Meetings booked (a booked meeting = SQL)'],
       open: ['Owner meeting links in HubSpot so the source carries into the booking.', 'High-intent alert to the owner.'] },
