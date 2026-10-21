@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Big Leap DIY Toolkits</title>
+<meta name="description" content="Free, self-serve toolkits from Big Leap. Set up the foundations yourself and save your budget for strategy.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/bigleap-logo.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root {
+  --navy: #143D55;
+  --navy-2: #1D4D69;
+  --blue: #3187B5;
+  --blue-ink: #246D96;
+  --sky: #EEF3F8;
+  --tint: #DAE9F2;
+  --paper: #FFFFFF;
+  --line: #D4DADF;
+  --text: #243642;
+  --muted: #5F6E79;
+  --red: #EA4335;
+  --red-ink: #C5372B;
+  --green: #0F7B5F;
+  --amber: #A15C07;
+  --head: "Raleway", "Segoe UI", Arial, sans-serif;
+  --body: "Open Sans", "Segoe UI", Arial, sans-serif;
+  --r-btn: 14px;
+  --r-card: 12px;
+  --shadow: 0 1px 2px rgba(20,61,85,.06), 0 8px 24px rgba(20,61,85,.06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #DCE9F2; --navy-2: #1A3A4E; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26;
+    --tint: #1D3A4C; --paper: #142632; --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD;
+    --red: #F0675B; --red-ink: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --navy: #DCE9F2; --navy-2: #1A3A4E; --blue: #6FB3DA; --blue-ink: #8CC4E4; --sky: #0F1D26;
+  --tint: #1D3A4C; --paper: #142632; --line: #2D4556; --text: #D7E2EA; --muted: #9AAFBD;
+  --red: #F0675B; --red-ink: #F0675B; --green: #4CC9A3; --amber: #E7A64A;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--sky); color: var(--text); font: 16px/1.6 var(--body); overflow-wrap: anywhere; }
+a { color: var(--blue-ink); }
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02em; margin: 0; }
+.wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Draft strip + top bar */
+.draft-strip { background: #143D55; color: #fff; font-size: 13px; text-align: center; padding: 8px 16px; }
+
+.draft-strip a { color: #fff; }
+.top { background: var(--paper); border-bottom: 2px solid var(--blue); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
+.logo img { height: 34px; width: auto; display: block; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo img { background: #fff; border-radius: 8px; padding: 4px 8px; height: 38px; } }
+:root[data-theme="dark"] .logo img { background: #fff; border-radius: 8px; padding: 4px 8px; height: 38px; }
+.logo span { font-family: var(--head); font-weight: 700; font-size: 15px; border-left: 1px solid var(--line); padding-left: 12px; }
+.top-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 22px; border-radius: var(--r-btn); font: 700 15px/1.2 var(--body); text-decoration: none; border: 2px solid transparent; cursor: pointer; }
+.btn-red { background: #EA4335; color: #fff; }
+.btn-red:hover { background: #C5372B; }
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--blue); }
+.theme-btn { min-height: 44px; min-width: 44px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); cursor: pointer; font-size: 18px; }
+
+/* Hero */
+.hero { padding: clamp(36px, 6vw, 72px) 0 clamp(28px, 4vw, 48px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.kicker { font-family: var(--head); font-weight: 700; font-style: italic; color: var(--navy); font-size: 15px; margin: 0 0 14px; }
+.hero h1 { font-size: clamp(34px, 5.2vw, 58px); line-height: 1.08; font-weight: 800; }
+.hero h1 .second { display: block; color: var(--blue); }
+.hero p.lede { font-size: clamp(16px, 1.6vw, 19px); color: var(--text); max-width: 34em; margin: 18px 0 0; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; color: var(--muted); font-size: 14px; }
+.hero-stats b { color: var(--navy); font-family: var(--head); font-size: 22px; display: block; line-height: 1.1; }
+.start-card { background: var(--paper); border-radius: 16px; padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow); border: 1px solid var(--line); }
+.start-card h2 { font-size: 26px; text-align: center; }
+.start-card p { margin: 10px 0 18px; color: var(--muted); text-align: center; }
+.start-card ol { margin: 0 0 22px; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 10px; }
+.start-card li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; font-size: 15px; }
+.start-card li::before { content: counter(s); width: 30px; height: 30px; border-radius: 50%; background: var(--tint); color: var(--navy); font: 700 14px/30px var(--head); text-align: center; }
+.start-card .btn { width: 100%; }
+
+/* Tabs */
+.tabs-bar { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+.tabs-bar .wrap { overflow: hidden; }
+.tabs { display: flex; gap: 4px; max-width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 0 0 auto; min-height: 52px; padding: 0 18px; border: 0; background: none; color: var(--muted); font: 700 15px/1 var(--head); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+.tab[aria-selected="true"] { color: var(--navy); border-bottom-color: var(--red); }
+.tab .count { display: inline-block; min-width: 22px; padding: 2px 7px; margin-left: 6px; border-radius: 999px; background: var(--tint); color: var(--navy); font: 700 12px/1.4 var(--body); }
+.panel { padding: clamp(28px, 4vw, 48px) 0 72px; }
+.panel[hidden] { display: none; }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.section-head h2 { font-size: clamp(26px, 3vw, 36px); }
+.section-head p { margin: 6px 0 0; color: var(--muted); max-width: 44em; }
+
+/* The DIY map */
+.map { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: clamp(18px, 3vw, 32px); box-shadow: var(--shadow); display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 0 24px; }
+.map-start { grid-row: 1 / span 5; display: flex; flex-direction: column; justify-content: center; position: relative; padding-right: 22px; }
+.map-start::after { content: ""; position: absolute; right: 0; top: 8%; bottom: 8%; border-right: 3px solid var(--navy); border-radius: 0 16px 16px 0; }
+.start-node { display: block; text-decoration: none; background: var(--navy); color: #fff; border-radius: 14px; padding: 16px; }
+:root[data-theme="dark"] .start-node { background: #2B5A78; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .start-node { background: #2B5A78; } }
+.start-node small { display: block; font-size: 12px; opacity: .85; font-weight: 600; }
+.start-node strong { display: block; font: 700 17px/1.25 var(--head); margin-top: 4px; }
+.start-node:hover { outline: 3px solid var(--blue); }
+.line { display: grid; grid-template-columns: 170px minmax(0, 1fr); align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.line:last-child { border-bottom: 0; }
+.line-name { font: 700 16px/1.2 var(--head); color: var(--navy); }
+.line-name small { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); margin-top: 2px; }
+.stops { position: relative; display: flex; justify-content: space-between; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.stops::before { content: ""; position: absolute; left: calc(100% / (2 * var(--s, 6))); width: calc((var(--n, 6) - 1) * 100% / var(--s, 6)); top: 21px; height: 4px; background: var(--c, var(--blue)); border-radius: 2px; }
+.stops.draft-line::before { background: repeating-linear-gradient(90deg, var(--c, var(--blue)) 0 10px, transparent 10px 16px); }
+.stop { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.stop a { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--text); width: 100%; }
+.dot { width: var(--dot, 44px); height: var(--dot, 44px); border-radius: 50%; display: grid; place-items: center; font: 800 16px/1 var(--head); background: var(--c, var(--blue)); color: #fff; border: 4px solid var(--paper); box-shadow: 0 0 0 2px var(--c, var(--blue)); }
+.draft-line .dot { background: var(--paper); color: var(--c, var(--blue)); box-shadow: 0 0 0 2px var(--c, var(--blue)); border-style: solid; }
+.stop.is-draft .dot { background: var(--paper); color: var(--c, var(--blue)); }
+.stop .lbl { font-size: 13px; line-height: 1.25; font-weight: 600; color: var(--navy); overflow-wrap: normal; word-break: normal; hyphens: auto; white-space: normal; }
+.stop a:hover .dot { transform: scale(1.08); }
+.stop-filler { flex: 1 1 0; }
+.map-legend { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+.legend-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 6px; background: var(--blue); }
+.legend-dot.hollow { background: var(--paper); box-shadow: inset 0 0 0 2px var(--blue); }
+
+
+/* Connection map */
+.map { position: relative; }
+.map-tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.map-count { font-size: 13px; color: var(--muted); }
+.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 1; }
+.map-svg path { fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: .9; }
+.map-svg path.in { stroke-dasharray: 6 6; }
+.map-svg path.faint { stroke-width: 1.5; opacity: .35; }
+.stop button.node { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; color: var(--text); font: inherit; }
+.stop button.node:hover .dot { transform: scale(1.08); }
+.stop, .line-name { position: relative; z-index: 2; }
+.hero[hidden] { display: none !important; }
+.lg-narrow { display: none; }
+@media (max-width: 820px) { .lg-wide { display: none; } .lg-narrow { display: inline; } }
+.line-name { justify-self: start; position: relative; z-index: 2; padding: 2px 8px 2px 0; background: var(--paper); border-radius: 0 8px 8px 0; }
+@media (max-width: 820px) { .line-name { background: none; } }
+.stop .dot { position: relative; z-index: 1; }
+.stop button.node, .stop a { position: relative; }
+.stop button.node::before { content: ""; position: absolute; top: 0; left: 50%; width: var(--dot, 44px); height: var(--dot, 44px); transform: translateX(-50%); border-radius: 50%; background: var(--paper); }
+.stop .lbl { position: relative; z-index: 1; padding: 1px 4px; border-radius: 6px; background: var(--paper); }
+.map.has-sel .stop .dot, .map.has-sel .stop .lbl { transition: opacity .15s ease, color .15s ease; }
+.map.has-sel .stop:not(.sel):not(.out):not(.in) .dot { opacity: .42; }
+.map.has-sel .stop:not(.sel):not(.out):not(.in) .lbl { color: var(--muted); }
+.stop.sel .dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--red); }
+.stop.out .dot, .stop.in .dot { box-shadow: 0 0 0 2px var(--c, var(--blue)), 0 0 0 6px rgba(49,135,181,.18); }
+.map-detail { margin-top: 14px; background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--sel, var(--navy)); border-radius: 12px; padding: 18px 20px; }
+.map-detail h3 { font-size: 20px; }
+.map-detail .meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.map-detail .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 24px; margin-top: 12px; }
+.map-detail h4 { margin: 0 0 6px; font: 700 13px var(--body); color: var(--muted); }
+.map-detail ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.map-detail li { display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 10px; font-size: 14.5px; }
+.map-detail li i { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; background: var(--c); }
+.map-detail li b { color: var(--navy); }
+.map-detail li.none { display: block; padding: 10px 12px; border-radius: 10px; background: var(--sky); color: inherit; }
+.map-detail li a { font-weight: 700; }
+.map-detail li .x { font-size: 11.5px; font-weight: 700; color: var(--blue-ink); margin-left: 4px; }
+.map-detail .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.md-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 10px 20px; }
+.map-detail h4 { margin-top: 16px !important; }
+.md-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)) !important; gap: 10px 20px !important; }
+.md-grid li { font-size: 13.5px !important; line-height: 1.45; }
+.md-grid li.none { grid-column: 1 / -1; max-width: 640px; }
+
+details.support { margin-top: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+details.support > summary { display: grid; gap: 2px; padding: 14px 18px 14px 50px; position: relative; cursor: pointer; list-style: none; }
+details.support > summary::-webkit-details-marker { display: none; }
+details.support > summary::before { content: "+"; position: absolute; left: 16px; top: 14px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--sky); color: var(--navy); font-weight: 800; }
+details.support[open] > summary::before { content: "\2212"; }
+details.support > summary b { font: 700 18px var(--head); color: var(--navy); }
+details.support > summary span { font-size: 14px; color: var(--muted); }
+details.support .support-grid { padding: 4px 16px 16px; }
+.support-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; }
+.sup { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 12px; padding: 16px 18px; }
+.sup h3 { font-size: 18px; margin-bottom: 8px; }
+.sup ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.sup li { font-size: 14px; line-height: 1.5; }
+.sup li b { display: inline-flex; align-items: center; gap: 6px; color: var(--navy); font-weight: 700; }
+.sup li b::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--to); }
+@media (max-width: 720px) { .map-detail .cols { grid-template-columns: 1fr; } }
+
+/* Filters + cards */
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 20px; align-items: center; }
+.search { flex: 1 1 260px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--text); font: 16px var(--body); }
+.chip { min-height: 40px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 600 14px var(--body); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+.series { margin-top: 28px; }
+.series-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-bottom: 12px; border-bottom: 2px solid var(--c, var(--blue)); }
+.series-head h3 { font-size: 24px; }
+.series-head p { margin: 4px 0 0; color: var(--muted); font-size: 15px; max-width: 46em; }
+.owner { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c, var(--blue)); color: #fff; font: 700 14px var(--head); flex: 0 0 auto; }
+.owner a { font-weight: 700; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; margin-top: 16px; }
+.card { position: relative; display: flex; flex-direction: column; gap: 8px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 20px; text-decoration: none; color: var(--text); }
+.card:hover { border-color: var(--c, var(--blue)); }
+.card .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.step { font-weight: 700; color: var(--navy); }
+.status { font: 700 12px/1 var(--body); padding: 6px 10px; border-radius: 999px; }
+.status.live { background: rgba(15,123,95,.12); color: var(--green); }
+.status.draft { background: rgba(161,92,7,.12); color: var(--amber); }
+.card h4 { margin: 0; font: 700 19px/1.3 var(--head); color: var(--navy); }
+.card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+.card .go { margin-top: auto; padding-top: 6px; font-weight: 700; color: var(--blue-ink); font-size: 14px; }
+/* Buildout */
+.bo-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0 0 32px; }
+.bo-stat { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 14px 16px; }
+.bo-stat b { display: block; font: 800 28px/1.1 var(--head); color: var(--navy); }
+.bo-stat span { font-size: 14px; color: var(--muted); }
+.bo-block { margin-top: 36px; }
+.bo-block > h3 { font-size: 22px; }
+.bo-block > p { margin: 6px 0 0; color: var(--muted); max-width: 46em; }
+.bo-block .card ul { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--muted); }
+.bo-block .card li + li { margin-top: 4px; }
+.bo-steps { margin: 14px 0 0; padding-left: 22px; max-width: 46em; }
+.bo-steps li + li { margin-top: 8px; }
+.bo-dec { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.bo-dec li { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--amber); border-radius: var(--r-card); padding: 12px 16px; }
+.bo-dec b { color: var(--navy); }
+.bo-dec span { display: block; font-size: 14px; color: var(--muted); }
+.empty { padding: 32px; text-align: center; background: var(--paper); border: 1px dashed var(--line); border-radius: var(--r-card); color: var(--muted); }
+
+/* Open items */
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.sum { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 14px 16px; }
+.sum b { display: block; font: 800 28px/1 var(--head); color: var(--navy); }
+.sum span { font-size: 14px; color: var(--muted); }
+.sum.block b { color: var(--red-ink); }
+.group { margin-top: 28px; }
+.group h3 { font-size: 20px; display: flex; align-items: center; gap: 10px; }
+.group h3 .n { font: 700 13px var(--body); color: var(--muted); }
+.items { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.item { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--k, var(--blue)); border-radius: 10px; padding: 16px 18px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; }
+.item h4 { margin: 0; font: 700 17px/1.35 var(--head); color: var(--navy); }
+.item p { margin: 0; font-size: 15px; grid-column: 1 / 2; }
+.item .side { grid-row: 1 / span 2; grid-column: 2; display: flex; flex-direction: column; align-items: end; gap: 6px; font-size: 13px; text-align: right; }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--tint); color: var(--navy); font-weight: 600; font-size: 13px; }
+.item .area { color: var(--muted); }
+
+
+/* Count badge on the Team review link in the header bar */
+.blh-tabs a .count { display: inline-block; min-width: 20px; padding: 1px 7px; border-radius: 999px; background: #DAE9F2; color: #143D55; font: 700 12px/1.4 "Open Sans", Arial, sans-serif; text-align: center; }
+.blh-tabs a[aria-current="page"] .count { background: #fff; }
+/* Team review */
+.review-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.agenda-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 22px; }
+.agenda-card h3 { font-size: 22px; }
+.agenda-card .sub { margin: 4px 0 14px; color: var(--muted); font-size: 15px; }
+.agenda { list-style: none; counter-reset: a; margin: 0; padding: 0; display: grid; gap: 0; }
+.agenda li { counter-increment: a; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.agenda li::before { content: counter(a); width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: var(--paper); font: 800 15px/34px var(--head); text-align: center; }
+.agenda b { font: 700 17px var(--head); color: var(--navy); }
+.agenda .mins { font-size: 13px; color: var(--muted); margin-left: 6px; white-space: nowrap; }
+.agenda p { margin: 4px 0 0; font-size: 15px; }
+button.link { background: none; border: 0; padding: 0; color: var(--blue-ink); font: 700 15px var(--body); text-decoration: underline; cursor: pointer; min-height: 32px; }
+.mini-steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15px; }
+@media (max-width: 960px) { .review-grid { grid-template-columns: 1fr; } }
+
+/* Widgets */
+.widget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; }
+.widget-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; display: flex; flex-direction: column; }
+.widget-card iframe { width: 100%; border: 0; display: block; background: var(--sky); transition: height .15s ease; }
+.widget-grid, .widgets-grid { align-items: start; }
+.widget-card .wc-body { padding: 16px 18px; display: grid; gap: 10px; border-top: 1px solid var(--line); }
+.widget-card h4 { margin: 0; font: 700 17px var(--head); color: var(--navy); }
+.widget-card p { margin: 0; font-size: 14px; color: var(--muted); }
+.code { position: relative; }
+.code textarea { width: 100%; min-height: 86px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--sky); color: var(--text); resize: vertical; }
+.copy { min-height: 40px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 700 14px var(--body); cursor: pointer; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 16px; margin-top: 16px; }
+.tile-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 12px; display: grid; gap: 8px; }
+.tile-card img { width: 100%; height: auto; border-radius: 8px; display: block; }
+
+/* How to */
+.how { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.steps-list { counter-reset: h; list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.steps-list li { counter-increment: h; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 18px 18px 18px 70px; position: relative; }
+.steps-list li::before { content: counter(h); position: absolute; left: 18px; top: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: var(--paper); font: 800 16px/36px var(--head); text-align: center; }
+.steps-list h4 { margin: 0 0 4px; font: 700 18px var(--head); color: var(--navy); }
+.steps-list p { margin: 0; font-size: 15px; }
+.aside { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card); padding: 20px; display: grid; gap: 12px; }
+.aside h3 { font-size: 20px; }
+.aside p, .aside li { font-size: 15px; }
+.aside ul { margin: 0; padding-left: 20px; }
+.aside code { font: 13px ui-monospace, Menlo, Consolas, monospace; background: var(--sky); padding: 2px 6px; border-radius: 6px; }
+
+footer.foot { background: var(--paper); border-top: 1px solid var(--line); padding: 28px 0 calc(28px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--muted); }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .how { grid-template-columns: 1fr; }
+}
+@media (max-width: 820px) {
+  .map { grid-template-columns: 1fr; }
+  .map-start { grid-row: auto; padding: 0 0 18px; }
+  .map-start::after { display: none; }
+  .line { grid-template-columns: 1fr; gap: 10px; }
+}
+@media (max-width: 520px) {
+  .map { --dot: 38px; }
+  .dot { font-size: 14px; border-width: 3px; }
+  .stops::before { top: 18px; }
+  .stop .lbl { font-size: 11px; }
+  .item { grid-template-columns: 1fr; }
+  .item .side { grid-row: auto; grid-column: 1; flex-direction: row; flex-wrap: wrap; align-items: center; text-align: left; }
+  .tab { padding: 0 10px; font-size: 14px; }
+  .top .wrap { min-height: 60px; }
+  .logo span { display: none; }
+  .top-actions .btn-ghost { display: none; }
+  .top .wrap { flex-wrap: nowrap; }
+  .top-actions .btn-red { padding: 8px 14px; font-size: 14px; }
+  .logo img { height: 28px; }
+}
+@media (max-width: 400px) {
+  .map { padding: 14px 10px; }
+  .map { --dot: 32px; }
+  .dot { font-size: 12px; border-width: 2px; }
+  .stops::before { top: 14px; height: 3px; }
+  .stop .lbl { font-size: 10px; }
+  .tabs-bar .wrap { padding-left: 10px; padding-right: 10px; }
+  .tab { padding: 0 8px; }
+}
+@media (max-width: 360px) { .stop .lbl { font-size: 9px; letter-spacing: -0.2px; } .map { padding: 12px 6px; } }
+
+/* Phones: stagger labels above/below so they never collide */
+@media (max-width: 520px) {
+  .line .stops { padding: 20px 0; }
+  .stops::before { top: calc(20px + var(--dot) / 2 - 2px) !important; }
+  .stop .lbl { position: absolute; left: 50%; transform: translateX(-50%); top: calc(var(--dot) + 3px); white-space: nowrap; font-size: 11.5px !important; letter-spacing: 0 !important; line-height: 1.2; }
+  .stop:nth-child(even) .lbl { top: auto; bottom: calc(100% + 3px); }
+  .stop:first-child .lbl { left: -2px; transform: none; }
+  .stop:last-child .lbl { left: auto; right: -2px; transform: none; }
+  .stop button.node { gap: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dot { transition: transform .15s ease; }
+}
+@media print {
+  .tabs-bar, .top-actions, .controls, .draft-strip, .theme-btn { display: none !important; }
+  .panel[hidden] { display: block !important; }
+  body { background: #fff; }
+}
+</style>
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form: one panel, one question per row (question left, answers right) ---- */
+.col-q.panel { padding: 0 !important; overflow: hidden; }
+.col-q .q-head { padding: 20px 28px 16px !important; border-bottom: 1px solid var(--line); }
+#answers .q { margin: 0 !important; padding: 22px 28px !important; border: 0 !important; border-top: 1px solid var(--line) !important; }
+#answers > .q-head + .q, #answers > .q:first-child, #answers > .q-head + div > .q:first-child { border-top: 0 !important; }
+#answers > div:not(.q):not(.q-head) > .q:first-child { border-top: 1px solid var(--line) !important; }
+.q legend { float: left !important; width: 100%; margin: 0 0 8px !important; }
+.q > legend + * { clear: both; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
+@media (min-width: 880px) {
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
+  .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
+  .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
+  .q.blx-split > .blx-qh:empty { display: none; }
+  .q.blx-split > .blx-qh .q-help { margin: 0; }
+  .q.blx-split > .blx-qc { margin-left: calc(41.67% + 22px); display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs > .blx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: start; }
+  #answers .q.blx-pairs > .blx-pair + .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs .blx-ph > * { margin: 8px 0 0 !important; display: block; }
+  #answers .q.blx-pairs .blx-pc { display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pairhelp { max-width: calc(41.67% - 22px); margin-top: 8px; }
+  #answers .q.blx-row > .q-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: center; }
+  #answers .q.blx-row > .q-row > :first-child { min-width: 0; }
+  #answers .q.blx-row > .q-row > :not(:first-child) { justify-self: start; }
+  #answers .q.blx-row > .q-row + .q-row { margin-top: 10px; }
+  #answers .q.blx-row > .sub-q { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; row-gap: 6px; align-items: center; margin-top: 16px; padding: 0; border: 0; }
+  #answers .q.blx-row > .sub-q > .q-label { grid-column: 1; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > :not(.q-label):not(.q-help) { grid-column: 2; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > .q-help { grid-column: 1; grid-row: 2; margin: 0; }
+  #answers .q.blx-row > .q-help { max-width: calc(41.6% - 22px); margin-top: 6px; }
+  #answers .q.blx-row .seg.inline { width: 100%; max-width: 420px; }
+  .blx-qc .seg:not(.inline) { max-width: 600px; }
+}
+#answers .q { scroll-margin-top: 16px; }
+.blx-pair + .blx-pair { margin-top: 12px; } .blx-pc { display: grid; gap: 8px; } .blx-ph > * { margin-bottom: 6px; }
+/* answer controls: lighter */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line-strong) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt, .opt-wrap, .text-field, .field { border-radius: 10px !important; }
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
+@media print { .blh { display: none !important; } }
+</style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html#toolkits" data-tab="toolkits" aria-current="page">All toolkits</a><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="index.html#revops" data-tab="revops">RevOps</a><a href="index.html#paid" data-tab="paid">Paid Media</a><a href="index.html#seo" data-tab="seo">SEO</a><a href="index.html#pr" data-tab="pr">Digital PR</a><a href="index.html#email" data-tab="email">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="journey.html" data-tab="journey">Journey map</a><a href="review.html" data-tab="review">Team review</a><a href="index.html#widgets" data-tab="widgets">Widgets</a><a href="index.html#buildout" data-tab="buildout">Buildout</a></nav><div class="blh-right"><button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div></div></header><!-- /bl-header -->
+<div class="draft-strip" role="note">Draft 1 · for internal review · RevOps 1–6 are live, the rest are first drafts</div>
+
+
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Small Leaps · free DIY toolkits from Big Leap</p>
+      <h1 id="hero-h">Do the setup yourself. <span class="second">Spend your budget on strategy.</span></h1>
+      <p class="lede">These free toolkits walk you through the groundwork you can do yourself, in the right order: tracking, lead capture, search basics, inbox and press readiness. Make small leaps on your own; when the next step needs an expert, make the Big Leap with us.</p>
+      <div class="hero-stats" id="hero-stats" aria-live="polite"></div>
+    </div>
+    <aside class="start-card" aria-labelledby="start-h">
+      <h2 id="start-h">Your first small leap</h2>
+      <p>One short profile, then every toolkit fills itself in.</p>
+      <ol>
+        <li>Build your Business Profile in about 3 minutes.</li>
+        <li>Follow the path it recommends for your business.</li>
+        <li>Copy each plan, build it, and make the Big Leap with us when you hit the hard part.</li>
+      </ol>
+      <a class="btn btn-red" id="start-btn" href="toolkits/paid/01_What_Kind_of_Business_Are_You.html">Build your Business Profile</a>
+    </aside>
+  </div>
+</section>
+
+
+<main>
+  <section class="panel" id="toolkits" aria-label="Toolkits">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>The DIY map: one effort, five channels</h2>
+          <p>Each line is a service; each stop is a small leap. They feed each other: tracking feeds ads, reviews feed local search, the CRM feeds email. Pick a stop to see what it unlocks.</p>
+        </div>
+        <div class="map-tools">
+          <button type="button" class="chip" id="map-all" aria-pressed="false">Show every connection</button>
+          <span class="map-count" id="map-count"></span>
+        </div>
+      </div>
+      <div class="map" id="map" aria-label="Map of all toolkits by service. Select a stop to see its connections."></div>
+      <div class="map-detail" id="map-detail" aria-live="polite"></div>
+
+      <details class="support">
+        <summary><b>How the services support each other</b><span>What doing each service well gives every other channel, and why the Big Leap engagement covers them together</span></summary>
+        <div class="support-grid" id="support-grid"></div>
+      </details>
+
+      <div class="controls" role="search">
+        <label class="sr" for="q">Search toolkits</label>
+        <input class="search" id="q" type="search" placeholder="Search by task, like “GA4” or “bio”" autocomplete="off">
+        <div id="filters" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+      <div id="series-list"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="widgets" aria-label="Widgets" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Widgets and tiles</h2>
+          <p>Small versions of the toolkits for proposal decks, sales calls and anywhere on bigleap.com. Each widget asks two or three questions, gives an instant answer and links to the full toolkit. Copy the embed code into any page, or download a tile image for slides.</p>
+          <p style="margin-top:10px"><b>See them in place:</b> <a href="mockups/homepage.html">bigleap.com homepage mockup</a> · <a href="mockups/toolkits-landing.html">toolkits landing page mockup</a></p>
+        </div>
+      </div>
+      <div id="widget-list"><div class="empty">Widgets are being built. They will appear here.</div></div>
+      <div id="tile-list"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="buildout" aria-label="Toolkits buildout" data-preview hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Toolkits buildout · October 2026</h2>
+          <p>An optimization pass on the whole site, plus five new strategy drafts. Nothing was redesigned: the layout, categories and every toolkit link are the same. Use the <b>Review mode</b> switch at the top of any page to compare the Original and Updated versions side by side.</p>
+        </div>
+        <span class="status draft">In review</span>
+      </div>
+
+      <div class="bo-stats">
+        <div class="bo-stat"><b>107</b><span>issues logged in a full audit</span></div>
+        <div class="bo-stat"><b>76</b><span>fixed and retested</span></div>
+        <div class="bo-stat"><b>5</b><span>new drafts, preview only</span></div>
+        <div class="bo-stat"><b>46/46</b><span>site checks pass (1 known gap)</span></div>
+        <div class="bo-stat"><b>35/35</b><span>visitor journey checks pass</span></div>
+      </div>
+
+      <div class="bo-block">
+        <h3>What changed</h3>
+        <div class="cards">
+          <div class="card" style="--c: var(--green)">
+            <h4>Fixed</h4>
+            <ul>
+              <li>SEO 02 froze the page after an answer.</li>
+              <li>Team Review dropped items and owners; it now has its own page.</li>
+              <li>Example numbers showed as the visitor’s own answers once a profile was saved.</li>
+              <li>Industry checks sent ordinary businesses to “Talk to Scott first”.</li>
+              <li>Widget buttons kept saying “ready” after a visitor changed to an answer with gaps.</li>
+              <li>Text contrast, keyboard focus and the mobile menu.</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--blue)">
+            <h4>Aligned</h4>
+            <ul>
+              <li>The journey map uses Notice Different, Align to Genuine and Recommend Delight as overlapping motions, with Purchase as the pivot.</li>
+              <li>The toolkit connection map: 42 links checked in both directions.</li>
+              <li>Unapproved promises in toolkit copy softened to “what we’d look at first”.</li>
+              <li>Tracking event names are unchanged, so reporting continues without a break.</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--navy)">
+            <h4>Added for the team</h4>
+            <ul>
+              <li>Automated checks for every page and eight visitor journeys.</li>
+              <li>Guides for storage, authoring and QA, so future toolkits match.</li>
+              <li>The Original / Updated / Final review switch.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bo-block">
+        <h3>New strategy drafts</h3>
+        <p>Four short starters feed a Personalized Marketing Roadmap that picks the next few actions and says why. Answers stay in the visitor’s browser. These are drafts for team review and aren’t in the public toolkit list yet.</p>
+        <div class="cards">
+          <a class="card" href="toolkits/plan/01_Are_You_Solving_the_Right_Problem.html"><div class="meta"><span class="step">Starter 1</span><span class="status draft">Preview</span></div><h4>Are You Solving the Right Problem?</h4><p>Situation and opportunity: the market you’re in and what’s holding growth back.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/02_What_Do_You_Already_Have.html"><div class="meta"><span class="step">Starter 2</span><span class="status draft">Preview</span></div><h4>What Do You Already Have?</h4><p>Foundations and gaps: what’s usable, what isn’t carrying weight, what’s missing.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/03_What_Makes_You_Worth_Choosing.html"><div class="meta"><span class="step">Starter 3</span><span class="status draft">Internal draft</span></div><h4>What Makes You Worth Choosing?</h4><p>Brand and messaging clarity, with drafts to edit.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="toolkits/plan/04_Would_Your_Customers_Recommend_You.html"><div class="meta"><span class="step">Starter 4</span><span class="status draft">Internal draft</span></div><h4>Would Your Customers Recommend You?</h4><p>Customer delight and referral, within review-platform rules.</p><span class="go">Open the draft →</span></a>
+          <a class="card" href="roadmap.html"><div class="meta"><span class="step">Shared output</span><span class="status draft">Preview</span></div><h4>Your Marketing Roadmap</h4><p>The next few actions from the profile, the starters and the toolkits already used, each with the reason it was picked.</p><span class="go">Open the roadmap →</span></a>
+        </div>
+      </div>
+
+      <div class="bo-block">
+        <h3>Decisions needed</h3>
+        <p>The first four come before anything new goes into the public journey.</p>
+        <ul class="bo-dec">
+          <li><b>1. Approve the adapted strategy methodology for public use</b><span>Coby Bush · the starters and roadmap restate the Agency Brands approach for a self-serve audience</span></li>
+          <li><b>2. Where the roadmap and starters appear in the public navigation</b><span>Marketing / web owner</span></li>
+          <li><b>3. Consent model for analytics</b><span>RevOps · no tags load today; events reach the page only</span></li>
+          <li><b>4. Should RevOps 01–06 fill in from the Business Profile?</b><span>RevOps owner · they’re live and the only toolkits that don’t</span></li>
+          <li><b>5–8. Scheduler links, Team Review visibility, DIY credit and discovery fee, the “load-bearing” standard</b><span>Can wait; each blocks specific future work</span></li>
+        </ul>
+      </div>
+
+      <div class="bo-block">
+        <h3>How to review</h3>
+        <ol class="bo-steps">
+          <li>Open any page and use the <b>Review mode</b> switch at the top to flip between <b>Original</b> (what’s live) and <b>Updated</b> (this buildout).</li>
+          <li>Try the toolkits you own, and the new drafts above. Add anything that needs changing to <a href="review.html">Team review</a>.</li>
+          <li>Approved changes move to <b>Final</b>, which appears as a third option in the switch. Final goes live only after sign-off.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight</span>
+    <span id="updated"></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var COLORS = { revops: '#143D55', paid: '#EA4335', seo: '#0F7B5F', pr: '#7A4E9C', email: '#B45309' };
+  var DARK_COLORS = { revops: '#6FB3DA', paid: '#F0675B', seo: '#4CC9A3', pr: '#B78ED6', email: '#E7A64A' };
+  var data = null, widgets = null;
+  var state = { q: '', series: 'all' };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function initials(n) { return String(n || '').split(/\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase(); }
+  function isDark() {
+    var t = document.documentElement.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function color(id) { return (isDark() ? DARK_COLORS : COLORS)[id] || '#3187B5'; }
+  function getJSON(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+
+  /* Theme toggle (remembered per browser) */
+  try { var saved = localStorage.getItem('bl_hub_theme'); if (saved) document.documentElement.setAttribute('data-theme', saved); } catch (e) {}
+  $('theme').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('bl_hub_theme', next); } catch (e) {}
+    renderMap(); renderSupport(); renderSeries();
+  });
+
+  /* Sections, driven by the flat toolkit bar in the site header */
+  var PANELS = ['toolkits', 'widgets', 'buildout'];
+  var SERVICE_IDS = ['revops', 'paid', 'seo', 'pr', 'email'];
+  var ALIAS = { '': 'toolkits' };
+  /* Team review moved to review.html (internal). Old links keep working. */
+  var REVIEW_HASHES = { 'review': '', 'team-review': '', 'how': '', 'open-items': '#open-items' };
+  var pendingSeries = null;
+  function mark(key) {
+    Array.prototype.forEach.call(document.querySelectorAll('.blh-tabs a[data-tab]'), function (a) {
+      var k = a.getAttribute('data-tab');
+      if (k === key) a.setAttribute('aria-current', 'page'); else if (k !== 'journey' && k !== 'start') a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('message', function (e) { var d = e.data; if (!d || d.source !== 'bl-diy-widget' || d.type !== 'height') return; Array.prototype.forEach.call(document.querySelectorAll('.widget-card iframe'), function (f) { if (f.contentWindow === e.source) f.style.height = d.height + 'px'; }); });
+  function showTab(id) { PANELS.forEach(function (p) { var el = $(p); if (el) el.hidden = p !== id; }); var hero = document.querySelector('.hero'); if (hero) hero.hidden = (id === 'widgets' || id === 'buildout'); if (id === 'toolkits' && typeof drawLines === 'function') setTimeout(drawLines, 30); }
+  function fromHash(scroll) {
+    var h = (location.hash || '').slice(1);
+    if (REVIEW_HASHES.hasOwnProperty(h)) { location.replace('review.html' + REVIEW_HASHES[h]); return; }
+    if (SERVICE_IDS.indexOf(h) > -1) {
+      showTab('toolkits'); mark(h);
+      if (data) { state.series = h; state.q = ''; $('q').value = ''; renderFilters(); renderSeries(); } else { pendingSeries = h; }
+      if (scroll) setTimeout(function () { var el = $('series-list'); if (el) el.scrollIntoView({ block: 'start' }); }, 30);
+      return;
+    }
+    var id = ALIAS.hasOwnProperty(h) ? ALIAS[h] : h;
+    if (PANELS.indexOf(id) < 0) return;
+    showTab(id); mark(id);
+    if (id === 'toolkits' && data && state.series !== 'all' && h === 'toolkits') { state.series = 'all'; renderFilters(); renderSeries(); }
+    if (scroll) { var m = document.querySelector('main'); if (m) m.scrollIntoView({ block: 'start' }); }
+  }
+  window.addEventListener('hashchange', function () { fromHash(true); });
+  showTab('toolkits'); fromHash(false);
+
+  /* Profile awareness */
+  function profile() { try { return JSON.parse(localStorage.getItem('bl_diy_profile_v1')) || null; } catch (e) { return null; } }
+
+  function renderStats() {
+    var all = []; data.series.forEach(function (s) { all = all.concat(s.toolkits); });
+    var live = all.filter(function (t) { return t.status === 'live'; }).length;
+    $('hero-stats').innerHTML =
+      '<span><b>' + all.length + '</b>toolkits</span>' +
+      '<span><b>' + data.series.length + '</b>services</span>' +
+      '<span><b>' + live + ' live · ' + (all.length - live) + ' draft</b>status</span>';
+    var p = profile();
+    if (p) { $('start-btn').textContent = 'Update your Business Profile'; }
+  }
+
+  var conn = null, PFX = { revops: 'rv', paid: 'paid', seo: 'seo', pr: 'pr', email: 'em' }, selNode = null, showAll = false;
+  function nodeInfo(id) {
+    var n = conn && conn.nodes[id]; if (!n) return null;
+    var s = data.series.filter(function (x) { return x.id === n[0]; })[0]; if (!s) return null;
+    var t2 = s.toolkits.filter(function (x) { return x.n === n[1]; })[0]; if (!t2) return null;
+    return { s: s, t: t2 };
+  }
+  function renderMap() {
+    var SLOTS = Math.max(6, Math.max.apply(null, data.series.map(function (s) { return s.toolkits.length; })));
+    var h = '<svg class="map-svg" id="map-svg" aria-hidden="true"></svg><div class="map-start"><a class="start-node" href="' + esc(data.start.file) + '"><small>Start here</small><strong>' + esc(data.start.title) + '</strong></a></div>';
+    data.series.forEach(function (s) {
+      var c = color(s.id);
+      var draft = s.toolkits.every(function (t) { return t.status !== 'live'; });
+      h += '<div class="line"><div class="line-name">' + esc(s.name) + '<small>' + esc(s.first) + ' · ' + s.toolkits.length + ' toolkit' + (s.toolkits.length === 1 ? '' : 's') + '</small></div>';
+      h += '<ol class="stops' + (draft ? ' draft-line' : '') + '" style="--c:' + c + ';--n:' + s.toolkits.length + ';--s:' + SLOTS + '">';
+      s.toolkits.forEach(function (t) {
+        var id = PFX[s.id] + t.n;
+        h += '<li class="stop' + (t.status !== 'live' ? ' is-draft' : '') + '" data-node="' + id + '"><button type="button" class="node" aria-pressed="false" title="' + esc(t.title) + '"><span class="dot" aria-hidden="true">' + t.n + '</span><span class="lbl">' + esc(t.short) + '<span class="sr">: ' + esc(t.title) + (t.status !== 'live' ? ' (draft)' : '') + '. Show connections</span></span></button></li>';
+      });
+      for (var i = s.toolkits.length; i < SLOTS; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
+      h += '</ol></div>';
+    });
+    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span class="lg-wide">Solid line: unlocks next · Dashed line: works best after</span><span class="lg-narrow">Tap a stop: the stops it connects to stay bright, and the list below explains each link.</span></div>';
+    $('map').innerHTML = h;
+    if (conn) {
+      var cross = conn.edges.filter(function (e) { return conn.nodes[e[0]][0] !== conn.nodes[e[1]][0]; }).length;
+      $('map-count').textContent = conn.edges.length + ' connections · ' + cross + ' across services';
+    }
+    selectNode(selNode || 'paid1', true);
+  }
+  function center(el, box) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top }; }
+  function drawLines() {
+    var svg = $('map-svg'), map = $('map'); if (!svg || !conn) return;
+    var box = map.getBoundingClientRect(); svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
+    var ln0 = map.querySelector('.line'); if (box.width < 560 || (ln0 && getComputedStyle(ln0).gridTemplateColumns.split(' ').length < 2)) { svg.innerHTML = ''; return; }
+    var out = '';
+    var obs = [];
+    Array.prototype.forEach.call(map.querySelectorAll('.stop[data-node]'), function (li) {
+      var d0 = li.querySelector('.dot').getBoundingClientRect(), l0 = li.querySelector('.lbl').getBoundingClientRect();
+      obs.push({ id: li.getAttribute('data-node'), cx: d0.left + d0.width / 2 - box.left, cy: d0.top + d0.height / 2 - box.top, r: d0.width / 2 + 4,
+        l: { x1: l0.left - box.left - 3, x2: l0.right - box.left + 3, y1: l0.top - box.top - 2, y2: l0.bottom - box.top + 2 } });
+    });
+    Array.prototype.forEach.call(map.querySelectorAll('.line-name'), function (ln) { var r0 = ln.getBoundingClientRect(); obs.push({ id: '', cx: -999, cy: -999, r: 0, l: { x1: r0.left - box.left - 4, x2: r0.right - box.left + 4, y1: r0.top - box.top - 2, y2: r0.bottom - box.top + 2 } }); });
+    var maxX = box.width - 6;
+    function clampX(c) { return { x: Math.max(6, Math.min(maxX, c.x)), y: c.y }; }
+    function bez(a, c1, c2, b, t2) { var u = 1 - t2; return { x: u*u*u*a.x + 3*u*u*t2*c1.x + 3*u*t2*t2*c2.x + t2*t2*t2*b.x, y: u*u*u*a.y + 3*u*u*t2*c1.y + 3*u*t2*t2*c2.y + t2*t2*t2*b.y }; }
+    function hits(a, c1, c2, b, e) {
+      var n = 0;
+      for (var i = 2; i <= 38; i++) {
+        var pt = bez(a, c1, c2, b, i / 40);
+        for (var k = 0; k < obs.length; k++) {
+          var o = obs[k], self = o.id === e[0] || o.id === e[1];
+          if (!self && Math.hypot(pt.x - o.cx, pt.y - o.cy) < o.r) n += 3;
+          if (pt.x > o.l.x1 && pt.x < o.l.x2 && pt.y > o.l.y1 && pt.y < o.l.y2) n += self ? 0 : 1;
+        }
+      }
+      return n;
+    }
+    function path(e, cls) {
+      var a = map.querySelector('[data-node="' + e[0] + '"] .dot'), b = map.querySelector('[data-node="' + e[1] + '"] .dot'); if (!a || !b) return;
+      var p = center(a, box), q = center(b, box), col = color(conn.nodes[e[0]][0]), R = a.getBoundingClientRect().width / 2;
+      var best = null;
+      if (Math.abs(p.y - q.y) < 8) {
+        var base = Math.min(60, 18 + Math.abs(q.x - p.x) * 0.25);
+        [0, 14, 28, 42].forEach(function (extra) {
+          if (best && best.n === 0) return;
+          var lift = base + extra, a1 = { x: p.x, y: p.y - R }, b1 = { x: q.x, y: q.y - R }, c1 = { x: p.x, y: p.y - R - lift }, c2 = { x: q.x, y: q.y - R - lift };
+          var n = hits(a1, c1, c2, b1, e); if (!best || n < best.n) best = { n: n, d: 'M' + a1.x + ' ' + a1.y + ' C ' + c1.x + ' ' + c1.y + ', ' + c2.x + ' ' + c2.y + ', ' + b1.x + ' ' + b1.y };
+        });
+      } else {
+        var my = (p.y + q.y) / 2, span = Math.abs(q.y - p.y);
+        [0, -1, 1, -2, 2, -3, 3, -4, 4].forEach(function (k) {
+          if (best && best.n === 0) return;
+          var off = k * Math.max(26, R * 1.6), c1 = { x: p.x + off, y: my }, c2 = { x: q.x + off, y: my };
+          if (k !== 0) { c1 = { x: p.x + off * 1.5, y: p.y + (q.y - p.y) * 0.3 }; c2 = { x: q.x + off * 1.5, y: q.y - (q.y - p.y) * 0.3 }; }
+          c1 = clampX(c1); c2 = clampX(c2);
+          var n = hits(p, c1, c2, q, e) + Math.abs(k) * 0.2; if (!best || n < best.n) best = { n: n, d: 'M' + p.x + ' ' + p.y + ' C ' + c1.x + ' ' + c1.y + ', ' + c2.x + ' ' + c2.y + ', ' + q.x + ' ' + q.y };
+        });
+      }
+      out += '<path class="' + cls + '" d="' + best.d + '" stroke="' + col + '"/>';
+    }
+    if (showAll) conn.edges.forEach(function (e) { path(e, 'faint'); });
+    if (selNode) conn.edges.forEach(function (e) { if (e[0] === selNode) path(e, 'out'); else if (e[1] === selNode) path(e, 'in'); });
+    svg.innerHTML = out;
+  }
+  function selectNode(id, quiet) { if (!quiet && window.blTrack) window.blTrack('diy_map_select', { label: id });
+    if (!conn) return; selNode = id;
+    var map = $('map'); map.classList.toggle('has-sel', !!id && !showAll);
+    Array.prototype.forEach.call(map.querySelectorAll('.stop[data-node]'), function (li) {
+      var n = li.getAttribute('data-node');
+      var isOut = conn.edges.some(function (e) { return e[0] === id && e[1] === n; });
+      var isIn = conn.edges.some(function (e) { return e[1] === id && e[0] === n; });
+      li.classList.toggle('sel', n === id); li.classList.toggle('out', isOut); li.classList.toggle('in', isIn && !isOut);
+      li.querySelector('button').setAttribute('aria-pressed', n === id ? 'true' : 'false');
+    });
+    drawLines();
+    var me = nodeInfo(id); if (!me) return;
+    function item(e, other) {
+      var o = nodeInfo(other); if (!o) return '';
+      var x = o.s.id !== me.s.id ? '<span class="x">' + esc(o.s.name) + '</span>' : '';
+      return '<li style="--c:' + color(o.s.id) + '"><i aria-hidden="true"></i><span><a href="' + esc(o.t.file) + '">' + esc(o.t.title) + '</a>' + x + '<br>' + esc(e[2]) + '</span></li>';
+    }
+    var outs = conn.edges.filter(function (e) { return e[0] === id; }), ins = conn.edges.filter(function (e) { return e[1] === id; });
+    var d = $('map-detail'); d.style.setProperty('--sel', color(me.s.id));
+    d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
+      '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html#connect:' + esc(id) + '">See it in the journey map</a></div></div>' +
+      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
+      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || (id === 'paid1' ? '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>' : '<li class="none"><b>Nothing required first.</b> A good place to start for ' + esc(me.s.name) + '.</li>')) + '</ul>';
+    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  function renderSupport() {
+    if (!conn || !conn.support) return;
+    var names = {}; data.series.forEach(function (s) { names[s.id] = s.name; });
+    $('support-grid').innerHTML = data.series.map(function (s) {
+      var row = conn.support[s.id] || {};
+      return '<article class="sup" style="--c:' + color(s.id) + '"><h3>' + esc(s.name) + ' gives…</h3><ul>' +
+        Object.keys(row).map(function (to) { return '<li style="--to:' + color(to) + '"><b>' + esc(names[to] || to) + '</b> ' + esc(row[to]) + '</li>'; }).join('') + '</ul></article>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('#map .stop button.node') : null;
+    if (b) selectNode(b.parentNode.getAttribute('data-node'));
+    if (e.target.id === 'map-all') { showAll = !showAll; e.target.setAttribute('aria-pressed', showAll ? 'true' : 'false'); e.target.textContent = showAll ? 'Hide extra connections' : 'Show every connection'; $('map').classList.toggle('has-sel', !showAll); drawLines(); }
+  });
+  var rT; window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(drawLines, 120); });
+
+  function renderFilters() {
+    var opts = [['all', 'All services']].concat(data.series.map(function (s) { return [s.id, s.name]; }));
+    $('filters').innerHTML = opts.map(function (o) { return '<button type="button" class="chip" data-s="' + o[0] + '" aria-pressed="' + (state.series === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('');
+    Array.prototype.forEach.call($('filters').querySelectorAll('.chip'), function (b) {
+      b.addEventListener('click', function () { state.series = b.getAttribute('data-s'); renderFilters(); renderSeries(); mark(state.series === 'all' ? 'toolkits' : state.series); try { history.replaceState(null, '', '#' + (state.series === 'all' ? 'toolkits' : state.series)); } catch (e) {} });
+    });
+  }
+
+  function renderSeries() {
+    var q = state.q.toLowerCase(), out = '', shown = 0;
+    data.series.forEach(function (s) {
+      if (state.series !== 'all' && state.series !== s.id) return;
+      var list = s.toolkits.filter(function (t) { return !q || (t.title + ' ' + t.description + ' ' + s.name + ' ' + t.short).toLowerCase().indexOf(q) > -1; });
+      if (!list.length) return;
+      shown += list.length;
+      var c = color(s.id);
+      out += '<section class="series" style="--c:' + c + '" aria-labelledby="s-' + s.id + '"><div class="series-head"><div><h3 id="s-' + s.id + '">' + esc(s.name) + '</h3><p>' + esc(s.promise) + '</p></div>' +
+        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=hub-' + esc(s.id) + '" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
+      list.forEach(function (t) {
+        out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">Draft 1') + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
+      });
+      out += '</div></section>';
+    });
+    $('series-list').innerHTML = shown ? out : '<div class="empty">No toolkit matches “' + esc(state.q) + '”. Try a broader word, like “ads” or “leads”.</div>';
+  }
+
+  function renderWidgets() {
+    if (!widgets || !widgets.widgets || !widgets.widgets.length) return;
+    var base = location.href.replace(/[#?].*$/, '').replace(/index\.html$/, '');
+    $('widget-list').innerHTML = '<div class="widget-grid">' + widgets.widgets.map(function (w) {
+      var src = base + w.file;
+      var code = '<iframe src="' + src + '" title="' + w.title.replace(/"/g, '&quot;') + '" width="100%" height="' + w.height + '" style="border:0;max-width:' + (w.maxWidth || 420) + 'px" loading="lazy" data-bl-widget></iframe>\n<script>addEventListener("message",function(e){var d=e.data;if(d&&d.source==="bl-diy-widget"&&d.type==="height"){document.querySelectorAll("iframe[data-bl-widget]").forEach(function(f){if(f.contentWindow===e.source)f.style.height=d.height+"px";});}});<\/script>';
+      return '<article class="widget-card"><iframe src="' + esc(w.file) + '" title="' + esc(w.title) + '" height="' + w.height + '" loading="lazy"></iframe><div class="wc-body"><h4>' + esc(w.title) + '</h4><p>' + esc(w.use) + '</p><div class="code"><label class="sr" for="code-' + esc(w.id) + '">Embed code</label><textarea id="code-' + esc(w.id) + '" readonly>' + esc(code) + '</textarea></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="copy" type="button" data-copy="code-' + esc(w.id) + '">Copy embed code</button><a class="copy" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(w.file) + '" target="_blank" rel="noopener">Open on its own</a></div></div></article>';
+    }).join('') + '</div>';
+    if (widgets.tiles && widgets.tiles.length) {
+      $('tile-list').innerHTML = '<div class="section-head" style="margin-top:44px"><div><h2>Slide tiles</h2><p>Static images sized for proposal decks (16:9 and square). Each one has the toolkit link printed on it.</p></div></div><div class="tiles">' + widgets.tiles.map(function (t) {
+        return '<figure class="tile-card" style="margin:0"><img src="' + esc(t.file) + '" alt="' + esc(t.alt) + '" loading="lazy"><figcaption style="font-size:14px"><b>' + esc(t.title) + '</b><br><a href="' + esc(t.file) + '" download>Download PNG</a></figcaption></figure>';
+      }).join('') + '</div>';
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
+      b.addEventListener('click', function () {
+        var ta = $(b.getAttribute('data-copy')), txt = ta.value;
+        function done() { var o = b.textContent; b.textContent = 'Copied'; setTimeout(function () { b.textContent = o; }, 1600); }
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(done, function () { ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }); }
+        else { ta.focus(); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
+      });
+    });
+  }
+
+  $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); renderSeries(); });
+  if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { renderMap(); renderSeries(); }); } catch (e) {} }
+
+  Promise.all([
+    getJSON('toolkits.json'),
+    getJSON('data/widgets.json').catch(function () { return null; }),
+    getJSON('data/connections.json').catch(function () { return null; })
+  ]).then(function (r) {
+    data = r[0]; widgets = r[1]; conn = r[2];
+    $('updated').textContent = 'Updated ' + (data.updated || '');
+    if (pendingSeries) { state.series = pendingSeries; pendingSeries = null; }
+    renderStats(); renderMap(); renderSupport(); renderFilters(); renderSeries(); renderWidgets();
+    setTimeout(drawLines, 300); if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawLines);
+  }).catch(function () {
+    $('series-list').innerHTML = '<div class="empty">The toolkit list could not load. Refresh the page; if it keeps happening, check that toolkits.json is valid.</div>';
+  });
+})();
+</script>
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() {
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q')) return;
+    Array.prototype.forEach.call(form.querySelectorAll('.q'), function (q) {
+      if (q.closest('.q') !== q || q.parentElement.closest('.q')) return;
+      var kids = Array.prototype.filter.call(q.children, function (c) { return !c.classList.contains('sr-only') && !c.classList.contains('sr'); });
+      if (!kids.length) return;
+      var heads = kids.filter(function (c) { return c.tagName === 'LEGEND' || c.classList.contains('q-label'); });
+      if (kids[0].classList.contains('q-row')) {
+        q.classList.add('blx-row');
+        if (heads.length) {
+          var pr = null; Array.prototype.slice.call(q.children).forEach(function (c) {
+            if (heads.indexOf(c) >= 0) { pr = document.createElement('div'); pr.className = 'blx-pair'; q.appendChild(pr); var a1 = document.createElement('div'); a1.className = 'blx-ph'; pr.appendChild(a1); a1.appendChild(c); var b1 = document.createElement('div'); b1.className = 'blx-pc'; pr.appendChild(b1); return; }
+            if (pr && c !== pr) pr.querySelector('.blx-pc').appendChild(c);
+          });
+          q.classList.add('blx-pairs');
+        }
+        return;
+      }
+      if (kids[0].tagName === 'LEGEND') heads = [kids[0]];
+      if (heads.length > 1 && kids[0] === heads[0]) {
+        var nodes = Array.prototype.slice.call(q.children), pair = null, helps = [];
+        nodes.forEach(function (c) {
+          if (c.classList.contains('q-help')) { helps.push(c); return; }
+          if (heads.indexOf(c) >= 0) { pair = document.createElement('div'); pair.className = 'blx-pair'; q.appendChild(pair); var hc = document.createElement('div'); hc.className = 'blx-ph'; pair.appendChild(hc); hc.appendChild(c); var cc = document.createElement('div'); cc.className = 'blx-pc'; pair.appendChild(cc); return; }
+          if (pair) pair.querySelector('.blx-pc').appendChild(c);
+        });
+        if (helps.length) { var hw = document.createElement('div'); hw.className = 'blx-qh blx-pairhelp'; helps.forEach(function (h) { hw.appendChild(h); }); q.appendChild(hw); }
+        q.classList.add('blx-pairs'); return;
+      }
+      if (heads.length !== 1 || kids[0] !== heads[0]) return;
+      var head = heads[0], qh = document.createElement('div'), qc = document.createElement('div');
+      qh.className = 'blx-qh'; qc.className = 'blx-qc';
+      Array.prototype.slice.call(q.children).forEach(function (c) {
+        if (c === head) return;
+        if (c.classList.contains('q-help')) qh.appendChild(c); else qc.appendChild(c);
+      });
+      q.appendChild(qh); q.appendChild(qc); q.classList.add('blx-split');
+    });
+  })();
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+<script id="bl-version-js" src="assets/version-switch.js"></script>
+</body>
+</html>

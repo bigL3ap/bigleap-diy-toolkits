@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Homepage Mockup · DIY Toolkits</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+.hero { position: relative; overflow: hidden; background: linear-gradient(180deg, #F3E3E6 0%, #E9E3EE 30%, #D9E6F1 62%, #C6DBEA 100%); }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: linear-gradient(180deg, rgba(198,219,234,0) 0%, rgba(176,204,224,.55) 100%); pointer-events: none; }
+.hero .c { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
+.hero .eyebrow { font: italic 700 15px "Raleway", Arial, sans-serif; margin: 0 0 16px; }
+.hero h2 { font-size: clamp(40px, 5.6vw, 64px); line-height: 1.12; }
+.hero h2 span { display: block; color: var(--blue); }
+.hero p { font-size: 18px; max-width: 30em; margin: 20px 0 0; }
+.hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 28px; }
+.hero .diy-link { font-weight: 700; color: var(--navy); text-decoration: none; border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+.form-card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 16px 40px rgba(20,61,85,.14); }
+.form-card h3 { font-size: 28px; text-align: center; margin-bottom: 14px; font-weight: 600; }
+.form-card label { display: block; font-size: 13px; font-weight: 600; margin-top: 10px; }
+.form-card .ph { height: 42px; border: 1px solid var(--line); border-radius: 8px; margin-top: 4px; }
+.form-card .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-card .alt { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; }
+.services { display: grid; grid-template-columns: 240px minmax(0, 1fr); border: 1px solid var(--line); background: #fff; }
+.services .tabs { display: flex; flex-direction: column; background: var(--sky); }
+.services .tabs button { text-align: left; min-height: 48px; padding: 10px 18px; border: 0; border-left: 4px solid transparent; background: transparent; font: 600 18px "Raleway", Arial, sans-serif; color: var(--navy); cursor: pointer; }
+.services .tabs button[aria-selected="true"] { background: #fff; border-left-color: var(--blue); }
+.services .panel { padding: 30px 34px; }
+.services .panel h3 { font-size: 30px; }
+.services .panel p { margin: 10px 0 18px; }
+.services .subs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 24px; font: 700 18px "Raleway", Arial, sans-serif; }
+.services .subs span::before { content: ""; display: inline-block; width: 26px; height: 26px; border-radius: 6px; background: var(--tint, #DAE9F2); vertical-align: -6px; margin-right: 10px; }
+.diy-row { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 16px 18px; border-radius: 12px; background: var(--sky); }
+.diy-row b { font-family: "Raleway", Arial, sans-serif; font-size: 17px; }
+.diy-row a.chipl { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--navy); font-weight: 600; font-size: 14px; text-decoration: none; }
+.diy-row a.chipl:hover { border-color: var(--blue); }
+.services .bottom { display: flex; justify-content: flex-end; margin-top: 20px; }
+.diy-band .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 56px; align-items: center; }
+.diy-band h2 { font-size: clamp(32px, 4vw, 46px); }
+.diy-band h2 span { display: block; color: var(--blue); }
+.diy-band p.copy { font-size: 18px; margin: 18px 0 0; }
+.paths { margin: 28px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.paths a { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 18px; background: #fff; border-radius: 12px; border: 1px solid var(--line); text-decoration: none; color: var(--navy); }
+.paths a:hover { border-color: var(--blue); }
+.paths i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+.paths strong { font: 700 17px "Raleway", Arial, sans-serif; display: block; }
+.paths small { color: var(--muted); font-size: 14px; display: block; line-height: 1.4; }
+.paths em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.diy-band .more { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+.faq summary { cursor: pointer; font: 700 20px "Raleway", Arial, sans-serif; color: var(--navy); list-style-position: outside; }
+.faq details p { margin: 10px 0 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 0; }
+.layout aside { border-left: 1px solid var(--line); background: #F7F9FB; padding: 24px 20px; }
+.layout aside .notes { position: sticky; top: 64px; }
+body.clean .layout { grid-template-columns: 1fr; }
+body.clean .layout aside { display: none; }
+@media (max-width: 1240px) { .layout { grid-template-columns: 1fr; } .layout aside { border-left: 0; border-top: 1px solid var(--line); order: -1; } .layout aside .notes { position: static; } }
+@media (max-width: 900px) {
+  .hero .c, .diy-band .grid { grid-template-columns: 1fr; }
+  .services { grid-template-columns: 1fr; }
+  .services .tabs { flex-direction: row; overflow-x: auto; }
+  .services .tabs button { white-space: nowrap; border-left: 0; border-bottom: 3px solid transparent; font-size: 16px; }
+  .services .tabs button[aria-selected="true"] { border-bottom-color: var(--blue); }
+  .services .panel { padding: 22px 18px; }
+}
+@media (max-width: 520px) { .form-card .two { grid-template-columns: 1fr; } .paths a { grid-template-columns: 12px minmax(0, 1fr); } .paths em { grid-column: 2; } }
+.mock-bar a, .mock-bar button { display: inline-flex; align-items: center; min-height: 36px; }
+</style>
+</head>
+<body>
+<div class="mock-bar" role="note">Mockup of bigleap.com with the DIY toolkits added. Red numbers mark what's new.
+  <button type="button" id="toggle" aria-pressed="false">Hide notes</button>
+  <a href="toolkits-landing.html">See the toolkits landing page mockup</a>
+  <a href="../index.html">Back to the dashboard</a>
+</div>
+
+<header class="site-head">
+  <div class="c">
+    <a href="#" aria-label="Big Leap home"><img src="../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="caret" href="#">Services</a>
+      <a class="caret" href="#">Who We Serve</a>
+      <a class="caret" href="#">Case Studies</a>
+      <span class="new" style="display:inline-block"><span class="pin" aria-hidden="true" style="left:-30px;top:-8px">1</span><a class="caret new-outline" href="toolkits-landing.html">Resources</a></span>
+      <a class="new-outline" href="toolkits-landing.html" style="padding:2px 4px">Free Toolkits<span class="new-badge">New</span></a>
+      <a class="caret" href="#">About</a>
+      <a class="pill" href="#">Get Your Custom Strategy</a>
+    </nav>
+    <button class="menu-btn" type="button" id="menu" aria-expanded="false" aria-controls="nav" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<div class="layout">
+<main>
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="c">
+      <div>
+        <p class="eyebrow">Big Leap Brand-Led Performance Marketing: Where Connection Earns Conversion</p>
+        <h2 id="hero-h">Don't Chase Clicks. <span>Command Attention.</span></h2>
+        <p>Show up in the moments that matter before buyers are ready, so you're the obvious choice when it's time to buy.</p>
+        <div class="actions new">
+          <span class="pin" aria-hidden="true">2</span>
+          <a class="btn" href="#">Talk to a Strategist</a>
+          <a class="diy-link new-outline" href="toolkits-landing.html">Not ready to talk? Take a small leap with a free DIY toolkit</a>
+        </div>
+      </div>
+      <div class="form-card" aria-label="Talk to a Strategist form (existing)">
+        <h3>Talk to a Strategist</h3>
+        <div class="two"><div><label>First Name *</label><div class="ph"></div></div><div><label>Last Name *</label><div class="ph"></div></div></div>
+        <label>Email *</label><div class="ph"></div>
+        <label>Website *</label><div class="ph"></div>
+        <label>Monthly Budget Range</label><div class="ph"></div>
+        <p class="alt new new-outline"><span class="pin" aria-hidden="true" style="top:-12px;left:-12px">3</span>Budget under $3,000 a month? <a href="toolkits-landing.html">Our free toolkits cover the setup you can do yourself.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="existing" aria-label="Existing sections, unchanged"><div class="c"><span class="tag">Unchanged</span><b>Trusted by Industry-Leading Companies</b><span>Client logo bar</span><span class="tag">Unchanged</span><b>Clicks Fade. Brands Last.</b><span>Positioning</span><span class="tag">Unchanged</span><b>Conversion Starts at Consideration</b><span>Funnel diagram and comparison</span><span class="tag">Unchanged</span><b>A Growth Partner That Gets It</b><span>Six value cards</span><span class="tag">Unchanged</span><b>What Our Clients Are Saying</b><span>Reviews</span></div></div>
+
+  <section class="band" aria-labelledby="vs-h">
+    <div class="c">
+      <div class="center"><h2 class="h2" id="vs-h">Vision + Strategy</h2><p class="lead">Scale through SEO, AI SEO, paid media and RevOps strategies that line your brand up with performance.</p></div>
+      <div class="services new" style="margin-top:40px">
+        <span class="pin" aria-hidden="true">4</span>
+        <div class="tabs" role="tablist" aria-label="Services">
+          <button role="tab" aria-selected="true" data-s="seo">SEO Marketing</button>
+          <button role="tab" aria-selected="false" data-s="aiseo" tabindex="-1">AI SEO</button>
+          <button role="tab" aria-selected="false" data-s="paid" tabindex="-1">Paid Advertising</button>
+          <button role="tab" aria-selected="false" data-s="revops" tabindex="-1">RevOps</button>
+          <button role="tab" aria-selected="false" data-s="content" tabindex="-1">Content Marketing</button>
+          <button role="tab" aria-selected="false" data-s="cro" tabindex="-1">CRO</button>
+        </div>
+        <div class="panel" role="tabpanel" id="svc-panel"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="existing" aria-label="Existing section, unchanged"><div class="c"><span class="tag">Unchanged</span><b>Let's talk goals · Let's fuel your pipeline · Let's deliver</b><span>Three-step process</span></div></div>
+
+  <section class="band sky diy-band" aria-labelledby="diy-h">
+    <div class="c grid new">
+      <span class="pin" aria-hidden="true">5</span>
+      <div>
+        <p style="font:italic 700 15px Raleway,Arial,sans-serif;margin:0 0 12px">Small Leaps · free DIY toolkits</p><h2 id="diy-h">Make small leaps on your own. <span>Make the Big Leap with us.</span></h2>
+        <p class="copy">Tracking, ad accounts, lead capture, search basics, an inbox-ready email domain, a media-ready spokesperson. Every program starts with the same groundwork. Our free toolkits walk you through the parts you can do on your own, written by the Big Leap experts who do it every day.</p>
+        <ul class="paths" id="paths"></ul>
+        <div class="more"><a class="btn" href="toolkits-landing.html">See all free toolkits</a><span style="font-size:14px;color:var(--muted)">No sign-up. Nothing you enter is stored.</span></div>
+      </div>
+      <div><iframe class="widget" src="../widgets/profile-start.html" title="Where should your business start?" height="640" loading="lazy"></iframe></div>
+    </div>
+  </section>
+
+  <div class="existing" aria-label="Existing sections, unchanged"><div class="c"><span class="tag">Unchanged</span><b>Client Success Stories</b><span>Three case studies</span><span class="tag">Unchanged</span><b>Who We Serve</b><span>Six audience cards</span></div></div>
+
+  <section class="band faq" aria-labelledby="faq-h">
+    <div class="c" style="max-width:900px">
+      <h2 class="h2 center" id="faq-h">Big Leap's Digital Marketing Agency FAQs</h2>
+      <div style="margin-top:28px">
+        <details><summary>What is brand-led performance marketing?</summary><p>(Existing answer.)</p></details>
+        <details><summary>How much should I budget?</summary><p>(Existing answer, with links to the budget calculator.)</p></details>
+        <details class="new new-outline" open><span class="pin" aria-hidden="true" style="top:-10px;left:-20px">6</span><summary>Can I set up some of this myself before hiring an agency?</summary><p>Yes, and we'd encourage it. Installing tracking, connecting ad accounts, routing leads into a CRM and preparing a spokesperson are all things many teams can do on their own. Our <a href="toolkits-landing.html">free DIY toolkits</a> walk you through each step in order, so when we work together your budget goes to strategy and growth instead of setup.</p></details>
+        <details><summary>Will I have a dedicated account manager?</summary><p>(Existing answer.)</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="existing" aria-label="Existing sections, unchanged"><div class="c"><span class="tag">Unchanged</span><b>Take the Guesswork Out of Growth</b><span>Video and call</span><span class="tag">Unchanged</span><b>Award-Winning Digital Marketing Agency</b><span>Badges</span><span class="tag">Unchanged</span><b>Must-Reads From Our Blog</b><span>Three posts</span></div></div>
+
+  <footer class="site-foot">
+    <div class="c">
+      <div class="cols">
+        <div><img src="../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40" style="background:#fff;border-radius:8px;padding:6px 10px;height:46px;width:auto"></div>
+        <div><h4>Services</h4><ul><li><a href="#">SEO Marketing</a></li><li><a href="#">Paid Advertising</a></li><li><a href="#">RevOps</a></li><li><a href="#">Content Marketing</a></li><li><a href="#">CRO Marketing</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Sweet Takes Podcast</a></li></ul></div>
+        <div class="new"><span class="pin" aria-hidden="true" style="left:auto;right:0;top:-24px">7</span><h4>Free resources</h4><ul class="new-outline" style="padding:4px"><li><a href="toolkits-landing.html">DIY Toolkits</a></li><li><a href="#">Budget Calculator</a></li><li><a href="#">Site Health Checklist</a></li></ul></div>
+      </div>
+      <div class="legal"><span>© Big Leap. All rights reserved.</span><span>Privacy Policy · Terms of Use</span></div>
+    </div>
+  </footer>
+</main>
+
+<aside aria-label="What's new on this page">
+  <div class="notes">
+    <h3>What's new on this page</h3>
+    <ol>
+      <li><span><b>Nav.</b> “Free Toolkits” as its own top-level link, and DIY Toolkits listed first under Resources › Tools.</span></li>
+      <li><span><b>Hero.</b> A quiet second path under “Talk to a Strategist” for visitors who aren't ready to talk yet.</span></li>
+      <li><span><b>Form.</b> Small-budget visitors get pointed to the toolkits instead of a sales call that doesn't fit.</span></li>
+      <li><span><b>Service tabs.</b> Each service shows its own free toolkits, so the DIY path sits right next to what we sell.</span></li>
+      <li><span><b>New band.</b> “Small Leaps” placed after the 3-step process, as the step before step one: small leaps on their own, then the Big Leap with us. Live “Where should you start?” widget and a path for each of the five services.</span></li>
+      <li><span><b>FAQ.</b> One new question that answers “can I do this myself?” honestly and links the toolkits.</span></li>
+      <li><span><b>Footer.</b> Toolkits added to a Free resources column.</span></li>
+    </ol>
+    <p style="font-size:13px;color:var(--muted);margin:14px 0 0">Unchanged sections are shown as compressed bars. Tabs, links and the widget all work.</p>
+  </div>
+</aside>
+</div>
+
+<script>
+(function () {
+  var SVC = {
+    seo: { name: 'SEO Marketing', copy: 'Show up in relevant searches through local SEO, technical SEO, digital PR and link building.', subs: ['Local SEO', 'Technical SEO', 'Digital PR/Link Building', 'Site Migrations'], diy: [['Can Google find and trust your site?', '../toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html'], ['Ready for local search?', '../toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html']] },
+    aiseo: { name: 'AI SEO', copy: 'Get cited in AI answers from ChatGPT, Gemini, Perplexity and Google AI Overviews.', subs: ['AI Visibility', 'Entity Optimization', 'AI Search Tracking', 'Content for AI'], diy: [['Can AI search crawlers reach you?', '../toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html'], ['Are you ready to be pitched?', '../toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html']] },
+    paid: { name: 'Paid Advertising', copy: 'Search, Shopping, Performance Max, social and YouTube campaigns built to convert.', subs: ['Google Ads', 'Paid Social', 'Shopping & PMax', 'Conversion Tracking'], diy: [['Is your Google Ads account ready?', '../toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html'], ['Which campaigns should you run first?', '../toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html'], ['Which conversions should you track?', '../toolkits/paid/03_Which_Conversions_Should_You_Track.html']] },
+    revops: { name: 'RevOps', copy: 'Connect marketing to revenue with HubSpot, automation and reporting you can trust.', subs: ['HubSpot Setup', 'Lead Routing', 'Automation', 'Pipeline Reporting'], diy: [['Is every lead reaching your CRM?', '../toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html'], ['How much time is your sales process wasting?', '../toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html'], ['Never let a lead go cold', '../toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html']] },
+    content: { name: 'Content Marketing', copy: 'Content that earns attention, rankings and trust across every channel.', subs: ['Blog Content', 'Thought Leadership', 'Content Strategy', 'Content Refresh'], diy: [['Build your media kit', '../toolkits/pr/02_Build_Your_Media_Kit.html']] },
+    cro: { name: 'CRO', copy: 'Turn more of the traffic you already have into leads and sales.', subs: ['Landing Pages', 'A/B Testing', 'UX Audits', 'Form Optimization'], diy: [['Can you see what your marketing does?', '../toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html']] }
+  };
+  var panel = document.getElementById('svc-panel');
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function show(id) {
+    var s = SVC[id];
+    panel.innerHTML = '<h3>' + esc(s.name) + '</h3><p>' + esc(s.copy) + '</p><div class="subs">' + s.subs.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>' +
+      '<div class="diy-row new-outline"><b>Free DIY toolkits:</b>' + s.diy.map(function (d) { return '<a class="chipl" href="' + d[1] + '">' + esc(d[0]) + '</a>'; }).join('') + '</div>' +
+      '<div class="bottom"><a class="btn" href="#">Learn More</a></div>';
+  }
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.services [role=tab]'));
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); x.tabIndex = x === t ? 0 : -1; }); show(t.getAttribute('data-s')); });
+    t.addEventListener('keydown', function (e) { var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0; if (!d) return; e.preventDefault(); var n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); n.click(); });
+  });
+  show('seo');
+
+  var PATHS = [
+    ['#143D55', 'RevOps', 'Catch every lead, answer it fast, measure what works', '7 toolkits', '../toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html'],
+    ['#EA4335', 'Paid Media', 'Get your ad account ready and track what counts', '4 toolkits', '../toolkits/paid/01_What_Kind_of_Business_Are_You.html'],
+    ['#0F7B5F', 'SEO', 'Let Google and AI search find and trust you', '2 toolkits', '../toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html'],
+    ['#7A4E9C', 'Digital PR', 'Be ready the day a journalist says yes', '2 toolkits', '../toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html'],
+    ['#B45309', 'Email Marketing', 'Land in the inbox and automate what should send itself', '3 toolkits', '../toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html']
+  ];
+  document.getElementById('paths').innerHTML = PATHS.map(function (p) { return '<li><a href="' + p[4] + '" style="--c:' + p[0] + '"><i aria-hidden="true"></i><span><strong>' + p[1] + '</strong><small>' + p[2] + '</small></span><em>' + p[3] + '</em></a></li>'; }).join('');
+
+  var tg = document.getElementById('toggle');
+  tg.addEventListener('click', function () { var on = document.body.classList.toggle('clean'); tg.textContent = on ? 'Show notes' : 'Hide notes'; tg.setAttribute('aria-pressed', on); });
+  var mb = document.getElementById('menu'), nav = document.getElementById('nav');
+  mb.addEventListener('click', function () { var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
+})();
+</script>
+</body>
+</html>

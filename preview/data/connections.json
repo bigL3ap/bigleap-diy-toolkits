@@ -1,0 +1,87 @@
+{
+  "updated": "2026-10-21",
+  "note": "How the toolkits and services support each other. Node ids: rv1-rv7 (RevOps), paid1-paid4, seo1-seo2, pr1-pr2, em1-em3. Edge = [from, to, why]: doing 'from' makes 'to' work better or is needed first.",
+  "nodes": {
+    "rv1": ["revops", 1], "rv2": ["revops", 2], "rv3": ["revops", 3], "rv4": ["revops", 4], "rv5": ["revops", 5], "rv6": ["revops", 6], "rv7": ["revops", 7],
+    "paid1": ["paid", 1], "paid2": ["paid", 2], "paid3": ["paid", 3], "paid4": ["paid", 4],
+    "seo1": ["seo", 1], "seo2": ["seo", 2],
+    "pr1": ["pr", 1], "pr2": ["pr", 2],
+    "em1": ["email", 1], "em2": ["email", 2], "em3": ["email", 3]
+  },
+  "edges": [
+    ["paid1", "rv1", "If the profile shows leads landing in an inbox, capturing them in a CRM comes before any new traffic."],
+    ["paid1", "rv7", "No GA4 or Tag Manager yet? Tracking is the first small leap for every channel."],
+    ["paid1", "paid2", "The campaign types that fit your business decide what the ads account needs."],
+    ["paid1", "seo2", "Physical locations or a service area point straight to local search."],
+    ["paid1", "em1", "Anyone with a customer or prospect list should make sure it reaches the inbox."],
+    ["paid1", "pr1", "An awareness goal points to getting pitch-ready."],
+    ["rv7", "paid2", "Ads readiness depends on a conversion tag that actually fires."],
+    ["rv7", "seo1", "GA4 and Search Console together show which pages search sends visitors to."],
+    ["rv7", "em3", "UTMs on email links prove which emails drive leads and sales."],
+    ["rv7", "rv1", "UTMs on your links are what the CRM saves as each lead's source."],
+    ["rv7", "pr2", "Referral tracking lets your media kit's links and podcast mentions be measured."],
+    ["rv1", "rv2", "Once every lead lands in the CRM, the next leak is how fast someone replies."],
+    ["rv1", "paid3", "Leads in the CRM can be sent back to Google Ads as offline conversions, so ads optimize for real customers."],
+    ["rv1", "em2", "Contacts in the CRM can enter welcome and nurture emails automatically."],
+    ["rv2", "rv3", "Once first replies go out on their own, a clear owner makes sure a person follows up."],
+    ["rv2", "em2", "Sales follow-up and marketing email split cleanly: reps reply, email nurtures the rest."],
+    ["rv3", "rv4", "With owners in place, the steps after the first reply can run themselves."],
+    ["rv4", "rv6", "Automated stages create the clean data a pipeline dashboard needs."],
+    ["rv5", "rv4", "Hours lost to admin show which sales steps to automate first."],
+    ["rv5", "rv1", "The time audit ranks which hand work to fix first, usually starting with lead capture."],
+    ["rv6", "paid4", "Pipeline by source shows which campaigns deserve more budget."],
+    ["paid2", "paid3", "A ready account needs the right conversions to steer bidding."],
+    ["paid3", "rv7", "Your event plan is the list of conversion tags to install."],
+    ["paid3", "paid4", "With conversions decided, the first campaigns can bid on what matters."],
+    ["paid4", "seo1", "Search terms that convert in ads point to the pages worth ranking organically."],
+    ["paid4", "em2", "Ad visitors who don't buy yet can join a welcome flow instead of disappearing."],
+    ["paid4", "rv2", "Paid leads cost money; a fast first reply protects that spend."],
+    ["seo1", "paid2", "A fast, trustworthy landing page lowers ad costs and lifts Quality Score."],
+    ["seo1", "seo2", "Search Console and a crawlable site come before location pages can rank."],
+    ["seo1", "pr1", "A clear About page and schema give journalists the facts they look for when they land on your site."],
+    ["seo2", "paid2", "A verified Business Profile powers location and call assets in ads."],
+    ["seo2", "em2", "Review-request emails grow Google reviews for each location."],
+    ["seo2", "rv3", "Multi-location leads need routing to the right location's team."],
+    ["seo2", "rv1", "Calls and forms from every location should land in the CRM with their source."],
+    ["pr1", "pr2", "Once a spokesperson is ready, the media kit writes their bios and talking points."],
+    ["pr1", "seo1", "Once you're pitch-ready, earned coverage and links build the authority search and AI answers reward."],
+    ["pr2", "em2", "Bios and talking points become newsletter and nurture content."],
+    ["pr2", "paid4", "Your boilerplate and spokesperson bio become trust proof on ad landing pages."],
+    ["em1", "em2", "Only automate once the domain is authenticated and the list is clean."],
+    ["em1", "rv2", "An authenticated domain keeps sales follow-up out of spam too."],
+    ["em2", "em3", "Running flows need a scorecard to show what's working."],
+    ["em3", "rv6", "Email-driven leads and revenue belong on the pipeline dashboard."]
+  ],
+  "support": {
+    "revops": {
+      "paid": "Clean lead data and offline conversions let Google Ads bid on real customers, not form fills.",
+      "seo": "Lead source on every contact proves which pages and keywords produce pipeline.",
+      "pr": "Referral and source tracking shows which coverage turns into conversations.",
+      "email": "CRM contacts, owners and stages decide who gets which email and when."
+    },
+    "paid": {
+      "revops": "Paid leads are the fastest test of whether capture, routing and follow-up work.",
+      "seo": "Converting search terms reveal which topics deserve organic pages.",
+      "pr": "Paid can amplify the best coverage to the exact audience that matters.",
+      "email": "Ad visitors who aren't ready yet can join a welcome flow instead of being lost."
+    },
+    "seo": {
+      "revops": "Organic leads are the cheapest pipeline, once they're captured with their source.",
+      "paid": "Fast, trustworthy landing pages lower cost per click and lift Quality Score.",
+      "pr": "A clear About page, schema and newsroom give journalists and AI tools facts to cite.",
+      "email": "Content that ranks becomes the newsletter and nurture library."
+    },
+    "pr": {
+      "revops": "A known spokesperson and story shorten sales cycles; prospects arrive already trusting you.",
+      "paid": "Press mentions make ad copy and landing pages more credible.",
+      "seo": "Earned coverage and links build the authority search and AI answers reward.",
+      "email": "Bios, talking points and coverage give every email something worth reading."
+    },
+    "email": {
+      "revops": "Automated nurture warms leads before a rep calls, and an authenticated domain keeps sales email out of spam.",
+      "paid": "Welcome and cart flows turn paid clicks into revenue after the first visit.",
+      "seo": "Review-request emails grow local reviews, a local ranking factor.",
+      "pr": "A healthy list is the owned audience every announcement and coverage piece goes to first."
+    }
+  }
+}

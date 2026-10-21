@@ -1,0 +1,1672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Will Your Emails Reach the Inbox?</title>
+<meta name="description" content="Nine quick answers about how you send email. You get your Inbox Readiness List: the authentication, list and consent fixes that keep your email out of spam and inside the rules, in the order to do them.">
+<style>
+/* Big Leap DIY Toolkit shell (from the RevOps series, v2) + SEO series additions + Email series additions.
+Layout: masthead, series stepper, then questions left and results right on desktop; one column under 880px. */
+:root {
+--bg: #FFFFFF;
+--surface: #F7F9FB;        /* Off-White */
+--tint: #DAE9F2;           /* Header Tint */
+--tint-line: #BCD6E6;
+--line: #D4DADF;           /* Gray */
+--line-strong: #7F8F9A;
+--heading: #143D55;        /* Primary Blue */
+--text: #243642;           /* Body text */
+--muted: #5F6E79;
+--blue: #3187B5;           /* Secondary Blue */
+--blue-ink: #246D96;
+--red: #EA4336;            /* headline number and eyebrow only */
+--field: #FFFFFF;
+--hover: #EEF4F8;
+--seg-on: #143D55;
+--on-seg: #FFFFFF;
+--focus: #3187B5;
+--cta-bg: #143D55;
+--cta-fg: #FFFFFF;
+--cta-muted: #C9DCE8;
+--cta-line: #8FB4CB;
+--cta-card: #1D4D69;
+--cta-solid-bg: #FFFFFF;
+--cta-solid-fg: #143D55;
+--font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+--radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+}
+:root[data-theme="dark"] {
+--bg: #0F1D26; --surface: #162A36; --tint: #1D3A4C; --tint-line: #2D5268;
+--line: #2B4352; --line-strong: #57768A; --heading: #EEF4F8; --text: #E4EDF2;
+--muted: #9DB0BC; --blue: #5DA9D6; --blue-ink: #7DBDE3;
+--red: #F06A5F; --field: #0F1D26; --hover: #1F3646;
+--seg-on: #5DA9D6; --on-seg: #0F1D26; --focus: #5DA9D6;
+--cta-bg: #17384C; --cta-fg: #E4EDF2; --cta-muted: #A9C0CE; --cta-line: #4F7A94; --cta-card: #1F4760;
+--cta-solid-bg: #5DA9D6; --cta-solid-fg: #0F1D26;
+color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: var(--heading); text-wrap: balance; }
+a { color: var(--blue-ink); }
+.tnum, input[type="number"] { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+[hidden] { display: none !important; }
+.page {
+max-width: 1160px; margin: 0 auto;
+padding-left: max(16px, env(safe-area-inset-left, 0px));
+padding-right: max(16px, env(safe-area-inset-right, 0px));
+padding-block: 28px 40px;
+}
+@media (min-width: 700px) { .page { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+/* Masthead */
+.masthead { display: grid; gap: 10px; padding-bottom: 20px; }
+.wordmark { font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--heading); }
+.wordmark .wm-sub { color: var(--blue-ink); }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; font-weight: 700; letter-spacing: .04em; margin-top: 6px; }
+.eyebrow .kit { color: var(--red); }
+.eyebrow .campaign { color: var(--muted); font-weight: 400; }
+h1 { font-size: clamp(1.65rem, 1.05rem + 2.4vw, 2.35rem); line-height: 1.15; max-width: 26ch; }
+.lede { font-size: 16px; max-width: 60ch; }
+/* Slim six-step path */
+.stepper { border-block: 1px solid var(--line); padding-block: 12px; margin-bottom: 26px; display: grid; gap: 10px; }
+.stepper-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: 12.5px; }
+.stepper-head .label { font-size: 11.5px; }
+.stepper-note { color: var(--muted); }
+.stepper-note b, .stepper-note a { color: var(--heading); font-weight: 700; }
+.stepper ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; }
+.stepper ol::before { content: ""; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.stepper li { min-width: 0; position: relative; }
+.st { display: grid; justify-items: center; gap: 4px; text-align: center; color: var(--muted); text-decoration: none; padding-inline: 2px; }
+.st-dot {
+width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--line-strong);
+font-variant-numeric: tabular-nums;
+}
+.st-label { font-size: 12px; line-height: 1.25; font-weight: 700; }
+a.st:hover .st-dot { background: var(--hover); }
+a.st:hover .st-label { color: var(--heading); text-decoration: underline; text-underline-offset: 3px; }
+.st.is-current .st-dot { background: var(--seg-on); border-color: var(--seg-on); color: var(--on-seg); box-shadow: 0 0 0 4px var(--tint); }
+.st.is-current .st-label { color: var(--heading); }
+@media (max-width: 480px) { .st-label { font-size: 11px; } }
+/* Two columns */
+.layout { display: grid; gap: 22px; }
+.col-q, .results, .method, .results > *, .col-q > * { min-width: 0; }
+.results { display: grid; gap: 18px; align-content: start; }
+@media (min-width: 880px) {
+.layout { grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); grid-template-areas: "q r" "d r"; grid-template-rows: auto 1fr; column-gap: 30px; align-items: start; }
+.col-q { grid-area: q; } .results { grid-area: r; } .method { grid-area: d; align-self: start; }
+.is-sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+}
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+@media (max-width: 600px) { .panel { padding: 16px; } }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* Questions */
+.q-head { display: grid; gap: 6px; padding-bottom: 12px; }
+.q-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tint); color: var(--heading); border: 1px solid var(--tint-line); }
+.pill.is-yours { background: var(--field); border-color: var(--line-strong); }
+.example-text { font-size: 13.5px; color: var(--muted); }
+.text-btn { font: inherit; font-size: 13px; font-weight: 700; color: var(--heading); background: none; border: 0; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; justify-self: start; }
+.q { display: grid; gap: 8px; margin: 0; padding: 14px 0; min-width: 0; border: 0; border-top: 1px solid var(--line); }
+.q legend { float: left; width: 100%; padding: 0; margin: 0 0 8px; }
+.q legend + * { clear: both; }
+.q-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.q-row .q-label { flex: 1 1 12rem; }
+.q-label { display: block; font-weight: 700; color: var(--heading); line-height: 1.4; }
+.opt-tag { font-weight: 400; color: var(--muted); font-size: 13px; }
+.q-help { font-size: 13px; color: var(--muted); }
+.q-help a, .q-help b { color: var(--blue-ink); font-weight: 700; }
+.btn.see-results { display: none; }
+@media (max-width: 879px) { .btn.see-results { display: flex; margin-top: 6px; width: 100%; } }
+.text-field { width: 100%; min-width: 0; font: inherit; font-size: 16px; font-weight: 700; padding: 9px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); color: var(--text); }
+.text-field:focus { outline: none; }
+.text-field:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); overflow: hidden; }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field input { border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 700; font-size: 16px; padding: 8px 10px; width: 5.5rem; min-width: 0; }
+.field input:focus { outline: none; }
+.affix { display: flex; align-items: center; padding-inline: 10px; color: var(--muted); font-weight: 700; font-size: 14px; background: var(--surface); white-space: nowrap; }
+.affix.pre { border-right: 1px solid var(--line); }
+.seg { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 1px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--line-strong); overflow: hidden; }
+.seg.inline { display: inline-grid; flex: 0 0 auto; }
+.seg.wrap2 { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.seg label { display: grid; place-items: center; min-height: 42px; min-width: 4rem; padding: 7px 10px; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.25; color: var(--text); background: var(--field); cursor: pointer; user-select: none; transition: background-color .15s ease, color .15s ease; }
+.seg label:hover { background: var(--hover); }
+.seg input:checked + label { background: var(--seg-on); color: var(--on-seg); }
+.opts { display: grid; gap: 6px; }
+.opt { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.opt:hover { background: var(--hover); }
+.opt input { flex: none; margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--seg-on); }
+.opt-text { display: grid; gap: 1px; min-width: 0; }
+.opt-title { font-size: 14px; font-weight: 700; color: var(--heading); line-height: 1.35; }
+.opt-sub { font-size: 12.5px; color: var(--muted); }
+.opt-sub a, .opt-sub b { color: var(--blue-ink); font-weight: 700; }
+.opt-wrap { border: 1px solid var(--line-strong); border-radius: 8px; background: var(--field); }
+.opt-extra { display: grid; gap: 4px; padding: 0 12px 12px 38px; }
+.opt-extra label { font-size: 12px; font-weight: 700; color: var(--muted); }
+.opt-extra .text-field { font-size: 15px; padding: 7px 9px; }
+/* The answer */
+.answer { display: grid; gap: 10px; }
+.hero-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hero-num { font-size: clamp(2.5rem, 1.9rem + 2.2vw, 3.3rem); font-weight: 700; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.hero-num.is-zero { color: var(--heading); }
+.hero-unit { font-size: 19px; font-weight: 700; color: var(--heading); }
+.hero-rec { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.55rem); font-weight: 700; color: var(--heading); line-height: 1.25; max-width: 32ch; text-wrap: balance; }
+.answer-line { font-size: 15px; max-width: 60ch; }
+.answer-line b { color: var(--heading); }
+.answer.is-done { border-color: var(--tint-line); background: var(--tint); }
+.flash { animation: flash .6s ease; }
+@keyframes flash { from { background-color: var(--tint); } to { background-color: transparent; } }
+/* The deliverable */
+.deliv { display: grid; gap: 14px; }
+.deliv-head { display: grid; gap: 3px; }
+.deliv-head h2 { font-size: 19px; line-height: 1.25; }
+.deliv-sub { font-size: 14px; color: var(--muted); max-width: 62ch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; line-height: 1.3; padding: 2px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); white-space: nowrap; }
+.chip.first { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.manual { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.chip.plain { background: var(--field); color: var(--heading); border-color: var(--line-strong); }
+.kit-link { font-size: 13px; color: var(--muted); }
+.kit-link a, .kit-link b { color: var(--heading); font-weight: 700; }
+/* Step list: the ranked "do this" list inside a deliverable */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.steps > li.is-first { border-color: var(--tint-line); background: var(--tint); }
+.steps > li.is-done { background: transparent; border-style: dashed; }
+.sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; border: 1px solid var(--line-strong); color: var(--heading); font-variant-numeric: tabular-nums; background: var(--bg); }
+.is-first .sn { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.is-done .sn { color: var(--blue-ink); border-color: var(--tint-line); }
+.sb { display: grid; gap: 4px; min-width: 0; }
+.st-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.st-title { font-weight: 700; color: var(--heading); font-size: 15px; line-height: 1.35; }
+.st-meta { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; font-size: 14px; }
+.st-why { font-size: 14px; }
+.st-how { font-size: 13.5px; color: var(--text); padding-left: 10px; border-left: 2px solid var(--tint-line); }
+.is-done .st-title { color: var(--muted); }
+.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+/* Tabs inside a deliverable */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: inherit; font-size: 14px; font-weight: 700; color: var(--muted); background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px 9px; cursor: pointer; margin-bottom: -1px; }
+.tab:hover { color: var(--heading); }
+.tab[aria-selected="true"] { color: var(--heading); border-bottom-color: var(--seg-on); }
+.tab-count { font-weight: 400; color: var(--muted); }
+.tabpanel { display: grid; gap: 12px; }
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 9px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { background: var(--tint); color: var(--heading); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+tbody th { font-weight: 700; color: var(--heading); }
+.ph { color: var(--muted); font-style: italic; }
+/* Workflow diagram (Toolkit 2) */
+.flow { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 8px; }
+.flow::before { content: ""; position: absolute; left: 13px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.flow > li { position: relative; padding-left: 40px; min-width: 0; }
+.fnum { position: absolute; left: 0; top: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--heading); background: var(--bg); border: 2px solid var(--blue); }
+.k-manual .fnum { border-style: dashed; border-color: var(--line-strong); }
+.k-end .fnum { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.card { display: grid; gap: 3px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.k-manual .card { border-style: dashed; border-color: var(--line-strong); }
+.card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; align-items: baseline; }
+.card-title { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.card-detail { font-size: 13.5px; }
+.flow > li.wait { font-size: 12.5px; color: var(--muted); }
+.wait::before { content: ""; position: absolute; left: 9px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line-strong); }
+/* Emails (Toolkit 2) */
+.emails { display: grid; gap: 12px; }
+.token-note { font-size: 13.5px; color: var(--muted); }
+.token-note code { font: 700 13px/1 var(--font); color: var(--heading); }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); min-width: 0; }
+.email-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 9px 14px; background: var(--tint); }
+.email-name { font-size: 14.5px; font-weight: 700; color: var(--heading); }
+.email-when { display: block; font-size: 12.5px; font-weight: 400; color: var(--text); }
+.email-subject { padding: 10px 14px 0; font-size: 14px; }
+.email-subject span { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.email-subject b { color: var(--heading); overflow-wrap: anywhere; }
+.email-body { padding: 8px 14px 14px; white-space: pre-wrap; font-size: 14px; max-width: 66ch; overflow-wrap: anywhere; }
+.email .copy-fallback { padding: 0 14px 14px; }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.btn-line { background: transparent; color: var(--cta-fg); border: 1px solid var(--cta-line); }
+.btn-line:hover, .btn-line.is-copied { border-color: var(--cta-fg); }
+.btn-solid { background: var(--cta-solid-bg); color: var(--cta-solid-fg) !important; border: 1px solid var(--cta-solid-bg); }
+.btn-solid:hover { text-decoration: underline; text-underline-offset: 3px; }
+.btn-plain { background: var(--field); color: var(--heading); border: 1px solid var(--line-strong); min-height: 38px; padding: 7px 14px; font-size: 14px; }
+.btn-plain:hover { background: var(--hover); }
+.btn-plain.is-copied { background: var(--tint); border-color: var(--tint-line); }
+.btn-strong { background: var(--seg-on); color: var(--on-seg); border: 1px solid var(--seg-on); }
+/* Closing panel */
+.closing { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.closing h2 { color: var(--cta-fg); font-size: 19px; }
+.closing p { color: var(--cta-muted); }
+.closing > p { max-width: 60ch; }
+.closing :focus-visible { outline-color: var(--cta-fg); }
+.closing a { color: var(--cta-fg); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.copy-status { font-size: 13px; min-height: 1.2em; }
+.copy-status:empty { display: none; }
+.copy-fallback { display: grid; gap: 8px; }
+.copy-fallback label { font-size: 13px; color: var(--muted); }
+.closing .copy-fallback label { color: var(--cta-muted); }
+.copy-fallback textarea { width: 100%; min-width: 0; min-height: 12rem; resize: vertical; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--field); color: var(--text); font: 13px/1.5 var(--font); }
+.next { display: grid; gap: 3px; padding: 14px 16px; border-radius: 8px; background: var(--cta-card); border: 1px solid var(--cta-line); }
+.next-label { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cta-muted); }
+.next-title { font-size: 16px; font-weight: 700; color: var(--cta-fg) !important; }
+.next-why { font-size: 14px; }
+.xlinks { display: grid; gap: 6px; font-size: 14px; }
+.xlinks .label { color: var(--cta-muted); }
+.xlinks ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.xlinks li { color: var(--cta-muted); }
+.xlinks a { font-weight: 700; }
+.limits { border-top: 1px solid var(--cta-line); padding-top: 12px; }
+.limits summary { cursor: pointer; font-weight: 700; color: var(--cta-fg); font-size: 14px; }
+.limits ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.limits li { color: var(--cta-muted); font-size: 14px; }
+.limits li b { color: var(--cta-fg); }
+.applies { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; background: var(--cta-solid-bg); color: var(--cta-solid-fg); vertical-align: 1px; }
+/* How we calculate this */
+.method { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.method summary { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-weight: 700; color: var(--heading); cursor: pointer; list-style: none; border-radius: var(--radius); font-size: 14px; }
+.method summary::-webkit-details-marker { display: none; }
+.method summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s ease; flex: 0 0 auto; }
+.method[open] summary::before { transform: rotate(45deg); }
+.method summary .pill { margin-left: auto; }
+.method-body { padding: 0 20px 18px; display: grid; gap: 12px; font-size: 14px; }
+.method table td, .method table th { vertical-align: middle; }
+.cell { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.num-in { width: 4.25rem; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--field); color: var(--text); font: inherit; font-weight: 700; }
+.unit { font-size: 12px; color: var(--muted); }
+.method-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.reset-status { font-size: 13px; color: var(--muted); }
+.fine { font-size: 13px; color: var(--muted); }
+.foot { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.foot p { max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+/* At-a-glance strip (Toolkits 1 and 6) */
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.strip li { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; }
+.strip li + li::before { content: "\2192"; color: var(--muted); font-weight: 400; }
+.strip .ok, .strip .no, .strip .neutral { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--tint-line); background: var(--tint); color: var(--heading); }
+.strip .no { background: transparent; border: 1px dashed var(--line-strong); color: var(--text); }
+.strip .neutral { background: var(--field); border-color: var(--line); color: var(--muted); }
+.strip .mark { font-size: 12px; }
+/* ---------- SEO series additions (draft banner, profile strip, checks, snippets, print) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-wrap: anywhere; }
+.draft-banner { background: var(--tint); color: var(--heading); border-bottom: 1px solid var(--tint-line); font-size: 12.5px; line-height: 1.4; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); padding-top: max(7px, env(safe-area-inset-top, 0px)); text-align: center; }
+.draft-banner b { font-weight: 700; }
+.min-h { min-height: 100vh; min-height: 100dvh; }
+/* Stepper for a two-toolkit series */
+.stepper ol.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.stepper ol.n2::before { left: 25%; right: 25%; }
+.stepper a.st { min-height: 44px; }
+.start-here { font-size: 12.5px; }
+.start-here a { font-weight: 700; color: var(--heading); }
+/* Profile strip */
+.profile-strip { display: grid; gap: 8px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid var(--tint-line); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
+.profile-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.profile-row .p-text { flex: 1 1 18rem; min-width: 0; }
+.profile-row .p-text b { color: var(--heading); }
+.profile-row a, .profile-strip summary { font-weight: 700; color: var(--heading); }
+.profile-strip a { display: inline-flex; align-items: center; min-height: 44px; }
+.profile-strip .text-btn { min-height: 44px; }
+.profile-strip details summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+.paste-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.paste-row .text-field { flex: 1 1 14rem; font-weight: 400; }
+.paste-status { font-size: 13px; color: var(--muted); }
+.from-profile { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 999px; background: var(--tint); color: var(--blue-ink); border: 1px solid var(--tint-line); vertical-align: 1px; white-space: nowrap; }
+.profile-note { font-size: 13.5px; color: var(--muted); }
+/* Focus and checked states without :has() (Safari-safe) */
+.text-btn { display: inline-flex; align-items: center; min-height: 44px; }
+.seg label { min-height: 44px; }
+.seg.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opt { min-height: 44px; }
+.opt.is-checked { background: var(--tint); border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading); }
+.opt input { width: 18px; height: 18px; }
+.opt input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.wrap3 { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 420px) { .seg.wrap3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sub-q { display: grid; gap: 6px; padding-top: 6px; }
+.sub-q .q-label { font-size: 14px; }
+.opts.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+/* Deliverable items */
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chip.block { background: var(--field); color: var(--heading); border-color: var(--heading); }
+.chip.check { background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line-strong); }
+.st-time { font-size: 13px; color: var(--muted); }
+.st-time b { color: var(--heading); }
+.how-list { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.cms-note { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+.cms-note b { color: var(--heading); }
+.done-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.done-list li { font-size: 13px; font-weight: 700; color: var(--heading); padding: 3px 10px; border-radius: 999px; background: var(--tint); border: 1px solid var(--tint-line); }
+.snippet { display: grid; gap: 6px; }
+.snippet pre { margin: 0; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: 12.5px/1.5 "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.snippet-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.snippet-head span { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mini-table { font-size: 13px; }
+.mini-table th, .mini-table td { padding: 7px 8px; }
+.complex ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 14px; }
+.complex li b { color: var(--heading); }
+.complex .applies { background: var(--seg-on); color: var(--on-seg); }
+.complex-cta { font-size: 14px; }
+.complex-cta a { font-weight: 700; }
+.skip { display: grid; gap: 10px; }
+.skip h2 { font-size: 19px; }
+.templates { display: grid; gap: 12px; }
+.email-head .btn-plain { min-height: 44px; }
+.btn-plain { min-height: 44px; }
+.loc-meta { font-size: 13px; color: var(--muted); }
+@media print {
+  .draft-banner, .stepper, .profile-strip, .col-q, .closing-actions, .closing .next, .closing .xlinks, .btn, .text-btn, .method, .see-results, .copy-fallback { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .page { max-width: none; padding: 0; }
+  .layout { display: block; }
+  .results { display: block; }
+  .panel, .closing { border: 1px solid #999; background: #fff !important; color: #000 !important; break-inside: auto; margin-bottom: 12px; }
+  .closing h2, .closing p { color: #000 !important; }
+  .steps > li { break-inside: avoid; background: #fff !important; }
+  .is-sticky { position: static !important; }
+  a { color: #000; }
+}
+/* QA fixes */
+.mini-table th, .mini-table td { overflow-wrap: normal; word-break: normal; }
+.mini-table tbody th { white-space: nowrap; }
+.mini-table td:nth-child(2) { white-space: nowrap; }
+.seg.wrap3 label:last-of-type { grid-column: 1 / -1; }
+.profile-strip details summary::before { content: "\25B8"; margin-right: 6px; display: inline-block; transition: transform .15s ease; }
+.profile-strip details[open] summary::before { transform: rotate(90deg); }
+.profile-strip details summary::-webkit-details-marker { display: none; }
+.profile-strip details summary { list-style: none; }
+.seg label { overflow-wrap: normal; word-break: normal; hyphens: manual; min-width: 0; padding-inline: 6px; }
+@media (max-width: 360px) { .seg label { font-size: 13px; } }
+
+/* ---------- Email series additions ---------- */
+.stepper ol.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
+.stepper ol.n3::before { left: 16.6%; right: 16.6%; }
+.q-row + .q-row { margin-top: 4px; }
+.q-sub { font-weight: 700; color: var(--heading); font-size: 14px; flex: 1 1 9rem; min-width: 0; }
+.q-sub small { display: block; font-weight: 400; color: var(--muted); font-size: 12.5px; }
+.fields { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.fld { display: grid; gap: 4px; min-width: 0; }
+.fld > span { font-size: 13.5px; font-weight: 700; color: var(--heading); }
+.fld .field { width: 100%; }
+.fld .field input { width: 100%; flex: 1 1 auto; }
+.chip.good { background: var(--tint); color: var(--heading); border-color: var(--tint-line); }
+.chip.watch { background: var(--field); color: var(--heading); border: 1px dashed var(--line-strong); }
+.chip.fix { background: var(--seg-on); color: var(--on-seg); border-color: var(--seg-on); }
+.chip.none { background: transparent; color: var(--muted); border-color: var(--line); }
+.chip.run { background: var(--tint); color: var(--blue-ink); border-color: var(--tint-line); }
+.meta-grid { display: grid; gap: 4px 14px; grid-template-columns: max-content minmax(0, 1fr); margin: 2px 0 0; font-size: 14px; }
+.meta-grid dt { font-weight: 700; color: var(--heading); }
+.meta-grid dd { margin: 0; min-width: 0; }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: minmax(0, 1fr); } .meta-grid dd { margin-bottom: 4px; } }
+.subj-list { margin: 2px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 14px; }
+.score td, .score th { vertical-align: middle; }
+.score td.yours { font-weight: 700; color: var(--heading); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.score .rng { font-size: 13px; color: var(--muted); }
+.score tbody th { min-width: 9rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; color: var(--muted); align-items: center; }
+.note-box { font-size: 14px; padding: 10px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); }
+.note-box b { color: var(--heading); }
+.consent-table td, .consent-table th { font-size: 13.5px; }
+.consent-table tbody th { white-space: nowrap; }
+.est { font-size: 14px; color: var(--text); }
+.seg.wrap3.p5 label:last-of-type { grid-column: span 2; }
+@media (max-width: 420px) { .seg.wrap3.p5 label:last-of-type { grid-column: 1 / -1; } }
+.method .num-in { font-size: 16px; }
+@media print { .email .btn, .snippet .btn { display: none !important; } }
+
+</style>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style id="bl-header-css">
+/* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
+.blh, .blh * { box-sizing: border-box; }
+.blh { position: relative; z-index: 60; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; color: #143D55; -webkit-text-size-adjust: 100%; }
+.blh a { color: inherit; }
+.blh :focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; border-radius: 6px; }
+.blh-bar { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-in { max-width: 1240px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); }
+.blh-bar .blh-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; }
+.blh-logo { display: block; flex: 0 0 auto; }
+.blh-logo img { display: block; height: 40px; width: auto; }
+.blh-nav { display: flex; align-items: center; gap: 4px; }
+.blh-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 2px; }
+.blh-nav > ul > li { position: relative; }
+.blh-top { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 11px; border: 0; background: none; color: #143D55; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: -0.2px; text-decoration: none; cursor: pointer; white-space: nowrap; border-radius: 8px; }
+.blh-top:hover { color: #3187B5; }
+.blh-top .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-li.open > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-top.is-here { box-shadow: inset 0 -3px 0 #EA4335; border-radius: 0; }
+.blh-new { display: inline-block; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.5 "Open Sans", Arial, sans-serif; letter-spacing: 0; }
+.blh-dd { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 18px 20px; gap: 6px 28px; grid-auto-flow: column; grid-auto-columns: minmax(170px, auto); }
+.blh-li:last-child .blh-dd, .blh-li.r .blh-dd { left: auto; right: 0; transform: none; }
+.blh-li.open > .blh-dd { display: grid; }
+@media (hover: hover) and (min-width: 1081px) { .blh-li:hover > .blh-dd { display: grid; } .blh-li:hover > .blh-top .car { transform: rotate(-135deg); margin-top: 3px; } }
+.blh-dd::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.blh-col h6 { margin: 0 0 6px; font: 700 12px "Open Sans", Arial, sans-serif; color: #5F6E79; min-height: 16px; }
+.blh-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-col a { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font: 600 14.5px/1.3 "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-col a:hover { background: #EEF3F8; color: #246D96; }
+.blh-cta { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 10px 18px; border-radius: 25px; background: #143D55; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+.blh-cta:hover { background: #1D4D69; }
+.blh-burger { display: none; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 8px 14px; border: 1px solid #D4DADF; border-radius: 10px; background: #fff; color: #143D55; font: 700 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blh-burger i { position: relative; width: 18px; height: 2px; background: currentColor; display: inline-block; }
+.blh-burger i::before, .blh-burger i::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.blh-burger i::before { top: -6px; } .blh-burger i::after { top: 6px; }
+/* Tier 2: one flat toolkit bar */
+.blh-sub { background: #EEF3F8; border-bottom: 1px solid #D4DADF; }
+.blh-sub .blh-in { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.blh-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 6px 0; }
+.blh-tabs::-webkit-scrollbar { display: none; }
+.blh-label { flex: 0 0 auto; font: 800 15px "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; margin-right: 10px; white-space: nowrap; }
+.blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tabs a:hover { background: #DAE9F2; }
+.blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+.blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
+/* Bottom pager on toolkit pages */
+.blp { background: #EEF3F8; border-top: 1px solid #D4DADF; margin-top: 16px; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blp-in { max-width: 1240px; margin: 0 auto; padding: 18px max(20px, env(safe-area-inset-left)) calc(18px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-right)); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.blp a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 10px 16px; border: 1px solid #D4DADF; border-radius: 12px; background: #fff; color: #143D55; text-decoration: none; }
+.blp a:hover { border-color: #3187B5; }
+.blp a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blp small { font-size: 12.5px; color: #5F6E79; font-weight: 600; }
+.blp b { font: 700 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blp-a:not(.back) { text-align: right; align-items: flex-end; }
+.blp-hub { text-align: center; align-items: center; }
+@media (max-width: 640px) { .blp-in { grid-template-columns: 1fr 1fr; } .blp-hub { grid-column: 1 / -1; order: 3; } }
+@media print { .blp { display: none !important; } }
+@media (max-width: 1080px) {
+  .blh-burger { display: inline-flex; }
+  .blh-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid #D4DADF; box-shadow: 0 18px 30px rgba(20,61,85,.12); padding: 8px max(20px, env(safe-area-inset-left)) 18px; flex-direction: column; align-items: stretch; max-height: calc(100vh - 80px); overflow-y: auto; }
+  .blh.menu-open .blh-nav { display: flex; }
+  .blh-nav > ul { flex-direction: column; align-items: stretch; }
+  .blh-top { width: 100%; justify-content: space-between; padding: 12px 4px; border-bottom: 1px solid #EEF3F8; border-radius: 0; }
+  .blh-top.is-here { box-shadow: inset 4px 0 0 #EA4335; padding-left: 12px; }
+  .blh-dd { position: static; transform: none; box-shadow: none; border: 0; padding: 4px 4px 12px; grid-auto-flow: row; grid-auto-columns: auto; }
+  .blh-col a { white-space: normal; }
+  .blh-cta { margin: 14px 0 0; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .blh-bar .blh-in { min-height: 64px; }
+  .blh-logo img { height: 32px; }
+  .blh-sub .blh-in { gap: 6px; }
+  .blh-label { display: none; }
+  .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+.blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
+:root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
+
+/* ---- Shared toolkit polish (consistent controls across all toolkits) ---- */
+.q-row .seg.inline { display: grid; width: 100%; flex: 1 1 100%; }
+.seg.inline label { min-width: 0; padding-inline: 12px; }
+@media (max-width: 560px) { .q-row .seg.inline { width: 100%; } .q-row .q-sub { flex-basis: 100%; } }
+.st-top { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 4px 12px; }
+.st-top .chip-row { justify-self: end; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+@media (max-width: 560px) { .st-top { grid-template-columns: minmax(0, 1fr); } .st-top .chip-row { justify-self: start; justify-content: flex-start; } }
+@media (max-width: 420px) { .meta-grid { grid-template-columns: max-content minmax(0, 1fr) !important; } .meta-grid dd { margin-bottom: 0 !important; } }
+.draft-banner .nw, .draft-banner b { white-space: nowrap; }
+.blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
+.blx-rel > summary::-webkit-details-marker { display: none; }
+.blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+
+/* ---- Toolkit layout: questions on top (full width), results below ---- */
+@media (min-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: "q" "r" "d" !important; grid-template-rows: auto !important; row-gap: 22px; }
+  .col-q.is-sticky, .results.is-sticky { position: static !important; }
+  .results { grid-template-columns: minmax(0, 1fr); }
+}
+.col-q { scroll-margin-top: 16px; } #results, #answer { scroll-margin-top: 16px; }
+/* Live result bar: shows the headline while the results are off screen */
+.blx-bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 60; display: flex; align-items: center; gap: 14px; width: min(760px, calc(100% - 24px)); padding: 10px 10px 10px 18px; border-radius: 16px; background: #143D55; color: #fff; box-shadow: 0 10px 30px rgba(20,61,85,.35); transition: transform .25s ease; font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blx-bar.show { transform: translate(-50%, 0); }
+.blx-bar .t { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.3; }
+.blx-bar .t small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9FC4DC; }
+.blx-bar .t b { display: block; font-size: 15.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.blx-bar button { flex: 0 0 auto; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: #EA4335; color: #fff; font: 700 14.5px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.blx-bar button:hover { background: #C5372B; }
+@media (prefers-reduced-motion: reduce) { .blx-bar { transition: none; } }
+@media print { .blx-bar { display: none !important; } }
+
+/* ---- Toolkit form: one panel, one question per row (question left, answers right) ---- */
+.col-q.panel { padding: 0 !important; overflow: hidden; }
+.col-q .q-head { padding: 20px 28px 16px !important; border-bottom: 1px solid var(--line); }
+#answers .q { margin: 0 !important; padding: 22px 28px !important; border: 0 !important; border-top: 1px solid var(--line) !important; }
+#answers > .q-head + .q, #answers > .q:first-child, #answers > .q-head + div > .q:first-child { border-top: 0 !important; }
+#answers > div:not(.q):not(.q-head) > .q:first-child { border-top: 1px solid var(--line) !important; }
+.q legend { float: left !important; width: 100%; margin: 0 0 8px !important; }
+.q > legend + * { clear: both; }
+.q-label { font-size: 15.5px; }
+.q-help { line-height: 1.5; }
+/* AA contrast for small text in light mode (dark mode already passes): the red eyebrow, and muted text on the light-blue "do first" row */
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .eyebrow .kit { color: #C5372B; } :root:not([data-theme="dark"]) .steps > li.is-first .st-time, :root:not([data-theme="dark"]) .steps > li.is-first .kit-link, :root:not([data-theme="dark"]) .steps > li.is-first .path-owner { color: #46535D; } }
+:root[data-theme="light"] .eyebrow .kit { color: #C5372B; } :root[data-theme="light"] .steps > li.is-first .st-time, :root[data-theme="light"] .steps > li.is-first .kit-link, :root[data-theme="light"] .steps > li.is-first .path-owner { color: #46535D; }
+#answers .q[hidden], #answers [hidden] { display: none !important; }
+@media (min-width: 880px) {
+  #answers .q.blx-split:not([hidden]) { display: flow-root !important; }
+  .q.blx-split > legend, .q.blx-split > .q-label { float: left !important; clear: left; width: calc(41.67% - 22px) !important; margin: 2px 0 0 !important; padding: 0 !important; }
+  .q.blx-split > .blx-qh { float: left; clear: left; width: calc(41.67% - 22px); display: grid; gap: 6px; padding-top: 6px; }
+  .q.blx-split > .blx-qh:empty { display: none; }
+  .q.blx-split > .blx-qh .q-help { margin: 0; }
+  .q.blx-split > .blx-qc { margin-left: calc(41.67% + 22px); display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs > .blx-pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: start; }
+  #answers .q.blx-pairs > .blx-pair + .blx-pair { margin-top: 14px; }
+  #answers .q.blx-pairs .blx-ph > * { margin: 8px 0 0 !important; display: block; }
+  #answers .q.blx-pairs .blx-pc { display: grid; gap: 10px; min-width: 0; }
+  #answers .q.blx-pairs > .blx-pairhelp { max-width: calc(41.67% - 22px); margin-top: 8px; }
+  #answers .q.blx-row > .q-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; align-items: center; }
+  #answers .q.blx-row > .q-row > :first-child { min-width: 0; }
+  #answers .q.blx-row > .q-row > :not(:first-child) { justify-self: start; }
+  #answers .q.blx-row > .q-row + .q-row { margin-top: 10px; }
+  #answers .q.blx-row > .sub-q { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 44px; row-gap: 6px; align-items: center; margin-top: 16px; padding: 0; border: 0; }
+  #answers .q.blx-row > .sub-q > .q-label { grid-column: 1; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > :not(.q-label):not(.q-help) { grid-column: 2; grid-row: 1; }
+  #answers .q.blx-row > .sub-q > .q-help { grid-column: 1; grid-row: 2; margin: 0; }
+  #answers .q.blx-row > .q-help { max-width: calc(41.6% - 22px); margin-top: 6px; }
+  #answers .q.blx-row .seg.inline { width: 100%; max-width: 420px; }
+  .blx-qc .seg:not(.inline) { max-width: 600px; }
+}
+#answers .q { scroll-margin-top: 16px; }
+.blx-pair + .blx-pair { margin-top: 12px; } .blx-pc { display: grid; gap: 8px; } .blx-ph > * { margin-bottom: 6px; }
+/* answer controls: lighter */
+.seg { gap: 6px !important; border: 0 !important; background: transparent !important; overflow: visible !important; border-radius: 0 !important; }
+.seg label { min-height: 42px !important; border: 1px solid var(--line-strong) !important; border-radius: 10px !important; background: var(--field, #fff) !important; font-weight: 600 !important; color: var(--text) !important; transition: background-color .12s ease, border-color .12s ease; }
+.seg label:hover { background: var(--hover) !important; }
+.seg input:checked + label { background: var(--seg-on) !important; border-color: var(--seg-on) !important; color: var(--on-seg) !important; font-weight: 700 !important; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.seg.is-focus { outline: 0 !important; }
+.opt, .opt-wrap, .text-field, .field { border-radius: 10px !important; }
+/* compact floating result card */
+.blx-bar { left: auto !important; right: max(16px, env(safe-area-inset-right)); width: min(400px, calc(100% - 32px)) !important; transform: translateY(160%) !important; padding: 10px 10px 10px 16px !important; gap: 12px !important; border-radius: 14px !important; }
+.blx-bar.show { transform: translateY(0) !important; }
+.blx-bar .t b { font-size: 14.5px !important; white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.blx-bar button { padding: 9px 14px !important; font-size: 14px !important; }
+@media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
+@media print { .blh { display: none !important; } }
+</style>
+<script id="bl-track-js">
+/* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
+(function () {
+  var GTM = '', HUB = '';
+  window.dataLayer = window.dataLayer || [];
+  if (GTM) { (function (w, d, s, l, i) { w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', GTM); }
+  if (HUB) { var hs = document.createElement('script'); hs.async = true; hs.defer = true; hs.id = 'hs-script-loader'; hs.src = 'https://js.hs-scripts.com/' + HUB + '.js'; document.head.appendChild(hs); }
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/), page = location.pathname.split('/').pop() || 'index.html';
+  var ctx = m ? { toolkit: m[1] + '-' + m[2], service: m[1] } : { toolkit: '', service: '' };
+  function track(ev, extra) {
+    var o = { event: ev, toolkit: ctx.toolkit, service: ctx.service, page: page };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    window.dataLayer.push(o);
+    try { if (window._hsq && ev === 'diy_cta_click') window._hsq.push(['trackCustomBehavioralEvent', { name: 'diy_cta_click', properties: { toolkit: ctx.toolkit } }]); } catch (e) {}
+  }
+  window.blTrack = track;
+  track(m ? 'diy_toolkit_view' : 'diy_page_view');
+  var started = false, profiled = false;
+  function inMain(el) { return !el.closest('.blh, .blp'); }
+  /* Progress, for "Your roadmap": bl_diy_progress_v1 = { v: 1, kits: { "<series>-<nn>": { first, last, worked, headline, planTaken } } }.
+     Written only on toolkit pages, only after the visitor changes an answer, never from example answers. Stays in this browser.
+     A newer version of the key is left alone. */
+  var PK = 'bl_diy_progress_v1', hT = null, worked = false;
+  function prog(fn) {
+    if (!m) return;
+    try {
+      var raw = localStorage.getItem(PK), d = raw ? JSON.parse(raw) : null;
+      if (d && d.v !== 1) return;
+      d = d || { v: 1, kits: {} }; d.kits = d.kits || {};
+      var k = d.kits[ctx.toolkit] || {}; fn(k, new Date().toISOString()); d.kits[ctx.toolkit] = k;
+      localStorage.setItem(PK, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function headline() {
+    var a = document.getElementById('answer'); if (!a) return '';
+    var f = a.querySelector('.hero-fig'), l = a.querySelector('.answer-line');
+    var ft = f ? Array.prototype.map.call(f.childNodes, function (n) { return n.nodeType === 1 && n.hidden ? '' : n.textContent; }).join(' ') : '';
+    return (ft + ' · ' + (l ? l.textContent : '')).replace(/\s+/g, ' ').replace(/^ · | · $/g, '').trim().slice(0, 180);
+  }
+  function saveHeadline() { clearTimeout(hT); hT = setTimeout(function () { if (!worked || isExample()) return; var h = headline(); prog(function (k, now) { k.last = now; if (h) k.headline = h; }); }, 900); }
+  function onStart(e) {
+    if (!m || !e.target || !inMain(e.target) || !e.isTrusted) return;
+    if (!started) { started = true; track('diy_toolkit_start'); }
+    if (!worked) { worked = true; prog(function (k, now) { k.first = k.first || now; k.last = now; k.worked = true; }); }
+    saveHeadline();
+  }
+  document.addEventListener('change', onStart, true);
+  document.addEventListener('input', onStart, true);
+  try {
+    var set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (k, v) { if (k === 'bl_diy_profile_v1' && !profiled) { profiled = true; setTimeout(function () { track('diy_profile_saved'); }, 0); } return set.apply(this, arguments); };
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
+    var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
+    if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
+    if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
+    if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
+    if (el.tagName === 'A' && /toolkits\/[a-z]+\/\d+_/.test(href) && !el.closest('.blh')) return track('diy_crosslink_click', { label: txt, link_url: href });
+  }, true);
+})();
+</script>
+</head>
+<body>
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="../../index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="../../index.html">Free Toolkits <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="../../index.html#toolkits" data-tab="toolkits">All toolkits</a><a href="../paid/01_What_Kind_of_Business_Are_You.html" data-tab="start">Start here</a><a href="../../index.html#revops" data-tab="revops">RevOps</a><a href="../../index.html#paid" data-tab="paid">Paid Media</a><a href="../../index.html#seo" data-tab="seo">SEO</a><a href="../../index.html#pr" data-tab="pr">Digital PR</a><a href="../../index.html#email" data-tab="email" aria-current="true">Email Marketing</a><span class="blh-div" aria-hidden="true"></span><a href="../../journey.html" data-tab="journey">Journey map</a><a href="../../review.html" data-tab="review">Team review</a><a href="../../index.html#widgets" data-tab="widgets">Widgets</a><a href="../../index.html#buildout" data-tab="buildout">Buildout</a></nav></div></div></header><!-- /bl-header -->
+<div class="draft-banner" role="note">Draft 1 · for internal review · Owner: <b>Erica Pounder</b></div>
+<div class="page">
+<header class="masthead">
+<div class="wordmark">BIG LEAP <span class="wm-sub">· EMAIL MARKETING</span></div>
+<p class="eyebrow"><span class="kit">Email Marketing DIY Toolkit 1 of 3</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<h1>Will Your Emails Reach the Inbox?</h1>
+<p class="lede">Nine quick answers about how you send email. You get the fixes that keep your mail out of spam and inside the rules, in the order to do them.</p>
+</header>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile" tabindex="-1"></section>
+<nav class="stepper" aria-labelledby="stepper-h">
+<div class="stepper-head">
+<h2 id="stepper-h" class="label">The Email Marketing DIY path</h2>
+<p class="stepper-note start-here" id="start-here"></p>
+</div>
+<ol id="stepper-list"></ol>
+</nav>
+<div class="layout">
+<section class="col-q panel" id="col-q" aria-labelledby="q-title">
+<form id="answers" novalidate>
+<div class="q-head">
+<div class="q-head-row">
+<h2 id="q-title" class="label">How you send email today</h2>
+<span class="pill" id="example-pill">Example answers</span>
+</div>
+<p class="example-text" id="example-text"></p>
+<button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
+</div>
+<fieldset class="q">
+<legend><span class="q-label">Which email platform do you send from?<span data-pf="platform"></span></span></legend>
+<div class="seg wrap3 p5"><input type="radio" id="platform-mailchimp" name="platform" value="mailchimp"><label for="platform-mailchimp">Mailchimp</label><input type="radio" id="platform-klaviyo" name="platform" value="klaviyo"><label for="platform-klaviyo">Klaviyo</label><input type="radio" id="platform-hubspot" name="platform" value="hubspot"><label for="platform-hubspot">HubSpot</label><input type="radio" id="platform-constantcontact" name="platform" value="constantcontact"><label for="platform-constantcontact">Constant Contact</label><input type="radio" id="platform-other" name="platform" value="other"><label for="platform-other">Other</label></div>
+<p class="q-help">Your list uses the menus for your platform. "Other" covers tools like Brevo, ActiveCampaign or Kit; the steps are the same idea.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">What address do your emails come from?</span></legend>
+<div class="opts "><label class="opt" for="from-custom"><input type="radio" id="from-custom" name="from" value="custom"><span class="opt-text"><span class="opt-title">Our own domain</span><span class="opt-sub">For example hello@yourbusiness.com</span></span></label><label class="opt" for="from-free"><input type="radio" id="from-free" name="from" value="free"><span class="opt-text"><span class="opt-title">A free mailbox</span><span class="opt-sub">For example yourbusiness@gmail.com, @yahoo.com or @outlook.com</span></span></label><label class="opt" for="from-unsure"><input type="radio" id="from-unsure" name="from" value="unsure"><span class="opt-text"><span class="opt-title">Not sure</span></span></label></div><div class="sub-q"><label class="q-label" for="domain">Your email domain <span class="opt-tag">(optional)</span></label><input class="text-field" id="domain" name="domain" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="yourbusiness.com"><p class="q-help">Used only on this page, to fill in the records below. Nothing is sent anywhere.</p></div>
+<p class="q-help">Gmail, Yahoo and Microsoft check that bulk email really comes from the domain in the "From" line. A free mailbox can't pass that check.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Is your domain set up to prove your email is really from you?</span></legend>
+<div class="q-row"><span class="q-sub" id="spf-q">SPF<small>Lists the services allowed to send as you</small></span><div class="seg inline" role="radiogroup" aria-labelledby="spf-q"><input type="radio" id="spf-yes" name="spf" value="yes"><label for="spf-yes">Yes</label><input type="radio" id="spf-no" name="spf" value="no"><label for="spf-no">No</label><input type="radio" id="spf-unsure" name="spf" value="unsure"><label for="spf-unsure">Not sure</label></div></div><div class="q-row"><span class="q-sub" id="dkim-q">DKIM<small>A digital signature on every email</small></span><div class="seg inline" role="radiogroup" aria-labelledby="dkim-q"><input type="radio" id="dkim-yes" name="dkim" value="yes"><label for="dkim-yes">Yes</label><input type="radio" id="dkim-no" name="dkim" value="no"><label for="dkim-no">No</label><input type="radio" id="dkim-unsure" name="dkim" value="unsure"><label for="dkim-unsure">Not sure</label></div></div><div class="q-row"><span class="q-sub" id="dmarc-q">DMARC<small>Tells inboxes what to do if the first two fail</small></span><div class="seg inline" role="radiogroup" aria-labelledby="dmarc-q"><input type="radio" id="dmarc-yes" name="dmarc" value="yes"><label for="dmarc-yes">Yes</label><input type="radio" id="dmarc-no" name="dmarc" value="no"><label for="dmarc-no">No</label><input type="radio" id="dmarc-unsure" name="dmarc" value="unsure"><label for="dmarc-unsure">Not sure</label></div></div>
+<p class="q-help">These are three small text records at whoever hosts your domain (GoDaddy, Cloudflare, Squarespace, Namecheap and so on). Your platform's domain settings page usually shows a green tick for each. Since 2024, Gmail and Yahoo require all three from anyone sending 5,000 or more emails a day to their users.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Tick what every marketing email already has <span class="opt-tag">(leave it if you're not sure)</span></span></legend>
+<div class="opts "><label class="opt" for="has-unsub"><input type="checkbox" id="has-unsub" name="has" value="unsub"><span class="opt-text"><span class="opt-title">A working unsubscribe link</span><span class="opt-sub">One click, no login. Most platforms add one-click unsubscribe to the email header for you.</span></span></label><label class="opt" for="has-address"><input type="checkbox" id="has-address" name="has" value="address"><span class="opt-text"><span class="opt-title">Your postal address in the footer</span><span class="opt-sub">A street address or a registered post office box.</span></span></label></div>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Where did the people on your list come from? <span class="opt-tag">(tick all that apply)</span><span data-pf="source"></span></span></legend>
+<div class="opts "><label class="opt" for="source-forms"><input type="checkbox" id="source-forms" name="source" value="forms"><span class="opt-text"><span class="opt-title">They signed up</span><span class="opt-sub">A form, pop-up or a box ticked at checkout</span></span></label><label class="opt" for="source-customers"><input type="checkbox" id="source-customers" name="source" value="customers"><span class="opt-text"><span class="opt-title">They bought from us</span><span class="opt-sub">Customers who gave their email when they paid</span></span></label><label class="opt" for="source-imports"><input type="checkbox" id="source-imports" name="source" value="imports"><span class="opt-text"><span class="opt-title">We imported contacts</span><span class="opt-sub">From a CRM, spreadsheet, old system or business cards</span></span></label><label class="opt" for="source-bought"><input type="checkbox" id="source-bought" name="source" value="bought"><span class="opt-text"><span class="opt-title">We bought, rented or scraped a list</span><span class="opt-sub">Including "opt-in" lists sold by a third party</span></span></label></div><div class="sub-q"><div class="q-row"><span class="q-sub" id="doi-q">Double opt-in<small>New sign-ups click a link to confirm</small></span><div class="seg inline" role="radiogroup" aria-labelledby="doi-q"><input type="radio" id="doi-yes" name="doi" value="yes"><label for="doi-yes">Yes</label><input type="radio" id="doi-no" name="doi" value="no"><label for="doi-no">No</label></div></div></div>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">How big is your list, and when did it last get an email?</span></legend>
+<div class="fields"><label class="fld" for="size"><span>Contacts on your list</span><span class="field"><input id="size" name="size" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 2400"></span></label></div><div class="seg wrap2"><input type="radio" id="last-recent" name="last" value="recent"><label for="last-recent">Last 30 days</label><input type="radio" id="last-months" name="last" value="months"><label for="last-months">1–6 months</label><input type="radio" id="last-stale" name="last" value="stale"><label for="last-stale">6–12 months</label><input type="radio" id="last-cold" name="last" value="cold"><label for="last-cold">Over a year or never</label></div>
+<p class="q-help">A list that has gone quiet for months is where most spam traps and dead addresses hide.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Do you know your bounce and spam complaint rates?</span></legend>
+<div class="opts "><label class="opt" for="rates-fine"><input type="radio" id="rates-fine" name="rates" value="fine"><span class="opt-text"><span class="opt-title">Yes, and they look fine</span><span class="opt-sub">Bounces under 2%, spam complaints under 0.1% (rules of thumb)</span></span></label><label class="opt" for="rates-high"><input type="radio" id="rates-high" name="rates" value="high"><span class="opt-text"><span class="opt-title">They're high, or we've had a warning</span><span class="opt-sub">From your platform, Gmail, or a paused account</span></span></label><label class="opt" for="rates-unknown"><input type="radio" id="rates-unknown" name="rates" value="unknown"><span class="opt-text"><span class="opt-title">We don't know</span></span></label></div>
+<p class="q-help">A <b>bounce</b> is an email that couldn't be delivered. A <b>spam complaint</b> is someone clicking "Report spam". Your campaign reports show both.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Where are your subscribers? <span class="opt-tag">(tick all that apply)</span><span data-pf="regions"></span></span></legend>
+<div class="opts two"><label class="opt" for="regions-us"><input type="checkbox" id="regions-us" name="regions" value="us"><span class="opt-text"><span class="opt-title">United States</span><span class="opt-sub">CAN-SPAM</span></span></label><label class="opt" for="regions-ca"><input type="checkbox" id="regions-ca" name="regions" value="ca"><span class="opt-text"><span class="opt-title">Canada</span><span class="opt-sub">CASL</span></span></label><label class="opt" for="regions-eu"><input type="checkbox" id="regions-eu" name="regions" value="eu"><span class="opt-text"><span class="opt-title">UK or European Union</span><span class="opt-sub">UK GDPR and PECR, or GDPR</span></span></label></div>
+<p class="q-help">Each country has its own email law. The strictest one that applies to a subscriber is the one to follow.</p>
+</fieldset>
+<fieldset class="q">
+<legend><span class="q-label">Anything coming up? <span class="opt-tag">(optional)</span></span></legend>
+<div class="opts "><label class="opt" for="plans-migrate"><input type="checkbox" id="plans-migrate" name="plans" value="migrate"><span class="opt-text"><span class="opt-title">Moving to a different email platform</span></span></label><label class="opt" for="plans-newdomain"><input type="checkbox" id="plans-newdomain" name="plans" value="newdomain"><span class="opt-text"><span class="opt-title">Sending from a new domain for the first time</span></span></label><label class="opt" for="plans-multibrand"><input type="checkbox" id="plans-multibrand" name="plans" value="multibrand"><span class="opt-text"><span class="opt-title">Sending for more than one brand or website</span></span></label></div>
+</fieldset>
+
+<button type="button" class="btn btn-strong see-results" id="see-results">See your inbox readiness list</button>
+</form>
+</section>
+
+<div class="results" id="results">
+<section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
+<h2 class="label" id="answer-h">Your inbox readiness</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">0</span><span class="hero-unit" id="out-unit"></span></p>
+<p class="hero-rec" id="out-rec"></p>
+<p class="answer-line" id="out-line"></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="deliv-h">
+<div class="deliv-head">
+<h2 id="deliv-h">Your Inbox Readiness List</h2>
+<p class="deliv-sub" id="deliv-sub"></p>
+</div>
+<ol class="steps" id="plan"></ol>
+<div id="done-wrap" hidden>
+<p class="label" style="margin-bottom:6px">Already in place</p>
+<ul class="done-list" id="done-list"></ul>
+</div>
+</section>
+
+<section class="panel deliv" aria-labelledby="law-h" id="law-panel">
+<div class="deliv-head">
+<h2 id="law-h">The rules for where your subscribers are</h2>
+<p class="deliv-sub">A plain summary, not legal advice. If you're unsure, follow the strictest row that applies.</p>
+</div>
+<div class="table-wrap"><table class="mini-table consent-table"><caption class="sr-only">Email laws by region</caption>
+<thead><tr><th scope="col">Where</th><th scope="col">Law</th><th scope="col">What you need</th></tr></thead>
+<tbody id="law-rows"></tbody></table></div>
+</section>
+
+<section class="panel complex" aria-labelledby="complex-h">
+<div class="deliv-head">
+<h2 id="complex-h" style="font-size:19px">Where it gets complex</h2>
+<p class="deliv-sub">These need expert judgment. Do your list above first; these can wait for a conversation.</p>
+</div>
+<ul id="complex-list"></ul>
+<p class="complex-cta" id="complex-cta"></p>
+</section>
+
+<section class="closing" aria-labelledby="closing-h">
+<h2 id="closing-h">Want it built for you?</h2>
+<p>Copy your plan and work through it, or bring it to a call. With these basics in place, our time together goes to strategy, not setup.</p>
+<div class="closing-actions">
+<button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
+<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=email-01" target="_blank" rel="noopener">Talk to Erica about building it</a>
+</div>
+<p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+<div id="copy-host"></div>
+<div class="next" id="next">
+<span class="next-label">Next toolkit</span>
+<p class="next-title" id="next-title"></p>
+<p class="next-why" id="next-why"></p>
+</div>
+<div class="xlinks" id="xlinks" hidden>
+<p class="label">Related Big Leap DIY toolkits</p>
+<ul id="xlinks-list"></ul>
+</div>
+</section>
+</div>
+
+<details class="method" id="method">
+<summary>How we calculate this</summary>
+<div class="method-body">
+<p>An <b>inbox risk</b> is anything that can send your email to spam or break an email law: sending from a free mailbox, missing SPF, DKIM or DMARC, a bought list, a list not mailed in six months or more, no unsubscribe link, no postal address, known high bounce or complaint rates, or imported EU/UK contacts with no record of consent. Answers of "not sure" become checks at the top of your list, not risks, until you know.</p>
+<p>The list order follows the work: your sending address first, then the domain records, then the list itself, then the rules. Times are rough first-time ranges, not promises. DNS changes can take up to 48 hours to show; that wait is extra.</p>
+<p>Gmail and Yahoo's bulk-sender rules (in force since February 2024) apply to anyone sending about 5,000 or more emails a day to their users; Microsoft added similar rules for Outlook.com in 2025. We flag them when your list is 5,000 or more. The rate limits quoted (spam complaints under 0.1%, never 0.3% or more) come from Google's sender guidelines.</p>
+<div class="table-wrap">
+<table class="mini-table">
+<thead><tr><th scope="col">Assumption</th><th scope="col">Value</th></tr></thead>
+<tbody id="assume-rows"></tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<footer class="foot">
+<p>Free tools and plan limits change. Check your own account before you build. This is general guidance, not legal advice.</p>
+<p>© Big Leap · Email Marketing DIY Toolkit 1 of 3 · Draft 1 for internal review · <a id="hub-link" href="../../index.html">All DIY Toolkits</a></p>
+</footer>
+</div>
+<script>
+/* =====================================================================
+SERIES SETTINGS: the same in all three Email Marketing DIY toolkits.
+OWNER: the Big Leap expert named on the CTA.
+CTA_URL: where "Talk to Erica about building it" goes.
+SERIES: every toolkit in the Email Marketing series (file = relative link).
+LINKS: the shared cross-link map for all DIY series (relative URLs).
+===================================================================== */
+const OWNER = { name: 'Erica Pounder', first: 'Erica' };
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=email-01'; // swap for Erica's meeting scheduler link
+const SERIES = [
+  { n: 1, short: 'Inbox', title: 'Will Your Emails Reach the Inbox?', file: '01_Will_Your_Emails_Reach_the_Inbox.html' },
+  { n: 2, short: 'Automate', title: 'Which Emails Should Send Themselves?', file: '02_Which_Emails_Should_Send_Themselves.html' },
+  { n: 3, short: 'Measure', title: 'Is Your Email Program Working?', file: '03_Is_Your_Email_Program_Working.html' },
+];
+const LINKS = {
+  profile:{name:'Build Your Business Profile',url:'../paid/01_What_Kind_of_Business_Are_You.html',owner:'Scott Smoot'},
+  adsReady:{name:'Is Your Google Ads Account Ready?',url:'../paid/02_Is_Your_Google_Ads_Account_Ready.html',owner:'Scott Smoot'},
+  conversions:{name:'Which Conversions Should You Track?',url:'../paid/03_Which_Conversions_Should_You_Track.html',owner:'Scott Smoot'},
+  campaigns:{name:'Which Campaigns Should You Run First?',url:'../paid/04_Which_Campaigns_Should_You_Run_First.html',owner:'Scott Smoot'},
+  tracking:{name:'Can You See What Your Marketing Does?',url:'../revops/07_Can_You_See_What_Your_Marketing_Does.html',owner:'Dallas Olsen'},
+  leadCapture:{name:'Is Every Lead Reaching Your CRM?',url:'../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',owner:'Dallas Olsen'},
+  speedToLead:{name:'Never Let a Lead Go Cold',url:'../revops/02_Never_Let_a_Lead_Go_Cold.html',owner:'Dallas Olsen'},
+  pipelineDash:{name:'Is Your Pipeline Ready for a Dashboard?',url:'../revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html',owner:'Dallas Olsen'},
+  seoBasics:{name:'Can Google Find and Trust Your Site?',url:'../seo/01_Can_Google_Find_and_Trust_Your_Site.html',owner:'Shema Al-Darwish'},
+  local:{name:'Is Your Business Ready for Local Search?',url:'../seo/02_Is_Your_Business_Ready_for_Local_Search.html',owner:'Shema Al-Darwish'},
+  prReady:{name:'Are You Ready to Be Pitched?',url:'../pr/01_Are_You_Ready_to_Be_Pitched.html',owner:'Kristina Ainge'},
+  mediaKit:{name:'Build Your Media Kit',url:'../pr/02_Build_Your_Media_Kit.html',owner:'Kristina Ainge'},
+  inbox:{name:'Will Your Emails Reach the Inbox?',url:'01_Will_Your_Emails_Reach_the_Inbox.html',owner:'Erica Pounder'},
+  flows:{name:'Which Emails Should Send Themselves?',url:'02_Which_Emails_Should_Send_Themselves.html',owner:'Erica Pounder'},
+  emailHealth:{name:'Is Your Email Program Working?',url:'03_Is_Your_Email_Program_Working.html',owner:'Erica Pounder'},
+  hub:{name:'All DIY Toolkits',url:'../../index.html',owner:''},
+};
+
+/* EXAMPLE: the answers a first-time visitor sees. */
+const EXAMPLE = { platform: 'mailchimp', from: 'custom', domain: '', spf: 'yes', dkim: 'unsure', dmarc: 'no', has: ['unsub'], source: ['forms', 'imports'], doi: 'no', size: '2400', last: 'months', rates: 'unknown', regions: ['us'], plans: [] };
+/* ASSUMPTIONS: rough first-time times in minutes [low, high], and the bulk-sender threshold. Rules of thumb, not measurements. */
+const ASSUMPTIONS = {
+  bulkList: 5000,        // list size from which we treat you as a Gmail/Yahoo bulk sender
+  dedicatedIpList: 100000, // list size where a dedicated IP might come up
+  domain:   [60, 180],   // get a domain mailbox and switch the From address
+  auth:     [30, 60],    // add SPF/DKIM records at the DNS host and verify
+  authCheck:[10, 20],
+  dmarc:    [15, 30],
+  bought:   [30, 90],    // find, tag and suppress bought contacts
+  stale:    [60, 180],   // clean, then re-permission send
+  warm:     [30, 60],
+  unsub:    [10, 20],
+  address:  [10, 15],
+  rates:    [20, 45],
+  ratesHigh:[60, 180],
+  doi:      [15, 30],
+  consent:  [60, 180],
+  imports:  [30, 90],
+};
+
+/* ---------- Shared Business Profile (same helper in every DIY toolkit) ---------- */
+const PROFILE_KEY = 'bl_diy_profile_v1';
+function encodeProfile(p){ try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/,''); } catch(e){ return ''; } }
+function decodeProfile(code){ try { code = String(code||'').trim(); if (!code.startsWith('BL1.')) return null; const b = code.slice(4); const p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length+3)%4))))); return (p && p.v === 1) ? p : null; } catch(e){ return null; } }
+function loadProfile(){ try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || null; } catch(e){ return null; } }
+function saveProfile(p){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch(e){} }
+function clearProfile(){ try { localStorage.removeItem(PROFILE_KEY); } catch(e){} }
+
+/* ---------- small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function toNum(v) { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; }
+function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+function fmt(n, digits) { return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 0 }); }
+// minutes -> "about 2 hours" / "30–45 minutes" / "2–4 hours"
+function timeRange(lo, hi) {
+  lo = Math.max(0, lo || 0); hi = Math.max(lo, hi || 0);
+  if (hi <= 0) return 'no time';
+  if (hi < 60) return (Math.round(lo) === Math.round(hi) ? 'about ' + fmt(Math.round(hi)) : fmt(Math.round(lo)) + '–' + fmt(Math.round(hi))) + ' minutes';
+  const d = hi / 60 < 10 ? 1 : 0;
+  const a = fmt(lo / 60, d), b = fmt(hi / 60, d);
+  return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
+}
+function link(key) { return LINKS[key] || null; }
+function linkHtml(key, label) { const l = link(key); return l ? '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>' : esc(label || ''); }
+
+/* ---------- stepper ---------- */
+function renderStepper(current) {
+  const ol = $('stepper-list');
+  ol.className = 'n' + SERIES.length;
+  ol.innerHTML = SERIES.map((k) => {
+    const cur = k.n === current;
+    const inner = '<span class="st-dot" aria-hidden="true">' + k.n + '</span><span class="st-label"><span class="sr-only">Toolkit ' + k.n + ': </span>' + esc(k.short) + '</span>';
+    return '<li>' + (cur
+      ? '<div class="st is-current" aria-current="step" title="' + esc(k.title) + '">' + inner + '</div>'
+      : '<a class="st" href="' + esc(k.file) + '" title="' + esc(k.title) + '">' + inner + '</a>') + '</li>';
+  }).join('');
+  const sh = $('start-here');
+  if (sh) sh.innerHTML = 'Start here: ' + linkHtml('profile', 'Build your Business Profile');
+}
+
+/* ---------- profile strip ---------- */
+const MODEL_LABEL = { b2b: 'B2B', b2c: 'B2C', both: 'B2B and B2C' };
+const REACH_LABEL = { local: 'local', regional: 'regional', national: 'national', international: 'international' };
+function profileSummary(p) {
+  const bits = [];
+  bits.push(p.name || p.industry || 'Your business');
+  if (MODEL_LABEL[p.model]) bits.push(MODEL_LABEL[p.model]);
+  if (REACH_LABEL[p.reach]) bits.push(REACH_LABEL[p.reach]);
+  return bits.join(' · ');
+}
+function initProfileStrip(onChange) {
+  const host = $('profile-strip');
+  function draw() {
+    const p = loadProfile();
+    if (p && p.v === 1) {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Using your Business Profile: <b>' + esc(profileSummary(p)) + '</b></p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Change</a>' +
+        '<button type="button" class="text-btn" id="profile-clear">Clear</button></div>';
+      $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onChange(null); $('profile-strip').focus(); });
+    } else {
+      host.innerHTML = '<div class="profile-row"><p class="p-text">Answer 8 questions once and every toolkit fills itself in.</p>' +
+        '<a href="' + esc(LINKS.profile.url) + '">Build your Business Profile →</a></div>' +
+        '<details id="paste-details"><summary>Paste a profile code</summary>' +
+        '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
+        '<input class="text-field" id="profile-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…">' +
+        '<button type="button" class="btn btn-plain" id="profile-apply">Use this profile</button></div>' +
+        '<p class="paste-status" id="paste-status" role="status" aria-live="polite"></p></details>';
+      $('profile-apply').addEventListener('click', () => {
+        const p2 = decodeProfile($('profile-code').value);
+        if (!p2) { $('paste-status').textContent = 'That code did not work. Copy the whole code, starting with BL1.'; return; }
+        saveProfile(p2); draw(); onChange(p2);
+      });
+    }
+  }
+  draw();
+  return loadProfile();
+}
+// Shows a "From your profile" tag next to a question label; hides it once the visitor changes that answer.
+function markFromProfile(names) {
+  document.querySelectorAll('[data-pf]').forEach((el) => {
+    const on = names.indexOf(el.getAttribute('data-pf')) !== -1;
+    el.innerHTML = on ? '<span class="from-profile">From your profile</span>' : '';
+  });
+}
+function unmarkProfile(name) {
+  document.querySelectorAll('[data-pf="' + name + '"]').forEach((el) => { el.innerHTML = ''; });
+}
+
+/* ---------- form state (no :has(), Safari-safe) ---------- */
+function syncChoiceStyles(root) {
+  root.querySelectorAll('.opt').forEach((o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); });
+}
+// Visible focus ring on segmented buttons for keyboard users (the radio itself is visually hidden).
+let usingKeyboard = false;
+document.addEventListener('keydown', () => { usingKeyboard = true; }, true);
+document.addEventListener('pointerdown', () => { usingKeyboard = false; }, true);
+document.addEventListener('mousedown', () => { usingKeyboard = false; }, true);
+function initSegFocus(root) {
+  const segOf = (el) => (el && el.closest) ? el.closest('.seg') : null;
+  root.addEventListener('focusin', (e) => { const s = segOf(e.target); if (s && usingKeyboard) s.classList.add('is-focus'); });
+  root.addEventListener('focusout', (e) => { const s = segOf(e.target); if (s) s.classList.remove('is-focus'); });
+  root.addEventListener('keyup', (e) => { const s = segOf(e.target); if (s && e.target === document.activeElement) s.classList.add('is-focus'); });
+}
+function radioVal(form, name) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value;
+  return '';
+}
+function setRadio(form, name, value) {
+  const els = form.querySelectorAll('input[name="' + name + '"]');
+  for (let i = 0; i < els.length; i++) els[i].checked = els[i].value === value;
+}
+function checkVals(form, name) {
+  return Array.prototype.filter.call(form.querySelectorAll('input[name="' + name + '"]'), (i) => i.checked).map((i) => i.value);
+}
+function setChecks(form, name, values) {
+  form.querySelectorAll('input[name="' + name + '"]').forEach((i) => { i.checked = values.indexOf(i.value) !== -1; });
+}
+
+/* ---------- deliverable list ---------- */
+// item: { id, title, sev:'block'|'check'|'fix', done, why, steps:[], cms:'', time:[lo,hi], per:'', kit:{key, why}, snippetId }
+/* Severity labels; each page can change SEV_TEXT before its first render. */
+const SEV_TEXT = { block: 'Blocker', check: 'Check this' };
+const SEV_CHIP = { get block() { return '<span class="chip block">' + esc(SEV_TEXT.block) + '</span>'; }, get check() { return '<span class="chip check">' + esc(SEV_TEXT.check) + '</span>'; }, fix: '' };
+function renderItems(el, items, extraHtml) {
+  let open = 0;
+  el.innerHTML = items.map((t, i) => {
+    const first = !t.done && open++ < 3;
+    const chips = t.done ? '' : (first ? '<span class="chip first">Do first</span>' : '') + (SEV_CHIP[t.sev] || '');
+    return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
+      '<span class="sn" aria-hidden="true">' + (t.done ? '✓' : i + 1) + '</span><div class="sb">' +
+      '<div class="st-top"><span class="st-title">' + (t.done ? '<span class="sr-only">Done: </span>' : '') + esc(t.title) + '</span>' +
+      (chips ? '<span class="chips">' + chips + '</span>' : '') + '</div>' +
+      (t.done ? (t.doneNote ? '<p class="st-time">' + esc(t.doneNote) + '</p>' : '') :
+        (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
+        (t.steps && t.steps.length ? '<ol class="how-list">' + t.steps.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') +
+        (t.cms ? '<p class="cms-note"><b>' + esc(t.cmsLabel || 'On your platform') + ':</b> ' + esc(t.cms) + '</p>' : '') +
+        (extraHtml && extraHtml[t.id] ? extraHtml[t.id] : '') +
+        (t.time ? '<p class="st-time">Time: <b>' + esc(timeRange(t.time[0], t.time[1])) + '</b>' + (t.per ? ' ' + esc(t.per) : '') + (t.wait ? ' · ' + esc(t.wait) : '') + '</p>' : '') +
+        (t.kit && LINKS[t.kit.key] ? '<p class="kit-link">Free toolkit: ' + linkHtml(t.kit.key) + ' · ' + esc(t.kit.why) + '</p>' : '')) +
+      '</div></li>';
+  }).join('');
+}
+function itemsText(items, extraText) {
+  const out = [];
+  let open = 0;
+  items.forEach((t, i) => {
+    const first = !t.done && open++ < 3;
+    if (t.done) { out.push('[done] ' + t.title); return; }
+    out.push((i + 1) + '. ' + t.title + (t.sev === 'block' ? ' [' + SEV_TEXT.block.toUpperCase() + ']' : t.sev === 'check' ? ' [' + SEV_TEXT.check.toUpperCase() + ']' : '') + (first ? ', do this first' : ''));
+    if (t.why) out.push('   ' + t.why);
+    (t.steps || []).forEach((s, j) => out.push('   ' + String.fromCharCode(97 + j) + ') ' + s));
+    if (t.cms) out.push('   ' + (t.cmsLabel || 'On your platform') + ': ' + t.cms);
+    if (extraText && extraText[t.id]) extraText[t.id].forEach((l) => out.push('   ' + l));
+    if (t.time) out.push('   Time: ' + timeRange(t.time[0], t.time[1]) + (t.per ? ' ' + t.per : '') + (t.wait ? ' · ' + t.wait : ''));
+    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + LINKS[t.kit.key].name + ' (' + t.kit.why + ')');
+  });
+  return out;
+}
+
+/* ---------- where it gets complex ---------- */
+function renderComplex(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  $('complex-list').innerHTML = sorted.map((c) => '<li><b>' + esc(c.title) + '</b>' + (f[c.key] ? '<span class="applies">Applies to you</span>' : '') + '. ' + esc(c.text) + '</li>').join('');
+}
+function complexText(list, flags) {
+  const f = flags || {};
+  const sorted = list.slice().sort((a, b) => (f[b.key] ? 1 : 0) - (f[a.key] ? 1 : 0));
+  return sorted.map((c) => '- ' + c.title + (f[c.key] ? ' (applies to you)' : '') + ': ' + c.text);
+}
+
+/* ---------- cross-links and next ---------- */
+function renderXlinks(list, skip) {
+  const live = list.filter((l) => LINKS[l.key] && l.key !== skip);
+  $('xlinks').hidden = live.length === 0;
+  $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
+}
+function xlinksText(list, skip) {
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')');
+}
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function renderNext(key, why) {
+  const l = LINKS[key];
+  if (!l) { $('next').hidden = true; return; }
+  $('next').hidden = false;
+  $('next-title').innerHTML = linkHtml(key);
+  $('next-why').textContent = why;
+}
+
+/* ---------- example pill ---------- */
+function setExampleState(state, exampleText) {
+  const pill = $('example-pill');
+  pill.textContent = state === 'example' ? 'Example answers' : state === 'profile' ? 'From your profile' : 'Your answers';
+  pill.classList.toggle('is-yours', state !== 'example');
+  $('example-text').textContent = state === 'example' ? exampleText
+    : state === 'profile' ? 'Some answers came from your Business Profile. Change any of them.'
+    : 'Your results update as you go.';
+  $('restore-example').hidden = state === 'example';
+}
+let lastHeadline = null;
+function flashIfChanged(key) {
+  const el = $('answer');
+  if (lastHeadline !== null && key !== lastHeadline) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+  lastHeadline = key;
+}
+
+/* ---------- copy ---------- */
+function copyWithFallback(text, onDone, host) {
+  const fallback = () => {
+    let box = host.querySelector('.copy-fallback');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'copy-fallback';
+      const id = host.id + '-text';
+      box.innerHTML = '<label for="' + id + '">Your browser blocked copying here. The text is selected below, so you can copy it yourself.</label><textarea id="' + id + '" readonly spellcheck="false"></textarea>';
+      host.appendChild(box);
+    }
+    const ta = box.querySelector('textarea');
+    ta.value = text; ta.focus(); ta.select();
+    try { if (document.execCommand && document.execCommand('copy')) { onDone(); } } catch (e) {}
+  };
+  const legacy = () => {
+    // Second try: a hidden textarea + execCommand. If that fails too, show the text to copy by hand.
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) { onDone(); return; }
+    } catch (e) {}
+    fallback();
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) navigator.clipboard.writeText(text).then(onDone, legacy);
+    else legacy();
+  } catch (err) { legacy(); }
+}
+function initCopyButton(btn, statusEl, host, getText, label, msg) {
+  let timer = null;
+  btn.addEventListener('click', () => {
+    copyWithFallback(getText(), () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      if (statusEl) statusEl.textContent = msg;
+      clearTimeout(timer);
+      timer = setTimeout(() => { btn.textContent = label; btn.classList.remove('is-copied'); if (statusEl) statusEl.textContent = ''; }, 3000);
+    }, host);
+  });
+}
+function initCopy(getText) {
+  initCopyButton($('copy-btn'), $('copy-status'), $('copy-host'), getText, 'Copy my plan', 'Your plan is copied. Paste it into an email, a doc or your notes.');
+  return () => { const ta = $('copy-host').querySelector('textarea'); if (ta) ta.value = getText(); };
+}
+
+/* ---------- layout ---------- */
+function initSticky() {
+  const q = $('col-q'), r = $('results');
+  const wide = window.matchMedia('(min-width: 880px)');
+  function update() {
+    q.classList.remove('is-sticky'); r.classList.remove('is-sticky');
+    if (!wide.matches) return;
+    const room = window.innerHeight - 32;
+    if (r.offsetHeight < q.offsetHeight && r.offsetHeight <= room) r.classList.add('is-sticky');
+    else if (q.offsetHeight < r.offsetHeight && q.offsetHeight <= room) q.classList.add('is-sticky');
+  }
+  window.addEventListener('resize', update);
+  if (wide.addEventListener) wide.addEventListener('change', update); else if (wide.addListener) wide.addListener(update);
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(update); ro.observe(q); ro.observe(r); }
+  return update;
+}
+function initShell(current, onRestore) {
+  renderStepper(current);
+  $('cta-link').href = CTA_URL;
+  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
+  $('complex-cta').innerHTML = 'Any of these sound like you? ' + esc(OWNER.name) + ' leads email marketing at Big Leap. Ready for the big leap? <a href="' + esc(CTA_URL) + '" target="_blank" rel="noopener">Talk to ' + esc(OWNER.first) + ' about building it</a>.';
+  $('hub-link').href = LINKS.hub.url;
+  $('restore-example').addEventListener('click', onRestore);
+  $('see-results').addEventListener('click', () => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('answer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { $('answer').focus({ preventScroll: true }); } catch (e) { $('answer').focus(); }
+  });
+}
+
+
+
+
+/* ---------- Toolkit 1: Will Your Emails Reach the Inbox? ---------- */
+SEV_TEXT.block = 'Inbox risk';
+const PLATFORM = {
+  mailchimp: { name: 'Mailchimp' }, klaviyo: { name: 'Klaviyo' }, hubspot: { name: 'HubSpot' },
+  constantcontact: { name: 'Constant Contact' }, other: { name: 'your platform' },
+};
+// Platform-specific menu paths. Menus change; the footer tells people to check their own account.
+const HOW = {
+  auth: {
+    mailchimp: 'Profile icon → Account & billing → Domains (newer accounts: Settings → Domains). Add and verify your domain, then click Authenticate. Mailchimp lists the records to add (DKIM records are CNAMEs) and checks them for you.',
+    klaviyo: 'Settings → Domains → set up a branded sending domain. Klaviyo gives you records for a subdomain such as send.yourdomain.com. Add them at your DNS host, then click Verify. That covers SPF and DKIM for Klaviyo mail.',
+    hubspot: 'Settings → Content → Domains & URLs → Connect a domain → Email sending domain. HubSpot shows the DKIM records (CNAMEs) and the SPF value to add, and re-checks them for you.',
+    constantcontact: 'Your account name → My Settings → look for self-authentication of your domain. Constant Contact gives you DKIM records (CNAMEs) to add at your DNS host.',
+    other: 'Look for "domain authentication", "sending domain" or "DKIM" in your platform\'s settings. It gives you the exact records to copy.',
+  },
+  unsub: {
+    mailchimp: 'Mailchimp adds an unsubscribe link and one-click unsubscribe to every campaign. If you edited the footer, put the *|UNSUB|* merge tag back.',
+    klaviyo: 'Klaviyo requires an unsubscribe link. In custom templates, keep the {% unsubscribe %} tag in the footer block.',
+    hubspot: 'Settings → Marketing → Email → Configuration: check the subscription footer is on. HubSpot adds one-click unsubscribe to marketing email.',
+    constantcontact: 'Constant Contact adds the unsubscribe footer to every email automatically. If you send from another tool, check that one too.',
+    other: 'Look for the footer settings or an "unsubscribe" merge tag. Send yourself a test and click it.',
+  },
+  address: {
+    mailchimp: 'Audience → Settings → "Required email footer content" holds the address used in every footer.',
+    klaviyo: 'Settings → Account → Organization: fill in the address. Templates pull it into the footer.',
+    hubspot: 'Settings → Marketing → Email → Configuration → Footer: add your company address.',
+    constantcontact: 'Account settings → Organization information: add your physical address. It shows in every footer.',
+    other: 'Add your postal address to the footer of your main template, then check a test email.',
+  },
+  doi: {
+    mailchimp: 'Audience → Settings → Audience name and defaults → tick "Enable double opt-in".',
+    klaviyo: 'Audience → Lists & segments → open your main list → Settings → Opt-in process: Double opt-in.',
+    hubspot: 'Settings → Marketing → Email → Subscriptions (or Double opt-in): turn it on for new contacts.',
+    constantcontact: 'Look for "Confirmed opt-in" in your account or sign-up form settings and turn it on.',
+    other: 'Look for "double opt-in" or "confirmed opt-in" in your list or form settings.',
+  },
+  reports: {
+    mailchimp: 'Analytics → Reports: open a recent campaign. Bounces and abuse (spam) reports are listed.',
+    klaviyo: 'Analytics → Deliverability (or open a campaign → Overview): bounce rate and spam complaint rate.',
+    hubspot: 'Marketing → Email → Analyze tab: bounce rate and spam report rate.',
+    constantcontact: 'Reporting → Email: bounces and spam reports for each email.',
+    other: 'Open your campaign reports and look for bounces and spam complaints.',
+  },
+};
+const COMPLEX = [
+  { key: 'warm', title: 'Warming up a new domain or IP', text: 'Mail from a new domain, or a big list that has been quiet, has to start small and grow over a few weeks, sending to your most engaged people first. Too much too fast is how new senders end up in spam.' },
+  { key: 'dedicated', title: 'Dedicated IP addresses', text: 'High-volume senders sometimes move to their own sending IP. It only helps with steady, large volume, and it needs warming and monitoring. Most small businesses are better off on the platform\'s shared IPs.' },
+  { key: 'migrate', title: 'Moving between email platforms', text: 'Moving lists, suppressions, consent records, forms and automations without losing unsubscribes or reputation needs a plan and a careful first few sends.' },
+  { key: 'blocklist', title: 'Blocklists and paused accounts', text: 'If a blocklist names your domain or your platform has paused you, getting removed means finding the cause first, cleaning the list, and asking for delisting the right way.' },
+  { key: 'multibrand', title: 'Several brands or domains', text: 'Each brand needs its own authenticated domain, consent and unsubscribe handling, and a clear rule for who gets which emails, or one brand\'s complaints can hurt the others.' },
+];
+const LAWS = {
+  us: ['United States', 'CAN-SPAM', 'You may email without opt-in, but every email needs honest From and subject lines, your postal address and a working unsubscribe. Honour unsubscribes within 10 business days (Gmail and Yahoo expect bulk senders to process them within 2 days).'],
+  ca: ['Canada', 'CASL', 'You need consent first: express (they agreed) or implied (for example a purchase, which lasts two years). Identify yourself, include an unsubscribe, and keep proof of consent.'],
+  eu: ['UK or EU', 'GDPR, UK GDPR, PECR', 'You need clear opt-in consent (no pre-ticked boxes) and a record of when and how it was given. In the UK, a "soft opt-in" lets you email existing customers about similar products if they could opt out when they bought.'],
+};
+function cleanDomain(raw) {
+  let d = String(raw || '').trim().toLowerCase();
+  d = d.replace(/^[a-z]+:\/\//, '').replace(/^.*@/, '').split(/[\/?#\s]/)[0].replace(/:\d+$/, '').replace(/^www\./, '');
+  return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(d) ? d : '';
+}
+function sizeNum(v) { const n = Math.floor(toNum(v)); return clamp(n, 0, 1e9); }
+function model(input, a) {
+  const pl = PLATFORM[input.platform] ? input.platform : 'other';
+  const P = PLATFORM[pl];
+  const dom = cleanDomain(input.domain);
+  const site = dom || 'yourdomain.com';
+  const has = (k) => input.has.indexOf(k) !== -1;
+  const src = (k) => input.source.indexOf(k) !== -1;
+  const reg = (k) => input.regions.indexOf(k) !== -1;
+  const plan = (k) => input.plans.indexOf(k) !== -1;
+  const size = sizeNum(input.size);
+  const bulk = size >= a.bulkList;
+  const items = [], done = [];
+  const authNo = input.spf === 'no' || input.dkim === 'no';
+  const authUnsure = !authNo && (input.spf === 'unsure' || input.dkim === 'unsure' || !input.spf || !input.dkim);
+
+  // 1. Sending address
+  if (input.from !== 'custom') {
+    const free = input.from === 'free';
+    items.push({ id: 'from', sev: free ? 'block' : 'check',
+      title: free ? 'Send from your own domain, not a free mailbox' : 'Check which address your emails come from',
+      why: free ? 'Gmail, Yahoo and Outlook publish rules that stop other services sending as @gmail.com, @yahoo.com or @outlook.com. Marketing email "from" a free address often lands in spam or gets rewritten.'
+        : 'Two minutes. Open your last campaign and look at the From address. If it ends in gmail.com, yahoo.com or outlook.com, this becomes your first fix.',
+      steps: free ? [
+        'If you own a website domain, create a mailbox on it with Google Workspace or Microsoft 365, for example hello@' + site + '.',
+        'No domain yet? Buy one that matches your business name from any registrar. It is a small yearly cost.',
+        'In ' + P.name + ', add the new address as a sender and verify it from the confirmation email.',
+        'Set it as the default From address on your templates and automations.',
+        'Do the domain records in the next steps before your first big send from the new address.',
+      ] : ['Open your most recent campaign in ' + P.name + ' and check the From address.', 'Check your automated emails too; they often keep an old address.'],
+      time: free ? a.domain : [5, 10] });
+  } else done.push('Sending from your own domain');
+
+  // 2. SPF and DKIM
+  if (authNo || authUnsure) {
+    items.push({ id: 'auth', sev: authNo ? 'block' : 'check',
+      title: authNo ? 'Authenticate your sending domain (SPF and DKIM)' : 'Check SPF and DKIM are in place',
+      why: authNo ? 'Without them, inboxes can\'t tell your email from someone pretending to be you. Gmail and Yahoo now expect authenticated mail from every sender, and require it at volume.'
+        : 'Your platform\'s domain page shows whether each record passed. If either fails, this becomes a fix.',
+      steps: authNo ? [
+        'In ' + P.name + ', open the domain settings (below) and start authenticating ' + site + '.',
+        'Copy each record it shows you: the type (CNAME or TXT), the host or name, and the value.',
+        'Log in where your domain is managed (GoDaddy, Cloudflare, Squarespace, Namecheap and so on), open DNS settings, and add each record exactly as shown.',
+        'Only one SPF record is allowed per domain. If one already exists (it starts v=spf1), add the new "include:" part to it rather than creating a second record.',
+        'Back in ' + P.name + ', click Verify. If it fails, wait an hour and try again; DNS can take up to 48 hours.',
+      ] : [
+        'Open the domain settings in ' + P.name + ' (below) and look for "Authenticated" or a green tick next to ' + site + '.',
+        'If a record is missing or failing, copy what ' + P.name + ' shows and add it at your DNS host (GoDaddy, Cloudflare, Squarespace, Namecheap and so on).',
+        'Only one SPF record is allowed per domain: add to an existing one (it starts v=spf1) rather than creating a second.',
+        'Click Verify. DNS changes can take up to 48 hours to show.',
+      ],
+      cms: HOW.auth[pl], cmsLabel: 'On ' + P.name,
+      time: authNo ? a.auth : a.authCheck, wait: authNo ? 'DNS can take up to 48 hours' : '' });
+  } else done.push('SPF and DKIM set up');
+
+  // 3. DMARC
+  if (input.dmarc !== 'yes') {
+    const no = input.dmarc === 'no';
+    items.push({ id: 'dmarc', sev: no ? 'block' : 'check',
+      title: no ? 'Publish a DMARC record' : 'Check for a DMARC record',
+      why: no ? 'DMARC tells inboxes what to do with mail that fails SPF and DKIM, and sends you reports. Gmail and Yahoo require it from bulk senders' + (bulk ? ', which includes a list your size.' : '; it is a quick win at any size.')
+        : 'Look it up in a minute: search "DMARC lookup" and enter ' + site + '. If nothing is found, this becomes a fix.',
+      steps: (no ? [] : ['Use any free DMARC lookup tool and enter ' + site + '.', 'If a record is found and starts v=DMARC1, you\'re done. If not, add the one below.']).concat(no ? [
+        'Do SPF and DKIM first. DMARC checks that at least one of them passes for your domain.',
+        'At your DNS host, add a TXT record with the host _dmarc and the value below. Change the report address to a mailbox you check.',
+        'Start with p=none. It changes nothing for your mail; it only turns on reports.',
+        'After two to four weeks of clean reports, consider moving to p=quarantine. Ask for help before p=reject.',
+      ] : []),
+      time: no ? a.dmarc : [5, 10], wait: no ? 'DNS can take up to 48 hours' : '' });
+  } else done.push('DMARC record published');
+
+  // 4. Bought lists
+  if (src('bought')) items.push({ id: 'bought', sev: 'block',
+    title: 'Stop emailing bought, rented or scraped contacts',
+    why: 'These people never asked to hear from you, so they complain, bounce and hit spam traps. Mailchimp, Klaviyo, HubSpot and Constant Contact all ban them in their terms, and can suspend your account.',
+    steps: ['Find those contacts: filter by import date, source, or the tag you gave the upload.', 'Tag them, then remove or suppress them from every send list.', 'Don\'t import them into a new platform either.', 'Grow the list with sign-up forms and checkout opt-ins instead.'],
+    time: a.bought });
+
+  // 5. Stale or quiet list
+  if (input.last === 'stale' || input.last === 'cold') items.push({ id: 'stale', sev: 'block',
+    title: 'Clean your list before you send to it again',
+    why: 'After six months without email, some addresses are dead and some have become spam traps. A big first send to a cold list is one of the fastest ways into the spam folder.',
+    steps: ['Export the list and remove obvious bad addresses: typos, role addresses like info@ you didn\'t sign up, and old hard bounces.', 'Run the rest through an email verification service, then suppress anything marked invalid.', 'Send first to the people most likely to know you: recent customers and recent sign-ups.', 'Send a short "do you still want to hear from us?" email to the rest. Keep the people who click; suppress the rest after a second try.', 'Grow volume over a few sends rather than mailing everyone at once.'],
+    time: a.stale });
+  else if (input.last === 'months') items.push({ id: 'warm', sev: 'fix',
+    title: 'Ease back in after a quiet spell',
+    why: 'A gap of a month or more is fine, but start your next sends with your most engaged people so the first results are good ones.',
+    steps: ['Send the next campaign to people who opened or clicked in the last 90 days, or bought recently.', 'Send to the rest of the list a few days later.', 'Watch bounces and complaints on both sends before going back to full volume.'],
+    time: a.warm });
+
+  // 6. Unsubscribe and address
+  if (!has('unsub')) items.push({ id: 'unsub', sev: 'block', title: 'Add a working unsubscribe link to every email',
+    why: 'It is the law almost everywhere, and Gmail and Yahoo require one-click unsubscribe from bulk senders. If people can\'t unsubscribe, they press "Report spam" instead.',
+    steps: ['Check your main template and every automated email for an unsubscribe link.', 'Send yourself a test and click it: it should work in one step, with no login.', 'Honour unsubscribes straight away (US law allows 10 business days at most).'],
+    cms: HOW.unsub[pl], cmsLabel: 'On ' + P.name, time: a.unsub });
+  if (!has('address')) items.push({ id: 'address', sev: 'block', title: 'Put your postal address in the footer',
+    why: 'CAN-SPAM and CASL both require a valid physical address in every marketing email. A registered post office box or mailbox service counts.',
+    steps: ['Decide which address to show (a PO box is fine if it is registered to you).', 'Add it once in your account settings so every email picks it up.', 'Send a test and check it appears.'],
+    cms: HOW.address[pl], cmsLabel: 'On ' + P.name, time: a.address });
+  if (has('unsub') && has('address')) done.push('Unsubscribe link and postal address');
+
+  // 7. Rates
+  if (input.rates === 'high' || input.rates === 'unknown' || !input.rates) {
+    const high = input.rates === 'high';
+    items.push({ id: 'rates', sev: high ? 'block' : 'check',
+      title: high ? 'Find out why bounces or complaints are high' : 'Look up your bounce and spam complaint rates',
+      why: high ? 'Inboxes judge you on these numbers. Google asks senders to keep spam complaints under 0.1% and never reach 0.3%.'
+        : 'These two numbers decide whether inboxes trust you. Rules of thumb: bounces under 2%, spam complaints under 0.1%, never 0.3% or more.',
+      steps: (high ? ['Compare recent campaigns: is one segment, import or email type behind the spike?', 'Suppress hard bounces and anyone who complained (most platforms do this for you).', 'Stop sending to contacts who haven\'t clicked (or bought) in 6–12 months until you\'ve run a re-permission email.', 'Check the sign-up form isn\'t letting in fake or mistyped addresses: add double opt-in or a CAPTCHA.']
+        : ['Open your last three to five campaigns and note the bounce rate and spam complaint rate.']).concat([
+        'Sending to Gmail addresses? Set up Google Postmaster Tools (free) at postmaster.google.com for your domain. It shows your spam rate as Gmail sees it.',
+        'For a full health check of these numbers, use Toolkit 3: Is Your Email Program Working?',
+      ]),
+      cms: HOW.reports[pl], cmsLabel: 'Where to look in ' + P.name,
+      time: high ? a.ratesHigh : a.rates, kit: { key: 'emailHealth', why: 'scores bounces, complaints, clicks and more.' } });
+  } else done.push('Bounce and complaint rates look fine');
+
+  // 8. Imported contacts and consent
+  if (src('imports')) {
+    const eu = reg('eu');
+    items.push({ id: 'imports', sev: eu ? 'block' : 'fix',
+      title: eu ? 'Confirm consent for imported UK or EU contacts' : 'Check your imported contacts agreed to hear from you',
+      why: eu ? 'In the UK and EU you need a record that each person agreed to marketing email. Contacts imported from a CRM or spreadsheet often have none.'
+        : 'People you met once, or who only asked for a quote, may not expect marketing email. They are the ones most likely to complain.',
+      steps: ['Split imported contacts by where they came from: customers, enquiries, event lists, business cards.', 'Keep those with a clear relationship or recorded consent' + (eu ? ' (date, source, and what they agreed to).' : '.'), 'Send the rest one permission email asking them to opt in, and only keep the people who do.', 'Tag every future import with its source and date so you can answer "where did this contact come from?"'],
+      time: a.imports });
+  }
+
+  // 9. Double opt-in
+  if (input.doi !== 'yes') items.push({ id: 'doi', sev: 'fix', title: 'Turn on double opt-in for new sign-ups',
+    why: 'A confirmation click keeps typos, fake addresses and spam traps off your list, and gives you proof of consent. You lose a few sign-ups and gain a cleaner list.',
+    steps: ['Turn it on for your main list (below).', 'Edit the confirmation email so it sounds like you and says what they will get.', 'Add a line under your sign-up form: "Check your inbox to confirm."'],
+    cms: HOW.doi[pl], cmsLabel: 'On ' + P.name, time: a.doi });
+  else done.push('Double opt-in on');
+
+  // 10. Regions
+  if (reg('eu') || reg('ca')) items.push({ id: 'consent', sev: 'fix',
+    title: 'Keep consent records for ' + [reg('ca') ? 'Canada' : '', reg('eu') ? 'the UK and EU' : ''].filter(Boolean).join(' and '),
+    why: 'Stricter laws than the US: you need consent before you email, and proof of it. See the rules table below.',
+    steps: ['Make sure every sign-up form has an unticked consent box and a short line on what people will receive.', 'Check your platform stores the consent date and source for each contact (most do, as a field or a tag).', reg('ca') ? 'For Canada, note when implied consent from a purchase runs out (two years) and ask for express consent before then.' : 'Link your privacy policy from every form.', 'Don\'t import contacts from those countries without a record of consent.'],
+    time: a.consent });
+
+  const blockers = items.filter((t) => t.sev === 'block').length;
+  const checks = items.filter((t) => t.sev === 'check').length;
+  const rank = { block: 0, check: 1, fix: 2 };
+  const ordered = items.map((t, i) => ({ t, i })).sort((x, y) => (rank[x.t.sev] - rank[y.t.sev]) || (x.i - y.i)).map((x) => x.t);
+  // DMARC depends on SPF/DKIM: if both are on the list, keep the SPF/DKIM item just before DMARC.
+  const ai = ordered.findIndex((t) => t.id === 'auth'), di = ordered.findIndex((t) => t.id === 'dmarc');
+  if (ai > di && di !== -1) { const it = ordered.splice(ai, 1)[0]; ordered.splice(di, 0, it); }
+  const totalLo = ordered.reduce((s, t) => s + (t.time ? t.time[0] : 0), 0);
+  const totalHi = ordered.reduce((s, t) => s + (t.time ? t.time[1] : 0), 0);
+  const flags = {
+    warm: plan('newdomain') || input.from === 'free' || input.last === 'stale' || input.last === 'cold',
+    dedicated: size >= a.dedicatedIpList,
+    migrate: plan('migrate'),
+    blocklist: input.rates === 'high',
+    multibrand: plan('multibrand'),
+  };
+  return { pl, P, dom, site, size, bulk, items: ordered, done, blockers, checks, totalLo, totalHi, flags, input };
+}
+function dmarcSnippet(m) {
+  return ['Type:  TXT', 'Host:  _dmarc', 'Value: v=DMARC1; p=none; rua=mailto:dmarc-reports@' + m.site].join('\n');
+}
+function snippetHtml(id, label, text) {
+  return '<div class="snippet"><div class="snippet-head"><span>' + esc(label) + '</span><button type="button" class="btn btn-plain" data-copy="' + id + '">Copy record</button></div><pre id="snip-' + id + '">' + esc(text) + '</pre><div id="snip-host-' + id + '"></div></div>';
+}
+let currentProfile = null;
+let SNIPS = {};
+(function () {
+  const form = $('answers');
+  let last = null, profileSnapshot = null;
+  $('assume-rows').innerHTML = [
+    ['Switch to a domain mailbox', ASSUMPTIONS.domain], ['Add SPF and DKIM records', ASSUMPTIONS.auth], ['Add a DMARC record', ASSUMPTIONS.dmarc],
+    ['Remove bought contacts', ASSUMPTIONS.bought], ['Clean and re-permission a quiet list', ASSUMPTIONS.stale], ['Fix the unsubscribe link', ASSUMPTIONS.unsub],
+    ['Add a postal address', ASSUMPTIONS.address], ['Look up rates and set up Postmaster Tools', ASSUMPTIONS.rates], ['Dig into high rates', ASSUMPTIONS.ratesHigh],
+    ['Turn on double opt-in', ASSUMPTIONS.doi], ['Sort imported contacts', ASSUMPTIONS.imports], ['Consent records', ASSUMPTIONS.consent],
+  ].map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(timeRange(r[1][0], r[1][1])) + '</td></tr>').join('') +
+    '<tr><th scope="row">Bulk-sender rules flagged from</th><td>' + fmt(ASSUMPTIONS.bulkList) + ' contacts</td></tr>';
+
+  function readInput() {
+    return { platform: radioVal(form, 'platform'), from: radioVal(form, 'from'), domain: $('domain').value, spf: radioVal(form, 'spf'), dkim: radioVal(form, 'dkim'), dmarc: radioVal(form, 'dmarc'),
+      has: checkVals(form, 'has'), source: checkVals(form, 'source'), doi: radioVal(form, 'doi'), size: $('size').value, last: radioVal(form, 'last'), rates: radioVal(form, 'rates'),
+      regions: checkVals(form, 'regions'), plans: checkVals(form, 'plans') };
+  }
+  function applyInput(i) {
+    ['platform', 'from', 'spf', 'dkim', 'dmarc', 'doi', 'last', 'rates'].forEach((k) => setRadio(form, k, i[k]));
+    $('domain').value = i.domain || ''; $('size').value = i.size || '';
+    setChecks(form, 'has', i.has); setChecks(form, 'source', i.source); setChecks(form, 'regions', i.regions); setChecks(form, 'plans', i.plans);
+  }
+  function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  function applyProfile(p) {
+    currentProfile = p;
+    const i = JSON.parse(JSON.stringify(EXAMPLE));
+    const used = [];
+    if (p) {
+      if (p.crm === 'hubspot') { i.platform = 'hubspot'; used.push('platform'); }
+      if (p.reach === 'international') { if (i.regions.indexOf('eu') === -1) i.regions.push('eu'); used.push('regions'); }
+      if (p.ecommerce === 'shopify' || p.ecommerce === 'other') { if (i.source.indexOf('customers') === -1) i.source.push('customers'); used.push('source'); }
+    }
+    applyInput(i);
+    markFromProfile(used);
+    profileSnapshot = p && used.length ? readInput() : null;
+  }
+  function state(i) {
+    if (profileSnapshot && same(i, profileSnapshot)) return 'profile';
+    if (!profileSnapshot && same(i, EXAMPLE)) return 'example';
+    return 'yours';
+  }
+  function xlinks(m) {
+    const p = currentProfile || {};
+    const L = [];
+    if (p.crm === 'none' || m.input.source.indexOf('imports') !== -1) L.push({ key: 'leadCapture', why: 'get every form sign-up into one CRM with its source, so consent and lists stay clean.' });
+    L.push({ key: 'tracking', why: 'tag your email links with UTMs so GA4 shows what email actually brings in.' });
+    if (p.goal === 'leads' || p.goal === 'calls') L.push({ key: 'speedToLead', why: 'a fast personal reply to new leads is a sales job, not a newsletter.' });
+    if (p.locations === 'one' || p.locations === 'multi') L.push({ key: 'local', why: 'your customers are local, so reviews and your Google Business Profile matter too.' });
+    L.push({ key: 'emailHealth', why: 'once mail reaches the inbox, score whether it is working.' });
+    return L;
+  }
+  function nextFor(m) {
+    return { key: 'flows', why: m.blockers ? 'Fix the inbox risks first, then plan the emails that send themselves: welcome, follow-up and win-back.' : 'Your mail can reach the inbox. Next, plan the emails that send themselves.' };
+  }
+  function headline(m) {
+    const n = m.blockers;
+    return {
+      num: String(n),
+      unit: n === 1 ? 'issue could send your email to spam or break the rules' : n === 0 ? 'inbox risks found' : 'issues could send your email to spam or break the rules',
+      rec: n === 0 && m.items.length === 0 ? 'You\'re ready to send.' : '',
+      line: (n > 0 ? 'Fix ' + (n === 1 ? 'it' : 'those') + ' before your next big send. ' : '') +
+        (m.items.length === 0 ? 'Every check on this list is in place.'
+          : 'Your list has ' + m.items.length + ' ' + (m.items.length === 1 ? 'item' : 'items') + (m.checks ? ' (' + m.checks + ' quick ' + (m.checks === 1 ? 'check' : 'checks') + ')' : '') + ', about ' + timeRange(m.totalLo, m.totalHi) + ' of work in total.') +
+        (m.bulk ? ' With ' + fmt(m.size) + ' contacts you may count as a bulk sender, so Gmail and Yahoo\'s stricter rules apply.' : ''),
+    };
+  }
+  function lawRows(m) {
+    const r = m.input.regions.length ? m.input.regions : ['us'];
+    return ['us', 'ca', 'eu'].filter((k) => r.indexOf(k) !== -1).map((k) => LAWS[k]);
+  }
+  let SNIPS_TEXT = {};
+  function planText(m) {
+    const h = headline(m);
+    const L = ['YOUR INBOX READINESS LIST', 'Will Your Emails Reach the Inbox? (Big Leap Email Marketing DIY Toolkit 1 of 3)', ''];
+    if (currentProfile && currentProfile.name) L.push('Business: ' + currentProfile.name);
+    if (m.dom) L.push('Domain: ' + m.dom);
+    L.push('Platform: ' + (m.pl === 'other' ? 'Other' : m.P.name));
+    L.push(h.num + ' ' + h.unit + '.', h.line, '');
+    L.push('FIXES, IN ORDER');
+    if (!m.items.length) L.push('Nothing to fix.');
+    itemsText(m.items, SNIPS_TEXT).forEach((l) => L.push(l));
+    if (m.done.length) L.push('', 'ALREADY IN PLACE', ...m.done.map((d) => '[done] ' + d));
+    L.push('', 'THE RULES FOR WHERE YOUR SUBSCRIBERS ARE (general information, not legal advice)', ...lawRows(m).map((r) => '- ' + r[0] + ' (' + r[1] + '): ' + r[2]));
+    L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
+    const nx = nextFor(m);
+    L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
+    const xl = xlinksText(xlinks(m), nx.key);
+    if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    return L.join('\n');
+  }
+  function render() {
+    const input = readInput(), m = model(input, ASSUMPTIONS);
+    last = m;
+    setExampleState(state(input), 'Example: a business on Mailchimp with half its domain records set up and an imported list. Change any answer to make it yours.');
+    const h = headline(m);
+    $('out-num').textContent = h.num;
+    $('out-num').classList.toggle('is-zero', m.blockers === 0);
+    $('out-unit').textContent = h.unit;
+    $('out-rec').textContent = h.rec; $('out-rec').hidden = !h.rec;
+    $('out-line').textContent = h.line;
+    $('answer').classList.toggle('is-done', m.items.length === 0);
+    flashIfChanged(m.blockers + '/' + m.items.length);
+    $('deliv-sub').textContent = m.items.length
+      ? 'Inbox risks first, then quick checks, then the rest in fix order. Steps use ' + (m.pl === 'other' ? 'general menus' : m.P.name + ' menus') + ' where they differ.'
+      : 'Everything on the inbox list is in place.';
+    SNIPS = { dmarc: dmarcSnippet(m) };
+    SNIPS_TEXT = { dmarc: ['DMARC record to add:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
+    if (m.input.dmarc !== 'no') SNIPS_TEXT = { dmarc: ['DMARC record to add if none is found:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
+    renderItems($('plan'), m.items, { dmarc: m.input.dmarc === 'yes' ? '' : snippetHtml('dmarc', m.input.dmarc === 'no' ? 'DMARC record (start here)' : 'DMARC record (if none is found)', SNIPS.dmarc) });
+    if (m.input.dmarc === 'yes') SNIPS_TEXT = {};
+    $('done-wrap').hidden = m.done.length === 0;
+    $('done-list').innerHTML = m.done.map((x) => '<li><span aria-hidden="true">✓ </span>' + esc(x) + '</li>').join('');
+    $('law-rows').innerHTML = lawRows(m).map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>').join('');
+    renderComplex(COMPLEX, m.flags);
+    const nx = nextFor(m);
+    renderXlinks(xlinks(m), nx.key);
+    renderNext(nx.key, nx.why);
+    syncChoiceStyles(form);
+    syncCopy();
+    sticky();
+  }
+  function restore() { profileSnapshot = null; applyInput(JSON.parse(JSON.stringify(EXAMPLE))); markFromProfile([]); render(); const f = form.querySelector('input[name="platform"]:checked'); if (f) f.focus(); }
+  initShell(1, restore);
+  currentProfile = initProfileStrip((p) => { applyProfile(p); render(); });
+  const syncCopy = initCopy(() => planText(last));
+  const sticky = initSticky();
+  initSegFocus(form);
+  $('plan').addEventListener('click', (ev) => {
+    const b = ev.target.closest ? ev.target.closest('[data-copy]') : null;
+    if (!b) return;
+    const id = b.getAttribute('data-copy');
+    copyWithFallback(SNIPS[id] || '', () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy record'; }, 2500); }, $('snip-host-' + id));
+  });
+  form.addEventListener('submit', (ev) => ev.preventDefault());
+  form.addEventListener('change', (ev) => { if (ev.target && ev.target.name) unmarkProfile(ev.target.name); render(); });
+  form.addEventListener('input', (ev) => { if (ev.target && (ev.target.id === 'domain' || ev.target.id === 'size')) render(); });
+  applyProfile(currentProfile);
+  render();
+})();
+
+</script>
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="../pr/02_Build_Your_Media_Kit.html"><small>← Previous</small><b>Digital PR: Build Your Media Kit</b></a><a class="blp-hub" href="../../index.html"><small>Email Marketing · Toolkit 1 of 3</small><b>All toolkits</b></a><a class="blp-a" href="02_Which_Emails_Should_Send_Themselves.html"><small>Next →</small><b>Which Emails Should Send Themselves?</b></a></div></nav><!-- /bl-pager -->
+<script id="bl-header-js">
+(function () {
+  var h = document.querySelector('.blh'); if (!h) return;
+  var burger = h.querySelector('.blh-burger');
+  var bar = h.querySelector('.blh-tabs');
+  function centerCurrent() {
+    var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
+    if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
+    var prev = cur.previousElementSibling; while (prev && prev.tagName !== 'A') prev = prev.previousElementSibling;
+    bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
+  }
+  centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  function swipeHints() {
+    Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
+      var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
+      if (over && !has) { var p = document.createElement('p'); p.className = 'blx-swipe'; p.setAttribute('aria-hidden', 'true'); p.textContent = 'Swipe to see the whole table →'; w.parentNode.insertBefore(p, w); }
+      else if (!over && has) h.parentNode.removeChild(h);
+    });
+  }
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html"];
+  function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
+  var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  function labelNext() {
+    var box = document.getElementById('next'); if (!box || me < 0) return;
+    var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
+    var dl = box.getAttribute('data-label');
+    if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
+    if (!a) { lab.textContent = 'Next toolkit'; return; }
+    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    if (lab.textContent !== txt) lab.textContent = txt;
+  }
+  var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
+  window.addEventListener('load', labelNext); setTimeout(labelNext, 400);
+  Array.prototype.forEach.call(document.querySelectorAll('.draft-banner'), function (b) { b.innerHTML = b.innerHTML.replace(/Owner: ([A-Z][a-z]+ [A-Z][A-Za-z-]+)/, 'Owner: <span class="nw">$1</span>'); });
+  var xl = document.getElementById('xlinks');
+  if (xl && !xl.querySelector('details')) {
+    var lab0 = xl.querySelector('.label'), d0 = document.createElement('details'), sm = document.createElement('summary');
+    d0.className = 'blx-rel'; sm.textContent = lab0 ? lab0.textContent : 'Related toolkits';
+    d0.appendChild(sm); while (xl.firstChild) { if (xl.firstChild === lab0) xl.removeChild(lab0); else d0.appendChild(xl.firstChild); } xl.appendChild(d0);
+  }
+
+  (function () {
+    var ans = document.getElementById('answer'), res = document.getElementById('results'), q = document.getElementById('col-q');
+    if (!ans || !res || !q || !window.IntersectionObserver) return;
+    var bar = document.createElement('div'); bar.className = 'blx-bar'; bar.setAttribute('role', 'status'); bar.setAttribute('aria-live', 'off');
+    bar.innerHTML = '<div class="t"><small>Your result so far</small><b></b></div><button type="button">See plan ↓</button>';
+    document.body.appendChild(bar);
+    var label = bar.querySelector('b');
+    function summary() {
+      var f = ans.querySelector('.hero-fig'), h = f ? Array.prototype.map.call(f.children.length ? f.children : [f], function (c) { return c.hidden ? '' : c.textContent; }).join(' ') : '';
+      if (!h || !h.trim()) { var hh = ans.querySelector('h2:not(.label), h3, .answer-line, p'); h = hh ? hh.textContent : ''; }
+      return h.replace(/\s+/g, ' ').trim();
+    }
+    function upd() { label.textContent = summary() || 'Your plan is ready below'; }
+    upd(); new MutationObserver(upd).observe(ans, { childList: true, subtree: true, characterData: true });
+    var resVisible = false, qVisible = true;
+    function toggle() { bar.classList.toggle('show', !resVisible && qVisible && window.innerWidth >= 0); }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { resVisible = e.isIntersecting; }); toggle(); }, { rootMargin: '0px 0px -35% 0px' }).observe(res);
+    new IntersectionObserver(function (es) { es.forEach(function (e) { qVisible = e.isIntersecting; }); toggle(); }).observe(q);
+    bar.querySelector('button').addEventListener('click', function () { ans.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); try { ans.focus({ preventScroll: true }); } catch (e) {} if (window.blTrack) window.blTrack('diy_see_plan_click'); });
+  })();
+
+
+  (function () {
+    var form = document.getElementById('answers'); if (!form || !document.getElementById('col-q')) return;
+    Array.prototype.forEach.call(form.querySelectorAll('.q'), function (q) {
+      if (q.closest('.q') !== q || q.parentElement.closest('.q')) return;
+      var kids = Array.prototype.filter.call(q.children, function (c) { return !c.classList.contains('sr-only') && !c.classList.contains('sr'); });
+      if (!kids.length) return;
+      var heads = kids.filter(function (c) { return c.tagName === 'LEGEND' || c.classList.contains('q-label'); });
+      if (kids[0].classList.contains('q-row')) {
+        q.classList.add('blx-row');
+        if (heads.length) {
+          var pr = null; Array.prototype.slice.call(q.children).forEach(function (c) {
+            if (heads.indexOf(c) >= 0) { pr = document.createElement('div'); pr.className = 'blx-pair'; q.appendChild(pr); var a1 = document.createElement('div'); a1.className = 'blx-ph'; pr.appendChild(a1); a1.appendChild(c); var b1 = document.createElement('div'); b1.className = 'blx-pc'; pr.appendChild(b1); return; }
+            if (pr && c !== pr) pr.querySelector('.blx-pc').appendChild(c);
+          });
+          q.classList.add('blx-pairs');
+        }
+        return;
+      }
+      if (kids[0].tagName === 'LEGEND') heads = [kids[0]];
+      if (heads.length > 1 && kids[0] === heads[0]) {
+        var nodes = Array.prototype.slice.call(q.children), pair = null, helps = [];
+        nodes.forEach(function (c) {
+          if (c.classList.contains('q-help')) { helps.push(c); return; }
+          if (heads.indexOf(c) >= 0) { pair = document.createElement('div'); pair.className = 'blx-pair'; q.appendChild(pair); var hc = document.createElement('div'); hc.className = 'blx-ph'; pair.appendChild(hc); hc.appendChild(c); var cc = document.createElement('div'); cc.className = 'blx-pc'; pair.appendChild(cc); return; }
+          if (pair) pair.querySelector('.blx-pc').appendChild(c);
+        });
+        if (helps.length) { var hw = document.createElement('div'); hw.className = 'blx-qh blx-pairhelp'; helps.forEach(function (h) { hw.appendChild(h); }); q.appendChild(hw); }
+        q.classList.add('blx-pairs'); return;
+      }
+      if (heads.length !== 1 || kids[0] !== heads[0]) return;
+      var head = heads[0], qh = document.createElement('div'), qc = document.createElement('div');
+      qh.className = 'blx-qh'; qc.className = 'blx-qc';
+      Array.prototype.slice.call(q.children).forEach(function (c) {
+        if (c === head) return;
+        if (c.classList.contains('q-help')) qh.appendChild(c); else qc.appendChild(c);
+      });
+      q.appendChild(qh); q.appendChild(qc); q.classList.add('blx-split');
+    });
+  })();
+  var swT; window.addEventListener('resize', function () { clearTimeout(swT); swT = setTimeout(swipeHints, 150); });
+  window.addEventListener('load', swipeHints); setTimeout(swipeHints, 600); document.addEventListener('click', function () { setTimeout(swipeHints, 120); });
+  function closeAll(except) { Array.prototype.forEach.call(h.querySelectorAll('.blh-li.open'), function (li) { if (li !== except) { li.classList.remove('open'); var b = li.querySelector('.blh-top'); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
+  Array.prototype.forEach.call(h.querySelectorAll('button.blh-top'), function (b) {
+    b.addEventListener('click', function () { var li = b.parentNode, open = !li.classList.contains('open'); closeAll(li); li.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  });
+  if (burger) burger.addEventListener('click', function () { var open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  document.addEventListener('click', function (e) { if (!h.contains(e.target)) { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); } } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(null); if (h.classList.contains('menu-open')) { h.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } } });
+})();
+</script>
+<script id="bl-version-js" src="../../assets/version-switch.js"></script>
+</body>
+</html>
