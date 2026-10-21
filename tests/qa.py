@@ -338,7 +338,7 @@ def browser_checks(data):
         ctx.close()
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        want = {'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'start', 'roadmap', 'journey', 'widgets', 'buildout', 'review'}
+        want = {'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'start', 'roadmap', 'journey', 'widgets', 'review'}
         have = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
         rec(want <= have, 'every page is reachable from the toolkit bar', ', '.join(sorted(want - have)))
         btn = pg.query_selector('.blh-tbtn'); dd = False

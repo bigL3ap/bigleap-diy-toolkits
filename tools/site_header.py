@@ -3,7 +3,8 @@
 
 Tier 1 copies the bigleap.com header (logo, Services / Who We Serve / Case Studies / Resources / About menus,
 "Get Your Custom Strategy"), with links to the live site, so the toolkits read as part of bigleap.com.
-Tier 2 is the toolkit bar: All toolkits · Start here · the five services · Journey map · Team review · Widgets,
+Tier 2 is the toolkit bar. Client-facing pages sit on the left (Toolkits menu · Start here · Roadmap); internal pages
+sit on the right under "Internal" (Journey map · Sales assets · Widgets · Mockups · Status & review),
 plus Previous / Next on public toolkit pages. Preview pages (toolkits.json "previews") and review.html get the
 header but are never added to the Previous / Next sequence.
 
@@ -86,6 +87,11 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-int { flex: 0 0 auto; margin-left: auto; display: flex; align-items: center; gap: 2px; padding-left: 12px; border-left: 1px solid #B9C6CF; }
+.blh-int-l { flex: 0 0 auto; font: 800 11px/1 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #5F6E79; margin-right: 6px; white-space: nowrap; }
+.blh-int a { font-weight: 600; color: #3D5566; }
+:root[data-theme="dark"] .blh-int { border-left-color: #2D4556; } :root[data-theme="dark"] .blh-int-l, :root[data-theme="dark"] .blh-int a:not([aria-current]) { color: #9AAFBD; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-int { border-left-color: #2D4556; } :root:not([data-theme="light"]) .blh-int-l, :root:not([data-theme="light"]) .blh-int a:not([aria-current]) { color: #9AAFBD; } }
 .blh-sub .blh-in { position: relative; }
 .blh-tbtn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; cursor: pointer; white-space: nowrap; }
 .blh-tbtn:hover, .blh-tbtn[aria-expanded="true"] { background: #DAE9F2; }
@@ -528,10 +534,11 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
             items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email'), ('Strategy', 'strategy')]
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
-    # click from the bar. Internal pages (Buildout, Team review) sit after a divider.
+    # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
     menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
     tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey')]
-    tools_tabs = [('Widgets', 'index.html#widgets', 'widgets'), ('Sales assets', 'sales.html', 'sales'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Buildout', 'index.html#buildout', 'buildout'), ('Team review', 'review.html', 'review')]
+    tabs = [x for x in tabs if x[2] != 'journey']   # the Journey map is internal
+    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Sales assets', 'sales.html', 'sales'), ('Widgets', 'index.html#widgets', 'widgets'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Status & review', 'review.html', 'review')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
@@ -540,7 +547,8 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     menu_btn = (f'<button type="button" class="blh-tbtn{" is-current" if in_menu else ""}" aria-expanded="false" aria-controls="blh-tmenu">'
                 'Toolkits<span class="car" aria-hidden="true"></span></button>')
     menu_html = ('<div class="blh-tmenu" id="blh-tmenu" hidden><ul>' + ''.join('<li>' + tab(*x) + '</li>' for x in menu_items) + '</ul></div>')
-    tab_html = menu_btn + ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
+    tab_html = (menu_btn + ''.join(tab(*x) for x in tabs) +
+                '<span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span>' + ''.join(tab(*x) for x in tools_tabs) + '</span>')
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
