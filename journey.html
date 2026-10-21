@@ -388,6 +388,26 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .map { position: relative; }
 .map-tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .map-count { font-size: 13px; color: var(--muted); }
+/* Auto-tour: shows that each stop does something. Stops for good on any interaction; never runs with reduced motion. */
+.tour-btn { display: inline-flex; align-items: center; gap: 8px; }
+.tour-btn[aria-pressed="true"], .tour-btn[aria-pressed="false"] { background: var(--paper); color: var(--navy); border-color: var(--line); }
+.tour-ico { width: 10px; height: 12px; display: inline-block; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.tour-btn[aria-pressed="false"] .tour-ico { width: 0; height: 0; border-left: 10px solid currentColor; border-right: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.tour-hint { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 14px; color: var(--muted); }
+.tour-hint[hidden] { display: none; }
+.tour-dot { width: 10px; height: 10px; border-radius: 50%; background: #EA4335; flex: 0 0 auto; }
+.map.touring .stop.sel .dot { animation: tour-pulse 1.6s ease-out infinite; }
+@keyframes tour-pulse { 0% { box-shadow: 0 0 0 0 rgba(234,67,53,.55); } 70% { box-shadow: 0 0 0 14px rgba(234,67,53,0); } 100% { box-shadow: 0 0 0 0 rgba(234,67,53,0); } }
+.map-detail.touring { transition: border-color .3s ease; }
+@media (prefers-reduced-motion: no-preference) { .tour-hint .tour-dot { animation: tour-blink 1.6s ease-in-out infinite; } .map-detail.touring > * { animation: tour-fade .45s ease; } }
+@keyframes tour-blink { 50% { opacity: .35; } }
+@keyframes tour-fade { from { opacity: .25; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .map.touring .stop.sel .dot { animation: none; } }
+/* "Try me" hint on the segment picker, until the first pick */
+.seg-tabs.try .seg-tab.try-me { position: relative; }
+.seg-tabs.try .seg-tab.try-me::after { content: "Try me"; position: absolute; top: -9px; right: -6px; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 700 10.5px/1.6 var(--body); }
+@media (prefers-reduced-motion: no-preference) { .seg-tabs.try .seg-tab.try-me { animation: try-glow 2.4s ease-in-out infinite; } }
+@keyframes try-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(49,135,181,0); } 50% { box-shadow: 0 0 0 5px rgba(49,135,181,.28); } }
 .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 1; }
 .map-svg path { fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: .9; }
 .map-svg path.in { stroke-dasharray: 6 6; }
@@ -793,7 +813,8 @@ details.support .support-grid { padding: 4px 16px 16px; }
   <div class="jpanel" id="jp-connect" role="tabpanel" aria-labelledby="jt-connect" hidden>
   <section class="block" aria-labelledby="conn-h">
     <div class="block-head map-head"><div><h2 id="conn-h">The DIY map: one effort, five channels</h2><p>Each line is a service; each stop is a small leap. They feed each other: tracking feeds ads, reviews feed local search, the CRM feeds email. Pick a stop to see what it unlocks and why.</p></div>
-      <div class="map-tools"><button type="button" class="map-all-btn" id="map-all" aria-pressed="false">Show every connection</button><span class="map-count" id="map-count"></span></div></div>
+      <div class="map-tools"><button type="button" class="map-all-btn tour-btn" id="map-tour" aria-pressed="true" hidden><span class="tour-ico" aria-hidden="true"></span><span class="tour-txt">Pause tour</span></button><button type="button" class="map-all-btn" id="map-all" aria-pressed="false">Show every connection</button><span class="map-count" id="map-count"></span></div></div>
+    <p class="tour-hint" id="tour-hint" hidden><span class="tour-dot" aria-hidden="true"></span><span id="tour-hint-txt">Taking a quick tour. Tap any stop to explore it yourself.</span></p>
     <div class="map" id="map" aria-label="Map of all toolkits by service. Select a stop to see its connections."></div>
     <div class="map-detail" id="map-detail" aria-live="polite"></div>
     <details class="support">
@@ -1086,6 +1107,13 @@ details.support .support-grid { padding: 4px 16px 16px; }
   var tabs = $('seg-tabs');
   tabs.innerHTML = SEG_ORDER.map(function (id, i) { var s = SEGMENTS[id]; return '<button type="button" class="seg-tab" role="tab" id="tab-' + id + '" aria-controls="way" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '" data-seg="' + id + '">' + esc(s.label) + '<small>' + esc(s.short) + '</small></button>'; }).join('');
   var curSeg = 'local';
+  /* "Try me" on one other segment until the visitor picks one */
+  (function () {
+    var other = tabs.querySelector('.seg-tab[aria-selected="false"]'); if (!other) return;
+    tabs.classList.add('try'); other.classList.add('try-me');
+    function off() { tabs.classList.remove('try'); other.classList.remove('try-me'); }
+    tabs.addEventListener('click', off, { once: true }); tabs.addEventListener('keydown', off, { once: true });
+  })();
   var wayOpen = false;
   function renderWay(id) {
     var s = SEGMENTS[id];
@@ -1291,8 +1319,62 @@ details.support .support-grid { padding: 4px 16px 16px; }
     if (pendingK && conn.nodes[pendingK]) selNode = pendingK;
     renderMap(); renderSupport();
     setTimeout(drawLines, 300); if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawLines);
+    setTimeout(tour.init, 1200);
   }).catch(function () { connLoaded = true; $('map').innerHTML = '<p class="none" style="padding:16px">The map could not load. Refresh the page to try again.</p>'; });
   if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { if (data) { renderMap(); renderSupport(); } }); } catch (e) {} }
+
+  /* Auto-tour of the map: every few seconds a different stop is selected so visitors see that each one
+     does something. It never runs with reduced motion or from a #connect:<id> link, pauses off-screen and in
+     background tabs, does not touch the URL or analytics, keeps screen readers quiet, and stops for good the
+     moment the visitor interacts with the map. A Pause/Play button covers WCAG 2.2.2. */
+  var tour = (function () {
+    var STEPS = ['paid1', 'rv7', 'plan3', 'rv2', 'em2', 'seo2', 'pr1', 'plan1', 'rv1'], EVERY = 3600;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var st = { ended: false, paused: false, inView: false, timer: null, i: 0, maxH: 0 };
+    var btn = $('map-tour'), hint = $('tour-hint'), det = $('map-detail'), mapEl = $('map');
+    function panelShown() { var pn = $('jp-connect'); return pn && !pn.hidden; }
+    function canRun() { return !st.ended && !st.paused && st.inView && panelShown() && !document.hidden && data && conn; }
+    function step() {
+      var ids = STEPS.filter(function (x) { return conn.nodes[x]; }); if (!ids.length) return;
+      var id = ids[st.i % ids.length]; st.i++;
+      if (id === selNode && ids.length > 1) { id = ids[st.i % ids.length]; st.i++; }
+      selectNode(id, true);
+      st.maxH = Math.max(st.maxH, det.offsetHeight); det.style.minHeight = st.maxH + 'px';   /* grow-only: no jumping */
+    }
+    function sync() {
+      var run = canRun();
+      mapEl.classList.toggle('touring', run); det.classList.toggle('touring', run);
+      det.setAttribute('aria-live', st.ended || st.paused ? 'polite' : 'off');
+      if (run && !st.timer) st.timer = setInterval(step, EVERY);
+      if (!run && st.timer) { clearInterval(st.timer); st.timer = null; }
+    }
+    function end() {
+      if (st.ended) return; st.ended = true; sync();
+      det.style.minHeight = ''; btn.hidden = true;
+      $('tour-hint-txt').textContent = 'Your turn: tap any stop to see what it unlocks.'; hint.classList.add('done');
+      setTimeout(function () { hint.hidden = true; }, 4000);
+    }
+    function init() {
+      if (reduce || pendingK) return;          /* reduced motion, or the visitor came for a specific toolkit */
+      btn.hidden = false; hint.hidden = false;
+      btn.addEventListener('click', function () {
+        st.paused = !st.paused; btn.setAttribute('aria-pressed', st.paused ? 'false' : 'true');
+        btn.querySelector('.tour-txt').textContent = st.paused ? 'Play tour' : 'Pause tour'; sync();
+      });
+      /* any real interaction with the map or its detail ends the tour */
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+        [mapEl, det, $('map-all')].forEach(function (el) { el.addEventListener(ev, end, { passive: true }); });
+      });
+      mapEl.addEventListener('focusin', end);
+      if (window.IntersectionObserver) new IntersectionObserver(function (es) { es.forEach(function (e) { st.inView = e.isIntersecting; }); sync(); }, { threshold: 0.35 }).observe(mapEl);
+      else st.inView = true;
+      document.addEventListener('visibilitychange', sync);
+      window.addEventListener('hashchange', function () { setTimeout(sync, 50); });
+      jtabs.addEventListener('click', function () { setTimeout(sync, 50); });
+      sync();
+    }
+    return { init: init, sync: sync };
+  })();
 
   /* KPIs by phase */
   var KPIS = [
