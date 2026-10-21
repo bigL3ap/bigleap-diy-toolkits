@@ -242,6 +242,18 @@
       "description": "A brand and messaging starter: eight finish-the-sentence answers become a first-draft positioning, promise, value proposition, themes and channel lines.",
       "reviewer": "Coby Bush",
       "review": "Is this the smallest useful question set? Confirm it stays clearly separate from the full Brand Ideology process before any public release."
+    },
+    {
+      "id": "plan4",
+      "n": 4,
+      "group": "Strategy starter 4 of 4",
+      "statusLabel": "Internal draft",
+      "title": "Would Your Customers Recommend You?",
+      "short": "Delight",
+      "file": "toolkits/plan/04_Would_Your_Customers_Recommend_You.html",
+      "description": "A customer delight and referral check: nine moments after the sale, fixes in order, when and how to ask for reviews and referrals within platform rules, and what to measure.",
+      "reviewer": "Erica Pounder and Coby Bush",
+      "review": "Does it complement Email 02 and SEO 02 without overlapping? Are the review and referral rules stated correctly for our clients' platforms?"
     }
   ]
 }
