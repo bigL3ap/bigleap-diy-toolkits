@@ -476,12 +476,14 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-version-js"[^>]*></script>\n?', '', s)
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
     s = s.replace('</head>', CSS + '\n' + track_js() + '\n</head>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n</body>', 1)
+    version = f'<script id="bl-version-js" src="{rel(page, "assets/version-switch.js")}"></script>'   # Original / Updated / Final switch (assets/version-switch.js)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n' + version + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
