@@ -193,7 +193,7 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
   .seg-tab small { font-size: 11.5px; }
 }
 /* Page tabs */
-.jtabs { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 36px 0 0; padding: 8px 0; background: var(--sky); }
+.jtabs { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin: 36px 0 0; padding: 8px 0; background: var(--sky); }
 .jtabs button { display: grid; gap: 2px; align-content: center; min-height: 56px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--navy); cursor: pointer; text-align: left; font: inherit; }
 .jtabs b { font: 700 16px/1.2 var(--head); }
 .jtabs small { font-size: 12.5px; color: var(--muted); }
@@ -201,7 +201,8 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
 .jtabs button[aria-selected="true"] small { color: #DCE9F2; }
 .jtabs button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .jpanel > .block:first-child { margin-top: 28px; }
-@media (max-width: 640px) { .jtabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .jtabs button { min-height: 48px; padding: 6px 10px; } .jtabs b { font-size: 14.5px; } .jtabs small { display: none; } }
+@media (max-width: 1100px) { .jtabs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .jtabs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 6px 0; } .jtabs b { line-height: 1.15; } .jtabs button { min-height: 48px; padding: 6px 10px; } .jtabs b { font-size: 14.5px; } .jtabs small { display: none; } }
 /* Segment panel: details on demand */
 .phase blockquote { margin-top: 0; }
 .phase .moment { margin-bottom: 8px; }
@@ -503,6 +504,132 @@ details.support .support-grid { padding: 4px 16px 16px; }
 .map-all-btn[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
 .map-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 16px; }
 @media (max-width: 360px) { .stop .lbl { font-size: 9px; letter-spacing: -0.2px; } .map { padding: 12px 6px; } }
+
+/* ===== Start to finish: the full campaign flow ===== */
+.cf-head-acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cf-play { min-height: 44px; padding: 8px 16px; border-radius: 14px; border: 1px solid var(--navy); background: var(--paper); color: var(--navy); font: 700 14.5px var(--body); cursor: pointer; }
+.cf-play[aria-pressed="true"] { background: #143D55; border-color: #143D55; color: #fff; }
+.cf-legend { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.cf-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.cf-st { font-style: normal; display: inline-block; font: 700 11px/1.6 var(--body); padding: 0 7px; border-radius: 999px; white-space: nowrap; }
+.cf-st.s-live { background: rgba(15,123,95,.14); color: var(--green); }
+.cf-st.s-built { background: rgba(49,135,181,.15); color: var(--blue-ink); }
+.cf-st.s-prog { background: rgba(161,92,7,.14); color: var(--amber); }
+.cf-st.s-plan { background: rgba(95,110,121,.14); color: var(--muted); }
+
+.cf-flow { margin-top: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px 16px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); column-gap: 18px; row-gap: 0; }
+.cf-feeds { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 0 0 12px; font-size: 13px; color: var(--muted); }
+.cf-feeds > span { font-weight: 700; color: var(--navy); margin-right: 2px; }
+.cf-chip { min-height: 32px; padding: 4px 11px; border-radius: 999px; border: 1px dashed var(--line); background: var(--sky); color: var(--text); font: 600 12.5px var(--body); cursor: pointer; }
+.cf-chip:hover, .cf-chip[aria-pressed="true"] { border-color: var(--blue); border-style: solid; }
+.cf-feeds .cf-into { font-weight: 700; color: var(--blue-ink); }
+.cf-node { position: relative; display: grid; align-content: start; gap: 3px; min-height: 132px; padding: 12px 12px 10px; border: 1px solid var(--line); border-top: 5px solid var(--c, var(--navy)); border-radius: 12px; background: var(--paper); color: var(--text); text-align: left; font: inherit; cursor: pointer; transition: box-shadow .15s, transform .15s; }
+.cf-node:hover { box-shadow: var(--shadow); }
+.cf-node[aria-pressed="true"] { border-color: var(--c, var(--navy)); box-shadow: 0 0 0 2px var(--c, var(--navy)), var(--shadow); }
+.cf-node:not(.cf-last)::after { content: ""; position: absolute; top: 50%; right: -16px; width: 14px; height: 14px; background: no-repeat center / 14px 14px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h10M7 3l4 4-4 4' fill='none' stroke='%233187B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); transform: translateY(-50%); }
+.cf-node .cf-n { font: 800 12px var(--head); color: var(--c, var(--navy)); letter-spacing: .04em; text-transform: uppercase; }
+.cf-node b { font: 700 16px/1.2 var(--head); color: var(--navy); }
+.cf-node small { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+.cf-node .cf-st { justify-self: start; margin-top: 4px; }
+.cf-start { position: absolute; top: -13px; right: 10px; font: 800 10.5px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; background: #EA4335; color: #fff; padding: 5px 8px; border-radius: 999px; }
+.cf-loop { grid-column: 2 / 7; margin: 0 calc(10% - 7px); position: relative; height: 54px; border: 2px dashed var(--red); border-top: 0; border-radius: 0 0 18px 18px; }
+.cf-loop::before, .cf-loop::after { content: ""; position: absolute; top: -2px; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; }
+.cf-loop::before { left: -8px; border-bottom: 10px solid var(--red); top: -8px; }
+.cf-loop::after { display: none; }
+.cf-loop button { position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 50%); max-width: calc(100% - 20px); min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--red); background: var(--paper); color: var(--text); font: 600 13px/1.3 var(--body); cursor: pointer; text-align: center; }
+.cf-loop button b { color: var(--red); }
+.cf-loop button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--red); }
+.cf-measure { grid-column: 1 / -1; margin-top: 34px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 14px; min-height: 48px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--tint); color: var(--navy); font: inherit; text-align: left; cursor: pointer; }
+.cf-measure b { font: 700 15px var(--head); }
+.cf-measure span { font-size: 13px; }
+.cf-measure[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--navy); }
+
+.cf-detail { margin-top: 14px; background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--c, var(--navy)); border-radius: 12px; padding: 18px 20px; }
+.cf-dh { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 10px 20px; }
+.cf-dh h3 { font-size: clamp(20px, 2.2vw, 26px); }
+.cf-dh .cf-kick { font: 800 12px var(--head); text-transform: uppercase; letter-spacing: .05em; color: var(--c, var(--navy)); margin: 0 0 4px; }
+.cf-dh .cf-runs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.cf-dh .cf-runs span { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--sky); color: var(--navy); border: 1px solid var(--line); }
+.cf-nav { display: flex; gap: 6px; }
+.cf-nav button { min-height: 40px; min-width: 44px; padding: 6px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); color: var(--navy); font: 700 13.5px var(--body); cursor: pointer; }
+.cf-nav button:disabled { opacity: .4; cursor: default; }
+.cf-lead { margin: 12px 0 0; max-width: 60em; }
+.cf-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px 24px; margin-top: 14px; }
+.cf-cols h4 { font-size: 14px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 6px; font-family: var(--body); }
+.cf-cols ul, .cf-cols ol { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14px; line-height: 1.5; }
+.cf-cols ul.cf-open li::marker { color: var(--amber); }
+.cf-cols ul.cf-open li b { color: var(--amber); }
+.cf-people { list-style: none; padding: 0 !important; }
+.cf-people li { display: flex; align-items: center; gap: 10px; }
+.cf-av { flex: 0 0 34px; width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--tint); color: var(--navy); display: grid; place-items: center; font: 800 12px var(--head); }
+.cf-people small { display: block; color: var(--muted); font-size: 12.5px; }
+.cf-week { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; margin-top: 14px; }
+.cf-week div { border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: var(--sky); font-size: 12.5px; line-height: 1.35; }
+.cf-week div b { display: block; font: 800 11px var(--head); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.cf-week div.gap { border-style: dashed; background: transparent; color: var(--amber); }
+.cf-links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-size: 14px; font-weight: 700; }
+.cf-asof { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 1100px) { .cf-week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 900px) {
+  .cf-flow { grid-template-columns: 1fr; row-gap: 22px; padding: 16px 14px; }
+  .cf-feeds { padding: 0; }
+  .cf-node { min-height: 0; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 10px; align-items: center; padding: 12px 14px; }
+  .cf-node .cf-n { grid-row: 1 / 3; font-size: 18px; min-width: 22px; }
+  .cf-node b, .cf-node small { grid-column: 2; }
+  .cf-node .cf-st { grid-column: 3; grid-row: 1 / 3; margin: 0; }
+  .cf-node:not(.cf-last)::after { top: auto; bottom: -19px; right: auto; left: 22px; transform: rotate(90deg); }
+  .cf-start { top: -11px; }
+  .cf-loop { grid-column: 1; grid-row: auto; order: 0; height: auto; margin: 0; border: 2px dashed var(--red); border-radius: 12px; padding: 0; }
+  .cf-loop::before { display: none; }
+  .cf-loop button { position: static; transform: none; width: 100%; max-width: none; border: 0; border-radius: 10px; padding: 10px 12px; text-align: left; }
+  .cf-measure { margin-top: 0; }
+  .cf-week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: no-preference) { .cf-detail.anim > * { animation: tour-fade .35s ease; } }
+
+/* ===== For service teams: why the toolkits grow your book ===== */
+.tm-line { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; background: #143D55; color: #fff; border-radius: 14px; padding: 16px 20px; }
+.tm-line p { margin: 0; font: 700 clamp(17px, 1.8vw, 21px)/1.35 var(--head); max-width: 44em; }
+.tm-line button { min-height: 44px; padding: 8px 16px; border-radius: 12px; border: 1px solid #fff; background: transparent; color: #fff; font: 700 14px var(--body); cursor: pointer; }
+.tm-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.tm-col { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+.tm-col h3 { font-size: 18px; display: flex; align-items: center; gap: 8px; }
+.tm-col h3 i { font-style: normal; font: 800 11px/1 var(--body); padding: 5px 8px; border-radius: 999px; }
+.tm-col.kit h3 i { background: rgba(15,123,95,.14); color: var(--green); }
+.tm-col.you h3 i { background: rgba(234,67,53,.12); color: var(--red); }
+.tm-col ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14.5px; }
+.tm-wheel { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; counter-reset: tw; }
+.tm-wheel li { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; line-height: 1.45; counter-increment: tw; }
+.tm-wheel li b { display: block; font: 700 15px/1.25 var(--head); color: var(--navy); margin-bottom: 3px; }
+.tm-wheel li b::before { content: counter(tw) ". "; color: var(--blue); }
+.tm-wheel li:not(:last-child)::after { content: "\2192"; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--blue); font-weight: 800; }
+.tm-wheel li:last-child { border-color: var(--blue); }
+.tm-back { margin: 8px 0 0; font-size: 13px; color: var(--muted); text-align: right; }
+.tm-qs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 12px; margin-top: 18px; }
+.tm-q { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+.tm-q summary { list-style: none; cursor: pointer; padding: 14px 16px 14px 46px; position: relative; font: 700 16px/1.35 var(--head); color: var(--navy); }
+.tm-q summary::-webkit-details-marker { display: none; }
+.tm-q summary::before { content: "+"; position: absolute; left: 14px; top: 13px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--sky); font-weight: 800; }
+.tm-q[open] summary::before { content: "\2212"; }
+.tm-q p { margin: 0; padding: 0 16px 14px 46px; font-size: 14.5px; }
+.tm-q p + p { padding-top: 0; margin-top: -4px; }
+.tm-teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 14px; margin-top: 18px; }
+.tm-team { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
+.tm-team header { display: flex; gap: 12px; align-items: center; }
+.tm-team header img, .tm-team header .cf-av { width: 48px; height: 48px; flex-basis: 48px; border-radius: 50%; object-fit: cover; }
+.tm-team h3 { font-size: 18px; }
+.tm-team header small { display: block; font-size: 13px; color: var(--muted); }
+.tm-team h4 { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 4px; }
+.tm-team p { margin: 0; font-size: 14px; }
+.tm-team ul { margin: 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 3px; }
+.tm-asks { margin: 18px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.tm-asks li { background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--blue); border-radius: 12px; padding: 14px 16px; font-size: 14.5px; }
+.tm-asks li b { display: block; font: 700 16px var(--head); color: var(--navy); margin-bottom: 4px; }
+.tm-sub { margin-top: 30px; }
+.tm-sub h3 { font-size: clamp(20px, 2.2vw, 26px); }
+.tm-sub > p { margin: 6px 0 0; color: var(--muted); max-width: 52em; }
+@media (max-width: 1000px) { .tm-wheel { grid-template-columns: 1fr 1fr; } .tm-wheel li::after { display: none; } .tm-back { text-align: left; } }
+@media (max-width: 640px) { .tm-split, .tm-wheel { grid-template-columns: 1fr; } }
 </style>
 <style id="bl-header-css">
 /* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
@@ -778,9 +905,11 @@ details.support .support-grid { padding: 4px 16px 16px; }
 
   <nav class="jtabs" role="tablist" aria-label="Journey map views">
     <button type="button" role="tab" id="jt-segments" aria-controls="jp-segments" aria-selected="true" data-p="segments"><b>The journey</b><small>By segment</small></button>
+    <button type="button" role="tab" id="jt-flow" aria-controls="jp-flow" aria-selected="false" tabindex="-1" data-p="flow"><b>Start to finish</b><small>The full campaign</small></button>
     <button type="button" role="tab" id="jt-connect" aria-controls="jp-connect" aria-selected="false" tabindex="-1" data-p="connect" data-try><b>How it connects</b><small>Across services</small></button>
     <button type="button" role="tab" id="jt-measure" aria-controls="jp-measure" aria-selected="false" tabindex="-1" data-p="measure"><b>Measure it</b><small>KPIs and tracking</small></button>
     <button type="button" role="tab" id="jt-campaigns" aria-controls="jp-campaigns" aria-selected="false" tabindex="-1" data-p="campaigns"><b>Follow up</b><small>Campaigns</small></button>
+    <button type="button" role="tab" id="jt-teams" aria-controls="jp-teams" aria-selected="false" tabindex="-1" data-p="teams"><b>For service teams</b><small>Why it grows your book</small></button>
   </nav>
   <div class="jpanel" id="jp-segments" role="tabpanel" aria-labelledby="jt-segments">
   <section class="block way" aria-labelledby="way-h">
@@ -853,6 +982,103 @@ details.support .support-grid { padding: 4px 16px 16px; }
     <div class="camps" id="camps"></div>
   </section>
 
+  </div>
+
+  <div class="jpanel" id="jp-flow" role="tabpanel" aria-labelledby="jt-flow" hidden>
+  <section class="block" aria-labelledby="flow-h">
+    <div class="block-head">
+      <div><h2 id="flow-h">The full campaign, start to finish</h2><p>It starts when someone signs up for the Masterclass. From there: the Invitational emails, the weekly tracks, the free toolkits, a call with an expert, and the sales pipeline. Anyone who doesn&rsquo;t close goes back into the loop. Pick a stage to see what happens there, what it runs on, who owns it and what&rsquo;s still open.</p></div>
+      <div class="cf-head-acts"><button type="button" class="cf-play" id="cf-play" aria-pressed="false">&#9654; Walk me through it</button></div>
+    </div>
+    <ul class="cf-legend" aria-label="Status key">
+      <li><i class="cf-st s-live">Live</i> running today</li>
+      <li><i class="cf-st s-built">Built</i> ready, not switched on everywhere</li>
+      <li><i class="cf-st s-prog">In progress</i> being built or fixed</li>
+      <li><i class="cf-st s-plan">Planned</i> not built yet</li>
+    </ul>
+    <div class="cf-flow" id="cf-flow" role="group" aria-label="Campaign stages"></div>
+    <div class="cf-detail" id="cf-detail" aria-live="polite"></div>
+    <p class="cf-asof">Status as of Oct 21, 2026, from the October syncs and the Mailchimp build. Anything under &ldquo;Still open&rdquo; needs a check before it&rsquo;s reported as done.</p>
+  </section>
+  </div>
+  <div class="jpanel" id="jp-teams" role="tabpanel" aria-labelledby="jt-teams" hidden>
+  <section class="block" aria-labelledby="teams-h">
+    <div class="block-head"><div><h2 id="teams-h">For service teams: why this grows your book, not shrinks it</h2><p>A fair worry: if we give away how-to toolkits for SEO, paid media, PR, email and RevOps, won&rsquo;t people do the work themselves instead of hiring us? Here&rsquo;s how the toolkits are built to send work to your team, not take it away.</p></div></div>
+
+    <div class="tm-line">
+      <p>The toolkits give away the checklist, not the work. They find the people who need you and send them to you with a plan.</p>
+      <button type="button" id="tm-copy">Copy this line</button>
+    </div>
+
+    <div class="tm-split">
+      <div class="tm-col kit">
+        <h3><i>Free</i> What a toolkit does</h3>
+        <ul>
+          <li>Checks where they stand and names what to fix first</li>
+          <li>Explains why each fix matters, in plain language</li>
+          <li>Hands them a plan they can copy</li>
+          <li>Stops at the point where it needs an expert, and names that expert</li>
+        </ul>
+      </div>
+      <div class="tm-col you">
+        <h3><i>Your team</i> What a toolkit can&rsquo;t do</h3>
+        <ul>
+          <li>Do the build: campaigns, fixes, flows, integrations, pitches</li>
+          <li>Run it every month, and adjust when results move</li>
+          <li>Make the judgment calls a checklist can&rsquo;t</li>
+          <li>Own the outcome and be accountable for it</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tm-sub">
+      <h3>How a free toolkit turns into work for your team</h3>
+      <p>Every step is designed so the prospect gets more value from us, not less need for us.</p>
+      <ol class="tm-wheel">
+        <li><b>They try it free</b>People who weren&rsquo;t ready to talk to sales get real progress, with your name and photo on the toolkit.</li>
+        <li><b>They see the size of the job</b>The plan shows how much there is to do well. That&rsquo;s what makes an expert worth it.</li>
+        <li><b>They ask for you</b>&ldquo;Talk to [you] about building it&rdquo; is on every toolkit, tagged so we know which one started it.</li>
+        <li><b>The call starts ahead</b>They arrive with a Business Profile and a plan, so discovery starts at strategy, not setup.</li>
+        <li><b>They find the next service</b>The Business Profile maps a path across every service, so one team&rsquo;s client becomes another team&rsquo;s lead.</li>
+      </ol>
+      <p class="tm-back">&#8634; Not ready yet? They stay in the Masterclass emails until they are. <a href="#flow">See the full campaign</a></p>
+    </div>
+
+    <div class="tm-sub">
+      <h3>The questions teams ask</h3>
+      <div class="tm-qs">
+        <details class="tm-q"><summary>If it&rsquo;s free, won&rsquo;t people just do it themselves?</summary>
+          <p>Some will, and most of them weren&rsquo;t going to sign a retainer this year anyway. Today they&rsquo;d find a YouTube video or a competitor&rsquo;s blog. With the toolkits, the help they find is ours, and our name is the one they remember when the list gets long.</p>
+          <p>The toolkits cover the checklist, not the build. Each one ends where it takes an expert, and names one.</p></details>
+        <details class="tm-q"><summary>Doesn&rsquo;t giving it away make our work look less valuable?</summary>
+          <p>It does the opposite. A prospect who has worked through the checklist understands how much goes into doing it well. The toolkit works like a sample of your expertise, with your name and face on it.</p></details>
+        <details class="tm-q"><summary>Will this flood my team with low-quality leads?</summary>
+          <p>No. Using a toolkit doesn&rsquo;t send anyone to sales. Masterclass signups come in as subscribers, not sales leads. Someone only reaches you when they click &ldquo;Talk to [you]&rdquo; and book a call.</p>
+          <p>When they do, they bring their Business Profile and plan, so you know their situation before you meet.</p></details>
+        <details class="tm-q"><summary>What if a current client uses a toolkit and decides they don&rsquo;t need us?</summary>
+          <p>The toolkits stop at foundations and readiness, which a retained client should already have in place with us. If a client opens a toolkit for a service they don&rsquo;t buy from us yet, that&rsquo;s an expansion conversation, and the toolkit has already done the discovery.</p></details>
+        <details class="tm-q"><summary>Does marketing get the credit while my team does the work?</summary>
+          <p>Every &ldquo;Talk to&rdquo; link is tagged by toolkit and service, so the team whose toolkit started the conversation is visible in reporting. The HubSpot report that shows this is planned. See <a href="#measure">Measure it</a>.</p></details>
+        <details class="tm-q"><summary>Is this more work for my team?</summary>
+          <p>The ask is small: review your toolkits once, take the calls they book, and tell us what prospects keep asking so the next toolkit answers it.</p></details>
+      </div>
+    </div>
+
+    <div class="tm-sub">
+      <h3>Where each toolkit stops and your team starts</h3>
+      <p>Every service has its own toolkits, owned by that team&rsquo;s lead. The toolkit takes the prospect to the edge of the work. Your team does the work.</p>
+      <div class="tm-teams" id="tm-teams"><p class="empty">Loading&hellip;</p></div>
+    </div>
+
+    <div class="tm-sub">
+      <h3>What we need from you</h3>
+      <ul class="tm-asks">
+        <li><b>Review your toolkits</b>Check that the advice matches how your team works, and that the &ldquo;where it gets complex&rdquo; line is in the right place. <a href="review.html">Open Team review</a></li>
+        <li><b>Take the calls</b>When someone books through your toolkit, their plan comes with them. Start from what they&rsquo;ve already done.</li>
+        <li><b>Tell us what prospects ask</b>The questions you hear on calls become the next toolkit, or the next Masterclass email.</li>
+      </ul>
+    </div>
+  </section>
   </div>
 
   <nav class="pager" aria-label="Page navigation">
@@ -1165,10 +1391,10 @@ details.support .support-grid { padding: 4px 16px 16px; }
   setSeg('local', false, true);
 
   /* Page tabs */
-  var JT = ['segments', 'connect', 'measure', 'campaigns'], jtabs = document.querySelector('.jtabs');
+  var JT = ['segments', 'flow', 'connect', 'measure', 'campaigns', 'teams'], jtabs = document.querySelector('.jtabs');
   var pendingK = null, connLoaded = false;
   function showPanel(p, focus, quiet) {
-    var parts = String(p || '').split(':'); p = parts[0]; if (parts[1]) { pendingK = parts[1]; if (connLoaded) showConn(parts[1], true); }
+    var parts = String(p || '').split(':'); p = parts[0]; if (parts[1] && p === 'connect') { pendingK = parts[1]; if (connLoaded) showConn(parts[1], true); }
     if (JT.indexOf(p) < 0) p = 'segments';
     JT.forEach(function (x) { var on = x === p, b = $('jt-' + x); b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; $('jp-' + x).hidden = !on; if (on && focus) b.focus(); });
     if (p === 'connect' && typeof drawLines === 'function') setTimeout(drawLines, 30);
@@ -1453,6 +1679,216 @@ details.support .support-grid { padding: 4px 16px 16px; }
   }).join('');
 
   try { var t = localStorage.getItem('bl_hub_theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+})();
+</script>
+<script id="journey-flow-js">
+/* Start to finish (campaign flow) and For service teams tabs. Content lives here; status as of Oct 21, 2026. */
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var ST = { live: ['s-live', 'Live'], built: ['s-built', 'Built'], prog: ['s-prog', 'In progress'], plan: ['s-plan', 'Planned'] };
+  function chip(s) { var x = ST[s] || ST.plan; return '<i class="cf-st ' + x[0] + '">' + x[1] + '</i>'; }
+  var C = { capture: '#EA4335', email: '#B45309', self: '#0F7B5F', hand: '#7A4E9C', close: '#143D55', loop: '#EA4335', measure: '#246D96' };
+
+  /* People: photos come from data/widgets.json; everyone else gets initials. */
+  var PEOPLE = {};
+  var ROLE = {
+    'Coby Bush': 'VP of Marketing', 'Alexandra Johnson': 'Takes over the Masterclass and DIY toolkits from Coby by the end of October',
+    'Whitney Sorensen': 'Masterclass content and review', 'Dallas Olsen': 'Director of RevOps', 'Phil': 'Mailchimp form build',
+    'Kevin': 'Ecosystem to Mailchimp sync', 'Vitor': 'Email HTML', 'Erica Pounder': 'Email Marketing'
+  };
+
+  var STAGES = [
+    { k: 'attract', n: 'Before the start', t: 'Where signups come from', sub: 'Ads, landing pages, existing contacts', st: 'prog', c: C.capture, feed: true,
+      runs: ['Paid ads', 'Landing pages', 'HubSpot / ecosystem'],
+      lead: 'Three sources feed the Masterclass signup. The “Keep Calm and Market On” and “Part of a Complete Breakfast” ads send people to tactical landing pages. Existing contacts are invited directly. And the toolkits will link to the signup once the address is confirmed.',
+      what: ['Ads point to tactical landing pages: Marketing Strategy PSA, Sweet Story, The Big Leap Way and Keep Calm.', 'The Sept 1 sync found these pages get traffic but almost no engagement, so the path changed to: ad → tactical landing page → DIY guide or toolkit → Masterclass nurture.', 'Existing contacts start in the Invitational directly (see stage 2).'],
+      people: ['Coby Bush', 'Alexandra Johnson'],
+      kpi: ['Landing page sessions and engagement', 'Click-through from landing page to a toolkit or the signup form', 'Signup rate by source'],
+      open: ['Point every landing page at a toolkit or the signup form, not a dead end.', 'Send the Masterclass signup address so the toolkits can link to it (Team review item).'],
+      links: [['Team review', 'review.html']] },
+    { k: 'signup', n: 'Stage 1', t: 'Sign up', sub: 'Masterclass signup form', st: 'prog', c: C.capture, start: true,
+      runs: ['Mailchimp form (replacing HubSpot)', '“Choose My Tracks” page'],
+      lead: 'This is where the campaign starts. Someone signs up for the Masterclass and picks the topics they want to learn about.',
+      what: ['Fields: first name, last name, email, and “I want to learn more about:” with a track choice.', 'New contacts come in as Subscribers. They are not routed to sales.', 'Whitney and Coby get a notification for each signup.', 'The HubSpot form is being replaced with a Mailchimp-integrated form so signups go straight into the right groups. Test submissions ran Oct 19.'],
+      people: ['Phil', 'Dallas Olsen', 'Whitney Sorensen', 'Coby Bush'],
+      kpi: ['Signups per week', 'Form completion rate', 'Tracks picked per signup'],
+      open: ['Confirm the Mailchimp form is live and the test signups landed in the right groups.', 'Confirm the public signup address for the toolkits and ads.'] },
+    { k: 'invite', n: 'Stage 2', t: 'Masterclass Invitational', sub: '4 emails that invite them in', st: 'prog', c: C.email,
+      runs: ['Mailchimp journey', 'Group = Invitational'],
+      lead: 'A four-email series that introduces the Masterclass and asks people to pick their tracks. Anyone in the Invitational group gets it, synced from the ecosystem.',
+      emails: ['Invitational email 1', 'Invitational email 2', 'Invitational email 3', 'Invitational email 4'],
+      what: ['Trigger: the contact is in the Invitational group, synced from the ecosystem.', 'No exit until they unsubscribe.', 'Starting audience: 833 contacts emailed in the last 180 days who haven’t opted out.', 'Closed-lost contacts join this group when their nurture ends (see the loop).'],
+      people: ['Whitney Sorensen', 'Dallas Olsen', 'Vitor', 'Kevin'],
+      kpi: ['Open and click rate per email', 'Share who pick a track', 'Unsubscribes'],
+      open: ['The send window was set to Wednesdays 10 to 10:30am, which is why it hadn’t sent (Mailchimp support, Oct 16). Confirm it’s fixed and the first send went out.', 'Whitney’s content review.', 'Mobile CSS fix (Dallas).'] },
+    { k: 'tracks', n: 'Stage 3', t: 'Masterclass tracks', sub: '7 topics, one a day', st: 'live', c: C.email,
+      runs: ['Mailchimp', 'Preference center groups'],
+      lead: 'Subscribers get the tracks they picked. Each track has its own day of the week at 10am, and new content is added every month.',
+      week: [['Mon', 'Brand Strategy'], ['Tue', 'AI in Marketing'], ['Wed', 'Creative & Content'], ['Thu', 'Organic / SEO'], ['Fri', 'Paid Media'], ['Sat', 'RevOps'], ['Sun', 'Digital PR']],
+      what: ['Launched in July with one email per track and a 30-day delay, with new content added monthly.', 'Moved from HubSpot to Mailchimp on Oct 12. Subscribers choose tracks in the preference center.', 'Engaged contacts only, not an endless loop (Oct 5 decision). Watch opens and clicks and stop sending to people who don’t engage.'],
+      people: ['Whitney Sorensen', 'Alexandra Johnson', 'Erica Pounder'],
+      kpi: ['Opens and clicks per track', 'Clicks from a track email to a toolkit', 'Engaged subscribers per track'],
+      open: ['No Email Marketing track yet, even though Email has its own toolkits.', 'Confirm the send cadence after the Mailchimp move.', 'Link each track email to its matching toolkits, so reading turns into doing.'] },
+    { k: 'diy', n: 'Stage 4', t: 'DIY toolkits', sub: 'Small leaps they take on their own', st: 'live', c: C.self,
+      runs: ['DIY toolkit site', 'Business Profile'],
+      lead: 'The free toolkits turn interest into progress. The Business Profile takes 3 minutes and maps a path across every service. Each toolkit ends with a plan they can copy.',
+      what: ['Business Profile → service toolkits → plan, widgets and roadmap.', 'Answers stay in the visitor’s browser. Nothing is sent anywhere.', 'Every toolkit names its Big Leap expert, with a photo.', 'Each toolkit sends engagement events: views, first answers, plans copied, Talk-to clicks.'],
+      people: ['Dallas Olsen', 'Scott Smoot', 'Shemmah Al-Darweesh', 'Kristina Ainge', 'Erica Pounder', 'Coby Bush'],
+      kpi: ['Toolkit starts and completions', 'Plans copied', 'Profiles completed'],
+      open: ['Owner sign-off on each toolkit (Team review).', 'Tag Manager ID so the events reach GA4 (Measure it).'],
+      links: [['Browse the toolkits', 'index.html#toolkits'], ['Start with the Business Profile', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html']] },
+    { k: 'expert', n: 'Stage 5', t: 'Talk to an expert', sub: 'The hand-off to a person', st: 'built', c: C.hand,
+      runs: ['“Talk to [owner]” CTA', 'UTM per toolkit'],
+      lead: 'When the next step needs an expert, the toolkit says so and names one: “Talk to Shemmah about building it.” This click is the moment interest becomes a sales conversation.',
+      what: ['Every toolkit has a “Talk to [owner]” button, tagged by toolkit and service.', 'They bring their plan to the call, so it starts at strategy, not setup.', 'Planned: each owner’s own meeting link, the plan attached to the booking, and an alert when someone shows high intent.'],
+      people: ['Dallas Olsen', 'Scott Smoot', 'Shemmah Al-Darweesh', 'Kristina Ainge', 'Erica Pounder', 'Coby Bush'],
+      kpi: ['Talk-to clicks per toolkit', 'Meetings booked (a booked meeting = SQL)'],
+      open: ['Owner meeting links in HubSpot so the source carries into the booking.', 'High-intent alert to the owner.'] },
+    { k: 'sales', n: 'Stage 6', t: 'Sales pipeline', sub: 'SDR → closer', st: 'live', c: C.close,
+      runs: ['Sales Hub', 'Ecosystem deal'],
+      lead: 'A booked call becomes a deal. The SDR qualifies it, the closer proposes, and the plan the prospect already built becomes the starting scope.',
+      what: ['Their plan becomes the scope. Work they already did, and that holds up, is credited against it.', 'Won: onboarding (stage 7).', 'Lost: the follow-up and nurture loop, back into the Invitational.'],
+      people: [],
+      kpi: ['SQL → opportunity rate', 'Win rate on toolkit-sourced deals', 'Time from first toolkit to closed won'],
+      open: [] },
+    { k: 'won', n: 'Stage 7', t: 'Closed won', sub: 'Onboard, then grow', st: 'live', c: C.close,
+      runs: ['Onboarding', 'Toolkits for other services'],
+      lead: 'New clients start from the work they already did. The Business Profile already maps the other services, so the next toolkit is often the next expansion conversation.',
+      what: ['Onboarding picks up from their plan.', 'Toolkits for services they don’t buy yet become expansion conversations for that team.'],
+      people: [],
+      kpi: ['New marketing-sourced MRR', 'Expansion from a second service'],
+      open: [] },
+    { k: 'lost', n: 'The loop', t: 'Closed lost → back into the loop', sub: 'Follow-up, nurture, Invitational', st: 'prog', c: C.loop, loop: true,
+      runs: ['Mailchimp', 'Brand = Big Leap'],
+      lead: 'A lost deal isn’t the end. Contacts get a short follow-up from their rep, then a longer marketing nurture, and then they join the Masterclass Invitational.',
+      emails: ['Closed-Lost Follow-up: 7 emails over 21 days from sales@, signed by their rep with the rep’s meeting link (for “We never reached them”).', 'Closed-Lost Nurture: from marketing@.', 'When the nurture ends: added to the Invitational group (stage 2).'],
+      what: ['Follow-up trigger: Nurture = “follow-up”. 44 contacts.', 'Nurture audience: 7,639 contacts.', 'Merge fields: Sales Rep and Rep Meeting Link. Filtered to Brand = Big Leap.', 'No crossover: a contact is in only one of these series at a time.'],
+      people: ['Dallas Olsen', 'Kevin'],
+      kpi: ['Replies and meetings from the follow-up', 'Re-opened deals', 'Contacts who reach the Invitational'],
+      open: ['Confirm both series are switched on and the hand-off to the Invitational group works.'] },
+    { k: 'measure', n: 'End to end', t: 'Measure it', sub: 'Toward $400K new marketing-sourced MRR', st: 'plan', c: C.measure, bar: true,
+      runs: ['GA4 / Tag Manager', 'HubSpot', 'Mailchimp'],
+      lead: 'Every stage feeds one question: how much new MRR did marketing source? The goal is $400K in new marketing-sourced MRR.',
+      what: ['Toolkits and widgets already send diy_ events to the page’s dataLayer.', 'HubSpot: contacts and deals with original source campaign diy-toolkits, by lifecycle stage and toolkit.', 'Mailchimp: opens and clicks for the Invitational, tracks and nurtures.'],
+      people: ['Dallas Olsen'],
+      kpi: ['Signups → engaged subscribers → toolkit users → SQLs → closed won', 'New marketing-sourced MRR against $400K'],
+      open: ['Build the end-to-end report (not built yet).', 'Add the Tag Manager and HubSpot IDs so events start sending.'],
+      links: [['KPIs and tracking', '#measure']] }
+  ];
+  var ORDER = STAGES.map(function (s) { return s.k; });
+  function byK(k) { return STAGES.filter(function (s) { return s.k === k; })[0]; }
+
+  function initials(n) { return n.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase(); }
+  function person(n) {
+    var p = PEOPLE[n] || {}; var role = ROLE[n] || p.title || '';
+    var av = p.photo ? '<img class="cf-av" src="' + esc(p.photo) + '" alt="" width="34" height="34" loading="lazy">' : '<span class="cf-av" aria-hidden="true">' + esc(initials(n)) + '</span>';
+    return '<li>' + av + '<span>' + esc(n) + (role ? '<small>' + esc(role) + '</small>' : '') + '</span></li>';
+  }
+
+  function drawFlow() {
+    var main = STAGES.filter(function (s) { return !s.feed && !s.loop && !s.bar; });
+    var h = '<div class="cf-feeds"><span>Feeds in:</span>' +
+      ['Ads + landing pages', 'Existing contacts (833)', 'Toolkit visitors'].map(function (t) { return '<button type="button" class="cf-chip" data-k="attract" aria-pressed="false">' + esc(t) + '</button>'; }).join('') +
+      '<span class="cf-into">&darr; into Sign up</span></div>';
+    h += main.map(function (s) {
+      return '<button type="button" class="cf-node' + (s.k === 'won' ? ' cf-last' : '') + '" data-k="' + s.k + '" aria-pressed="false" style="--c:' + s.c + '"' + (s.k === 'invite' ? ' data-try="Click any stage"' : '') + '>' +
+        (s.start ? '<em class="cf-start">Start</em>' : '') +
+        '<span class="cf-n">' + esc(s.n.replace('Stage ', '')) + '</span><b>' + esc(s.t) + '</b><small>' + esc(s.sub) + '</small>' + chip(s.st) + '</button>';
+    }).join('');
+    var L = byK('lost'), M = byK('measure');
+    h += '<div class="cf-loop"><button type="button" data-k="lost" aria-pressed="false"><b>&#8634; Closed lost</b> &rarr; 21-day follow-up &rarr; nurture &rarr; back into the Invitational</button></div>';
+    h += '<button type="button" class="cf-measure" data-k="measure" aria-pressed="false"><b>Measured end to end</b><span>' + esc(M.sub) + ' ' + '</span>' + chip(M.st) + '</button>';
+    $('cf-flow').innerHTML = h;
+  }
+
+  var cur = null;
+  function show(k, quiet, anim) {
+    var s = byK(k) || byK('signup'); cur = s.k;
+    Array.prototype.forEach.call(document.querySelectorAll('#cf-flow [data-k]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === s.k); });
+    var i = ORDER.indexOf(s.k);
+    var h = '<div class="cf-dh"><div><p class="cf-kick">' + esc(s.n) + '</p><h3>' + esc(s.t) + ' ' + chip(s.st) + '</h3><div class="cf-runs">' + s.runs.map(function (r) { return '<span>' + esc(r) + '</span>'; }).join('') + '</div></div>' +
+      '<div class="cf-nav"><button type="button" data-go="' + (ORDER[i - 1] || '') + '"' + (i ? '' : ' disabled') + ' aria-label="Previous stage">&larr;</button><button type="button" data-go="' + (ORDER[i + 1] || '') + '"' + (i < ORDER.length - 1 ? '' : ' disabled') + ' aria-label="Next stage">Next &rarr;</button></div></div>' +
+      '<p class="cf-lead">' + esc(s.lead) + '</p>';
+    if (s.week) h += '<div class="cf-week">' + s.week.map(function (d) { return '<div><b>' + d[0] + ' 10am</b>' + esc(d[1]) + '</div>'; }).join('') + '<div class="gap"><b>No day yet</b>Email Marketing</div></div>';
+    h += '<div class="cf-cols"><div><h4>What happens</h4><ul>' + s.what.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>';
+    if (s.emails) h += '<div><h4>The emails</h4><ol>' + s.emails.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ol></div>';
+    if (s.people.length) h += '<div><h4>Who</h4><ul class="cf-people">' + s.people.map(person).join('') + '</ul></div>';
+    h += '<div><h4>Measure</h4><ul>' + s.kpi.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>';
+    if (s.open.length) h += '<div><h4>Still open</h4><ul class="cf-open">' + s.open.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>';
+    h += '</div>';
+    if (s.links) h += '<p class="cf-links">' + s.links.map(function (l) { return '<a href="' + esc(l[1]) + '">' + esc(l[0]) + ' &rarr;</a>'; }).join('') + '</p>';
+    var d = $('cf-detail'); d.style.setProperty('--c', s.c); d.innerHTML = h;
+    d.classList.remove('anim'); void d.offsetWidth; if (anim) d.classList.add('anim');
+    if (!quiet) { try { history.replaceState(null, '', '#flow:' + s.k); } catch (e) {} if (window.blTrack) window.blTrack('diy_journey_flow', { label: s.k }); }
+  }
+
+  var timer = null, resumeAt = 0;
+  function stopTour(reset) { if (timer) { clearInterval(timer); timer = null; } if (reset) resumeAt = 0; var b = $('cf-play'); b.setAttribute('aria-pressed', 'false'); b.innerHTML = resumeAt ? '&#9654; Keep going' : '&#9654; Walk me through it'; }
+  function startTour() {
+    var b = $('cf-play'); b.setAttribute('aria-pressed', 'true'); b.innerHTML = '&#10073;&#10073; Pause';
+    function step() { if (resumeAt >= ORDER.length) { resumeAt = 0; stopTour(); return; } show(ORDER[resumeAt], true, true); resumeAt++; }
+    step(); timer = setInterval(step, 5000);
+  }
+
+  function init() {
+    if (!$('cf-flow')) return;
+    drawFlow();
+    $('cf-flow').addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (!b) return; stopTour(true); show(b.getAttribute('data-k')); });
+    $('cf-detail').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-go]'); if (b && b.getAttribute('data-go')) { stopTour(true); show(b.getAttribute('data-go')); return; }
+      var a = e.target.closest('a[href^="#"]'); if (a) { e.preventDefault(); location.hash = a.getAttribute('href').slice(1); }
+    });
+    $('cf-play').addEventListener('click', function () { if (timer) stopTour(); else startTour(); });
+    function fromHash() { var m = /^#flow(?::([a-z]+))?/.exec(location.hash || ''); if (m) show(m[1] || cur || 'signup', true); }
+    show('signup', true); fromHash();
+    window.addEventListener('hashchange', fromHash);
+    document.addEventListener('visibilitychange', function () { if (document.hidden && timer) stopTour(); });
+  }
+
+  /* For service teams */
+  var EDGE = {
+    revops: ['Checks that leads reach the CRM, follow-up speed, who owns each lead, what can be automated, and dashboard readiness.', 'Building the integrations, routing, workflows and dashboards, and keeping them working as the business changes.'],
+    paid: ['Business type, account readiness, which conversions to track and which campaigns to run first.', 'Building and launching campaigns, budgets and bidding, creative testing and month-to-month optimization.'],
+    seo: ['Whether Google can find and trust the site, and local search readiness.', 'Technical fixes at scale, content strategy, earning links and ongoing ranking work.'],
+    pr: ['Whether they’re ready to be pitched, and a starter media kit.', 'Story angles, media relationships, pitching and landing the coverage.'],
+    email: ['Inbox placement, which emails should send themselves, and whether the program is working.', 'Building the flows, design, segmentation, testing and running the sends.'],
+    strategy: ['The right problem, what they already have, what makes them worth choosing and whether customers would recommend them.', 'Positioning, the plan across services and the roadmap that ties them together.']
+  };
+  var SC = { revops: 'var(--c-revops)', paid: 'var(--c-paid)', seo: 'var(--c-seo)', pr: 'var(--c-pr)', email: 'var(--c-email)', strategy: 'var(--c-strategy)' };
+  function drawTeams(series) {
+    var el = $('tm-teams'); if (!el) return;
+    el.innerHTML = series.filter(function (s) { return EDGE[s.id]; }).map(function (s) {
+      var p = PEOPLE[s.owner] || {}, first = String(s.owner || '').split(' ')[0];
+      var av = p.photo ? '<img src="' + esc(p.photo) + '" alt="" width="48" height="48" loading="lazy">' : '<span class="cf-av" aria-hidden="true">' + esc(initials(s.owner || '?')) + '</span>';
+      var kits = (s.toolkits || []).map(function (k) { return '<li><a href="' + esc(k.file || k.href || '#') + '">' + esc(k.title || k.name) + '</a></li>'; }).join('');
+      return '<article class="tm-team" style="--c:' + SC[s.id] + '"><header>' + av + '<div><h3>' + esc(s.name) + '</h3><small>' + esc(s.owner) + (p.title ? ', ' + esc(p.title) : '') + '</small></div></header>' +
+        '<div><h4>The toolkits cover</h4><p>' + esc(EDGE[s.id][0]) + '</p></div>' +
+        '<div><h4>Your team does</h4><p>' + esc(EDGE[s.id][1]) + '</p></div>' +
+        '<div><h4>The hand-off</h4><p>&ldquo;Talk to ' + esc(first) + ' about building it,&rdquo; with their plan attached.</p></div>' +
+        '<details><summary>' + (s.toolkits || []).length + ' toolkits</summary><ul>' + kits + '</ul></details></article>';
+    }).join('');
+  }
+  function initTeams() {
+    var c = $('tm-copy');
+    if (c) c.addEventListener('click', function () {
+      var t = document.querySelector('.tm-line p').textContent;
+      function done() { c.textContent = 'Copied'; setTimeout(function () { c.textContent = 'Copy this line'; }, 1800); }
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done); else done();
+    });
+    var tp = $('jp-teams'); if (tp) tp.addEventListener('click', function (e) { var a = e.target.closest('a[href^="#"]'); if (a) { e.preventDefault(); location.hash = a.getAttribute('href').slice(1); window.scrollTo(0, document.querySelector('.jtabs').offsetTop); } });
+  }
+
+  Promise.all([
+    fetch('data/widgets.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return {}; }),
+    fetch('toolkits.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return { series: [] }; })
+  ]).then(function (r) {
+    PEOPLE = (r[0] && r[0].people) || {};
+    drawTeams(r[1].series || []);
+    if (cur) show(cur, true);
+  });
+  init(); initTeams();
 })();
 </script>
 <script id="bl-header-js">
