@@ -8,10 +8,10 @@ Live (GitHub Pages, `main` only): https://bigl3ap.github.io/bigleap-diy-toolkits
 
 | Path | What it is |
 |---|---|
-| `index.html` | The hub: the DIY map, the toolkits by service, widgets |
-| `journey.html` | The buyer-journey map (internal strategy content) |
-| `review.html` | Team review: agenda, drafts to review, open items. Internal: linked from the hub's draft strip and footer, not from the toolkit bar or toolkit content. |
-| `roadmap.html` | Your Marketing Roadmap (internal draft): three priorities built from the visitor's answers |
+| `index.html` | The hub: the toolkits by service, widgets, and the Buildout summary |
+| `journey.html` | The buyer-journey map, plus the DIY map of how the toolkits connect ("How it connects" tab) |
+| `review.html` | Team review: decisions, a review card per owner, before-launch to-dos (from `data/open-items.json`). Internal, but in the toolkit bar. |
+| `roadmap.html` | Your Marketing Roadmap: three priorities built from the visitor's answers |
 | `toolkits/<series>/` | The 18 public toolkits: RevOps (1–6 live, 7 draft), Paid Media, SEO, Digital PR, Email |
 | `toolkits/plan/` | Strategy starters 1–4 (the Strategy series). 3 and 4 await Coby's method review. |
 | `roadmap.html` | Your Marketing Roadmap: next priorities from the profile, the starters and toolkit progress. |

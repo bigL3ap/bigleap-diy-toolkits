@@ -53,7 +53,7 @@ def pages():
 
 
 # ---------------------------------------------------------------- static checks
-CANON_OWNERS = {'Dallas Olsen', 'Scott Smoot', 'Coby Bush', 'Kristina Ainge', 'Erica Pounder', 'Shema Al-Darwish',
+CANON_OWNERS = {'Dallas Olsen', 'Scott Smoot', 'Coby Bush', 'Kristina Ainge', 'Erica Pounder', 'Shemmah Al-Darweesh',
                 'Whitney Sorensen', 'All owners'}
 
 
@@ -383,10 +383,17 @@ def browser_checks(data):
         ctx.close()
         rec(not nofocus, 'first form control shows a visible keyboard focus', '; '.join(nofocus[:5]))
 
-        # 7. dark mode renders the hub without errors
+        # 7. dark mode: the hub lists every toolkit, and the DIY map (journey page) draws every stop and its links
         ctx, pg, errs = new(storage={}, dark=True)
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        rec(not errs and pg.evaluate("document.querySelectorAll('#map .stop').length") >= 18, 'hub renders in dark mode with the full map', '; '.join(errs[:2]))
+        cards = pg.evaluate("document.querySelectorAll('#series-list .card').length")
+        nkits = sum(len(s['toolkits']) for s in (data.get('toolkits.json') or {}).get('series', []))
+        rec(not errs and cards == nkits and not pg.query_selector('#map'), 'hub lists every toolkit in dark mode (the map lives on the journey page)', f'{cards} of {nkits}; ' + '; '.join(errs[:2]))
+        pg.goto(base + 'journey.html#connect:plan3'); pg.wait_for_timeout(900)
+        stops = pg.evaluate("document.querySelectorAll('#map .stop').length")
+        paths = pg.evaluate("document.querySelectorAll('#map-svg path').length")
+        sel = pg.evaluate("(document.querySelector('#map .stop.sel')||{}).getAttribute ? document.querySelector('#map .stop.sel').getAttribute('data-node') : ''")
+        rec(not errs and stops == nkits and paths > 0 and sel == 'plan3', 'DIY map on the journey page: every stop, links drawn, #connect:<id> selects it (dark)', f'{stops} stops, {paths} lines, selected {sel}; ' + '; '.join(errs[:2]))
         ctx.close()
 
         # 8. roadmap (when present): empty state and personalized state
