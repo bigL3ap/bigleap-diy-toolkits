@@ -13,7 +13,7 @@ What it covers
   Browser  Every page loads with no console errors; no horizontal scroll at 390px; every toolkit
            prefills from a saved Business Profile and never overwrites it with example answers;
            "Copy my plan" produces text; Team Review renders every open item and every owner filter
-           shows that owner's items; Team review is linked from the hub and the toolkit bar's last tab is reachable on mobile;
+           shows that owner's items; every page is in the toolkit bar, the Toolkits dropdown works on a phone and by keyboard;
            keyboard focus is visible on the first interactive control; dark mode renders.
 
 Exit code 0 when every check passes, 1 otherwise. Results print as PASS / FAIL / SKIP / KNOWN lines and a summary.
@@ -109,7 +109,7 @@ def check_json():
         owners = {o.strip() for i in oi['items'] for o in str(i['owner']).split(',')}
         odd = sorted(owners - CANON_OWNERS)
         rec(not odd, 'open-items: owner names are canonical full names', ', '.join(odd))
-        types = {'Blocker', 'Waiting on', 'Decision', 'Owner review', 'To do', 'Other from the call'}
+        types = {'Decision', 'Owner review', 'To do', 'Later'}
         badt = sorted({i['type'] for i in oi['items']} - types)
         rec(not badt, 'open-items: every type is a known type', ', '.join(badt))
     return data
@@ -338,8 +338,19 @@ def browser_checks(data):
         ctx.close()
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        tr = pg.query_selector('.draft-strip a[href="review.html"]')
-        rec(bool(tr and tr.is_visible()), 'Team review is linked from the hub (internal pages stay out of the toolkit bar)')
+        want = {'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'start', 'roadmap', 'journey', 'widgets', 'buildout', 'review'}
+        have = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
+        rec(want <= have, 'every page is reachable from the toolkit bar', ', '.join(sorted(want - have)))
+        btn = pg.query_selector('.blh-tbtn'); dd = False
+        if btn:
+            btn.click(); pg.wait_for_timeout(150)
+            shown = pg.evaluate("(()=>{var m=document.getElementById('blh-tmenu');if(m.hidden)return 0;var r=m.getBoundingClientRect();return r.right<=innerWidth+1&&r.left>=0?m.querySelectorAll('a').length:-1})()")
+            pg.keyboard.press('Escape'); pg.wait_for_timeout(100)
+            closed = pg.evaluate("document.getElementById('blh-tmenu').hidden")
+            btn.focus(); pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(100)
+            kb = pg.evaluate("!!(document.activeElement && document.activeElement.closest('#blh-tmenu'))")
+            dd = shown == 7 and closed and kb
+        rec(dd, 'Toolkits dropdown opens on screen with all 7 groups, closes on Escape, works by keyboard (phone)')
         last = pg.query_selector_all('.blh-tabs a[data-tab]')
         reach = False
         if last:

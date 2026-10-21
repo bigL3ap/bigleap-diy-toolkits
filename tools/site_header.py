@@ -86,6 +86,20 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
+.blh-sub .blh-in { position: relative; }
+.blh-tbtn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; cursor: pointer; white-space: nowrap; }
+.blh-tbtn:hover, .blh-tbtn[aria-expanded="true"] { background: #DAE9F2; }
+.blh-tbtn.is-current { background: #143D55; color: #fff; }
+.blh-tbtn .car { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -4px; transition: transform .15s ease; }
+.blh-tbtn[aria-expanded="true"] .car { transform: rotate(-135deg); margin-top: 3px; }
+.blh-tbtn:focus-visible, .blh-tmenu a:focus-visible { outline: 3px solid #3187B5; outline-offset: 2px; }
+.blh-tmenu { position: absolute; top: calc(100% - 4px); z-index: 60; min-width: 220px; background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 8px; }
+.blh-tmenu[hidden] { display: none; }
+.blh-tmenu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.blh-tmenu li:first-child { border-bottom: 1px solid #EEF3F8; padding-bottom: 4px; margin-bottom: 2px; }
+.blh-tmenu a { display: flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 8px; font: 600 14.5px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
+.blh-tmenu a:hover { background: #EEF3F8; color: #246D96; }
+.blh-tmenu a[aria-current="page"], .blh-tmenu a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-right { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
 .blh-theme { display: inline-grid; place-items: center; min-height: 40px; min-width: 40px; border: 1px solid #D4DADF; border-radius: 999px; background: #fff; color: #143D55; cursor: pointer; font-size: 16px; }
 /* Bottom pager on toolkit pages */
@@ -118,7 +132,7 @@ CSS = r"""<style id="bl-header-css">
   .blh-label { display: none; }
   .blh-tabs { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
 }
-@media (prefers-reduced-motion: reduce) { .blh-top .car { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .blh-top .car, .blh-tbtn .car { transition: none; } }
 .blx-swipe { margin: 6px 0 4px; font: 600 12.5px/1.3 'Open Sans', Arial, sans-serif; color: #5B6B76; text-align: right; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blx-swipe { color: #9FB3C1; } }
 :root[data-theme="dark"] .blx-swipe { color: #9FB3C1; }
@@ -135,8 +149,8 @@ CSS = r"""<style id="bl-header-css">
 .blx-rel > summary { cursor: pointer; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; list-style: none; padding: 4px 0; }
 .blx-rel > summary::-webkit-details-marker { display: none; }
 .blx-rel > summary::before { content: "+ "; } .blx-rel[open] > summary::before { content: "− "; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
-:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-tabs a, :root:not([data-theme="light"]) .blh-tbtn { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-tbtn:hover, :root:not([data-theme="light"]) .blh-tbtn[aria-expanded="true"] { background: #1D3A4C; } :root:not([data-theme="light"]) .blh-tbtn.is-current { background: #DCE9F2; color: #0F1D26; } :root:not([data-theme="light"]) .blh-tmenu { background: #142632; border-color: #2D4556; } :root:not([data-theme="light"]) .blh-tmenu a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-tmenu a:hover { background: #1D3A4C; color: #fff; } :root:not([data-theme="light"]) .blh-tmenu li:first-child { border-bottom-color: #2D4556; } :root:not([data-theme="light"]) .blh-label { color: #fff; } :root:not([data-theme="light"]) .blp { background: #0F1D26; border-top-color: #22394A; } }
+:root[data-theme="dark"] .blh-sub { background: #0F1D26; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-tabs a, :root[data-theme="dark"] .blh-tbtn { color: #DCE9F2; } :root[data-theme="dark"] .blh-tbtn:hover, :root[data-theme="dark"] .blh-tbtn[aria-expanded="true"] { background: #1D3A4C; } :root[data-theme="dark"] .blh-tbtn.is-current { background: #DCE9F2; color: #0F1D26; } :root[data-theme="dark"] .blh-tmenu { background: #142632; border-color: #2D4556; } :root[data-theme="dark"] .blh-tmenu a { color: #DCE9F2; } :root[data-theme="dark"] .blh-tmenu a:hover { background: #1D3A4C; color: #fff; } :root[data-theme="dark"] .blh-tmenu li:first-child { border-bottom-color: #2D4556; } :root[data-theme="dark"] .blh-label { color: #fff; } :root[data-theme="dark"] .blp { background: #0F1D26; border-top-color: #22394A; }
 
 /* ---- Toolkit layout: questions on top (full width), results below ---- */
 @media (min-width: 880px) {
@@ -226,6 +240,31 @@ JS = r"""<script id="bl-header-js">
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
   }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
+  /* Toolkits dropdown in the toolkit bar. The panel sits outside the scrolling bar so it is never clipped. */
+  (function () {
+    var btn = h.querySelector('.blh-tbtn'), menu = document.getElementById('blh-tmenu'); if (!btn || !menu) return;
+    var wrap = menu.parentNode, links = function () { return menu.querySelectorAll('a'); };
+    function place() { var b = btn.getBoundingClientRect(), w = wrap.getBoundingClientRect(); menu.style.left = Math.max(0, Math.min(b.left - w.left, w.width - menu.offsetWidth)) + 'px'; }
+    function open(focusFirst) { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); place(); if (focusFirst) { var a = menu.querySelector('a[aria-current]') || links()[0]; if (a) a.focus(); } }
+    function close(refocus) { if (menu.hidden) return; menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); if (refocus) btn.focus(); }
+    btn.addEventListener('click', function () { if (menu.hidden) open(false); else close(false); });
+    btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { e.preventDefault(); close(true); } });
+    menu.addEventListener('keydown', function (e) {
+      var l = Array.prototype.slice.call(links()), i = l.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); l[(i + 1) % l.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); l[(i - 1 + l.length) % l.length].focus(); }
+    });
+    menu.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) close(false); });
+    document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) close(false); });
+    menu.addEventListener('focusout', function (e) { if (!menu.hidden && e.relatedTarget && !menu.contains(e.relatedTarget) && e.relatedTarget !== btn) close(false); });
+    if (bar) bar.addEventListener('scroll', function () { if (!menu.hidden) place(); });
+    window.addEventListener('resize', function () { if (!menu.hidden) place(); });
+    /* the hub marks the current group with aria-current; mirror it on the button */
+    function sync() { btn.classList.toggle('is-current', !!menu.querySelector('a[aria-current]')); }
+    sync();
+    if (window.MutationObserver) new MutationObserver(sync).observe(menu, { attributes: true, subtree: true, attributeFilter: ['aria-current'] });
+  })();
   function swipeHints() {
     Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
       var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
@@ -424,15 +463,20 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
         if label == 'Resources':
             items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email'), ('Strategy', 'strategy')]
-    tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
-    tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    # Team review and Buildout are internal: linked from the hub's draft strip and footer, not the public bar.
-    tools_tabs = [('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey'), ('Widgets', 'index.html#widgets', 'widgets')]
+    # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
+    # click from the bar. Internal pages (Buildout, Team review) sit after a divider.
+    menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
+    tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey')]
+    tools_tabs = [('Widgets', 'index.html#widgets', 'widgets'), ('Buildout', 'index.html#buildout', 'buildout'), ('Team review', 'review.html', 'review')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
         return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
-    tab_html = ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
+    in_menu = any(k in (current, service) for _, _, k in menu_items)
+    menu_btn = (f'<button type="button" class="blh-tbtn{" is-current" if in_menu else ""}" aria-expanded="false" aria-controls="blh-tmenu">'
+                'Toolkits<span class="car" aria-hidden="true"></span></button>')
+    menu_html = ('<div class="blh-tmenu" id="blh-tmenu" hidden><ul>' + ''.join('<li>' + tab(*x) + '</li>' for x in menu_items) + '</ul></div>')
+    tab_html = menu_btn + ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
@@ -449,7 +493,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
             f'<a class="blh-cta" href="{BL}/get-started/{UTM}">Get Your Custom Strategy</a></nav>'
             '</div></div>'
             '<div class="blh-sub"><div class="blh-in">'
-            f'<nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span>{tab_html}</nav>'
+            f'<nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span>{tab_html}</nav>{menu_html}'
             + (f'<div class="blh-right">{extra}</div>' if extra else '') +
             '</div></div></header><!-- /bl-header -->')
 
