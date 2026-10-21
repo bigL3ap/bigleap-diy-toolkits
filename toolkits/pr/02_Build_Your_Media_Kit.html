@@ -631,7 +631,7 @@ a { color: #000; }
 <h1>Build Your Media Kit</h1>
 <p class="lede">Eight short prompts about your spokesperson. You get two bios, a podcast intro, host questions, a company boilerplate, a headshot spec and a press page outline, written for you to edit and copy.</p>
 </header>
-<div class="profile-strip" id="profile-strip" aria-label="Business Profile"></div>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
 <nav class="stepper" aria-labelledby="stepper-h">
 <div class="stepper-head">
 <h2 id="stepper-h" class="label">The Digital PR DIY path</h2>
@@ -900,7 +900,7 @@ const first = !t.done && open++ < 3;
 out.push((t.done ? '[ready] ' : '[gap] ' + (i + 1) + '. ') + t.title + (first ? ' (do this first)' : '') + (t.time && !t.done ? ' · ' + t.time : ''));
 if (t.why && !t.done) out.push('   ' + t.why);
 if (!t.done) (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.link && !t.done) out.push('   Free toolkit: ' + LINKS[t.link].name + ' (' + LINKS[t.link].url + ')');
+if (t.link && !t.done) out.push('   Free toolkit: ' + LINKS[t.link].name + ' (' + absUrl(LINKS[t.link].url) + ')');
 });
 return out;
 }
@@ -916,7 +916,9 @@ function renderXlinks(links) {
 $('xlinks').hidden = links.length === 0;
 $('xlinks-list').innerHTML = links.map((l) => '<li><a href="' + esc(LINKS[l.key].url) + '">' + esc(LINKS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
 }
-function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url + ')'); }
+function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')'); }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
 $('next-title').innerHTML = '<a href="' + esc(LINKS[key].url) + '">' + esc(LINKS[key].name) + '</a>';
 $('next-why').textContent = why;
@@ -1016,7 +1018,7 @@ window.addEventListener('beforeprint', () => { document.querySelectorAll('detail
 }
 function planFooter(nextKey) {
 const L = [];
-if (nextKey) L.push('', 'NEXT: ' + LINKS[nextKey].name + ' (' + LINKS[nextKey].url + ')');
+if (nextKey) L.push('', 'NEXT: ' + LINKS[nextKey].name + ' (' + absUrl(LINKS[nextKey].url) + ')');
 L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
 return L;
 }
@@ -1181,7 +1183,7 @@ return profile && (clean(profile.name) || clean(profile.industry))
 }
 function isExample(i) {
 const e = exampleFor(profile);
-return FIELDS.every((k) => k === 'years' ? i.yearsNum === e.years : String(i[k]) === String(e[k]));
+return FIELDS.every((k) => k === 'years' ? i.yearsNum === (parseInt(e.years, 10) || 0) : String(i[k]) === String(e[k]));
 }
 function applyProfile(p) {
 profile = p;

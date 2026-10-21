@@ -631,7 +631,7 @@ a { color: #000; }
 <h1>Are You Ready to Be Pitched?</h1>
 <p class="lede">Nine quick answers about your spokesperson, your story and your assets. You get a Pitch-Ready Checklist and a 90-day prep plan, with the gaps that would stall you first.</p>
 </header>
-<div class="profile-strip" id="profile-strip" aria-label="Business Profile"></div>
+<section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
 <nav class="stepper" aria-labelledby="stepper-h">
 <div class="stepper-head">
 <h2 id="stepper-h" class="label">The Digital PR DIY path</h2>
@@ -907,7 +907,7 @@ const first = !t.done && open++ < 3;
 out.push((t.done ? '[ready] ' : '[gap] ' + (i + 1) + '. ') + t.title + (first ? ' (do this first)' : '') + (t.time && !t.done ? ' · ' + t.time : ''));
 if (t.why && !t.done) out.push('   ' + t.why);
 if (!t.done) (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.link && !t.done) out.push('   Free toolkit: ' + LINKS[t.link].name + ' (' + LINKS[t.link].url + ')');
+if (t.link && !t.done) out.push('   Free toolkit: ' + LINKS[t.link].name + ' (' + absUrl(LINKS[t.link].url) + ')');
 });
 return out;
 }
@@ -923,7 +923,9 @@ function renderXlinks(links) {
 $('xlinks').hidden = links.length === 0;
 $('xlinks-list').innerHTML = links.map((l) => '<li><a href="' + esc(LINKS[l.key].url) + '">' + esc(LINKS[l.key].name) + '</a>: ' + esc(l.why) + '</li>').join('');
 }
-function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url + ')'); }
+function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')'); }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
 $('next-title').innerHTML = '<a href="' + esc(LINKS[key].url) + '">' + esc(LINKS[key].name) + '</a>';
 $('next-why').textContent = why;
@@ -1023,7 +1025,7 @@ window.addEventListener('beforeprint', () => { document.querySelectorAll('detail
 }
 function planFooter(nextKey) {
 const L = [];
-if (nextKey) L.push('', 'NEXT: ' + LINKS[nextKey].name + ' (' + LINKS[nextKey].url + ')');
+if (nextKey) L.push('', 'NEXT: ' + LINKS[nextKey].name + ' (' + absUrl(LINKS[nextKey].url) + ')');
 L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
 return L;
 }
@@ -1188,7 +1190,7 @@ $('out-unit').textContent = h.unit;
 const firstGaps = m.items.filter((t) => !t.done).slice(0, 3).map((t) => t.short.toLowerCase());
 $('out-line').innerHTML = m.stalls === 0
 ? 'You have a spokesperson, a fast reply, a story and the assets to back it up. You are ready for someone to pitch you.'
-: 'Start with <b>' + esc(firstGaps.join(', ')) + '</b>. Fix these before anyone pitches you, and the first month goes to stories instead of paperwork. <b>' + m.readyCount + ' of 10</b> ' + (m.readyCount === 1 ? 'item is' : 'items are') + ' ready.';
+: 'Start with your <b>' + esc(firstGaps.join(', ')) + '</b>. Fix ' + (firstGaps.length === 1 ? 'this' : 'these') + ' before anyone pitches you, and the first month goes to stories instead of paperwork. <b>' + m.readyCount + ' of 10</b> ' + (m.readyCount === 1 ? 'item is' : 'items are') + ' ready.';
 $('answer').classList.toggle('is-done', m.stalls === 0);
 flashIfChanged(m.stalls);
 $('strip').innerHTML = ITEMS.map((it) => {

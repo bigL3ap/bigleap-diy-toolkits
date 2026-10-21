@@ -1047,8 +1047,10 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')');
 }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
   const l = LINKS[key];
   if (!l) { $('next').hidden = true; return; }
@@ -1210,7 +1212,7 @@ const FLOWS = {
     },
     subjects: ['We miss you at NAME', 'It\'s been a while: here\'s what\'s new', 'Should we stay in touch?'],
     body: 'Hi {first name},\n\nIt\'s been a while since we heard from you at NAME. [One line on what\'s new or what you can help with now.]\n\n[Link to come back, book or reply]\n\nIf now isn\'t the time, no problem. Just reply and tell us what would be useful.\n\n[Your name]\nNAME' },
-  sunset: { name: 'Sunset (clean-out)', trigger: 'No opens or clicks in 6–12 months (90 days if you email weekly)', timing: 'One or two "still want these?" emails, then stop sending to them', emails: 2, needs: false, exit: 'click',
+  sunset: { name: 'Sunset (clean-out)', trigger: 'No clicks (or purchases) in 6–12 months (90 days if you email weekly)', timing: 'One or two "still want these?" emails, then stop sending to them', emails: 2, needs: false, exit: 'click',
     goal: { all: 'Protect inbox placement' },
     subjects: ['Do you still want to hear from NAME?', 'Last email unless you click'],
     body: 'Hi {first name},\n\nWe haven\'t heard from you in a while, so we\'re checking: do you still want emails from NAME?\n\n[Yes, keep me on the list] (one click)\n\nIf we don\'t hear back, we\'ll stop emailing you. No hard feelings.\n\n[Your name]\nNAME' },
@@ -1326,10 +1328,12 @@ let currentProfile = null;
       if (t) { i.btype = t; used.push('btype'); i.follow = t === 'ecom' ? 'na' : (p.crm && p.crm !== 'none' ? 'person' : 'none'); }
       if (p.name) { i.bizname = p.name; used.push('bizname'); }
       if (p.crm === 'hubspot') { i.platform = 'hubspot'; used.push('platform'); }
+      // The profile has no list size or order value: drop the example numbers so the estimate only uses real inputs.
+      if (used.length) { i.size = ''; i.value = ''; }
     }
     applyInput(i);
     markFromProfile(used);
-    profileSnapshot = p ? readInput() : null;
+    profileSnapshot = p && used.length ? readInput() : null;
   }
   function state(i) {
     if (profileSnapshot && same(i, profileSnapshot)) return 'profile';

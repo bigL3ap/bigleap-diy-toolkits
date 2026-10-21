@@ -1057,8 +1057,10 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')');
 }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
   const l = LINKS[key];
   if (!l) { $('next').hidden = true; return; }
@@ -1222,6 +1224,7 @@ function fixFor(key, m) {
   return Object.assign({ id: key, sev: 'fix', cms: WHERE[m.pl], cmsLabel: 'Where to look in ' + P }, f, { kit: f.kit ? { key: f.kit, why: f.kit === 'inbox' ? 'covers domain records, list hygiene and consent.' : f.kit === 'flows' ? 'plans the welcome and sunset flows that do this for you.' : 'sets up UTMs and GA4 so email gets credit.' } : null });
 }
 function numOrNull(v) { if (v === '' || v === null || v === undefined) return null; const n = parseFloat(v); return Number.isFinite(n) ? clamp(n, 0, 1e9) : null; }
+function pctOrNull(v) { const n = numOrNull(v); return n === null ? null : Math.min(n, 100); }
 function rangeOf(meas, r) {
   const u = meas.unit;
   const f = (n) => fmt(n, 2) + u;
@@ -1242,7 +1245,7 @@ function model(input, a) {
   const vals = {
     growth: now !== null && then !== null && then > 0 ? (now - then) / then * 100 : null,
     cadence: numOrNull(input.sends),
-    click: numOrNull(input.click), unsub: numOrNull(input.unsub), spam: numOrNull(input.spam), bounce: numOrNull(input.bounce),
+    click: pctOrNull(input.click), unsub: pctOrNull(input.unsub), spam: pctOrNull(input.spam), bounce: pctOrNull(input.bounce),
   };
   const cadenceHigh = vals.cadence !== null && vals.cadence > a.cadenceHigh;
   const rows = MEASURES.map((meas) => {
@@ -1342,10 +1345,12 @@ let currentProfile = null;
       if (p.crm === 'hubspot') { i.platform = 'hubspot'; used.push('platform'); }
       if (p.goal === 'sales') { i.unit = 'revenue'; used.push('unit'); }
       else if (p.goal === 'leads' || p.goal === 'calls') { i.unit = 'leads'; used.push('unit'); }
+      // The profile has none of these numbers: drop the example ones so the scorecard only grades real inputs.
+      if (used.length) FIELDS.forEach((k) => { i[k] = ''; });
     }
     applyInput(i);
     markFromProfile(used);
-    profileSnapshot = p ? readInput() : null;
+    profileSnapshot = p && used.length ? readInput() : null;
   }
   function state(i) {
     if (profileSnapshot && same(i, profileSnapshot)) return 'profile';

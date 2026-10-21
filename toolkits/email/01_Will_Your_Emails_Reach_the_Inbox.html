@@ -1067,8 +1067,10 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + absUrl(LINKS[l.key].url) + ')');
 }
+// Copied plans get pasted into email, so links must be absolute.
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
 function renderNext(key, why) {
   const l = LINKS[key];
   if (!l) { $('next').hidden = true; return; }
@@ -1228,7 +1230,7 @@ const COMPLEX = [
   { key: 'multibrand', title: 'Several brands or domains', text: 'Each brand needs its own authenticated domain, consent and unsubscribe handling, and a clear rule for who gets which emails, or one brand\'s complaints can hurt the others.' },
 ];
 const LAWS = {
-  us: ['United States', 'CAN-SPAM', 'You may email without opt-in, but every email needs honest From and subject lines, your postal address and a working unsubscribe. Honour unsubscribes within 10 business days.'],
+  us: ['United States', 'CAN-SPAM', 'You may email without opt-in, but every email needs honest From and subject lines, your postal address and a working unsubscribe. Honour unsubscribes within 10 business days (Gmail and Yahoo expect bulk senders to process them within 2 days).'],
   ca: ['Canada', 'CASL', 'You need consent first: express (they agreed) or implied (for example a purchase, which lasts two years). Identify yourself, include an unsubscribe, and keep proof of consent.'],
   eu: ['UK or EU', 'GDPR, UK GDPR, PECR', 'You need clear opt-in consent (no pre-ticked boxes) and a record of when and how it was given. In the UK, a "soft opt-in" lets you email existing customers about similar products if they could opt out when they bought.'],
 };
@@ -1316,12 +1318,12 @@ function model(input, a) {
     time: a.bought });
 
   // 5. Stale or quiet list
-  if (size > 0 && (input.last === 'stale' || input.last === 'cold')) items.push({ id: 'stale', sev: 'block',
+  if (input.last === 'stale' || input.last === 'cold') items.push({ id: 'stale', sev: 'block',
     title: 'Clean your list before you send to it again',
     why: 'After six months without email, some addresses are dead and some have become spam traps. A big first send to a cold list is one of the fastest ways into the spam folder.',
     steps: ['Export the list and remove obvious bad addresses: typos, role addresses like info@ you didn\'t sign up, and old hard bounces.', 'Run the rest through an email verification service, then suppress anything marked invalid.', 'Send first to the people most likely to know you: recent customers and recent sign-ups.', 'Send a short "do you still want to hear from us?" email to the rest. Keep the people who click; suppress the rest after a second try.', 'Grow volume over a few sends rather than mailing everyone at once.'],
     time: a.stale });
-  else if (size > 0 && input.last === 'months') items.push({ id: 'warm', sev: 'fix',
+  else if (input.last === 'months') items.push({ id: 'warm', sev: 'fix',
     title: 'Ease back in after a quiet spell',
     why: 'A gap of a month or more is fine, but start your next sends with your most engaged people so the first results are good ones.',
     steps: ['Send the next campaign to people who opened or clicked in the last 90 days, or bought recently.', 'Send to the rest of the list a few days later.', 'Watch bounces and complaints on both sends before going back to full volume.'],
@@ -1345,7 +1347,7 @@ function model(input, a) {
       title: high ? 'Find out why bounces or complaints are high' : 'Look up your bounce and spam complaint rates',
       why: high ? 'Inboxes judge you on these numbers. Google asks senders to keep spam complaints under 0.1% and never reach 0.3%.'
         : 'These two numbers decide whether inboxes trust you. Rules of thumb: bounces under 2%, spam complaints under 0.1%, never 0.3% or more.',
-      steps: (high ? ['Compare recent campaigns: is one segment, import or email type behind the spike?', 'Suppress hard bounces and anyone who complained (most platforms do this for you).', 'Stop sending to contacts who haven\'t opened or clicked in 6–12 months until you\'ve run a re-permission email.', 'Check the sign-up form isn\'t letting in fake or mistyped addresses: add double opt-in or a CAPTCHA.']
+      steps: (high ? ['Compare recent campaigns: is one segment, import or email type behind the spike?', 'Suppress hard bounces and anyone who complained (most platforms do this for you).', 'Stop sending to contacts who haven\'t clicked (or bought) in 6–12 months until you\'ve run a re-permission email.', 'Check the sign-up form isn\'t letting in fake or mistyped addresses: add double opt-in or a CAPTCHA.']
         : ['Open your last three to five campaigns and note the bounce rate and spam complaint rate.']).concat([
         'Sending to Gmail addresses? Set up Google Postmaster Tools (free) at postmaster.google.com for your domain. It shows your spam rate as Gmail sees it.',
         'For a full health check of these numbers, use Toolkit 3: Is Your Email Program Working?',
@@ -1389,7 +1391,7 @@ function model(input, a) {
   const totalLo = ordered.reduce((s, t) => s + (t.time ? t.time[0] : 0), 0);
   const totalHi = ordered.reduce((s, t) => s + (t.time ? t.time[1] : 0), 0);
   const flags = {
-    warm: plan('newdomain') || input.from === 'free' || (size > 0 && (input.last === 'stale' || input.last === 'cold')),
+    warm: plan('newdomain') || input.from === 'free' || input.last === 'stale' || input.last === 'cold',
     dedicated: size >= a.dedicatedIpList,
     migrate: plan('migrate'),
     blocklist: input.rates === 'high',
@@ -1438,7 +1440,7 @@ let SNIPS = {};
     }
     applyInput(i);
     markFromProfile(used);
-    profileSnapshot = p ? readInput() : null;
+    profileSnapshot = p && used.length ? readInput() : null;
   }
   function state(i) {
     if (profileSnapshot && same(i, profileSnapshot)) return 'profile';
@@ -1512,8 +1514,9 @@ let SNIPS = {};
       : 'Everything on the inbox list is in place.';
     SNIPS = { dmarc: dmarcSnippet(m) };
     SNIPS_TEXT = { dmarc: ['DMARC record to add:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
-    renderItems($('plan'), m.items, { dmarc: m.input.dmarc === 'no' ? snippetHtml('dmarc', 'DMARC record (start here)', SNIPS.dmarc) : '' });
-    if (m.input.dmarc !== 'no') SNIPS_TEXT = {};
+    if (m.input.dmarc !== 'no') SNIPS_TEXT = { dmarc: ['DMARC record to add if none is found:'].concat(SNIPS.dmarc.split('\n').map((l) => '     ' + l)) };
+    renderItems($('plan'), m.items, { dmarc: m.input.dmarc === 'yes' ? '' : snippetHtml('dmarc', m.input.dmarc === 'no' ? 'DMARC record (start here)' : 'DMARC record (if none is found)', SNIPS.dmarc) });
+    if (m.input.dmarc === 'yes') SNIPS_TEXT = {};
     $('done-wrap').hidden = m.done.length === 0;
     $('done-list').innerHTML = m.done.map((x) => '<li><span aria-hidden="true">✓ </span>' + esc(x) + '</li>').join('');
     $('law-rows').innerHTML = lawRows(m).map((r) => '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>').join('');
