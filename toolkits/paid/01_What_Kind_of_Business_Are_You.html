@@ -833,10 +833,10 @@ function lab(group, v) { return (LABELS[group] && LABELS[group][v]) || ''; }
 /* Industries Google treats with extra rules. Matched against the profile's industry text. */
 const SPECIAL_VERTICALS = [
 { key: 'auto', label: 'Auto dealers', re: /dealership|\b(auto|car|vehicle|truck|rv|motorcycle|boat)s?\b.*\b(dealer|sales)\b/i, note: 'Vehicle ads use their own formats and inventory feeds, and state advertising rules apply.' },
-{ key: 'legal', label: 'Legal services', re: /\b(law|legal|lawyer|attorney|bail)/i, note: 'Some legal services need Google certification or are restricted in some places.' },
+{ key: 'legal', label: 'Legal services', re: /\b(law(yer|yers|firm|s)?|legal|attorneys?|bail ?bonds?)\b/i, note: 'Some legal services need Google certification or are restricted in some places.' },
 { key: 'health', label: 'Healthcare and pharma', re: /health ?care|medical|clinic|doctor|dental|dentist|pharma|drug|addiction|rehab|telehealth|mental health|supplement/i, note: 'Healthcare and medicine ads are restricted, some need certification, and you cannot remarket on health conditions.' },
-{ key: 'finance', label: 'Financial services', re: /financ|loan|lend|credit|mortgage|insurance|\bbank|invest|crypto|\bdebt/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
-{ key: 'housing', label: 'Housing, employment or credit', re: /real estate|realtor|housing|apartment|rental|property management|home ?builder|staffing|recruit|hiring|employment|\bjobs?\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
+{ key: 'finance', label: 'Financial services', re: /^(?!.*\bfood ?banks?\b).*\b(financ\w*|loans?|lend(er|ers|ing)|credit|mortgages?|insurance|banking|banks?|invest(ment|ing|or|ors|ments)|crypto\w*|debt)\b/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
+{ key: 'housing', label: 'Housing, employment or credit', re: /\b(real estate|realtors?|housing|apartments?|(home|house|property|apartment|vacation) rentals?|property management|home ?builders?|staffing|recruit\w*|hiring|employment|jobs?)\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
 ];
 function detectSpecial(industry) { const s = String(industry || ''); if (!s.trim()) return null; for (const v of SPECIAL_VERTICALS) { if (v.re.test(s)) return v; } return null; }
 
@@ -854,7 +854,7 @@ function absUrl(rel) { try { return new URL(rel, window.location.href).href; } c
 function linkHtml(key, label) { const L = LINKS[key]; if (!L) return esc(label || ''); return '<a href="' + esc(L.url) + '">' + esc(label || L.name) + '</a>'; }
 function linkPlain(key) { const L = LINKS[key]; return L ? L.name + ' (' + absUrl(L.url) + ')' : ''; }
 function radioVal(name) { const r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
-function setRadio(name, value) { const el = document.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function setRadio(name, value) { [].forEach.call(document.querySelectorAll('input[name="' + name + '"]'), (el) => { if (el.value === String(value)) el.checked = true; }); } // off-list values are ignored, never thrown
 function syncOptChecked(root) { [].forEach.call((root || document).querySelectorAll('.opt'), (o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); }); }
 
 /* ---------- series stepper ---------- */
@@ -1208,13 +1208,20 @@ return '<li class="' + (first ? 'is-first' : '') + '"><span class="sn" aria-hidd
 function render() {
 industryToggle(); ecomToggle(); syncOptChecked(form);
 const input = readInput(), p = toProfile(input), ex = isExample(input);
+// saved: the profile this browser held when the page opened (or a pasted code, or "Save to this browser").
+// The answers are the visitor's own when they differ from the example, or when they match that saved profile.
+const atSaved = !!saved && sameProfile(p, saved), own = !ex || atSaved;
 const special = detectSpecial(p.industry), fits = campaignFits(p), path = diyPath(p), flags = complexFlags(p, special);
 const code = encodeProfile(p);
 last = { p, fits, path, flags, special, code };
-setExampleState(ex, EXAMPLE_TEXT, 'Your profile updates as you go and saves in this browser.');
-// Save automatically once the answers are the visitor's own.
+setExampleState(!own, EXAMPLE_TEXT, 'Your profile updates as you go and saves in this browser.');
+// Restore goes back to the saved profile when there is one, otherwise to the example answers.
+$('restore-example').textContent = saved ? 'Go back to my saved profile' : 'Go back to the example answers';
+$('restore-example').hidden = saved ? atSaved : ex;
+// Save automatically once the answers are the visitor's own. Example answers are never written over a saved profile.
 if (!ex) { saveProfile(p); $('save-status').textContent = 'Saved in this browser. Other Big Leap toolkits will fill themselves in.'; $('save-btn').hidden = true; }
-else { $('save-btn').hidden = false; $('save-status').textContent = 'These are example answers, so nothing is saved yet. Change any answer, or save them as they are.'; }
+else if (atSaved) { $('save-btn').hidden = true; $('save-status').textContent = 'Saved in this browser. Other Big Leap toolkits will fill themselves in.'; }
+else { $('save-btn').hidden = false; $('save-status').textContent = loadProfile() ? 'These are the example answers, so they are not saved. Your last saved answers stay in this browser until you change one here.' : 'These are example answers, so nothing is saved yet. Change any answer, or save them as they are.'; }
 $('out-num').textContent = String(path.length);
 $('out-unit').textContent = path.length === 1 ? 'toolkit on your DIY path' : 'toolkits on your DIY path';
 const fitNames = fits.filter((f) => f.status === 'fits').map((f) => f.name);
@@ -1241,7 +1248,9 @@ renderXlinks(xl);
 renderNext('adsReady', 'Your profile fills it in. It turns your answers into a launch readiness list, in build order.');
 syncCopy(); syncCode(); sticky();
 }
-initShell(1, () => { applyExample(); render(); $('name').focus(); });
+let saved = null;
+function sameProfile(a, b) { return ['name', 'industry', 'model', 'offer', 'ecommerce', 'locations', 'reach', 'app', 'crm', 'website', 'goal', 'adBudget', 'ga4', 'gtm', 'gbp'].every((k) => String(a[k] == null ? '' : a[k]) === String(b[k] == null ? '' : b[k])); }
+initShell(1, () => { if (saved) applyProfileToForm(saved); else applyExample(); render(); $('name').focus(); });
 // Profile strip on the builder: load a saved profile or a pasted code.
 function stripUI(loaded) {
 const el = $('profile-strip');
@@ -1251,22 +1260,22 @@ el.innerHTML = loaded
 '<details class="ps-paste"><summary>Already have a profile code? Paste it</summary><div class="ps-paste-row"><label class="sr-only" for="ps-code">Profile code</label>' +
 '<input class="text-field" id="ps-code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="BL1.…"><button type="button" class="btn btn-plain" id="ps-load">Load profile</button></div></details>' +
 '<p class="ps-status" id="ps-status" role="status" aria-live="polite"></p>';
-if (loaded) $('ps-fresh').addEventListener('click', (e) => { e.preventDefault(); clearProfile(); applyExample(); stripUI(false); render(); $('name').focus(); });
+if (loaded) $('ps-fresh').addEventListener('click', (e) => { e.preventDefault(); clearProfile(); saved = null; applyExample(); stripUI(false); render(); $('name').focus(); });
 else {
-const go = () => { const prof = decodeProfile($('ps-code').value); if (!prof) { $('ps-status').textContent = 'That code did not work. It should start with BL1.'; return; } applyProfileToForm(prof); saveProfile(prof); stripUI(true); render(); };
+const go = () => { const prof = decodeProfile($('ps-code').value); if (!prof) { $('ps-status').textContent = 'That code did not work. It should start with BL1.'; return; } applyProfileToForm(prof); saveProfile(prof); saved = toProfile(readInput()); stripUI(true); render(); };
 $('ps-load').addEventListener('click', go);
 $('ps-code').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
 }
 }
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your profile and path are copied. Paste them into an email or a doc.');
 const syncCode = initCopyButton('copy-code', 'code-host', 'save-status', () => last.code, 'Copy code', 'Code copied. Paste it into any Big Leap DIY toolkit, on any device.');
-$('save-btn').addEventListener('click', () => { saveProfile(last.p); $('save-status').textContent = 'Saved in this browser. Other Big Leap toolkits will fill themselves in.'; $('save-btn').hidden = true; });
+$('save-btn').addEventListener('click', () => { saveProfile(last.p); saved = last.p; $('restore-example').textContent = 'Go back to my saved profile'; $('save-status').textContent = 'Saved in this browser. Other Big Leap toolkits will fill themselves in.'; $('save-btn').hidden = true; });
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
 form.addEventListener('input', render);
 form.addEventListener('change', render);
-const saved = loadProfile();
-if (saved && saved.v === 1) { applyProfileToForm(saved); stripUI(true); } else { applyExample(); stripUI(false); }
+const stored = loadProfile();
+if (stored && stored.v === 1) { applyProfileToForm(stored); saved = toProfile(readInput()); stripUI(true); } else { applyExample(); stripUI(false); }
 render();
 })();
 

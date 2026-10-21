@@ -713,7 +713,8 @@ body { overflow-wrap: anywhere; }
 <legend><span class="q-label">Open <span id="robots-url">yoursite.com/robots.txt</span>. What does it say?</span></legend>
 <div class="opts">
 <label class="opt" for="robots-open"><input type="radio" id="robots-open" name="robots" value="open"><span class="opt-text"><span class="opt-title">Nothing blocked, or there's no file</span><span class="opt-sub">No "Disallow: /" line, or only private areas like /cart or /admin are blocked.</span></span></label>
-<label class="opt" for="robots-some"><input type="radio" id="robots-some" name="robots" value="some"><span class="opt-text"><span class="opt-title">It blocks some bots by name</span><span class="opt-sub">For example GPTBot, OAI-SearchBot, PerplexityBot or Bingbot.</span></span></label>
+<label class="opt" for="robots-some"><input type="radio" id="robots-some" name="robots" value="some"><span class="opt-text"><span class="opt-title">It blocks a search bot by name</span><span class="opt-sub">Googlebot, Bingbot, OAI-SearchBot or PerplexityBot appears with "Disallow: /" under it.</span></span></label>
+<label class="opt" for="robots-training"><input type="radio" id="robots-training" name="robots" value="training"><span class="opt-text"><span class="opt-title">It blocks only AI training bots</span><span class="opt-sub">Only GPTBot, Google-Extended or CCBot are blocked. That is a business choice, not a search problem.</span></span></label>
 <label class="opt" for="robots-all"><input type="radio" id="robots-all" name="robots" value="all"><span class="opt-text"><span class="opt-title">It says "User-agent: *" then "Disallow: /"</span><span class="opt-sub">That blocks every search engine from the whole site.</span></span></label>
 <label class="opt" for="robots-unsure"><input type="radio" id="robots-unsure" name="robots" value="unsure"><span class="opt-text"><span class="opt-title">Haven't looked yet</span></span></label>
 </div>
@@ -736,7 +737,7 @@ body { overflow-wrap: anywhere; }
 <div class="opts">
 <label class="opt" for="has-https"><input type="checkbox" id="has-https" name="has" value="https"><span class="opt-text"><span class="opt-title">Every page loads on https:// with a padlock</span><span class="opt-sub">No "Not secure" warning in the browser bar.</span></span></label>
 <label class="opt" for="has-speed"><input type="checkbox" id="has-speed" name="has" value="speed"><span class="opt-text"><span class="opt-title">The site passes Core Web Vitals on mobile</span><span class="opt-sub">Google's speed and stability check, shown at the top of PageSpeed Insights.</span></span></label>
-<label class="opt" for="has-titles"><input type="checkbox" id="has-titles" name="has" value="titles"><span class="opt-text"><span class="opt-title">Each key page has its own title and description</span><span class="opt-sub">The blue headline and grey text people see in Google results.</span></span></label>
+<label class="opt" for="has-titles"><input type="checkbox" id="has-titles" name="has" value="titles"><span class="opt-text"><span class="opt-title">Each key page has its own title and description</span><span class="opt-sub">The blue headline and gray text people see in Google results.</span></span></label>
 <label class="opt" for="has-schema"><input type="checkbox" id="has-schema" name="has" value="schema"><span class="opt-text"><span class="opt-title">The site has Organization or LocalBusiness schema</span><span class="opt-sub">Hidden code that tells search engines and AI exactly who you are.</span></span></label>
 <label class="opt" for="has-about"><input type="checkbox" id="has-about" name="has" value="about"><span class="opt-text"><span class="opt-title">A real About page and easy-to-find contact details</span><span class="opt-sub">Who runs the business, address or service area, phone, email.</span></span></label>
 </div>
@@ -920,6 +921,8 @@ function timeRange(lo, hi) {
   return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
 }
 function link(key) { return LINKS[key] || null; }
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkPlain(key) { const l = LINKS[key]; return l ? l.name + ' (' + absUrl(l.url) + ')' : ''; }
 function linkHtml(key, label) { const l = link(key); return l ? '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>' : esc(label || ''); }
 
 /* ---------- stepper ---------- */
@@ -1050,7 +1053,7 @@ function itemsText(items, extraText) {
     if (t.cms) out.push('   ' + (t.cmsLabel || 'On your platform') + ': ' + t.cms);
     if (extraText && extraText[t.id]) extraText[t.id].forEach((l) => out.push('   ' + l));
     if (t.time) out.push('   Time: ' + timeRange(t.time[0], t.time[1]) + (t.per ? ' ' + t.per : '') + (t.wait ? ' · ' + t.wait : ''));
-    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + LINKS[t.kit.key].name + ' (' + t.kit.why + ')');
+    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + linkPlain(t.kit.key) + ' · ' + t.kit.why);
   });
   return out;
 }
@@ -1074,7 +1077,7 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url));
 }
 function renderNext(key, why) {
   const l = LINKS[key];
@@ -1087,10 +1090,11 @@ function renderNext(key, why) {
 /* ---------- example pill ---------- */
 function setExampleState(state, exampleText) {
   const pill = $('example-pill');
-  pill.textContent = state === 'example' ? 'Example answers' : state === 'profile' ? 'From your profile' : 'Your answers';
-  pill.classList.toggle('is-yours', state !== 'example');
+  // 'profile' = profile answers plus untouched examples, so it is still labeled as examples.
+  pill.textContent = state === 'yours' ? 'Your answers' : 'Example answers';
+  pill.classList.toggle('is-yours', state === 'yours');
   $('example-text').textContent = state === 'example' ? exampleText
-    : state === 'profile' ? 'Some answers came from your Business Profile. Change any of them.'
+    : state === 'profile' ? 'Some answers came from your Business Profile (marked); the rest are examples. Change them to make them yours.'
     : 'Your results update as you go.';
   $('restore-example').hidden = state === 'example';
 }
@@ -1301,7 +1305,7 @@ function model(input, a) {
       cms: HOW.robots[cms], cmsLabel: 'On ' + C.name,
       time: all || some ? a.robots : a.robotsCheck,
     });
-  } else done.push('robots.txt lets search engines in');
+  } else done.push(input.robots === 'training' ? 'robots.txt lets search bots in (AI training bots blocked by your choice; that does not affect search)' : 'robots.txt lets search engines in');
 
   // 2. Search Console + sitemap
   if (input.gsc !== 'full') {
@@ -1433,7 +1437,7 @@ function model(input, a) {
     title: 'Make it obvious who you are and how to reach you',
     why: 'Google\'s quality guidelines talk about E-E-A-T: experience, expertise, authority and trust. In plain words: can a stranger tell a real, qualified business is behind this site?',
     steps: [
-      'About page: who runs the business, how long you\'ve done it, credentials or licences, and real photos of people, not stock.',
+      'About page: who runs the business, how long you\'ve done it, credentials or licenses, and real photos of people, not stock.',
       'Contact page and footer: the same business name, phone, email and address (or service area) on every page.',
       'Link to your social profiles' + (localType ? ' and your Google Business Profile' : '') + ' from the footer.',
       'Blog posts: show the author\'s name and a one-line bio.',
@@ -1476,7 +1480,7 @@ function model(input, a) {
     crawl: input.size === 'large',
     intl: plan('intl'),
     content: ordered.length === 0,
-    ai: input.robots === 'some',
+    ai: input.robots === 'some' || input.robots === 'training',
   };
   return { cms, C, dom, site, items: ordered, done, blockers, checks, fixes, totalLo, totalHi, flags, localType, sitemapUrl, input };
 }
@@ -1504,8 +1508,8 @@ function schemaSnippet(m) {
   const name = p.name || 'YOUR BUSINESS NAME';
   const url = 'https://' + m.site + '/';
   const lines = ['<script type="application/ld+json">', '{', '  "@context": "https://schema.org",', '  "@type": "' + (m.localType ? 'LocalBusiness' : 'Organization') + '",',
-    '  "name": ' + JSON.stringify(name) + ',', '  "url": "' + url + '",', '  "logo": "' + url + 'LOGO-FILE.png",', '  "telephone": "+1-000-000-0000",', '  "email": "HELLO@' + m.site.replace(/^www\./, '').toUpperCase() + '",'];
-  if (m.localType) lines.push('  "address": {', '    "@type": "PostalAddress",', '    "streetAddress": "STREET ADDRESS",', '    "addressLocality": "CITY",', '    "addressRegion": "STATE",', '    "postalCode": "ZIP",', '    "addressCountry": "US"', '  },', '  "openingHours": "Mo-Fr 09:00-17:00",');
+    '  "name": ' + JSON.stringify(name) + ',', '  "url": "' + url + '",', '  "logo": "' + url + 'LOGO-FILE.png",', '  "telephone": "+1-PHONE",', '  "email": "HELLO@' + m.site.replace(/^www\./, '').toUpperCase() + '",'];
+  if (m.localType) lines.push('  "address": {', '    "@type": "PostalAddress",', '    "streetAddress": "STREET ADDRESS",', '    "addressLocality": "CITY",', '    "addressRegion": "STATE",', '    "postalCode": "ZIP",', '    "addressCountry": "COUNTRY"', '  },', '  "openingHours": "HOURS",');
   lines.push('  "sameAs": [', '    "https://www.facebook.com/YOURPAGE",', '    "https://www.linkedin.com/company/YOURCOMPANY"', '  ]', '}', '</' + 'script>');
   return lines.join('\n');
 }
@@ -1588,9 +1592,11 @@ let SNIPS = {};
   }
   function headline(m) {
     const n = m.blockers;
+    // Reachability checks still open (robots.txt not looked at, index not checked): no all-clear yet.
+    const open = m.items.filter((t) => t.sev === 'check' && (t.id === 'robots' || t.id === 'index')).length;
     return {
-      num: String(n),
-      unit: n === 1 ? 'blocker stops Google or AI search from seeing your site' : n === 0 ? 'blockers: Google and AI search can reach your site' : 'blockers stop Google or AI search from seeing your site',
+      num: n === 0 && open ? '' : String(n),
+      unit: n === 1 ? 'blocker stops Google or AI search from seeing your site' : n === 0 ? (open ? 'No blockers found yet. ' + open + ' ' + (open === 1 ? 'check' : 'checks') + ' to confirm' : 'blockers: Google and AI search can reach your site') : 'blockers stop Google or AI search from seeing your site',
       line: (n > 0 ? 'Fix ' + (n === 1 ? 'it' : 'those') + ' first. ' : '') +
         (m.items.length === 0 ? 'Every foundation check is in place. Your site is ready for an SEO strategy conversation.'
           : 'Your full list has ' + m.items.length + ' ' + (m.items.length === 1 ? 'item' : 'items') + (m.checks ? ' (' + m.checks + ' quick ' + (m.checks === 1 ? 'check' : 'checks') + ')' : '') + ', about ' + timeRange(m.totalLo, m.totalHi) + ' of work in total.'),
@@ -1602,17 +1608,17 @@ let SNIPS = {};
     if (m.dom) L.push('Site: ' + m.dom);
     L.push('Platform: ' + (m.cms === 'other' ? 'Other or custom' : m.C.name));
     if (currentProfile && currentProfile.website === false) L.push('Your profile says you don\'t have a website yet. Use this list as your launch checklist.');
-    L.push(h.num + ' ' + h.unit + '.', h.line, '');
+    L.push((h.num ? h.num + ' ' : '') + h.unit + '.', h.line, '');
     L.push('FIXES, IN ORDER');
     if (!m.items.length) L.push('Nothing to fix.');
     itemsText(m.items, SNIPS_TEXT).forEach((l) => L.push(l));
     if (m.done.length) L.push('', 'ALREADY IN PLACE', ...m.done.map((d) => '[done] ' + d));
     L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
     const nx = nextFor(m);
-    L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
+    L.push('', 'NEXT TOOLKIT: ' + linkPlain(nx.key) + ' - ' + nx.why);
     const xl = xlinksText(xlinks(m), nx.key);
     if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
-    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
     return L.join('\n');
   }
   let SNIPS_TEXT = {};
@@ -1625,6 +1631,7 @@ let SNIPS = {};
     $('site-query').textContent = 'site:' + d;
     const h = headline(m);
     $('out-num').textContent = h.num;
+    $('out-num').hidden = !h.num;
     $('out-num').classList.toggle('is-zero', m.blockers === 0);
     $('out-unit').textContent = h.unit;
     $('out-rec').textContent = currentProfile && currentProfile.website === false ? 'Your profile says you don\'t have a website yet. Use this list as your launch checklist.' : '';

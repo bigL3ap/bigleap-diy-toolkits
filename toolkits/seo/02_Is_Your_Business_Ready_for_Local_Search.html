@@ -940,6 +940,8 @@ function timeRange(lo, hi) {
   return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
 }
 function link(key) { return LINKS[key] || null; }
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkPlain(key) { const l = LINKS[key]; return l ? l.name + ' (' + absUrl(l.url) + ')' : ''; }
 function linkHtml(key, label) { const l = link(key); return l ? '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>' : esc(label || ''); }
 
 /* ---------- stepper ---------- */
@@ -1070,7 +1072,7 @@ function itemsText(items, extraText) {
     if (t.cms) out.push('   ' + (t.cmsLabel || 'On your platform') + ': ' + t.cms);
     if (extraText && extraText[t.id]) extraText[t.id].forEach((l) => out.push('   ' + l));
     if (t.time) out.push('   Time: ' + timeRange(t.time[0], t.time[1]) + (t.per ? ' ' + t.per : '') + (t.wait ? ' · ' + t.wait : ''));
-    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + LINKS[t.kit.key].name + ' (' + t.kit.why + ')');
+    if (t.kit && LINKS[t.kit.key]) out.push('   Free toolkit: ' + linkPlain(t.kit.key) + ' · ' + t.kit.why);
   });
   return out;
 }
@@ -1094,7 +1096,7 @@ function renderXlinks(list, skip) {
   $('xlinks-list').innerHTML = live.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
 function xlinksText(list, skip) {
-  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' (' + LINKS[l.key].url.replace(/^\.\.\//, '') + ')');
+  return list.filter((l) => LINKS[l.key] && l.key !== skip).map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url));
 }
 function renderNext(key, why) {
   const l = LINKS[key];
@@ -1107,10 +1109,11 @@ function renderNext(key, why) {
 /* ---------- example pill ---------- */
 function setExampleState(state, exampleText) {
   const pill = $('example-pill');
-  pill.textContent = state === 'example' ? 'Example answers' : state === 'profile' ? 'From your profile' : 'Your answers';
-  pill.classList.toggle('is-yours', state !== 'example');
+  // 'profile' = profile answers plus untouched examples, so it is still labeled as examples.
+  pill.textContent = state === 'yours' ? 'Your answers' : 'Example answers';
+  pill.classList.toggle('is-yours', state === 'yours');
   $('example-text').textContent = state === 'example' ? exampleText
-    : state === 'profile' ? 'Some answers came from your Business Profile. Change any of them.'
+    : state === 'profile' ? 'Some answers came from your Business Profile (marked); the rest are examples. Change them to make them yours.'
     : 'Your results update as you go.';
   $('restore-example').hidden = state === 'example';
 }
@@ -1285,12 +1288,12 @@ function model(input, a) {
       : 'Your pin is what "near me" searches measure distance from. A pin on the wrong building sends people to the wrong place.',
     steps: area ? [
       'In your profile, open Edit profile → Location → Business location, and turn the address off (it stays on file but is hidden).',
-      'Open Service area and add the cities or postcodes you really serve. A rule of thumb from Google: about two hours\' drive from your base, at most.',
+      'Open Service area and add the cities or ZIP codes you really serve. A rule of thumb from Google: about two hours\' drive from your base, at most.',
       'Don\'t create extra profiles for cities you serve. Use location pages on your website instead.',
     ] : [
       'Open Edit profile → Location → Business location and check the address matches your signage and website exactly.',
-      'Drag the map pin onto your front door, not the middle of the block or the car park.',
-      both ? 'Add a Service area too, listing the cities or postcodes you travel to.' : 'Leave Service area empty unless you also travel to customers.',
+      'Drag the map pin onto your front door, not the middle of the block or the parking lot.',
+      both ? 'Add a Service area too, listing the cities or ZIP codes you travel to.' : 'Leave Service area empty unless you also travel to customers.',
       'Add suite or unit numbers in the second address line, not the first.',
     ],
     time: per(a.setup), per: perTxt,
@@ -1315,7 +1318,7 @@ function model(input, a) {
   if (fillMissing.length) {
     const steps = [];
     if (!gf('hours')) steps.push('Hours: set regular hours, and add Special hours for holidays before each one. Wrong hours are one of the most common complaints in reviews.');
-    if (!gf('photos')) steps.push('Photos: add your logo and a cover photo, then real photos of the outside (so people recognise it), inside, team and work. Add a few new ones each month.');
+    if (!gf('photos')) steps.push('Photos: add your logo and a cover photo, then real photos of the outside (so people recognize it), inside, team and work. Add a few new ones each month.');
     if (!gf('services')) steps.push('Services or products: list each one with a short plain description. Description: 2–3 sentences on what you do and who for, in plain words, no links or phone numbers.');
     steps.push('Fill in Attributes (for example wheelchair access, online appointments) and the booking or appointment link if you have one.');
     steps.push('Post an update every couple of weeks (Add update) with an offer, news or a recent job.');
@@ -1346,14 +1349,14 @@ function model(input, a) {
   const missingDirs = DIR_ORDER.filter((k) => input.dir.indexOf(k) === -1);
   const dirsOk = input.dir.indexOf('apple') !== -1 && input.dir.indexOf('bing') !== -1 && missingDirs.length <= 2;
   basics.push(dirsOk);
-  if (missingDirs.length) items.push({
+  if (!dirsOk) items.push({
     id: 'dirs', sev: 'fix',
     title: 'Claim your listings on the main maps and directories',
     why: 'Apple Maps, Bing and the big directories are where many people (and AI assistants) look you up. They often already have a listing for you, with whatever details they guessed.',
     steps: missingDirs.map((k) => DIRS[k]).concat(['Use your master name, address and phone exactly. Link to the matching location page on your website.']),
     time: [a.dirClaim[0] * missingDirs.length * L, a.dirClaim[1] * missingDirs.length * L], per: '(' + missingDirs.length + ' ' + (missingDirs.length === 1 ? 'listing' : 'listings') + (L > 1 ? ' × ' + L + ' locations' : '') + ')',
   });
-  if (!missingDirs.length) done.push('Main directories claimed');
+  if (dirsOk) done.push('Main maps and directories claimed');
 
   // 8. Location pages
   const lpOk = input.lp === 'each';
@@ -1399,7 +1402,7 @@ function model(input, a) {
     steps: [
       'Turn on review notifications: Menu → Business Profile settings → Notifications.',
       'Reply within a couple of days. Thank people by name and mention what they bought or the service, in your own words.',
-      'For a bad review: thank them, apologise for the experience without arguing, and offer to fix it offline with a name and phone number.',
+      'For a bad review: thank them, apologize for the experience without arguing, and offer to fix it offline with a name and phone number.',
       'Never share private details about the customer in a reply.',
       'Report only reviews that break Google\'s rules (spam, hate, not a real customer) using the flag on the review.',
     ],
@@ -1450,7 +1453,7 @@ function templates(m) {
   const link = reviewLink();
   return [
     { id: 'text', name: 'Text message', when: 'Send within a day of the job or delivery', body: 'Hi [FIRST NAME], thanks for choosing ' + biz + '! Would you take a minute to tell others how it went? Your review helps a lot: ' + link + '\n– [YOUR NAME]' },
-    { id: 'email', name: 'Email', when: 'Same day, or the next morning', subject: 'How did we do, [FIRST NAME]?', body: 'Hi [FIRST NAME],\n\nThank you for choosing ' + biz + '. We hope [THE SERVICE OR PRODUCT] is everything you needed.\n\nWould you share a quick review on Google? Honest feedback, good or bad, helps us improve and helps neighbours decide. It takes about a minute:\n' + link + '\n\nIf anything wasn\'t right, just reply to this email and I\'ll make it right.\n\nThank you,\n[YOUR NAME]\n' + biz },
+    { id: 'email', name: 'Email', when: 'Same day, or the next morning', subject: 'How did we do, [FIRST NAME]?', body: 'Hi [FIRST NAME],\n\nThank you for choosing ' + biz + '. We hope [THE SERVICE OR PRODUCT] is everything you needed.\n\nWould you share a quick review on Google? Honest feedback, good or bad, helps us improve and helps neighbors decide. It takes about a minute:\n' + link + '\n\nIf anything wasn\'t right, just reply to this email and I\'ll make it right.\n\nThank you,\n[YOUR NAME]\n' + biz },
     { id: 'replypos', name: 'Reply to a good review', when: 'Within a couple of days', body: 'Thank you, [REVIEWER NAME]! We\'re so glad [THE SPECIFIC THING THEY MENTIONED] went well. We appreciate you choosing ' + biz + ' and hope to see you again.' },
     { id: 'replyneg', name: 'Reply to a bad review', when: 'Within a day, calmly', body: 'Hi [REVIEWER NAME], thank you for telling us, and I\'m sorry this wasn\'t the experience you expected. We\'d like to put it right. Please call me, [YOUR NAME], at [PHONE] or email [EMAIL] so we can talk it through.' },
   ];
@@ -1539,7 +1542,7 @@ let currentProfile = null;
     const h = headline(m);
     const L = ['YOUR LOCAL SEARCH CHECKLIST', 'Is Your Business Ready for Local Search? (Big Leap SEO DIY Toolkit 2 of 2)', ''];
     if (m.online) {
-      L.push(h.unit + '.', h.line, '', 'NEXT TOOLKIT: ' + LINKS.seoBasics.name + ' (' + LINKS.seoBasics.url.replace(/^\.\.\//, '') + ')');
+      L.push(h.unit + '.', h.line, '', 'NEXT TOOLKIT: ' + linkPlain('seoBasics'));
       L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
       return L.join('\n');
     }
@@ -1552,10 +1555,10 @@ let currentProfile = null;
     L.push('', 'YOUR REVIEW REQUEST AND REPLY TEMPLATES', ...templatesText(m));
     L.push('', 'WHERE IT GETS COMPLEX', ...complexText(COMPLEX, m.flags));
     const nx = nextFor(m);
-    L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
+    L.push('', 'NEXT TOOLKIT: ' + linkPlain(nx.key) + ' - ' + nx.why);
     const xl = xlinksText(xlinks(m), nx.key);
     if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
-    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
     return L.join('\n');
   }
   function renderTemplates(m) {

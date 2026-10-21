@@ -835,10 +835,10 @@ function lab(group, v) { return (LABELS[group] && LABELS[group][v]) || ''; }
 /* Industries Google treats with extra rules. Matched against the profile's industry text. */
 const SPECIAL_VERTICALS = [
 { key: 'auto', label: 'Auto dealers', re: /dealership|\b(auto|car|vehicle|truck|rv|motorcycle|boat)s?\b.*\b(dealer|sales)\b/i, note: 'Vehicle ads use their own formats and inventory feeds, and state advertising rules apply.' },
-{ key: 'legal', label: 'Legal services', re: /\b(law|legal|lawyer|attorney|bail)/i, note: 'Some legal services need Google certification or are restricted in some places.' },
+{ key: 'legal', label: 'Legal services', re: /\b(law(yer|yers|firm|s)?|legal|attorneys?|bail ?bonds?)\b/i, note: 'Some legal services need Google certification or are restricted in some places.' },
 { key: 'health', label: 'Healthcare and pharma', re: /health ?care|medical|clinic|doctor|dental|dentist|pharma|drug|addiction|rehab|telehealth|mental health|supplement/i, note: 'Healthcare and medicine ads are restricted, some need certification, and you cannot remarket on health conditions.' },
-{ key: 'finance', label: 'Financial services', re: /financ|loan|lend|credit|mortgage|insurance|\bbank|invest|crypto|\bdebt/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
-{ key: 'housing', label: 'Housing, employment or credit', re: /real estate|realtor|housing|apartment|rental|property management|home ?builder|staffing|recruit|hiring|employment|\bjobs?\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
+{ key: 'finance', label: 'Financial services', re: /^(?!.*\bfood ?banks?\b).*\b(financ\w*|loans?|lend(er|ers|ing)|credit|mortgages?|insurance|banking|banks?|invest(ment|ing|or|ors|ments)|crypto\w*|debt)\b/i, note: 'Financial services ads need advertiser verification in many countries, and loans carry disclosure rules.' },
+{ key: 'housing', label: 'Housing, employment or credit', re: /\b(real estate|realtors?|housing|apartments?|(home|house|property|apartment|vacation) rentals?|property management|home ?builders?|staffing|recruit\w*|hiring|employment|jobs?)\b/i, note: 'In the US and Canada, these ads cannot target by age, gender, family status or ZIP code.' },
 ];
 function detectSpecial(industry) { const s = String(industry || ''); if (!s.trim()) return null; for (const v of SPECIAL_VERTICALS) { if (v.re.test(s)) return v; } return null; }
 
@@ -856,7 +856,7 @@ function absUrl(rel) { try { return new URL(rel, window.location.href).href; } c
 function linkHtml(key, label) { const L = LINKS[key]; if (!L) return esc(label || ''); return '<a href="' + esc(L.url) + '">' + esc(label || L.name) + '</a>'; }
 function linkPlain(key) { const L = LINKS[key]; return L ? L.name + ' (' + absUrl(L.url) + ')' : ''; }
 function radioVal(name) { const r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
-function setRadio(name, value) { const el = document.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function setRadio(name, value) { [].forEach.call(document.querySelectorAll('input[name="' + name + '"]'), (el) => { if (el.value === String(value)) el.checked = true; }); } // off-list values are ignored, never thrown
 function syncOptChecked(root) { [].forEach.call((root || document).querySelectorAll('.opt'), (o) => { const i = o.querySelector('input'); o.classList.toggle('is-checked', !!(i && i.checked)); }); }
 
 /* ---------- series stepper ---------- */
@@ -1139,7 +1139,7 @@ return '“[service] cost”, “hire [service]”, “best [service] for [need]
 }
 function structure(m) {
 const i = m.i, L = [];
-const usesSearch = m.camps.some((c) => c.type === 'search' || c.type === 'brand');
+const usesSearch = m.camps.some((c) => c.type === 'search'); // non-brand Search only; the brand campaign has its own block below
 const reachText = { local: 'your city or a radius around your location', regional: 'the states or regions you serve', national: 'your country', international: 'your one best country to start' }[i.reach] || 'the area you serve';
 if (m.primary.type === 'pmax' && m.store) {
 L.push({ title: 'One Performance Max campaign, best sellers first', why: 'Start with one asset group for your best-selling or highest-margin products, not the whole catalog.', steps: ['Merchant Center: make sure titles, photos and prices are clean on those products.', 'Campaigns → + New campaign → Sales → Performance Max, and pick your Merchant Center feed.', 'Use a listing group filter to include only the products you chose.', 'Add your own images, a logo and at least one short video; otherwise Google makes one for you.'] });
@@ -1201,7 +1201,8 @@ return { feed: m.store, offline: i.model !== 'b2c' || i.goal === 'leads', app: i
 
 (function () {
 const form = $('answers');
-let last = null, profile = loadProfile(), pmap = fromProfile(profile);
+let last = null, profile = loadProfile(), pmap = fromProfile(profile), touched = false;
+const PROFILE_EXAMPLE_TEXT = 'Some answers came from your Business Profile (marked); the rest are examples. Change them to make them yours.';
 const PF = ['model', 'offer', 'ecommerce', 'locations', 'app', 'goal', 'reach', 'adBudget'];
 $('assume-rows').innerHTML = [
 ['Run only one campaign below', money(ASSUMPTIONS.minBudget) + ' / mo'],
@@ -1242,7 +1243,7 @@ if (m.i.model !== 'b2c') L.push({ key: 'pipelineDash', why: 'see which campaigns
 return L;
 }
 function splitRows(m) {
-return m.split.map((s) => ({ name: s.c.name, share: s.lo === s.hi ? '100%' : Math.round(s.lo * 100) + '–' + Math.round(s.hi * 100) + '%', month: m.b ? moneyRange(m.b * s.lo, m.b * s.hi) : '—', day: m.b ? moneyRange(m.b * s.lo / 30.4, m.b * s.hi / 30.4) : '—' }));
+return m.split.map((s) => ({ name: s.c.name, share: s.lo === s.hi ? '100%' : Math.round(s.lo * 100) + '–' + Math.round(s.hi * 100) + '%', month: m.b ? moneyRange(m.b * s.lo, m.b * s.hi) : '—', day: m.b ? (Math.round(m.b * s.hi / 30.4) < 1 ? 'under $1' : moneyRange(m.b * s.lo / 30.4, m.b * s.hi / 30.4)) : '—' }));
 }
 function planText(m) {
 const L = ['YOUR CAMPAIGN STARTER PLAN', 'Which Campaigns Should You Run First? (Big Leap Paid Media DIY Toolkit 4 of 4)', ''];
@@ -1276,11 +1277,13 @@ const i = readInput();
 visibility(i); pfTags(i);
 const m = model(i, profile);
 last = m;
-setExampleState(!profile && isExample(i), EXAMPLE_TEXT, profile ? 'Answers marked “From your profile” came from your Business Profile. Change any of them.' : 'Your plan updates as you go.');
+// With a profile, unmapped answers are still examples until the visitor changes something.
+if (profile && !touched) setExampleState(true, PROFILE_EXAMPLE_TEXT);
+else setExampleState(!profile && isExample(i), EXAMPLE_TEXT, profile ? 'Answers marked “From your profile” came from your Business Profile. Change any of them.' : 'Your plan updates as you go.');
 if (profile) $('restore-example').hidden = true;
 $('out-rec').textContent = 'Start with ' + m.camps.map((c) => c.name).join(', then ') + '.';
 $('out-line').innerHTML = m.camps.length === 1
-? (m.b && m.b < ASSUMPTIONS.twoCampaignBudget ? 'At ' + esc(money(m.b)) + ' a month, one campaign gets enough clicks to learn. Add a second once this one pays off.' : 'One campaign first. Add a second once this one pays off.')
+? (m.b && m.b < ASSUMPTIONS.twoCampaignBudget ? 'At ' + esc(money(m.b)) + ' a month, one campaign keeps a small budget focused. Add a second once this one pays off.' : 'One campaign first. Add a second once this one pays off.')
 : 'Put most of your <b>' + esc(money(m.b)) + '</b> on the first campaign and test the second with the rest.';
 flashIfChanged(m.camps.map((c) => c.name).join('|'));
 const W = warnings(m);
@@ -1306,6 +1309,9 @@ initShell(4, () => { applyAnswers(EXAMPLE); render(); const f = document.querySe
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your starter plan is copied. Paste it into an email, a doc or a task list.');
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
+const markTouched = () => { touched = true; };
+form.addEventListener('input', markTouched, true);
+form.addEventListener('change', markTouched, true);
 form.addEventListener('input', render);
 form.addEventListener('change', render);
 applyAnswers(EXAMPLE);

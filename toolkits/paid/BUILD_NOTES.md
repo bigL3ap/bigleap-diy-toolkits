@@ -1,17 +1,18 @@
 # Paid Media DIY Toolkits: build notes (Draft v1)
 
 Owner: **Scott Smoot** (CTA "Talk to Scott about building it"). Built Oct 19, 2026 from the Agency Brands Bi-Weekly call.
-Three single-file HTML tools, no external requests, matching the RevOps series shell (`toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html`).
+Four single-file HTML tools, no external requests, matching the RevOps series shell (`toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html`).
 
 | # | File | Title | Deliverable |
 |---|---|---|---|
 | 1 | `01_What_Kind_of_Business_Are_You.html` | What Kind of Business Are You? | Business Profile card + `BL1.` code + campaign-type fit + "Your DIY path" across all series |
 | 2 | `02_Is_Your_Google_Ads_Account_Ready.html` | Is Your Google Ads Account Ready? | Your Launch Readiness List (OK/gap in build order, steps, time) |
-| 3 | `03_Which_Campaigns_Should_You_Run_First.html` | Which Campaigns Should You Run First? | Your Campaign Starter Plan (campaigns, budget split, structure, negatives, 30 days, what not to turn on) |
+| 3 | `03_Which_Conversions_Should_You_Track.html` | Which Conversions Should You Track? | Your Conversion Event Plan (named events, key events, Primary/Secondary in Google Ads, build order, UTM starter) |
+| 4 | `04_Which_Campaigns_Should_You_Run_First.html` | Which Campaigns Should You Run First? | Your Campaign Starter Plan (campaigns, budget split, structure, negatives, 30 days, what not to turn on) |
 
 ## What each tool does
 
-**01 Business Profile Builder (the shared start for every series).** This is Dallas's "drag and drop your deliverable from toolkit one" idea. Eight questions cover every field in the shared schema. The tool saves the profile to `localStorage` (`bl_diy_profile_v1`) once the answers stop being the example answers. Example answers are not saved unless the visitor clicks "Save to this browser". It also prints a copyable `BL1.` code for other devices. On the results side it shows:
+**01 Business Profile Builder (the shared start for every series).** This is Dallas's "drag and drop your deliverable from toolkit one" idea. Eight questions cover every field in the shared schema. The tool saves the profile to `localStorage` (`bl_diy_profile_v1`) once the answers stop being the example answers. Example answers are not saved unless the visitor clicks "Save to this browser", and they never overwrite a saved profile. When a saved profile is loaded, the restore link reads "Go back to my saved profile" and restores it (not the example). It also prints a copyable `BL1.` code for other devices. On the results side it shows:
 - **Campaign types**: one line each, marked Fits, Maybe or Not yet. The types are Search, Performance Max / Shopping, Local and location assets, App, and Demand Gen / YouTube.
 - **Your DIY path**: an ordered, reasoned list of toolkits across paid, tracking, seo, pr and revops, built from the LINKS map. The first three are marked "Do first".
 - **Special-rule callout**: a "talk to Scott, special rules apply" panel for auto dealers, legal, healthcare/pharma, finance, and housing/employment/credit. These are matched against the industry text.
@@ -28,7 +29,9 @@ Three single-file HTML tools, no external requests, matching the RevOps series s
 
 The headline counts the **gaps that would waste spend**. Account and Merchant Center gaps are listed as launch blockers and are not counted in the red number.
 
-**03 Campaign starter plan.** This turns the profile into:
+**03 Conversion event plan.** Picks the wins that count (forms, calls, purchases, bookings, sign-ups, installs), names each event with Google's recommended names, says which are GA4 key events and which are Primary or Secondary in Google Ads, gives an optional lead value, a build order with times, a UTM naming starter and the classic mistakes. Profile answers (goal, model, CRM, store, channels) are prefilled and tagged.
+
+**04 Campaign starter plan.** This turns the profile into:
 - The first one or two campaigns
 - A budget split shown as ranges, monthly and daily
 - A "start tight, then open up" structure: exact/phrase match only, up to 3 ad groups with one landing page each, tight geo, no Display or search partners, and Maximize clicks until conversions record
@@ -55,25 +58,34 @@ The headline counts the **gaps that would waste spend**. Account and Merchant Ce
 | 02 | Landing page action + mobile speed | Items 9, 10 (waste spend) |
 | 02 | Conditional: GBP, Merchant Center, CRM import, SDK | Items 7, 8, 11, 12 |
 | 02 | Budget | Item 13 (wastes spend under $1,000/mo) |
-| 03 | Business rows, goal, reach, budget (prefilled) | Campaign choice, split, targeting text |
-| 03 | Lines to advertise | Ad group count (max 3) |
-| 03 | People search your name? | Whether a brand campaign is the second campaign |
-| 03 | Conversion tracking tested? | Bidding advice, "fix tracking first" warning, next link |
+| 03 | Wins (multi-select) | Which events are in the plan; which follow-up questions show |
+| 03 | Sells to, CRM | Qualified-lead and closed-won imports (B2B with a CRM) |
+| 03 | Ad platforms | Google Ads column, Meta and LinkedIn steps, UTM rows |
+| 03 | Form confirmation (forms or bookings only) | Trigger type, classic-mistake flags |
+| 03 | Store, app SDK and money model (when picked) | Purchase and app event rows |
+| 03 | First sale and close rate (leads, calls or bookings only) | Lead value passed with each lead |
+| 03 | Conversions tracked today | Audit step and Check/Gap status |
+| 04 | Business rows, goal, reach, budget (prefilled) | Campaign choice, split, targeting text |
+| 04 | Lines to advertise | Ad group count (max 3) |
+| 04 | People search your name? | Whether a brand campaign is the second campaign |
+| 04 | Conversion tracking tested? | Bidding advice, "fix tracking first" warning, next link |
 
-## Results order (all three)
-Headline (one sentence, at most one red number) → named deliverable → Where it gets complex (sorted, "Applies to you" chips) → closing panel. The closing panel has Copy my plan, the Talk to Scott CTA, Next toolkit, and cross-links filtered by the answers. 02 and 03 also have "How we calculate this" listing every rule of thumb.
+## Results order (all four)
+Headline (one sentence, at most one red number) → named deliverable → Where it gets complex (sorted, "Applies to you" chips) → closing panel. The closing panel has Copy my plan, the Talk to Scott CTA, Next toolkit, and cross-links filtered by the answers. 02, 03 and 04 also have "How we calculate this".
 
 ## Logic and assumptions (all in `ASSUMPTIONS` at the top of each script)
 - 01: `videoMinBudget` $3,000/mo before Demand Gen moves from "not yet" to "maybe" (non-B2B). `smallBudget` $1,000.
 - 02: `minBudget` $1,000/mo counts as "ready" for one Search campaign. Daily budget ≥ 10× expected CPC. 14–30 days before judging. "Not sure" counts as a gap.
-- 03: one campaign under $1,500/mo. Main/secondary split 70–85% / 15–30%. Brand campaign 10–20%. Standard Shopping instead of PMax under $1,500. Up to 3 ad groups, 5–15 keywords each. About 30 conversions in 30 days before a tCPA/tROAS target. Raise budget 15–20% in week 4 if efficient.
-- Campaign choice (03): installs+app → App. Sales+store → PMax (or Standard Shopping when small). Visits+location → Search with location assets (+ PMax for store goals at $3k+). Calls → Search with call assets. Awareness → Demand Gen. Otherwise → Search (+ location assets if they have locations). The second campaign is brand Search unless they said nobody searches the name.
+- 03: setup minutes per build step (`perEvent`, `keyEvents`, `adsImport`, `meta`, `linkedin`, `offline`, `app`, `audit`, `test`). Lead value = average first sale × (buyers out of 10 ÷ 10).
+- 04: one campaign under $1,500/mo. Main/secondary split 70–85% / 15–30%. Brand campaign 10–20%. Standard Shopping instead of PMax under $1,500. Up to 3 ad groups, 5–15 keywords each. About 30 conversions in 30 days before a tCPA/tROAS target. Raise budget 15–20% in week 4 if efficient.
+- Campaign choice (04): installs+app → App. Sales+store → PMax (or Standard Shopping when small). Visits+location → Search with location assets (+ PMax for store goals at $3k+). Calls → Search with call assets. Awareness → Demand Gen. Otherwise → Search (+ location assets if they have locations). The second campaign is brand Search unless they said nobody searches the name.
 - Every number is labeled a rule of thumb. No invented statistics. The only external benchmark cited is Google's own ~2.5s LCP guidance.
 
 ## Where it sends people next
 - 01 → 02 (always next).
-- 02 → 03.
-- 03 → 02 if conversions are not confirmed, else tracking 01.
+- 02 → 03 until a tested conversion is in place, then 04.
+- 03 → 04 if they run or plan ads, else `leadCapture` (form or booking wins) or `seoBasics`.
+- 04 → 02 if conversions are not confirmed, else `tracking` (RevOps 7).
 
 Cross-links follow spec §5:
 - No/unsure GA4 or GTM → `tracking`
@@ -84,19 +96,19 @@ Cross-links follow spec §5:
 - B2B → `pipelineDash`
 - Awareness → `prReady` / `mediaKit`
 
-Footer links `hub` (`../../index.html`). All links are relative and open in the same tab. The CTA alone opens in a new tab (external site).
+Footer links `hub` (`../../index.html`). On-page links are relative and open in the same tab; copied plans use absolute URLs (`absUrl()` / `linkPlain()`). The CTA alone opens in a new tab (external site).
 
 ## Shared Business Profile
 The helper is inlined verbatim (`encodeProfile`, `decodeProfile`, `loadProfile`, `saveProfile`, `clearProfile`, key `bl_diy_profile_v1`).
-- **02/03 profile strip**: shows "Using your Business Profile: <name or industry> · <model> · <reach>" with Change/Clear, or the build link plus a collapsed "Paste a profile code" field. Prefilled answers get a "From your profile" tag that disappears when the visitor changes that answer.
+- **02/03/04 profile strip**: shows "Using your Business Profile: <name or industry> · <model> · <reach>" with Change/Clear, or the build link plus a collapsed "Paste a profile code" field. Prefilled answers get a "From your profile" tag that disappears when the visitor changes that answer. Until the visitor changes something, the pill stays "Example answers" and says the unmarked answers are examples.
 - **01 strip**: says when a saved profile was loaded ("Start fresh" clears it), or offers to paste a code.
 - `LABELS`, `SPECIAL_VERTICALS` and `detectSpecial()` sit in the common script block. Other series can copy them if they want the same wording.
 
 ## Settings to edit before launch
-- `CTA_URL` in all three files: swap for Scott's scheduler link.
+- `CTA_URL` in all four files: swap for Scott's scheduler link.
 - `OWNER` if a co-owner is added.
 - `ASSUMPTIONS` values once Scott confirms them (see open questions).
-- `SPECIAL_VERTICALS` regex list (01, and copied into 02/03) if Scott wants more or fewer flagged industries.
+- `SPECIAL_VERTICALS` regex list (01, and copied into 02 and 04; keep the three identical) if Scott wants more or fewer flagged industries. Patterns use word boundaries so "Lawn care", "Party rentals" or "Food bank" are not flagged.
 - Sources are kept in the scratchpad (`paid-src/`: `build.py`, `p1–p3.py/.js`, `common.js`, `header.js`, `base.css`, `extra.css`). Editing the HTML directly is fine too, because each page is self-contained.
 
 ## Source material used
@@ -132,10 +144,10 @@ The helper is inlined verbatim (`encodeProfile`, `decodeProfile`, `loadProfile`,
 15. Dallas's follow-up idea: should submitting a profile trigger a "how did it go?" check-in from you? It would need a form/HubSpot hook. These pages send nothing today.
 
 ## QA run (Oct 19, 2026)
-- Bundled Chromium at 320 light, 390 dark, 768 light, 1024 light, 1280 light and 1920 dark: no horizontal overflow and no console errors on all three. Screenshots are in `scratchpad/qa/paid-0N-*.png`.
+- Bundled Chromium at 320 light, 390 dark, 768 light, 1024 light, 1280 light and 1920 dark: no horizontal overflow and no console errors on all three (03 Conversions was added later and is covered by `tests/qa.py`). Screenshots are in `scratchpad/qa/paid-0N-*.png`.
 - Edge inputs tested: blank budget, negative, 99,999,999,999, HTML in the business name (escaped), every goal in 03, profile save → prefill in 02/03 → Clear → paste code → reload. No NaN/undefined/null text on screen or in copied plans.
 - Copy my plan: plain text mirrors the screen sections, including the absolute URLs of the linked toolkits. The fallback chain is Clipboard API → `execCommand` → selectable textarea.
 - Safari: no regex lookbehind, `structuredClone`, top-level await or `dvh`. The base shell's `:has()` rules are cosmetic only; selected options use `.is-checked` and focus uses `input:focus-visible + label`. `localStorage` is wrapped in try/catch.
 - Tap targets are ≥ 44px, inputs are 16px, and number fields use `inputmode="numeric"`. Sticky positioning is off under 880px, safe-area padding is applied, motion is reduced when requested, and the print view shows the deliverable only.
 - Not tested: real Firefox, WebKit or Samsung Internet (no binaries here).
-- Cross-links to the SEO, PR and RevOps 7 (tracking stack) pages will 404 until those land. (Tracking now lives in RevOps 7 and Paid 3; there is no separate Tracking series.)
+- Cross-links to the SEO, PR and RevOps pages resolve; all those toolkits are live. (Tracking lives in RevOps 7 and Paid 3; there is no separate Tracking series.)

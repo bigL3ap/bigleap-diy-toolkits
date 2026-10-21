@@ -848,14 +848,15 @@ function timeRange(lowMin, highMin) {
   if (highMin < 60) return Math.round(lowMin) + '–' + Math.round(highMin) + ' minutes';
   const r = (m) => { const h = m / 60; return h < 10 ? fmt(Math.round(h * 2) / 2, 1) : fmt(Math.round(h)); };
   const a = lowMin < 60 ? Math.round(lowMin) + ' min' : r(lowMin), b = r(highMin);
-  return (a === b ? 'about ' + a : a + '–' + b) + ' hours';
+  return (a === b ? 'about ' + a : a + '–' + b) + (b === '1' ? ' hour' : ' hours');
 }
 function linkHtml(key, label) {
   const l = LINKS[key];
   if (!l) return esc(label || '');
   return '<a href="' + esc(l.url) + '">' + esc(label || l.name) + '</a>';
 }
-function linkText(key) { const l = LINKS[key]; return l ? l.name + ' (' + l.url + ')' : ''; }
+function absUrl(rel) { try { return new URL(rel, window.location.href).href; } catch (e) { return rel; } }
+function linkText(key) { const l = LINKS[key]; return l ? l.name + ' (' + absUrl(l.url) + ')' : ''; }
 
 function renderStepper(current) {
   const ol = $('stepper-list');
@@ -970,16 +971,16 @@ function renderXlinks(links) {
   $('xlinks').hidden = links.length === 0;
   $('xlinks-list').innerHTML = links.map((l) => '<li>' + linkHtml(l.key) + ': ' + esc(l.why) + '</li>').join('');
 }
-function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + LINKS[l.key].url); }
+function xlinksText(links) { return links.map((l) => '- ' + LINKS[l.key].name + ': ' + l.why + ' ' + absUrl(LINKS[l.key].url)); }
 function renderNext(key, why) {
   $('next-title').innerHTML = linkHtml(key);
   $('next-why').textContent = why;
 }
-function setExampleState(isExample, exampleText) {
+function setExampleState(isExample, exampleText, profileMix) {
   const pill = $('example-pill');
   pill.textContent = isExample ? 'Example answers' : 'Your answers';
   pill.classList.toggle('is-yours', !isExample);
-  $('example-text').textContent = isExample ? exampleText : 'Your results update as you go.';
+  $('example-text').textContent = isExample ? (profileMix ? 'Some answers came from your Business Profile (marked); the rest are examples. Change them to make them yours.' : exampleText) : 'Your results update as you go.';
   $('restore-example').hidden = isExample;
 }
 let lastHeadline = null;
@@ -1052,7 +1053,7 @@ function initShell(current, onRestore) {
 }
 // Form value helpers
 function radioVal(form, name) { const els = form.querySelectorAll('input[name="' + name + '"]'); for (let i = 0; i < els.length; i++) if (els[i].checked) return els[i].value; return ''; }
-function setRadio(form, name, value) { const el = form.querySelector('input[name="' + name + '"][value="' + value + '"]'); if (el) el.checked = true; }
+function setRadio(form, name, value) { form.querySelectorAll('input[name="' + name + '"]').forEach((el) => { if (el.value === String(value)) el.checked = true; }); } // off-list values are ignored, never thrown
 function checkedVals(form, name) { return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map((x) => x.value); }
 function setChecks(form, name, values) { form.querySelectorAll('input[name="' + name + '"]').forEach((x) => { x.checked = values.indexOf(x.value) !== -1; }); }
 function sameSet(a, b) { return a.length === b.length && a.every((x) => b.indexOf(x) !== -1); }
@@ -1072,7 +1073,8 @@ function model(i, a) {
   const gads = i.channels.indexOf('google') !== -1, meta = i.channels.indexOf('meta') !== -1, li = i.channels.indexOf('linkedin') !== -1;
   const b2bCrm = (i.model === 'b2b' || i.model === 'both') && i.crm !== 'none' && (has('leads') || has('calls') || has('bookings'));
   const avg = clamp(toNum(i.avg), 0, 1e7), rate = clamp(toNum(i.rate), 0, 10);
-  const leadValue = avg > 0 && rate > 0 ? Math.round(avg * rate / 10) : 0;
+  const valueAsked = has('leads') || has('calls') || has('bookings'); // the value question is hidden otherwise
+  const leadValue = valueAsked && avg > 0 && rate > 0 ? Math.round(avg * rate / 10) : 0;
   const lv = leadValue ? money(leadValue) + ' (your lead value)' : '';
   const money_ = has('purchases');
   const events = [];
@@ -1175,16 +1177,17 @@ const UTM_RULES = [
   '<b>Lowercase only, with underscores, no spaces.</b> GA4 treats "Email" and "email" as two different sources.',
   '<b>Use GA4\'s medium names</b> (cpc, paid_social, social, email, referral) so visits land in the right default channel.',
   '<b>Campaign = year_month_offer.</b> Short, sortable, and it matches across GA4, ads and your CRM.',
-  '<b>Never put UTMs on links within your own site.</b> It restarts the visit and wipes out the real source.',
+  '<b>Never put UTMs on links within your own site.</b> It overwrites the real source, so GA4 credits the wrong channel.',
   '<b>Keep a shared list</b> of every tagged link, so the next person uses the same names.',
 ];
 function mistakes(m, i) {
   const L = [];
   L.push({ t: 'Counting page views as conversions.', d: 'A visit to your contact or pricing page is interest, not a lead. Count the confirmed action instead.', on: i.existing !== 'none' });
   if (m.has('purchases')) L.push({ t: 'Duplicate purchase events.', d: 'A store app plus a theme or Tag Manager tag sends purchase twice. Keep one source, and always send transaction_id so duplicates can be dropped.', on: i.store === 'shopify' });
-  L.push({ t: 'Thank-you page reloads.', d: 'Refreshes, bookmarks and back-button visits count again. Set lead actions to count once, and keep the thank-you page out of search and menus.', on: i.confirm === 'page' });
+  const formWins = m.has('leads') || m.has('bookings'); // the form question is hidden otherwise
+  L.push({ t: 'Thank-you page reloads.', d: 'Refreshes, bookmarks and back-button visits count again. Set lead actions to count once, and keep the thank-you page out of search and menus.', on: formWins && i.confirm === 'page' });
   L.push({ t: 'Tracking everything as primary.', d: 'If clicks, scrolls and page views steer bids, the platform finds people who click, not people who buy. Keep primary to the actions closest to money.', on: m.gads });
-  L.push({ t: 'Counting the button click, not the success.', d: 'A "Submit" click fires even when the form fails validation. Trigger on the thank-you page or the success message.', on: i.confirm === 'msg' });
+  L.push({ t: 'Counting the button click, not the success.', d: 'A "Submit" click fires even when the form fails validation. Trigger on the thank-you page or the success message.', on: formWins && i.confirm === 'msg' });
   return L;
 }
 (function () {
@@ -1217,7 +1220,7 @@ function mistakes(m, i) {
     else if (p.ecommerce === 'other') { setRadio(form, 'store', 'other'); markFromProfile('store-l', true); }
     if (p.adBudget && toNum(p.adBudget) > 0 && checkedVals(form, 'channels').length === 0) { setChecks(form, 'channels', ['google']); markFromProfile('channels-l', true); }
   }
-  let profile = null;
+  let profile = null, touched = false;
   function xlinks(m, i) {
     const L = [{ key: 'tracking', why: 'make sure Tag Manager, GA4 and your ad tags are installed first.' }];
     if (m.has('leads') || m.has('bookings')) L.push({ key: 'leadCapture', why: 'every lead in your CRM with its source, which the offline path depends on.' });
@@ -1229,13 +1232,14 @@ function mistakes(m, i) {
   function complexFlags(m, i) { return { offline: m.b2bCrm, value: m.has('purchases') || !!m.leadValue, app: m.has('installs'), embed: i.confirm === 'embed' && (m.has('leads') || m.has('bookings')) }; }
   function headline(m) {
     if (!m.events.length) return { num: '0', unit: 'conversions planned yet', zero: true, plain: 'Pick at least one win to build your plan.' };
-    if (m.gads) return { num: String(m.primaries), unit: (m.primaries === 1 ? 'conversion should' : 'conversions should') + ' steer your ad bids', zero: m.primaries === 0, plain: m.primaries + ' of ' + m.events.length + ' tracked actions should steer your Google Ads bids.' };
+    if (m.gads) return { num: String(m.primaries), unit: (m.primaries === 1 ? 'conversion should' : 'conversions should') + ' steer your ad bids', zero: m.primaries === 0, plain: m.primaries + ' of ' + m.events.length + ' tracked ' + (m.events.length === 1 ? 'action' : 'actions') + ' should steer your Google Ads bids.' };
     return { num: String(m.keys), unit: m.keys === 1 ? 'key event to mark in GA4' : 'key events to mark in GA4', zero: m.keys === 0, plain: m.keys + ' key ' + (m.keys === 1 ? 'event' : 'events') + ' to mark in GA4.' };
   }
   function lineFor(m) {
     if (!m.events.length) return 'Pick at least one win on the left to build your plan.';
     const others = m.events.length - (m.gads ? m.primaries : m.keys);
-    let s = m.gads ? 'Track <b>' + m.events.length + '</b> actions in all; the other ' + others + ' are for reporting only, so they don\'t pull your bids toward cheap clicks.' : 'You track <b>' + m.events.length + '</b> actions. When you start ads, the same names import straight into Google Ads.';
+    const acts = (n) => n === 1 ? 'action' : 'actions';
+    let s = m.gads ? 'Track <b>' + m.events.length + '</b> ' + acts(m.events.length) + ' in all' + (others > 0 ? '; the other ' + others + (others === 1 ? ' is' : ' are') + ' for reporting only, so ' + (others === 1 ? 'it doesn\'t' : 'they don\'t') + ' pull your bids toward cheap clicks.' : '.') : 'You track <b>' + m.events.length + '</b> ' + acts(m.events.length) + '. When you start ads, the same names import straight into Google Ads.';
     if (m.leadValue) s += ' Each lead is worth about <b>' + esc(money(m.leadValue)) + '</b> to you, so pass that as its value.';
     s += ' Setup takes about <b>' + esc(timeRange(m.lo, m.hi)) + '</b> the first time.';
     return s;
@@ -1258,9 +1262,9 @@ function mistakes(m, i) {
     mistakes(m, i).forEach((x) => L.push('- ' + x.t + (x.on ? ' (applies to you)' : '') + ' ' + x.d));
     L.push('', 'WHERE IT GETS COMPLEX');
     complexText(COMPLEX, complexFlags(m, i)).forEach((l) => L.push(l));
-    L.push('', 'NEXT TOOLKIT: ' + nextFor(m, i).name + ' ' + LINKS[nextFor(m, i).key].url);
+    L.push('', 'NEXT TOOLKIT: ' + linkText(nextFor(m, i).key));
     L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xlinksText(xlinks(m, i)));
-    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL, 'All DIY toolkits: ' + absUrl(LINKS.hub.url));
     return L.join('\n');
   }
   function tableNote(m) {
@@ -1283,7 +1287,8 @@ function mistakes(m, i) {
     $('store-wrap').hidden = !m.has('purchases');
     $('app-wrap').hidden = !m.has('installs');
     $('value-wrap').hidden = !(m.has('leads') || m.has('calls') || m.has('bookings'));
-    setExampleState(isExample(i), 'Example: a B2B service firm on HubSpot that gets form leads and calls, running Google and LinkedIn ads. Change any answer to make it yours.');
+    // With a profile, unmapped answers are still examples until the visitor changes something.
+    setExampleState(isExample(i) || (!!profile && !touched), 'Example: a B2B service firm on HubSpot that gets form leads and calls, running Google and LinkedIn ads. Change any answer to make it yours.', !!profile && !touched);
     const h = headline(m);
     $('out-num').textContent = h.num;
     $('out-num').classList.toggle('is-zero', h.zero);
@@ -1306,12 +1311,17 @@ function mistakes(m, i) {
     syncCopy();
     sticky();
   }
-  initShell(3, () => { applyValues(EXAMPLE); applyProfile(null); render(); $('w-leads').focus(); });
+  initShell(3, () => { applyValues(EXAMPLE); applyProfile(null); touched = true; render(); $('w-leads').focus(); });
   const syncCopy = initCopy(() => planText(last.m, last.i));
   const sticky = initSticky();
   applyValues(EXAMPLE);
   profile = initProfileStrip((p) => { profile = p; applyProfile(p); render(); }, () => { profile = null; applyProfile(null); render(); });
   if (profile) applyProfile(profile);
+  // A changed answer is the visitor's own: drop its "From your profile" tag (as Paid 02 and 04 do).
+  const PF_LABEL = { wins: 'wins-l', model: 'model-l', crm: 'crm-l', store: 'store-l', channels: 'channels-l' };
+  const onUserChange = (e) => { touched = true; if (e.target && PF_LABEL[e.target.name]) markFromProfile(PF_LABEL[e.target.name], false); };
+  form.addEventListener('input', onUserChange, true);
+  form.addEventListener('change', onUserChange, true);
   form.addEventListener('submit', (e) => e.preventDefault());
   form.addEventListener('input', render);
   form.addEventListener('change', render);

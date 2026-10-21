@@ -259,14 +259,15 @@ def browser_checks(data):
             if f.endswith('paid/01_What_Kind_of_Business_Are_You.html'):
                 continue
             with open(os.path.join(ROOT, f), encoding='utf-8') as fh:
-                if 'profile-strip' not in fh.read():
+                src = fh.read()
+                if 'profile-strip' not in src and 'id="profile"' not in src:
                     if any(f.startswith(k) for k in KNOWN_NO_PROFILE):
                         known.append(os.path.basename(f)[:2])
                     else:
                         noprefill.append(f + ' (does not read the profile)')
                     continue
             pg.goto(base + f, wait_until='load'); pg.wait_for_timeout(300)
-            strip = pg.evaluate("(document.getElementById('profile-strip')||{}).textContent||''")
+            strip = pg.evaluate("(document.getElementById('profile-strip')||document.getElementById('profile')||{}).textContent||''")
             if 'QA Test Co' not in strip:
                 noprefill.append(f)
             saved = pg.evaluate("localStorage.getItem('bl_diy_profile_v1')")
