@@ -426,7 +426,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email')]
     tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
     tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
+    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets'), ('Buildout', 'index.html#buildout', 'buildout')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
