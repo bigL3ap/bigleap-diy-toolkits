@@ -385,27 +385,27 @@
   "people": {
     "Dallas Olsen": {
       "title": "Director of RevOps",
-      "photo": ""
+      "photo": "assets/people/dallas-olsen.jpg"
     },
     "Scott Smoot": {
       "title": "Director of PPC",
-      "photo": ""
+      "photo": "assets/people/scott-smoot.jpg"
     },
     "Shemmah Al-Darweesh": {
       "title": "Director of Organic Growth",
-      "photo": ""
+      "photo": "assets/people/shemmah-al-darweesh.jpg"
     },
     "Kristina Ainge": {
       "title": "Director of Digital PR",
-      "photo": ""
+      "photo": "assets/people/kristina-ainge.jpg"
     },
     "Erica Pounder": {
       "title": "Email Marketing",
-      "photo": ""
+      "photo": "assets/people/erica-pounder.jpg"
     },
     "Coby Bush": {
       "title": "VP of Marketing",
-      "photo": ""
+      "photo": "assets/people/coby-bush.jpg"
     }
   },
   "note": "people[].photo: a square headshot path (e.g. assets/people/dallas-olsen.jpg) or URL. Empty shows initials."

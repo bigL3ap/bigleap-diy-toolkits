@@ -443,6 +443,45 @@ TRACK_TMPL = r"""<script id="bl-track-js">
 })();
 </script>"""
 
+# "Try me" cue: a small red badge on the first control a visitor can play with, until they touch it.
+# Targets: the first [data-try] element on the page; on toolkit pages, otherwise the first answer group.
+# Badge is positioned in page coordinates so containers with overflow:hidden don't clip it.
+TRY_JS = r"""<script id="bl-try-js">
+(function () {
+  'use strict';
+  var css = '.bl-try-badge{position:absolute;z-index:40;padding:1px 8px;border-radius:999px;background:#EA4335;color:#fff;font:700 11px/1.6 "Open Sans","Segoe UI",Arial,sans-serif;pointer-events:none;white-space:nowrap;box-shadow:0 2px 6px rgba(20,61,85,.25)}' +
+    '@media (prefers-reduced-motion:no-preference){.bl-try-glow{animation:bl-try-glow 2.4s ease-in-out infinite}.bl-try-badge{animation:bl-try-bob 2.4s ease-in-out infinite}}' +
+    '@keyframes bl-try-glow{0%,100%{box-shadow:0 0 0 0 rgba(49,135,181,0)}50%{box-shadow:0 0 0 5px rgba(49,135,181,.3)}}' +
+    '@keyframes bl-try-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}' +
+    '@media print{.bl-try-badge{display:none}}';
+  function find() {
+    var t = document.querySelector('[data-try]');
+    if (t) return t.offsetParent ? t : null;
+    if (!/\/toolkits\/[a-z]+\//.test(location.pathname)) return null;
+    var all = document.querySelectorAll('[role="radiogroup"], label.opt, .seg');
+    for (var i = 0; i < all.length; i++) if (all[i].offsetParent && !all[i].closest('.blh, .blx-bar, details:not([open])')) return all[i];
+    return null;
+  }
+  function start(t) {
+    var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+    var b = document.createElement('span'); b.className = 'bl-try-badge'; b.setAttribute('aria-hidden', 'true'); b.textContent = t.getAttribute('data-try') || 'Try me';
+    document.body.appendChild(b); t.classList.add('bl-try-glow');
+    function place() {
+      if (!document.body.contains(t) || !t.offsetParent) { b.style.display = 'none'; if (!document.body.contains(t)) stop(); return; }
+      var r = t.getBoundingClientRect(); b.style.display = '';
+      b.style.top = Math.round(r.top + window.scrollY - 10) + 'px';
+      b.style.left = Math.round(r.right + window.scrollX - b.offsetWidth + 6) + 'px';
+    }
+    var iv = setInterval(place, 800);
+    function stop() { clearInterval(iv); window.removeEventListener('resize', place); if (b.parentNode) b.parentNode.removeChild(b); t.classList.remove('bl-try-glow'); }
+    ['pointerdown', 'keydown', 'change'].forEach(function (ev) { t.addEventListener(ev, stop, { once: true }); });
+    window.addEventListener('resize', place); place();
+  }
+  var tries = 0;
+  (function go() { var t = find(); if (t) return start(t); if (++tries < 6) setTimeout(go, 500); })();
+})();
+</script>"""
+
 def track_js():
     return TRACK_TMPL.replace('__GTM__', GTM_ID).replace('__HUB__', HUBSPOT_ID)
 
@@ -467,7 +506,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     # click from the bar. Internal pages (Buildout, Team review) sit after a divider.
     menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
     tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey')]
-    tools_tabs = [('Widgets', 'index.html#widgets', 'widgets'), ('Buildout', 'index.html#buildout', 'buildout'), ('Team review', 'review.html', 'review')]
+    tools_tabs = [('Widgets', 'index.html#widgets', 'widgets'), ('Sales assets', 'sales.html', 'sales'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Buildout', 'index.html#buildout', 'buildout'), ('Team review', 'review.html', 'review')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
@@ -521,13 +560,14 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-try-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-version-js"[^>]*></script>\n?', '', s)   # removes the retired version switch
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
     s = s.replace('</head>', CSS + '\n' + track_js() + '\n</head>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n</body>', 1)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n' + TRY_JS + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
@@ -549,10 +589,14 @@ if __name__ == '__main__':
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
-    apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
+    apply('mockups/homepage.html', header('mockups/homepage.html', 'mockups', '', None, None, ''))
+    apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'mockups', '', None, None, ''))
     # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
     if os.path.exists(os.path.join(ROOT, 'review.html')):
         apply('review.html', header('review.html', 'review', '', None, None, theme))
+    # Sales assets: the live-call deck, per-service options and talk tracks. Internal; tab only.
+    if os.path.exists(os.path.join(ROOT, 'sales.html')):
+        apply('sales.html', header('sales.html', 'sales', '', None, None, theme))
     # Your Marketing Roadmap: a shared output page with its own tab; no pager.
     if os.path.exists(os.path.join(ROOT, 'roadmap.html')):
         apply('roadmap.html', header('roadmap.html', 'roadmap', '', None, None, ''))
@@ -563,4 +607,4 @@ if __name__ == '__main__':
         if os.path.exists(os.path.join(ROOT, pv['file'])):
             apply(pv['file'], header(pv['file'], 'preview', '', None, None, ''))
             print('preview', pv['file'])
-    print('index.html, journey.html, review.html')
+    print('index.html, journey.html, review.html, sales.html')
