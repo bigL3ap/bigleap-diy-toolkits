@@ -1,12 +1,13 @@
 {
   "updated": "2026-10-21",
-  "note": "How the toolkits and services support each other. Node ids: rv1-rv7 (RevOps), paid1-paid4, seo1-seo2, pr1-pr2, em1-em3. Edge = [from, to, why]: doing 'from' makes 'to' work better or is needed first.",
+  "note": "How the toolkits and services support each other. Node ids: rv1-rv7 (RevOps), paid1-paid4, seo1-seo2, pr1-pr2, em1-em3, plan1-plan4 (Strategy). Edge = [from, to, why]: doing 'from' makes 'to' work better or is needed first.",
   "nodes": {
     "rv1": ["revops", 1], "rv2": ["revops", 2], "rv3": ["revops", 3], "rv4": ["revops", 4], "rv5": ["revops", 5], "rv6": ["revops", 6], "rv7": ["revops", 7],
     "paid1": ["paid", 1], "paid2": ["paid", 2], "paid3": ["paid", 3], "paid4": ["paid", 4],
     "seo1": ["seo", 1], "seo2": ["seo", 2],
     "pr1": ["pr", 1], "pr2": ["pr", 2],
-    "em1": ["email", 1], "em2": ["email", 2], "em3": ["email", 3]
+    "em1": ["email", 1], "em2": ["email", 2], "em3": ["email", 3],
+    "plan1": ["strategy", 1], "plan2": ["strategy", 2], "plan3": ["strategy", 3], "plan4": ["strategy", 4]
   },
   "edges": [
     ["paid1", "rv1", "If the profile shows leads landing in an inbox, capturing them in a CRM comes before any new traffic."],
@@ -50,7 +51,15 @@
     ["em1", "em2", "Only automate once the domain is authenticated and the list is clean."],
     ["em1", "rv2", "An authenticated domain keeps sales follow-up out of spam too."],
     ["em2", "em3", "Running flows need a scorecard to show what's working."],
-    ["em3", "rv6", "Email-driven leads and revenue belong on the pipeline dashboard."]
+    ["em3", "rv6", "Email-driven leads and revenue belong on the pipeline dashboard."],
+    ["paid1", "plan1", "Your Business Profile fills in the situation check, so it starts from what you've already told us."],
+    ["plan1", "plan2", "Knowing the problem you're solving tells the foundations check which gaps matter most."],
+    ["plan2", "rv7", "If analytics shows up as missing or unknown, the tracking check is where to fix it."],
+    ["plan3", "seo1", "Your positioning line belongs in your homepage title and headline."],
+    ["plan3", "paid4", "Your positioning and promise become the headlines and descriptions for your first campaigns."],
+    ["plan3", "pr1", "A clear point of view is the angle reporters and hosts look for."],
+    ["plan4", "em2", "The moments worth following up become the emails that send themselves."],
+    ["plan4", "seo2", "Asking happy customers for reviews builds the local search profile people check before they call."]
   ],
   "support": {
     "revops": {
@@ -82,6 +91,13 @@
       "paid": "Welcome and cart flows turn paid clicks into revenue after the first visit.",
       "seo": "Review-request emails grow local reviews, a local ranking factor.",
       "pr": "A healthy list is the owned audience every announcement and coverage piece goes to first."
+    },
+    "strategy": {
+      "paid": "a positioning line and promise to write ads from, and a clear goal to choose campaigns by.",
+      "seo": "the words for your homepage title, headlines and key pages.",
+      "pr": "a point of view worth pitching, and the angle behind it.",
+      "email": "the moments after a sale worth an email, and the voice to write them in.",
+      "revops": "priorities, so CRM and tracking work goes where the real gaps are."
     }
   }
 }

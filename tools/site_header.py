@@ -423,10 +423,11 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
         items.append(f'<li class="blh-li{" r" if i >= 3 else ""}"><button class="blh-top" type="button" aria-expanded="false">{e(label)}<span class="car" aria-hidden="true"></span></button><div class="blh-dd">{dd}</div></li>')
         if label == 'Resources':
             items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
-    SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email')]
+    SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email'), ('Strategy', 'strategy')]
     tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
     tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets'), ('Buildout', 'index.html#buildout', 'buildout')]
+    # Team review and Buildout are internal: linked from the hub's draft strip and footer, not the public bar.
+    tools_tabs = [('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey'), ('Widgets', 'index.html#widgets', 'widgets')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
@@ -489,7 +490,7 @@ if __name__ == '__main__':
     import sys
     only_pages = 'pages-only' in sys.argv
     d = json.load(open(os.path.join(ROOT, 'toolkits.json')))
-    ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
+    ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email', 'strategy'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
     by = {s['id']: s for s in d['series']}
     seq = [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
     SEQ_JSON = json.dumps([t['file'] for _, t in seq])
@@ -508,6 +509,9 @@ if __name__ == '__main__':
     # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
     if os.path.exists(os.path.join(ROOT, 'review.html')):
         apply('review.html', header('review.html', 'review', '', None, None, theme))
+    # Your Marketing Roadmap: a shared output page with its own tab; no pager.
+    if os.path.exists(os.path.join(ROOT, 'roadmap.html')):
+        apply('roadmap.html', header('roadmap.html', 'roadmap', '', None, None, ''))
     # Preview modules: drafts listed under "previews" in toolkits.json. They get the site header but
     # no Previous/Next pager, and they are never added to SEQ, so the public sequence is unchanged
     # until a draft is approved and moved into a series.

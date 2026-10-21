@@ -50,6 +50,7 @@ Every toolkit has the same parts, with the same ids, because the shared header s
 1. Add it to `toolkits.json`.
    - A public toolkit goes into its series.
    - A draft that should not be public yet goes under `"previews"`. Previews show on `review.html` and are never added to the public list, the map or Previous and Next.
+   - A **new series** also needs: a colour, node prefix and id in `index.html` (`COLORS`, `DARK_COLORS`, `PFX`, `SERVICE_IDS`); a tab and its place in `ORDER` in `tools/site_header.py`; and its toolkits in `journey.html` (`K`, `SERIES`, `SERIES_ORDER`, `CAMPAIGN`, and a `--c-<series>` colour). The Strategy series is the worked example.
 2. Add its key to the `LINKS` map in the pages that should link to it.
 3. If it has real relationships with other toolkits, add them to `data/connections.json`. Each needs a reason, and the arrow must point from the toolkit that helps to the one it helps. Don't add links just to fill the map.
 4. Run `python3 tools/site_header.py` to add the shared header, toolkit bar, pager and tracking.

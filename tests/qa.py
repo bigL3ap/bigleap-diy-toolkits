@@ -13,7 +13,7 @@ What it covers
   Browser  Every page loads with no console errors; no horizontal scroll at 390px; every toolkit
            prefills from a saved Business Profile and never overwrites it with example answers;
            "Copy my plan" produces text; Team Review renders every open item and every owner filter
-           shows that owner's items; the toolkit bar's Team review link is reachable on mobile;
+           shows that owner's items; Team review is linked from the hub and the toolkit bar's last tab is reachable on mobile;
            keyboard focus is visible on the first interactive control; dark mode renders.
 
 Exit code 0 when every check passes, 1 otherwise. Results print as PASS / FAIL / SKIP / KNOWN lines and a summary.
@@ -338,13 +338,15 @@ def browser_checks(data):
         ctx.close()
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        a = pg.query_selector('.blh-tabs a[data-tab="review"]')
+        tr = pg.query_selector('.draft-strip a[href="review.html"]')
+        rec(bool(tr and tr.is_visible()), 'Team review is linked from the hub (internal pages stay out of the toolkit bar)')
+        last = pg.query_selector_all('.blh-tabs a[data-tab]')
         reach = False
-        if a:
-            a.focus(); pg.wait_for_timeout(200)
-            r = pg.evaluate("(()=>{var a=document.querySelector('.blh-tabs a[data-tab=review]').getBoundingClientRect();return [a.left,a.right,innerWidth]})()")
+        if last:
+            last[-1].focus(); pg.wait_for_timeout(200)
+            r = last[-1].evaluate("a => { var b = a.getBoundingClientRect(); return [b.left, b.right, innerWidth]; }")
             reach = r[0] >= 0 and r[1] <= r[2] + 1
-        rec(reach, 'Team review link scrolls into view when focused on a phone')
+        rec(reach, 'last toolkit-bar tab scrolls into view when focused on a phone')
         ctx.close()
 
         # 6. keyboard focus visible on the first control of each toolkit

@@ -10,11 +10,12 @@ Live (GitHub Pages, `main` only): https://bigl3ap.github.io/bigleap-diy-toolkits
 |---|---|
 | `index.html` | The hub: the DIY map, the toolkits by service, widgets |
 | `journey.html` | The buyer-journey map (internal strategy content) |
-| `review.html` | Team review: agenda, drafts to review, open items. Internal, and not linked from toolkit content. |
+| `review.html` | Team review: agenda, drafts to review, open items. Internal: linked from the hub's draft strip and footer, not from the toolkit bar or toolkit content. |
 | `roadmap.html` | Your Marketing Roadmap (internal draft): three priorities built from the visitor's answers |
 | `toolkits/<series>/` | The 18 public toolkits: RevOps (1–6 live, 7 draft), Paid Media, SEO, Digital PR, Email |
-| `toolkits/plan/` | Strategy starters 1–4, internal drafts. Listed under `previews` in `toolkits.json`. |
-| `toolkits.json` | The toolkit catalog. Series drive the hub and Previous and Next; previews drive the review page. |
+| `toolkits/plan/` | Strategy starters 1–4 (the Strategy series). 3 and 4 await Coby's method review. |
+| `roadmap.html` | Your Marketing Roadmap: next priorities from the profile, the starters and toolkit progress. |
+| `toolkits.json` | The toolkit catalog. Series drive the hub, the map and Previous and Next. Toolkits with a `review` note, and any `previews`, are listed on `review.html`. |
 | `data/` | `connections.json` (map links), `widgets.json`, `open-items.json` (Team review) |
 | `widgets/`, `tiles/` | Embeddable widgets and slide tiles |
 | `mockups/` | Homepage and landing-page mockups |
