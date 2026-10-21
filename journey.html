@@ -193,7 +193,7 @@ h1, h2, h3, h4 { font-family: var(--head); color: var(--navy); letter-spacing: -
   .seg-tab small { font-size: 11.5px; }
 }
 /* Page tabs */
-.jtabs { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 36px 0 0; padding: 8px 0; background: var(--bg); }
+.jtabs { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 36px 0 0; padding: 8px 0; background: var(--sky); }
 .jtabs button { display: grid; gap: 2px; align-content: center; min-height: 56px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--navy); cursor: pointer; text-align: left; font: inherit; }
 .jtabs b { font: 700 16px/1.2 var(--head); }
 .jtabs small { font-size: 12.5px; color: var(--muted); }
@@ -603,7 +603,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <li><a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html"><small>Small leap 1</small><b>Know where you stand</b><span>Business Profile: 3 minutes, a path across every service</span></a></li>
       <li><a href="index.html#toolkits"><small>Small leap 2</small><b>Fix the foundations</b><span>Tracking, lead capture, search basics, inbox, spokesperson</span></a></li>
       <li><a href="index.html#toolkits"><small>Small leap 3</small><b>Get ready to grow</b><span>Ads readiness, first campaigns, email flows, dashboards, media kit</span></a></li>
-      <li class="big"><a href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&amp;utm_medium=journey-map"><small>The Big Leap</small><b>Hire Big Leap</b><span>Their plan becomes the scope. Work they already did lowers the cost.</span></a></li>
+      <li class="big"><a href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&amp;utm_medium=journey-map"><small>The Big Leap</small><b>Hire Big Leap</b><span>Their plan becomes the scope. Work they already did, and that holds up, is credited against the scope.</span></a></li>
     </ol>
   </section>
 
@@ -615,13 +615,13 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   </nav>
   <div class="jpanel" id="jp-segments" role="tabpanel" aria-labelledby="jt-segments">
   <section class="block way" aria-labelledby="way-h">
-    <div class="block-head"><div><h2 id="way-h">The Big Leap way, by segment</h2><p>How a real prospect in each Big Leap segment notices we're different, finds help that fits their actual situation, and decides to hire us. Pick a segment; the swimlane below follows the same prospect.</p></div></div>
+    <div class="block-head"><div><h2 id="way-h">The Big Leap way, by segment</h2><p>How Notice Different, Align to Genuine and Recommend Delight work together for a real prospect in each Big Leap segment, before and after they hire us. They notice we're different, find help that fits their actual situation, and get an experience worth recommending, from the first toolkit through onboarding. Pick a segment; the swimlane below follows the same prospect.</p></div></div>
     <div class="seg-tabs" role="tablist" aria-label="Segments" id="seg-tabs"></div>
     <div class="way-panel" id="way" role="tabpanel" aria-live="polite"></div>
   </section>
 
   <section class="block" aria-labelledby="lane-h">
-    <div class="block-head"><div><h2 id="lane-h">Where each leap happens</h2><p>Stages across, what happens down. The three Big Leap phases sit on top. With a segment selected, the numbered cells show that prospect's path in order.</p></div>
+    <div class="block-head"><div><h2 id="lane-h">Where each leap happens</h2><p>Stages across, what happens down. The three motions run under every stage at different weights: Notice Different leads early, Align to Genuine peaks around Purchase, and Recommend Delight is present throughout and grows after it. Purchase is the pivot. With a segment selected, the numbered cells show that prospect's path in order.</p></div>
       <button type="button" class="chip" id="lane-all" aria-pressed="false">Show everything</button></div>
     <div class="board" id="board" aria-label="Swimlane: stages across, lanes down">
       <div class="lane-grid" id="grid"></div>
@@ -636,7 +636,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <div><b>Real value, no gate</b><p>No email wall. A visitor gets a complete plan for free, and leaves better off even if they never call.</p></div>
       <div><b>Honest about limits</b><p>Every plan ends with “Where it gets complex”. Saying where DIY stops is what makes the expert credible.</p></div>
       <div><b>A named expert</b><p>Each toolkit is written by, and hands off to, a real person: Dallas, Scott, Shema, Kristina or Erica.</p></div>
-      <div><b>Small leaps make the Big Leap easier</b><p>The visitor brings their plan to the call. The gaps they couldn't close become the proposal, and the small leaps they already made lower its cost.</p></div>
+      <div><b>Small leaps make the Big Leap easier</b><p>The visitor brings their plan to the call. The gaps they couldn't close become the proposal, and work they already did, and that holds up, is credited against the scope.</p></div>
     </div>
   </section>
 
@@ -675,7 +675,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   </div>
   <div class="jpanel" id="jp-campaigns" role="tabpanel" aria-labelledby="jt-campaigns" hidden>
   <section class="block" aria-labelledby="camp-h">
-    <div class="block-head"><div><h2 id="camp-h">Campaigns for people who engage</h2><p>Every toolkit visit is a signal. These follow-ups keep the relationship going until the prospect is ready for the Big Leap, without turning a helpful tool into a hard sell.</p></div></div>
+    <div class="block-head"><div><h2 id="camp-h">Campaigns for people who engage</h2><p>These follow-ups would keep the relationship going until the prospect is ready for the Big Leap, without turning a helpful tool into a hard sell.</p></div></div>
+    <div class="tp" style="margin-top:14px"><i class="plan">Planned</i><span><b>Planned, not built. None of these run today.</b> Each one needs explicit opt-in consent and a privacy review before it’s built.</span></div>
     <div class="camps" id="camps"></div>
   </section>
 
@@ -687,7 +688,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   </nav>
 </main>
 
-<footer class="foot"><div class="wrap"><span>© Big Leap · Notice Different · Align to Genuine</span><a href="index.html">All DIY toolkits</a></div></footer>
+<footer class="foot"><div class="wrap"><span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight</span><a href="index.html">All DIY toolkits</a></div></footer>
 
 <script>
 (function () {
@@ -758,7 +759,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     '3,1': { t: 'Checks ad-account readiness, plans first campaigns, maps email flows, automates sales steps, plans a pipeline dashboard, builds a media kit.' },
     '3,2': { k: ['paid2', 'paid4', 'em2', 'em3', 'rv4', 'rv6', 'pr2'] },
     '3,3': { tp: [['“Where it gets complex” panel on every plan', 1], ['Case studies matched to their segment', 0], ['Masterclass invite', 0]] },
-    '3,4': { pl: 'MQL, rising intent', s: 'Repeat visits to Paid 4, Email 3 or RevOps 6, or a blocker flagged in Paid 2, are strong buying signals.' },
+    '3,4': { pl: 'MQL, rising intent', s: 'Once they opt in, repeat visits to Paid 4, Email 3 or RevOps 6, or a blocker flagged in Paid 2, are strong buying signals.' },
 
     '4,0': { t: '“This needs someone who has done it a hundred times.”' },
     '4,1': { t: 'Clicks “Talk to Scott / Dallas / Shema / Kristina / Erica about building it” and books a call with their plan attached.' },
@@ -767,9 +768,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     '4,4': { pl: 'SQL', s: 'Meeting booked. utm_campaign shows which toolkit sent them (for example paid-02), so the owner walks in knowing their gaps.' },
 
     '5,0': { t: '“They already know where we are. That saves us time and money.”' },
-    '5,1': { t: 'Strategy call reviews their plan. The gaps they couldn’t close become the scope. The small leaps they already made lower the upfront cost.' },
-    '5,2': { t: 'Their plan and Business Profile feed Coby’s gap audit and the 90-day foundational model.' },
-    '5,3': { tp: [['Strategy call with the toolkit owner', 1], ['Proposal scoped from their gap list', 0], ['Agency Brands routing: Big Leap or LeadGenix by fit', 0], ['Onboarding that skips work they already did', 0]] },
+    '5,1': { t: 'Strategy call reviews their plan. The gaps they couldn’t close become the scope. Work they already did, and that holds up, is credited against the scope.' },
+    '5,2': { t: 'Their plan and Business Profile feed the situation audit and gap audit.' },
+    '5,3': { tp: [['Strategy call with the toolkit owner', 1], ['Proposal scoped from their gap list', 0], ['Agency Brands routing by what they’re buying: Big Leap, Set Fire, LeadGenix or STS', 0], ['Onboarding that skips work they already did', 0]] },
     '5,4': { pl: 'Opportunity → Customer', s: 'Deal created with original source “DIY toolkit”. Closed-won reports back to the toolkit that started it.' }
   };
 
@@ -782,7 +783,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       pains: ['Calls and forms from three locations land in different places, and some never get a reply.', 'Paying for Google Ads in an account a past agency controls, with no idea which calls came from ads.', 'Listings and reviews are inconsistent across locations, so the map pack goes to competitors.'],
       notice: { moment: 'After a slow week, the owner searches “why isn’t Google Ads getting us calls” and lands on a Big Leap article with a three-question widget instead of a contact form.',
         reframe: 'Your next customer is already calling. The problem is what happens after they do.',
-        where: ['Contractor / HVAC page and blog posts with the “Where should you start?” widget', 'Local search ads on HVAC marketing terms', 'LeadGenix referral for single-location shops'],
+        where: ['Contractor / HVAC page and blog posts with the “Where should you start?” widget', 'Local search ads on HVAC marketing terms', 'LeadGenix referral when what they’re buying is local lead-to-sale'],
         why: 'They expected a pitch. They got a check that found the leak in their own funnel in three minutes.' },
       align: { leaps: ['paid1', 'seo2', 'rv1', 'em1', 'paid2'],
         genuine: 'The plan is built for three locations, no CRM and their budget. It says plainly that the ads account must be theirs before anything else.',
@@ -791,7 +792,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         offer: 'A 30-minute plan review with Scott: take ownership of the account and set up call tracking.',
         event: 'Talk to Scott (paid-02) → meeting booked = SQL' },
       solution: { services: ['Paid search with call tracking', 'Local SEO and location pages', 'Review program', 'RevOps: CRM and routing'],
-        scope: 'Starts at campaigns, not cleanup. Multi-location goes to Big Leap; single-location, smaller budgets fit LeadGenix (routing rule to confirm).', cta: ['Talk to Scott', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html'] },
+        scope: 'Starts at campaigns, not cleanup. The situation audit names the lead brand by what they’re buying: multi-location growth stays with Big Leap; small-business paid and SEO goes to Set Fire; local lead-to-sale goes to LeadGenix.', cta: ['Talk to Scott', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html'] },
       kpis: { nd: 'Toolkit visits from Contractor/HVAC pages; widget CTA clicks', ag: 'Profiles with 2+ locations; 2+ toolkits finished', cv: 'SQLs tagged paid-02 or seo-02; close rate; new MRR' },
       path: [
         ['0,1', '<b>Notice Different:</b> searches “how to get more HVAC leads” and lands on a Big Leap article with the “Where should you start?” widget.'],
@@ -800,7 +801,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         ['2,2', '<b>Small leap 2:</b> fixes listings across three Google Business Profiles (SEO 2), connects forms to a free CRM (RevOps 1), authenticates the domain so review requests stop landing in spam (Email 1).'],
         ['2,4', 'Three toolkits finished, multi-location, budget fits: <b>MQL</b>. Shema’s check-in asks how the listings went.'],
         ['3,2', '<b>Small leap 3:</b> Google Ads ready? flags that the old agency owns the account and calls aren’t tracked.'],
-        ['4,1', '<b>Convert:</b> clicks Talk to Scott with the plan attached: <b>SQL</b> (paid-02).'],
+        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Scott with the plan attached: <b>SQL</b> (paid-02).'],
         ['5,1', '<b>The Big Leap:</b> Scott scopes account ownership, call tracking, location pages and a review program, skipping the work they already did.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
 
@@ -827,8 +828,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         ['2,2', '<b>Small leap 2:</b> installs the Google & YouTube app, GA4 and Meta Conversions API (RevOps 7), plans purchase events (Paid 3), adds DMARC for Google and Yahoo sender rules (Email 1).'],
         ['2,4', 'Opts in for the plan, then hits the ecommerce fit rule: <b>Lead → MQL</b>.'],
         ['3,2', '<b>Small leap 3:</b> maps welcome, cart and post-purchase flows (Email 2), finds feed disapprovals (Paid 2), plans Standard Shopping to start (Paid 4).'],
-        ['3,4', 'Returns to Paid 4 and Email 3 twice in a week: high-intent alert to Scott.'],
-        ['4,1', '<b>Convert:</b> clicks Talk to Scott about feed tiering by margin: <b>SQL</b> (paid-04).'],
+        ['3,4', 'Returns to Paid 4 and Email 3 twice in a week. Once they’ve opted in, that would trigger a high-intent alert to Scott (planned).'],
+        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Scott about feed tiering by margin: <b>SQL</b> (paid-04).'],
         ['5,4', '<b>The Big Leap:</b> closes Shopping and Performance Max plus email flows, with clean tracking from day one.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
 
@@ -856,7 +857,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         ['2,2', '<b>Small leap 2:</b> builds lead capture, speed to lead and routing in HubSpot (RevOps 1–3), tags campaigns with UTMs (RevOps 7), opens AI crawler access (SEO 1).'],
         ['2,4', 'HubSpot fit plus four toolkits: <b>MQL</b>.'],
         ['3,2', '<b>Small leap 3:</b> plans sending MQL, SQL and closed-won back to Google Ads (Paid 3), then plans a pipeline dashboard (RevOps 6) and hits multi-touch attribution.'],
-        ['4,4', '<b>Convert:</b> books with Dallas from RevOps 6: <b>SQL</b> (revops-06). Dallas brings in Scott.'],
+        ['4,4', '<b>Purchase pivot:</b> books with Dallas from RevOps 6: <b>SQL</b> (revops-06). Dallas brings in Scott.'],
         ['5,1', '<b>The Big Leap:</b> attribution and reporting, value-based bidding on offline conversions, and AI SEO. The basics are already done.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
 
@@ -883,7 +884,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         ['2,2', '<b>Small leap 2:</b> Pitch-ready check (PR 1): no bios, headshots or press page. Fixes the About page, adds Legal Service schema, sets up Bing Webmaster Tools (SEO 1).'],
         ['2,4', 'Opts in, then hits the fit rule after a second toolkit: <b>Lead → MQL</b>.'],
         ['3,2', '<b>Small leap 3:</b> builds bios, a podcast intro and talking points (PR 2), sets up an intake follow-up flow and a monthly newsletter (Email 2).'],
-        ['4,1', '<b>Convert:</b> clicks Talk to Kristina about a 90-day authority push: <b>SQL</b> (pr-02).'],
+        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Kristina about a 90-day authority push: <b>SQL</b> (pr-02).'],
         ['5,4', '<b>The Big Leap:</b> closes Digital PR plus AI SEO, with local SEO and compliant paid search as phase two.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] }
   };
@@ -914,17 +915,17 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     });
   });
   var out = '<div aria-hidden="true" style="grid-row:1 / span 2;grid-column:1"></div>';
-  out += '<div class="phase-band ph-nd" style="grid-column:2">Notice Different</div><div class="phase-band ph-ag" style="grid-column:3 / span 3">Align to Genuine</div><div class="phase-band ph-cv" style="grid-column:6 / span 2">Convert</div>';
+  out += '<div class="phase-band ph-nd" style="grid-column:2">Notice Different (heaviest here)</div><div class="phase-band ph-ag" style="grid-column:3 / span 3">Align to Genuine (builds to the pivot)</div><div class="phase-band ph-cv" style="grid-column:6 / span 2">Purchase, the pivot (Align to Genuine peaks)</div>';
   LANES.forEach(function (l, li) { out += '<div class="lane-h" style="grid-row:' + (li + 3) + ';grid-column:1"><span>' + esc(l[0]) + '<small>' + esc(l[1]) + '</small></span></div>'; });
   var tmp = document.createElement('div'); tmp.innerHTML = cellsHtml.replace(/grid-row:(\d+);/g, function (m, n) { return 'grid-row:' + (+n + 1) + ';'; });
-  var PHASE_OF = ['Notice Different', 'Align to Genuine', 'Align to Genuine', 'Align to Genuine', 'Convert', 'Convert'];
+  var PHASE_OF = ['Notice Different leads', 'Align to Genuine builds', 'Align to Genuine builds', 'Align to Genuine builds', 'Toward the pivot', 'Purchase, the pivot'];
   STAGES.forEach(function (s, si) {
     out += '<div class="stage-h" style="grid-column:' + (si + 2) + '"><small>' + PHASE_OF[si] + ' · Stage ' + (si + 1) + '</small><strong>' + esc(s[0]) + '</strong></div>';
     LANES.forEach(function (l, li) { var el = tmp.querySelector('#c-' + si + '-' + li); out += el.outerHTML; });
   });
   $('grid').innerHTML = out;
   $('legend').innerHTML = SERIES_ORDER.map(function (s) { return '<span class="chip" style="--c:var(--c-' + s + ')">' + esc(SERIES[s][0]) + ' · ' + esc(SERIES[s][2]) + '</span>'; }).join('') +
-    '<span class="tp"><i class="live">Live</i> in place today</span><span class="tp"><i class="plan">Planned</i> still to build</span>';
+    '<span class="tp"><i class="live">Live</i> in place today</span><span class="tp"><i class="plan">Planned</i> still to build</span><span>Recommend Delight runs under every stage and grows after the Big Leap.</span>';
 
   /* Segments: the Big Leap way panel + swimlane highlight */
   var tabs = $('seg-tabs');
@@ -941,7 +942,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       '<div class="phases">' +
         '<div class="phase ph-nd"><h3>Notice Different</h3><blockquote>“' + esc(s.notice.reframe) + '”</blockquote><p class="moment">' + esc(s.notice.moment) + '</p></div>' +
         '<div class="phase ph-ag"><h3>Align to Genuine</h3><p class="moment">' + esc(s.align.genuine) + '</p><h4>Their small leaps</h4><div class="chips">' + s.align.leaps.map(function (k) { return chip(k, false); }).join('') + '</div></div>' +
-        '<div class="phase ph-cv"><h3>Convert</h3><dl><dt>The trigger</dt><dd>' + esc(s.convert.trigger) + '</dd><dt>The offer</dt><dd>' + esc(s.convert.offer) + '</dd></dl></div>' +
+        '<div class="phase ph-cv"><h3>At the pivot: Purchase</h3><dl><dt>The trigger</dt><dd>' + esc(s.convert.trigger) + '</dd><dt>The offer</dt><dd>' + esc(s.convert.offer) + '</dd><dt>Recommend Delight, once they hire us</dt><dd>Onboarding that skips work they already did, an owner check-in on how it’s going, and the toolkit for the next service they don’t buy yet.</dd></dl></div>' +
       '</div>' +
       '<details class="more"' + (wayOpen ? ' open' : '') + '><summary>Show the full breakdown <span>where they notice us, proof, conversion event and KPIs</span></summary><div class="more-grid">' +
         '<div class="ph-nd"><h4>Where they notice us</h4>' + li(s.notice.where) + '<h4>Why it feels different</h4><p>' + esc(s.notice.why) + '</p><p class="kpi"><b>KPI:</b> ' + esc(s.kpis.nd) + '</p></div>' +
@@ -982,9 +983,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 
   /* Page tabs */
   var JT = ['segments', 'connect', 'measure', 'campaigns'], jtabs = document.querySelector('.jtabs');
-  var pendingK = null;
+  var pendingK = null, connLoaded = false;
   function showPanel(p, focus, quiet) {
-    var parts = String(p || '').split(':'); p = parts[0]; if (parts[1]) pendingK = parts[1];
+    var parts = String(p || '').split(':'); p = parts[0]; if (parts[1]) { pendingK = parts[1]; if (connLoaded && K[parts[1]]) showConn(parts[1], true); }
     if (JT.indexOf(p) < 0) p = 'segments';
     JT.forEach(function (x) { var on = x === p, b = $('jt-' + x); b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; $('jp-' + x).hidden = !on; if (on && focus) b.focus(); });
     if (!quiet) { try { history.replaceState(null, '', '#' + p); } catch (e) {} if (window.blTrack) window.blTrack('diy_journey_tab', { label: p }); }
@@ -1010,10 +1011,10 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       '<div class="col"><h5>Unlocks next <span aria-hidden="true">→</span></h5>' + list(outs, 1, 'The hand-off to Big Leap.') + '</div></div>' +
       '<div class="handoff"><b>Hand-off to sales:</b> “Talk to ' + esc(s[2]) + ' about building it”, tagged <code>utm_campaign=' + CAMPAIGN[id] + '</code>. A booked call becomes an SQL with the toolkit as its source.</div>' +
       '<a class="open" href="' + esc(k[1]) + '">Open this toolkit</a>';
-    if (!quiet && window.blTrack) window.blTrack('diy_map_select', { label: id });
+    if (!quiet) { try { history.replaceState(null, '', '#connect:' + id); } catch (e) {} if (window.blTrack) window.blTrack('diy_map_select', { label: id }); }
   }
   $('series-col').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) showConn(b.getAttribute('data-k')); });
-  fetch('data/connections.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) { EDGES = d.edges || []; showConn(pendingK && K[pendingK] ? pendingK : 'rv7', true); }).catch(function () { showConn('rv7', true); });
+  fetch('data/connections.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) { EDGES = d.edges || []; connLoaded = true; showConn(pendingK && K[pendingK] ? pendingK : 'paid1', true); }).catch(function () { connLoaded = true; showConn(pendingK && K[pendingK] ? pendingK : 'paid1', true); });
 
   /* KPIs by phase */
   var KPIS = [
@@ -1028,10 +1029,14 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       ['Small leaps per person', '2+ toolkits per engaged visitor', 'Whether people follow the path across services.', 'GA4 Explore: users by count of <code>diy_plan_copy</code>; in HubSpot, the “Toolkits used” property once opt-in is live.'],
       ['Business Profiles built', 'A third of engaged visitors', 'The shared start that drives cross-service paths.', 'GA4 event <code>diy_profile_saved</code>.']
     ] },
-    { ph: 'cv', title: 'Convert', sub: 'Are they raising their hand?', items: [
+    { ph: 'cv', title: 'At the pivot', sub: 'Are they raising their hand?', items: [
       ['Talk-to clicks', '3–5% of toolkit visitors', 'Clicks on “Talk to [owner] about building it”.', 'GA4 key event <code>diy_cta_click</code>, by toolkit and owner.'],
       ['Toolkit-sourced SQLs', 'Track monthly; target set after 60 days', 'Meetings booked from a toolkit.', 'HubSpot: meetings where the contact’s original source campaign is <code>diy-toolkits</code>; <code>utm_campaign</code> shows the toolkit.'],
       ['MQL → SQL → won rates', 'At or above other marketing sources', 'Whether toolkit leads are better qualified.', 'HubSpot funnel report filtered to source campaign <code>diy-toolkits</code>, compared with all marketing.']
+    ] },
+    { ph: 'rd', title: 'Recommend Delight', sub: 'Would they recommend us?', items: [
+      ['Onboarding credit', 'Most toolkit-sourced clients', 'New clients whose onboarding skipped work they already did.', 'HubSpot: closed-won deals with original source campaign <code>diy-toolkits</code>, checked against the gap list in the proposal.'],
+      ['Expansion from toolkits', 'Track quarterly; target set after the first QBR cycle', 'Upsells that start when a client is shared the toolkit for a service they don’t buy yet.', 'Upsell Opportunity Tracker, logged per the Client expansion follow-up.']
     ] },
     { ph: 'rv', title: 'Revenue', sub: 'Is it moving the goal?', items: [
       ['Toolkit-sourced new MRR', 'Counts toward the $400K marketing-sourced MRR goal', 'New MRR from deals whose first touch was a toolkit.', 'HubSpot deals report: original source campaign <code>diy-toolkits</code>, closed-won, by brand. LTV = MRR × 6 + one-time, the Agency Brands standard.'],
@@ -1039,9 +1044,9 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       ['Days to close', 'Shorter than other sources', 'Whether small leaps speed up the Big Leap.', 'HubSpot deal “Days to close”, toolkit-sourced vs all.']
     ] }
   ];
-  var PHC = { nd: 'ph-nd', ag: 'ph-ag', cv: 'ph-cv', rv: '' };
+  var PHC = { nd: 'ph-nd', ag: 'ph-ag', cv: 'ph-cv', rd: '', rv: '' };
   $('kpis').innerHTML = '<div class="kt-wrap"><table class="kt"><thead><tr><th scope="col">KPI</th><th scope="col">Example target</th><th scope="col">How to see it</th></tr></thead>' + KPIS.map(function (g) {
-    return '<tbody class="' + PHC[g.ph] + '"' + (g.ph === 'rv' ? ' style="--ph:#143D55"' : '') + '><tr class="kt-g"><th colspan="3" scope="rowgroup">' + esc(g.title) + ' <span>' + esc(g.sub) + '</span></th></tr>' +
+    return '<tbody class="' + PHC[g.ph] + '"' + (g.ph === 'rv' ? ' style="--ph:#143D55"' : g.ph === 'rd' ? ' style="--ph:var(--c-pr)"' : '') + '><tr class="kt-g"><th colspan="3" scope="rowgroup">' + esc(g.title) + ' <span>' + esc(g.sub) + '</span></th></tr>' +
       g.items.map(function (k) { return '<tr><td><b>' + esc(k[0]) + '</b><small>' + esc(k[2]) + '</small></td><td class="tgt">' + esc(k[1]) + '</td><td class="how">' + k[3] + '</td></tr>'; }).join('') + '</tbody>';
   }).join('') + '</table></div>';
   var EVENTS = [
@@ -1050,6 +1055,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     ['diy_toolkit_start', 'The first answer is changed on a toolkit'],
     ['diy_profile_saved', 'A Business Profile is saved'],
     ['diy_plan_copy / diy_plan_download', '“Copy my plan” or download is used'],
+    ['diy_plan_email', 'Planned: an “Email me” button is clicked (no such button exists yet)'],
     ['diy_cta_click', '“Talk to [owner]” or “Get Your Custom Strategy” is clicked'],
     ['diy_next_click', 'Previous or Next toolkit is clicked'],
     ['diy_see_plan_click', 'The live result bar\u2019s \u201cSee your plan\u201d button is clicked'],
@@ -1064,15 +1070,15 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     { t: 'Plan delivery and owner check-in', ch: 'Email (Mailchimp)', trig: '“Email me my plan” opt-in on any toolkit', own: 'Erica, with each toolkit owner as sender',
       steps: ['Day 0: their plan and Business Profile', 'Day 3: “How did it go?” plain-text note from the toolkit owner', 'Day 7: the next small leap for their segment', 'Day 14: a case study from their segment', 'Day 21: a free 20-minute plan review. Exits when a meeting is booked.'],
       kpi: 'Reply rate, click rate, meetings booked', note: 'Runs next to the Masterclass and Closed-Lost nurtures already in Mailchimp.' },
-    { t: 'High-intent sales alert', ch: 'HubSpot workflow + Slack', trig: 'A launch blocker in Paid 2, 3+ toolkits in 14 days, repeat visits to Paid 4, RevOps 6 or Email 3, or a budget that fits',
-      own: 'Dallas (build), toolkit owners (follow-up)', steps: ['Create a task for the owner', 'Post the plan summary to the brand’s sales Slack channel', 'Owner replies personally within one business day'], kpi: 'Time to first touch; alert → SQL rate' },
-    { t: 'Retarget toolkit visitors', ch: 'Google Ads + Meta audiences', trig: 'Visited a toolkit but didn’t copy a plan, or copied a plan but didn’t book',
+    { t: 'High-intent sales alert', ch: 'HubSpot workflow + Slack', trig: 'A launch blocker in Paid 2, 3+ toolkits in 14 days, repeat visits to Paid 4, RevOps 6 or Email 3, or a budget that fits. Requires opt-in consent.',
+      own: 'Dallas (build), toolkit owners (follow-up)', steps: ['Create a task for the owner', 'With the visitor’s explicit consent, share their plan summary in the brand’s sales Slack channel', 'Owner replies personally within one business day'], kpi: 'Time to first touch; alert → SQL rate' },
+    { t: 'Retarget toolkit visitors', ch: 'Google Ads + Meta audiences', trig: 'Visited a toolkit but didn’t copy a plan, or copied a plan but didn’t book. Requires opt-in consent.',
       own: 'Scott', steps: ['Started, didn’t finish: “Finish your plan” ad back to that toolkit', 'Finished, didn’t book: a segment case study plus “Talk to an expert”', 'Exclude customers and open deals'], kpi: 'Return visits, assisted SQLs, cost per SQL' },
-    { t: 'Segment nurture track', ch: 'Email, monthly', trig: 'Opted in; tagged by the service they used',
+    { t: 'Segment nurture track', ch: 'Email, monthly', trig: 'Opted in; tagged by the service they used. Requires opt-in consent.',
       own: 'Coby and Whitney', steps: ['Reuse the 7-track Nurture Track (Paid, SEO, RevOps and more)', 'Each email links the next relevant small leap', 'Quarterly “Small Leaps” roundup of new toolkits'], kpi: 'Click rate, toolkit return visits, MQLs' },
     { t: 'Small Leaps office hours', ch: 'Monthly live session', trig: 'Opted-in toolkit users and widget visitors',
       own: 'Rotating owner (Scott, Shema, Kristina, Erica, Dallas)', steps: ['30 minutes of live Q&A on one service’s toolkits', 'Record for Sweet Takes and YouTube clips', 'Follow-up email with the next small leap'], kpi: 'Registrations, attendance, attendee → SQL' },
-    { t: 'Closed-lost re-engagement', ch: 'Email (Mailchimp)', trig: 'Deal closed-lost on budget or timing',
+    { t: 'Closed-lost re-engagement', ch: 'Email (Mailchimp)', trig: 'Deal closed-lost on budget or timing. Requires opt-in consent.',
       own: 'Sales and Erica', steps: ['“Not ready for us? Start with a small leap.”', 'Send the toolkit that matches their gap list', 'Re-alert sales when they finish two toolkits'], kpi: 'Reactivated SQLs, win-back MRR' },
     { t: 'Client expansion', ch: 'Account management', trig: 'Existing clients without a given service (Upsell Opportunity Tracker)',
       own: 'Account managers', steps: ['Share the toolkit for the service they don’t buy yet in the QBR', 'Their gaps become an upsell scope', 'Log in the upsell tracker'], kpi: 'Upsell SQLs, expansion MRR' },

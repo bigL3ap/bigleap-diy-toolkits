@@ -652,7 +652,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 
 <footer class="foot">
   <div class="wrap">
-    <span>© Big Leap · Notice Different · Align to Genuine</span>
+    <span>© Big Leap · Notice Different · Align to Genuine · Recommend Delight</span>
     <span id="updated"></span>
   </div>
 </footer>
@@ -756,7 +756,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       for (var i = s.toolkits.length; i < SLOTS; i++) h += '<li class="stop-filler" aria-hidden="true"></li>';
       h += '</ol></div>';
     });
-    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span class="lg-wide">Solid line: this leap supports · Dashed: this leap needs</span><span class="lg-narrow">Tap a stop: the stops it connects to stay bright, and the list below explains each link.</span></div>';
+    h += '<div class="map-legend"><span><span class="legend-dot"></span>Live</span><span><span class="legend-dot hollow"></span>Draft 1, in review</span><span class="lg-wide">Solid line: unlocks next · Dashed line: works best after</span><span class="lg-narrow">Tap a stop: the stops it connects to stay bright, and the list below explains each link.</span></div>';
     $('map').innerHTML = h;
     if (conn) {
       var cross = conn.edges.filter(function (e) { return conn.nodes[e[0]][0] !== conn.nodes[e[1]][0]; }).length;
@@ -841,8 +841,8 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
       '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a><a class="btn btn-ghost" href="journey.html#connect:' + esc(id) + '">See it in the journey map</a></div></div>' +
       '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
-      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>') + '</ul>';
-    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || (id === 'paid1' ? '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>' : '<li class="none"><b>Nothing required first.</b> A good place to start for ' + esc(me.s.name) + '.</li>')) + '</ul>';
+    if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
   function renderSupport() {
     if (!conn || !conn.support) return;
@@ -877,7 +877,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       shown += list.length;
       var c = color(s.id);
       out += '<section class="series" style="--c:' + c + '" aria-labelledby="s-' + s.id + '"><div class="series-head"><div><h3 id="s-' + s.id + '">' + esc(s.name) + '</h3><p>' + esc(s.promise) + '</p></div>' +
-        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
+        '<div class="owner"><span class="avatar" aria-hidden="true">' + initials(s.owner) + '</span><span>Owner: ' + esc(s.owner) + '<br><a href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=hub-' + esc(s.id) + '" target="_blank" rel="noopener">Talk to ' + esc(s.first) + '</a></span></div></div><div class="cards">';
       list.forEach(function (t) {
         out += '<a class="card" href="' + esc(t.file) + '"><div class="meta"><span class="step">Step ' + t.n + ' of ' + s.toolkits.length + '</span><span class="status ' + (t.status === 'live' ? 'live">Live' : 'draft">Draft 1') + '</span></div><h4>' + esc(t.title) + '</h4><p>' + esc(t.description) + '</p><span class="go">Open toolkit</span></a>';
       });
