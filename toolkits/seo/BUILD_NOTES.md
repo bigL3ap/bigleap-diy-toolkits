@@ -1,6 +1,6 @@
 # SEO DIY Toolkits: build notes (Draft v1)
 
-Owner: **Shema Al-Darwish** (CTA: "Talk to Shema about building it"). Built Oct 19, 2026 from the Agency Brands call.
+Owner: **Shemmah Al-Darweesh** (CTA: "Talk to Shemmah about building it"). Built Oct 19, 2026 from the Agency Brands call.
 Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready_for_Local_Search.html`. Each is a single self-contained file with no external requests. It uses the RevOps v2 shell, the shared Business Profile, and the cross-link map from the build spec.
 
 ---
@@ -70,7 +70,7 @@ Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready
 ---
 
 ## Settings to edit before launch (top of each file's script)
-- `CTA_URL`: currently `https://www.bigleap.com/contact-us/`. Swap for Shema's meeting scheduler link.
+- `CTA_URL`: currently `https://www.bigleap.com/contact-us/`. Swap for Shemmah's meeting scheduler link.
 - `OWNER`: name and first name used on the CTA and in "Where it gets complex".
 - `EXAMPLE`, `ASSUMPTIONS`: example answers and time ranges.
 - `LINKS`: the shared cross-link map. Paid, Tracking and PR targets must exist at the same relative paths. Neither page was checked against those series' final files.
@@ -81,7 +81,7 @@ Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready
 - Google Drive: the client-specific "Website SEO / GEO Checklist" (AI crawler access review, Organization/FAQ schema for AI understanding, entity clarity, LLM-friendly content → content strategy and AI visibility in "Where it gets complex"). Generalized; no client named.
 - Source notes: AI search tracking needs prompts, URLs, competitors and personas, and has no history before setup; location pages + GBP; competing GBP profiles with similar names; simple local landing pages (hero, H1, details, map).
 
-## Open questions for Shema
+## Open questions for Shemmah
 1. Confirm you are the owner and CTA name for both SEO toolkits, or name a co-owner (Alex and Mark also run SEO/GEO).
 2. Provide your meeting scheduler link to replace `CTA_URL`.
 3. Which AI-search checks should stay in the foundations kit (OAI-SearchBot, PerplexityBot, Bing for Copilot/ChatGPT)? Add llms.txt, or leave it out?
