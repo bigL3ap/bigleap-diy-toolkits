@@ -218,6 +218,18 @@
       "description": "A preliminary situation read: market (capture, generate or expand), the business-health axis holding growth back, the three motions, and the next three priorities.",
       "reviewer": "Coby Bush",
       "review": "Do the market, health and motion rules match the Situation Audit? Calibrate the base depths and the tie-break rule of thumb."
+    },
+    {
+      "id": "plan2",
+      "n": 2,
+      "group": "Strategy starter 2 of 4",
+      "statusLabel": "Internal draft",
+      "title": "What Do You Already Have?",
+      "short": "Foundations",
+      "file": "toolkits/plan/02_What_Do_You_Already_Have.html",
+      "description": "A foundations and gap check: usable, needs work, missing or not sure for 13 areas from brand foundation to revenue engine, with what to fix first and why.",
+      "reviewer": "Coby Bush",
+      "review": "Does the layer order and the 'usable means' test for each area match the Gap Audit? Who sets the written standard for 'not load-bearing'?"
     }
   ]
 }
