@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} · Big Leap</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root { --navy:#143D55; --blue:#3187B5; --blue-ink:#246D96; --tint:#DAE9F2; --sky:#EEF3F8; --paper:#FFFFFF; --line:#D4DADF; --text:#243642; --muted:#5F6E79; --red:#EA4335; --accent:{{ACCENT}}; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:{{ACCENT_DARK}}; color-scheme: dark; } }
+:root[data-theme="dark"] { --navy:#DCE9F2; --blue:#6FB3DA; --blue-ink:#8CC4E4; --tint:#1D3A4C; --sky:#0F1D26; --paper:#142632; --line:#2D4556; --text:#D7E2EA; --muted:#9AAFBD; --accent:{{ACCENT_DARK}}; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: transparent; }
+body { font: 15px/1.5 "Open Sans", "Segoe UI", Arial, sans-serif; color: var(--text); -webkit-text-size-adjust: 100%; }
+.w { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--accent); border-radius: 14px; padding: 18px 18px 16px; max-width: 460px; margin: 0 auto; }
+.k { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 700 12px/1 "Open Sans", Arial, sans-serif; color: var(--muted); }
+.k b { color: var(--accent); font-weight: 700; }
+h1 { font: 800 21px/1.2 "Raleway", "Segoe UI", Arial, sans-serif; color: var(--navy); margin: 8px 0 12px; letter-spacing: -0.01em; }
+fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+legend { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--navy); padding: 0; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { flex: 1 1 auto; min-height: 40px; min-width: 64px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--text); font: 600 14px "Open Sans", Arial, sans-serif; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+input[type=number] { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--text); font: 16px "Open Sans", Arial, sans-serif; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.out { background: var(--sky); border-radius: 12px; padding: 14px 14px 12px; margin-top: 4px; }
+.big { font: 800 30px/1.1 "Raleway", "Segoe UI", Arial, sans-serif; color: var(--navy); }
+.big.hot { color: var(--red); }
+.out p { margin: 6px 0 0; font-size: 14px; }
+.cta { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; min-height: 46px; padding: 10px 16px; border-radius: 14px; background: #C5372B; color: #fff; font: 700 15px "Open Sans", Arial, sans-serif; text-decoration: none; text-align: center; }
+.cta:hover { background: #A32B22; }
+.foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.foot a { color: var(--blue-ink); }
+@media (max-width: 340px) { .w { padding: 14px; } h1 { font-size: 19px; } .big { font-size: 26px; } }
+</style>
+</head>
+<body>
+<main class="w" aria-labelledby="h">
+  <div class="k"><b>{{SERVICE}} · Free DIY toolkit</b><span>{{MINUTES}}</span></div>
+  <h1 id="h">{{TITLE}}</h1>
+  <form id="f" onsubmit="return false"></form>
+  <div class="out" aria-live="polite"><div class="big" id="big"></div><p id="det"></p></div>
+  <a class="cta" id="cta" href="../{{KIT}}" target="_blank" rel="noopener">{{CTA}}</a>
+  <div class="foot"><span>Big Leap · Nothing you enter is stored</span><a href="../index.html" target="_blank" rel="noopener">All toolkits</a></div>
+</main>
+<script>
+(function(){
+'use strict';
+var Q = {{Q}};
+var A = {{A}};
+{{COMPUTE}}
+var f = document.getElementById('f');
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+Q.forEach(function(q){
+  var fs = document.createElement('fieldset');
+  var lg = '<legend id="l-' + q.id + '">' + esc(q.label) + '</legend>';
+  if (q.type === 'number') {
+    fs.innerHTML = lg + '<input type="number" inputmode="numeric" min="0" max="' + (q.max || 100000) + '" id="i-' + q.id + '" aria-labelledby="l-' + q.id + '" value="' + A[q.id] + '">';
+    fs.querySelector('input').addEventListener('input', function(e){ var v = parseFloat(e.target.value); A[q.id] = isFinite(v) && v >= 0 ? Math.min(v, q.max || 100000) : 0; run(); });
+  } else {
+    var opts = q.options || [['yes','Yes'],['no','No'],['unsure','Not sure']];
+    fs.innerHTML = lg + '<div class="seg" role="group" aria-labelledby="l-' + q.id + '">' + opts.map(function(o){ return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + (A[q.id] === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>';
+    Array.prototype.forEach.call(fs.querySelectorAll('button'), function(b){ b.addEventListener('click', function(){ A[q.id] = b.getAttribute('data-v'); Array.prototype.forEach.call(fs.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', x === b); }); run(); }); });
+  }
+  f.appendChild(fs);
+});
+var WID = location.pathname.split('/').pop().replace('.html', ''), answered = false;
+window.dataLayer = window.dataLayer || [];
+function wt(ev, extra){ var o = { event: ev, widget: WID, embedded: window.top !== window.self }; if (extra) for (var k in extra) o[k] = extra[k]; window.dataLayer.push(o); try { if (window.top !== window.self) window.parent.postMessage({ source: 'bl-diy-widget', event: ev, widget: WID, label: o.label || '' }, '*'); } catch (e) {} }
+function tag(u){ if (window.top === window.self || !u || /utm_/.test(u)) return u; return u + (u.indexOf('?') < 0 ? '?' : '&') + 'utm_source=bigleap-widget&utm_medium=widget&utm_campaign=widget-' + WID; }
+wt('diy_widget_view');
+function sendH(){ try { if (window.top !== window.self) window.parent.postMessage({ source: 'bl-diy-widget', type: 'height', widget: WID, height: Math.ceil(document.documentElement.scrollHeight) }, '*'); } catch (e) {} }
+window.addEventListener('load', sendH); window.addEventListener('resize', sendH); setTimeout(sendH, 300);
+
+document.getElementById('cta').addEventListener('click', function(){ wt('diy_widget_cta', { label: this.textContent }); this.href = tag(this.getAttribute('href')); });
+f.addEventListener('click', function(e){ if (!answered && e.target.closest('button')) { answered = true; wt('diy_widget_answer'); } });
+f.addEventListener('input', function(){ if (!answered) { answered = true; wt('diy_widget_answer'); } });
+var CTA0 = { href: document.getElementById('cta').getAttribute('href'), text: document.getElementById('cta').textContent };
+function run(){ setTimeout(function(){ if (typeof sendH === 'function') sendH(); }, 0); var r = compute(A) || {}; var big = document.getElementById('big'); big.textContent = r.big || ''; big.className = 'big' + (r.hot ? ' hot' : ''); document.getElementById('det').textContent = r.detail || ''; var cta = document.getElementById('cta'); cta.setAttribute('href', r.link || CTA0.href); cta.textContent = r.cta || CTA0.text; }
+try { var t = new URLSearchParams(location.search).get('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch(e) {}
+run();
+})();
+</script>
+</body>
+</html>
