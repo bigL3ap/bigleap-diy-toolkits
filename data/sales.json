@@ -172,7 +172,8 @@
           ],
           "ask": "When you ask ChatGPT or Google's AI about your category, does your business come up?",
           "listen": "\"I've never checked\", or competitors named instead of them.",
-          "next": "We fix the foundation, then build the content and authority that AI and search tools cite."
+          "next": "We fix the foundation, then build the content and authority that AI and search tools cite.",
+          "proof": 1
         },
         {
           "widget": "local-ready",
@@ -184,7 +185,8 @@
           ],
           "ask": "Search \"[your service] near me\" from your phone. Where do you show up?",
           "listen": "Missing from the map, wrong hours or phone number, or one location stronger than the rest.",
-          "next": "We manage profiles, listings and local pages for every location."
+          "next": "We manage profiles, listings and local pages for every location.",
+          "proof": 0
         },
         {
           "widget": "review-health",
@@ -196,7 +198,8 @@
           ],
           "ask": "How do you ask customers for reviews today, and who replies to them?",
           "listen": "No routine, old reviews, or negative reviews left without a reply.",
-          "next": "We set up a steady review-request and reply process across your locations."
+          "next": "We set up a steady review-request and reply process across your locations.",
+          "proof": 0
         }
       ]
     },
@@ -233,7 +236,8 @@
           ],
           "ask": "If a reporter called tomorrow asking for an expert quote, who would take the call?",
           "listen": "No named spokesperson, no data or stories ready, or a slow approvals process.",
-          "next": "We shape the angles, prep the spokesperson and pitch the right outlets."
+          "next": "We shape the angles, prep the spokesperson and pitch the right outlets.",
+          "proof": 0
         },
         {
           "widget": "media-kit",
@@ -245,7 +249,8 @@
           ],
           "ask": "Where would a journalist find your founder's bio and a usable headshot today?",
           "listen": "Scattered files, outdated bios, or \"we'd have to put that together.\"",
-          "next": "We build and maintain the media kit alongside every campaign."
+          "next": "We build and maintain the media kit alongside every campaign.",
+          "proof": 0
         },
         {
           "widget": "podcast-ready",
@@ -257,7 +262,8 @@
           ],
           "ask": "What could you talk about for 30 minutes that your best customers would want to hear?",
           "listen": "A clear point of view, customer stories, or a founder who enjoys talking.",
-          "next": "We find shows that fit, prep the talking points, and handle the pitching."
+          "next": "We find shows that fit, prep the talking points, and handle the pitching.",
+          "proof": 1
         }
       ]
     },
@@ -294,7 +300,8 @@
           ],
           "ask": "Have you set up SPF, DKIM and DMARC for the domain you send from?",
           "listen": "\"What's that?\", \"IT handled it years ago\", or open rates that dropped suddenly.",
-          "next": "We set up authentication and list hygiene, then keep an eye on deliverability."
+          "next": "We set up authentication and list hygiene, then keep an eye on deliverability.",
+          "proof": 1
         },
         {
           "widget": "email-flows",
@@ -306,7 +313,8 @@
           ],
           "ask": "What email does a new subscriber or customer get from you in their first week?",
           "listen": "Nothing, a single receipt, or only the monthly newsletter.",
-          "next": "We plan, write, build and test the flows in your email platform."
+          "next": "We plan, write, build and test the flows in your email platform.",
+          "proof": 0
         },
         {
           "widget": "email-health",
@@ -318,7 +326,8 @@
           ],
           "ask": "When did you last remove subscribers who haven't opened in six months or more?",
           "listen": "Never, a list that keeps growing while results fall, or rising complaints.",
-          "next": "We run regular audits and fix issues before they cost revenue."
+          "next": "We run regular audits and fix issues before they cost revenue.",
+          "proof": 1
         }
       ]
     },
