@@ -390,7 +390,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email')]
     tabs = [('All toolkits', 'index.html#toolkits', 'toolkits'), ('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start')]
     tabs += [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'index.html#review', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
+    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Team review', 'review.html', 'review'), ('Widgets', 'index.html#widgets', 'widgets')]
     def tab(t_, f, key):
         return f'<a href="{rel(page, f)}" data-tab="{key}"' + (' aria-current="page"' if key == current or key == service else '') + f'>{e(t_)}</a>'
     tab_html = ''.join(tab(*x) for x in tabs) + '<span class="blh-div" aria-hidden="true"></span>' + ''.join(tab(*x) for x in tools_tabs)
@@ -466,4 +466,14 @@ if __name__ == '__main__':
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
     apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'landing', '', None, None, ''))
-    print('index.html, journey.html')
+    # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
+    if os.path.exists(os.path.join(ROOT, 'review.html')):
+        apply('review.html', header('review.html', 'review', '', None, None, theme))
+    # Preview modules: drafts listed under "previews" in toolkits.json. They get the site header but
+    # no Previous/Next pager, and they are never added to SEQ, so the public sequence is unchanged
+    # until a draft is approved and moved into a series.
+    for pv in d.get('previews', []):
+        if os.path.exists(os.path.join(ROOT, pv['file'])):
+            apply(pv['file'], header(pv['file'], 'preview', '', None, None, ''))
+            print('preview', pv['file'])
+    print('index.html, journey.html, review.html')
