@@ -635,7 +635,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </section>
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Want your dashboard built for you?</h2>
-<p>Copy your dashboard plan and build it report by report, or bring it to a call. It's the exact scope of what we'd fix and build first.</p>
+<p>Copy your dashboard plan and build it report by report, or bring it to a call. It's what we'd look at first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-06" target="_blank" rel="noopener">Talk to Dallas about building it</a>
@@ -660,12 +660,12 @@ tbody th { font-weight: 700; color: var(--heading); }
 <details class="method" id="method">
 <summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
 <div class="method-body">
-<p>Time today is your weekly hours × 4.33 weeks a month. Time you could get back runs from what's left after the checklist's target (the low end) to all of it (the high end). Cost is hours × your hourly cost.</p>
+<p>Time today is your weekly hours × 4.33 weeks a month. Time you could get back runs from what's left after Big Leap's 30-day target (the low end) to all of it (the high end). Cost is hours × your hourly cost.</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th scope="col">Assumption</th><th scope="col">Value</th></tr></thead>
 <tbody>
-<tr><th scope="row">Weekly time still spent once the dashboard is live (the checklist target)</th>
+<tr><th scope="row">Weekly time still spent once the dashboard is live (Big Leap's 30-day target)</th>
 <td><span class="cell"><input class="num-in" id="a-target" type="number" min="0" step="0.25" inputmode="decimal" aria-label="Hours a week at target"><span class="unit">hrs / wk</span></span></td></tr>
 </tbody>
 </table>
@@ -713,7 +713,7 @@ tracking:{ name: 'Can You See What Your Marketing Does? (RevOps 7)', url: '07_Ca
 };
 /* =====================================================================
 ASSUMPTIONS: Big Leap's model defaults for this toolkit.
-targetHoursPerWeek is the checklist's 30-day target: under 0.5 hours a
+targetHoursPerWeek is Big Leap's 30-day target: under 0.5 hours a
 week on pipeline numbers. Visitors can tune it.
 ===================================================================== */
 const ASSUMPTIONS = {
@@ -789,7 +789,7 @@ return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
 (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
 (t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
 (t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+(t.kit && t.kit !== t.self ? '<p class="kit-link">Free toolkit: ' + kitRef(t.kit, 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
 '</div></li>';
 }).join('');
 }
@@ -802,7 +802,7 @@ out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.me
 if (t.why) out.push('   ' + t.why);
 if (t.how) out.push('   How: ' + t.how);
 (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+if (t.kit && t.kit !== t.self) out.push('   Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : ''));
 });
 return out;
 }
@@ -1016,7 +1016,7 @@ function xlinks() {
 return [
 { key: 'paid', why: 'to act on what "New leads by source" shows about your ads.' },
 { key: 'seo', why: 'to grow the organic line on the same report.' },
-{ key: 'pr', why: 'to see press and referral traffic turn into leads.' },
+{ key: 'pr', why: 'to get pitch-ready, so coverage you earn can be tracked as a source.' },
 ];
 }
 function planText(m, ed) {

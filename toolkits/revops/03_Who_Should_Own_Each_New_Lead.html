@@ -667,7 +667,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </section>
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Want your routing built for you?</h2>
-<p>Copy your rules and steps and build them this afternoon, or bring them to a call. The rule list is the exact scope of what we'd build.</p>
+<p>Copy your rules and steps and build them this afternoon, or bring them to a call. The rule list is what we'd look at first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-03" target="_blank" rel="noopener">Talk to Dallas about building it</a>
@@ -820,7 +820,7 @@ return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
 (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
 (t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
 (t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+(t.kit && t.kit !== t.self ? '<p class="kit-link">Free toolkit: ' + kitRef(t.kit, 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
 '</div></li>';
 }).join('');
 }
@@ -833,7 +833,7 @@ out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.me
 if (t.why) out.push('   ' + t.why);
 if (t.how) out.push('   How: ' + t.how);
 (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+if (t.kit && t.kit !== t.self) out.push('   Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : ''));
 });
 return out;
 }
@@ -1009,7 +1009,7 @@ const highMin = manual ? leads * Math.max(a.assignMinutes[0], a.assignMinutes[1]
 const items = [];
 const S = (o) => items.push(Object.assign({ self: 3 }, o));
 const fields = ds.map((d) => d.field);
-if (fields.length) S({ title: 'Collect what the rules read', why: 'Make sure ' + joinList(fields) + ' land on every new contact as dropdowns.' + (ds.some((d) => d.key === 'size') ? ' If you’d rather not ask for company size, that rule depends on enrichment data.' : ''), kit: 1, where: 'Step 4' });
+if (fields.length) S({ title: 'Collect what the rules read', why: 'Make sure ' + joinList(fields) + (fields.length === 1 ? ' lands' : ' land') + ' on every new contact as dropdowns.' + (ds.some((d) => d.key === 'size') ? ' If you’d rather not ask for company size, that rule depends on enrichment data.' : ''), kit: 1, where: 'Step 4' });
 if (reps >= 2) S({ title: 'List who can own a lead', why: 'One row per rep: their HubSpot login, what they cover, and who only takes overflow.', kit: 3, where: 'Step 2' });
 if (reps >= 1) S({ title: reps >= 2 ? 'Agree the rules' : 'Name a backup owner', why: reps >= 2 ? 'Fill in the bracketed names and values on the Rules tab, and have whoever runs sales sign off.' : 'Someone who covers when the owner is out.', kit: 3, where: 'Step 3' });
 if (reps <= 1 && reps >= 1) {

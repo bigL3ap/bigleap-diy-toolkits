@@ -726,7 +726,7 @@ const TOOLKIT_URLS = {
 7: '07_Can_You_See_What_Your_Marketing_Does.html', // Can You See What Your Marketing Does?
 };
 const SERVICE_TOOLKITS = {
-email:   { name: 'Email Marketing DIY Toolkit', url: '../email/01_Will_Your_Emails_Reach_the_Inbox.html' },   // Erica Pounder
+email:   { name: 'Email Marketing DIY Toolkit', url: '../email/02_Which_Emails_Should_Send_Themselves.html' },   // Erica Pounder
 paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/01_What_Kind_of_Business_Are_You.html' },          // Scott Smoot
 seo:     { name: 'SEO DIY Toolkit', url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html' },            // Shema Al-Darwish
 pr:      { name: 'Digital PR DIY Toolkit', url: '../pr/01_Are_You_Ready_to_Be_Pitched.html' },              // Kristina Ainge
@@ -810,7 +810,7 @@ return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
 (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
 (t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
 (t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+(t.kit && t.kit !== t.self ? '<p class="kit-link">Free toolkit: ' + kitRef(t.kit, 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
 '</div></li>';
 }).join('');
 }
@@ -823,7 +823,7 @@ out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.me
 if (t.why) out.push('   ' + t.why);
 if (t.how) out.push('   How: ' + t.how);
 (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+if (t.kit && t.kit !== t.self) out.push('   Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : ''));
 });
 return out;
 }

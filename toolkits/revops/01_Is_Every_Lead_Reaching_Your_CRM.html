@@ -653,7 +653,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </section>
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Want every lead captured for you?</h2>
-<p>Copy your intake map and work through the fixes, or bring it to a call. It's the exact scope of what we'd connect first.</p>
+<p>Copy your intake map and work through the fixes, or bring it to a call. It's what we'd look at first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-01" target="_blank" rel="noopener">Talk to Dallas about building it</a>
@@ -694,7 +694,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </div>
 <footer class="foot">
 <p><a href="../../index.html">← All Big Leap DIY Toolkits</a></p>
-<p>Estimates built from typical small-business lead intake, not a measurement of your account. The checklist's first step measures your real numbers. HubSpot features and plan limits change, so check what your account includes.</p>
+<p>Estimates built from typical small-business lead intake, not a measurement of your account. Measure your real numbers first. HubSpot features and plan limits change, so check what your account includes.</p>
 <p>Big Leap · RevOps DIY Toolkit 1 of 7 · Notice Different · Align to Genuine</p>
 </footer>
 </div>
@@ -719,7 +719,7 @@ const TOOLKIT_URLS = {
 };
 const SERVICE_TOOLKITS = {
 email:   { name: 'Email Marketing DIY Toolkit', url: '../email/01_Will_Your_Emails_Reach_the_Inbox.html' },   // Erica Pounder
-paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/01_What_Kind_of_Business_Are_You.html' },          // Scott Smoot
+paid:    { name: 'Google Ads DIY Toolkit', url: '../paid/03_Which_Conversions_Should_You_Track.html' },          // Scott Smoot
 seo:     { name: 'SEO DIY Toolkit', url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html' },            // Shema Al-Darwish
 pr:      { name: 'Digital PR DIY Toolkit', url: '../pr/01_Are_You_Ready_to_Be_Pitched.html' },              // Kristina Ainge
 content: { name: 'Content Go/No-Go Toolkit', url: '' },       // Whitney Sorensen (not built yet)
@@ -805,7 +805,7 @@ return '<li class="' + (t.done ? 'is-done' : first ? 'is-first' : '') + '">' +
 (t.why ? '<p class="st-why">' + esc(t.why) + '</p>' : '') +
 (t.how ? '<p class="st-how">' + esc(t.how) + '</p>' : '') +
 (t.list ? '<ul>' + t.list.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
-(t.kit ? '<p class="kit-link">' + (t.kit === t.self ? 'In the checklist: ' : 'Free toolkit: ') + kitRef(t.kit, t.kit === t.self ? (t.where || '') : 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.kit !== t.self && t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
+(t.kit && t.kit !== t.self ? '<p class="kit-link">Free toolkit: ' + kitRef(t.kit, 'Toolkit ' + t.kit + ', ' + SERIES[t.kit - 1].title) + (t.where ? ' · ' + esc(t.where) : '') + '</p>' : '') +
 '</div></li>';
 }).join('');
 }
@@ -818,7 +818,7 @@ out.push((t.done ? '[done] ' : (i + 1) + '. ') + t.title + (t.meta ? ' (' + t.me
 if (t.why) out.push('   ' + t.why);
 if (t.how) out.push('   How: ' + t.how);
 (t.list || []).forEach((x) => out.push('   - ' + x));
-if (t.kit) out.push('   ' + (t.kit === t.self ? 'Checklist: ' + (t.where || '') : 'Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : '')));
+if (t.kit && t.kit !== t.self) out.push('   Free toolkit: ' + kitPlain(t.kit) + (t.where ? ', ' + t.where : ''));
 });
 return out;
 }
@@ -1066,6 +1066,7 @@ $('out-gaps').classList.toggle('is-zero', allGood);
 $('out-unit').textContent = allGood ? 'handoffs run on their own' : m.gaps === 1 ? 'handoff needs a person' : 'handoffs need a person';
 $('out-line').innerHTML = allGood
 ? 'Every lead lands in HubSpot with a source and an owner, and both sides hear about it right away.'
+: m.highMin <= 0 ? (!m.leads ? 'Each one is a place a lead can wait or slip. Add your form leads a month to size the hand work.' : m.sourceGap ? 'Each one is a place a lead can wait or slip. It costs no hand time, but every report on which marketing works depends on it.' : 'Each one is a place a lead can wait or slip, though at these estimates it costs no hand time.')
 : 'Each one is a place a lead can wait or slip, and together they cost about <b>' + esc(hoursRange(m.lowMin, m.highMin)) + '</b> of hand work.';
 $('answer').classList.toggle('is-done', allGood);
 flashIfChanged(m.gaps);

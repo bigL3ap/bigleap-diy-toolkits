@@ -645,7 +645,7 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 <input type="radio" id="ga4how-site" name="ga4how" value="site"><label for="ga4how-site">A plugin, app or the site's own settings</label>
 <input type="radio" id="ga4how-both" name="ga4how" value="both"><label for="ga4how-both">More than one way, or not sure</label>
 </div>
-<p class="q-help">Adding it two ways counts every visit twice. We check for that.</p>
+<p class="q-help">Adding it two ways counts page views and events twice. We check for that.</p>
 </div>
 </div>
 
@@ -744,7 +744,7 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Want it built and checked for you?</h2>
-<p>Copy your build list and work through it, or bring it to a call. It's the exact scope of the first two weeks of any campaign we run.</p>
+<p>Copy your build list and work through it, or bring it to a call. It's what we'd look at first.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=revops-07" target="_blank" rel="noopener">Talk to Dallas about building it</a>
@@ -881,7 +881,7 @@ function initProfileStrip(onApply, onClear) {
         '<p class="profile-status" id="profile-status" role="status" aria-live="polite"></p>';
       $('profile-clear').addEventListener('click', () => { clearProfile(); draw(); onClear(); $('profile-status') && ($('profile-status').textContent = ''); });
     } else {
-      box.innerHTML = '<div class="profile-row"><p>Answer 8 questions once and every toolkit fills itself in. ' + linkHtml('profile', 'Build your Business Profile →') + '</p></div>' +
+      box.innerHTML = '<div class="profile-row"><p>Answer 8 questions once and most toolkits fill themselves in. ' + linkHtml('profile', 'Build your Business Profile →') + '</p></div>' +
         '<details id="paste-box"><summary>Paste a profile code</summary>' +
         '<div class="paste-row"><label class="sr-only" for="profile-code">Profile code</label>' +
         '<input class="text-field" id="profile-code" type="text" autocomplete="off" spellcheck="false" placeholder="BL1.…">' +
@@ -1129,8 +1129,8 @@ function model(i, a) {
     ga4T = T('ga4Check');
   } else if (doubleRisk) {
     ga4Status = 'check'; ga4Title = 'Make sure GA4 isn\'t installed twice';
-    ga4Why = 'GA4 is in, but it may be loading from two places. That counts every page view twice and halves your conversion rate on paper.';
-    ga4Warn = 'Double-tagging is the most common GA4 problem we find. Keep exactly one install.';
+    ga4Why = 'GA4 is in, but it may be loading from two places. Duplicate tags count page views and events twice, so page views, events and conversions look inflated.';
+    ga4Warn = 'Keep exactly one install.';
     ga4Steps = ['Open tagassistant.google.com, connect your site and load two pages.', 'If the same G- ID shows up twice, or GA4 → Reports → Realtime shows two page_view events per page, you are double-tagged.', 'Keep one install. If Tag Manager is your setup, remove GA4 from the plugin, theme or platform settings (WordPress: Site Kit or MonsterInsights; Shopify: theme code if the Google & YouTube app is connected).', 'Recheck in Tag Assistant until each page shows one page_view.'];
     ga4T = T('ga4Check');
   } else {
@@ -1143,7 +1143,7 @@ function model(i, a) {
   // 4. Search Console
   items.push({ key: 'gsc', core: true, status: i.gsc === 'yes' ? 'ok' : i.gsc === 'no' ? 'gap' : 'check',
     title: i.gsc === 'unsure' ? 'Check Search Console access' : 'Verify your site in Google Search Console',
-    why: i.gsc === 'yes' ? 'Link it to GA4 if you haven\'t: GA4 Admin → Product links → Search Console links.' : i.gsc === 'unsure' ? 'Go to search.google.com/search-console. If your site is listed, you\'re in. If not, someone else may own it; ask before adding a new one.' : 'It shows which Google searches find you and flags pages Google can\'t index. It also shows when you appear in AI Overviews.',
+    why: i.gsc === 'yes' ? 'Link it to GA4 if you haven\'t: GA4 Admin → Product links → Search Console links.' : i.gsc === 'unsure' ? 'Go to search.google.com/search-console. If your site is listed, you\'re in. If not, someone else may own it; ask before adding a new one.' : 'It shows which Google searches find you and flags pages Google can\'t index. AI Overview impressions are included in its totals, though not broken out separately.',
     steps: ['search.google.com/search-console → Add property → Domain → type your domain without https://.', 'Copy the TXT record and add it in your domain registrar\'s DNS settings (GoDaddy, Namecheap, Cloudflare and so on). Click Verify. DNS can take a few hours.', 'No DNS access? Choose URL prefix instead and verify with your GA4 or Tag Manager account.', 'Sitemaps → submit your sitemap URL. ' + SITEMAP[i.platform], 'In GA4: Admin → Product links → Search Console links → Link.'],
     time: timeRange(T('gsc')[0], T('gsc')[1]), t: T('gsc'), link: i.gsc !== 'yes' ? { key: 'seoBasics', why: 'once you\'re verified, it checks whether Google can find and trust your site.' } : null });
   // 5. Ad tags
@@ -1176,9 +1176,9 @@ function model(i, a) {
       'Back in Campaign Manager, the tag turns Active once LinkedIn sees traffic. That can take up to a day.'],
     time: timeRange(T('linkedin')[0], T('linkedin')[1]), t: T('linkedin') });
   // 6. Call tracking
-  if (i.calls !== 'no') items.push({ key: 'calls', core: i.calls === 'lot', status: i.calls === 'lot' ? 'gap' : 'later',
+  if (i.calls !== 'no') items.push({ key: 'calls', core: i.calls === 'lot', status: i.calls === 'lot' ? 'check' : 'later',
     title: 'Track phone calls',
-    why: i.calls === 'lot' ? 'Calls are your main lead source, so tracking forms alone hides most of what your marketing does.' : 'Start with tap-to-call tracking. Add a call tracking service later if calls grow.',
+    why: i.calls === 'lot' ? 'Calls are your main lead source, so tracking forms alone hides most of what your marketing does. Already tracking calls? Check they show up in GA4 and your CRM.' : 'Start with tap-to-call tracking. Add a call tracking service later if calls grow.',
     steps: ['Make every phone number on the site a tap-to-call link (tel:+15555550123), so taps can be counted.', 'Track the taps as a click_to_call event. The next toolkit sets that up.'].concat(
       ch.indexOf('google') !== -1 ? ['Running Google Ads? Add a call asset (Ads → Assets → + → Call) and count "Calls from ads" with a minimum call length, such as 60 seconds.'] : [],
       ['Need to know which campaign drove a call? A call tracking service (CallRail, CallTrackingMetrics, WhatConverts and others) shows a different number per traffic source and sends calls to GA4, Google Ads and your CRM. It\'s a paid tool; most install with one script through Tag Manager.']),
@@ -1250,6 +1250,7 @@ function stripText(t) { return t.replace(/<[^>]+>/g, ''); }
     else if ((p.crm === 'hubspot' || p.crm === 'other') && radioVal(form, 'crm') === 'none') { setRadio(form, 'crm', 'nosource'); markFromProfile('crm-l', true); }
   }
   let profile = null;
+  let mixed = false; // profile answers applied over example answers, not yet edited
   function xlinks(m, i) {
     const L = [];
     if (i.crm !== 'source') L.push({ key: 'leadCapture', why: 'gets every form lead into your CRM with its source. It already covers the HubSpot tracking code and UTM fields.' });
@@ -1288,7 +1289,8 @@ function stripText(t) { return t.replace(/<[^>]+>/g, ''); }
     last = { m, i };
     $('ga4how-wrap').hidden = i.ga4 !== 'yes';
     $('tags-wrap').hidden = i.channels.length === 0;
-    setExampleState(isExample(i), 'Example: a WordPress site with GA4 from a plugin, no Tag Manager, planning Google and Meta ads. Change any answer to make it yours.');
+    const mix = !!profile && mixed;
+    setExampleState(isExample(i) || mix, mix ? 'Answers marked "From your profile" are yours; the rest are example answers. Change any answer to make it yours.' : 'Example: a WordPress site with GA4 from a plugin, no Tag Manager, planning Google and Meta ads. Change any answer to make it yours.');
     const h = headline(m);
     $('out-num').textContent = h.num;
     $('out-num').classList.toggle('is-zero', h.zero);
@@ -1314,15 +1316,15 @@ function stripText(t) { return t.replace(/<[^>]+>/g, ''); }
     syncCopy();
     sticky();
   }
-  initShell(7, () => { applyValues(EXAMPLE); applyProfile(null); render(); $('platform').focus(); });
+  initShell(7, () => { mixed = false; applyValues(EXAMPLE); applyProfile(null); render(); $('platform').focus(); });
   const syncCopy = initCopy(() => planText(last.m, last.i));
   const sticky = initSticky();
   applyValues(EXAMPLE);
-  profile = initProfileStrip((p) => { profile = p; applyProfile(p); render(); }, () => { profile = null; applyProfile(null); render(); });
-  if (profile) applyProfile(profile);
+  profile = initProfileStrip((p) => { profile = p; mixed = true; applyProfile(p); render(); }, () => { profile = null; mixed = false; applyProfile(null); render(); });
+  if (profile) { mixed = true; applyProfile(profile); }
   form.addEventListener('submit', (e) => e.preventDefault());
-  form.addEventListener('input', render);
-  form.addEventListener('change', render);
+  form.addEventListener('input', () => { mixed = false; render(); });
+  form.addEventListener('change', () => { mixed = false; render(); });
   render();
 })();
 </script>
