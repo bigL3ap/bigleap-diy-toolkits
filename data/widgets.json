@@ -385,27 +385,51 @@
   "people": {
     "Dallas Olsen": {
       "title": "Director of RevOps",
-      "photo": "assets/people/dallas-olsen.jpg"
+      "photo": "assets/people/dallas-olsen.jpg",
+      "email": "dallas@bigleap.com",
+      "banner": "assets/people/dallas-olsen-banner.jpg",
+      "qr": "assets/qr/dallas-olsen.svg",
+      "bio": "Meet Dallas. Director of RevOps with a knack for solving messy problems, lightening the mood, and finding joy in the wonderfully unserious parts of life."
     },
     "Scott Smoot": {
       "title": "Director of PPC",
-      "photo": "assets/people/scott-smoot.jpg"
+      "photo": "assets/people/scott-smoot.jpg",
+      "email": "ssmoot@bigleap.com",
+      "banner": "assets/people/scott-smoot-banner.jpg",
+      "qr": "assets/qr/scott-smoot.svg",
+      "bio": "Meet Scott. Director of PPC. Once-upon-a-time rock guitarist. He never misses a Brandon Sanderson novel and just used his woodworking skills to build the ultimate workbench."
     },
     "Shemmah Al-Darweesh": {
       "title": "Director of Organic Growth",
-      "photo": "assets/people/shemmah-al-darweesh.jpg"
+      "photo": "assets/people/shemmah-al-darweesh.jpg",
+      "email": "shemmah@bigleap.com",
+      "banner": "",
+      "qr": "assets/qr/shemmah-al-darweesh.svg",
+      "bio": "Meet Shemmah. Director of Organic Growth at Big Leap."
     },
     "Kristina Ainge": {
       "title": "Director of Digital PR",
-      "photo": "assets/people/kristina-ainge.jpg"
+      "photo": "assets/people/kristina-ainge.jpg",
+      "email": "kristina@bigleap.com",
+      "banner": "assets/people/kristina-ainge-banner.jpg",
+      "qr": "assets/qr/kristina-ainge.svg",
+      "bio": "Meet Kristina. Director of Digital PR. Fueled by Diet Coke and Swig runs, she coaches volleyball, formerly competed with USA Weightlifting, and dominates reality TV trivia challenges."
     },
     "Erica Pounder": {
       "title": "Email Marketing",
-      "photo": "assets/people/erica-pounder.jpg"
+      "photo": "assets/people/erica-pounder.jpg",
+      "email": "epounder@bigleap.com",
+      "banner": "",
+      "qr": "assets/qr/erica-pounder.svg",
+      "bio": "Meet Erica. Email Marketing at Big Leap."
     },
     "Coby Bush": {
       "title": "VP of Marketing",
-      "photo": "assets/people/coby-bush.jpg"
+      "photo": "assets/people/coby-bush.jpg",
+      "email": "coby@bigleap.com",
+      "banner": "assets/people/coby-bush-banner.jpg",
+      "qr": "assets/qr/coby-bush.svg",
+      "bio": "Coby is a brand strategist and fractional CMO. His practice is grounded in behavioral economics and built on one conviction: a brand’s most defensible asset is not its product, but its perspective. He is the co-architect of the Big Leap Way, a methodology for developing brand-led go-to-market strategies that create customers out of critics and evangelists out of customers."
     }
   },
   "note": "people[].photo: a square headshot path (e.g. assets/people/dallas-olsen.jpg) or URL. Empty shows initials."

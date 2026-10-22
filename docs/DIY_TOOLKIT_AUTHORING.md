@@ -18,13 +18,13 @@ Every toolkit has the same parts, with the same ids, because the shared header s
 | Example state | `#example-pill`, `#example-text`, `#restore-example` | Every page opens with realistic example answers. The pill says "Example answers" until the visitor changes something. |
 | Result | `#answer` with `.hero-fig` and `.answer-line` | One number or word, one plain sentence. The progress recorder reads these. |
 | Deliverables | `.panel.deliv` sections | What to do, in order, with the free toolkit for each step |
-| Closing | `.closing` | `#copy-btn` "Copy my plan", optional print, `#cta-link` "Talk to <owner>" |
+| Closing | `.closing` | `#copy-btn` "Copy my plan", optional print, `#cta-link` "Email <owner>" (a mailto with the toolkit in the subject). The shared owner script adds the "Talk To An Expert" card above it: banner photo, bio and a QR code, from `data/widgets.json` people (`email`, `bio`, `banner`, `qr`). |
 | Next and related | `#next`, `#xlinks` | `renderNext(key, why)` and `renderXlinks([...])` using the shared `LINKS` map |
 
 ## Content rules
 
 - **Every toolkit must answer five questions:** what we learned, why it matters, what to do, how to do it, and what's next.
-- **Never withhold the plan.** The whole plan is on the page and in "Copy my plan". "Talk to <owner>" is optional and never required.
+- **Never withhold the plan.** The whole plan is on the page and in "Copy my plan". "Email <owner>" is optional and never required.
 - **Plain English.** Explain any acronym the first time. One idea per sentence.
 - **Explain every recommendation.** Show the reason next to it. Mark rules of thumb as rules of thumb. No invented statistics, no ROI promises, no guarantees.
 - **No commitments nobody approved.** Avoid "exactly what we'd build" or "the scope of any campaign we run". Use "a good place to start", "what we'd look at first".

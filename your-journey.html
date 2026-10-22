@@ -670,6 +670,24 @@ details.support .support-grid { padding: 4px 16px 16px; }
 .yj-key .yj-ico { width: 16px; height: 16px; font-size: 9px; }
 .stop.yj-done .dot { box-shadow: 0 0 0 3px var(--green); }
 .stop.yj-done .lbl::after { content: " ✓"; color: var(--green); font-weight: 800; }
+.yj-x-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 14px; margin-top: 18px; }
+.yj-x { border-radius: 14px; overflow: hidden; background: #0F1B24; color: #fff; display: flex; flex-direction: column; }
+.yj-x .bx-photo { height: 190px; background: #0F1B24 center 28%/cover no-repeat; position: relative; }
+.yj-x .bx-photo:after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,27,36,0) 50%, #0F1B24 100%); }
+.yj-x .bx-body { display: flex; gap: 14px; align-items: flex-start; padding: 14px 18px 18px; flex: 1 1 auto; }
+.yj-x .bx-text { flex: 1 1 auto; min-width: 0; display: grid; gap: 8px; align-content: start; }
+.yj-x .bx-k { font: 800 11px var(--body); letter-spacing: .08em; text-transform: uppercase; color: #9FB0BC; }
+.yj-x h3 { margin: 0; font: 700 20px/1.2 var(--head); color: #fff; }
+.yj-x p { margin: 0; font-size: 14px; line-height: 1.55; color: #C9D3DA; }
+.yj-x .bx-who { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #9FB0BC; }
+.yj-x .bx-who b { color: #fff; }
+.yj-x .bx-who img, .yj-x .ini { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; box-shadow: 0 0 0 2px rgba(255,255,255,.85); }
+.yj-x .ini { display: grid; place-items: center; background: rgba(255,255,255,.18); font: 800 15px var(--head); color: #fff; }
+.yj-x .bx-qr { flex: 0 0 auto; background: #fff; border-radius: 12px; padding: 6px 6px 4px; text-align: center; text-decoration: none; }
+.yj-x .bx-qr img { display: block; width: 132px; height: 132px; }
+.yj-x .bx-qr span { display: block; margin-top: 2px; font: 700 10.5px/1.3 var(--body); color: #0F1B24; }
+.yj-x .yj-cta { margin-top: 4px; }
+@media (max-width: 700px) { .yj-x .bx-qr { display: none; } }
 @media (max-width: 1000px) { .yj-path { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .yj-path { grid-template-columns: 1fr; } }
 </style>
@@ -921,7 +939,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
-    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || /^mailto:/i.test(href) || /^Email /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
     if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
     if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
@@ -963,7 +981,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
 
   <section class="block" aria-labelledby="leap-h">
     <div class="block-head"><div><h2 id="leap-h">The Big Leap: when to bring in an expert</h2><p>The toolkits take you to the edge of the work. When you want it built, run every month or done at scale, talk to the Big Leap expert for that service. Your plan comes with you, so the conversation starts where you are.</p></div></div>
-    <div class="tm-teams" id="yj-experts"><p class="empty">Loading&hellip;</p></div>
+    <div class="yj-x-grid" id="yj-experts"><p class="empty">Loading&hellip;</p></div>
   </section>
 
   <nav class="pager" aria-label="Page navigation">
@@ -1060,12 +1078,14 @@ details.support .support-grid { padding: 4px 16px 16px; }
     };
     $('yj-experts').innerHTML = series.filter(function (s) { return WHEN[s.id]; }).map(function (s) {
       var p = people[s.owner] || {}, first = String(s.owner || '').split(' ')[0];
-      var av = p.photo ? '<img src="' + esc(p.photo) + '" alt="" width="48" height="48" loading="lazy">' : '<span class="cf-av" aria-hidden="true">' + esc(first.charAt(0)) + '</span>';
-      var url = 'https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=your-journey-' + s.id;
+      var mail = p.email ? 'mailto:' + p.email + '?subject=' + encodeURIComponent('Big Leap DIY toolkits: a question for ' + first) + '&body=' + encodeURIComponent('Hi ' + first + ',\n\nI’ve been working through the ' + s.name + ' toolkits (' + location.href.split('#')[0] + ') and would like to talk about the next step.\n\n') : '';
       var mine = s.toolkits.filter(function (t) { return status(kitKey(t.file)) !== 'none'; }).length;
-      return '<article class="tm-team" style="--c:var(--c-' + s.id + ')"><header>' + av + '<div><h3>' + esc(s.name) + '</h3><small>' + esc(s.owner) + (p.title ? ', ' + esc(p.title) : '') + '</small></div></header>' +
-        '<p>Talk to ' + esc(first) + ' ' + esc(WHEN[s.id]) + '</p>' + (mine ? '<p class="fine" style="color:var(--muted)">You have worked on ' + mine + ' of ' + s.toolkits.length + ' ' + esc(s.name) + ' toolkits, so bring your plan.</p>' : '') +
-        '<p><a class="yj-cta" href="' + esc(url) + '" target="_blank" rel="noopener">Talk to ' + esc(first) + '</a></p></article>';
+      var who = (p.photo ? '<img src="' + esc(p.photo) + '" alt="" width="40" height="40" loading="lazy">' : '<span class="ini" aria-hidden="true">' + esc(first.charAt(0)) + '</span>') + '<span><b>' + esc(s.owner) + '</b><br>' + esc((p.title ? p.title + ' · ' : '') + s.name) + '</span>';
+      return '<article class="yj-x">' + (p.banner ? '<div class="bx-photo" style="background-image:url(&quot;' + esc(p.banner) + '&quot;)" role="img" aria-label=""></div>' : '') +
+        '<div class="bx-body"><div class="bx-text"><span class="bx-k">' + esc(s.name) + '</span><h3>Talk To An Expert</h3><p>' + esc(p.bio || ('Meet ' + first + '. ' + (p.title || ''))) + '</p>' +
+        '<p>Email ' + esc(first) + ' ' + esc(WHEN[s.id]) + '</p>' + (mine ? '<p style="color:#9FB0BC">You have worked on ' + mine + ' of ' + s.toolkits.length + ' ' + esc(s.name) + ' toolkits, so bring your plan.</p>' : '') +
+        '<div class="bx-who">' + who + '</div>' + (mail ? '<a class="yj-cta" href="' + esc(mail) + '">Email ' + esc(first) + '</a>' : '') + '</div>' +
+        (mail && p.qr ? '<a class="bx-qr" href="' + esc(mail) + '"><img src="' + esc(p.qr) + '" alt="QR code: email ' + esc(first) + '" width="132" height="132"><span>Scan to email</span></a>' : '') + '</div></article>';
     }).join('');
   }
 
@@ -1182,7 +1202,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     var d = $('map-detail'); d.style.setProperty('--sel', color(me.s.id));
     d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
       '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a></div></div>' +
-      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
+      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Email ' + esc(me.s.first) + '”.</li>') + '</ul>' +
       '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || (id === 'paid1' ? '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>' : '<li class="none"><b>Nothing required first.</b> A good place to start for ' + esc(me.s.name) + '.</li>')) + '</ul>';
     if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
