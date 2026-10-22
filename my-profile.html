@@ -699,6 +699,10 @@ details.support .support-grid { padding: 4px 16px 16px; }
 .mp-f label { font-size: 13px; font-weight: 700; color: var(--navy); }
 .mp-f input, .mp-f select { min-height: 44px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--text); font: inherit; font-size: 16px; width: 100%; }
 .mp-f input:focus-visible, .mp-f select:focus-visible { outline: 3px solid var(--blue); outline-offset: 1px; }
+.mp-sec { margin-top: 20px; }
+.mp-sec:first-child { margin-top: 14px; }
+.mp-sec h4 { margin: 0; font: 800 12.5px var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--blue-ink); }
+.mp-sec .mp-grid { margin-top: 10px; }
 .mp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 16px; }
 .mp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; border-radius: 12px; border: 1px solid var(--navy); background: var(--paper); color: var(--navy); font: 700 14.5px var(--body); text-decoration: none; cursor: pointer; }
 .mp-btn.solid { background: #143D55; border-color: #143D55; color: #fff; }
@@ -1060,7 +1064,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     <div class="block-head"><div><h2 id="bp-h">Your Business Profile <span class="mp-pill" id="bp-pill" hidden>First step</span></h2><p>The basics about your business that every toolkit uses to fill itself in. Edit anything and save; every toolkit uses the new version straight away.</p></div></div>
     <form class="mp-card" id="bp-form" novalidate>
       <p class="mp-note" id="bp-intro"></p>
-      <div class="mp-grid" id="bp-fields"></div>
+      <div id="bp-fields"></div>
       <div class="mp-actions"><button type="submit" class="mp-btn solid" id="bp-save">Save my profile</button><a class="mp-btn quiet" href="toolkits/paid/01_What_Kind_of_Business_Are_You.html" id="bp-guided">Use the guided version</a><span class="mp-status" id="bp-saved" role="status" aria-live="polite"></span></div>
     </form>
   </section>
@@ -1107,33 +1111,52 @@ details.support .support-grid { padding: 4px 16px 16px; }
   function encodeProfile(p) { try { return 'BL1.' + btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/=+$/, ''); } catch (e) { return ''; } }
   function decodeProfile(code) { try { code = String(code || '').trim(); if (code.indexOf('BL1.') !== 0) return null; var b = code.slice(4); var p = JSON.parse(decodeURIComponent(escape(atob(b + '==='.slice((b.length + 3) % 4))))); return p && p.v === 1 ? p : null; } catch (e) { return null; } }
 
-  /* Business Profile fields: the same schema Paid 01 builds (docs/STATE_AND_STORAGE.md). */
-  var F = [
-    { k: 'name', l: 'Business name', t: 'text', ph: 'For example: Peak Plumbing' },
-    { k: 'industry', l: 'What you do', t: 'text', ph: 'For example: residential plumbing' },
-    { k: 'model', l: 'Who you sell to', o: [['b2b', 'Businesses (B2B)'], ['b2c', 'Consumers (B2C)'], ['both', 'Both']] },
-    { k: 'offer', l: 'What you sell', o: [['products', 'Products'], ['services', 'Services'], ['both', 'Both']] },
-    { k: 'reach', l: 'Where you sell', o: [['local', 'Local'], ['regional', 'Regional'], ['national', 'National'], ['international', 'International']] },
-    { k: 'locations', l: 'Places customers visit', o: [['none', 'None'], ['one', 'One location'], ['multi', 'Several locations']] },
-    { k: 'goal', l: 'Your main goal', o: [['leads', 'More leads (forms)'], ['calls', 'More phone calls'], ['sales', 'More online sales'], ['visits', 'More store or office visits'], ['installs', 'More app installs'], ['awareness', 'More people knowing the brand']] },
-    { k: 'adBudget', l: 'Monthly ad budget (dollars)', t: 'number', ph: 'Leave blank if none' },
-    { k: 'website', l: 'A website you can edit', o: [['yes', 'Yes'], ['no', 'No']], bool: true },
-    { k: 'ecommerce', l: 'Online checkout', o: [['shopify', 'Shopify'], ['other', 'Another platform'], ['none', 'None']] },
-    { k: 'app', l: 'A mobile app', o: [['yes', 'Yes'], ['no', 'No']], bool: true },
-    { k: 'crm', l: 'Where new leads go', o: [['hubspot', 'HubSpot'], ['other', 'Another CRM'], ['none', 'No CRM yet']] },
-    { k: 'ga4', l: 'Google Analytics 4', o: [['yes', 'Set up'], ['no', 'Not set up'], ['unsure', 'Not sure']] },
-    { k: 'gtm', l: 'Google Tag Manager', o: [['yes', 'Set up'], ['no', 'Not set up'], ['unsure', 'Not sure']] },
-    { k: 'gbp', l: 'Google Business Profile', o: [['yes', 'Yes'], ['no', 'No'], ['na', 'Not needed']] }
+  /* Business Profile fields: the same schema Paid 01 builds (docs/STATE_AND_STORAGE.md). Grouped for display only; storage stays flat. */
+  var SECTIONS = [
+    { h: 'Business basics', fields: [
+      { k: 'name', l: 'Business name', t: 'text', ph: 'For example: Peak Plumbing' },
+      { k: 'industry', l: 'What you do', t: 'text', ph: 'For example: residential plumbing' }
+    ] },
+    { h: 'Target audience & offer', fields: [
+      { k: 'model', l: 'Who you sell to', o: [['b2b', 'Businesses (B2B)'], ['b2c', 'Consumers (B2C)'], ['both', 'Both']] },
+      { k: 'offer', l: 'What you sell', o: [['products', 'Products'], ['services', 'Services'], ['both', 'Both']] },
+      { k: 'reach', l: 'Where you sell', o: [['local', 'Local'], ['regional', 'Regional'], ['national', 'National'], ['international', 'International']] },
+      { k: 'locations', l: 'Places customers visit', o: [['none', 'None'], ['one', 'One location'], ['multi', 'Several locations']] }
+    ] },
+    { h: 'Goals & budget', fields: [
+      { k: 'goal', l: 'Your main goal', o: [['leads', 'More leads (forms)'], ['calls', 'More phone calls'], ['sales', 'More online sales'], ['visits', 'More store or office visits'], ['installs', 'More app installs'], ['awareness', 'More people knowing the brand']] },
+      { k: 'adBudget', l: 'Monthly ad budget (dollars)', t: 'number', ph: 'Leave blank if none' }
+    ] },
+    { h: 'Online presence', fields: [
+      { k: 'website', l: 'A website you can edit', o: [['yes', 'Yes'], ['no', 'No']], bool: true },
+      { k: 'ecommerce', l: 'Online checkout', o: [['shopify', 'Shopify'], ['other', 'Another platform'], ['none', 'None']] },
+      { k: 'app', l: 'A mobile app', o: [['yes', 'Yes'], ['no', 'No']], bool: true },
+      { k: 'gbp', l: 'Google Business Profile', o: [['yes', 'Yes'], ['no', 'No'], ['na', 'Not needed']] },
+      { k: 'linkedin', l: 'LinkedIn page URL', t: 'text', ph: 'linkedin.com/company/yourbusiness' },
+      { k: 'facebook', l: 'Facebook page URL', t: 'text', ph: 'facebook.com/yourbusiness' },
+      { k: 'gbpUrl', l: 'Google Business Profile URL', t: 'text', ph: 'g.page/yourbusiness' }
+    ] },
+    { h: 'Tracking setup', fields: [
+      { k: 'ga4', l: 'Google Analytics 4', o: [['yes', 'Set up'], ['no', 'Not set up'], ['unsure', 'Not sure']] },
+      { k: 'gtm', l: 'Google Tag Manager', o: [['yes', 'Set up'], ['no', 'Not set up'], ['unsure', 'Not sure']] }
+    ] },
+    { h: 'Lead routing', fields: [
+      { k: 'crm', l: 'Where new leads go', o: [['hubspot', 'HubSpot'], ['other', 'Another CRM'], ['none', 'No CRM yet']] }
+    ] }
   ];
+  var F = SECTIONS.reduce(function (a, s) { return a.concat(s.fields); }, []);
+  function fieldHtml(f, p) {
+    var v = p ? p[f.k] : ''; if (f.bool) v = v === true ? 'yes' : v === false ? 'no' : '';
+    var ctl = f.o ? '<select id="bp-' + f.k + '"><option value="">Choose…</option>' + f.o.map(function (o) { return '<option value="' + o[0] + '"' + (String(v) === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>'
+      : '<input id="bp-' + f.k + '" type="' + f.t + '"' + (f.t === 'number' ? ' min="0" step="any" inputmode="decimal"' : ' maxlength="80" autocomplete="off"') + ' placeholder="' + esc(f.ph || '') + '" value="' + esc(v == null ? '' : v) + '">';
+    return '<div class="mp-f"><label for="bp-' + f.k + '">' + esc(f.l) + '</label>' + ctl + '</div>';
+  }
   function renderProfile() {
     var p = get(K.profile); p = p && p.v === 1 ? p : null;
     $('bp-pill').hidden = !!p;
     $('bp-intro').innerHTML = p ? 'Saved in this browser. Change anything below and save.' : '<b>New here? Start with this.</b> Fill it in here, or <a href="toolkits/paid/01_What_Kind_of_Business_Are_You.html">use the guided version</a>, which explains each question and recommends a path. About 3 minutes either way.';
-    $('bp-fields').innerHTML = F.map(function (f) {
-      var v = p ? p[f.k] : ''; if (f.bool) v = v === true ? 'yes' : v === false ? 'no' : '';
-      var ctl = f.o ? '<select id="bp-' + f.k + '"><option value="">Choose…</option>' + f.o.map(function (o) { return '<option value="' + o[0] + '"' + (String(v) === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>'
-        : '<input id="bp-' + f.k + '" type="' + f.t + '"' + (f.t === 'number' ? ' min="0" step="any" inputmode="decimal"' : ' maxlength="80" autocomplete="off"') + ' placeholder="' + esc(f.ph || '') + '" value="' + esc(v == null ? '' : v) + '">';
-      return '<div class="mp-f"><label for="bp-' + f.k + '">' + esc(f.l) + '</label>' + ctl + '</div>';
+    $('bp-fields').innerHTML = SECTIONS.map(function (s) {
+      return '<div class="mp-sec"><h4>' + esc(s.h) + '</h4><div class="mp-grid">' + s.fields.map(function (f) { return fieldHtml(f, p); }).join('') + '</div></div>';
     }).join('');
     $('mp-code').value = p ? encodeProfile(p) : '';
   }
