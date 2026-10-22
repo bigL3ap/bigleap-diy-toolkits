@@ -1,10 +1,10 @@
 {
   "updated": "2026-10-21",
-  "note": "How the toolkits and services support each other. Node ids: rv1-rv7 (RevOps), paid1-paid4, seo1-seo2, pr1-pr2, em1-em3, plan1-plan4 (Strategy). Edge = [from, to, why]: doing 'from' makes 'to' work better or is needed first.",
+  "note": "How the toolkits and services support each other. Node ids: rv1-rv7 (RevOps), paid1-paid4, seo1-seo5, pr1-pr2, em1-em3, plan1-plan4 (Strategy). Edge = [from, to, why]: doing 'from' makes 'to' work better or is needed first.",
   "nodes": {
     "rv1": ["revops", 1], "rv2": ["revops", 2], "rv3": ["revops", 3], "rv4": ["revops", 4], "rv5": ["revops", 5], "rv6": ["revops", 6], "rv7": ["revops", 7],
     "paid1": ["paid", 1], "paid2": ["paid", 2], "paid3": ["paid", 3], "paid4": ["paid", 4],
-    "seo1": ["seo", 1], "seo2": ["seo", 2],
+    "seo1": ["seo", 1], "seo2": ["seo", 2], "seo3": ["seo", 3], "seo4": ["seo", 4], "seo5": ["seo", 5],
     "pr1": ["pr", 1], "pr2": ["pr", 2],
     "em1": ["email", 1], "em2": ["email", 2], "em3": ["email", 3],
     "plan1": ["strategy", 1], "plan2": ["strategy", 2], "plan3": ["strategy", 3], "plan4": ["strategy", 4]
@@ -39,6 +39,10 @@
     ["paid4", "rv2", "Paid leads cost money; a fast first reply protects that spend."],
     ["seo1", "paid2", "A fast, trustworthy landing page lowers ad costs and lifts Quality Score."],
     ["seo1", "seo2", "Search Console and a crawlable site come before location pages can rank."],
+    ["seo1", "seo5", "General crawl and indexing basics come first; checking whether AI crawlers specifically can read the site is the next layer."],
+    ["seo5", "seo4", "Formatting content for AI Overviews only pays off once AI crawlers can actually reach and read it."],
+    ["seo3", "seo4", "A recognized, consistently described entity gives an AI answer engine a confident subject to name and cite."],
+    ["seo4", "seo3", "Content shaped to be lifted by AI Overviews still needs a clear, consistent entity behind it for that citation to carry weight."],
     ["seo1", "pr1", "A clear About page and schema give journalists the facts they look for when they land on your site."],
     ["seo2", "paid2", "A verified Business Profile powers location and call assets in ads."],
     ["seo2", "em2", "Review-request emails grow Google reviews for each location."],

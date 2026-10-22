@@ -319,6 +319,8 @@ body { overflow-wrap: anywhere; }
 /* Stepper for a two-toolkit series */
 .stepper ol.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
 .stepper ol.n2::before { left: 25%; right: 25%; }
+.stepper ol.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 880px; }
+.stepper ol.n5::before { left: 10%; right: 10%; }
 .stepper a.st { min-height: 44px; }
 .start-here { font-size: 12.5px; }
 .start-here a { font-weight: 700; color: var(--heading); }
@@ -722,7 +724,7 @@ body { overflow-wrap: anywhere; }
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· SEO</span></div>
-<p class="eyebrow"><span class="kit">SEO DIY Toolkit 1 of 2</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<p class="eyebrow"><span class="kit">SEO DIY Toolkit 1 of 5</span><span class="campaign">Notice Different · Align to Genuine</span></p>
 <h1>Can Google Find and Trust Your Site?</h1>
 <p class="lede">Eight quick answers about your website. You get a fix list for anything that stops Google or AI search from seeing your site, in the order to do it.</p>
 </header>
@@ -920,7 +922,7 @@ body { overflow-wrap: anywhere; }
 </div>
 <footer class="foot">
 <p>Free tools and plan limits change. Check your own account before you build.</p>
-<p>© Big Leap · SEO DIY Toolkit 1 of 2 · Draft 1 for internal review · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
+<p>© Big Leap · SEO DIY Toolkit 1 of 5 · Draft 1 for internal review · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
 </footer>
 </div>
 <script>
@@ -937,6 +939,9 @@ const OWNER_EMAIL = 'shemmah@bigleap.com';   /* the closing button emails the ow
 const SERIES = [
   { n: 1, short: 'Foundations', title: 'Can Google Find and Trust Your Site?', file: '01_Can_Google_Find_and_Trust_Your_Site.html' },
   { n: 2, short: 'Local search', title: 'Is Your Business Ready for Local Search?', file: '02_Is_Your_Business_Ready_for_Local_Search.html' },
+  { n: 3, short: 'Entity', title: 'Does Google and AI Know Who You Are?', file: '03_Does_Google_and_AI_Know_Who_You_Are.html' },
+  { n: 4, short: 'AI Overviews', title: 'How Exposed Are You to AI Overviews?', file: '04_How_Exposed_Are_You_to_AI_Overviews.html' },
+  { n: 5, short: 'AI Crawlers', title: 'Can AI Bots Actually Read Your Site?', file: '05_Can_AI_Bots_Actually_Read_Your_Site.html' },
 ];
 const LINKS = {
   profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
@@ -946,6 +951,9 @@ const LINKS = {
   conversions:{ name: 'Which Conversions Should You Track?',   url: '../paid/03_Which_Conversions_Should_You_Track.html', owner: 'Scott Smoot' },
   seoBasics: { name: 'Can Google Find and Trust Your Site?',   url: '../seo/01_Can_Google_Find_and_Trust_Your_Site.html',   owner: 'Shemmah Al-Darweesh' },
   local:     { name: 'Is Your Business Ready for Local Search?', url: '../seo/02_Is_Your_Business_Ready_for_Local_Search.html', owner: 'Shemmah Al-Darweesh' },
+  seoEntity: { name: 'Does Google and AI Know Who You Are?',   url: '../seo/03_Does_Google_and_AI_Know_Who_You_Are.html',   owner: 'Shemmah Al-Darweesh' },
+  seoExposure:{ name: 'How Exposed Are You to AI Overviews?',  url: '../seo/04_How_Exposed_Are_You_to_AI_Overviews.html',   owner: 'Shemmah Al-Darweesh' },
+  seoCrawler:{ name: 'Can AI Bots Actually Read Your Site?',   url: '../seo/05_Can_AI_Bots_Actually_Read_Your_Site.html',   owner: 'Shemmah Al-Darweesh' },
   prReady:   { name: 'Are You Ready to Be Pitched?',           url: '../pr/01_Are_You_Ready_to_Be_Pitched.html',            owner: 'Kristina Ainge' },
   mediaKit:  { name: 'Build Your Media Kit',                   url: '../pr/02_Build_Your_Media_Kit.html',                   owner: 'Kristina Ainge' },
   leadCapture:{ name: 'Is Every Lead Reaching Your CRM?',      url: '../revops/01_Is_Every_Lead_Reaching_Your_CRM.html',    owner: 'Dallas Olsen' },
@@ -1684,7 +1692,7 @@ let SNIPS = {};
   }
   function planText(m) {
     const h = headline(m);
-    const L = ['YOUR SEO FOUNDATION FIX LIST', 'Can Google Find and Trust Your Site? (Big Leap SEO DIY Toolkit 1 of 2)', ''];
+    const L = ['YOUR SEO FOUNDATION FIX LIST', 'Can Google Find and Trust Your Site? (Big Leap SEO DIY Toolkit 1 of 5)', ''];
     if (m.dom) L.push('Site: ' + m.dom);
     L.push('Platform: ' + (m.cms === 'other' ? 'Other or custom' : m.C.name));
     if (currentProfile && currentProfile.website === false) L.push('Your profile says you don\'t have a website yet. Use this list as your launch checklist.');
@@ -1761,7 +1769,7 @@ let SNIPS = {};
 })();
 
 </script>
-<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="../revops/07_Can_You_See_What_Your_Marketing_Does.html"><small>← Previous</small><b>RevOps: Can You See What Your Marketing Does?</b></a><a class="blp-hub" href="../../toolkits.html"><small>SEO · Toolkit 1 of 2</small><b>All toolkits</b></a><a class="blp-a" href="02_Is_Your_Business_Ready_for_Local_Search.html"><small>Next →</small><b>Is Your Business Ready for Local Search?</b></a></div></nav><!-- /bl-pager -->
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="../revops/07_Can_You_See_What_Your_Marketing_Does.html"><small>← Previous</small><b>RevOps: Can You See What Your Marketing Does?</b></a><a class="blp-hub" href="../../toolkits.html"><small>SEO · Toolkit 1 of 5</small><b>All toolkits</b></a><a class="blp-a" href="02_Is_Your_Business_Ready_for_Local_Search.html"><small>Next →</small><b>Is Your Business Ready for Local Search?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
   var P = {"name": "Shemmah Al-Darweesh", "title": "Director of Organic Growth", "photo": "../../assets/people/shemmah-al-darweesh.jpg", "banner": "", "qr": "../../assets/qr/shemmah-al-darweesh.svg", "bio": "Meet Shemmah. Director of Organic Growth at Big Leap.", "email": "shemmah@bigleap.com"};
@@ -1924,7 +1932,7 @@ let SNIPS = {};
       else if (!over && has) h.parentNode.removeChild(h);
     });
   }
-  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html", "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html", "toolkits/plan/02_What_Do_You_Already_Have.html", "toolkits/plan/03_What_Makes_You_Worth_Choosing.html", "toolkits/plan/04_Would_Your_Customers_Recommend_You.html"];
+  var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/seo/03_Does_Google_and_AI_Know_Who_You_Are.html", "toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html", "toolkits/seo/05_Can_AI_Bots_Actually_Read_Your_Site.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html", "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html", "toolkits/plan/02_What_Do_You_Already_Have.html", "toolkits/plan/03_What_Makes_You_Worth_Choosing.html", "toolkits/plan/04_Would_Your_Customers_Recommend_You.html"];
   function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
   var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
   function labelNext() {

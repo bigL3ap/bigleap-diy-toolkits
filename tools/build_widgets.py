@@ -95,6 +95,47 @@ WIDGETS = [
   if (!issues.length) return { big: 'Healthy and active', detail: 'Steady, recent and answered. Keep asking the same way, and never offer anything in return for a review.', cta: 'See more ways to earn reviews', link: '../toolkits/plan/04_Would_Your_Customers_Recommend_You.html' };
   return { big: issues.length === 1 ? 'One thing to fix' : issues.length + ' things to fix', hot: true, detail: issues[0] };
 }"""),
+    dict(id='brand-entity-check', service='SEO', minutes='1 minute', kit='toolkits/seo/03_Does_Google_and_AI_Know_Who_You_Are.html',
+         title='Does Google and AI know who you are?', cta='Check my entity signals',
+         Q=[dict(id='schema', label='Does your homepage have Organization schema markup?', type='choice'),
+            dict(id='nap', label='Are your name, address and phone the same everywhere online?', type='choice'),
+            dict(id='panel', label='Does a Knowledge Panel show when you search your business name?', type='choice')],
+         A=dict(schema='no', nap='unsure', panel='unsure'),
+         compute=r"""function compute(a){
+  var order = ['schema', 'nap', 'panel'], names = { schema: 'Organization schema', nap: 'consistent business details', panel: 'a Knowledge Panel' };
+  var why = { schema: 'A snippet of code on your homepage that tells Google and AI tools exactly who you are. The quickest DIY fix of the three.', nap: 'Mismatched details across directories make it harder for Google to trust which listing is right.', panel: 'This tends to show up once the other signals are solid and consistent, not from a single fix.' };
+  var gaps = order.filter(function(k){ return a[k] !== 'yes'; });
+  if (!gaps.length) return { big: 'Entity signals solid', detail: 'Google and AI tools have a clear, consistent read on who you are. The full toolkit checks press mentions and cross-linked profiles too.', cta: 'Check the rest of my entity signals' };
+  return { big: gaps.length + ' of 3 to fix', hot: gaps[0] !== 'panel', detail: 'Start with ' + names[gaps[0]] + '. ' + why[gaps[0]] };
+}"""),
+    dict(id='ai-overview-exposure', service='SEO', minutes='1 minute', kit='toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html',
+         title='How exposed are you to AI Overviews?', cta='Check my AI Overview exposure',
+         Q=[dict(id='af', label='Do your key pages answer the main question in the first sentence or two?', type='choice'),
+            dict(id='faq', label='Do you use FAQ-style, question-phrased headers?', type='choice'),
+            dict(id='schema', label='Do you have FAQPage or HowTo schema on any pages?', type='choice')],
+         A=dict(af='unsure', faq='no', schema='no'),
+         compute=r"""function compute(a){
+  var order = ['af', 'faq', 'schema'], names = { af: 'answering first', faq: 'FAQ-style headers', schema: 'FAQPage or HowTo schema' };
+  var why = { af: 'An AI tool usually lifts the first clear, complete answer it finds on a page.', faq: 'A header phrased as a real question gives AI tools a clean pair to lift.', schema: 'This marks up a question-and-answer section in a format AI tools can read directly.' };
+  var strong = order.filter(function(k){ return a[k] === 'yes'; }).length;
+  if (strong === 3) return { big: 'Ready for AI Overviews', detail: 'Your content is shaped the way AI tools tend to lift answers from. The full toolkit checks ranking and content freshness too.', cta: 'Check the rest of my exposure' };
+  var gaps = order.filter(function(k){ return a[k] !== 'yes'; });
+  var label = strong === 0 ? 'Low exposure' : 'Building exposure';
+  return { big: label, hot: strong === 0, detail: 'Start with ' + names[gaps[0]] + '. ' + why[gaps[0]] };
+}"""),
+    dict(id='ai-crawler-check', service='SEO', minutes='1 minute', kit='toolkits/seo/05_Can_AI_Bots_Actually_Read_Your_Site.html',
+         title='Can AI bots actually read your site?', cta='Check my AI crawler readiness',
+         Q=[dict(id='robots', label='Does your robots.txt file block any named AI crawlers, like GPTBot or ClaudeBot?', type='choice'),
+            dict(id='render', label='Is your key content visible without JavaScript?', type='choice'),
+            dict(id='gating', label='Is any of your core content behind a login or paywall?', type='choice')],
+         A=dict(robots='unsure', render='unsure', gating='no'),
+         compute=r"""function compute(a){
+  if (a.robots === 'yes') return { big: 'Blocked', hot: true, detail: 'Your robots.txt is telling at least one AI crawler not to visit. Nothing else matters until that block is removed.' };
+  if (a.gating === 'yes') return { big: 'Blocked', hot: true, detail: 'Content behind a login or paywall is invisible to every crawler, AI included. Decide what, if anything, should be public.' };
+  if (a.render !== 'yes') return { big: 'Partially ready', hot: true, detail: 'If key content only appears after JavaScript runs, many AI crawlers may see a blank page. Check your raw HTML.' };
+  if (a.robots === 'unsure') return { big: 'Partially ready', hot: true, detail: 'Worth confirming: check yoursite.com/robots.txt for a Disallow line under any of the AI crawler names.' };
+  return { big: 'Ready', detail: 'No blockers found. The full toolkit checks llms.txt, your sitemap and homepage speed too.', cta: 'Check the rest of my crawler readiness' };
+}"""),
     # ---------------- Digital PR
     dict(id='media-kit', service='Digital PR', minutes='1 minute', kit='toolkits/pr/02_Build_Your_Media_Kit.html',
          title='Is your media kit ready for a journalist?', cta='Build my media kit',
