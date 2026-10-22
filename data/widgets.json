@@ -45,6 +45,17 @@
       "kit": "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html"
     },
     {
+      "id": "paid-value",
+      "title": "What's a messy ad account costing you?",
+      "service": "Paid Media",
+      "owner": "Scott Smoot",
+      "file": "widgets/paid-value.html",
+      "height": 665,
+      "maxWidth": 460,
+      "use": "First slide of a Paid Media pitch: turns a vague audit offer into a dollar range before the owner has committed to anything.",
+      "kit": "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html"
+    },
+    {
       "id": "paid-ready",
       "title": "Is your Google Ads account ready to spend?",
       "service": "Paid Media",
@@ -76,6 +87,17 @@
       "maxWidth": 460,
       "use": "First paid media calls with new advertisers deciding where to start.",
       "kit": "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html"
+    },
+    {
+      "id": "seo-value",
+      "title": "What's being invisible to AI search costing you?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/seo-value.html",
+      "height": 570,
+      "maxWidth": 460,
+      "use": "First slide of an SEO pitch: turns AI-search anxiety into a visits-at-risk range before talking tactics.",
+      "kit": "toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html"
     },
     {
       "id": "seo-foundations",
@@ -175,6 +197,17 @@
       "maxWidth": 460,
       "use": "Thought-leadership and PR conversations; pairs with a Sweet Takes invite.",
       "kit": "toolkits/pr/02_Build_Your_Media_Kit.html"
+    },
+    {
+      "id": "email-value",
+      "title": "What's a list with no flows costing you?",
+      "service": "Email Marketing",
+      "owner": "Erica Pounder",
+      "file": "widgets/email-value.html",
+      "height": 605,
+      "maxWidth": 460,
+      "use": "First slide of an Email pitch: turns \"we just send a newsletter\" into a monthly revenue range.",
+      "kit": "toolkits/email/02_Which_Emails_Should_Send_Themselves.html"
     },
     {
       "id": "email-inbox",

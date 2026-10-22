@@ -3,7 +3,7 @@
     "title": "Big Leap DIY Toolkits: Live Sales Demo Deck",
     "url": "https://docs.google.com/presentation/d/1HacLeKa-OoPuJjSRSrxruZsquVrpVIohIsYQIjUHaaw/edit"
   },
-  "note": "Internal. Value points avoid pricing and promises of results; proof points carry their source. Edit here, then rebuild the deck requests with tools/build_sales_deck.py.",
+  "note": "Internal. Value points avoid pricing and promises of results; proof points carry their source. \"heard\" lines are patterns from real discovery calls, generalized and anonymized — never a specific client's name. Edit here, then rebuild the deck requests with tools/build_sales_deck.py.",
   "start": {
     "widget": "profile-start",
     "headline": "Start with your business, not a pitch.",
@@ -21,11 +21,16 @@
       "id": "revops",
       "name": "RevOps",
       "owner": "Dallas Olsen",
-      "story": "Marketing only pays off when every lead is caught, answered fast and traced to revenue.",
+      "story": "Most small businesses can't say which lead became which customer — so every budget call after that is a guess, and the whole thing runs on whichever person remembers to follow up.",
       "value": [
         "Every form, call and chat lands in the CRM with its source attached.",
         "Fast, automatic follow-up, with a named owner on every lead.",
         "Reporting that ties marketing spend to pipeline and closed revenue."
+      ],
+      "heard": [
+        "“We're basically on a wild goose chase every time someone asks for a case status.” — a common line when leads are scattered across tools with no single source of truth.",
+        "The business runs on one person's memory. If they're out sick, new leads stall.",
+        "A CRM holding thousands of contacts, with only a small fraction of them actually active or current."
       ],
       "proof": [
         {
@@ -41,6 +46,19 @@
       ],
       "options": [
         {
+          "widget": "revops-hours",
+          "headline": "Put a number on hand work.",
+          "points": [
+            "Turns copy-paste, data entry and manual follow-up into hours per month.",
+            "That number makes the case for automation in your own terms.",
+            "Hours back go to selling instead of updating records."
+          ],
+          "ask": "Walk me through everything that happens between a new lead and a booked meeting.",
+          "listen": "Manual steps: copying leads between tools, reminders, re-keying data, chasing status.",
+          "next": "We automate the repeatable steps in the CRM and hand the hours back to the team.",
+          "proof": 1
+        },
+        {
           "widget": "lead-speed",
           "headline": "Reply before they move on.",
           "points": [
@@ -50,7 +68,8 @@
           ],
           "ask": "When a form comes in at 4:45 on a Friday, what happens next?",
           "listen": "\"Same day\" or later, no automatic reply, or \"whoever sees it first.\"",
-          "next": "We set up instant replies, routing and owner alerts in the CRM so every lead hears back fast."
+          "next": "We set up instant replies, routing and owner alerts in the CRM so every lead hears back fast.",
+          "proof": 0
         },
         {
           "widget": "tracking-check",
@@ -62,19 +81,8 @@
           ],
           "ask": "If I asked which channel brought in last month's best customer, could you show me?",
           "listen": "\"Not sure\", spreadsheets, or different answers from marketing and sales.",
-          "next": "We connect forms, calls, ads and the CRM into one view from source to revenue."
-        },
-        {
-          "widget": "revops-hours",
-          "headline": "Put a number on hand work.",
-          "points": [
-            "Turns copy-paste, data entry and manual follow-up into hours per month.",
-            "That number makes the case for automation in your own terms.",
-            "Hours back go to selling instead of updating records."
-          ],
-          "ask": "Walk me through everything that happens between a new lead and a booked meeting.",
-          "listen": "Manual steps: copying leads between tools, reminders, re-keying data, chasing status.",
-          "next": "We automate the repeatable steps in the CRM and hand the hours back to the team."
+          "next": "We connect forms, calls, ads and the CRM into one view from source to revenue.",
+          "proof": 1
         }
       ]
     },
@@ -82,11 +90,16 @@
       "id": "paid",
       "name": "Paid Media",
       "owner": "Scott Smoot",
-      "story": "Ad spend works best when Google learns from real customers, not clicks.",
+      "story": "Too many ad accounts run on autopilot — the same creative as last year, sometimes the same ad copy as a direct competitor — with nobody checking whether the budget is still working.",
       "value": [
         "Account structure and tracking fixed before budget scales.",
         "Bidding trained on leads and sales that matter, including offline results.",
         "Campaign choices matched to the goal, demand and budget."
+      ],
+      "heard": [
+        "“We paid about five thousand a month for six to eight months and got zero leads.” It's what happens when nobody reviews the account.",
+        "“Our last agency used the exact same ad copy for us and for our direct competitor.”",
+        "Budget keeps renewing because cancelling feels riskier than the status quo — even when nobody can say what it's actually producing."
       ],
       "proof": [
         {
@@ -102,6 +115,19 @@
       ],
       "options": [
         {
+          "widget": "paid-value",
+          "headline": "Put a number on a messy account.",
+          "points": [
+            "One minute turns \"not sure\" about tracking into a monthly dollar range.",
+            "Ties back to Google's own published lift from fixing the signal, not a guess.",
+            "A number a business owner can act on before paying for management."
+          ],
+          "ask": "If I asked what Google counts as a conversion in your account right now, could you tell me?",
+          "listen": "\"Not sure\", clicks or page views, or an account nobody's reviewed in months.",
+          "next": "We audit the account, fix tracking and structure, then show the number again.",
+          "proof": 0
+        },
+        {
           "widget": "paid-ready",
           "headline": "Ready before you spend.",
           "points": [
@@ -111,7 +137,8 @@
           ],
           "ask": "Who set up your Google Ads account, and when did someone last review it end to end?",
           "listen": "An old setup, a past agency, or \"we just boost what's working.\"",
-          "next": "We audit and fix the account foundation first, then scale what works."
+          "next": "We audit and fix the account foundation first, then scale what works.",
+          "proof": 1
         },
         {
           "widget": "conversions-check",
@@ -123,7 +150,8 @@
           ],
           "ask": "What does Google Ads count as a conversion in your account today?",
           "listen": "Page views, button clicks, \"all form fills\", or nobody is sure.",
-          "next": "We set up conversion tracking, values and CRM imports so bidding learns from sales."
+          "next": "We set up conversion tracking, values and CRM imports so bidding learns from sales.",
+          "proof": 0
         },
         {
           "widget": "campaign-pick",
@@ -135,7 +163,8 @@
           ],
           "ask": "If you could only run one campaign next month, what would it need to achieve?",
           "listen": "Leads versus sales versus awareness, the monthly budget, and how many people search for what they sell.",
-          "next": "We build the first campaign around that goal, then expand as the data comes in."
+          "next": "We build the first campaign around that goal, then expand as the data comes in.",
+          "proof": 1
         }
       ]
     },
@@ -143,11 +172,16 @@
       "id": "seo",
       "name": "SEO",
       "owner": "Shemmah Al-Darweesh",
-      "story": "Customers find you in Google, in Maps and now in AI answers. Each one needs a solid foundation.",
+      "story": "A lot of SEO pain shows up after a migration nobody checked, or a plateau nobody explained — and now AI tools are a second search engine most sites haven't shown up in yet.",
       "value": [
         "Technical health that lets Google and AI tools crawl and trust the site.",
         "A local presence that is complete and consistent: Business Profile, listings, reviews.",
         "Content and authority built on that foundation."
+      ],
+      "heard": [
+        "A migration can quietly leave thousands of broken pages and open redirects behind — the kind of thing a past agency never mentions.",
+        "Rankings that slide from the teens into single digits over a year, while the invoices keep arriving.",
+        "Twenty reviews sitting next to a competitor's two or three hundred."
       ],
       "proof": [
         {
@@ -162,6 +196,19 @@
         }
       ],
       "options": [
+        {
+          "widget": "seo-value",
+          "headline": "Put a number on being invisible to AI search.",
+          "points": [
+            "Turns \"haven't checked\" into a monthly range of visits that could be at risk.",
+            "Ties to Google and Pew's own published AI-summary click-through data, not a guess.",
+            "A fast way into the AI-visibility conversation without the jargon."
+          ],
+          "ask": "When you ask ChatGPT or Google's AI about your category, does your business come up?",
+          "listen": "\"I've never checked\", or a competitor named instead of them.",
+          "next": "We check the foundation, then build the content and authority AI tools cite.",
+          "proof": 0
+        },
         {
           "widget": "seo-foundations",
           "headline": "Findable by Google and AI search.",
@@ -207,11 +254,15 @@
       "id": "pr",
       "name": "Digital PR",
       "owner": "Kristina Ainge",
-      "story": "Earned coverage builds trust that ads can't buy, and it feeds SEO and AI search too.",
+      "story": "The fear usually isn't bad press — it's losing control of the story before a journalist, a review site or an AI summary tells it first.",
       "value": [
         "Expert positioning and story angles journalists actually use.",
         "Coverage and links from publications your buyers trust.",
         "A media kit and spokesperson ready before the pitch goes out."
+      ],
+      "heard": [
+        "Worry that one bad review, a lawsuit mention or an old news story becomes the AI-generated summary of the business.",
+        "Wanting to get ahead of the narrative, not clean one up after the fact."
       ],
       "proof": [
         {
@@ -228,13 +279,13 @@
       "options": [
         {
           "widget": "pr-ready",
-          "headline": "Ready when a journalist calls.",
+          "headline": "Ready before the story gets told without you.",
           "points": [
             "Checks the spokesperson, story angles and proof points before pitching starts.",
-            "Journalists move fast. Being ready is the difference between a quote and a pass.",
+            "Journalists and AI summaries both move fast — being ready is the difference between shaping the story and reacting to it.",
             "Shows what you need to bring to a PR program."
           ],
-          "ask": "If a reporter called tomorrow asking for an expert quote, who would take the call?",
+          "ask": "If a reporter — or an AI tool summarizing your industry — needed a quote from you tomorrow, who would it be?",
           "listen": "No named spokesperson, no data or stories ready, or a slow approvals process.",
           "next": "We shape the angles, prep the spokesperson and pitch the right outlets.",
           "proof": 0
@@ -271,7 +322,7 @@
       "id": "email",
       "name": "Email Marketing",
       "owner": "Erica Pounder",
-      "story": "Email is the channel you own. It only pays off if it reaches the inbox and sends at the right moments.",
+      "story": "Email is the channel you own outright — but only if it reaches the inbox and sends at the moment someone actually cares.",
       "value": [
         "Deliverability set up right: authentication, unsubscribe and list hygiene.",
         "Automated flows that send at the moment of intent: welcome, follow-up, win-back.",
@@ -290,6 +341,19 @@
         }
       ],
       "options": [
+        {
+          "widget": "email-value",
+          "headline": "Put a number on a list with no flows.",
+          "points": [
+            "Turns \"we only send a newsletter\" into a monthly revenue range.",
+            "Built on Klaviyo's own published flow-vs-campaign benchmark, not a guess.",
+            "Shows which flow is worth building first, before writing a single email."
+          ],
+          "ask": "What email does a new subscriber or customer get from you in their first week?",
+          "listen": "Nothing, a single receipt, or only the monthly newsletter.",
+          "next": "We plan, write, build and test the flows in your email platform.",
+          "proof": 0
+        },
         {
           "widget": "email-inbox",
           "headline": "Keep reaching the inbox.",
@@ -335,11 +399,16 @@
       "id": "strategy",
       "name": "Strategy",
       "owner": "Coby Bush",
-      "story": "Before tactics: the right problem, the foundations already in place, and a reason customers choose you.",
+      "story": "Most businesses aren't missing a tactic. They're missing someone who owns the whole picture instead of one more vendor adding to the pile.",
       "value": [
         "Diagnose the real constraint before choosing channels.",
         "Reuse what already works instead of starting over.",
         "Build a brand and customer experience worth recommending."
+      ],
+      "heard": [
+        "“We don't want the rigid-retainer agency flow — we want a real partner.”",
+        "A two- or three-person team trying to keep marketing running across dozens of locations.",
+        "A handful of vendors, each doing their own piece, and nobody owning how they fit together."
       ],
       "proof": [
         {
@@ -356,10 +425,10 @@
       "options": [
         {
           "widget": "situation-check",
-          "headline": "Solve the right problem first.",
+          "headline": "Find the one problem actually worth solving.",
           "points": [
-            "Two questions point to where marketing should focus right now.",
-            "Keeps the conversation on your real constraint, not the tactic you asked about.",
+            "Two questions point to where marketing should focus right now, not whichever tactic came up last.",
+            "Keeps the conversation on the real constraint, not whichever vendor pitched most recently.",
             "A natural opener for any service conversation."
           ],
           "ask": "If marketing went perfectly for the next year, what would be different for the business?",
