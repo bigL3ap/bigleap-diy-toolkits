@@ -25,12 +25,18 @@ Rules: only Paid 01 writes it automatically, and only once the answers differ fr
 
 ```
 { v: 1,
-  situation: { v: 1, answers: {...}, result: { market, conf, limiting, axes, depth, lead, top }, updated },
-  gap:       { v: 1, answers: { <area>: 'usable'|'weak'|'missing'|'unknown'|'na' }, result: { counts, top, gaps }, updated },
-  brand:     { v: 1, answers: {...}, edits: { <output>: text }, result: { positioning, promise, value, voices }, updated },
-  delight:   { v: 1, answers: {...}, result: { fixes, risk, strong }, updated },
+  situation: { v: 1, answers: { <signal>: value, data?: { <field>: number } }, result: { market, conf, limiting, axes, depth, lead, top, data? }, updated },
+  gap:       { v: 1, answers: { <area>: 'usable'|'weak'|'missing'|'unknown'|'na', aud?: {...} }, result: { counts, top, gaps, aud? }, updated },
+  brand:     { v: 1, answers: { ..., gtm?: { ch, j } }, edits: { <output>: text }, result: { positioning, promise, value, voices, gtm? }, updated },
+  delight:   { v: 1, answers: {...}, result: { fixes, risk, strong, motions?, thin? }, updated },
   roadmap:   { v: 1, goal, done: { <actionId>: ISO date }, updated } }
 ```
+
+Optional fields added Oct 22, 2026 (Coby's review). They are additive, so `v` stays 1 and older saves still load:
+- `situation.answers.data`: the optional real numbers (`mk_volume`, `mk_trend`, `mk_comp`, `mk_ads`, `mk_size`, `mk_cust`, `mk_brand`, `bz_cac`, `bz_cac_prev`, `bz_value`, `bz_disc`, `bz_repeat`, `bz_ref`). `result.data` is how many were entered. The free-text `sell`, `pay` and `deliver` answers are no longer asked; older saves may still hold them, and the go-to-market starter still reads `sell` from them.
+- `gap.answers.aud`: who buys and what drives them (`type`, `age`, `life`, `shop`, `size`, `role`, `where`, `source`, `drivers`, `trigger`, `decide`, `hesitate`, `words`). `result.aud` keeps `type`, `drivers`, `decide`, `whoKnown`, `driveKnown`.
+- `brand.answers.gtm`: `ch` is `{ <channel>: { spend, work } }`, `j` is the customer-journey answers. `result.gtm` is `{ total, byStage, byMotion, channels, flags }`. The roadmap reads `flags`.
+- `delight.answers` now also holds the Notice Different (`nd_*`) and Align to Genuine (`ag_*`) activities. `result.motions` is the level per motion and `result.thin` the thinnest one.
 
 Rules:
 - A starter writes only its own section, through `saveAssessPart()`.

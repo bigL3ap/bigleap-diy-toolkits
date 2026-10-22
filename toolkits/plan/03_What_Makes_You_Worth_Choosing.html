@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>What Makes You Worth Choosing?</title>
-<meta name="description" content="A brand and messaging starter: finish eight sentences and get a first draft of your positioning, promise, value proposition and channel-ready messaging, all editable.">
+<title>How Do You Go to Market?</title>
+<meta name="description" content="Map where your marketing money goes against how buyers find and choose you, and draft the message every channel should carry.">
 <meta name="robots" content="noindex, nofollow">
 <style>
 :root {
@@ -411,6 +411,39 @@ body { background: #fff; color: #000; }
 .stack-sm td::before { content: attr(data-l); color: var(--muted); font-weight: 700; font-size: 13px; }
 }
 /* ---- Strategy starters (plan series): components built on the toolkit design system ---- */
+/* Strategy starters: optional real numbers ("Have real numbers?" boxes) */
+.data-box { margin-top: 12px; border: 1px dashed var(--line-strong); border-radius: 10px; background: var(--surface); }
+.data-box > summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--heading); }
+.data-box > summary .opt-note { font-weight: 400; color: var(--muted); }
+.data-box[open] > summary { border-bottom: 1px dashed var(--line); }
+.data-box > .q-help { padding: 10px 14px 0; margin: 0; }
+.data-grid { display: grid; gap: 14px; padding: 12px 14px 14px; }
+.data-f { display: grid; gap: 4px; }
+.data-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.data-l { flex: 1 1 12rem; font-size: 14px; font-weight: 700; color: var(--heading); }
+.data-in { display: inline-flex; align-items: center; gap: 6px; }
+.data-in .num-in { width: 7.5rem; font-size: 16px; }
+.data-u { font-size: 13px; font-weight: 700; color: var(--muted); }
+.data-how { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.data-how a { color: var(--blue-ink); font-weight: 700; }
+.data-said { margin: 0; font-size: 12.5px; font-weight: 700; color: var(--blue-ink); }
+.tool-list { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 4px; }
+.tool-list a { color: var(--blue-ink); font-weight: 700; }
+/* Strategy starter 3: go-to-market inventory */
+.ch-list { display: grid; gap: 6px; }
+.ch-item { display: grid; gap: 6px; }
+.ch-more { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 0 0 4px 34px; }
+.ch-more[hidden] { display: none; }
+.ch-more .num-in { width: 7rem; font-size: 16px; }
+.ch-more .seg { flex: 1 1 15rem; }
+.ch-more .data-u { white-space: nowrap; }
+.lens .lens-list { margin: 4px 0 0; padding-left: 16px; font-size: 13px; display: grid; gap: 2px; }
+.mbars { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.mbars li { display: grid; gap: 4px; }
+.mbars .mb-top { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+.mbars .mb-top b { color: var(--heading); }
+.mbar { height: 8px; border-radius: 999px; background: var(--tint); overflow: hidden; }
+.mbar > span { display: block; height: 100%; background: var(--heading); border-radius: 999px; }
 .text-field.long { font-weight: 400; line-height: 1.45; resize: vertical; min-height: 2.6em; }
 .q-text-count { font-size: 12px; color: var(--muted); text-align: right; }
 .prelim { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border: 1px dashed var(--line-strong); border-radius: 8px; background: var(--bg); font-size: 13.5px; }
@@ -767,9 +800,9 @@ body { background: #fff; color: #000; }
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· STRATEGY STARTERS</span></div>
-<p class="eyebrow"><span class="kit">Strategy Starter 3 of 4</span><span class="campaign">Notice Different · Align to Genuine</span></p>
-<h1>What Makes You Worth Choosing?</h1>
-<p class="lede">Finish eight sentences about your customers and what you do differently. You get a first draft of your positioning, your promise, a value proposition and messaging you can use on your site, in ads, emails and pitches. Everything is built from your words, and you can edit all of it.</p>
+<p class="eyebrow"><span class="kit">Strategy Starter 3 of 4</span><span class="campaign">Notice Different · Align to Genuine · Recommend Delight</span></p>
+<h1>How Do You Go to Market?</h1>
+<p class="lede">List where your marketing money goes today, then walk through how customers find you and decide. You get a snapshot of your spend against the buyer journey, the places they don't line up, and a first draft of the message every channel should carry. Everything is built from your answers, and you can edit all of it.</p>
 </header>
 <section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
 <nav class="stepper" aria-labelledby="stepper-h">
@@ -784,12 +817,21 @@ body { background: #fff; color: #000; }
 <form id="answers" novalidate>
 <div class="q-head">
 <div class="q-head-row">
-<h2 id="q-title" class="label">Finish each sentence</h2>
+<h2 id="q-title" class="label">How you go to market</h2>
 <span class="pill" id="example-pill">Example answers</span>
 </div>
 <p class="example-text" id="example-text"></p>
 <button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
 </div>
+<fieldset class="q" id="spend-q"><legend><span class="q-label">Where your marketing money goes</span></legend>
+<p class="q-help">Tick every place you spend money on marketing today, including agencies and software. Add a rough monthly amount and whether it's working. Your ad platforms, your accounting software or a credit card statement have the numbers.</p>
+<div class="ch-list" id="ch-list"></div>
+</fieldset>
+<fieldset class="q" id="journey-q"><legend><span class="q-label">Your customer journey</span></legend>
+<p class="q-help">How buyers get from never having heard of you to buying, and what happens next. Free ways to check: <span id="journey-tools"></span></p>
+<div class="q-rows" id="journey-rows"></div>
+</fieldset>
+<div class="q"><span class="q-label">Your message</span><p class="q-help">Finish these sentences so every channel above says the same thing. You get a positioning statement, a promise and lines for each channel.</p></div>
 <div class="q">
 <label class="q-label" for="category">We are a… <span class="pf-tag" id="pf-category" hidden>From your answers elsewhere</span></label>
 <input class="text-field" id="category" name="category" type="text" maxlength="60" autocomplete="off">
@@ -837,13 +879,47 @@ body { background: #fff; color: #000; }
 <input class="text-field" id="never" name="never" type="text" maxlength="60" autocomplete="off">
 <p class="q-help">How you'd describe your voice to a new writer. The “never” is as useful as the rest.</p>
 </fieldset>
-<button type="button" class="btn btn-strong see-results" id="see-results">See my messaging</button>
+<button type="button" class="btn btn-strong see-results" id="see-results">See my go-to-market</button>
 </form>
 </section>
 <div class="results" id="results">
 
 <section class="panel answer" id="answer" tabindex="-1" aria-labelledby="answer-h">
-<h2 class="label" id="answer-h">Your positioning, first draft</h2>
+<h2 class="label" id="answer-h">Your go-to-market, in one line</h2>
+<p class="hero-fig"><span class="hero-num" id="out-num">$0</span><span class="hero-unit" id="out-unit">a month on marketing</span></p>
+<p class="answer-line" id="gtm-line"></p>
+<p class="prelim"><span><b>Your own snapshot.</b> Built from your answers and rough numbers, not from your books or ad accounts. Use it to decide where to look closer.</span></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="stages-h">
+<div class="deliv-head">
+<h2 id="stages-h">Your spend against the buyer journey</h2>
+<p class="deliv-sub">Where your money goes at each stage, next to where you said buyers actually are. Rough splits: some channels work at more than one stage.</p>
+</div>
+<div class="lens-grid" id="gtm-stages"></div>
+</section>
+
+<section class="panel deliv" aria-labelledby="mis-h">
+<div class="deliv-head">
+<h2 id="mis-h">Where it doesn't line up</h2>
+<p class="deliv-sub">Each one says what we noticed, why it matters and the free toolkit that helps. The reasons are shown so you can disagree.</p>
+</div>
+<ol class="steps" id="gtm-flags"></ol>
+</section>
+
+<section class="panel deliv" aria-labelledby="mot-h">
+<div class="deliv-head">
+<h2 id="mot-h">Your spend across the three motions</h2>
+<p class="deliv-sub">Notice Different gets you noticed, Align to Genuine helps the right buyers choose you, and Recommend Delight turns customers into your next customers. Starter 4 looks at each one in depth.</p>
+</div>
+<ul class="mbars" id="gtm-motions"></ul>
+</section>
+
+<section class="panel deliv" aria-labelledby="pos-h">
+<div class="deliv-head">
+<h2 id="pos-h">Your positioning, first draft</h2>
+<p class="deliv-sub">The message every channel above should carry.</p>
+</div>
 <p class="answer-line hero-quote" id="out-line"></p>
 <p class="answer-line" id="out-sub"></p>
 <p class="prelim"><span><b>A first draft, not a finished brand.</b> It's only as sharp as your answers, and it hasn't been tested with customers yet. Read it out loud to a customer before you put it on your site.</span></p>
@@ -891,7 +967,7 @@ body { background: #fff; color: #000; }
 </div>
 <ul class="bullets">
 <li><b>It is</b> a working draft, built only from your answers, to get consistent words onto your site, ads and emails now.</li>
-<li><b>It isn't</b> research. Test it: read your positioning to three customers and ask what they'd change.</li>
+<li><b>It isn't</b> research or an audit of your ad accounts. The spend and stage splits are rough, from your answers. Test the message: read your positioning to three customers and ask what they'd change.</li>
 <li><b>It isn't</b> a full brand strategy. That goes deeper into what you believe and why, every audience you serve, your story and your voice, and it takes a strategist working with your team.</li>
 <li><b>Nothing here changes your other toolkits.</b> Copy the lines you like into them yourself.</li>
 </ul>
@@ -899,7 +975,7 @@ body { background: #fff; color: #000; }
 
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Use it, then test it</h2>
-<p id="closing-p">Copy or print your messaging starter. Put the positioning on your homepage and the promise in your next email, and listen to what customers say back. If you want to go deeper, a strategist can help; that's optional.</p>
+<p id="closing-p">Copy or print your go-to-market snapshot and messaging starter. Start with the first thing that doesn't line up. Put the positioning on your homepage and the promise in your next email, and listen to what customers say back. If you want to go deeper, a strategist can help; that's optional.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
 <button type="button" class="btn btn-line" id="print-btn">Print or save as PDF</button>
@@ -946,8 +1022,8 @@ const CURRENT_KIT = 3;
 const SERIES = [
 { n: 1, short: 'Situation', title: 'Are You Solving the Right Problem?', file: '01_Are_You_Solving_the_Right_Problem.html' },
 { n: 2, short: 'Foundations', title: 'What Do You Already Have?', file: '02_What_Do_You_Already_Have.html' },
-{ n: 3, short: 'Brand', title: 'What Makes You Worth Choosing?', file: '03_What_Makes_You_Worth_Choosing.html' },
-{ n: 4, short: 'Delight', title: 'Would Your Customers Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
+{ n: 3, short: 'Go to Market', title: 'How Do You Go to Market?', file: '03_What_Makes_You_Worth_Choosing.html' },
+{ n: 4, short: 'Motions', title: 'Do People Notice, Choose and Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
 ];
 const LINKS = {
 profile:     { name: 'Build Your Business Profile',              url: '../paid/01_What_Kind_of_Business_Are_You.html',             owner: 'Scott Smoot' },
@@ -970,8 +1046,8 @@ flows:       { name: 'Which Emails Should Send Themselves?',     url: '../email/
 emailHealth: { name: 'Is Your Email Program Working?',           url: '../email/03_Is_Your_Email_Program_Working.html',            owner: 'Erica Pounder' },
 situation:   { name: 'Are You Solving the Right Problem?',       url: '01_Are_You_Solving_the_Right_Problem.html',                 owner: '' },
 gap:         { name: 'What Do You Already Have?',                url: '02_What_Do_You_Already_Have.html',                          owner: '' },
-brand:       { name: 'What Makes You Worth Choosing?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
-delight:     { name: 'Would Your Customers Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
+brand:       { name: 'How Do You Go to Market?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
+delight:     { name: 'Do People Notice, Choose and Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
 roadmap:     { name: 'Your Marketing Roadmap',                   url: '../../roadmap.html',                                        owner: '' },
 hub:         { name: 'All DIY Toolkits',                         url: '../../index.html',                                          owner: '' },
 };
@@ -1306,6 +1382,8 @@ how: 'A weekly close, done by Monday\nAlerts when food or labor costs drift\nOne
 alternative: 'use a general bookkeeper or do it themselves', voices: ['Warm', 'Direct', 'Plain-spoken'], never: 'corporate or preachy',
 };
 const EXAMPLE_TEXT = 'Example: a bookkeeping firm that only serves restaurants. Change any answer to make it yours.';
+const EXAMPLE_GTM = { ch: { search_ads: { spend: 1200, work: 'yes' }, social_ads: { spend: 400, work: 'unsure' }, seo: { spend: 600, work: 'yes' }, events: { spend: 300, work: 'no' }, email: { spend: 50, work: 'unsure' }, software: { spend: 150, work: 'yes' } }, j: { first: ['referral', 'search'], research: ['site', 'reviews', 'people'], cycle: 'weeks', touches: 'few', tip: 'talk', after: ['onboard'], source: 'some' } };
+EXAMPLE.gtm = EXAMPLE_GTM;
 const OUT_KEYS = [
 { key: 'positioning', title: 'Positioning statement', use: 'Your north star. Internal first; parts of it go on your homepage.', from: ['audience', 'outcome', 'category', 'different', 'alternative'] },
 { key: 'promise', title: 'Customer promise', use: 'What customers can hold you to. Homepage, proposals, onboarding.', from: ['promise'] },
@@ -1313,6 +1391,123 @@ const OUT_KEYS = [
 { key: 'pov', title: 'Your point of view', use: 'The belief behind the brand. Articles, talks and press.', from: ['wrong', 'different', 'outcome'] },
 ];
 
+/* Free tools we trust: linked from the optional "real numbers" boxes and the copied plan.
+   Checked Oct 22, 2026. Free, or free with an account; limits noted where they matter. */
+const TOOLS = {
+trends:    ['Google Trends', 'https://trends.google.com/trends/'],
+kwplanner: ['Google Keyword Planner (free with a Google Ads account)', 'https://ads.google.com/home/tools/keyword-planner/'],
+semrush:   ['Semrush free account (10 searches a day)', 'https://www.semrush.com/'],
+ahrefsKw:  ['Ahrefs Keyword Generator', 'https://ahrefs.com/keyword-generator'],
+google:    ['Google Search', 'https://www.google.com/'],
+maps:      ['Google Maps', 'https://www.google.com/maps'],
+adsTrans:  ['Google Ads Transparency Center', 'https://adstransparency.google.com/'],
+metaLib:   ['Meta Ad Library', 'https://www.facebook.com/ads/library/'],
+census:    ['Census Business Builder', 'https://www.census.gov/data/data-tools/cbb.html'],
+censusData:['data.census.gov', 'https://data.census.gov/'],
+gsc:       ['Google Search Console', 'https://search.google.com/search-console'],
+ga4:       ['Google Analytics', 'https://analytics.google.com/'],
+gbp:       ['Google Business Profile', 'https://business.google.com/'],
+bing:      ['Bing Webmaster Tools', 'https://www.bing.com/webmasters'],
+crm:       ['HubSpot free CRM', 'https://www.hubspot.com/products/crm'],
+forms:     ['Google Forms', 'https://forms.google.com/'],
+clarity:   ['Microsoft Clarity', 'https://clarity.microsoft.com/'],
+metaSuite: ['Meta Business Suite', 'https://business.facebook.com/'],
+utm:       ['Google Campaign URL Builder', 'https://ga-dev-tools.google/campaign-url-builder/'],
+};
+function toolLink(k) { const t = TOOLS[k]; return t ? '<a href="' + esc(t[1]) + '" target="_blank" rel="noopener">' + esc(t[0]) + ' ↗</a>' : ''; }
+function toolPlain(k) { const t = TOOLS[k]; return t ? t[0] + ': ' + t[1] : ''; }
+
+/* ---------- go to market (Coby, Oct 22, 2026): spend inventory and the customer journey ----------
+   Each channel sits at the journey stage it mostly serves and the motion it mostly drives.
+   RULE OF THUMB: one stage and one motion per channel, for a rough picture only. */
+const STAGE = { aware: 'Before they know you', compare: 'While they compare', decide: 'When they decide', after: 'After they buy', support: 'Behind the scenes' };
+const CHANNELS = [
+{ id: 'search_ads', name: 'Search ads (Google, Bing)', stage: 'compare', motion: 'ag', kit: 'campaigns' },
+{ id: 'social_ads', name: 'Paid social (Meta, LinkedIn, TikTok)', stage: 'aware', motion: 'nd', kit: 'campaigns' },
+{ id: 'seo', name: 'SEO and website content', stage: 'compare', motion: 'ag', kit: 'seoBasics' },
+{ id: 'local', name: 'Google Business Profile and directories', stage: 'compare', motion: 'ag', kit: 'local' },
+{ id: 'market', name: 'Marketplaces and lead sites (Amazon, Angi, Thumbtack)', stage: 'compare', motion: 'ag', kit: null },
+{ id: 'social', name: 'Organic social media', stage: 'aware', motion: 'nd', kit: null },
+{ id: 'pr', name: 'PR and media', stage: 'aware', motion: 'nd', kit: 'prReady' },
+{ id: 'events', name: 'Events, trade shows and sponsorships', stage: 'aware', motion: 'nd', kit: null },
+{ id: 'offline', name: 'Print, radio, TV, outdoor or direct mail', stage: 'aware', motion: 'nd', kit: null },
+{ id: 'influencer', name: 'Influencers and affiliates', stage: 'aware', motion: 'nd', kit: null },
+{ id: 'sales', name: 'Sales team or outbound prospecting', stage: 'decide', motion: 'ag', kit: 'speedToLead' },
+{ id: 'email', name: 'Email marketing', stage: 'decide', motion: 'ag', kit: 'flows' },
+{ id: 'referral', name: 'Referral, loyalty or partner programs', stage: 'after', motion: 'rd', kit: 'delight' },
+{ id: 'reviews', name: 'Reviews and reputation', stage: 'after', motion: 'rd', kit: 'local' },
+{ id: 'agency', name: 'Agencies or freelancers', stage: 'support', motion: null, kit: null },
+{ id: 'software', name: 'Marketing software (CRM, email, analytics)', stage: 'support', motion: null, kit: 'leadCapture' },
+];
+const CH = {}; CHANNELS.forEach((c) => { CH[c.id] = c; });
+const WORK = [['yes', 'Working'], ['no', 'Not working'], ['unsure', 'Not sure']];
+const JOURNEY = [
+{ id: 'first', label: 'How do buyers first hear about you? (up to three)', kind: 'check', max: 3, opts: [['search', 'Searching online'], ['maps', 'Maps and reviews'], ['social', 'Social media'], ['referral', 'Word of mouth or a referral'], ['ads', 'Ads'], ['events', 'Events or trade shows'], ['press', 'Press or podcasts'], ['market', 'Marketplaces or lead sites'], ['outbound', 'We reach out to them'], ['unsure', 'Not sure']] },
+{ id: 'research', label: 'Where do they look before deciding?', kind: 'check', opts: [['site', 'Your website'], ['reviews', 'Reviews'], ['competitors', 'Competitors’ sites'], ['people', 'People they know'], ['social', 'Social media'], ['ai', 'AI tools like ChatGPT'], ['compare', 'Comparison or directory sites'], ['unsure', 'Not sure']] },
+{ id: 'cycle', label: 'How long from first contact to buying?', kind: 'radio', cls: 'wrap2', opts: [['day', 'Same day'], ['days', 'A few days'], ['weeks', 'Weeks'], ['months', 'Months'], ['unsure', 'Not sure']] },
+{ id: 'touches', label: 'How many conversations before they buy?', kind: 'radio', cls: 'wrap2', opts: [['one', 'One'], ['few', 'Two or three'], ['many', 'Four or more'], ['unsure', 'Not sure']] },
+{ id: 'tip', label: 'What usually tips them to buy?', kind: 'radio', cls: 'stack', opts: [['talk', 'A conversation with us'], ['quote', 'A quote or proposal'], ['proof', 'A review or referral'], ['trial', 'A demo, trial or sample'], ['offer', 'An offer or deadline'], ['unsure', 'Not sure']] },
+{ id: 'after', label: 'After they buy, do you…', kind: 'check', opts: [['onboard', 'Welcome or onboard them'], ['review', 'Ask for a review'], ['ref', 'Ask for referrals'], ['touch', 'Stay in touch by email'], ['next', 'Offer a next purchase'], ['none', 'None of these yet']] },
+{ id: 'source', label: 'Do you know which channel each customer came from?', kind: 'radio', cls: 'wrap2', opts: [['yes', 'Yes'], ['some', 'For some'], ['no', 'No']] },
+];
+const J = {}; JOURNEY.forEach((f) => { J[f.id] = f; });
+function jLabel(id, v) { const o = J[id].opts.filter((x) => x[0] === v)[0]; return o ? o[1] : v; }
+const FIRST_STAGE = { search: 'compare', maps: 'compare', social: 'aware', referral: 'after', ads: 'aware', events: 'aware', press: 'aware', market: 'compare', outbound: 'decide' };
+function chHtml(c) {
+return '<div class="ch-item"><label class="opt" for="ch-' + c.id + '"><input type="checkbox" id="ch-' + c.id + '" name="ch" value="' + c.id + '"><span class="opt-text"><span class="opt-title">' + esc(c.name) + '</span></span></label>' +
+'<div class="ch-more" id="chm-' + c.id + '" hidden><span class="data-in"><label class="sr-only" for="chs-' + c.id + '">' + esc(c.name) + ': monthly spend in dollars</label><input class="num-in" type="number" id="chs-' + c.id + '" min="0" step="any" inputmode="decimal" placeholder="0"><span class="data-u">dollars a month</span></span>' +
+'<span class="sr-only" id="chw-' + c.id + '-q">' + esc(c.name) + ': is it working?</span><div class="seg wrap3" role="radiogroup" aria-labelledby="chw-' + c.id + '-q">' + WORK.map((w) => '<input type="radio" id="chw-' + c.id + '-' + w[0] + '" name="chw-' + c.id + '" value="' + w[0] + '"><label for="chw-' + c.id + '-' + w[0] + '">' + w[1] + '</label>').join('') + '</div></div></div>';
+}
+function jRowHtml(f) {
+const lid = 'j-' + f.id + '-q';
+const ctl = f.kind === 'radio'
+? '<div class="seg ' + (f.cls || 'wrap2') + '" role="radiogroup" aria-labelledby="' + lid + '">' + f.opts.map((o) => '<input type="radio" id="j-' + f.id + '-' + o[0] + '" name="j-' + f.id + '" value="' + o[0] + '"><label for="j-' + f.id + '-' + o[0] + '">' + esc(o[1]) + '</label>').join('') + '</div>'
+: '<div class="opts opts-2" role="group" aria-labelledby="' + lid + '">' + f.opts.map((o) => '<label class="opt" for="j-' + f.id + '-' + o[0] + '"><input type="checkbox" id="j-' + f.id + '-' + o[0] + '" name="j-' + f.id + '" value="' + o[0] + '"' + (f.max ? ' data-max="' + f.max + '"' : '') + '><span class="opt-text"><span class="opt-title">' + esc(o[1]) + '</span></span></label>').join('') + '</div>';
+return '<div class="q-row aud-row"><span class="row-label" id="' + lid + '">' + esc(f.label) + '</span>' + ctl + '</div>';
+}
+function readGtm() {
+const ch = {};
+CHANNELS.forEach((c) => { if ($('ch-' + c.id).checked) { const s = parseFloat($('chs-' + c.id).value); ch[c.id] = { spend: Number.isFinite(s) && s > 0 ? Math.min(s, 1e8) : 0, work: radioVal('chw-' + c.id) || '' }; } });
+const j = {};
+JOURNEY.forEach((f) => { j[f.id] = f.kind === 'radio' ? radioVal('j-' + f.id) : [].map.call(document.querySelectorAll('input[name="j-' + f.id + '"]:checked'), (x) => x.value); });
+return { ch, j };
+}
+function applyGtm(g) {
+g = g || {}; const ch = g.ch || {}, j = g.j || {};
+CHANNELS.forEach((c) => { const on = !!ch[c.id]; $('ch-' + c.id).checked = on; $('chm-' + c.id).hidden = !on; $('chs-' + c.id).value = on && ch[c.id].spend ? ch[c.id].spend : ''; const r = document.querySelector('input[name="chw-' + c.id + '"]:checked'); if (r) r.checked = false; if (on && ch[c.id].work) setRadio('chw-' + c.id, ch[c.id].work); });
+JOURNEY.forEach((f) => { if (f.kind === 'radio') { const r = document.querySelector('input[name="j-' + f.id + '"]:checked'); if (r) r.checked = false; if (j[f.id]) setRadio('j-' + f.id, j[f.id]); } else [].forEach.call(document.querySelectorAll('input[name="j-' + f.id + '"]'), (x) => { x.checked = (j[f.id] || []).indexOf(x.value) > -1; }); });
+}
+function readGoToMarket(g) {
+const ch = g.ch, j = g.j, ids = Object.keys(ch);
+const total = ids.reduce((s, k) => s + ch[k].spend, 0);
+const byStage = { aware: 0, compare: 0, decide: 0, after: 0, support: 0 }, byMotion = { nd: 0, ag: 0, rd: 0 };
+ids.forEach((k) => { byStage[CH[k].stage] += ch[k].spend; if (CH[k].motion) byMotion[CH[k].motion] += ch[k].spend; });
+const pct = (n, of) => of > 0 ? Math.round(n / of * 100) : 0;
+const first = (j.first || []).filter((x) => x !== 'unsure'), research = (j.research || []).filter((x) => x !== 'unsure'), after = (j.after || []).filter((x) => x !== 'none');
+const flags = [];
+const add = (id, title, why, kit, steps) => flags.push({ id, title, why, kit, steps: steps || [] });
+const notWorking = ids.filter((k) => ch[k].work === 'no' && ch[k].spend > 0), unsureCh = ids.filter((k) => ch[k].work === 'unsure' || !ch[k].work);
+const nwSpend = notWorking.reduce((s, k) => s + ch[k].spend, 0);
+if (notWorking.length) add('notworking', 'Review ' + money(nwSpend) + ' a month on channels you said aren’t working', 'That’s ' + listW(notWorking.map((k) => CH[k].name.split(' (')[0].toLowerCase())) + '. Before you cut it, check whether it’s failing or just not being measured.', 'tracking', ['Write down what each one was meant to do: get noticed, bring leads or bring sales.', 'Check the last three months of results against that one job.', 'Pause or move the budget only after that check.']);
+if (unsureCh.length && (j.source !== 'yes')) add('unsure', 'You can’t tell what ' + (unsureCh.length === 1 ? 'one channel is' : unsureCh.length + ' channels are') + ' doing', 'You’re not sure whether ' + listW(unsureCh.map((k) => CH[k].name.split(' (')[0].toLowerCase())) + (unsureCh.length === 1 ? ' is' : ' are') + ' working' + (j.source === 'no' ? ', and you don’t know which channel each customer came from.' : '.') + ' Tracking comes before any budget decision.', 'tracking', ['Tag every link with where it came from (UTM tags).', 'Record leads and sales as key events in Google Analytics.', 'Ask “How did you hear about us?” on every form.']);
+else if (j.source === 'no') add('source', 'You don’t know which channel each customer came from', 'Without it, every budget decision is a guess.', 'tracking', ['Tag every link with UTM tags.', 'Record leads and sales as key events in Google Analytics.', 'Ask “How did you hear about us?” on every form.']);
+if (first.indexOf('referral') > -1 && !ch.referral && after.indexOf('ref') < 0) add('referral', 'Buyers find you by word of mouth, and nothing invests in it', 'You said referrals are how buyers first hear about you, but you don’t ask for referrals or run a program for them.', 'delight', ['Pick the moment customers are happiest (a finished job, a first result).', 'Ask for a referral then, by name, in one sentence.', 'Thank every referrer, whether or not it turns into a sale.']);
+if ((research.indexOf('reviews') > -1 || first.indexOf('maps') > -1) && !ch.reviews && !ch.local && after.indexOf('review') < 0) add('reviews', 'Buyers read reviews, and you don’t ask for them', 'Reviews are where you said buyers look, and nothing feeds them new ones.', 'local', ['Claim and complete your Google Business Profile.', 'Ask every happy customer for a review, with a direct link.', 'Reply to every review, good or bad.']);
+if (research.indexOf('ai') > -1) add('ai', 'Buyers ask AI tools, so your website has to answer their questions', 'AI assistants pull from pages that answer questions plainly. If your site doesn’t, you’re left out of the answer.', 'seoBasics', ['List the ten questions buyers ask before they buy.', 'Answer each one plainly on your site, one page or section each.', 'Make sure search engines can crawl and index those pages.']);
+const longSale = j.cycle === 'months' || j.cycle === 'weeks' || j.touches === 'many';
+if (longSale && !ch.email && after.indexOf('touch') < 0) add('nurture', 'A long decision, and nothing keeps you in touch', 'Buyers take ' + (j.cycle === 'months' ? 'months' : j.cycle === 'weeks' ? 'weeks' : 'several conversations') + ' to decide, and no email or follow-up keeps you in front of them meanwhile.', 'flows', ['Write three useful emails for people who aren’t ready yet.', 'Send them automatically after a first inquiry.', 'Add one for customers who went quiet.']);
+if (total > 0 && pct(byStage.aware, total) >= 60 && (byStage.compare + byStage.decide) < total * 0.2) add('topheavy', pct(byStage.aware, total) + '% of your spend goes to getting noticed', 'Very little supports buyers while they compare and decide, so the attention you pay for can leak to competitors who are easier to find and choose.', 'seoBasics', ['Make sure people who hear about you can find you when they search your name.', 'Give every page a clear next step.', 'Follow up fast when someone raises their hand.']);
+if (total > 0 && byStage.after === 0 && after.length === 0) add('nothingafter', 'Nothing happens after the sale', 'No spend and no follow-up after people buy. Happy customers are the cheapest source of new ones.', 'delight', ['Plan the first week after a purchase: one welcome, one check-in.', 'Ask for a review once they’ve had a good result.', 'Ask for a referral at the same moment.']);
+if ((j.tip === 'talk' || j.tip === 'quote') && !ch.sales && first.indexOf('outbound') < 0) add('response', 'A conversation closes the sale, so reply fast', 'You said a conversation or a quote tips buyers to buy. Speed and a clear owner for every lead matter most here.', 'speedToLead', ['Reply to every new lead within an hour during business hours.', 'Give every lead one owner.', 'Follow up at least three times before you give up.']);
+if (!ids.length) add('none', 'List where you spend first', 'Tick the channels you spend money on, even small amounts, so this can compare spend with the buyer journey.', null, []);
+const where = {};
+first.forEach((v) => { const st = FIRST_STAGE[v]; if (st) (where[st] = where[st] || []).push(jLabel('first', v)); });
+research.forEach((v) => (where.compare = where.compare || []).push(jLabel('research', v)));
+if (j.tip && j.tip !== 'unsure') (where.decide = where.decide || []).push(jLabel('tip', j.tip));
+after.forEach((v) => (where.after = where.after || []).push(jLabel('after', v)));
+return { total, byStage, byMotion, pct, flags, where, ids, first, nwSpend };
+}
+function listW(a) { a = a.filter(Boolean); return a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
 function cap(s) { s = clean(s); return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 function lines(s) { return String(s || '').split(/\n|;/).map((x) => noDot(x).replace(/^[-•*\d.)\s]+/, '')).filter(Boolean); }
 function joinList(a) { a = a.map(lcFirst); return a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
@@ -1360,14 +1555,16 @@ const form = $('answers');
 let profile = loadProfile(), last = null;
 const saved = loadAssessPart('brand'), situation = loadAssessPart('situation');
 let seeded = false, touched = !!(saved && saved.answers), edits = (saved && saved.edits) ? Object.assign({}, saved.edits) : {};
+$('ch-list').innerHTML = CHANNELS.map(chHtml).join(''); $('journey-rows').innerHTML = JOURNEY.map(jRowHtml).join('');
+$('journey-tools').innerHTML = ['ga4', 'gsc', 'clarity', 'forms', 'utm'].map(toolLink).join(' · ');
 $('voice-opts').innerHTML = VOICES.map((v) => '<label class="opt" for="voice-' + v.toLowerCase().replace(/\W/g, '') + '"><input type="checkbox" id="voice-' + v.toLowerCase().replace(/\W/g, '') + '" name="voice" value="' + v + '"><span class="opt-text"><span class="opt-title">' + v + '</span></span></label>').join('');
-function readInput() { const o = {}; FIELDS.forEach((k) => { o[k] = $(k).value; }); o.voices = [].map.call(form.querySelectorAll('input[name="voice"]:checked'), (i) => i.value); return o; }
-function applyInput(a) { FIELDS.forEach((k) => { $(k).value = a[k] || ''; }); [].forEach.call(form.querySelectorAll('input[name="voice"]'), (i) => { i.checked = (a.voices || []).indexOf(i.value) > -1; }); }
+function readInput() { const o = {}; FIELDS.forEach((k) => { o[k] = $(k).value; }); o.voices = [].map.call(form.querySelectorAll('input[name="voice"]:checked'), (i) => i.value); o.gtm = readGtm(); return o; }
+function applyInput(a) { applyGtm(a.gtm || { ch: {}, j: {} }); FIELDS.forEach((k) => { $(k).value = a[k] || ''; }); [].forEach.call(form.querySelectorAll('input[name="voice"]'), (i) => { i.checked = (a.voices || []).indexOf(i.value) > -1; }); }
 function limitVoices(e) { const on = form.querySelectorAll('input[name="voice"]:checked'); if (on.length > 3 && e && e.target && e.target.name === 'voice') e.target.checked = false; }
 function seed() {
 // reuse what other starters and the profile already know; never overwrite the visitor's own answers
 const s = { category: '', outcome: '' }, tags = [];
-if (situation && situation.answers && situation.answers.sell) { s.category = situation.answers.sell; tags.push('pf-category'); }
+if (situation && situation.answers && situation.answers.sell) { s.category = situation.answers.sell; tags.push('pf-category'); }   // older saves only: the situation check no longer asks this
 else if (profile && profile.industry) { s.category = profile.industry; tags.push('pf-category'); }
 if (situation && situation.answers && situation.answers.pay) { s.outcome = situation.answers.pay; tags.push('pf-outcome'); }
 return { s, tags };
@@ -1376,19 +1573,26 @@ function bizName() { return (profile && clean(profile.name)) || ''; }
 function outsFor(d) { return { positioning: d.positioning, promise: d.promise, value: d.value, pov: d.pov }; }
 
 function planText(m) {
-const L = ['YOUR MESSAGING STARTER (FIRST DRAFT)', 'What Makes You Worth Choosing? (Big Leap Strategy Starter 3 of 4, Draft 1)', 'Built only from your answers. Test it with customers before you rely on it.', ''];
+const L = ['YOUR GO-TO-MARKET SNAPSHOT AND MESSAGING STARTER', 'How Do You Go to Market? (Big Leap Strategy Starter 3 of 4, Draft 1)', 'Built only from your answers and rough numbers. Not an audit of your accounts.', ''];
+const g = m.g; L.push('MARKETING SPEND: ' + money(g.total) + ' a month across ' + g.ids.length + ' channels');
+g.ids.forEach((k) => L.push('- ' + CH[k].name + ': ' + money(m.a.gtm.ch[k].spend) + ' a month · ' + ({ yes: 'working', no: 'not working', unsure: 'not sure' }[m.a.gtm.ch[k].work] || 'not marked') + ' · ' + STAGE[CH[k].stage].toLowerCase()));
+L.push('', 'SPEND BY STAGE (rough, one stage per channel)'); ['aware', 'compare', 'decide', 'after', 'support'].forEach((s) => L.push('- ' + STAGE[s] + ': ' + money(g.byStage[s]) + (g.total ? ' (' + g.pct(g.byStage[s], g.total) + '%)' : '') + ((g.where[s] || []).length ? ' · buyers: ' + g.where[s].join(', ').toLowerCase() : '')));
+L.push('', 'SPEND BY MOTION'); ['nd', 'ag', 'rd'].forEach((x) => L.push('- ' + MOTIONS[x].name + ': ' + money(g.byMotion[x])));
+L.push('', 'YOUR CUSTOMER JOURNEY'); JOURNEY.forEach((f) => { const v = m.a.gtm.j[f.id]; const t = Array.isArray(v) ? v.map((x) => jLabel(f.id, x)).join(', ') : (v ? jLabel(f.id, v) : ''); if (t) L.push('- ' + f.label.replace(/ \(.*\)$/, '') + ' ' + t); });
+L.push('', 'WHERE IT DOESN’T LINE UP'); g.flags.forEach((x, i) => { L.push((i + 1) + '. ' + x.title, '   ' + x.why); x.steps.forEach((s, k) => L.push('   ' + String.fromCharCode(97 + k) + ') ' + s)); if (x.kit) L.push('   Free toolkit: ' + linkPlain(x.kit)); });
+L.push('', 'Free tools for checking your journey: ' + ['ga4', 'gsc', 'clarity', 'forms', 'utm'].map(toolPlain).join('; '), '', '---', 'YOUR MESSAGE (FIRST DRAFT)', '');
 OUT_KEYS.forEach((o) => { const v = m.final[o.key]; if (v) L.push(o.title.toUpperCase() + (edits[o.key] != null ? ' (edited)' : ''), v, ''); });
 L.push('THREE MESSAGING THEMES'); m.themes.forEach((t, i) => L.push((i + 1) + '. ' + t.name + ': ' + t.line));
 L.push('', 'PUT IT TO WORK'); m.channels.forEach((c) => L.push('- ' + c.k + ': ' + c.v + (c.kit ? ' (see ' + LINKS[c.kit].name + ', ' + absUrl(LINKS[c.kit].url) + ')' : '')));
 if (m.a.voices.length || clean(m.a.never)) { L.push('', 'VOICE'); if (m.a.voices.length) L.push('We sound: ' + m.a.voices.join(', ') + '.'); m.a.voices.forEach((v) => L.push('- ' + v + ': ' + VOICE_TIPS[v])); if (clean(m.a.never)) L.push('- Never: ' + clean(m.a.never) + '.'); }
 if (m.lint.length) { L.push('', 'TO MAKE IT SHARPER'); m.lint.forEach((x) => L.push('- ' + x.t.replace(/<[^>]+>/g, ''))); }
 L.push('', 'WHAT THIS IS: a first draft from your answers. Not research and not a full brand strategy.');
-return L.concat(planFooter('seoBasics')).join('\n');
+return L.concat(planFooter('delight')).join('\n');
 }
 
 function render() {
 syncOptChecked(form);
-const a = readInput(), d = drafts(a, bizName()), gen = outsFor(d), lint = coach(a);
+const a = readInput(), d = drafts(a, bizName()), gen = outsFor(d), lint = coach(a), g = readGoToMarket(a.gtm);
 const final = {}; OUT_KEYS.forEach((o) => { final[o.key] = edits[o.key] != null ? edits[o.key] : gen[o.key]; });
 const themes = [
 { name: 'The belief', line: d.wrong ? 'Most companies in our industry ' + d.wrong + '. We ' + (d.dif || 'don’t') + '.' : 'Finish “Most companies in our industry…” to unlock this theme.', use: 'Use it to get noticed: articles, social posts, the opening line of a pitch.' },
@@ -1406,13 +1610,22 @@ const channels = [
 { k: 'Welcome email subject', v: d.want ? cap(d.wantBare) + ': here’s how we do it' : '', count: '', kit: 'flows' },
 { k: 'Press angle', v: d.wrong ? 'Why most ' + (d.cat.endsWith('s') ? d.cat : d.cat + 's') + ' ' + d.wrong.replace(/^(they\s+)/i, '') + ', and what to do instead' : '', count: '', kit: 'prReady' },
 ].filter((c) => clean(c.v));
-last = { a, d, final, themes, channels, lint };
+last = { a, d, final, themes, channels, lint, g };
 setExampleState(!touched && !seeded, EXAMPLE_TEXT, seeded && !touched ? 'We started from what you told us in your situation check or profile. Finish the other sentences to build your draft.' : 'Your answers and edits save in this browser as you go. Nothing is sent anywhere.');
-if (touched) saveAssessPart('brand', { answers: a, edits, result: { positioning: final.positioning, promise: final.promise, value: final.value, voices: a.voices } });
+if (touched) saveAssessPart('brand', { answers: a, edits, result: { positioning: final.positioning, promise: final.promise, value: final.value, voices: a.voices, gtm: { total: g.total, byStage: g.byStage, byMotion: g.byMotion, channels: g.ids, flags: g.flags.map((x) => x.id) } } });
+// go-to-market snapshot
+$('out-num').textContent = money(g.total);
+$('out-unit').textContent = 'a month across ' + g.ids.length + (g.ids.length === 1 ? ' channel' : ' channels');
+const topSt = Object.keys(STAGE).filter((s) => s !== 'support').sort((x, y) => g.byStage[y] - g.byStage[x])[0];
+$('gtm-line').innerHTML = (g.total > 0 ? 'Most of it (<b>' + g.pct(g.byStage[topSt], g.total) + '%</b>) goes to <b>' + esc({ aware: 'getting noticed', compare: 'reaching buyers while they compare', decide: 'helping buyers decide', after: 'customers after they buy' }[topSt]) + '</b>. ' : (g.ids.length ? 'Add rough monthly amounts to see where the money goes. ' : 'Tick the channels you spend on to see where the money goes. ')) + (g.first.length ? 'Buyers first hear about you through <b>' + esc(listW(g.first.map((v) => jLabel('first', v).toLowerCase()))) + '</b>. ' : '') + (g.flags.length && g.flags[0].id !== 'none' ? '<b>' + g.flags.length + (g.flags.length === 1 ? ' thing doesn’t' : ' things don’t') + ' line up</b> below.' : '');
+$('gtm-stages').innerHTML = ['aware', 'compare', 'decide', 'after'].map((s) => { const chs = g.ids.filter((k) => CH[k].stage === s); return '<div class="lens"><span class="lens-k">' + esc(STAGE[s]) + '</span><span class="lens-v">' + money(g.byStage[s]) + (g.total ? ' · ' + g.pct(g.byStage[s], g.total) + '%' : '') + '</span><span class="lens-n"><b>You spend on:</b> ' + (chs.length ? esc(listW(chs.map((k) => CH[k].name.split(' (')[0]))) : 'nothing yet') + '</span><span class="lens-n"><b>Buyers are:</b> ' + ((g.where[s] || []).length ? esc(listW(g.where[s].map((x) => x.toLowerCase()))) : 'not answered') + '</span></div>'; }).join('') + (g.byStage.support ? '<div class="lens"><span class="lens-k">' + esc(STAGE.support) + '</span><span class="lens-v">' + money(g.byStage.support) + '</span><span class="lens-n">' + esc(listW(g.ids.filter((k) => CH[k].stage === 'support').map((k) => CH[k].name.split(' (')[0]))) + '. Supports every stage.</span></div>' : '');
+$('gtm-flags').innerHTML = g.flags.map((x, i) => '<li class="' + (i === 0 ? 'is-first' : '') + '"><span class="sn" aria-hidden="true">' + (i + 1) + '</span><div class="sb"><div class="st-top"><span class="st-title">' + esc(x.title) + '</span>' + (i === 0 ? '<span class="chip-row"><span class="chip first">Start here</span></span>' : '') + '</div><p class="st-why">' + esc(x.why) + '</p>' + (x.steps.length ? '<ol class="how">' + x.steps.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') + (x.kit ? '<p class="kit-link">Free toolkit: ' + linkHtml(x.kit) + '</p>' : '') + '</div></li>').join('') || '<li class="is-empty"><p>Nothing obvious. Your spend and your buyers line up. Check again when you add a channel.</p></li>';
+const mtot = g.byMotion.nd + g.byMotion.ag + g.byMotion.rd;
+$('gtm-motions').innerHTML = ['nd', 'ag', 'rd'].map((m) => '<li><span class="mb-top"><b>' + esc(MOTIONS[m].name) + '</b><span>' + money(g.byMotion[m]) + (mtot ? ' · ' + g.pct(g.byMotion[m], mtot) + '%' : '') + '</span></span><span class="mbar" aria-hidden="true"><span style="width:' + (mtot ? g.pct(g.byMotion[m], mtot) : 0) + '%"></span></span><span class="fine">' + esc(MOTIONS[m].short) + '. ' + esc(MOTIONS[m].peak) + '</span></li>').join('');
 // headline: the positioning statement itself
 $('out-line').textContent = final.positioning;
 $('out-sub').innerHTML = lint.length ? '<b>' + lint.length + (lint.length === 1 ? ' quick fix' : ' quick fixes') + '</b> below would make it sharper.' : 'No obvious weak spots. Now test it: read it to three customers and ask what they’d change.';
-flashIfChanged(final.positioning.slice(0, 40));
+flashIfChanged(g.total + '|' + g.flags.length);
 $('coach-wrap').hidden = !lint.length;
 $('lint').innerHTML = lint.map((x) => '<li>' + x.t + ' <a href="#' + x.k + '" data-focus="' + x.k + '">Edit this answer</a></li>').join('');
 // outputs
@@ -1425,7 +1638,7 @@ return '<div class="out-card"><div class="out-h"><h3>' + esc(o.title) + '</h3>' 
 $('themes').innerHTML = themes.map((t, i) => '<li><span class="sn" aria-hidden="true">' + (i + 1) + '</span><div class="sb"><div class="st-top"><span class="st-title">' + esc(t.name) + '</span></div><p class="st-why"><b>' + esc(t.line) + '</b></p><p class="st-time">' + esc(t.use) + '</p></div></li>').join('');
 $('channels').innerHTML = channels.map((c) => '<li><span class="ch-k">' + esc(c.k) + '</span><span class="ch-v">' + esc(c.v) + '</span>' + (c.count ? c.count : '') + '<span class="kit-link">Used in: ' + linkHtml(c.kit) + '</span></li>').join('');
 $('voice-guide').innerHTML = (a.voices.map((v) => '<li><b>' + esc(v) + ':</b> ' + esc(VOICE_TIPS[v]) + '</li>').join('') + (clean(a.never) ? '<li><b>Never:</b> ' + esc(clean(a.never)) + '.</li>' : '')) || '<li>Pick up to three words in “We sound…” to get a short voice guide.</li>';
-renderNext('seoBasics', 'Put your positioning to work where people already look: your homepage title, headline and key pages.');
+renderNext('delight', 'Go to market covers how buyers find and choose you. The motions check looks at each of the three motions in depth, including what happens after the sale.');
 renderXlinks([{ key: 'campaigns', why: 'use your headline and description in your first campaigns.' }, { key: 'flows', why: 'your promise and proof belong in your welcome and follow-up emails.' }, { key: 'prReady', why: 'your point of view is the start of a press angle.' }, { key: 'delight', why: 'check that what happens after the sale keeps your promise.' }]);
 syncCopy(); sticky();
 }
@@ -1437,21 +1650,26 @@ const r = e.target.closest && e.target.closest('[data-reset]'); if (r) { delete 
 const f = e.target.closest && e.target.closest('[data-focus]'); if (f) { e.preventDefault(); const el = $(f.getAttribute('data-focus')); if (el) { el.scrollIntoView({ block: 'center' }); el.focus(); } }
 });
 function profileStrip() { renderProfileStrip(profile, (p) => { profile = p; render(); }, () => { profile = null; profileStrip(); render(); }); }
-initShell(CURRENT_KIT, () => { touched = false; seeded = false; edits = {}; applyInput(EXAMPLE); markFromProfile(['pf-category', 'pf-outcome'], false); render(); $('category').focus(); });
+initShell(CURRENT_KIT, () => { touched = false; seeded = false; edits = {}; applyInput(Object.assign({ gtm: EXAMPLE_GTM }, EXAMPLE)); markFromProfile(['pf-category', 'pf-outcome'], false); render(); $('category').focus(); });
 $('cta-link').href = CTA_URL; $('cta-link').textContent = 'Talk to a strategist (optional)';
 $('print-btn').addEventListener('click', printPlan);
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your messaging starter is copied. Paste it into a doc and share it with whoever writes for you.');
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
 const onUser = (e) => { limitVoices(e); touched = true; const id = e.target && e.target.id; if (id === 'category' || id === 'outcome') markFromProfile(['pf-' + id], false); render(); };
+form.addEventListener('change', (e) => {
+const t = e.target; if (!t) return;
+if (t.name === 'ch') { $('chm-' + t.value).hidden = !t.checked; if (t.checked) { const s = $('chs-' + t.value); if (s) s.focus(); } }
+if (t.type === 'checkbox' && t.name && t.name.indexOf('j-') === 0) { const all = [].slice.call(document.querySelectorAll('input[name="' + t.name + '"]')); const excl = (v) => v === 'unsure' || v === 'none'; if (t.checked && excl(t.value)) all.forEach((x) => { if (x !== t) x.checked = false; }); else if (t.checked) { all.forEach((x) => { if (excl(x.value)) x.checked = false; }); const max = +t.getAttribute('data-max') || 0; if (max && all.filter((x) => x.checked).length > max) t.checked = false; } }
+}, true);
 form.addEventListener('input', onUser); form.addEventListener('change', onUser);
 if (saved && saved.answers) applyInput(saved.answers);
-else { const sd = seed(); if (sd.tags.length) { applyInput({ voices: [] }); seeded = true; if (sd.s.category) $('category').value = sd.s.category; if (sd.s.outcome) $('outcome').value = sd.s.outcome; markFromProfile(sd.tags, true); } else applyInput(EXAMPLE); }
+else { const sd = seed(); if (sd.tags.length) { applyInput({ voices: [], gtm: { ch: {}, j: {} } }); seeded = true; if (sd.s.category) $('category').value = sd.s.category; if (sd.s.outcome) $('outcome').value = sd.s.outcome; markFromProfile(sd.tags, true); } else applyInput(EXAMPLE); }
 profileStrip(); render();
 })();
 
 </script>
-<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="02_What_Do_You_Already_Have.html"><small>← Previous</small><b>What Do You Already Have?</b></a><a class="blp-hub" href="../../index.html"><small>Strategy · Toolkit 3 of 4</small><b>All toolkits</b></a><a class="blp-a" href="04_Would_Your_Customers_Recommend_You.html"><small>Next →</small><b>Would Your Customers Recommend You?</b></a></div></nav><!-- /bl-pager -->
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="02_What_Do_You_Already_Have.html"><small>← Previous</small><b>What Do You Already Have?</b></a><a class="blp-hub" href="../../index.html"><small>Strategy · Toolkit 3 of 4</small><b>All toolkits</b></a><a class="blp-a" href="04_Would_Your_Customers_Recommend_You.html"><small>Next →</small><b>Do People Notice, Choose and Recommend You?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
   var P = {"name": "Coby Bush", "title": "VP of Marketing", "photo": "../../assets/people/coby-bush.jpg"};
