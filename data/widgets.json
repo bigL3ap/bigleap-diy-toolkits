@@ -111,6 +111,39 @@
       "kit": "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html"
     },
     {
+      "id": "brand-entity-check",
+      "title": "Does Google and AI know who you are?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/brand-entity-check.html",
+      "height": 600,
+      "maxWidth": 460,
+      "use": "Any prospect asking about AI search or brand visibility; the SEO service page.",
+      "kit": "toolkits/seo/03_Does_Google_and_AI_Know_Who_You_Are.html"
+    },
+    {
+      "id": "ai-overview-exposure",
+      "title": "How exposed are you to AI Overviews?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/ai-overview-exposure.html",
+      "height": 560,
+      "maxWidth": 460,
+      "use": "Content and AI-search conversations; the SEO service page.",
+      "kit": "toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html"
+    },
+    {
+      "id": "ai-crawler-check",
+      "title": "Can AI bots actually read your site?",
+      "service": "SEO",
+      "owner": "Shemmah Al-Darweesh",
+      "file": "widgets/ai-crawler-check.html",
+      "height": 560,
+      "maxWidth": 460,
+      "use": "Technical SEO and AI-visibility conversations; the SEO service page.",
+      "kit": "toolkits/seo/05_Can_AI_Bots_Actually_Read_Your_Site.html"
+    },
+    {
       "id": "pr-ready",
       "title": "Could you say yes to a journalist this week?",
       "service": "Digital PR",
@@ -280,6 +313,27 @@
       "service": "SEO",
       "file": "tiles/review-health-16x9.png",
       "alt": "Slide tile: How healthy are your Google reviews? Scan the QR code to try it free."
+    },
+    {
+      "id": "brand-entity-check",
+      "title": "Does Google and AI know who you are?",
+      "service": "SEO",
+      "file": "tiles/brand-entity-check-16x9.png",
+      "alt": "Slide tile: Does Google and AI know who you are? Scan the QR code to try it free."
+    },
+    {
+      "id": "ai-overview-exposure",
+      "title": "How exposed are you to AI Overviews?",
+      "service": "SEO",
+      "file": "tiles/ai-overview-exposure-16x9.png",
+      "alt": "Slide tile: How exposed are you to AI Overviews? Scan the QR code to try it free."
+    },
+    {
+      "id": "ai-crawler-check",
+      "title": "Can AI bots actually read your site?",
+      "service": "SEO",
+      "file": "tiles/ai-crawler-check-16x9.png",
+      "alt": "Slide tile: Can AI bots actually read your site? Scan the QR code to try it free."
     },
     {
       "id": "pr-ready",

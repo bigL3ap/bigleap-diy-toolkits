@@ -1,7 +1,9 @@
 # SEO DIY Toolkits: build notes (Draft v1)
 
-Owner: **Shemmah Al-Darweesh** (CTA: "Talk to Shemmah about building it"). Built Oct 19, 2026 from the Agency Brands call.
-Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready_for_Local_Search.html`. Each is a single self-contained file with no external requests. It uses the RevOps v2 shell, the shared Business Profile, and the cross-link map from the build spec.
+Owner: **Shemmah Al-Darweesh** (CTA: "Talk to Shemmah about building it"). Toolkits 1-2 built Oct 19, 2026 from the Agency Brands call. Toolkits 3-5 added Oct 22, 2026.
+Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready_for_Local_Search.html`, `03_Does_Google_and_AI_Know_Who_You_Are.html`, `04_How_Exposed_Are_You_to_AI_Overviews.html`, `05_Can_AI_Bots_Actually_Read_Your_Site.html`. Each is a single self-contained file with no external requests. It uses the RevOps v2 shell, the shared Business Profile, and the cross-link map from the build spec.
+
+**Toolkits 3-5 origin.** Shemmah flagged in Slack that the SEO lineup should reflect AI search (entity recognition, AI Overviews, AI crawler access), and suggested swapping the existing two toolkits out for three new ones. The account owner's call was to keep toolkits 1-2 exactly as they are and add the three AI-search toolkits alongside them, so the SEO stepper now runs five steps instead of two. Nothing in toolkits 1-2 was removed or renamed; only the series-wide `SERIES`/`LINKS` metadata, the stepper's "N of 5" CSS, and the "SEO DIY Toolkit X of 5" eyebrow/footer text were updated on those two files.
 
 ---
 
@@ -69,11 +71,83 @@ Files: `01_Can_Google_Find_and_Trust_Your_Site.html`, `02_Is_Your_Business_Ready
 
 ---
 
+## Toolkit 3: Does Google and AI Know Who You Are?
+
+**What it does.** A brand entity health check: whether Google and AI tools can resolve the business to one clear, consistent subject. Produces **"N of 6 entity signals"** plus a ranked fix list, foundational/DIY-able signals (schema, consistency) ranked ahead of signals that can't be built on demand (Knowledge Panel, press mentions).
+
+**Questions → what each one feeds**
+
+| # | Question | Feeds |
+|---|---|---|
+| 1 | Website platform + optional business name/domain | Platform note on the schema fix; prefills the copyable Organization JSON-LD |
+| 2 | Knowledge Panel shows for the business name: yes/no/unsure | Panel item (flagged as "takes time," not a one-time fix) |
+| 3 | NAP (name, address, phone) consistent across profiles: yes/some differ/unsure | NAP consistency item |
+| 4 | Organization schema on homepage: yes/no/unsure | Schema item with the copyable JSON-LD snippet |
+| 5 | Press/partner/directory mentions: yes/no/unsure | Mentions item (flagged "takes time") |
+| 6 | One clear About page: yes/no/unsure | About page item |
+| 7 | Social profiles cross-linked to the site: yes/no/unsure | Cross-link item |
+
+**Results order.** Headline ("N of 6 entity signals") → Fix list, schema and consistency ranked ahead of "takes time" items (new `earn` severity chip, styled like the existing `.chip.manual` pattern) → Already in place → Where it gets complex → closing panel.
+
+**Logic and assumptions.** The Organization JSON-LD snippet prefills from `loadProfile()` (business name, domain) with bracketed placeholders (`[Your Business Name]`) when profile data is missing — a deliberate departure from Toolkit 1's ALL-CAPS placeholder convention, per the build spec. The profile is never written, only read.
+
+**Where it sends people next.** Next: Local (`seo2`) if NAP/locations are unresolved, otherwise AI Overviews (`seo4`). Cross-links: `seoBasics`, `local`, `seoExposure`, `prReady` (press mentions missing).
+
+---
+
+## Toolkit 4: How Exposed Are You to AI Overviews?
+
+**What it does.** Checks whether content is shaped the way AI Overviews and answer engines tend to lift an answer: answer-first structure, FAQ-style headers, FAQPage/HowTo schema, page-1 ranking (an authority proxy) and refresh cadence. Produces an exposure level (Low / Building / Ready for AI Overviews) and a ranked fix list with a before/after plain-text example of rewriting a paragraph answer-first. No invented statistics about AI Overview click-through or traffic impact anywhere on the page — mechanism and plausible reasoning only.
+
+**Questions → what each one feeds**
+
+| # | Question | Feeds |
+|---|---|---|
+| 1 | Website platform | Platform note on the FAQPage/HowTo schema fix |
+| 2 | Key pages answer the question in the first sentence or two: yes/no/unsure | Answer-first item, with the before/after example attached |
+| 3 | FAQ-style, question-phrased headers: yes/no/unsure | FAQ headers item |
+| 4 | FAQPage or HowTo schema present: yes/no/unsure | Schema item |
+| 5 | Page-1 ranking for a core keyword: yes/no/unsure | Authority item (flagged "takes time," links to `seoBasics`) |
+| 6 | Content refresh cadence (within 3mo / 3-12mo / over 1yr / never) | Refresh-calendar item |
+
+**Results order.** Headline ("N of 5 exposure signals") → Fix list (formatting fixes first, then checks, then the authority item) → Already in place → Where it gets complex → closing panel.
+
+**Logic and assumptions.** Formatting (answer-first, FAQ headers, schema) is treated as DIY-able with time ranges; ranking/authority is treated as earned over time, not scheduled, and carries no time estimate.
+
+**Where it sends people next.** Next: `seoBasics` if not yet ranking page 1 for any core keyword (AI Overviews mostly pull from pages that already rank), otherwise `seoCrawler`. Cross-links: `seoCrawler`, `seoEntity`, `seoBasics`.
+
+---
+
+## Toolkit 5: Can AI Bots Actually Read Your Site?
+
+**What it does.** A technical readiness grader for the named AI crawlers (GPTBot, Google-Extended, PerplexityBot, ClaudeBot, CCBot, OAI-SearchBot): robots.txt blocking, llms.txt presence, JS-rendering vs. static HTML, XML sitemap submission, homepage load speed, login/paywall gating. Produces a grade (Blocked / Partially ready / Ready) and a ranked technical fix list, with a copyable robots.txt allow-list snippet for the six named bots.
+
+**Questions → what each one feeds**
+
+| # | Question | Feeds |
+|---|---|---|
+| 1 | Website platform | Platform note on the llms.txt fix |
+| 2 | robots.txt blocks any named AI crawler: no/yes/haven't checked | **Blocker** (yes) or a check; carries the bot table and the copyable allow-list snippet |
+| 3 | llms.txt present at site root: yes/no/unsure | llms.txt item |
+| 4 | Key content visible without JavaScript: yes/no/unsure | **Blocker** (needs JS) or a check; flagged as usually needing a developer, no DIY time estimate |
+| 5 | XML sitemap submitted to Search Console: yes/no/unsure | Sitemap item |
+| 6 | Homepage load speed (fast / moderate / slow / untested) | Speed item, scaled to severity |
+| 7 | Core content gated behind login/paywall: no/yes/unsure | **Blocker** (yes); framed as a business decision, not a one-time fix |
+
+**Results order.** Headline (grade + "N of 6 technical signals clear") → Fix list, hard blockers ranked first (new `block` severity chip), then fixes, then checks → Already in place → Where it gets complex (server-side rendering, real speed fixes, gating as a business call, confirming crawler visits needs server logs) → closing panel.
+
+**Logic and assumptions.** Any one of: robots.txt blocking a named bot, content gated, or content requiring JavaScript, sets the grade to "Blocked" regardless of the other five signals, because none of them matter until that one is cleared.
+
+**Where it sends people next.** Next: always `seoExposure` — formatting for AI Overviews only pays off once AI crawlers can reach the content, so the "why" text changes depending on whether a blocker is present. Cross-links: `seoBasics`, `seoEntity`, `seoExposure`.
+
+---
+
 ## Settings to edit before launch (top of each file's script)
 - `CTA_URL`: currently `https://www.bigleap.com/contact-us/`. Swap for Shemmah's meeting scheduler link.
 - `OWNER`: name and first name used on the CTA and in "Where it gets complex".
 - `EXAMPLE`, `ASSUMPTIONS`: example answers and time ranges.
 - `LINKS`: the shared cross-link map. Paid, Tracking and PR targets must exist at the same relative paths. Neither page was checked against those series' final files.
+- Toolkits 3-5 add `seoEntity`, `seoExposure` and `seoCrawler` to the `LINKS` map in all five SEO files plus the 15 other toolkit/roadmap files that carry their own copy of this map (Paid, Plan, PR, Email, RevOps 07, `roadmap.html`), so any toolkit can cross-link to them. The three keys were not added to `data/widgets.json`'s wording or any file outside this `LINKS` map search.
 
 ## Source material used
 - Fathom: "Agency Brands Bi-Weekly SEO/Content/PPC/RevOps Call - October 19" (Scott Smoot ~9:10 on locations, GBP and Google Ads, and "for SEO, GA4 plus a couple of conversion events is enough"; Coby Bush ~9:15–12:40 on "hold a brush vs. Starry Night" and doing setup in order from beginning to end; Coby ~38:00–41:00 on "what has to be done before we can have a conversation" and "you wouldn't set up GA4 again if it already exists").
