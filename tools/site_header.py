@@ -668,7 +668,7 @@ GROUPS = {
     'profile': [('Profile, answers & progress', 'my-profile.html', 'profile-home'), ('Journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')],
     'assets': [('Sales deck & talk tracks', 'sales.html', 'sales'), ('Widgets & tiles', 'widgets.html', 'widgets'), ('Page mockups', 'mockups/homepage.html', 'mockups')],
 }
-INTERNAL_KEYS = {'journey', 'sales', 'widgets', 'mockups', 'review'}
+INTERNAL_KEYS = {'journey', 'sales', 'widgets', 'mockups', 'review', 'cannibalization'}
 
 def header(page, current, where='', prev=None, nxt=None, extra='', service=None):
     e = html.escape
@@ -706,7 +706,9 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     menu_html = t_menu + p_menu + a_menu
     tab_html = (tab('Start here', 'index.html', 'home') + t_btn + p_btn +
                 '<span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span>'
-                + tab('Customer journey', 'journey.html', 'journey') + a_btn + tab('Status & review', 'review.html', 'review') + '</span>')
+                + tab('Customer journey', 'journey.html', 'journey') + a_btn
+                + tab('Service cannibalization', 'cannibalization.html', 'cannibalization')
+                + tab('Status & review', 'review.html', 'review') + '</span>')
     internal = current in INTERNAL_KEYS
     strip = ('<div class="blh-strip" role="note">' + ('Internal page · for the Big Leap team · not shown to clients' if internal else 'Draft 1 · for internal review · not launched yet') + '</div>')
     pn = ''
@@ -893,6 +895,10 @@ if __name__ == '__main__':
     # Assets (internal): widgets and slide tiles; shares sub-tabs with the sales deck and mockups.
     apply('widgets.html', header('widgets.html', 'widgets', '', None, None, ''), theme=True)
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
+    # Service cannibalization: moved out of journey.html's own tabs into its own page, so the case
+    # against cannibalizing a service line's book is a first-class, easy-to-find internal destination.
+    if os.path.exists(os.path.join(ROOT, 'cannibalization.html')):
+        apply('cannibalization.html', header('cannibalization.html', 'cannibalization', '', None, None, ''))
     # My Profile: the Business Profile, every toolkit's saved answers, and the visitor's progress, in one place.
     if os.path.exists(os.path.join(ROOT, 'my-profile.html')):
         apply('my-profile.html', header('my-profile.html', 'profile-home', '', None, None, ''))
@@ -916,4 +922,4 @@ if __name__ == '__main__':
         if os.path.exists(os.path.join(ROOT, pv['file'])):
             apply(pv['file'], header(pv['file'], 'preview', '', None, None, ''))
             print('preview', pv['file'])
-    print('index.html, journey.html, review.html, sales.html')
+    print('index.html, journey.html, cannibalization.html, review.html, sales.html')
