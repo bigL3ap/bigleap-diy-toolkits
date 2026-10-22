@@ -6,11 +6,11 @@
   "note": "Internal. Value points avoid pricing and promises of results; proof points carry their source. Edit here, then rebuild the deck requests with tools/build_sales_deck.py.",
   "start": {
     "widget": "profile-start",
-    "headline": "Start with their business, not a pitch.",
+    "headline": "Start with your business, not a pitch.",
     "points": [
       "Eight questions build a Business Profile that fills in every other toolkit.",
-      "The result points to the service to start with, in the client's own words.",
-      "Nothing is stored on Big Leap's side. Answers stay in the client's browser."
+      "The result points to the service to start with, in your own words.",
+      "Nothing is stored on Big Leap's side. Answers stay in your browser."
     ],
     "ask": "Before I show you anything, let's answer a few questions about the business together.",
     "listen": "What they sell, where customers come from, which CRM they use, and how many locations they have.",
@@ -69,7 +69,7 @@
           "headline": "Put a number on hand work.",
           "points": [
             "Turns copy-paste, data entry and manual follow-up into hours per month.",
-            "That number makes the case for automation in the client's own terms.",
+            "That number makes the case for automation in your own terms.",
             "Hours back go to selling instead of updating records."
           ],
           "ask": "Walk me through everything that happens between a new lead and a booked meeting.",
@@ -232,7 +232,7 @@
           "points": [
             "Checks the spokesperson, story angles and proof points before pitching starts.",
             "Journalists move fast. Being ready is the difference between a quote and a pass.",
-            "Shows what the client needs to bring to a PR program."
+            "Shows what you need to bring to a PR program."
           ],
           "ask": "If a reporter called tomorrow asking for an expert quote, who would take the call?",
           "listen": "No named spokesperson, no data or stories ready, or a slow approvals process.",
@@ -359,7 +359,7 @@
           "headline": "Solve the right problem first.",
           "points": [
             "Two questions point to where marketing should focus right now.",
-            "Keeps the conversation on the client's real constraint, not the tactic they asked about.",
+            "Keeps the conversation on your real constraint, not the tactic you asked about.",
             "A natural opener for any service conversation."
           ],
           "ask": "If marketing went perfectly for the next year, what would be different for the business?",
@@ -371,7 +371,7 @@
           "headline": "Fix the foundation first.",
           "points": [
             "Four checks show which foundation everything else depends on.",
-            "Reuses what the client already has instead of starting over.",
+            "Reuses what you already have instead of starting over.",
             "Puts the work in the order it pays off."
           ],
           "ask": "What do you already have that's working, even a little?",
