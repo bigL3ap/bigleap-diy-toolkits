@@ -47,8 +47,11 @@ def main():
         J = '1 First-time owner'
         ctx, pg, errs = session()
         pg.goto(B + 'index.html'); pg.wait_for_timeout(500)
-        pg.click('.blh-tabs a[data-tab="start"]'); pg.wait_for_load_state('load'); pg.wait_for_timeout(300)
-        rec(J, '"Start here" opens the Business Profile', 'What_Kind_of_Business' in pg.url, pg.url)
+        rec(J, 'My Profile tab shows a "Start here" pill before a profile exists', pg.evaluate("(()=>{const x=document.querySelector('.blh-tabs a[data-tab=profile] [data-start-pill]'); return !!x && !x.hidden})()"))
+        pg.click('.blh-tabs a[data-tab="profile"]'); pg.wait_for_load_state('load'); pg.wait_for_timeout(400)
+        rec(J, 'My Profile opens', 'my-profile' in pg.url, pg.url)
+        pg.click('#bp-guided'); pg.wait_for_load_state('load'); pg.wait_for_timeout(300)
+        rec(J, '"Use the guided version" opens the Business Profile', 'What_Kind_of_Business' in pg.url, pg.url)
         pg.fill('#name', 'Sunrise Plumbing'); pg.click('label[for=crm-none]'); pg.click('label[for=goal-calls]'); pg.wait_for_timeout(300)
         rec(J, 'profile saved after real answers', 'Sunrise Plumbing' in (pg.evaluate("localStorage.getItem('bl_diy_profile_v1')") or ''))
         pg.goto(B + 'roadmap.html'); pg.wait_for_timeout(500)

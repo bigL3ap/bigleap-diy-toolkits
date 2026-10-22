@@ -19,6 +19,7 @@ Every toolkit has the same parts, with the same ids, because the shared header s
 | Result | `#answer` with `.hero-fig` and `.answer-line` | One number or word, one plain sentence. The progress recorder reads these. |
 | Deliverables | `.panel.deliv` sections | What to do, in order, with the free toolkit for each step |
 | Closing | `.closing` | `#copy-btn` "Copy my plan", optional print, `#cta-link` "Email <owner>" (a mailto with the toolkit in the subject). The shared owner script adds the "Talk To An Expert" card above it: banner photo, bio and a QR code, from `data/widgets.json` people (`email`, `bio`, `banner`, `qr`). |
+| Saved answers | (shared script) | Nothing to add. The shared answers script (`bl-answers-js`) saves every real answer in `#answers` to `bl_diy_answers_v1` and restores it on the next visit, so give every input an `id` (or a `name` for radios and checkboxes) and a visible label. Never save while example answers show. |
 | Next and related | `#next`, `#xlinks` | `renderNext(key, why)` and `renderXlinks([...])` using the shared `LINKS` map |
 
 ## Content rules
