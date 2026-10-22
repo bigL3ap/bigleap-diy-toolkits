@@ -1885,14 +1885,25 @@ let currentProfile = null;
   var SEQ = ["toolkits/paid/01_What_Kind_of_Business_Are_You.html", "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html", "toolkits/paid/03_Which_Conversions_Should_You_Track.html", "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html", "toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html", "toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html", "toolkits/revops/03_Who_Should_Own_Each_New_Lead.html", "toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html", "toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html", "toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html", "toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html", "toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html", "toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html", "toolkits/seo/03_Does_Google_and_AI_Know_Who_You_Are.html", "toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html", "toolkits/seo/05_Can_AI_Bots_Actually_Read_Your_Site.html", "toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html", "toolkits/pr/02_Build_Your_Media_Kit.html", "toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html", "toolkits/email/02_Which_Emails_Should_Send_Themselves.html", "toolkits/email/03_Is_Your_Email_Program_Working.html", "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html", "toolkits/plan/02_What_Do_You_Already_Have.html", "toolkits/plan/03_What_Makes_You_Worth_Choosing.html", "toolkits/plan/04_Would_Your_Customers_Recommend_You.html"];
   function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
   var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  /* Has the visitor already worked the toolkit at this href, per their own saved progress? Read-only. */
+  function kitWorked(href) {
+    try {
+      var m = new URL(href, location.href).pathname.match(/toolkits\/([a-z]+)\/(\d+)_/);
+      if (!m) return false;
+      var d = JSON.parse(localStorage.getItem('bl_diy_progress_v1') || 'null');
+      var k = d && d.kits && d.kits[m[1] + '-' + m[2]];
+      return !!(k && k.worked);
+    } catch (e) { return false; }
+  }
   function labelNext() {
     var box = document.getElementById('next'); if (!box || me < 0) return;
     var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
     var dl = box.getAttribute('data-label');
     if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
     if (!a) { lab.textContent = 'Next toolkit'; return; }
-    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
-    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    var href = a.getAttribute('href'), t = seqIdx(href), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    /* Earlier in sequence AND not already worked: a real skipped prerequisite. Already worked: don't call it a gap. */
+    var txt = t < 0 ? 'Recommended next' : (t < me && !kitWorked(href)) ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
     if (lab.textContent !== txt) lab.textContent = txt;
   }
   var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }

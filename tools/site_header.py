@@ -302,14 +302,25 @@ JS = r"""<script id="bl-header-js">
   var SEQ = __SEQ__;
   function seqIdx(href) { try { var p = new URL(href, location.href).pathname; for (var i = 0; i < SEQ.length; i++) if (p.slice(-SEQ[i].length) === SEQ[i]) return i; } catch (e) {} return -1; }
   var me = seqIdx(location.href), pagerNext = document.querySelector('.blp-a:not(.back)');
+  /* Has the visitor already worked the toolkit at this href, per their own saved progress? Read-only. */
+  function kitWorked(href) {
+    try {
+      var m = new URL(href, location.href).pathname.match(/toolkits\/([a-z]+)\/(\d+)_/);
+      if (!m) return false;
+      var d = JSON.parse(localStorage.getItem('bl_diy_progress_v1') || 'null');
+      var k = d && d.kits && d.kits[m[1] + '-' + m[2]];
+      return !!(k && k.worked);
+    } catch (e) { return false; }
+  }
   function labelNext() {
     var box = document.getElementById('next'); if (!box || me < 0) return;
     var lab = box.querySelector('.next-label'), a = box.querySelector('a[href]'); if (!lab) return;
     var dl = box.getAttribute('data-label');
     if (dl) { if (lab.textContent !== dl) lab.textContent = dl; return; }   /* only write when it changes: the observer watches this box, so an unconditional write loops forever */
     if (!a) { lab.textContent = 'Next toolkit'; return; }
-    var t = seqIdx(a.getAttribute('href')), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
-    var txt = t < 0 ? 'Recommended next' : t < me ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
+    var href = a.getAttribute('href'), t = seqIdx(href), pn = pagerNext ? seqIdx(pagerNext.getAttribute('href')) : -1;
+    /* Earlier in sequence AND not already worked: a real skipped prerequisite. Already worked: don't call it a gap. */
+    var txt = t < 0 ? 'Recommended next' : (t < me && !kitWorked(href)) ? 'Fix this first' : t === pn ? 'Next toolkit' : 'Recommended next';
     if (lab.textContent !== txt) lab.textContent = txt;
   }
   var nb = document.getElementById('next'); if (nb && window.MutationObserver) { new MutationObserver(labelNext).observe(nb, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-label'] }); }
