@@ -664,7 +664,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
             '</ul></div>' for h6, links in cols)
         items.append(f'<li class="blh-li{" r" if i >= 3 else ""}"><button class="blh-top" type="button" aria-expanded="false">{e(label)}<span class="car" aria-hidden="true"></span></button><div class="blh-dd">{dd}</div></li>')
         if label == 'Resources':
-            items.append(f'<li><a class="blh-top is-here" href="{hub}">Free Toolkits <span class="blh-new">New</span></a></li>')
+            items.append(f'<li><a class="blh-top is-here" href="{hub}">Small Leaps <span class="blh-new">New</span></a></li>')
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email'), ('Strategy', 'strategy')]
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
     # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
