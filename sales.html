@@ -83,6 +83,8 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .talk dl { margin: 0; display: grid; gap: 10px; }
 .talk dt { font-weight: 700; color: var(--navy); font-size: 14px; }
 .talk dd { margin: 2px 0 0; font-size: 15px; }
+.talk.heard ul { margin: 0; padding-left: 20px; display: grid; gap: 7px; font-size: 14.5px; }
+.talk.heard + .talk.standalone { margin-top: 12px; }
 .opt .acts { margin-top: 16px; }
 .copied { font-size: 13px; color: var(--muted); align-self: center; }
 /* Slide preview: a visual match of the real Google Slide, always rendered in the deck's own light colors (not site theme) so what you see is what you copy. */
@@ -571,6 +573,7 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
     '</div>' +
     '<div class="talk-zone">' +
       '<p class="zone-tag internal">Internal talk track — not for the client</p>' +
+      (s.heard && s.heard.length ? '<div class="talk heard standalone"><h4 style="margin-top:0">What we keep hearing</h4><ul>' + s.heard.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '') +
       '<div class="talk standalone"><dl><div><dt>Ask</dt><dd>' + esc(o.ask) + '</dd></div><div><dt>Listen for</dt><dd>' + esc(o.listen) + '</dd></div><div><dt>Next step</dt><dd>' + esc(o.next) + '</dd></div></dl></div>' +
     '</div>' +
     '<details class="live-try" open>' +
