@@ -660,7 +660,7 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· PAID MEDIA</span></div>
-<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 3 of 4</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 2 of 3</span><span class="campaign">Notice Different · Align to Genuine</span></p>
 <h1>Which Conversions Should You Track?</h1>
 <p class="lede">Answer a few questions about how your business makes money. You get a named event plan, which events should steer your ad bids, and a UTM naming starter.</p>
 </header>
@@ -869,7 +869,7 @@ code, .mono { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-si
 </div>
 <footer class="foot">
 <p>Free tools and plan limits change. Check your own account before you build. Menu paths were checked in October 2026 and may move.</p>
-<p>© Big Leap · Paid Media DIY Toolkit 3 of 4 · Draft 1 · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
+<p>© Big Leap · Paid Media DIY Toolkit 2 of 3 · Draft 1 · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
 </footer>
 </div>
 <script>
@@ -883,10 +883,9 @@ const OWNER = { name: 'Scott Smoot', first: 'Scott' };
 const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-03';
 const OWNER_EMAIL = 'ssmoot@bigleap.com';   /* the closing button emails the owner */ // swap for Scott's meeting scheduler link
 const SERIES = [
-  { n: 1, short: 'Profile', title: 'What Kind of Business Are You?', file: '01_What_Kind_of_Business_Are_You.html' },
-  { n: 2, short: 'Ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
-  { n: 3, short: 'Conversions', title: 'Which Conversions Should You Track?', file: '03_Which_Conversions_Should_You_Track.html' },
-  { n: 4, short: 'Launch', title: 'Which Campaigns Should You Run First?', file: '04_Which_Campaigns_Should_You_Run_First.html' },
+  { n: 1, short: 'Ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
+  { n: 2, short: 'Conversions', title: 'Which Conversions Should You Track?', file: '03_Which_Conversions_Should_You_Track.html' },
+  { n: 3, short: 'Launch', title: 'Which Campaigns Should You Run First?', file: '04_Which_Campaigns_Should_You_Run_First.html' },
 ];
 const LINKS = {
   profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
@@ -1328,7 +1327,7 @@ function mistakes(m, i) {
     return s;
   }
   function planText(m, i) {
-    const L = ['YOUR CONVERSION EVENT PLAN', 'Which Conversions Should You Track? (Big Leap Paid Media DIY Toolkit 3 of 4)', ''];
+    const L = ['YOUR CONVERSION EVENT PLAN', 'Which Conversions Should You Track? (Big Leap Paid Media DIY Toolkit 2 of 3)', ''];
     L.push('Wins: ' + (i.wins.length ? i.wins.map((w) => WIN_NAMES[w]).join(', ') : 'none picked'));
     L.push(headline(m).plain);
     if (m.leadValue) L.push('Lead value: ' + money(m.leadValue));
@@ -1394,7 +1393,7 @@ function mistakes(m, i) {
     syncCopy();
     sticky();
   }
-  initShell(3, () => { applyValues(EXAMPLE); applyProfile(null); touched = true; render(); $('w-leads').focus(); });
+  initShell(2, () => { applyValues(EXAMPLE); applyProfile(null); touched = true; render(); $('w-leads').focus(); });
   const syncCopy = initCopy(() => planText(last.m, last.i));
   const sticky = initSticky();
   applyValues(EXAMPLE);
@@ -1411,7 +1410,7 @@ function mistakes(m, i) {
   render();
 })();
 </script>
-<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="02_Is_Your_Google_Ads_Account_Ready.html"><small>← Previous</small><b>Is Your Google Ads Account Ready?</b></a><a class="blp-hub" href="../../toolkits.html"><small>Paid Media · Toolkit 3 of 4</small><b>All toolkits</b></a><a class="blp-a" href="04_Which_Campaigns_Should_You_Run_First.html"><small>Next →</small><b>Which Campaigns Should You Run First?</b></a></div></nav><!-- /bl-pager -->
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="02_Is_Your_Google_Ads_Account_Ready.html"><small>← Previous</small><b>Is Your Google Ads Account Ready?</b></a><a class="blp-hub" href="../../toolkits.html"><small>Paid Media · Toolkit 2 of 3</small><b>All toolkits</b></a><a class="blp-a" href="04_Which_Campaigns_Should_You_Run_First.html"><small>Next →</small><b>Which Campaigns Should You Run First?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
   var P = {"name": "Scott Smoot", "title": "Director of PPC", "photo": "../../assets/people/scott-smoot.jpg", "banner": "../../assets/people/scott-smoot-banner.jpg", "qr": "../../assets/qr/scott-smoot.svg", "bio": "Meet Scott. Director of PPC. Once-upon-a-time rock guitarist. He never misses a Brandon Sanderson novel and just used his woodworking skills to build the ultimate workbench.", "email": "ssmoot@bigleap.com"};

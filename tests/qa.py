@@ -83,7 +83,13 @@ def check_json():
     if cn and tk:
         by = {s['id']: {t['n'] for t in s['toolkits']} for s in tk['series']}
         prev_ids = {p['id'] for p in tk.get('previews', [])}
-        bad = [k for k, (sid, n) in cn['nodes'].items() if not (sid in by and n in by[sid])]
+        # "start" is a sentinel for the universal Business Profile step (toolkits.json's top-level "start"),
+        # not part of any series, so it's valid when mapped as ["start", 0] and a start file is configured.
+        def node_ok(sid, n):
+            if sid == 'start':
+                return n == 0 and bool(tk.get('start', {}).get('file'))
+            return sid in by and n in by[sid]
+        bad = [k for k, (sid, n) in cn['nodes'].items() if not node_ok(sid, n)]
         rec(not bad, 'connections: every node maps to a public toolkit', ', '.join(bad))
         badedge = [e for e in cn['edges'] if e[0] not in cn['nodes'] or e[1] not in cn['nodes']]
         rec(not badedge, 'connections: every edge references known nodes', str(badedge[:3]))
