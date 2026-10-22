@@ -86,6 +86,8 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 999px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tabs a:hover { background: #DAE9F2; }
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
+.blh-pill { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 800 10px/1.6 "Open Sans", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.blh-pill[hidden] { display: none; }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-int { flex: 0 0 auto; margin-left: auto; display: flex; align-items: center; gap: 2px; padding-left: 12px; border-left: 1px solid #B9C6CF; }
 .blh-int-l { flex: 0 0 auto; font: 800 11px/1 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #5F6E79; margin-right: 6px; white-space: nowrap; }
@@ -239,6 +241,8 @@ JS = r"""<script id="bl-header-js">
   var h = document.querySelector('.blh'); if (!h) return;
   var burger = h.querySelector('.blh-burger');
   var bar = h.querySelector('.blh-tabs');
+  /* the "Start here" pill on My Profile shows until the visitor has a Business Profile */
+  try { if (localStorage.getItem('bl_diy_profile_v1')) Array.prototype.forEach.call(h.querySelectorAll('[data-start-pill]'), function (x) { x.hidden = true; }); } catch (e) {}
   function centerCurrent() {
     var cur = bar && (bar.querySelector('a[aria-current="page"]') || bar.querySelector('a[aria-current="true"]')); if (!cur || bar.scrollWidth <= bar.clientWidth) return;
     if (cur.offsetLeft + cur.offsetWidth < bar.clientWidth - 24) { bar.scrollLeft = 0; return; }
@@ -540,6 +544,83 @@ def owner_js(page, name, people):
     r = lambda k: rel(page, pp[k]) if pp.get(k) else ''
     return OWNER_TMPL.replace('__OWNER__', json.dumps({'name': name, 'title': pp.get('title', ''), 'photo': r('photo'), 'banner': r('banner'), 'qr': r('qr'), 'bio': pp.get('bio', ''), 'email': pp.get('email', '')}, ensure_ascii=False))
 
+
+# Saved answers, for "My Profile": every toolkit remembers its own answers in this browser and restores them on the
+# next visit. bl_diy_answers_v1 = { v: 1, kits: { "<folder>-<nn>": { v: 1, title, url, updated, fields: [ { k, type, label, value, text } ] } } }
+# Saved only after a real (trusted) answer change, never while the page shows example answers. Strategy starters
+# restore themselves from bl_diy_assess_v1, so here they are only recorded for display. Paid 01 is the Business
+# Profile itself, which has its own key. A newer version of the key is left alone.
+ANSWERS_JS = r"""<script id="bl-answers-js">
+(function () {
+  var m = location.pathname.match(/toolkits\/([a-z]+)\/(\d+)_/); if (!m) return;
+  var KEY = 'bl_diy_answers_v1', kit = m[1] + '-' + m[2];
+  if (kit === 'paid-01') return;
+  var form = document.getElementById('answers'); if (!form) return;
+  var selfRestoring = m[1] === 'plan', restoring = false, sT = null;
+  function load() { try { var d = JSON.parse(localStorage.getItem(KEY)); return d && d.v === 1 ? d : (d ? null : { v: 1, kits: {} }); } catch (e) { return { v: 1, kits: {} }; } }
+  function isExample() { var p = document.getElementById('example-pill'); return !!(p && /example/i.test(p.textContent || '')); }
+  function clean(el) { if (!el) return ''; var c = el.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.pf-tag, .bl-try-badge, .sr-only, .sr, .chip'), function (x) { x.remove(); }); return (c.textContent || '').replace(/\s+/g, ' ').trim(); }
+  function labelFor(el) {
+    var g = el.closest('[role="radiogroup"], [role="group"]'), id = g && g.getAttribute('aria-labelledby');
+    if (id && document.getElementById(id)) return clean(document.getElementById(id));
+    if (el.id) { var l = form.querySelector('label[for="' + el.id + '"]'); if (l && el.type !== 'radio' && el.type !== 'checkbox') return clean(l); }
+    var lb = el.getAttribute('aria-labelledby'); if (lb && document.getElementById(lb)) return clean(document.getElementById(lb));
+    var q = el.closest('.q-row, .data-f, .q'); var t = q && q.querySelector('.row-label, .data-l, .q-label, legend'); return clean(t) || el.name || el.id;
+  }
+  function optText(el) { var l = el.id && form.querySelector('label[for="' + el.id + '"]'); return clean(l || el.closest('label')) || el.value; }
+  function serialize() {
+    var seen = {}, out = [];
+    Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (el) {
+      if (el.disabled || el.type === 'button' || el.type === 'submit' || el.type === 'hidden') return;
+      if (el.type === 'radio' || el.type === 'checkbox') {
+        var k = el.name || el.id; if (!k || seen[k]) return; seen[k] = 1;
+        var all = form.querySelectorAll('input[name="' + k + '"]'); if (!all.length) all = [el];
+        var on = Array.prototype.filter.call(all, function (x) { return x.checked; });
+        out.push({ k: k, type: el.type, label: labelFor(el), value: el.type === 'radio' ? (on[0] ? on[0].value : '') : on.map(function (x) { return x.value; }), text: on.map(optText).join(', ') });
+      } else {
+        var k2 = el.id || el.name; if (!k2 || seen[k2]) return; seen[k2] = 1;
+        out.push({ k: k2, type: 'value', label: labelFor(el), value: el.value, text: el.value });
+      }
+    });
+    return out;
+  }
+  function save() {
+    if (restoring || isExample()) return;
+    var d = load(); if (!d) return;
+    d.kits = d.kits || {};
+    var h1 = document.querySelector('h1');
+    d.kits[kit] = { v: 1, title: (h1 ? h1.textContent : document.title).trim(), url: 'toolkits/' + location.pathname.split('/toolkits/')[1], updated: new Date().toISOString(), fields: serialize() };
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  function onUser(e) { if (!e.isTrusted || !form.contains(e.target)) return; clearTimeout(sT); sT = setTimeout(save, 700); }
+  form.addEventListener('input', onUser, true); form.addEventListener('change', onUser, true);
+  var rx = document.getElementById('restore-example');
+  if (rx) rx.addEventListener('click', function () { var d = load(); if (d && d.kits && d.kits[kit]) { delete d.kits[kit]; try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} } });
+  /* restore: set the saved values, then fire the page's own input/change handlers so it recalculates */
+  function apply(fields) {
+    var changed = 0;
+    fields.forEach(function (f) {
+      if (f.type === 'radio') { var r = f.value && form.querySelector('input[name="' + f.k + '"][value="' + String(f.value).replace(/"/g, '') + '"]'); if (r && !r.checked) { r.checked = true; fire(r); changed++; } }
+      else if (f.type === 'checkbox') { var all = form.querySelectorAll('input[name="' + f.k + '"]'); if (!all.length) { var one = document.getElementById(f.k); all = one ? [one] : []; } Array.prototype.forEach.call(all, function (x) { var want = (f.value || []).indexOf(x.value) > -1; if (x.checked !== want) { x.checked = want; fire(x); changed++; } }); }
+      else { var el = document.getElementById(f.k) || form.querySelector('[name="' + f.k + '"]'); if (el && form.contains(el) && el.value !== f.value) { el.value = f.value; fire(el); changed++; } }
+    });
+    return changed;
+  }
+  function fire(el) { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }
+  function restore() {
+    var d = load(), s = d && d.kits && d.kits[kit]; if (!s || !s.fields || !s.fields.length) return;
+    restoring = true;
+    try { apply(s.fields); apply(s.fields); } finally { restoring = false; }   /* twice: some questions appear only after an earlier answer */
+    var head = form.querySelector('.q-head'); if (!head || document.getElementById('bl-restored')) return;
+    var n = document.createElement('p'); n.id = 'bl-restored'; n.setAttribute('role', 'status');
+    n.style.cssText = 'margin:8px 0 0;font-size:13px;line-height:1.45;color:var(--muted,#5F6E79)';
+    n.innerHTML = 'Welcome back: your saved answers are loaded. <a href="' + (location.pathname.indexOf('/toolkits/') > -1 ? '../../' : '') + 'my-profile.html" style="font-weight:700">See all your answers in My Profile</a>';
+    head.appendChild(n);
+  }
+  if (!selfRestoring) setTimeout(restore, 0);
+})();
+</script>"""
+
 def track_js():
     return TRACK_TMPL.replace('__GTM__', GTM_ID).replace('__HUB__', HUBSPOT_ID)
 
@@ -563,12 +644,13 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
     # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
     menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Your journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')]
+    tabs = [('My Profile', 'my-profile.html', 'profile'), ('Your journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')]
     tools_tabs = [('Customer journey', 'journey.html', 'journey'), ('Sales assets', 'sales.html', 'sales'), ('Widgets', 'index.html#widgets', 'widgets'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Status & review', 'review.html', 'review')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
-        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
+        pill = '<span class="blh-pill" data-start-pill>Start here</span>' if key == 'profile' else ''
+        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}{pill}</a>'
     in_menu = any(k in (current, service) for _, _, k in menu_items)
     menu_btn = (f'<button type="button" class="blh-tbtn{" is-current" if in_menu else ""}" aria-expanded="false" aria-controls="blh-tmenu">'
                 'Toolkits<span class="car" aria-hidden="true"></span></button>')
@@ -621,6 +703,7 @@ def apply(page, block, before_selector=None, bottom=''):
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-try-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-owner-js">.*?</script>\n?', '', s, flags=re.S)
+    s = re.sub(r'<script id="bl-answers-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-version-js"[^>]*></script>\n?', '', s)   # removes the retired version switch
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
@@ -643,13 +726,16 @@ if __name__ == '__main__':
         prev = seq[i - 1] if i else None
         nxt = seq[i + 1] if i + 1 < len(seq) else None
         fmt = lambda it: None if not it else ((it[1]['title'] if it[0]['id'] == s['id'] else f"{it[0]['name']}: {it[1]['title']}"), it[1]['file'])
-        cur = 'start' if t['file'].endswith('paid/01_What_Kind_of_Business_Are_You.html') else 'toolkit'
+        cur = 'profile' if t['file'].endswith('paid/01_What_Kind_of_Business_Are_You.html') else 'toolkit'
         apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
-              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}") + '\n' + owner_js(t['file'], s['owner'], PEOPLE))
+              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}") + '\n' + owner_js(t['file'], s['owner'], PEOPLE) + '\n' + ANSWERS_JS)
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
+    # My Profile: the Business Profile and every toolkit's saved answers, in one place.
+    if os.path.exists(os.path.join(ROOT, 'my-profile.html')):
+        apply('my-profile.html', header('my-profile.html', 'profile', '', None, None, ''))
     # Your journey: the client-facing journey map (the visitor's own path). journey.html is the internal map.
     if os.path.exists(os.path.join(ROOT, 'your-journey.html')):
         apply('your-journey.html', header('your-journey.html', 'yourjourney', '', None, None, ''))
