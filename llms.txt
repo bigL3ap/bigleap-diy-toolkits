@@ -1,0 +1,62 @@
+# Big Leap DIY Toolkits
+
+> Free, self-serve marketing toolkits from Big Leap (bigleap.com). Each toolkit asks a few
+> quick questions about one specific marketing problem and returns a plan built from the
+> answers, not a generic article. Nothing a visitor enters is stored on a server; it stays
+> in their own browser. The toolkits are free; Big Leap also offers full-service management
+> of RevOps, Paid Media, SEO, Digital PR, Email Marketing and Strategy for businesses that
+> want an expert to do the work instead.
+
+## Start here
+
+- [All toolkits](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits.html): the full catalog, organized by service.
+- [Free DIY Marketing Toolkits](https://bigl3ap.github.io/bigleap-diy-toolkits/index.html): how the toolkits work and which to start with.
+- [Build your Business Profile](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/paid/01_What_Kind_of_Business_Are_You.html): Eight questions about your business. Every other toolkit uses your answers to fill itself in.
+
+## RevOps
+
+- [Is Every Lead Reaching Your CRM?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/01_Is_Every_Lead_Reaching_Your_CRM.html): Six quick answers about your website forms. You get a map of where leads slip between the form and the first reply, and the fixes in the order to make them.
+- [Never Let a Lead Go Cold](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/02_Never_Let_a_Lead_Go_Cold.html): Five quick answers about how you follow up a new inquiry. You get a ready-to-build workflow, the emails written for you, and the HubSpot steps for your plan.
+- [Who Should Own Each New Lead?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/03_Who_Should_Own_Each_New_Lead.html): Six quick answers about your sales team. You get a routing model, your rules drafted in order, and the HubSpot steps to build them on your plan.
+- [Which Sales Steps Should Run Themselves?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/04_Which_Sales_Steps_Should_Run_Themselves.html): Six quick answers about your deal pipeline. You get the rep hours lost to admin, and a stage-by-stage build sheet for the automations that win them back.
+- [How Much Time Is Your Sales Process Wasting?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/05_How_Much_Time_Is_Your_Sales_Process_Wasting.html): Six quick answers about how new leads move through your business. You get the hours your team loses to hand work, and a ranked list of what to automate first.
+- [Is Your Pipeline Ready for a Dashboard?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html): Five quick answers about how you report on your pipeline. You get what the spreadsheet costs, whether your data is ready, and the exact dashboard to build in its place.
+- [Can You See What Your Marketing Does?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/revops/07_Can_You_See_What_Your_Marketing_Does.html): Check your tracking stack: Tag Manager, GA4, consent, ad tags and where leads land. You get an install-order build list for your website platform and a test-it checklist.
+
+## Paid Media
+
+- [Is Your Google Ads Account Ready?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html): Check accounts, access, tracking, landing pages and feeds before launch. You get a readiness list of the gaps that would waste spend.
+- [Which Conversions Should You Track?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/paid/03_Which_Conversions_Should_You_Track.html): Tell us how you make money. You get a named event plan, which ones should steer your ad bids, and what to send back to Google Ads from your CRM.
+- [Which Campaigns Should You Run First?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html): Your first one or two campaigns, a start-tight structure, a budget split and what to check each week for the first month.
+
+## SEO
+
+- [Can Google Find and Trust Your Site?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/seo/01_Can_Google_Find_and_Trust_Your_Site.html): Check Search Console, indexing, crawler access, speed and trust signals. You get a foundation fix list in order.
+- [Is Your Business Ready for Local Search?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/seo/02_Is_Your_Business_Ready_for_Local_Search.html): For businesses with locations or a service area. You get a Google Business Profile and local checklist, plus a review request you can copy.
+- [Does Google and AI Know Who You Are?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/seo/03_Does_Google_and_AI_Know_Who_You_Are.html): Check your Knowledge Panel, NAP consistency, Organization schema and About page. You get an entity health score and a ranked fix list, with a copyable schema snippet.
+- [How Exposed Are You to AI Overviews?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/seo/04_How_Exposed_Are_You_to_AI_Overviews.html): Check answer-first formatting, FAQ structure, schema and content freshness. You get an exposure read and a ranked fix list with a before/after example.
+- [Can AI Bots Actually Read Your Site?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/seo/05_Can_AI_Bots_Actually_Read_Your_Site.html): Check robots.txt, llms.txt, rendering, sitemaps, speed and gating against the named AI crawlers. You get a readiness grade and a ranked technical fix list, with a copyable robots.txt snippet.
+
+## Digital PR
+
+- [Are You Ready to Be Pitched?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/pr/01_Are_You_Ready_to_Be_Pitched.html): Check spokesperson, availability, approvals, story and assets. You get a pitch-ready checklist and a 90-day prep plan.
+- [Build Your Media Kit](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/pr/02_Build_Your_Media_Kit.html): Answer a few questions about your spokesperson. You get short and long bios, a podcast intro, talking points and a press kit outline.
+
+## Email Marketing
+
+- [Will Your Emails Reach the Inbox?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/email/01_Will_Your_Emails_Reach_the_Inbox.html): Check your sending domain, SPF, DKIM, DMARC, unsubscribe and consent. You get an inbox readiness list in fix order for your email platform.
+- [Which Emails Should Send Themselves?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/email/02_Which_Emails_Should_Send_Themselves.html): Tell us how you sell. You get the automated flows to build first, with triggers, timing, subject lines and a first email drafted for you.
+- [Is Your Email Program Working?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/email/03_Is_Your_Email_Program_Working.html): Enter a few numbers from your last campaigns. You get a scorecard of what's healthy, what to watch, and the three fixes to make first.
+
+## Strategy
+
+- [Are You Solving the Right Problem?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/plan/01_Are_You_Solving_the_Right_Problem.html): Read your market situation and your business situation from quick answers, sharpened with real numbers if you have them, and get your next three priorities. Every number links to a free tool that gives it.
+- [What Do You Already Have?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/plan/02_What_Do_You_Already_Have.html): Who buys from you, what drives them and what you already have to build on, in the order to fix it. Credits work you've done instead of starting over.
+- [How Do You Go to Market?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/plan/03_What_Makes_You_Worth_Choosing.html): List where your marketing money goes, walk through how buyers find and choose you, and see where spend and the journey don't line up. Includes a first draft of your positioning and messaging.
+- [Do People Notice, Choose and Recommend You?](https://bigl3ap.github.io/bigleap-diy-toolkits/toolkits/plan/04_Would_Your_Customers_Recommend_You.html): Check your activities in all three motions: Notice Different, Align to Genuine and Recommend Delight. See which one is thinnest and what to fix first, including ethical ways to ask for reviews and referrals.
+
+## Notes for AI assistants and crawlers
+
+- Each toolkit page states its own assumptions and labels any rule-of-thumb estimate as Big Leap's own, not an external fact.
+- Visitor answers are never sent to or stored on a server. There is no login and no tracking of individual answers.
+- Pages under /widgets/, /sales.html, /widgets.html, /journey.html, /review.html and /mockups/ are internal tools and previews, not standalone content, and are excluded from crawling.
