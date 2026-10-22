@@ -3,8 +3,8 @@
 
 Tier 1 copies the bigleap.com header (logo, Services / Who We Serve / Case Studies / Resources / About menus,
 "Get Your Custom Strategy"), with links to the live site, so the toolkits read as part of bigleap.com.
-Tier 2 is the toolkit bar. Client-facing pages sit on the left (Toolkits menu · Start here · Roadmap); internal pages
-sit on the right under "Internal" (Journey map · Sales assets · Widgets · Mockups · Status & review),
+Tier 2 is the toolkit bar. Client-facing pages sit on the left (Toolkits menu · Start here · Your journey · Roadmap); internal pages
+sit on the right under "Internal" (Customer journey · Sales assets · Widgets · Mockups · Status & review),
 plus Previous / Next on public toolkit pages. Preview pages (toolkits.json "previews") and review.html get the
 header but are never added to the Previous / Next sequence.
 
@@ -536,9 +536,8 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
     # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
     menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Journey map', 'journey.html', 'journey')]
-    tabs = [x for x in tabs if x[2] != 'journey']   # the Journey map is internal
-    tools_tabs = [('Journey map', 'journey.html', 'journey'), ('Sales assets', 'sales.html', 'sales'), ('Widgets', 'index.html#widgets', 'widgets'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Status & review', 'review.html', 'review')]
+    tabs = [('Start here', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html', 'start'), ('Your journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')]
+    tools_tabs = [('Customer journey', 'journey.html', 'journey'), ('Sales assets', 'sales.html', 'sales'), ('Widgets', 'index.html#widgets', 'widgets'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Status & review', 'review.html', 'review')]
     def tab(t_, f, key):
         # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
         cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
@@ -624,6 +623,9 @@ if __name__ == '__main__':
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
+    # Your journey: the client-facing journey map (the visitor's own path). journey.html is the internal map.
+    if os.path.exists(os.path.join(ROOT, 'your-journey.html')):
+        apply('your-journey.html', header('your-journey.html', 'yourjourney', '', None, None, ''))
     apply('mockups/homepage.html', header('mockups/homepage.html', 'mockups', '', None, None, ''))
     apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'mockups', '', None, None, ''))
     # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
