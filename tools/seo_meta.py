@@ -30,7 +30,7 @@ TODAY = date.today().isoformat()
 
 # Internal pages: never touched by this script. Kept here only so a reviewer can see the
 # deliberate split between what's public and what stays hidden.
-INTERNAL_PAGES = {'journey.html', 'sales.html', 'widgets.html', 'review.html',
+INTERNAL_PAGES = {'journey.html', 'sales.html', 'widgets.html', 'review.html', 'cannibalization.html',
                    'mockups/homepage.html', 'mockups/toolkits-landing.html'}
 
 HUB_PAGES = [

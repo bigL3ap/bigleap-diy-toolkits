@@ -595,49 +595,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
 }
 @media (prefers-reduced-motion: no-preference) { .cf-detail.anim > * { animation: tour-fade .35s ease; } }
 
-/* ===== For service teams: why the toolkits grow your book ===== */
-.tm-line { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; background: #143D55; color: #fff; border-radius: 14px; padding: 16px 20px; }
-.tm-line p { margin: 0; font: 700 clamp(17px, 1.8vw, 21px)/1.35 var(--head); max-width: 44em; }
-.tm-line button { min-height: 44px; padding: 8px 16px; border-radius: 12px; border: 1px solid #fff; background: transparent; color: #fff; font: 700 14px var(--body); cursor: pointer; }
-.tm-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
-.tm-col { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
-.tm-col h3 { font-size: 18px; display: flex; align-items: center; gap: 8px; }
-.tm-col h3 i { font-style: normal; font: 800 11px/1 var(--body); padding: 5px 8px; border-radius: 999px; }
-.tm-col.kit h3 i { background: rgba(15,123,95,.14); color: var(--green); }
-.tm-col.you h3 i { background: rgba(234,67,53,.12); color: var(--red); }
-.tm-col ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14.5px; }
-.tm-wheel { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; counter-reset: tw; }
-.tm-wheel li { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; line-height: 1.45; counter-increment: tw; }
-.tm-wheel li b { display: block; font: 700 15px/1.25 var(--head); color: var(--navy); margin-bottom: 3px; }
-.tm-wheel li b::before { content: counter(tw) ". "; color: var(--blue); }
-.tm-wheel li:not(:last-child)::after { content: "\2192"; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--blue); font-weight: 800; }
-.tm-wheel li:last-child { border-color: var(--blue); }
-.tm-back { margin: 8px 0 0; font-size: 13px; color: var(--muted); text-align: right; }
-.tm-qs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 12px; margin-top: 18px; }
-.tm-q { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
-.tm-q summary { list-style: none; cursor: pointer; padding: 14px 16px 14px 46px; position: relative; font: 700 16px/1.35 var(--head); color: var(--navy); }
-.tm-q summary::-webkit-details-marker { display: none; }
-.tm-q summary::before { content: "+"; position: absolute; left: 14px; top: 13px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--sky); font-weight: 800; }
-.tm-q[open] summary::before { content: "\2212"; }
-.tm-q p { margin: 0; padding: 0 16px 14px 46px; font-size: 14.5px; }
-.tm-q p + p { padding-top: 0; margin-top: -4px; }
-.tm-teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 14px; margin-top: 18px; }
-.tm-team { background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
-.tm-team header { display: flex; gap: 12px; align-items: center; }
-.tm-team header img, .tm-team header .cf-av { width: 48px; height: 48px; flex-basis: 48px; border-radius: 50%; object-fit: cover; }
-.tm-team h3 { font-size: 18px; }
-.tm-team header small { display: block; font-size: 13px; color: var(--muted); }
-.tm-team h4 { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 4px; }
-.tm-team p { margin: 0; font-size: 14px; }
-.tm-team ul { margin: 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 3px; }
-.tm-asks { margin: 18px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
-.tm-asks li { background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--blue); border-radius: 12px; padding: 14px 16px; font-size: 14.5px; }
-.tm-asks li b { display: block; font: 700 16px var(--head); color: var(--navy); margin-bottom: 4px; }
-.tm-sub { margin-top: 30px; }
-.tm-sub h3 { font-size: clamp(20px, 2.2vw, 26px); }
-.tm-sub > p { margin: 6px 0 0; color: var(--muted); max-width: 52em; }
-@media (max-width: 1000px) { .tm-wheel { grid-template-columns: 1fr 1fr; } .tm-wheel li::after { display: none; } .tm-back { text-align: left; } }
-@media (max-width: 640px) { .tm-split, .tm-wheel { grid-template-columns: 1fr; } }
+/* "For service teams" moved to its own page: cannibalization.html. This note points there. */
+.cann-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.cann-note a { font-weight: 700; }
 </style>
 <style id="bl-header-css">
 /* Big Leap site header (tools/site_header.py). Always light, like bigleap.com. */
@@ -953,7 +913,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
 </script>
 </head>
 <body>
-<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Small Leaps <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html" data-tab="home">Start here</a><button type="button" class="blh-tbtn" data-tab="t" aria-expanded="false" aria-controls="blh-tmenu">All toolkits<span class="car" aria-hidden="true"></span></button><button type="button" class="blh-tbtn" data-tab="p" aria-expanded="false" aria-controls="blh-pmenu">My Profile<span class="car" aria-hidden="true"></span></button><span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span><a href="journey.html" data-tab="journey" aria-current="page">Customer journey</a><button type="button" class="blh-tbtn" data-tab="a" aria-expanded="false" aria-controls="blh-amenu">Assets<span class="car" aria-hidden="true"></span></button><a href="review.html" data-tab="review">Status &amp; review</a></span></nav><div class="blh-tmenu" id="blh-tmenu" hidden><ul><li><a href="toolkits.html#toolkits" data-tab="toolkits">All toolkits</a></li><li><a href="toolkits.html#revops" data-tab="revops">RevOps</a></li><li><a href="toolkits.html#paid" data-tab="paid">Paid Media</a></li><li><a href="toolkits.html#seo" data-tab="seo">SEO</a></li><li><a href="toolkits.html#pr" data-tab="pr">Digital PR</a></li><li><a href="toolkits.html#email" data-tab="email">Email Marketing</a></li><li><a href="toolkits.html#strategy" data-tab="strategy">Strategy</a></li></ul></div><div class="blh-tmenu" id="blh-pmenu" hidden><ul><li><a href="my-profile.html" data-tab="profile-home">Profile, answers &amp; progress</a></li><li><a href="your-journey.html" data-tab="yourjourney">Journey</a></li><li><a href="roadmap.html" data-tab="roadmap">Roadmap</a></li></ul></div><div class="blh-tmenu" id="blh-amenu" hidden><ul><li><a href="sales.html" data-tab="sales">Sales deck &amp; talk tracks</a></li><li><a href="widgets.html" data-tab="widgets">Widgets &amp; tiles</a></li><li><a href="mockups/homepage.html" data-tab="mockups">Page mockups</a></li></ul></div></div></div><div class="blh-strip" role="note">Internal page · for the Big Leap team · not shown to clients</div></header><!-- /bl-header -->
+<!-- bl-header --><header class="blh" role="banner"><div class="blh-bar"><div class="blh-in"><a class="blh-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="122" height="40"></a><button class="blh-burger" type="button" aria-expanded="false" aria-controls="blh-nav"><i aria-hidden="true"></i>Menu</button><nav class="blh-nav" id="blh-nav" aria-label="Big Leap"><ul><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Services<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>SEO</h6><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/ai-seo/">AI SEO</a></li><li><a href="https://www.bigleap.com/services/local-seo/">Local SEO</a></li><li><a href="https://www.bigleap.com/services/technical-seo/">Technical SEO</a></li><li><a href="https://www.bigleap.com/services/seo-site-migrations/">Site Migrations</a></li></ul></div><div class="blh-col"><h6>Paid Advertising</h6><ul><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/paid-search/">Paid Search Ads</a></li><li><a href="https://www.bigleap.com/services/paid-search/google-ads-agency/">Google Ads Agency</a></li><li><a href="https://www.bigleap.com/services/paid-social/">Paid Social Ads</a></li><li><a href="https://www.bigleap.com/services/retargeting/">Retargeting Ads</a></li></ul></div><div class="blh-col"><h6>More services</h6><ul><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/digital-pr/">Digital PR</a></li><li><a href="https://www.bigleap.com/services/reputation-management/">Reputation Management</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">Conversion Rate Optimization</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Who We Serve<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/enterprise/">Enterprise</a></li><li><a href="https://www.bigleap.com/who-we-serve/multi-location/">Multi-Location &amp; Franchise</a></li><li><a href="https://www.bigleap.com/who-we-serve/ecommerce/">Ecommerce &amp; DTC</a></li><li><a href="https://www.bigleap.com/who-we-serve/b2b/">B2B</a></li><li><a href="https://www.bigleap.com/who-we-serve/saas/">SaaS</a></li><li><a href="https://www.bigleap.com/who-we-serve/investors/">Private Equity &amp; Investors</a></li></ul></div><div class="blh-col"><h6>By industry</h6><ul><li><a href="https://www.bigleap.com/who-we-serve/automotive/">Automotive</a></li><li><a href="https://www.bigleap.com/who-we-serve/home-contractor-and-hvac/">Contractor / HVAC</a></li><li><a href="https://www.bigleap.com/who-we-serve/finance/">Finance</a></li><li><a href="https://www.bigleap.com/who-we-serve/food-and-beverage/">Food &amp; Beverage</a></li><li><a href="https://www.bigleap.com/who-we-serve/higher-education/">Higher Education</a></li><li><a href="https://www.bigleap.com/who-we-serve/information-technology/">Information Technology</a></li><li><a href="https://www.bigleap.com/who-we-serve/insurance/">Insurance</a></li><li><a href="https://www.bigleap.com/who-we-serve/legal/">Legal</a></li></ul></div><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/who-we-serve/manufacturing/">Manufacturing</a></li><li><a href="https://www.bigleap.com/who-we-serve/medical-practices/">Medical Practices</a></li><li><a href="https://www.bigleap.com/who-we-serve/mental-health/">Mental Health</a></li><li><a href="https://www.bigleap.com/who-we-serve/nonprofit/">Nonprofit</a></li><li><a href="https://www.bigleap.com/who-we-serve/optometrists/">Optometrists</a></li><li><a href="https://www.bigleap.com/who-we-serve/retail/">Retail</a></li><li><a href="https://www.bigleap.com/who-we-serve/roofing/">Roofers</a></li></ul></div></div></li><li class="blh-li"><button class="blh-top" type="button" aria-expanded="false">Case Studies<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>By business type</h6><ul><li><a href="https://www.bigleap.com/b2b-case-studies/">B2B Case Studies</a></li><li><a href="https://www.bigleap.com/enterprise-case-studies/">Enterprise Case Studies</a></li><li><a href="https://www.bigleap.com/local-and-multilocation-case-studies/">Local &amp; Multi-Location</a></li><li><a href="https://www.bigleap.com/ecommerce-case-studies/">Ecommerce Case Studies</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">View All Case Studies</a></li></ul></div></div></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">Resources<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6>Blog</h6><ul><li><a href="https://www.bigleap.com/blog/category/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/blog/category/conversion-optimization/">Conversion Rate Optimization</a></li><li><a href="https://www.bigleap.com/blog/category/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/blog/category/seo/">SEO</a></li><li><a href="https://www.bigleap.com/blog/">View All Blog Posts</a></li></ul></div><div class="blh-col"><h6>Tools</h6><ul><li><a href="index.html">Free DIY Toolkits <span class="blh-new">New</span></a></li><li><a href="https://www.bigleap.com/digital-marketing-budget-calculator/">Digital Marketing Budget Calculator</a></li><li><a href="https://www.bigleap.com/blog/your-free-digital-marketing-tool-kit/">Digital Marketing Tool Kit</a></li><li><a href="https://www.bigleap.com/blog/your-client-agency-partnership-pulse-check/">Partnership Pulse Check</a></li><li><a href="https://www.bigleap.com/blog/your-16-point-site-health-checklist/">Site Health Checklist</a></li></ul></div><div class="blh-col"><h6>Podcast</h6><ul><li><a href="https://www.bigleap.com/podcasts/">Sweet Takes Podcast</a></li></ul></div></div></li><li><a class="blh-top is-here" href="index.html">Small Leaps <span class="blh-new">New</span></a></li><li class="blh-li r"><button class="blh-top" type="button" aria-expanded="false">About<span class="car" aria-hidden="true"></span></button><div class="blh-dd"><div class="blh-col"><h6 aria-hidden="true"></h6><ul><li><a href="https://www.bigleap.com/about-us/">About Us</a></li><li><a href="https://www.bigleap.com/about-us/#our-leadership-team">Our Team</a></li><li><a href="https://www.bigleap.com/careers/">Careers</a></li><li><a href="https://www.bigleap.com/contact-us/">Contact Us</a></li></ul></div></div></li></ul><a class="blh-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&utm_medium=site-header">Get Your Custom Strategy</a></nav></div></div><div class="blh-sub"><div class="blh-in"><nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span><a href="index.html" data-tab="home">Start here</a><button type="button" class="blh-tbtn" data-tab="t" aria-expanded="false" aria-controls="blh-tmenu">All toolkits<span class="car" aria-hidden="true"></span></button><button type="button" class="blh-tbtn" data-tab="p" aria-expanded="false" aria-controls="blh-pmenu">My Profile<span class="car" aria-hidden="true"></span></button><span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span><a href="journey.html" data-tab="journey" aria-current="page">Customer journey</a><button type="button" class="blh-tbtn" data-tab="a" aria-expanded="false" aria-controls="blh-amenu">Assets<span class="car" aria-hidden="true"></span></button><a href="cannibalization.html" data-tab="cannibalization">Service cannibalization</a><a href="review.html" data-tab="review">Status &amp; review</a></span></nav><div class="blh-tmenu" id="blh-tmenu" hidden><ul><li><a href="toolkits.html#toolkits" data-tab="toolkits">All toolkits</a></li><li><a href="toolkits.html#revops" data-tab="revops">RevOps</a></li><li><a href="toolkits.html#paid" data-tab="paid">Paid Media</a></li><li><a href="toolkits.html#seo" data-tab="seo">SEO</a></li><li><a href="toolkits.html#pr" data-tab="pr">Digital PR</a></li><li><a href="toolkits.html#email" data-tab="email">Email Marketing</a></li><li><a href="toolkits.html#strategy" data-tab="strategy">Strategy</a></li></ul></div><div class="blh-tmenu" id="blh-pmenu" hidden><ul><li><a href="my-profile.html" data-tab="profile-home">Profile, answers &amp; progress</a></li><li><a href="your-journey.html" data-tab="yourjourney">Journey</a></li><li><a href="roadmap.html" data-tab="roadmap">Roadmap</a></li></ul></div><div class="blh-tmenu" id="blh-amenu" hidden><ul><li><a href="sales.html" data-tab="sales">Sales deck &amp; talk tracks</a></li><li><a href="widgets.html" data-tab="widgets">Widgets &amp; tiles</a></li><li><a href="mockups/homepage.html" data-tab="mockups">Page mockups</a></li></ul></div></div></div><div class="blh-strip" role="note">Internal page · for the Big Leap team · not shown to clients</div></header><!-- /bl-header -->
 
 <main class="wrap">
   <section class="hero" aria-labelledby="h1">
@@ -977,8 +937,8 @@ details.support .support-grid { padding: 4px 16px 16px; }
     <button type="button" role="tab" id="jt-connect" aria-controls="jp-connect" aria-selected="false" tabindex="-1" data-p="connect" data-try><b>How it connects</b><small>Across services</small></button>
     <button type="button" role="tab" id="jt-measure" aria-controls="jp-measure" aria-selected="false" tabindex="-1" data-p="measure"><b>Measure it</b><small>KPIs and tracking</small></button>
     <button type="button" role="tab" id="jt-campaigns" aria-controls="jp-campaigns" aria-selected="false" tabindex="-1" data-p="campaigns"><b>Follow up</b><small>Campaigns</small></button>
-    <button type="button" role="tab" id="jt-teams" aria-controls="jp-teams" aria-selected="false" tabindex="-1" data-p="teams"><b>For service teams</b><small>Why it grows your book</small></button>
   </nav>
+  <p class="cann-note"><a href="cannibalization.html">Worried the toolkits cannibalize your service line? See &ldquo;Service cannibalization&rdquo; &rarr;</a></p>
   <div class="jpanel" id="jp-segments" role="tabpanel" aria-labelledby="jt-segments">
   <section class="block way" aria-labelledby="way-h">
     <div class="block-head"><div><h2 id="way-h">The Big Leap way, by segment</h2><p>How Notice Different, Align to Genuine and Recommend Delight work together for a real prospect in each Big Leap segment, before and after they hire us. They notice we're different, find help that fits their actual situation, and get an experience worth recommending, from the first toolkit through onboarding. Pick a segment; the swimlane below follows the same prospect.</p></div></div>
@@ -1067,85 +1027,6 @@ details.support .support-grid { padding: 4px 16px 16px; }
     <div class="cf-flow" id="cf-flow" role="group" aria-label="Campaign stages"></div>
     <div class="cf-detail" id="cf-detail" aria-live="polite"></div>
     <p class="cf-asof">Status as of Oct 21, 2026, from the October syncs and the Mailchimp build. Anything under &ldquo;Still open&rdquo; needs a check before it&rsquo;s reported as done.</p>
-  </section>
-  </div>
-  <div class="jpanel" id="jp-teams" role="tabpanel" aria-labelledby="jt-teams" hidden>
-  <section class="block" aria-labelledby="teams-h">
-    <div class="block-head"><div><h2 id="teams-h">For service teams: why this grows your book, not shrinks it</h2><p>A fair worry: if we give away how-to toolkits for SEO, paid media, PR, email and RevOps, won&rsquo;t people do the work themselves instead of hiring us? Here&rsquo;s how the toolkits are built to send work to your team, not take it away.</p></div></div>
-
-    <div class="tm-line">
-      <p>The toolkits give away the checklist, not the work. They find the people who need you and send them to you with a plan.</p>
-      <button type="button" id="tm-copy">Copy this line</button>
-    </div>
-
-    <div class="tm-split">
-      <div class="tm-col kit">
-        <h3><i>Free</i> What a toolkit does</h3>
-        <ul>
-          <li>Checks where they stand and names what to fix first</li>
-          <li>Explains why each fix matters, in plain language</li>
-          <li>Hands them a plan they can copy</li>
-          <li>Stops at the point where it needs an expert, and names that expert</li>
-        </ul>
-      </div>
-      <div class="tm-col you">
-        <h3><i>Your team</i> What a toolkit can&rsquo;t do</h3>
-        <ul>
-          <li>Do the build: campaigns, fixes, flows, integrations, pitches</li>
-          <li>Run it every month, and adjust when results move</li>
-          <li>Make the judgment calls a checklist can&rsquo;t</li>
-          <li>Own the outcome and be accountable for it</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="tm-sub">
-      <h3>How a free toolkit turns into work for your team</h3>
-      <p>Every step is designed so the prospect gets more value from us, not less need for us.</p>
-      <ol class="tm-wheel">
-        <li><b>They try it free</b>People who weren&rsquo;t ready to talk to sales get real progress, with your name and photo on the toolkit.</li>
-        <li><b>They see the size of the job</b>The plan shows how much there is to do well. That&rsquo;s what makes an expert worth it.</li>
-        <li><b>They ask for you</b>&ldquo;Email [you]&rdquo; is on every toolkit, with your photo, bio and a QR code, and the toolkit is in the subject line so you know which one started it.</li>
-        <li><b>The call starts ahead</b>They arrive with a Business Profile and a plan, so discovery starts at strategy, not setup.</li>
-        <li><b>They find the next service</b>The Business Profile maps a path across every service, so one team&rsquo;s client becomes another team&rsquo;s lead.</li>
-      </ol>
-      <p class="tm-back">&#8634; Not ready yet? They stay in the Masterclass emails until they are. <a href="#flow">See the full campaign</a></p>
-    </div>
-
-    <div class="tm-sub">
-      <h3>The questions teams ask</h3>
-      <div class="tm-qs">
-        <details class="tm-q"><summary>If it&rsquo;s free, won&rsquo;t people just do it themselves?</summary>
-          <p>Some will, and most of them weren&rsquo;t going to sign a retainer this year anyway. Today they&rsquo;d find a YouTube video or a competitor&rsquo;s blog. With the toolkits, the help they find is ours, and our name is the one they remember when the list gets long.</p>
-          <p>The toolkits cover the checklist, not the build. Each one ends where it takes an expert, and names one.</p></details>
-        <details class="tm-q"><summary>Doesn&rsquo;t giving it away make our work look less valuable?</summary>
-          <p>It does the opposite. A prospect who has worked through the checklist understands how much goes into doing it well. The toolkit works like a sample of your expertise, with your name and face on it.</p></details>
-        <details class="tm-q"><summary>Will this flood my team with low-quality leads?</summary>
-          <p>No. Using a toolkit doesn&rsquo;t send anyone to sales. Masterclass signups come in as subscribers, not sales leads. Someone only reaches you when they choose to email you from the toolkit.</p>
-          <p>When they do, they bring their Business Profile and plan, so you know their situation before you meet.</p></details>
-        <details class="tm-q"><summary>What if a current client uses a toolkit and decides they don&rsquo;t need us?</summary>
-          <p>The toolkits stop at foundations and readiness, which a retained client should already have in place with us. If a client opens a toolkit for a service they don&rsquo;t buy from us yet, that&rsquo;s an expansion conversation, and the toolkit has already done the discovery.</p></details>
-        <details class="tm-q"><summary>Does marketing get the credit while my team does the work?</summary>
-          <p>Every &ldquo;Email [you]&rdquo; click is tracked by toolkit and service, so the team whose toolkit started the conversation is visible in reporting. The HubSpot report that shows this is planned. See <a href="#measure">Measure it</a>.</p></details>
-        <details class="tm-q"><summary>Is this more work for my team?</summary>
-          <p>The ask is small: review your toolkits once, take the calls they book, and tell us what prospects keep asking so the next toolkit answers it.</p></details>
-      </div>
-    </div>
-
-    <div class="tm-sub">
-      <h3>Where each toolkit stops and your team starts</h3>
-      <p>Every service has its own toolkits, owned by that team&rsquo;s lead. The toolkit takes the prospect to the edge of the work. Your team does the work.</p>
-      <div class="tm-teams" id="tm-teams"><p class="empty">Loading&hellip;</p></div>
-    </div>
-
-    <div class="tm-sub">
-      <h3>What we need from you</h3>
-      <ul class="tm-asks">
-        <li><b>Review your toolkits</b>Check that the advice matches how your team works, and that the &ldquo;where it gets complex&rdquo; line is in the right place. <a href="review.html">Open Status &amp; review</a></li>
-        <li><b>Take the calls</b>When someone books through your toolkit, their plan comes with them. Start from what they&rsquo;ve already done.</li>
-        <li><b>Tell us what prospects ask</b>The questions you hear on calls become the next toolkit, or the next Masterclass email.</li>
-      </ul>
-    </div>
   </section>
   </div>
 
@@ -1462,7 +1343,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
   setSeg('local', false, true);
 
   /* Page tabs */
-  var JT = ['segments', 'flow', 'connect', 'measure', 'campaigns', 'teams'], jtabs = document.querySelector('.jtabs');
+  var JT = ['segments', 'flow', 'connect', 'measure', 'campaigns'], jtabs = document.querySelector('.jtabs');
   var pendingK = null, connLoaded = false;
   function showPanel(p, focus, quiet) {
     var parts = String(p || '').split(':'); p = parts[0]; if (parts[1] && p === 'connect') { pendingK = parts[1]; if (connLoaded) showConn(parts[1], true); }
@@ -1758,7 +1639,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
 })();
 </script>
 <script id="journey-flow-js">
-/* Start to finish (campaign flow) and For service teams tabs. Content lives here; status as of Oct 21, 2026. */
+/* Start to finish (campaign flow) tab. Content lives here; status as of Oct 21, 2026. */
 (function () {
   'use strict';
   function $(id) { return document.getElementById(id); }
@@ -1925,48 +1806,14 @@ details.support .support-grid { padding: 4px 16px 16px; }
     document.addEventListener('visibilitychange', function () { if (document.hidden && timer) stopTour(); });
   }
 
-  /* For service teams */
-  var EDGE = {
-    revops: ['Checks that leads reach the CRM, follow-up speed, who owns each lead, what can be automated, and dashboard readiness.', 'Building the integrations, routing, workflows and dashboards, and keeping them working as the business changes.'],
-    paid: ['Business type, account readiness, which conversions to track and which campaigns to run first.', 'Building and launching campaigns, budgets and bidding, creative testing and month-to-month optimization.'],
-    seo: ['Whether Google can find and trust the site, and local search readiness.', 'Technical fixes at scale, content strategy, earning links and ongoing ranking work.'],
-    pr: ['Whether they’re ready to be pitched, and a starter media kit.', 'Story angles, media relationships, pitching and landing the coverage.'],
-    email: ['Inbox placement, which emails should send themselves, and whether the program is working.', 'Building the flows, design, segmentation, testing and running the sends.'],
-    strategy: ['The right problem, what they already have, what makes them worth choosing and whether customers would recommend them.', 'Positioning, the plan across services and the roadmap that ties them together.']
-  };
-  var SC = { revops: 'var(--c-revops)', paid: 'var(--c-paid)', seo: 'var(--c-seo)', pr: 'var(--c-pr)', email: 'var(--c-email)', strategy: 'var(--c-strategy)' };
-  function drawTeams(series) {
-    var el = $('tm-teams'); if (!el) return;
-    el.innerHTML = series.filter(function (s) { return EDGE[s.id]; }).map(function (s) {
-      var p = PEOPLE[s.owner] || {}, first = String(s.owner || '').split(' ')[0];
-      var av = p.photo ? '<img src="' + esc(p.photo) + '" alt="" width="48" height="48" loading="lazy">' : '<span class="cf-av" aria-hidden="true">' + esc(initials(s.owner || '?')) + '</span>';
-      var kits = (s.toolkits || []).map(function (k) { return '<li><a href="' + esc(k.file || k.href || '#') + '">' + esc(k.title || k.name) + '</a></li>'; }).join('');
-      return '<article class="tm-team" style="--c:' + SC[s.id] + '"><header>' + av + '<div><h3>' + esc(s.name) + '</h3><small>' + esc(s.owner) + (p.title ? ', ' + esc(p.title) : '') + '</small></div></header>' +
-        '<div><h4>The toolkits cover</h4><p>' + esc(EDGE[s.id][0]) + '</p></div>' +
-        '<div><h4>Your team does</h4><p>' + esc(EDGE[s.id][1]) + '</p></div>' +
-        '<div><h4>The hand-off</h4><p>&ldquo;Email ' + esc(first) + '&rdquo; and a QR code on every toolkit, so they reach you with their plan in hand.</p></div>' +
-        '<details><summary>' + (s.toolkits || []).length + ' toolkits</summary><ul>' + kits + '</ul></details></article>';
-    }).join('');
-  }
-  function initTeams() {
-    var c = $('tm-copy');
-    if (c) c.addEventListener('click', function () {
-      var t = document.querySelector('.tm-line p').textContent;
-      function done() { c.textContent = 'Copied'; setTimeout(function () { c.textContent = 'Copy this line'; }, 1800); }
-      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done); else done();
-    });
-    var tp = $('jp-teams'); if (tp) tp.addEventListener('click', function (e) { var a = e.target.closest('a[href^="#"]'); if (a) { e.preventDefault(); location.hash = a.getAttribute('href').slice(1); window.scrollTo(0, document.querySelector('.jtabs').offsetTop); } });
-  }
-
   Promise.all([
     fetch('data/widgets.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return {}; }),
     fetch('toolkits.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return { series: [] }; })
   ]).then(function (r) {
     PEOPLE = (r[0] && r[0].people) || {};
-    drawTeams(r[1].series || []);
     if (cur) show(cur, true);
   });
-  init(); initTeams();
+  init();
 })();
 </script>
 <!-- bl-footer --><footer class="blf" aria-label="Big Leap"><div class="blf-in"><div class="blf-top"><div class="blf-brand"><a class="blf-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="assets/bigleap-logo.png" alt="Big Leap" width="110" height="36" loading="lazy"></a><p class="blf-tag">Brand-led performance marketing. Free DIY toolkits for the small leaps; our team for the Big Leap.</p></div><div><h2>DIY Toolkits</h2><ul><li><a href="index.html">Start here</a></li><li><a href="toolkits.html">All toolkits</a></li><li><a href="my-profile.html">My Profile</a></li><li><a href="your-journey.html">Your journey</a></li><li><a href="roadmap.html">Roadmap</a></li></ul></div><div><h2>Services</h2><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">CRO Marketing</a></li></ul></div><div><h2>Company</h2><ul><li><a href="https://www.bigleap.com/about-us/">About</a></li><li><a href="https://www.bigleap.com/areas-served/">Areas Served</a></li><li><a href="https://www.bigleap.com/blog/">Blog</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">Case Studies</a></li><li><a href="https://www.bigleap.com/sweet-story/">About Sweet Takes Podcast</a></li></ul></div><div><h2>Contact</h2><address><a href="tel:+18014363003">(801) 436-3003</a><br>4101 N Thanksgiving Way, Suite 175<br>Lehi, Utah 84043</address><a class="blf-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&amp;utm_medium=site-footer">Get Your Custom Strategy</a></div></div><div class="blf-bot"><ul class="blf-soc"><li><a href="https://www.facebook.com/bigleapmktg/" aria-label="Big Leap on Facebook" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a></li><li><a href="https://x.com/BigLeapMKTG/" aria-label="Big Leap on X" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"/></svg></a></li><li><a href="https://www.youtube.com/@bigleapmarketing" aria-label="Big Leap on YouTube" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a></li><li><a href="https://www.instagram.com/bigleapmktg/" aria-label="Big Leap on Instagram" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><path d="M16.5 7.5h.01"/></svg></a></li><li><a href="https://www.linkedin.com/company/bigleap/" aria-label="Big Leap on LinkedIn" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.5"/><path d="M11 20v-6a3 3 0 0 1 6 0v6M11 9v11"/></svg></a></li></ul><div class="blf-legal"><a href="https://www.bigleap.com/privacy-policy/">Privacy Policy</a><a href="https://www.bigleap.com/terms-of-use/">Terms of Use</a><span>© 2026 Big Leap, All Rights Reserved</span></div></div></div></footer><!-- /bl-footer -->
