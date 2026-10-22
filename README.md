@@ -10,10 +10,10 @@ Live (GitHub Pages, `main` only): https://bigl3ap.github.io/bigleap-diy-toolkits
 |---|---|
 | `index.html` | **Start here**, the landing page and the site's front door: what the toolkits are, who wrote them, how they work, the toolkit map, each service with a live widget, where DIY stops, FAQs. Old hub hashes (`#toolkits`, `#seo`, `#widgets`, `#buildout`…) redirect to their new pages. |
 | `toolkits.html` | **All toolkits**: the catalog by service, with search and service filters (`#revops`, `#paid`, … select a service). |
-| `my-profile.html`, `your-journey.html`, `roadmap.html`, `progress.html` | **My Profile** and its sub-tabs: Profile & answers, Journey, Roadmap, Progress. |
+| `my-profile.html`, `your-journey.html`, `roadmap.html`, `progress.html` | **My Profile** and its menu: Profile & answers, Journey, Roadmap, Progress. |
 | `journey.html` | Customer journey (internal): segments, the campaign flow, how the toolkits connect, measurement, service-team buy-in. |
-| `sales.html`, `widgets.html`, `mockups/homepage.html` | **Assets** (internal) and its sub-tabs: Sales deck & talk tracks, Widgets & tiles, Page mockups. `mockups/toolkits-landing.html` now redirects to `index.html`. |
-| (toolkit bar) | Client side on the left (Start here, All toolkits menu, My Profile); internal pages on the right under "Internal" (Customer journey, Assets, Status & review). Sub-tabs for My Profile and Assets are set in `GROUPS` in `tools/site_header.py`. |
+| `sales.html`, `widgets.html`, `mockups/homepage.html` | **Assets** (internal) and its menu: Sales deck & talk tracks, Widgets & tiles, Page mockups. `mockups/toolkits-landing.html` now redirects to `index.html`. |
+| (toolkit bar) | Identical on every page; only the highlight moves. Client side on the left: Start here, All toolkits (menu), My Profile (menu: Profile & answers, Journey, Roadmap, Progress). Internal on the right: Customer journey, Assets (menu: Sales deck & talk tracks, Widgets & tiles, Page mockups), Status & review. One status strip under the bar on every page (client pages: draft notice; internal pages: internal notice). The light/dark button lives in the site footer on pages that support it. Menus are set in `GROUPS` in `tools/site_header.py`. |
 | `review.html` | Status & review (internal): a To do tab and a What's built tab. |
 | `toolkits/<series>/` | The 18 public toolkits: RevOps (1–6 live, 7 draft), Paid Media, SEO, Digital PR, Email |
 | `toolkits/plan/` | Strategy starters 1–4 (the Strategy series). 3 and 4 await Coby's method review. |

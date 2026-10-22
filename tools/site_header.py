@@ -88,6 +88,10 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-pill { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 800 10px/1.6 "Open Sans", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
 .blh-pill[hidden] { display: none; }
+.blh-strip { background: #143D55; color: #fff; font: 600 13px/1.4 "Open Sans", Arial, sans-serif; text-align: center; padding: 8px 16px; }
+.draft-strip, .draft-banner { display: none !important; }
+.blh-tabs a .count { display: none !important; }
+.blf .blh-theme { background: #22394A; border-color: #2D4556; color: #DCE9F2; }
 .blh-subnav { background: #fff; border-bottom: 1px solid #D4DADF; }
 .blh-subnav .blh-in { display: flex; align-items: center; min-height: 46px; }
 .blh-stabs { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 5px 0; }
@@ -115,7 +119,7 @@ CSS = r"""<style id="bl-header-css">
 .blh-tmenu { position: absolute; top: calc(100% - 4px); z-index: 60; min-width: 220px; background: #fff; border: 1px solid #D4DADF; border-radius: 12px; box-shadow: 0 18px 40px rgba(20,61,85,.16); padding: 8px; }
 .blh-tmenu[hidden] { display: none; }
 .blh-tmenu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.blh-tmenu li:first-child { border-bottom: 1px solid #EEF3F8; padding-bottom: 4px; margin-bottom: 2px; }
+#blh-tmenu li:first-child { border-bottom: 1px solid #EEF3F8; padding-bottom: 4px; margin-bottom: 2px; }
 .blh-tmenu a { display: flex; align-items: center; min-height: 40px; padding: 6px 12px; border-radius: 8px; font: 600 14.5px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; }
 .blh-tmenu a:hover { background: #EEF3F8; color: #246D96; }
 .blh-tmenu a[aria-current="page"], .blh-tmenu a[aria-current="true"] { background: #143D55; color: #fff; }
@@ -261,13 +265,15 @@ JS = r"""<script id="bl-header-js">
     bar.scrollLeft = Math.max(0, (prev ? prev.offsetLeft : cur.offsetLeft) - 6);
   }
   centerCurrent(); window.addEventListener('hashchange', function () { setTimeout(centerCurrent, 60); });
-  /* Toolkits dropdown in the toolkit bar. The panel sits outside the scrolling bar so it is never clipped. */
-  (function () {
-    var btn = h.querySelector('.blh-tbtn'), menu = document.getElementById('blh-tmenu'); if (!btn || !menu) return;
+  /* Dropdowns in the toolkit bar (All toolkits, My Profile, Assets). Panels sit outside the scrolling bar so they are never clipped. */
+  var dds = [];
+  Array.prototype.forEach.call(h.querySelectorAll('.blh-tbtn'), function (btn) {
+    var menu = document.getElementById(btn.getAttribute('aria-controls')); if (!menu) return;
     var wrap = menu.parentNode, links = function () { return menu.querySelectorAll('a'); };
     function place() { var b = btn.getBoundingClientRect(), w = wrap.getBoundingClientRect(); menu.style.left = Math.max(0, Math.min(b.left - w.left, w.width - menu.offsetWidth)) + 'px'; }
-    function open(focusFirst) { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); place(); if (focusFirst) { var a = menu.querySelector('a[aria-current]') || links()[0]; if (a) a.focus(); } }
+    function open(focusFirst) { dds.forEach(function (d) { if (d.menu !== menu) d.close(false); }); menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); place(); if (focusFirst) { var a = menu.querySelector('a[aria-current]') || links()[0]; if (a) a.focus(); } }
     function close(refocus) { if (menu.hidden) return; menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); if (refocus) btn.focus(); }
+    dds.push({ menu: menu, close: close });
     btn.addEventListener('click', function () { if (menu.hidden) open(false); else close(false); });
     btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { e.preventDefault(); close(true); } });
@@ -281,11 +287,11 @@ JS = r"""<script id="bl-header-js">
     menu.addEventListener('focusout', function (e) { if (!menu.hidden && e.relatedTarget && !menu.contains(e.relatedTarget) && e.relatedTarget !== btn) close(false); });
     if (bar) bar.addEventListener('scroll', function () { if (!menu.hidden) place(); });
     window.addEventListener('resize', function () { if (!menu.hidden) place(); });
-    /* the hub marks the current group with aria-current; mirror it on the button */
+    /* the catalog marks the current service with aria-current; mirror it on the button */
     function sync() { btn.classList.toggle('is-current', !!menu.querySelector('a[aria-current]')); }
     sync();
     if (window.MutationObserver) new MutationObserver(sync).observe(menu, { attributes: true, subtree: true, attributeFilter: ['aria-current'] });
-  })();
+  });
   function swipeHints() {
     Array.prototype.forEach.call(document.querySelectorAll('.table-wrap, .evt-wrap'), function (w) {
       var over = w.scrollWidth > w.clientWidth + 4, h = w.previousElementSibling, has = h && h.classList && h.classList.contains('blx-swipe');
@@ -644,6 +650,7 @@ GROUPS = {
     'profile': [('Profile & answers', 'my-profile.html', 'profile-home'), ('Journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Progress', 'progress.html', 'progress')],
     'assets': [('Sales deck & talk tracks', 'sales.html', 'sales'), ('Widgets & tiles', 'widgets.html', 'widgets'), ('Page mockups', 'mockups/homepage.html', 'mockups')],
 }
+INTERNAL_KEYS = {'journey', 'sales', 'widgets', 'mockups', 'review'}
 
 def header(page, current, where='', prev=None, nxt=None, extra='', service=None):
     e = html.escape
@@ -662,26 +669,28 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
     # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
     menu_items = [('All toolkits', 'toolkits.html#toolkits', 'toolkits')] + [(n, 'toolkits.html#' + k, k) for n, k in SERVICES]
-    # Client side: Start here (landing), All toolkits (menu), My Profile (with its own sub-tabs).
-    # Internal side: Customer journey, Assets (with its own sub-tabs), Status & review.
+    # One bar on every page. Client side: Start here, All toolkits (menu), My Profile (menu).
+    # Internal side: Customer journey, Assets (menu), Status & review. Only the highlight changes.
     group = next((g for g, items in GROUPS.items() if any(k == current for _, _, k in items)), None)
-    tools_tabs = [('Customer journey', 'journey.html', 'journey'), ('Assets', 'sales.html', 'assets'), ('Status & review', 'review.html', 'review')]
     def tab(t_, f, key):
-        # one aria-current="page" per page; a group tab or the service a toolkit belongs to is marked "true" (same look)
-        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key in (service, group) else '')
+        # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
+        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
         return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
+    def dd(label, mid, items, on):
+        btn = (f'<button type="button" class="blh-tbtn{" is-current" if on else ""}" data-tab="{mid}" aria-expanded="false" aria-controls="blh-{mid}menu">'
+               f'{e(label)}<span class="car" aria-hidden="true"></span></button>')
+        panel = (f'<div class="blh-tmenu" id="blh-{mid}menu" hidden><ul>' + ''.join('<li>' + tab(*x) + '</li>' for x in items) + '</ul></div>')
+        return btn, panel
     in_menu = any(k in (current, service) for _, _, k in menu_items)
-    menu_btn = (f'<button type="button" class="blh-tbtn{" is-current" if in_menu else ""}" aria-expanded="false" aria-controls="blh-tmenu">'
-                'All toolkits<span class="car" aria-hidden="true"></span></button>')
-    menu_html = ('<div class="blh-tmenu" id="blh-tmenu" hidden><ul>' + ''.join('<li>' + tab(*x) + '</li>' for x in menu_items) + '</ul></div>')
-    tab_html = (tab('Start here', 'index.html', 'home') + menu_btn + tab('My Profile', 'my-profile.html', 'profile') +
-                '<span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span>' + ''.join(tab(*x) for x in tools_tabs) + '</span>')
-    sub = ''
-    if group:
-        label = {'profile': 'My Profile', 'assets': 'Assets'}[group]
-        sub = (f'<div class="blh-subnav"><div class="blh-in"><nav class="blh-stabs" aria-label="{e(label)}"><span class="blh-slabel">{e(label)}</span>'
-               + ''.join(f'<a href="{rel(page, f)}" data-tab="{k}"' + (' aria-current="page"' if k == current else '') + f'>{e(t_)}</a>' for t_, f, k in GROUPS[group])
-               + '</nav></div></div>')
+    t_btn, t_menu = dd('All toolkits', 't', menu_items, in_menu)
+    p_btn, p_menu = dd('My Profile', 'p', GROUPS['profile'], group == 'profile')
+    a_btn, a_menu = dd('Assets', 'a', GROUPS['assets'], group == 'assets')
+    menu_html = t_menu + p_menu + a_menu
+    tab_html = (tab('Start here', 'index.html', 'home') + t_btn + p_btn +
+                '<span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span>'
+                + tab('Customer journey', 'journey.html', 'journey') + a_btn + tab('Status & review', 'review.html', 'review') + '</span>')
+    internal = current in INTERNAL_KEYS
+    strip = ('<div class="blh-strip" role="note">' + ('Internal page · for the Big Leap team · not shown to clients' if internal else 'Draft 1 · for internal review · not launched yet') + '</div>')
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
@@ -700,7 +709,7 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
             '<div class="blh-sub"><div class="blh-in">'
             f'<nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span>{tab_html}</nav>{menu_html}'
             + (f'<div class="blh-right">{extra}</div>' if extra else '') +
-            '</div></div>' + sub + '</header><!-- /bl-header -->')
+            '</div></div>' + strip + '</header><!-- /bl-header -->')
 
 def pager(page, prev, nxt, where):
     e = html.escape
@@ -791,7 +800,9 @@ SOCIAL = [
     ('LinkedIn', 'https://www.linkedin.com/company/bigleap/', '<rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.5"/><path d="M11 20v-6a3 3 0 0 1 6 0v6M11 9v11"/>'),
 ]
 
-def site_footer(page):
+THEME_BTN = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
+
+def site_footer(page, theme=False):
     e = html.escape
     r = lambda f: rel(page, f)
     col = lambda h, links: f'<div><h2>{e(h)}</h2><ul>' + ''.join(f'<li><a href="{u}">{e(t)}</a></li>' for t, u in links) + '</ul></div>'
@@ -805,10 +816,10 @@ def site_footer(page):
             f'<div class="blf-brand"><a class="blf-logo" href="{BL}/" aria-label="Big Leap home"><img src="{r("assets/bigleap-logo.png")}" alt="Big Leap" width="110" height="36" loading="lazy"></a>'
             '<p class="blf-tag">Brand-led performance marketing. Free DIY toolkits for the small leaps; our team for the Big Leap.</p></div>'
             f'{diy}{svc}{co}{contact}</div>'
-            f'<div class="blf-bot">{soc}<div class="blf-legal"><a href="{BL}/privacy-policy/">Privacy Policy</a><a href="{BL}/terms-of-use/">Terms of Use</a><span>© 2026 Big Leap, All Rights Reserved</span></div></div>'
+            f'<div class="blf-bot">{soc}<div class="blf-legal">' + (THEME_BTN if theme else '') + f'<a href="{BL}/privacy-policy/">Privacy Policy</a><a href="{BL}/terms-of-use/">Terms of Use</a><span>© 2026 Big Leap, All Rights Reserved</span></div></div>'
             '</div></footer><!-- /bl-footer -->')
 
-def apply(page, block, before_selector=None, bottom=''):
+def apply(page, block, before_selector=None, bottom='', theme=False):
     p = os.path.join(ROOT, page)
     s = open(p, encoding='utf-8').read()
     # strip old versions (this header + the earlier bl-sitenav bar)
@@ -831,7 +842,7 @@ def apply(page, block, before_selector=None, bottom=''):
         i = s.rfind('<footer class="foot"')
         s = (s[:i] + why_block(page) + '\n' + s[i:]) if i >= 0 else s.replace('</body>', why_block(page) + '\n</body>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', (bottom + '\n' if bottom else '') + site_footer(page) + '\n' + JS.replace('__SEQ__', SEQ_JSON) + '\n' + TRY_JS + '\n</body>', 1)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + site_footer(page, theme) + '\n' + JS.replace('__SEQ__', SEQ_JSON) + '\n' + TRY_JS + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
@@ -854,9 +865,9 @@ if __name__ == '__main__':
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     # Start here: the landing page (the site's front door). All toolkits: the catalog.
     apply('index.html', header('index.html', 'home', '', None, None, ''))
-    apply('toolkits.html', header('toolkits.html', 'toolkits', '', None, None, theme))
+    apply('toolkits.html', header('toolkits.html', 'toolkits', '', None, None, ''), theme=True)
     # Assets (internal): widgets and slide tiles; shares sub-tabs with the sales deck and mockups.
-    apply('widgets.html', header('widgets.html', 'widgets', '', None, None, theme))
+    apply('widgets.html', header('widgets.html', 'widgets', '', None, None, ''), theme=True)
     # Progress: the visitor's progress across every toolkit (a My Profile sub-tab).
     if os.path.exists(os.path.join(ROOT, 'progress.html')):
         apply('progress.html', header('progress.html', 'progress', '', None, None, ''))
@@ -870,10 +881,10 @@ if __name__ == '__main__':
     apply('mockups/homepage.html', header('mockups/homepage.html', 'mockups', '', None, None, ''))
     # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
     if os.path.exists(os.path.join(ROOT, 'review.html')):
-        apply('review.html', header('review.html', 'review', '', None, None, theme))
+        apply('review.html', header('review.html', 'review', '', None, None, ''), theme=True)
     # Sales assets: the live-call deck, per-service options and talk tracks. Internal; tab only.
     if os.path.exists(os.path.join(ROOT, 'sales.html')):
-        apply('sales.html', header('sales.html', 'sales', '', None, None, theme))
+        apply('sales.html', header('sales.html', 'sales', '', None, None, ''))
     # Your Marketing Roadmap: a shared output page with its own tab; no pager.
     if os.path.exists(os.path.join(ROOT, 'roadmap.html')):
         apply('roadmap.html', header('roadmap.html', 'roadmap', '', None, None, ''))

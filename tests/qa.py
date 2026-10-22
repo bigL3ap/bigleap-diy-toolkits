@@ -338,15 +338,10 @@ def browser_checks(data):
         ctx.close()
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        want = {'home', 'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile', 'journey', 'assets', 'review'}
+        # every page is one click from the bar: direct tabs plus the All toolkits, My Profile and Assets menus
+        want = {'home', 'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile-home', 'yourjourney', 'roadmap', 'progress', 'journey', 'sales', 'widgets', 'mockups', 'review'}
         have = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
-        # My Profile and Assets each carry their own sub-tabs
-        for sub_page, sub_want in (('my-profile.html', {'profile-home', 'yourjourney', 'roadmap', 'progress'}), ('sales.html', {'sales', 'widgets', 'mockups'})):
-            pg.goto(base + sub_page); pg.wait_for_timeout(300)
-            got = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-stabs a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
-            want |= sub_want; have |= got
-        pg.goto(base + 'index.html'); pg.wait_for_timeout(300)
-        rec(want <= have, 'every page is reachable from the toolkit bar or its sub-tabs', ', '.join(sorted(want - have)))
+        rec(want <= have, 'every page is reachable from the toolkit bar and its menus', ', '.join(sorted(want - have)))
         btn = pg.query_selector('.blh-tbtn'); dd = False
         if btn:
             btn.click(); pg.wait_for_timeout(150)
