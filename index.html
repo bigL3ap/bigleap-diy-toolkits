@@ -45,6 +45,7 @@
 .svc:nth-of-type(even) { background: var(--sky); }
 .svc .c { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 56px; align-items: start; }
 .svc.flip .c > .copy { order: 2; }
+@media (min-width: 961px) { .svc .widget-col { position: sticky; top: 28px; } }
 .svc .label { font: 700 14px "Open Sans", Arial, sans-serif; color: var(--c); }
 .svc h2 { font-size: clamp(28px, 3.4vw, 40px); margin-top: 6px; }
 .svc .promise { font-size: 18px; margin: 12px 0 0; }
@@ -566,7 +567,7 @@
       return '<section class="svc' + (i % 2 ? ' flip' : '') + '" id="svc-' + s.id + '" style="--c:' + C[s.id] + '" aria-labelledby="sv-' + s.id + '"><div class="c"><div class="copy"><div class="label">' + esc(s.name) + ' · ' + s.toolkits.length + ' toolkits</div><h2 id="sv-' + s.id + '">' + esc(s.headline || s.name) + '</h2><p class="promise">' + esc(s.promise) + '</p><ul class="kits">' +
         s.toolkits.map(function (t) { return '<li><a href="' + esc(t.file) + '"><span class="n">' + t.n + '</span><span><strong>' + esc(t.title) + (t.status !== 'live' ? '<em>Draft</em>' : '') + '</strong><small>' + esc(t.description) + '</small></span></a></li>'; }).join('') +
         '</ul><a class="see" href="toolkits.html#' + s.id + '">See all ' + esc(s.name) + ' toolkits →</a><div class="owner-row">' + pic(s.owner, C[s.id]) + '<span>Written by <b>' + esc(s.owner) + '</b>' + (p.title ? ', ' + esc(p.title) : '') + '</span>' + mail + '</div></div>' +
-        (wg ? '<div><iframe class="widget" src="' + esc(wg.file) + '" title="' + esc(wg.title) + '" height="' + wg.height + '" loading="lazy"></iframe></div>' : '<div></div>') + '</div></section>';
+        (wg ? '<div class="widget-col"><iframe class="widget" src="' + esc(wg.file) + '" title="' + esc(wg.title) + '" height="' + wg.height + '" loading="lazy"></iframe></div>' : '<div></div>') + '</div></section>';
     }).join('');
   }).catch(function () {});
 })();
