@@ -727,7 +727,7 @@ body { background: #fff; color: #000; }
 <div class="page">
 <header class="masthead">
 <div class="wordmark">BIG LEAP <span class="wm-sub">· PAID MEDIA</span></div>
-<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 4 of 4</span><span class="campaign">Notice Different · Align to Genuine</span></p>
+<p class="eyebrow"><span class="kit">Paid Media DIY Toolkit 3 of 3</span><span class="campaign">Notice Different · Align to Genuine</span></p>
 <h1>Which Campaigns Should You Run First?</h1>
 <p class="lede">Seven quick answers. You get a Campaign Starter Plan: your first one or two Google Ads campaigns, a tight starting structure, a budget split and a 30-day check-in plan.</p>
 </header>
@@ -849,7 +849,7 @@ body { background: #fff; color: #000; }
 </div>
 <footer class="foot">
 <p>Free tools and plan limits change. Check your own account before you build. Nothing here is a promise of results; any number marked rule of thumb is a starting point, not a measurement of your account.</p>
-<p>© Big Leap · Paid Media DIY Toolkit 4 of 4 · Draft 1 · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
+<p>© Big Leap · Paid Media DIY Toolkit 3 of 3 · Draft 1 · <a id="hub-link" href="../../toolkits.html">All DIY Toolkits</a></p>
 </footer>
 </div>
 <script>
@@ -865,10 +865,9 @@ const OWNER = { name: 'Scott Smoot', first: 'Scott' };
 const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=paid-04';
 const OWNER_EMAIL = 'ssmoot@bigleap.com';   /* the closing button emails the owner */ // swap for Scott's meeting scheduler link
 const SERIES = [
-{ n: 1, short: 'Profile', title: 'What Kind of Business Are You?', file: '01_What_Kind_of_Business_Are_You.html' },
-{ n: 2, short: 'Ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
-{ n: 3, short: 'Conversions', title: 'Which Conversions Should You Track?', file: '03_Which_Conversions_Should_You_Track.html' },
-{ n: 4, short: 'Launch', title: 'Which Campaigns Should You Run First?', file: '04_Which_Campaigns_Should_You_Run_First.html' },
+{ n: 1, short: 'Ready', title: 'Is Your Google Ads Account Ready?', file: '02_Is_Your_Google_Ads_Account_Ready.html' },
+{ n: 2, short: 'Conversions', title: 'Which Conversions Should You Track?', file: '03_Which_Conversions_Should_You_Track.html' },
+{ n: 3, short: 'Launch', title: 'Which Campaigns Should You Run First?', file: '04_Which_Campaigns_Should_You_Run_First.html' },
 ];
 const LINKS = {
 profile:   { name: 'Build Your Business Profile',            url: '../paid/01_What_Kind_of_Business_Are_You.html',        owner: 'Scott Smoot' },
@@ -1329,7 +1328,7 @@ function splitRows(m) {
 return m.split.map((s) => ({ name: s.c.name, share: s.lo === s.hi ? '100%' : Math.round(s.lo * 100) + '–' + Math.round(s.hi * 100) + '%', month: m.b ? moneyRange(m.b * s.lo, m.b * s.hi) : '—', day: m.b ? (Math.round(m.b * s.hi / 30.4) < 1 ? 'under $1' : moneyRange(m.b * s.lo / 30.4, m.b * s.hi / 30.4)) : '—' }));
 }
 function planText(m) {
-const L = ['YOUR CAMPAIGN STARTER PLAN', 'Which Campaigns Should You Run First? (Big Leap Paid Media DIY Toolkit 4 of 4)', ''];
+const L = ['YOUR CAMPAIGN STARTER PLAN', 'Which Campaigns Should You Run First? (Big Leap Paid Media DIY Toolkit 3 of 3)', ''];
 if (profile) L.push('Business Profile: ' + profileName(profile));
 L.push('Start with: ' + m.camps.map((c) => c.name).join(' + ') + ' · Budget: ' + (m.b ? money(m.b) + ' a month' : 'not set'));
 const W = warnings(m).map((w) => w.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
@@ -1388,7 +1387,7 @@ syncCopy(); sticky();
 }
 function loadProfileIntoForm(p) { profile = p; pmap = fromProfile(p); applyAnswers(pmap); stripRender(); render(); }
 function stripRender() { renderProfileStrip(profile, loadProfileIntoForm, () => { profile = null; pmap = {}; stripRender(); render(); }); }
-initShell(4, () => { applyAnswers(EXAMPLE); render(); const f = document.querySelector('input[name="model"]:checked'); if (f) f.focus(); });
+initShell(3, () => { applyAnswers(EXAMPLE); render(); const f = document.querySelector('input[name="model"]:checked'); if (f) f.focus(); });
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your starter plan is copied. Paste it into an email, a doc or a task list.');
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
@@ -1404,7 +1403,7 @@ render();
 })();
 
 </script>
-<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="03_Which_Conversions_Should_You_Track.html"><small>← Previous</small><b>Which Conversions Should You Track?</b></a><a class="blp-hub" href="../../toolkits.html"><small>Paid Media · Toolkit 4 of 4</small><b>All toolkits</b></a><a class="blp-a" href="../revops/01_Is_Every_Lead_Reaching_Your_CRM.html"><small>Next →</small><b>RevOps: Is Every Lead Reaching Your CRM?</b></a></div></nav><!-- /bl-pager -->
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="03_Which_Conversions_Should_You_Track.html"><small>← Previous</small><b>Which Conversions Should You Track?</b></a><a class="blp-hub" href="../../toolkits.html"><small>Paid Media · Toolkit 3 of 3</small><b>All toolkits</b></a><a class="blp-a" href="../revops/01_Is_Every_Lead_Reaching_Your_CRM.html"><small>Next →</small><b>RevOps: Is Every Lead Reaching Your CRM?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
   var P = {"name": "Scott Smoot", "title": "Director of PPC", "photo": "../../assets/people/scott-smoot.jpg", "banner": "../../assets/people/scott-smoot-banner.jpg", "qr": "../../assets/qr/scott-smoot.svg", "bio": "Meet Scott. Director of PPC. Once-upon-a-time rock guitarist. He never misses a Brandon Sanderson novel and just used his woodworking skills to build the ultimate workbench.", "email": "ssmoot@bigleap.com"};

@@ -83,14 +83,6 @@
       "toolkits": [
         {
           "n": 1,
-          "short": "Profile",
-          "title": "What Kind of Business Are You?",
-          "file": "toolkits/paid/01_What_Kind_of_Business_Are_You.html",
-          "description": "Build your Business Profile once. You get the campaign types that fit, a code that fills in every other toolkit, and your DIY path across all services.",
-          "status": "draft"
-        },
-        {
-          "n": 2,
           "short": "Ready",
           "title": "Is Your Google Ads Account Ready?",
           "file": "toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html",
@@ -98,7 +90,7 @@
           "status": "draft"
         },
         {
-          "n": 3,
+          "n": 2,
           "short": "Conversions",
           "title": "Which Conversions Should You Track?",
           "file": "toolkits/paid/03_Which_Conversions_Should_You_Track.html",
@@ -106,7 +98,7 @@
           "status": "draft"
         },
         {
-          "n": 4,
+          "n": 3,
           "short": "Launch",
           "title": "Which Campaigns Should You Run First?",
           "file": "toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html",

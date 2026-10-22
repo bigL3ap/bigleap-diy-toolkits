@@ -861,17 +861,23 @@ if __name__ == '__main__':
     only_pages = 'pages-only' in sys.argv
     d = json.load(open(os.path.join(ROOT, 'toolkits.json')))
     PEOPLE = json.load(open(os.path.join(ROOT, 'data', 'widgets.json'))).get('people', {})
-    ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email', 'strategy'] if x in {s['id'] for s in d['series']}]           # journey order: Business Profile first
+    ORDER = [x for x in ['paid', 'revops', 'seo', 'pr', 'email', 'strategy'] if x in {s['id'] for s in d['series']}]           # series order after the universal Business Profile step below
     by = {s['id']: s for s in d['series']}
-    seq = [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
+    # The Business Profile ("start" in toolkits.json) is a universal first step ahead of every series,
+    # not owned by one of them - inject it as a synthetic series/toolkit pair so it gets the normal
+    # header/pager treatment as seq[0], instead of being listed as a numbered Paid Media toolkit.
+    START_SERIES = {'id': 'start', 'name': 'Start here', 'owner': 'Scott Smoot'}
+    START_TOOLKIT = {'n': 0, 'title': d['start']['title'], 'file': d['start']['file']}
+    seq = [(START_SERIES, START_TOOLKIT)] + [(by[sid], t) for sid in ORDER for t in by[sid]['toolkits']]
     SEQ_JSON = json.dumps([t['file'] for _, t in seq])
     for i, (s, t) in enumerate(seq if not only_pages else []):
         prev = seq[i - 1] if i else None
         nxt = seq[i + 1] if i + 1 < len(seq) else None
         fmt = lambda it: None if not it else ((it[1]['title'] if it[0]['id'] == s['id'] else f"{it[0]['name']}: {it[1]['title']}"), it[1]['file'])
         cur = 'toolkit'
+        where = 'Business Profile · Before any toolkit' if s is START_SERIES else f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}"
         apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
-              bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}") + '\n' + owner_js(t['file'], s['owner'], PEOPLE) + '\n' + ANSWERS_JS)
+              bottom=pager(t['file'], fmt(prev), fmt(nxt), where) + '\n' + owner_js(t['file'], s['owner'], PEOPLE) + '\n' + ANSWERS_JS)
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
     # Start here: the landing page (the site's front door). All toolkits: the catalog.
