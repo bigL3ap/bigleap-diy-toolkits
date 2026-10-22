@@ -8,18 +8,19 @@ Live (GitHub Pages, `main` only): https://bigl3ap.github.io/bigleap-diy-toolkits
 
 | Path | What it is |
 |---|---|
-| `index.html` | The hub: the toolkits by service, plus the widget library (internal) |
-| `journey.html` | The buyer-journey map, plus the DIY map of how the toolkits connect ("How it connects" tab) |
-| (toolkit bar) | Client-facing pages on the left (Toolkits, Start here, Roadmap); internal pages on the right under "Internal" (Journey map, Sales assets, Widgets, Mockups, Status & review). Set in `tools/site_header.py`. |
-| `review.html` | Status & review (internal): a To do tab (decisions, a review card per owner, before-launch to-dos from `data/open-items.json`) and a What's built tab (where everything stands, what changed). Replaces the old Buildout section and Team review page; `index.html#buildout` redirects here. |
-| `roadmap.html` | Your Marketing Roadmap: three priorities built from the visitor's answers |
+| `index.html` | **Start here**, the landing page and the site's front door: what the toolkits are, who wrote them, how they work, the toolkit map, each service with a live widget, where DIY stops, FAQs. Old hub hashes (`#toolkits`, `#seo`, `#widgets`, `#buildout`…) redirect to their new pages. |
+| `toolkits.html` | **All toolkits**: the catalog by service, with search and service filters (`#revops`, `#paid`, … select a service). |
+| `my-profile.html`, `your-journey.html`, `roadmap.html`, `progress.html` | **My Profile** and its sub-tabs: Profile & answers, Journey, Roadmap, Progress. |
+| `journey.html` | Customer journey (internal): segments, the campaign flow, how the toolkits connect, measurement, service-team buy-in. |
+| `sales.html`, `widgets.html`, `mockups/homepage.html` | **Assets** (internal) and its sub-tabs: Sales deck & talk tracks, Widgets & tiles, Page mockups. `mockups/toolkits-landing.html` now redirects to `index.html`. |
+| (toolkit bar) | Client side on the left (Start here, All toolkits menu, My Profile); internal pages on the right under "Internal" (Customer journey, Assets, Status & review). Sub-tabs for My Profile and Assets are set in `GROUPS` in `tools/site_header.py`. |
+| `review.html` | Status & review (internal): a To do tab and a What's built tab. |
 | `toolkits/<series>/` | The 18 public toolkits: RevOps (1–6 live, 7 draft), Paid Media, SEO, Digital PR, Email |
 | `toolkits/plan/` | Strategy starters 1–4 (the Strategy series). 3 and 4 await Coby's method review. |
-| `roadmap.html` | Your Marketing Roadmap: next priorities from the profile, the starters and toolkit progress. |
 | `toolkits.json` | The toolkit catalog. Series drive the hub, the map and Previous and Next. Toolkits with a `review` note, and any `previews`, are listed on `review.html`. |
 | `data/` | `connections.json` (map links), `widgets.json`, `open-items.json` (Status & review) |
 | `widgets/`, `tiles/` | Embeddable mini-toolkits (three or more per service) and their 16:9 slide tiles. Built with `tools/build_widgets.py` and `tools/build_tiles.py`; listed in `data/widgets.json`, which also holds each owner's title and photo. |
-| `mockups/` | Homepage and landing-page mockups |
+| `mockups/` | The bigleap.com homepage mockup (the landing-page mockup became `index.html`) |
 | `tools/site_header.py` | Adds the shared header, toolkit bar, pager and tracking to every page. Run it after changing `toolkits.json`. |
 | `tests/qa.py` | The automated QA suite |
 | `docs/` | Authoring guide, data and storage contract, QA guide, build notes |

@@ -88,6 +88,17 @@ CSS = r"""<style id="bl-header-css">
 .blh-tabs a[aria-current="page"], .blh-tabs a[aria-current="true"] { background: #143D55; color: #fff; }
 .blh-pill { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #EA4335; color: #fff; font: 800 10px/1.6 "Open Sans", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
 .blh-pill[hidden] { display: none; }
+.blh-subnav { background: #fff; border-bottom: 1px solid #D4DADF; }
+.blh-subnav .blh-in { display: flex; align-items: center; min-height: 46px; }
+.blh-stabs { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 5px 0; }
+.blh-stabs::-webkit-scrollbar { display: none; }
+.blh-slabel { flex: 0 0 auto; margin-right: 8px; font: 700 12px "Open Sans", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #5F6E79; }
+.blh-stabs a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 36px; padding: 4px 12px; border-radius: 8px; font: 600 14px "Open Sans", Arial, sans-serif; color: #143D55; text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent; }
+.blh-stabs a:hover { background: #EEF3F8; }
+.blh-stabs a[aria-current="page"] { border-radius: 0; border-bottom-color: #EA4335; font-weight: 700; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blh-subnav { background: #142632; border-bottom-color: #22394A; } :root:not([data-theme="light"]) .blh-stabs a { color: #DCE9F2; } :root:not([data-theme="light"]) .blh-stabs a:hover { background: #1D3A4C; } }
+:root[data-theme="dark"] .blh-subnav { background: #142632; border-bottom-color: #22394A; } :root[data-theme="dark"] .blh-stabs a { color: #DCE9F2; } :root[data-theme="dark"] .blh-stabs a:hover { background: #1D3A4C; }
+@media print { .blh-subnav { display: none !important; } }
 .blh-div { flex: 0 0 auto; width: 1px; height: 22px; background: #B9C6CF; margin: 0 8px; }
 .blh-int { flex: 0 0 auto; margin-left: auto; display: flex; align-items: center; gap: 2px; padding-left: 12px; border-left: 1px solid #B9C6CF; }
 .blh-int-l { flex: 0 0 auto; font: 800 11px/1 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #5F6E79; margin-right: 6px; white-space: nowrap; }
@@ -628,9 +639,16 @@ def rel(frm, to):
     r = os.path.relpath(os.path.join(ROOT, to), os.path.dirname(os.path.join(ROOT, frm))).replace(os.sep, '/')
     return r
 
+# Pages that share a top tab and show their own sub-tabs under the bar.
+GROUPS = {
+    'profile': [('Profile & answers', 'my-profile.html', 'profile-home'), ('Journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Progress', 'progress.html', 'progress')],
+    'assets': [('Sales deck & talk tracks', 'sales.html', 'sales'), ('Widgets & tiles', 'widgets.html', 'widgets'), ('Page mockups', 'mockups/homepage.html', 'mockups')],
+}
+
 def header(page, current, where='', prev=None, nxt=None, extra='', service=None):
     e = html.escape
     hub = rel(page, 'index.html')
+    cat = rel(page, 'toolkits.html')
     items = []
     for i, (label, url, cols) in enumerate(MENU):
         dd = ''.join(
@@ -643,25 +661,32 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
     SERVICES = [('RevOps', 'revops'), ('Paid Media', 'paid'), ('SEO', 'seo'), ('Digital PR', 'pr'), ('Email Marketing', 'email'), ('Strategy', 'strategy')]
     # "Toolkits" dropdown: every service group, plus All toolkits. Then the other pages as tabs, so every page is one
     # click from the bar. Client-facing pages sit on the left; internal pages are grouped on the right under "Internal".
-    menu_items = [('All toolkits', 'index.html#toolkits', 'toolkits')] + [(n, 'index.html#' + k, k) for n, k in SERVICES]
-    tabs = [('My Profile', 'my-profile.html', 'profile'), ('Your journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')]
-    tools_tabs = [('Customer journey', 'journey.html', 'journey'), ('Sales assets', 'sales.html', 'sales'), ('Widgets', 'index.html#widgets', 'widgets'), ('Mockups', 'mockups/homepage.html', 'mockups'), ('Status & review', 'review.html', 'review')]
+    menu_items = [('All toolkits', 'toolkits.html#toolkits', 'toolkits')] + [(n, 'toolkits.html#' + k, k) for n, k in SERVICES]
+    # Client side: Start here (landing), All toolkits (menu), My Profile (with its own sub-tabs).
+    # Internal side: Customer journey, Assets (with its own sub-tabs), Status & review.
+    group = next((g for g, items in GROUPS.items() if any(k == current for _, _, k in items)), None)
+    tools_tabs = [('Customer journey', 'journey.html', 'journey'), ('Assets', 'sales.html', 'assets'), ('Status & review', 'review.html', 'review')]
     def tab(t_, f, key):
-        # one aria-current="page" per page; the service a toolkit belongs to is marked "true" (same look)
-        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key == service else '')
-        pill = '<span class="blh-pill" data-start-pill>Start here</span>' if key == 'profile' else ''
-        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}{pill}</a>'
+        # one aria-current="page" per page; a group tab or the service a toolkit belongs to is marked "true" (same look)
+        cur = ' aria-current="page"' if key == current else (' aria-current="true"' if key in (service, group) else '')
+        return f'<a href="{rel(page, f)}" data-tab="{key}"' + cur + f'>{e(t_)}</a>'
     in_menu = any(k in (current, service) for _, _, k in menu_items)
     menu_btn = (f'<button type="button" class="blh-tbtn{" is-current" if in_menu else ""}" aria-expanded="false" aria-controls="blh-tmenu">'
-                'Toolkits<span class="car" aria-hidden="true"></span></button>')
+                'All toolkits<span class="car" aria-hidden="true"></span></button>')
     menu_html = ('<div class="blh-tmenu" id="blh-tmenu" hidden><ul>' + ''.join('<li>' + tab(*x) + '</li>' for x in menu_items) + '</ul></div>')
-    tab_html = (menu_btn + ''.join(tab(*x) for x in tabs) +
+    tab_html = (tab('Start here', 'index.html', 'home') + menu_btn + tab('My Profile', 'my-profile.html', 'profile') +
                 '<span class="blh-int" role="group" aria-label="Internal pages"><span class="blh-int-l" aria-hidden="true">Internal</span>' + ''.join(tab(*x) for x in tools_tabs) + '</span>')
+    sub = ''
+    if group:
+        label = {'profile': 'My Profile', 'assets': 'Assets'}[group]
+        sub = (f'<div class="blh-subnav"><div class="blh-in"><nav class="blh-stabs" aria-label="{e(label)}"><span class="blh-slabel">{e(label)}</span>'
+               + ''.join(f'<a href="{rel(page, f)}" data-tab="{k}"' + (' aria-current="page"' if k == current else '') + f'>{e(t_)}</a>' for t_, f, k in GROUPS[group])
+               + '</nav></div></div>')
     pn = ''
     if prev is not None or nxt is not None:
         def lk(item, label, back):
             if not item:
-                return f'<a href="{hub}">' + ('← ' if back else '') + f'<b>{label}</b><span>All toolkits</span>' + ('' if back else ' →') + '</a>'
+                return f'<a href="{cat}">' + ('← ' if back else '') + f'<b>{label}</b><span>All toolkits</span>' + ('' if back else ' →') + '</a>'
             title, f = item
             return f'<a href="{rel(page, f)}" title="{e(title)}">' + ('← ' if back else '') + f'<b>{label}</b><span>{e(title)}</span>' + ('' if back else ' →') + '</a>'
         pn = '<div class="blh-pn">' + lk(prev, 'Previous', True) + lk(nxt, 'Next', False) + '</div>'
@@ -675,11 +700,11 @@ def header(page, current, where='', prev=None, nxt=None, extra='', service=None)
             '<div class="blh-sub"><div class="blh-in">'
             f'<nav class="blh-tabs" aria-label="DIY Toolkits"><span class="blh-label">DIY Toolkits</span>{tab_html}</nav>{menu_html}'
             + (f'<div class="blh-right">{extra}</div>' if extra else '') +
-            '</div></div></header><!-- /bl-header -->')
+            '</div></div>' + sub + '</header><!-- /bl-header -->')
 
 def pager(page, prev, nxt, where):
     e = html.escape
-    hub = rel(page, 'index.html')
+    hub = rel(page, 'toolkits.html')
     def lk(item, label, back):
         if not item:
             return f'<a class="blp-a{" back" if back else ""}" href="{hub}"><small>{label}</small><b>All toolkits</b></a>'
@@ -770,7 +795,7 @@ def site_footer(page):
     e = html.escape
     r = lambda f: rel(page, f)
     col = lambda h, links: f'<div><h2>{e(h)}</h2><ul>' + ''.join(f'<li><a href="{u}">{e(t)}</a></li>' for t, u in links) + '</ul></div>'
-    diy = col('DIY Toolkits', [('All toolkits', r('index.html') + '#toolkits'), ('My Profile', r('my-profile.html')), ('Your journey', r('your-journey.html')), ('Roadmap', r('roadmap.html'))])
+    diy = col('DIY Toolkits', [('Start here', r('index.html')), ('All toolkits', r('toolkits.html')), ('My Profile', r('my-profile.html')), ('Your journey', r('your-journey.html')), ('Roadmap', r('roadmap.html')), ('Progress', r('progress.html'))])
     svc = col('Services', [('SEO Marketing', BL + '/services/seo-marketing/'), ('Paid Advertising', BL + '/services/paid-advertising/'), ('RevOps', BL + '/services/revops-agency/'), ('Content Marketing', BL + '/services/content-marketing/'), ('CRO Marketing', BL + '/services/cro-marketing/')])
     co = col('Company', [('About', BL + '/about-us/'), ('Areas Served', BL + '/areas-served/'), ('Blog', BL + '/blog/'), ('Case Studies', BL + '/digital-marketing-seo-case-studies/'), ('About Sweet Takes Podcast', BL + '/sweet-story/')])
     contact = ('<div><h2>Contact</h2><address><a href="tel:+18014363003">(801) 436-3003</a><br>4101 N Thanksgiving Way, Suite 175<br>Lehi, Utah 84043</address>'
@@ -822,21 +847,27 @@ if __name__ == '__main__':
         prev = seq[i - 1] if i else None
         nxt = seq[i + 1] if i + 1 < len(seq) else None
         fmt = lambda it: None if not it else ((it[1]['title'] if it[0]['id'] == s['id'] else f"{it[0]['name']}: {it[1]['title']}"), it[1]['file'])
-        cur = 'profile' if t['file'].endswith('paid/01_What_Kind_of_Business_Are_You.html') else 'toolkit'
+        cur = 'toolkit'
         apply(t['file'], header(t['file'], cur, '', None, None, '', s['id']),
               bottom=pager(t['file'], fmt(prev), fmt(nxt), f"{s['name']} · Toolkit {t['n']} of {len(s['toolkits'])}") + '\n' + owner_js(t['file'], s['owner'], PEOPLE) + '\n' + ANSWERS_JS)
         print('toolkit', t['file'])
     theme = '<button class="blh-theme" id="theme" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>'
-    apply('index.html', header('index.html', 'toolkits', '', None, None, theme))
+    # Start here: the landing page (the site's front door). All toolkits: the catalog.
+    apply('index.html', header('index.html', 'home', '', None, None, ''))
+    apply('toolkits.html', header('toolkits.html', 'toolkits', '', None, None, theme))
+    # Assets (internal): widgets and slide tiles; shares sub-tabs with the sales deck and mockups.
+    apply('widgets.html', header('widgets.html', 'widgets', '', None, None, theme))
+    # Progress: the visitor's progress across every toolkit (a My Profile sub-tab).
+    if os.path.exists(os.path.join(ROOT, 'progress.html')):
+        apply('progress.html', header('progress.html', 'progress', '', None, None, ''))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
     # My Profile: the Business Profile and every toolkit's saved answers, in one place.
     if os.path.exists(os.path.join(ROOT, 'my-profile.html')):
-        apply('my-profile.html', header('my-profile.html', 'profile', '', None, None, ''))
+        apply('my-profile.html', header('my-profile.html', 'profile-home', '', None, None, ''))
     # Your journey: the client-facing journey map (the visitor's own path). journey.html is the internal map.
     if os.path.exists(os.path.join(ROOT, 'your-journey.html')):
         apply('your-journey.html', header('your-journey.html', 'yourjourney', '', None, None, ''))
     apply('mockups/homepage.html', header('mockups/homepage.html', 'mockups', '', None, None, ''))
-    apply('mockups/toolkits-landing.html', header('mockups/toolkits-landing.html', 'mockups', '', None, None, ''))
     # Internal Team Review page (not linked from toolkit content, only from the toolkit bar).
     if os.path.exists(os.path.join(ROOT, 'review.html')):
         apply('review.html', header('review.html', 'review', '', None, None, theme))

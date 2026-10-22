@@ -42,8 +42,8 @@ def load(path):
 
 
 def pages():
-    out = ['index.html', 'journey.html']
-    for extra in ['review.html', 'roadmap.html']:
+    out = ['index.html', 'toolkits.html', 'journey.html']
+    for extra in ['review.html', 'roadmap.html', 'my-profile.html', 'your-journey.html', 'progress.html', 'widgets.html', 'sales.html']:
         if os.path.exists(os.path.join(ROOT, extra)):
             out.append(extra)
     out += sorted(os.path.relpath(p, ROOT) for p in glob.glob(os.path.join(ROOT, 'toolkits', '*', '*.html')))
@@ -180,7 +180,7 @@ def check_preview_isolation(data):
         skip('preview pages stay out of the public sequence', 'no previews defined')
         return
     leaks = []
-    public = ['index.html', 'journey.html'] + [t['file'] for s in tk['series'] for t in s['toolkits']]
+    public = ['index.html', 'toolkits.html', 'journey.html'] + [t['file'] for s in tk['series'] for t in s['toolkits']]
     for page in public:
         with open(os.path.join(ROOT, page), encoding='utf-8') as f:
             s = f.read()
@@ -188,7 +188,7 @@ def check_preview_isolation(data):
         if m and any(pf in m.group(1) for pf in prev):
             leaks.append(page + ' (pager sequence)')
         for pf in prev:
-            if os.path.basename(pf) in s and page in ('index.html', 'journey.html') and 'data-preview' not in s:
+            if os.path.basename(pf) in s and page in ('index.html', 'toolkits.html', 'journey.html') and 'data-preview' not in s:
                 leaks.append(f'{page} links {os.path.basename(pf)}')
     rec(not leaks, 'preview pages stay out of the public sequence and hub', '; '.join(leaks[:6]))
 
@@ -338,9 +338,15 @@ def browser_checks(data):
         ctx.close()
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
-        want = {'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile', 'roadmap', 'yourjourney', 'journey', 'widgets', 'review'}
+        want = {'home', 'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile', 'journey', 'assets', 'review'}
         have = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
-        rec(want <= have, 'every page is reachable from the toolkit bar', ', '.join(sorted(want - have)))
+        # My Profile and Assets each carry their own sub-tabs
+        for sub_page, sub_want in (('my-profile.html', {'profile-home', 'yourjourney', 'roadmap', 'progress'}), ('sales.html', {'sales', 'widgets', 'mockups'})):
+            pg.goto(base + sub_page); pg.wait_for_timeout(300)
+            got = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-stabs a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
+            want |= sub_want; have |= got
+        pg.goto(base + 'index.html'); pg.wait_for_timeout(300)
+        rec(want <= have, 'every page is reachable from the toolkit bar or its sub-tabs', ', '.join(sorted(want - have)))
         btn = pg.query_selector('.blh-tbtn'); dd = False
         if btn:
             btn.click(); pg.wait_for_timeout(150)
@@ -385,7 +391,7 @@ def browser_checks(data):
 
         # 7. dark mode: the hub lists every toolkit, and the DIY map (journey page) draws every stop and its links
         ctx, pg, errs = new(storage={}, dark=True)
-        pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
+        pg.goto(base + 'toolkits.html'); pg.wait_for_timeout(500)
         cards = pg.evaluate("document.querySelectorAll('#series-list .card').length")
         nkits = sum(len(s['toolkits']) for s in (data.get('toolkits.json') or {}).get('series', []))
         rec(not errs and cards == nkits and not pg.query_selector('#map'), 'hub lists every toolkit in dark mode (the map lives on the journey page)', f'{cards} of {nkits}; ' + '; '.join(errs[:2]))
