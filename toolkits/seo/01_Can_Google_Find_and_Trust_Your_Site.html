@@ -763,8 +763,16 @@ body { overflow-wrap: anywhere; }
 <div class="sub-q">
 <label class="q-label" for="domain">Your website address <span class="opt-tag">(optional)</span></label>
 <input class="text-field" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="www.example.com">
-<p class="q-help">Used only on this page, to fill in the checks and code below. Nothing is sent anywhere.</p>
 </div>
+<div class="sub-q">
+<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="linkedin" name="linkedin" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="linkedin.com/company/yourbusiness">
+</div>
+<div class="sub-q">
+<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="facebook" name="facebook" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="facebook.com/yourbusiness">
+</div>
+<p class="q-help">Used only on this page, to fill in the checks and code below with your real links. Nothing is sent anywhere.</p>
 </fieldset>
 
 <fieldset class="q">
@@ -963,7 +971,7 @@ const LINKS = {
 };
 
 /* EXAMPLE: the answers a first-time visitor sees. */
-const EXAMPLE = { cms: 'wordpress', domain: '', gsc: 'nomap', bing: 'no', robots: 'unsure', idx: 'some', has: ['https', 'about'], ga4: 'yes', size: 'small', plan: ['local'] };
+const EXAMPLE = { cms: 'wordpress', domain: '', linkedin: '', facebook: '', gsc: 'nomap', bing: 'no', robots: 'unsure', idx: 'some', has: ['https', 'about'], ga4: 'yes', size: 'small', plan: ['local'] };
 /* ASSUMPTIONS: rough first-time times in minutes [low, high]. Rules of thumb, not measurements. */
 const ASSUMPTIONS = {
   robots:   [15, 45],    // read robots.txt, fix the platform setting, recheck
@@ -1362,6 +1370,11 @@ function cleanDomain(raw) {
   d = d.replace(/^[a-z]+:\/\//, '').split(/[\/?#\s]/)[0].replace(/:\d+$/, '');
   return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(d) ? d : '';
 }
+function cleanUrl(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '';
+  return /^https?:\/\//i.test(s) ? s : 'https://' + s;
+}
 function model(input, a) {
   const cms = CMS[input.cms] ? input.cms : 'other';
   const C = CMS[cms];
@@ -1595,10 +1608,12 @@ function schemaSnippet(m) {
   const p = currentProfile || {};
   const name = p.name || 'YOUR BUSINESS NAME';
   const url = 'https://' + m.site + '/';
+  const facebook = cleanUrl(m.input.facebook) || 'https://www.facebook.com/YOURPAGE';
+  const linkedin = cleanUrl(m.input.linkedin) || 'https://www.linkedin.com/company/YOURCOMPANY';
   const lines = ['<script type="application/ld+json">', '{', '  "@context": "https://schema.org",', '  "@type": "' + (m.localType ? 'LocalBusiness' : 'Organization') + '",',
-    '  "name": ' + JSON.stringify(name) + ',', '  "url": "' + url + '",', '  "logo": "' + url + 'LOGO-FILE.png",', '  "telephone": "+1-PHONE",', '  "email": "HELLO@' + m.site.replace(/^www\./, '').toUpperCase() + '",'];
+    '  "name": ' + JSON.stringify(name) + ',', '  "url": "' + url + '",', '  "logo": "' + url + 'LOGO-FILE.png",', '  "telephone": "+1-PHONE",', '  "email": "HELLO@YOURDOMAIN.COM",'];
   if (m.localType) lines.push('  "address": {', '    "@type": "PostalAddress",', '    "streetAddress": "STREET ADDRESS",', '    "addressLocality": "CITY",', '    "addressRegion": "STATE",', '    "postalCode": "ZIP",', '    "addressCountry": "COUNTRY"', '  },', '  "openingHours": "HOURS",');
-  lines.push('  "sameAs": [', '    "https://www.facebook.com/YOURPAGE",', '    "https://www.linkedin.com/company/YOURCOMPANY"', '  ]', '}', '</' + 'script>');
+  lines.push('  "sameAs": [', '    ' + JSON.stringify(facebook) + ',', '    ' + JSON.stringify(linkedin) + '', '  ]', '}', '</' + 'script>');
   return lines.join('\n');
 }
 const BOTS = [
@@ -1631,12 +1646,13 @@ let SNIPS = {};
     '<tr><th scope="row">Key pages to title, by site size</th><td>' + ASSUMPTIONS.keyPages.small + ' / ' + ASSUMPTIONS.keyPages.medium + ' / ' + ASSUMPTIONS.keyPages.large + '</td></tr>';
 
   function readInput() {
-    return { cms: radioVal(form, 'cms'), domain: $('domain').value, gsc: radioVal(form, 'gsc'), bing: radioVal(form, 'bing'), robots: radioVal(form, 'robots'),
+    return { cms: radioVal(form, 'cms'), domain: $('domain').value, linkedin: $('linkedin').value, facebook: $('facebook').value, gsc: radioVal(form, 'gsc'), bing: radioVal(form, 'bing'), robots: radioVal(form, 'robots'),
       idx: radioVal(form, 'idx'), has: checkVals(form, 'has'), ga4: radioVal(form, 'ga4'), size: radioVal(form, 'size'), plan: checkVals(form, 'plan') };
   }
   function applyInput(i) {
     ['cms', 'gsc', 'bing', 'robots', 'idx', 'ga4', 'size'].forEach((k) => setRadio(form, k, i[k]));
     $('domain').value = i.domain || '';
+    $('linkedin').value = i.linkedin || ''; $('facebook').value = i.facebook || '';
     setChecks(form, 'has', i.has); setChecks(form, 'plan', i.plan);
   }
   function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
@@ -1763,7 +1779,7 @@ let SNIPS = {};
   });
   form.addEventListener('submit', (e) => e.preventDefault());
   form.addEventListener('change', (e) => { if (e.target && e.target.name) unmarkProfile(e.target.name === 'plan' ? 'intl' : e.target.name); render(); });
-  form.addEventListener('input', (e) => { if (e.target && e.target.id === 'domain') render(); });
+  form.addEventListener('input', (e) => { if (e.target && ['domain', 'linkedin', 'facebook'].indexOf(e.target.id) !== -1) render(); });
   applyProfile(currentProfile);
   render();
 })();

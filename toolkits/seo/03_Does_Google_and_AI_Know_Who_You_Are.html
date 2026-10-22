@@ -803,6 +803,19 @@ body { overflow-wrap: anywhere; }
 </div>
 </div>
 <p class="q-help">Cross-linked profiles (website → LinkedIn → Facebook → website) tell Google these accounts all belong to the same entity.</p>
+<div class="sub-q">
+<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="linkedin" name="linkedin" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="linkedin.com/company/yourbusiness">
+</div>
+<div class="sub-q">
+<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="facebook" name="facebook" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="facebook.com/yourbusiness">
+</div>
+<div class="sub-q">
+<label class="q-label" for="gbp">Your Google Business Profile URL <span class="opt-tag">(optional)</span></label>
+<input class="text-field" id="gbp" name="gbp" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="g.page/yourbusiness">
+</div>
+<p class="q-help">Used only on this page, to fill in the example code below with your real links. Nothing is sent anywhere.</p>
 </div>
 
 <button type="button" class="btn btn-strong see-results" id="see-results">See your fix list</button>
@@ -916,7 +929,7 @@ const LINKS = {
 };
 
 /* EXAMPLE: the answers a first-time visitor sees. */
-const EXAMPLE = { cms: 'wordpress', domain: '', kp: 'no', consistency: 'unsure', orgschema: 'no', mentions: 'no', about: 'yes', social: 'unsure' };
+const EXAMPLE = { cms: 'wordpress', domain: '', kp: 'no', consistency: 'unsure', orgschema: 'no', mentions: 'no', about: 'yes', social: 'unsure', linkedin: '', facebook: '', gbp: '' };
 /* ASSUMPTIONS: rough first-time times in minutes [low, high]. Rules of thumb, not measurements. Knowledge Panel and press mentions are earned, not scheduled, so they have no time estimate. */
 const ASSUMPTIONS = {
   orgschema: [20, 45],   // add Organization JSON-LD to the homepage and test it
@@ -1230,6 +1243,11 @@ function cleanDomain(raw) {
   d = d.replace(/^[a-z]+:\/\//, '').split(/[\/?#\s]/)[0].replace(/:\d+$/, '');
   return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(d) ? d : '';
 }
+function cleanUrl(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '';
+  return /^https?:\/\//i.test(s) ? s : 'https://' + s;
+}
 function model(input, a) {
   const cms = CMS[input.cms] ? input.cms : 'other';
   const dom = cleanDomain(input.domain);
@@ -1289,6 +1307,11 @@ function orgSchemaSnippet(m) {
   const p = currentProfile || {};
   const name = p.name || '[Your Business Name]';
   const url = 'https://' + m.site + '/';
+  const sameAs = [
+    cleanUrl(m.input.linkedin) || '[Your LinkedIn URL]',
+    cleanUrl(m.input.facebook) || '[Your Facebook URL]',
+    cleanUrl(m.input.gbp) || '[Your Google Business Profile URL]',
+  ];
   return [
     '<script type="application/ld+json">',
     '{',
@@ -1298,9 +1321,7 @@ function orgSchemaSnippet(m) {
     '  "url": "' + url + '",',
     '  "logo": "' + url + '[your-logo-file].png",',
     '  "sameAs": [',
-    '    "[Your LinkedIn URL]",',
-    '    "[Your Facebook URL]",',
-    '    "[Your Google Business Profile URL]"',
+    sameAs.map((s) => '    ' + JSON.stringify(s)).join(',\n'),
     '  ]',
     '}',
     '</' + 'script>',
@@ -1319,11 +1340,13 @@ let SNIPS = {};
 
   function readInput() {
     return { cms: radioVal(form, 'cms'), domain: $('domain').value, kp: radioVal(form, 'kp'), consistency: radioVal(form, 'consistency'),
-      orgschema: radioVal(form, 'orgschema'), mentions: radioVal(form, 'mentions'), about: radioVal(form, 'about'), social: radioVal(form, 'social') };
+      orgschema: radioVal(form, 'orgschema'), mentions: radioVal(form, 'mentions'), about: radioVal(form, 'about'), social: radioVal(form, 'social'),
+      linkedin: $('linkedin').value, facebook: $('facebook').value, gbp: $('gbp').value };
   }
   function applyInput(i) {
     ['cms', 'kp', 'consistency', 'orgschema', 'mentions', 'about', 'social'].forEach((k) => setRadio(form, k, i[k]));
     $('domain').value = i.domain || '';
+    $('linkedin').value = i.linkedin || ''; $('facebook').value = i.facebook || ''; $('gbp').value = i.gbp || '';
   }
   function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
   function applyProfile(p) {
@@ -1423,7 +1446,7 @@ let SNIPS = {};
   });
   form.addEventListener('submit', (e) => e.preventDefault());
   form.addEventListener('change', (e) => { if (e.target && e.target.name) unmarkProfile(e.target.name); render(); });
-  form.addEventListener('input', (e) => { if (e.target && e.target.id === 'domain') render(); });
+  form.addEventListener('input', (e) => { if (e.target && ['domain', 'linkedin', 'facebook', 'gbp'].indexOf(e.target.id) !== -1) render(); });
   applyProfile(currentProfile);
   render();
 })();
