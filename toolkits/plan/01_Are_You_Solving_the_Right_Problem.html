@@ -713,6 +713,45 @@ body { background: #fff; color: #000; }
 @media (max-width: 560px) { .blx-bar { right: 12px; left: 12px !important; width: auto !important; } }
 @media print { .blh { display: none !important; } }
 </style>
+<style id="bl-footer-css">
+.blw, .blf { font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blw { background: #fff; color: #143D55; border-top: 1px solid #D4DADF; padding: 56px 20px; }
+.blw-in, .blf-in { max-width: 1120px; margin: 0 auto; }
+.blw-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 40px; align-items: start; }
+.blw-eye { margin: 0 0 8px; color: #C5372B; font: 800 13px/1.4 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.blw h2 { margin: 0 0 14px; color: #143D55; font: 800 clamp(26px, 3.2vw, 36px)/1.15 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-lede { margin: 0 0 22px; color: #2D4556; font-size: 16px; line-height: 1.6; }
+.blw-stats { display: flex; flex-wrap: wrap; gap: 22px; margin: 0 0 24px; padding: 0; list-style: none; }
+.blw-stats b { display: block; color: #143D55; font: 800 30px/1.1 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-stats span { color: #5F6E79; font-size: 13px; }
+.blw-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 22px; border-radius: 25px; background: #EA4335; color: #fff !important; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; }
+.blw-btn:hover, .blw-btn:focus-visible { background: #C5372B; }
+.blw-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 30px; margin: 0; padding: 0; list-style: none; }
+.blw-grid li { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; }
+.blw-ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #EEF3F8; color: #143D55; }
+.blw-grid h3 { margin: 2px 0 4px; color: #143D55; font: 800 17px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-grid p { margin: 0; color: #2D4556; font-size: 14.5px; line-height: 1.55; }
+.blf { background: #0F1D26; color: #DCE9F2; padding: 48px 20px 28px; }
+.blf a { color: #DCE9F2; text-decoration: none; }
+.blf a:hover, .blf a:focus-visible { color: #fff; text-decoration: underline; }
+.blf-top { display: grid; grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr)) 1.25fr; gap: 28px; }
+.blf-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+.blf-tag { margin: 14px 0 0; max-width: 280px; color: #B9C7D2; font-size: 14px; line-height: 1.55; }
+.blf h2 { margin: 0 0 12px; color: #fff; font: 800 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: .02em; }
+.blf ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 14px; }
+.blf address { font-style: normal; font-size: 14px; line-height: 1.6; color: #B9C7D2; }
+.blf-cta { display: inline-flex; margin-top: 14px; min-height: 40px; align-items: center; padding: 8px 16px; border-radius: 25px; background: #EA4335; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; white-space: nowrap; }
+.blf-cta:hover, .blf-cta:focus-visible { background: #C5372B; text-decoration: none !important; }
+.blf-bot { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid #22394A; font-size: 13px; color: #B9C7D2; }
+.blf .blf-soc { display: flex; grid-auto-flow: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.blf-soc a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #22394A; }
+.blf-soc a:hover, .blf-soc a:focus-visible { background: #3187B5; }
+.blf-legal { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+@media (max-width: 1000px) { .blf-top { grid-template-columns: repeat(2, minmax(0, 1fr)); } .blf-brand { grid-column: 1 / -1; } }
+@media (max-width: 860px) { .blw-in { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 560px) { .blw { padding: 40px 16px; } .blw-grid { grid-template-columns: 1fr; } .blf { padding: 36px 16px 24px; } .blf-top { grid-template-columns: 1fr; gap: 24px; } }
+@media print { .blw, .blf { display: none !important; } }
+</style>
 <script id="bl-track-js">
 /* Big Leap DIY toolkits: engagement events. Sends diy_* events to dataLayer (GA4 via Tag Manager). No personal data. */
 (function () {
@@ -1754,6 +1793,7 @@ profileStrip(); render();
   if (!selfRestoring) setTimeout(restore, 0);
 })();
 </script>
+<!-- bl-footer --><footer class="blf" aria-label="Big Leap"><div class="blf-in"><div class="blf-top"><div class="blf-brand"><a class="blf-logo" href="https://www.bigleap.com/" aria-label="Big Leap home"><img src="../../assets/bigleap-logo.png" alt="Big Leap" width="110" height="36" loading="lazy"></a><p class="blf-tag">Brand-led performance marketing. Free DIY toolkits for the small leaps; our team for the Big Leap.</p></div><div><h2>DIY Toolkits</h2><ul><li><a href="../../index.html#toolkits">All toolkits</a></li><li><a href="../../my-profile.html">My Profile</a></li><li><a href="../../your-journey.html">Your journey</a></li><li><a href="../../roadmap.html">Roadmap</a></li></ul></div><div><h2>Services</h2><ul><li><a href="https://www.bigleap.com/services/seo-marketing/">SEO Marketing</a></li><li><a href="https://www.bigleap.com/services/paid-advertising/">Paid Advertising</a></li><li><a href="https://www.bigleap.com/services/revops-agency/">RevOps</a></li><li><a href="https://www.bigleap.com/services/content-marketing/">Content Marketing</a></li><li><a href="https://www.bigleap.com/services/cro-marketing/">CRO Marketing</a></li></ul></div><div><h2>Company</h2><ul><li><a href="https://www.bigleap.com/about-us/">About</a></li><li><a href="https://www.bigleap.com/areas-served/">Areas Served</a></li><li><a href="https://www.bigleap.com/blog/">Blog</a></li><li><a href="https://www.bigleap.com/digital-marketing-seo-case-studies/">Case Studies</a></li><li><a href="https://www.bigleap.com/sweet-story/">About Sweet Takes Podcast</a></li></ul></div><div><h2>Contact</h2><address><a href="tel:+18014363003">(801) 436-3003</a><br>4101 N Thanksgiving Way, Suite 175<br>Lehi, Utah 84043</address><a class="blf-cta" href="https://www.bigleap.com/get-started/?utm_source=diy-toolkits&amp;utm_medium=site-footer">Get Your Custom Strategy</a></div></div><div class="blf-bot"><ul class="blf-soc"><li><a href="https://www.facebook.com/bigleapmktg/" aria-label="Big Leap on Facebook" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a></li><li><a href="https://x.com/BigLeapMKTG/" aria-label="Big Leap on X" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"/></svg></a></li><li><a href="https://www.youtube.com/@bigleapmarketing" aria-label="Big Leap on YouTube" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a></li><li><a href="https://www.instagram.com/bigleapmktg/" aria-label="Big Leap on Instagram" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><path d="M16.5 7.5h.01"/></svg></a></li><li><a href="https://www.linkedin.com/company/bigleap/" aria-label="Big Leap on LinkedIn" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.5"/><path d="M11 20v-6a3 3 0 0 1 6 0v6M11 9v11"/></svg></a></li></ul><div class="blf-legal"><a href="https://www.bigleap.com/privacy-policy/">Privacy Policy</a><a href="https://www.bigleap.com/terms-of-use/">Terms of Use</a><span>© 2026 Big Leap, All Rights Reserved</span></div></div></div></footer><!-- /bl-footer -->
 <script id="bl-header-js">
 (function () {
   var h = document.querySelector('.blh'); if (!h) return;

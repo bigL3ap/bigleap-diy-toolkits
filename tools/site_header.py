@@ -690,6 +690,98 @@ def pager(page, prev, nxt, where):
             + '</div></nav><!-- /bl-pager -->')
 
 SEQ_JSON = '[]'
+WHY_PAGES = {'index.html', 'your-journey.html'}
+
+# ---------------------------------------------------------------------------------------------------
+# bigleap.com alignment: a "Why Big Leap" band (hub and Your journey) and a bigleap.com-style footer
+# (every page). Claims and links are only what bigleap.com itself publishes (homepage, Oct 22, 2026).
+FOOT_CSS = r"""<style id="bl-footer-css">
+.blw, .blf { font-family: "Open Sans", "Segoe UI", Arial, sans-serif; }
+.blw { background: #fff; color: #143D55; border-top: 1px solid #D4DADF; padding: 56px 20px; }
+.blw-in, .blf-in { max-width: 1120px; margin: 0 auto; }
+.blw-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 40px; align-items: start; }
+.blw-eye { margin: 0 0 8px; color: #C5372B; font: 800 13px/1.4 "Open Sans", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.blw h2 { margin: 0 0 14px; color: #143D55; font: 800 clamp(26px, 3.2vw, 36px)/1.15 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-lede { margin: 0 0 22px; color: #2D4556; font-size: 16px; line-height: 1.6; }
+.blw-stats { display: flex; flex-wrap: wrap; gap: 22px; margin: 0 0 24px; padding: 0; list-style: none; }
+.blw-stats b { display: block; color: #143D55; font: 800 30px/1.1 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-stats span { color: #5F6E79; font-size: 13px; }
+.blw-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 22px; border-radius: 25px; background: #EA4335; color: #fff !important; font: 700 15px "Raleway", "Segoe UI", Arial, sans-serif; text-decoration: none; }
+.blw-btn:hover, .blw-btn:focus-visible { background: #C5372B; }
+.blw-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 30px; margin: 0; padding: 0; list-style: none; }
+.blw-grid li { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; }
+.blw-ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #EEF3F8; color: #143D55; }
+.blw-grid h3 { margin: 2px 0 4px; color: #143D55; font: 800 17px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; }
+.blw-grid p { margin: 0; color: #2D4556; font-size: 14.5px; line-height: 1.55; }
+.blf { background: #0F1D26; color: #DCE9F2; padding: 48px 20px 28px; }
+.blf a { color: #DCE9F2; text-decoration: none; }
+.blf a:hover, .blf a:focus-visible { color: #fff; text-decoration: underline; }
+.blf-top { display: grid; grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr)) 1.25fr; gap: 28px; }
+.blf-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+.blf-tag { margin: 14px 0 0; max-width: 280px; color: #B9C7D2; font-size: 14px; line-height: 1.55; }
+.blf h2 { margin: 0 0 12px; color: #fff; font: 800 15px/1.3 "Raleway", "Segoe UI", Arial, sans-serif; letter-spacing: .02em; }
+.blf ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 14px; }
+.blf address { font-style: normal; font-size: 14px; line-height: 1.6; color: #B9C7D2; }
+.blf-cta { display: inline-flex; margin-top: 14px; min-height: 40px; align-items: center; padding: 8px 16px; border-radius: 25px; background: #EA4335; color: #fff !important; font: 700 14px "Raleway", "Segoe UI", Arial, sans-serif; white-space: nowrap; }
+.blf-cta:hover, .blf-cta:focus-visible { background: #C5372B; text-decoration: none !important; }
+.blf-bot { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid #22394A; font-size: 13px; color: #B9C7D2; }
+.blf .blf-soc { display: flex; grid-auto-flow: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.blf-soc a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #22394A; }
+.blf-soc a:hover, .blf-soc a:focus-visible { background: #3187B5; }
+.blf-legal { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+@media (max-width: 1000px) { .blf-top { grid-template-columns: repeat(2, minmax(0, 1fr)); } .blf-brand { grid-column: 1 / -1; } }
+@media (max-width: 860px) { .blw-in { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 560px) { .blw { padding: 40px 16px; } .blw-grid { grid-template-columns: 1fr; } .blf { padding: 36px 16px 24px; } .blf-top { grid-template-columns: 1fr; gap: 24px; } }
+@media print { .blw, .blf { display: none !important; } }
+</style>"""
+
+def _ic(d):
+    return f'<span class="blw-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg></span>'
+
+WHY_ITEMS = [
+    ('Strategy First', 'We start with strategy, not a pitch, making sure we’re the right partner for your goals.', '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'),
+    ('Brand-Led Performance', 'Your brand fuels your funnel. We build performance campaigns that align and scale.', '<path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>'),
+    ('AI SEO', 'Stay front and center in AI-driven search results and channels before competitors do.', '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8"/><path d="M10.5 7.5v6M7.5 10.5h6"/>'),
+    ('RevOps Alignment', 'Connect marketing to revenue to bridge the gap and drive measurable impact.', '<path d="M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4"/><path d="M20 12a8 8 0 0 1-14 5.3"/><path d="M6 21v-4h4"/>'),
+    ('Full Ownership', 'Maintain access to tools, data, and results. No black boxes. No locked-in platforms.', '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9"/><path d="m17 6 3 3"/><path d="m15 8 2 2"/>'),
+    ('95.3% Client Retention', '17+ years of staying ahead, so our clients never fall behind.', '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'),
+]
+
+def why_block(page):
+    e = html.escape
+    items = ''.join(f'<li>{_ic(d)}<div><h3>{e(t)}</h3><p>{e(p)}</p></div></li>' for t, p, d in WHY_ITEMS)
+    return ('<!-- bl-why --><section class="blw" aria-labelledby="blw-h"><div class="blw-in"><div>'
+            '<p class="blw-eye">Why Big Leap</p>'
+            '<h2 id="blw-h">A Growth Partner That Gets It, and Gets It Done</h2>'
+            '<p class="blw-lede">The DIY toolkits are written by the same team that runs these programs for our clients. Big Leap combines brand and performance marketing to deliver clarity and consistency.</p>'
+            '<ul class="blw-stats"><li><b>17+</b><span>years in digital marketing</span></li><li><b>4.8</b><span>average rating, 150+ verified reviews</span></li></ul>'
+            f'<a class="blw-btn" href="{BL}/about-us/">Learn more about us <span aria-hidden="true">→</span></a>'
+            f'</div><ul class="blw-grid">{items}</ul></div></section><!-- /bl-why -->')
+
+SOCIAL = [
+    ('Facebook', 'https://www.facebook.com/bigleapmktg/', '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>'),
+    ('X', 'https://x.com/BigLeapMKTG/', '<path d="M4 4l16 16M20 4 4 20"/>'),
+    ('YouTube', 'https://www.youtube.com/@bigleapmarketing', '<rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/>'),
+    ('Instagram', 'https://www.instagram.com/bigleapmktg/', '<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><path d="M16.5 7.5h.01"/>'),
+    ('LinkedIn', 'https://www.linkedin.com/company/bigleap/', '<rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.5"/><path d="M11 20v-6a3 3 0 0 1 6 0v6M11 9v11"/>'),
+]
+
+def site_footer(page):
+    e = html.escape
+    r = lambda f: rel(page, f)
+    col = lambda h, links: f'<div><h2>{e(h)}</h2><ul>' + ''.join(f'<li><a href="{u}">{e(t)}</a></li>' for t, u in links) + '</ul></div>'
+    diy = col('DIY Toolkits', [('All toolkits', r('index.html') + '#toolkits'), ('My Profile', r('my-profile.html')), ('Your journey', r('your-journey.html')), ('Roadmap', r('roadmap.html'))])
+    svc = col('Services', [('SEO Marketing', BL + '/services/seo-marketing/'), ('Paid Advertising', BL + '/services/paid-advertising/'), ('RevOps', BL + '/services/revops-agency/'), ('Content Marketing', BL + '/services/content-marketing/'), ('CRO Marketing', BL + '/services/cro-marketing/')])
+    co = col('Company', [('About', BL + '/about-us/'), ('Areas Served', BL + '/areas-served/'), ('Blog', BL + '/blog/'), ('Case Studies', BL + '/digital-marketing-seo-case-studies/'), ('About Sweet Takes Podcast', BL + '/sweet-story/')])
+    contact = ('<div><h2>Contact</h2><address><a href="tel:+18014363003">(801) 436-3003</a><br>4101 N Thanksgiving Way, Suite 175<br>Lehi, Utah 84043</address>'
+               f'<a class="blf-cta" href="{BL}/get-started/?utm_source=diy-toolkits&amp;utm_medium=site-footer">Get Your Custom Strategy</a></div>')
+    soc = '<ul class="blf-soc">' + ''.join(f'<li><a href="{u}" aria-label="Big Leap on {e(n)}" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{d}</svg></a></li>' for n, u, d in SOCIAL) + '</ul>'
+    return ('<!-- bl-footer --><footer class="blf" aria-label="Big Leap"><div class="blf-in"><div class="blf-top">'
+            f'<div class="blf-brand"><a class="blf-logo" href="{BL}/" aria-label="Big Leap home"><img src="{r("assets/bigleap-logo.png")}" alt="Big Leap" width="110" height="36" loading="lazy"></a>'
+            '<p class="blf-tag">Brand-led performance marketing. Free DIY toolkits for the small leaps; our team for the Big Leap.</p></div>'
+            f'{diy}{svc}{co}{contact}</div>'
+            f'<div class="blf-bot">{soc}<div class="blf-legal"><a href="{BL}/privacy-policy/">Privacy Policy</a><a href="{BL}/terms-of-use/">Terms of Use</a><span>© 2026 Big Leap, All Rights Reserved</span></div></div>'
+            '</div></footer><!-- /bl-footer -->')
 
 def apply(page, block, before_selector=None, bottom=''):
     p = os.path.join(ROOT, page)
@@ -697,7 +789,8 @@ def apply(page, block, before_selector=None, bottom=''):
     # strip old versions (this header + the earlier bl-sitenav bar)
     s = re.sub(r'<!-- bl-header -->.*?<!-- /bl-header -->\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-sitenav -->.*?<!-- /bl-sitenav -->\n?', '', s, flags=re.S)
-    s = re.sub(r'<style id="bl-(?:sitenav|header)-css">.*?</style>\n?', '', s, flags=re.S)
+    s = re.sub(r'<style id="bl-(?:sitenav|header|footer)-css">.*?</style>\n?', '', s, flags=re.S)
+    s = re.sub(r'<!-- bl-(why|footer) -->.*?<!-- /bl-\1 -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-header-js">.*?</script>\n?', '', s, flags=re.S)
     s = re.sub(r'<!-- bl-pager -->.*?<!-- /bl-pager -->\n?', '', s, flags=re.S)
     s = re.sub(r'<script id="bl-track-js">.*?</script>\n?', '', s, flags=re.S)
@@ -708,9 +801,12 @@ def apply(page, block, before_selector=None, bottom=''):
     fonts = rel(page, 'assets/fonts/fonts.css')
     if 'fonts.css' not in s:
         s = s.replace('</head>', f'<link rel="stylesheet" href="{fonts}">\n</head>', 1)
-    s = s.replace('</head>', CSS + '\n' + track_js() + '\n</head>', 1)
+    s = s.replace('</head>', CSS + '\n' + FOOT_CSS + '\n' + track_js() + '\n</head>', 1)
+    if page in WHY_PAGES:
+        i = s.rfind('<footer class="foot"')
+        s = (s[:i] + why_block(page) + '\n' + s[i:]) if i >= 0 else s.replace('</body>', why_block(page) + '\n</body>', 1)
     s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + block, s, count=1)
-    s = s.replace('</body>', (bottom + '\n' if bottom else '') + JS.replace('__SEQ__', SEQ_JSON) + '\n' + TRY_JS + '\n</body>', 1)
+    s = s.replace('</body>', (bottom + '\n' if bottom else '') + site_footer(page) + '\n' + JS.replace('__SEQ__', SEQ_JSON) + '\n' + TRY_JS + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
 if __name__ == '__main__':
