@@ -85,6 +85,37 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
 .talk dd { margin: 2px 0 0; font-size: 15px; }
 .opt .acts { margin-top: 16px; }
 .copied { font-size: 13px; color: var(--muted); align-self: center; }
+/* Slide preview: a visual match of the real Google Slide, always rendered in the deck's own light colors (not site theme) so what you see is what you copy. */
+.slide-zone { margin-top: 20px; }
+.zone-tag { margin: 0 0 8px; font: 800 11px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; }
+.zone-tag.client { color: #1B7A4B; }
+.zone-tag.internal { color: var(--red-ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .zone-tag.client { color: #4CC9A3; } }
+:root[data-theme="dark"] .zone-tag.client { color: #4CC9A3; }
+.slide-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid #D4DADF; }
+.slide-card .bar { height: 6px; background: var(--sc); }
+.slide-body { display: grid; grid-template-columns: minmax(0, 1fr) 230px; }
+@media (max-width: 680px) { .slide-body { grid-template-columns: 1fr; } }
+.slide-main { padding: 22px 24px 20px; color: #243642; }
+.slide-k { margin: 0 0 8px; font: 800 10.5px/1 "Open Sans", Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--sc); }
+.slide-h { margin: 0 0 10px; font: 800 23px/1.2 "Raleway", "Segoe UI", Arial, sans-serif; color: #143D55; }
+.slide-q { margin: 0 0 12px; font-size: 12.5px; color: #5F6E79; }
+.slide-sub { margin: 0 0 6px; font: 800 9.5px/1 "Open Sans", Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #5F6E79; }
+.slide-pts { margin: 0 0 14px; padding-left: 18px; display: grid; gap: 5px; font-size: 13.5px; color: #243642; }
+.slide-proof { margin: 0 0 12px; background: #EEF3F8; border-radius: 8px; padding: 9px 12px; font-size: 12px; color: #143D55; line-height: 1.5; }
+.slide-proof small { display: block; margin-top: 3px; color: #5F6E79; font-size: 11px; }
+.slide-exp { margin: 0; font-size: 11px; color: #5F6E79; }
+.slide-art { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: #EEF3F8; text-decoration: none; }
+.slide-art img { max-width: 100%; max-height: 280px; border-radius: 6px; box-shadow: 0 4px 16px rgba(20,61,85,.18); }
+.slide-art span { font: 700 11px/1.3 "Open Sans", Arial, sans-serif; color: #C5372B; text-align: center; }
+.slide-acts { margin-top: 12px; }
+.talk-zone { margin-top: 22px; }
+.talk.standalone { margin-top: 0; }
+.live-try { margin-top: 22px; border: 1px solid var(--line); border-radius: 12px; padding: 4px 16px 16px; }
+.live-try summary { cursor: pointer; padding: 12px 0; font: 700 13px var(--body); color: var(--navy); list-style: none; }
+.live-try summary::-webkit-details-marker { display: none; }
+.live-try summary::before { content: "▸ "; } .live-try[open] summary::before { content: "▾ "; }
+.live-try .live { margin-top: 4px; }
 .foot { font-size: 13px; color: var(--muted); padding: 0 0 40px; }
 </style>
 <style id="bl-header-css">
@@ -442,6 +473,49 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
   function slideUrl(id) { return S.deck.url + '#slide=id.' + id; }
   function services() { return [{ id: 'start', name: 'Start here', owner: 'Scott Smoot', story: 'Open any call here. One profile fills in every other toolkit and points to the service to start with.', value: [], proof: [], options: [S.start], slide: 'o_profile_start' }].concat(S.services); }
   function svc(id) { return services().filter(function (s) { return s.id === id; })[0]; }
+  function optProof(s, i) {
+    if (!s.proof || !s.proof.length) return null;
+    var o = s.options[i], idx = (o.proof !== undefined && o.proof !== null) ? o.proof : (i % s.proof.length);
+    return s.proof[idx];
+  }
+  function slideClipboard(s, o, w, idx, total, person) {
+    var proof = optProof(s, idx);
+    var kicker = s.name.toUpperCase() + (total > 1 ? ' · OPTION ' + (idx + 1) + ' OF ' + total : '');
+    var expertLine = 'Expert: ' + s.owner + (person.title ? ', ' + person.title : '');
+    var hp = [];
+    hp.push('<div style="font-family:Arial,Helvetica,sans-serif;max-width:520px">');
+    hp.push('<p style="margin:0 0 6px;font:700 11px Arial;letter-spacing:1px;text-transform:uppercase;color:#143D55">' + esc(kicker) + '</p>');
+    hp.push('<h2 style="margin:0 0 8px;font:700 24px Georgia, \'Times New Roman\', serif;color:#143D55">' + esc(o.headline) + '</h2>');
+    hp.push('<p style="margin:0 0 10px;font-size:12px;color:#5F6E79"><b>Live widget:</b> ' + esc(w.title) + '</p>');
+    hp.push('<p style="margin:0 0 4px;font:700 10px Arial;letter-spacing:1px;text-transform:uppercase;color:#5F6E79">Why it matters</p>');
+    hp.push('<ul style="margin:0 0 12px;padding-left:18px">' + o.points.map(function (p) { return '<li style="margin:0 0 4px;font-size:13px;color:#243642">' + esc(p) + '</li>'; }).join('') + '</ul>');
+    if (proof) hp.push('<p style="margin:0 0 10px;padding:8px 10px;background:#EEF3F8;border-radius:6px;font-size:12px;color:#143D55">' + esc(proof.text) + '<br><span style="color:#5F6E79;font-size:10.5px">Source: ' + esc(proof.source) + '</span></p>');
+    hp.push('<p style="margin:0;font-size:11px;color:#5F6E79">' + esc(expertLine) + '</p>');
+    hp.push('</div>');
+    var tp = [kicker, o.headline, 'Live widget: ' + w.title, '', 'Why it matters:'];
+    o.points.forEach(function (p) { tp.push('- ' + p); });
+    if (proof) tp.push('', proof.text, 'Source: ' + proof.source);
+    tp.push('', expertLine);
+    return { html: hp.join(''), text: tp.join('\n') };
+  }
+  function copySlide(idx, btn) {
+    var s = svc(cur), o = s.options[idx], w = BYW[o.widget], person = PEOPLE[s.owner] || {};
+    var data = slideClipboard(s, o, w, idx, s.options.length, person);
+    var msg = btn.parentNode.querySelector('.copied');
+    function ok(label) { if (msg) { msg.textContent = label; setTimeout(function () { msg.textContent = ''; }, 2500); } }
+    function fallback() {
+      if (navigator.clipboard) navigator.clipboard.writeText(data.text).then(function () { ok('Copied as text.'); }, function () { if (msg) msg.textContent = 'Copy failed — select the slide text to copy it by hand.'; });
+      else if (msg) msg.textContent = 'Copy failed — select the slide text to copy it by hand.';
+    }
+    if (navigator.clipboard && window.ClipboardItem) {
+      try {
+        var item = new ClipboardItem({ 'text/html': new Blob([data.html], { type: 'text/html' }), 'text/plain': new Blob([data.text], { type: 'text/plain' }) });
+        navigator.clipboard.write([item]).then(function () { ok('Copied. Paste into Slides.'); }, fallback);
+        return;
+      } catch (e) {}
+    }
+    fallback();
+  }
   function tabs() {
     $('svc-tabs').innerHTML = services().map(function (s) {
       var c = col(s.id);
@@ -466,16 +540,44 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
         return '<button type="button" class="opt-tab" role="tab" aria-selected="' + (i === curOpt) + '" data-o="' + i + '"' + (i === 1 && cur !== 'start' ? ' data-try="Try me"' : '') + '><small>Option ' + (i + 1) + '</small><b>' + esc(x.headline) + '</b><br>' + esc(BYW[x.widget].title) + '</button>';
       }).join('') + '</div>';
     }
-    h += '<div class="opt">' +
+    var total = s.options.length, proof = optProof(s, curOpt);
+    var sc = (COLORS[s.id] || COLORS.start);
+    var kicker = s.name.toUpperCase() + (total > 1 ? ' · OPTION ' + (curOpt + 1) + ' OF ' + total : '');
+    var expertLine = 'Expert: ' + s.owner + (person.title ? ', ' + person.title : '');
+    var tileUrl = 'tiles/live/' + o.widget + '.png';
+    h += '<div class="slide-zone">' +
+      '<p class="zone-tag client">Client-facing slide — safe to copy</p>' +
+      '<div class="slide-card" style="--sc:' + sc + '">' +
+        '<div class="bar"></div>' +
+        '<div class="slide-body">' +
+          '<div class="slide-main">' +
+            '<p class="slide-k">' + esc(kicker) + '</p>' +
+            '<h3 class="slide-h">' + esc(o.headline) + '</h3>' +
+            '<p class="slide-q"><b>Live widget:</b> ' + esc(w.title) + '</p>' +
+            '<p class="slide-sub">Why it matters</p>' +
+            '<ul class="slide-pts">' + o.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' +
+            (proof ? '<div class="slide-proof">' + esc(proof.text) + '<small>Source: ' + esc(proof.source) + '</small></div>' : '') +
+            '<p class="slide-exp">' + esc(expertLine) + '</p>' +
+          '</div>' +
+          '<a class="slide-art" href="' + esc(widgetUrl) + '" target="_blank" rel="noopener"><img src="' + esc(tileUrl) + '" alt="' + esc(w.title) + ' widget preview" loading="lazy"><span>Click the widget to try it live ↗</span></a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="acts slide-acts">' +
+        '<button type="button" class="btn btn-red btn-sm" data-copy-slide="' + curOpt + '">Copy this slide</button>' +
+        '<a class="btn btn-ghost btn-sm" href="' + esc(slideUrl(slideId)) + '" target="_blank" rel="noopener">Open in Google Slides</a>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(widgetUrl) + '">Copy link for the follow-up email</button>' +
+        '<span class="copied" aria-live="polite"></span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="talk-zone">' +
+      '<p class="zone-tag internal">Internal talk track — not for the client</p>' +
+      '<div class="talk standalone"><dl><div><dt>Ask</dt><dd>' + esc(o.ask) + '</dd></div><div><dt>Listen for</dt><dd>' + esc(o.listen) + '</dd></div><div><dt>Next step</dt><dd>' + esc(o.next) + '</dd></div></dl></div>' +
+    '</div>' +
+    '<details class="live-try" open>' +
+      '<summary>Try &ldquo;' + esc(w.title) + '&rdquo; live during the call — ' + esc(w.use) + '</summary>' +
       '<div class="live"><div class="live-cap"><span>Live widget: click the answers</span><span>Nothing is stored</span></div>' +
       '<iframe src="widgets/' + esc(o.widget) + '.html" title="' + esc(w.title) + '" style="height:' + (w.height || 640) + 'px" loading="lazy" data-w="' + esc(o.widget) + '"></iframe></div>' +
-      '<div><h3>' + esc(o.headline) + '</h3><p class="lead">' + esc(w.title) + ' · ' + esc(w.use) + '</p>' +
-      '<ul class="points">' + o.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' +
-      '<div class="talk"><h4>Talk track</h4><dl><div><dt>Ask</dt><dd>' + esc(o.ask) + '</dd></div><div><dt>Listen for</dt><dd>' + esc(o.listen) + '</dd></div><div><dt>Next step</dt><dd>' + esc(o.next) + '</dd></div></dl></div>' +
-      '<div class="acts"><a class="btn btn-red btn-sm" href="' + esc(slideUrl(slideId)) + '" target="_blank" rel="noopener">Open this slide</a>' +
-      '<a class="btn btn-ghost btn-sm" href="widgets/' + esc(o.widget) + '.html" target="_blank" rel="noopener">Open the widget on its own</a>' +
-      '<button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(widgetUrl) + '">Copy link for the follow-up email</button><span class="copied" aria-live="polite"></span></div>' +
-      '</div></div>';
+    '</details>';
     var panel = $('panel');
     panel.style.setProperty('--c', c);
     panel.setAttribute('aria-labelledby', 't-' + cur);
@@ -491,6 +593,7 @@ h1, h2, h3 { font-family: var(--head); color: var(--navy); letter-spacing: -0.02
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-s]'); if (t) return go(t.getAttribute('data-s'), 1, true);
     var o = e.target.closest('[data-o]'); if (o) return go(cur, +o.getAttribute('data-o') + 1, true);
+    var cs = e.target.closest('[data-copy-slide]'); if (cs) return copySlide(+cs.getAttribute('data-copy-slide'), cs);
     var c = e.target.closest('[data-copy]');
     if (c) { var url = c.getAttribute('data-copy'), msg = c.parentNode.querySelector('.copied');
       function ok() { msg.textContent = 'Copied.'; setTimeout(function () { msg.textContent = ''; }, 2500); }
