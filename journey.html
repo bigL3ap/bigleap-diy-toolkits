@@ -887,7 +887,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
-    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || /^mailto:/i.test(href) || /^Email /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
     if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
     if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
@@ -1050,7 +1050,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
       <ol class="tm-wheel">
         <li><b>They try it free</b>People who weren&rsquo;t ready to talk to sales get real progress, with your name and photo on the toolkit.</li>
         <li><b>They see the size of the job</b>The plan shows how much there is to do well. That&rsquo;s what makes an expert worth it.</li>
-        <li><b>They ask for you</b>&ldquo;Talk to [you] about building it&rdquo; is on every toolkit, tagged so we know which one started it.</li>
+        <li><b>They ask for you</b>&ldquo;Email [you]&rdquo; is on every toolkit, with your photo, bio and a QR code, and the toolkit is in the subject line so you know which one started it.</li>
         <li><b>The call starts ahead</b>They arrive with a Business Profile and a plan, so discovery starts at strategy, not setup.</li>
         <li><b>They find the next service</b>The Business Profile maps a path across every service, so one team&rsquo;s client becomes another team&rsquo;s lead.</li>
       </ol>
@@ -1066,12 +1066,12 @@ details.support .support-grid { padding: 4px 16px 16px; }
         <details class="tm-q"><summary>Doesn&rsquo;t giving it away make our work look less valuable?</summary>
           <p>It does the opposite. A prospect who has worked through the checklist understands how much goes into doing it well. The toolkit works like a sample of your expertise, with your name and face on it.</p></details>
         <details class="tm-q"><summary>Will this flood my team with low-quality leads?</summary>
-          <p>No. Using a toolkit doesn&rsquo;t send anyone to sales. Masterclass signups come in as subscribers, not sales leads. Someone only reaches you when they click &ldquo;Talk to [you]&rdquo; and book a call.</p>
+          <p>No. Using a toolkit doesn&rsquo;t send anyone to sales. Masterclass signups come in as subscribers, not sales leads. Someone only reaches you when they choose to email you from the toolkit.</p>
           <p>When they do, they bring their Business Profile and plan, so you know their situation before you meet.</p></details>
         <details class="tm-q"><summary>What if a current client uses a toolkit and decides they don&rsquo;t need us?</summary>
           <p>The toolkits stop at foundations and readiness, which a retained client should already have in place with us. If a client opens a toolkit for a service they don&rsquo;t buy from us yet, that&rsquo;s an expansion conversation, and the toolkit has already done the discovery.</p></details>
         <details class="tm-q"><summary>Does marketing get the credit while my team does the work?</summary>
-          <p>Every &ldquo;Talk to&rdquo; link is tagged by toolkit and service, so the team whose toolkit started the conversation is visible in reporting. The HubSpot report that shows this is planned. See <a href="#measure">Measure it</a>.</p></details>
+          <p>Every &ldquo;Email [you]&rdquo; click is tracked by toolkit and service, so the team whose toolkit started the conversation is visible in reporting. The HubSpot report that shows this is planned. See <a href="#measure">Measure it</a>.</p></details>
         <details class="tm-q"><summary>Is this more work for my team?</summary>
           <p>The ask is small: review your toolkits once, take the calls they book, and tell us what prospects keep asking so the next toolkit answers it.</p></details>
       </div>
@@ -1178,9 +1178,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
     '3,4': { pl: 'MQL, rising intent', s: 'Once they opt in, repeat visits to Paid 4, Email 3 or RevOps 6, or a blocker flagged in Paid 2, are strong buying signals.' },
 
     '4,0': { t: '“This needs someone who has done it a hundred times.”' },
-    '4,1': { t: 'Clicks “Talk to Scott / Dallas / Shemmah / Kristina / Erica about building it” and books a call with their plan attached.' },
+    '4,1': { t: 'Clicks “Email Scott / Dallas / Shemmah / Kristina / Erica” (or scans the QR code) and gets in touch with their plan in hand.' },
     '4,2': { t: 'Every toolkit’s closing panel hands off to its named expert.' },
-    '4,3': { tp: [['“Talk to [owner]” CTA, UTM-tagged per toolkit', 1], ['Owner scheduler links', 0], ['Plan and profile attached to the booking', 0]] },
+    '4,3': { tp: [['“Email [owner]” button, expert card and QR code on every toolkit', 1], ['Owner scheduler links', 0], ['Plan and profile attached to the booking', 0]] },
     '4,4': { pl: 'SQL', s: 'Meeting booked. utm_campaign shows which toolkit sent them (for example paid-02), so the owner walks in knowing their gaps.' },
 
     '5,0': { t: '“They already know where we are. That saves us time and money.”' },
@@ -1206,9 +1206,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
         proof: ['Local & multi-location case studies (Avis, Pinnacle Roofing)', 'Shemmah’s check-in after the listings fix'] },
       convert: { trigger: 'Google Ads ready? flags two launch blockers: the account belongs to the old agency, and calls aren’t tracked.',
         offer: 'A 30-minute plan review with Scott: take ownership of the account and set up call tracking.',
-        event: 'Talk to Scott (paid-02) → meeting booked = SQL' },
+        event: 'Emails Scott (paid-02) → meeting booked = SQL' },
       solution: { services: ['Paid search with call tracking', 'Local SEO and location pages', 'Review program', 'RevOps: CRM and routing'],
-        scope: 'Starts at campaigns, not cleanup. The situation audit names the lead brand by what they’re buying: multi-location growth stays with Big Leap; small-business paid and SEO goes to Set Fire; local lead-to-sale goes to LeadGenix.', cta: ['Talk to Scott', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html'] },
+        scope: 'Starts at campaigns, not cleanup. The situation audit names the lead brand by what they’re buying: multi-location growth stays with Big Leap; small-business paid and SEO goes to Set Fire; local lead-to-sale goes to LeadGenix.', cta: ['Email Scott', 'toolkits/paid/02_Is_Your_Google_Ads_Account_Ready.html'] },
       kpis: { nd: 'Toolkit visits from Contractor/HVAC pages; widget CTA clicks', ag: 'Profiles with 2+ locations; 2+ toolkits finished', cv: 'SQLs tagged paid-02 or seo-02; close rate; new MRR' },
       path: [
         ['0,1', '<b>Notice Different:</b> searches “how to get more HVAC leads” and lands on a Big Leap article with the “Where should you start?” widget.'],
@@ -1217,7 +1217,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
         ['2,2', '<b>Small leap 2:</b> fixes listings across three Google Business Profiles (SEO 2), connects forms to a free CRM (RevOps 1), authenticates the domain so review requests stop landing in spam (Email 1).'],
         ['2,4', 'Three toolkits finished, multi-location, budget fits: <b>MQL</b>. Shemmah’s check-in asks how the listings went.'],
         ['3,2', '<b>Small leap 3:</b> Google Ads ready? flags that the old agency owns the account and calls aren’t tracked.'],
-        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Scott with the plan attached: <b>SQL</b> (paid-02).'],
+        ['4,1', '<b>Purchase pivot:</b> emails Scott with the plan attached: <b>SQL</b> (paid-02).'],
         ['5,1', '<b>The Big Leap:</b> Scott scopes account ownership, call tracking, location pages and a review program, skipping the work they already did.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
 
@@ -1234,9 +1234,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
         proof: ['Ecommerce case studies (Nomatic, Kate’s Real Food, Spoonful of Comfort)', 'Erica’s flow examples in Email 2'] },
       convert: { trigger: 'Merchant Center shows feed disapprovals, and margins vary so much by product that one Performance Max campaign won’t work.',
         offer: 'A feed and margin review with Scott, with Erica on the call for flows.',
-        event: 'Talk to Scott (paid-04) → SQL' },
+        event: 'Emails Scott (paid-04) → SQL' },
       solution: { services: ['Shopping and Performance Max by margin tier', 'Email Marketing flows', 'SEO for product and category pages (phase 2)'],
-        scope: 'No first month lost to tracking setup, so results show up sooner and the retainer goes to growth.', cta: ['Talk to Scott', 'toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html'] },
+        scope: 'No first month lost to tracking setup, so results show up sooner and the retainer goes to growth.', cta: ['Email Scott', 'toolkits/paid/04_Which_Campaigns_Should_You_Run_First.html'] },
       kpis: { nd: 'Visits from ecommerce pages and retargeting; Ads ready? widget answers', ag: 'Shopify profiles; Paid 3 and Email 2 plans copied', cv: 'SQLs tagged paid-04; average deal MRR; days to close' },
       path: [
         ['0,3', '<b>Notice Different:</b> reads an ecommerce case study and clicks <b>Free Toolkits</b> in the bigleap.com nav.'],
@@ -1245,7 +1245,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
         ['2,4', 'Opts in for the plan, then hits the ecommerce fit rule: <b>Lead → MQL</b>.'],
         ['3,2', '<b>Small leap 3:</b> maps welcome, cart and post-purchase flows (Email 2), finds feed disapprovals (Paid 2), plans Standard Shopping to start (Paid 4).'],
         ['3,4', 'Returns to Paid 4 and Email 3 twice in a week. Once they’ve opted in, that would trigger a high-intent alert to Scott (planned).'],
-        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Scott about feed tiering by margin: <b>SQL</b> (paid-04).'],
+        ['4,1', '<b>Purchase pivot:</b> emails Scott about feed tiering by margin: <b>SQL</b> (paid-04).'],
         ['5,4', '<b>The Big Leap:</b> closes Shopping and Performance Max plus email flows, with clean tracking from day one.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] },
 
@@ -1262,9 +1262,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
         proof: ['B2B case studies', 'Dallas’s check-in once routing is live'] },
       convert: { trigger: 'RevOps 6 shows that multi-touch attribution across LinkedIn, Google Ads and HubSpot is beyond a DIY build.',
         offer: 'An attribution scoping call with Dallas; Scott joins for offline-conversion bidding.',
-        event: 'Talk to Dallas (revops-06) → SQL' },
+        event: 'Emails Dallas (revops-06) → SQL' },
       solution: { services: ['RevOps: attribution and reporting', 'Paid search with offline-conversion bidding', 'AI SEO and the Brand Visibility Audit'],
-        scope: 'They arrive already sold on RevOps because they felt the hours come back. The Brand Visibility Audit is the natural next step.', cta: ['Talk to Dallas', 'toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html'] },
+        scope: 'They arrive already sold on RevOps because they felt the hours come back. The Brand Visibility Audit is the natural next step.', cta: ['Email Dallas', 'toolkits/revops/06_Is_Your_Pipeline_Ready_for_a_Dashboard.html'] },
       kpis: { nd: 'QR scans (utm_medium=slide-tile); B2B page toolkit visits', ag: 'Time audits finished; RevOps 1–3 plans copied', cv: 'SQLs tagged revops-06; MQL→SQL rate vs other sources' },
       path: [
         ['0,2', '<b>Notice Different:</b> sees the “Hours lost” slide tile in a Big Leap webinar and scans the QR code.'],
@@ -1290,9 +1290,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
         proof: ['Digital PR coverage examples', 'Kristina’s check-in after the media kit'] },
       convert: { trigger: 'The pitch-ready checklist is done. What’s left is media relationships and pitching, which a toolkit can’t supply.',
         offer: 'A 90-day authority plan call with Kristina.',
-        event: 'Talk to Kristina (pr-02) → SQL' },
+        event: 'Emails Kristina (pr-02) → SQL' },
       solution: { services: ['Digital PR', 'AI SEO', 'Local SEO', 'Compliant paid search (phase 2)'],
-        scope: 'Kristina’s team pitches in week one instead of week four, because the media kit is already done.', cta: ['Talk to Kristina', 'toolkits/pr/02_Build_Your_Media_Kit.html'] },
+        scope: 'Kristina’s team pitches in week one instead of week four, because the media kit is already done.', cta: ['Email Kristina', 'toolkits/pr/02_Build_Your_Media_Kit.html'] },
       kpis: { nd: 'Podcast and industry-page visits; Pitch-ready widget answers', ag: 'Media kits built; SEO 1 plans copied', cv: 'SQLs tagged pr-02; placements in the first 90 days after close' },
       path: [
         ['0,1', '<b>Notice Different:</b> hears about the toolkits on the Sweet Takes podcast and finds the landing page.'],
@@ -1300,7 +1300,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
         ['2,2', '<b>Small leap 2:</b> Pitch-ready check (PR 1): no bios, headshots or press page. Fixes the About page, adds Legal Service schema, sets up Bing Webmaster Tools (SEO 1).'],
         ['2,4', 'Opts in, then hits the fit rule after a second toolkit: <b>Lead → MQL</b>.'],
         ['3,2', '<b>Small leap 3:</b> builds bios, a podcast intro and talking points (PR 2), sets up an intake follow-up flow and a monthly newsletter (Email 2).'],
-        ['4,1', '<b>Purchase pivot:</b> clicks Talk to Kristina about a 90-day authority push: <b>SQL</b> (pr-02).'],
+        ['4,1', '<b>Purchase pivot:</b> emails Kristina about a 90-day authority push: <b>SQL</b> (pr-02).'],
         ['5,4', '<b>The Big Leap:</b> closes Digital PR plus AI SEO, with local SEO and compliant paid search as phase two.']
       ], pipe: ['Visitor', 'Lead', 'MQL', 'SQL', 'Opportunity', 'Customer'] }
   };
@@ -1530,7 +1530,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     var d = $('map-detail'); d.style.setProperty('--sel', color(me.s.id));
     d.innerHTML = '<div class="md-head"><div><h3>' + esc(me.t.title) + '</h3><p class="meta">' + esc(me.s.name) + ' · Small leap ' + me.t.n + ' of ' + me.s.toolkits.length + ' · ' + esc(me.s.owner) + (me.t.status !== 'live' ? ' · Draft 1' : '') + '</p></div>' +
       '<div class="acts"><a class="btn btn-red" href="' + esc(me.t.file) + '">Open this toolkit</a></div></div>' +
-      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Talk to ' + esc(me.s.first) + '”.</li>') + '</ul>' +
+      '<h4>Unlocks next' + (outs.length ? ' (' + outs.length + ')' : '') + '</h4><ul class="md-grid">' + (outs.map(function (e) { return item(e, e[1]); }).join('') || '<li class="none">The hand-off to Big Leap: “Email ' + esc(me.s.first) + '”.</li>') + '</ul>' +
       '<h4>Works best after</h4><ul class="md-grid">' + (ins.map(function (e) { return item(e, e[0]); }).join('') || (id === 'paid1' ? '<li class="none"><b>Nothing — this is the starting point.</b> Every prospect begins here, and their answers fill in every toolkit after it.</li>' : '<li class="none"><b>Nothing required first.</b> A good place to start for ' + esc(me.s.name) + '.</li>')) + '</ul>';
     if (!quiet && window.innerWidth < 820) d.scrollIntoView({ block: 'nearest', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
@@ -1629,7 +1629,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
       ['Business Profiles built', 'A third of engaged visitors', 'The shared start that drives cross-service paths.', 'GA4 event <code>diy_profile_saved</code>.']
     ] },
     { ph: 'cv', title: 'At the pivot', sub: 'Are they raising their hand?', items: [
-      ['Talk-to clicks', '3–5% of toolkit visitors', 'Clicks on “Talk to [owner] about building it”.', 'GA4 key event <code>diy_cta_click</code>, by toolkit and owner.'],
+      ['Email-the-expert clicks', '3–5% of toolkit visitors', 'Clicks on “Email [owner]”.', 'GA4 key event <code>diy_cta_click</code>, by toolkit and owner.'],
       ['Toolkit-sourced SQLs', 'Track monthly; target set after 60 days', 'Meetings booked from a toolkit.', 'HubSpot: meetings where the contact’s original source campaign is <code>diy-toolkits</code>; <code>utm_campaign</code> shows the toolkit.'],
       ['MQL → SQL → won rates', 'At or above other marketing sources', 'Whether toolkit leads are better qualified.', 'HubSpot funnel report filtered to source campaign <code>diy-toolkits</code>, compared with all marketing.']
     ] },
@@ -1655,7 +1655,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
     ['diy_profile_saved', 'A Business Profile is saved'],
     ['diy_plan_copy / diy_plan_download', '“Copy my plan” or download is used'],
     ['diy_plan_email', 'Planned: an “Email me” button is clicked (no such button exists yet)'],
-    ['diy_cta_click', '“Talk to [owner]” or “Get Your Custom Strategy” is clicked'],
+    ['diy_cta_click', '“Email [owner]” or “Get Your Custom Strategy” is clicked'],
     ['diy_next_click', 'Previous or Next toolkit is clicked'],
     ['diy_see_plan_click', 'The live result bar\u2019s \u201cSee your plan\u201d button is clicked'],
     ['diy_crosslink_click', 'A link to another toolkit or service is clicked'],
@@ -1753,9 +1753,9 @@ details.support .support-grid { padding: 4px 16px 16px; }
       open: ['Owner sign-off on each toolkit (Status & review).', 'Decide where the toolkits live on bigleap.com, then launch.', 'Tag Manager ID so the events reach GA4 (Measure it).'],
       links: [['Browse the toolkits', 'index.html#toolkits'], ['Start with the Business Profile', 'toolkits/paid/01_What_Kind_of_Business_Are_You.html']] },
     { k: 'expert', n: 'Stage 4', t: 'Talk to an expert', sub: 'The hand-off to a person', st: 'draft', c: C.hand,
-      runs: ['“Talk to [owner]” CTA', 'UTM per toolkit'],
-      lead: 'When the next step needs an expert, the toolkit says so and names one: “Talk to Shemmah about building it.” This click is the moment interest becomes a sales conversation.',
-      what: ['Every drafted toolkit has a “Talk to [owner]” button, tagged by toolkit and service. It goes live when the toolkits launch.', 'They bring their plan to the call, so it starts at strategy, not setup.', 'Planned: each owner’s own meeting link, the plan attached to the booking, and an alert when someone shows high intent.'],
+      runs: ['“Email [owner]” button', 'Expert card with a QR code'],
+      lead: 'When the next step needs an expert, the toolkit says so and names one, with a photo and a short bio: “Email Shemmah.” This click is the moment interest becomes a sales conversation.',
+      what: ['Every drafted toolkit has an “Email [owner]” button (the toolkit is in the subject line) and an expert card with a QR code for printed plans and big screens. It goes live when the toolkits launch.', 'They bring their plan to the call, so it starts at strategy, not setup.', 'Planned: each owner’s own meeting link, the plan attached to the booking, and an alert when someone shows high intent.'],
       people: ['Dallas Olsen', 'Scott Smoot', 'Shemmah Al-Darweesh', 'Kristina Ainge', 'Erica Pounder', 'Coby Bush'],
       kpi: ['Talk-to clicks per toolkit', 'Meetings booked (a booked meeting = SQL)'],
       open: ['Owner meeting links in HubSpot so the source carries into the booking.', 'High-intent alert to the owner.'] },
@@ -1881,7 +1881,7 @@ details.support .support-grid { padding: 4px 16px 16px; }
       return '<article class="tm-team" style="--c:' + SC[s.id] + '"><header>' + av + '<div><h3>' + esc(s.name) + '</h3><small>' + esc(s.owner) + (p.title ? ', ' + esc(p.title) : '') + '</small></div></header>' +
         '<div><h4>The toolkits cover</h4><p>' + esc(EDGE[s.id][0]) + '</p></div>' +
         '<div><h4>Your team does</h4><p>' + esc(EDGE[s.id][1]) + '</p></div>' +
-        '<div><h4>The hand-off</h4><p>&ldquo;Talk to ' + esc(first) + ' about building it,&rdquo; with their plan attached.</p></div>' +
+        '<div><h4>The hand-off</h4><p>&ldquo;Email ' + esc(first) + '&rdquo; and a QR code on every toolkit, so they reach you with their plan in hand.</p></div>' +
         '<details><summary>' + (s.toolkits || []).length + ' toolkits</summary><ul>' + kits + '</ul></details></article>';
     }).join('');
   }

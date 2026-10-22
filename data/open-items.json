@@ -218,8 +218,8 @@
       "owner": "All owners",
       "area": "All",
       "status": "Open",
-      "title": "Send your scheduler link for the 'Talk to …' button",
-      "detail": "Every 'Talk to' button goes to bigleap.com/contact-us with UTMs. Send Dallas a booking link and it gets swapped in."
+      "title": "Optional: send a booking link for your toolkits",
+      "detail": "Every toolkit now has an “Email [owner]” button (the toolkit is in the subject) and an expert card with a QR code. If you'd rather people book time directly, send Dallas a booking link and it can sit next to the email button."
     },
     {
       "id": "t-masterclass",

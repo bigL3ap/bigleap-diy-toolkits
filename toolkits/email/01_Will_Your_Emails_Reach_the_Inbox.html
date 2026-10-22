@@ -687,7 +687,7 @@ body { overflow-wrap: anywhere; }
     var el = e.target.closest && e.target.closest('a, button'); if (!el) return;
     var txt = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80), href = el.getAttribute('href') || '';
     if (el.closest('.blp, .blh-pn')) return track('diy_next_click', { label: txt });
-    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
+    if (/utm_medium=talk-to-owner/.test(href) || /^Talk to /i.test(txt) || /^mailto:/i.test(href) || /^Email /i.test(txt) || el.classList.contains('blh-cta') || /get-started/.test(href)) return track('diy_cta_click', { label: txt, link_url: href });
     if (el.tagName === 'BUTTON' && /copy/i.test(txt)) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_copy', { label: txt }); }
     if (/download|print|save as|\.md\b|\.txt\b/i.test(txt) || el.hasAttribute('download')) { if (worked && !isExample()) prog(function (k, now) { k.planTaken = now; k.headline = headline() || k.headline; }); return track('diy_plan_download', { label: txt }); }
     if (/email me/i.test(txt)) return track('diy_plan_email', { label: txt });
@@ -816,7 +816,7 @@ body { overflow-wrap: anywhere; }
 <p>Copy your plan and work through it, or bring it to a call. With these basics in place, our time together goes to strategy, not setup.</p>
 <div class="closing-actions">
 <button type="button" class="btn btn-line" id="copy-btn">Copy my plan</button>
-<a class="btn btn-solid" id="cta-link" href="https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&amp;utm_medium=talk-to-owner&amp;utm_campaign=email-01" target="_blank" rel="noopener">Talk to Erica about building it</a>
+<a class="btn btn-solid" id="cta-link" href="mailto:epounder@bigleap.com">Email Erica</a>
 </div>
 <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
 <div id="copy-host"></div>
@@ -856,12 +856,13 @@ body { overflow-wrap: anywhere; }
 /* =====================================================================
 SERIES SETTINGS: the same in all three Email Marketing DIY toolkits.
 OWNER: the Big Leap expert named on the CTA.
-CTA_URL: where "Talk to Erica about building it" goes.
+CTA_URL: the contact page, kept as a fallback. OWNER_EMAIL: the closing "Email Erica" button.
 SERIES: every toolkit in the Email Marketing series (file = relative link).
 LINKS: the shared cross-link map for all DIY series (relative URLs).
 ===================================================================== */
 const OWNER = { name: 'Erica Pounder', first: 'Erica' };
-const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=email-01'; // swap for Erica's meeting scheduler link
+const CTA_URL = 'https://www.bigleap.com/contact-us/?utm_source=diy-toolkits&utm_medium=talk-to-owner&utm_campaign=email-01';
+const OWNER_EMAIL = 'epounder@bigleap.com';   /* the closing button emails the owner */ // swap for Erica's meeting scheduler link
 const SERIES = [
   { n: 1, short: 'Inbox', title: 'Will Your Emails Reach the Inbox?', file: '01_Will_Your_Emails_Reach_the_Inbox.html' },
   { n: 2, short: 'Automate', title: 'Which Emails Should Send Themselves?', file: '02_Which_Emails_Should_Send_Themselves.html' },
@@ -1187,8 +1188,8 @@ function initSticky() {
 function initShell(current, onRestore) {
   renderStepper(current);
   $('cta-link').href = CTA_URL;
-  $('cta-link').textContent = 'Talk to ' + OWNER.first + ' about building it';
-  $('complex-cta').innerHTML = 'Any of these sound like you? ' + esc(OWNER.name) + ' leads email marketing at Big Leap. Ready for the big leap? <a href="' + esc(CTA_URL) + '" target="_blank" rel="noopener">Talk to ' + esc(OWNER.first) + ' about building it</a>.';
+  $('cta-link').textContent = 'Email ' + OWNER.first;
+  $('complex-cta').innerHTML = 'Any of these sound like you? ' + esc(OWNER.name) + ' leads email marketing at Big Leap. Ready for the big leap? <a href="mailto:' + esc(OWNER_EMAIL) + '">Email ' + esc(OWNER.first) + '</a>.';
   $('hub-link').href = LINKS.hub.url;
   $('restore-example').addEventListener('click', onRestore);
   $('see-results').addEventListener('click', () => {
@@ -1517,7 +1518,7 @@ let SNIPS = {};
     L.push('', 'NEXT TOOLKIT: ' + LINKS[nx.key].name + ' - ' + nx.why);
     const xl = xlinksText(xlinks(m), nx.key);
     if (xl.length) L.push('', 'RELATED BIG LEAP DIY TOOLKITS', ...xl);
-    L.push('', 'Talk to ' + OWNER.first + ' about building it: ' + CTA_URL);
+    L.push('', 'Email ' + OWNER.first + ' about building it: ' + OWNER_EMAIL);
     return L.join('\n');
   }
   function render() {
@@ -1574,19 +1575,45 @@ let SNIPS = {};
 <!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="../pr/02_Build_Your_Media_Kit.html"><small>← Previous</small><b>Digital PR: Build Your Media Kit</b></a><a class="blp-hub" href="../../index.html"><small>Email Marketing · Toolkit 1 of 3</small><b>All toolkits</b></a><a class="blp-a" href="02_Which_Emails_Should_Send_Themselves.html"><small>Next →</small><b>Which Emails Should Send Themselves?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
-  var P = {"name": "Erica Pounder", "title": "Email Marketing", "photo": "../../assets/people/erica-pounder.jpg"};
+  var P = {"name": "Erica Pounder", "title": "Email Marketing", "photo": "../../assets/people/erica-pounder.jpg", "banner": "", "qr": "../../assets/qr/erica-pounder.svg", "bio": "Meet Erica. Email Marketing at Big Leap.", "email": "epounder@bigleap.com"};
   var box = document.querySelector('section.closing .closing-actions');
   if (!box || !P.name || document.querySelector('.bl-expert')) return;
+  var first = P.name.split(/\s+/)[0];
+  var title = ((document.querySelector('h1') || {}).textContent || document.title.split(' · ')[0]).trim();
+  var page = location.href.split('#')[0];
+  var mail = P.email ? 'mailto:' + P.email + '?subject=' + encodeURIComponent(title + ': a question for ' + first) + '&body=' + encodeURIComponent('Hi ' + first + ',\n\nI worked through "' + title + '" (' + page + ') and would like to talk about the next step.\n\n') : '';
   var st = document.createElement('style');
-  st.textContent = '.bl-expert{display:flex;align-items:center;gap:14px;margin:2px 0}.bl-expert img,.bl-expert .ini{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 0 0 3px rgba(255,255,255,.85)}.bl-expert .ini{display:grid;place-items:center;background:rgba(255,255,255,.18);font:800 18px "Raleway",Arial,sans-serif}.bl-expert b{display:block;font-size:16px;line-height:1.3}.bl-expert span{display:block;font-size:14px;color:var(--cta-muted,inherit)}@media print{.bl-expert img{box-shadow:none}}';
+  st.textContent = '.bl-expert{margin:4px 0 8px;border-radius:14px;overflow:hidden;background:#0F1B24;color:#fff}' +
+    '.bl-expert .bx-photo{height:210px;background:#0F1B24 center 28%/cover no-repeat;position:relative}' +
+    '.bl-expert .bx-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,27,36,0) 50%,#0F1B24 100%)}' +
+    '.bl-expert .bx-body{display:flex;gap:18px;align-items:center;padding:14px 20px 20px}' +
+    '.bl-expert .bx-text{flex:1 1 auto;min-width:0}' +
+    '.bl-expert h3{margin:0 0 6px;font:700 22px/1.2 "Raleway",Arial,sans-serif;color:#fff}' +
+    '.bl-expert p{margin:0;font-size:14.5px;line-height:1.55;color:#C9D3DA}' +
+    '.bl-expert .bx-who{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px;color:#9FB0BC}' +
+    '.bl-expert .bx-who b{color:#fff}' +
+    '.bl-expert .bx-who img,.bl-expert .ini{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.85)}' +
+    '.bl-expert .ini{display:grid;place-items:center;background:rgba(255,255,255,.18);font:800 15px "Raleway",Arial,sans-serif;color:#fff}' +
+    '.bl-expert .bx-qr{flex:0 0 auto;background:#fff;border-radius:12px;padding:8px 8px 6px;text-align:center;text-decoration:none}' +
+    '.bl-expert .bx-qr img{display:block;width:132px;height:132px}' +
+    '.bl-expert .bx-qr span{display:block;margin-top:3px;font:700 11px/1.3 Arial,sans-serif;color:#0F1B24}' +
+    '@media (max-width:700px){.bl-expert .bx-qr{display:none}.bl-expert .bx-photo{height:170px}.bl-expert .bx-body{padding:12px 16px 16px}}' +
+    '@media print{.bl-expert{background:#fff;color:#000;border:1px solid #bbb;break-inside:avoid}.bl-expert h3,.bl-expert .bx-who b{color:#000}.bl-expert p,.bl-expert .bx-who{color:#333}.bl-expert .bx-qr{display:block!important;border:1px solid #ddd}.bl-expert .bx-photo{display:none}}';
   document.head.appendChild(st);
   var d = document.createElement('div'); d.className = 'bl-expert';
   var ini = P.name.split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2);
-  d.innerHTML = (P.photo ? '<img src="' + P.photo + '" alt="" width="56" height="56">' : '<span class="ini" aria-hidden="true">' + ini + '</span>') +
-    '<div><b></b><span></span></div>';
-  d.querySelector('b').textContent = P.name;
-  d.querySelector('span').textContent = (P.title ? P.title + ' · ' : '') + 'Your Big Leap expert';
+  d.innerHTML = (P.banner ? '<div class="bx-photo" role="img" aria-label=""></div>' : '') +
+    '<div class="bx-body"><div class="bx-text"><h3>Talk To An Expert</h3><p class="bx-bio"></p>' +
+    '<div class="bx-who">' + (P.photo ? '<img src="' + P.photo + '" alt="" width="40" height="40">' : '<span class="ini" aria-hidden="true">' + ini + '</span>') + '<span><b></b><br><span class="bx-t"></span></span></div></div>' +
+    (P.qr && mail ? '<a class="bx-qr" href="' + mail + '"><img src="' + P.qr + '" alt="QR code: email ' + first + '" width="132" height="132"><span>Scan to email ' + first + '</span></a>' : '') + '</div>';
+  if (P.banner) d.querySelector('.bx-photo').style.backgroundImage = 'url("' + P.banner + '")';
+  d.querySelector('.bx-bio').textContent = P.bio || ('Meet ' + first + '. ' + (P.title || 'Your Big Leap expert') + '.');
+  d.querySelector('.bx-who b').textContent = P.name;
+  d.querySelector('.bx-t').textContent = (P.title ? P.title + ' · ' : '') + 'Your Big Leap expert';
   box.parentNode.insertBefore(d, box);
+  /* the closing button: email the owner instead of a contact form */
+  var cta = document.getElementById('cta-link');
+  if (cta && mail) { cta.href = mail; cta.removeAttribute('target'); cta.textContent = 'Email ' + first + (/optional/i.test(cta.textContent) ? ' (optional)' : ''); }
 })();
 </script>
 <script id="bl-header-js">
