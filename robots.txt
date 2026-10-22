@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /sales.html
+Disallow: /widgets.html
+Disallow: /journey.html
+Disallow: /review.html
+Disallow: /mockups/
+Disallow: /widgets/
+Disallow: /tools/
+
+Sitemap: https://bigl3ap.github.io/bigleap-diy-toolkits/sitemap.xml
