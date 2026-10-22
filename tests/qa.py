@@ -43,7 +43,7 @@ def load(path):
 
 def pages():
     out = ['index.html', 'toolkits.html', 'journey.html']
-    for extra in ['review.html', 'roadmap.html', 'my-profile.html', 'your-journey.html', 'progress.html', 'widgets.html', 'sales.html']:
+    for extra in ['review.html', 'roadmap.html', 'my-profile.html', 'your-journey.html', 'widgets.html', 'sales.html']:
         if os.path.exists(os.path.join(ROOT, extra)):
             out.append(extra)
     out += sorted(os.path.relpath(p, ROOT) for p in glob.glob(os.path.join(ROOT, 'toolkits', '*', '*.html')))
@@ -345,7 +345,7 @@ def browser_checks(data):
         ctx, pg, errs = new(width=390, height=844, storage={})
         pg.goto(base + 'index.html'); pg.wait_for_timeout(500)
         # every page is one click from the bar: direct tabs plus the All toolkits, My Profile and Assets menus
-        want = {'home', 'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile-home', 'yourjourney', 'roadmap', 'progress', 'journey', 'sales', 'widgets', 'mockups', 'review'}
+        want = {'home', 'toolkits', 'revops', 'paid', 'seo', 'pr', 'email', 'strategy', 'profile-home', 'yourjourney', 'roadmap', 'journey', 'sales', 'widgets', 'mockups', 'review'}
         have = set(pg.evaluate("[].map.call(document.querySelectorAll('.blh-tabs a[data-tab], .blh-tmenu a[data-tab]'), function (a) { return a.getAttribute('data-tab'); })"))
         rec(want <= have, 'every page is reachable from the toolkit bar and its menus', ', '.join(sorted(want - have)))
         btn = pg.query_selector('.blh-tbtn'); dd = False

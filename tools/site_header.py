@@ -597,6 +597,9 @@ ANSWERS_JS = r"""<script id="bl-answers-js">
   }
   function optText(el) { var l = el.id && form.querySelector('label[for="' + el.id + '"]'); return clean(l || el.closest('label')) || el.value; }
   function serialize() {
+    /* Besides the current value, also capture every option a choice field offered (opts: [{v,t}]),
+       so a page outside this toolkit (My Profile's inline editor) can rebuild the same choice -
+       not just display what was picked. Free-text fields need no opts; there's nothing to choose from. */
     var seen = {}, out = [];
     Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (el) {
       if (el.disabled || el.type === 'button' || el.type === 'submit' || el.type === 'hidden') return;
@@ -604,7 +607,11 @@ ANSWERS_JS = r"""<script id="bl-answers-js">
         var k = el.name || el.id; if (!k || seen[k]) return; seen[k] = 1;
         var all = form.querySelectorAll('input[name="' + k + '"]'); if (!all.length) all = [el];
         var on = Array.prototype.filter.call(all, function (x) { return x.checked; });
-        out.push({ k: k, type: el.type, label: labelFor(el), value: el.type === 'radio' ? (on[0] ? on[0].value : '') : on.map(function (x) { return x.value; }), text: on.map(optText).join(', ') });
+        out.push({ k: k, type: el.type, label: labelFor(el), value: el.type === 'radio' ? (on[0] ? on[0].value : '') : on.map(function (x) { return x.value; }), text: on.map(optText).join(', '), opts: Array.prototype.map.call(all, function (x) { return { v: x.value, t: optText(x) }; }) });
+      } else if (el.tagName === 'SELECT') {
+        var k3 = el.id || el.name; if (!k3 || seen[k3]) return; seen[k3] = 1;
+        var sel = el.selectedOptions && el.selectedOptions[0];
+        out.push({ k: k3, type: 'select', label: labelFor(el), value: el.value, text: sel ? sel.text : el.value, opts: Array.prototype.map.call(el.options, function (o) { return { v: o.value, t: o.text }; }) });
       } else {
         var k2 = el.id || el.name; if (!k2 || seen[k2]) return; seen[k2] = 1;
         out.push({ k: k2, type: 'value', label: labelFor(el), value: el.value, text: el.value });
@@ -658,7 +665,7 @@ def rel(frm, to):
 
 # Pages that share a top tab and show their own sub-tabs under the bar.
 GROUPS = {
-    'profile': [('Profile & answers', 'my-profile.html', 'profile-home'), ('Journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap'), ('Progress', 'progress.html', 'progress')],
+    'profile': [('Profile, answers & progress', 'my-profile.html', 'profile-home'), ('Journey', 'your-journey.html', 'yourjourney'), ('Roadmap', 'roadmap.html', 'roadmap')],
     'assets': [('Sales deck & talk tracks', 'sales.html', 'sales'), ('Widgets & tiles', 'widgets.html', 'widgets'), ('Page mockups', 'mockups/homepage.html', 'mockups')],
 }
 INTERNAL_KEYS = {'journey', 'sales', 'widgets', 'mockups', 'review'}
@@ -817,7 +824,7 @@ def site_footer(page, theme=False):
     e = html.escape
     r = lambda f: rel(page, f)
     col = lambda h, links: f'<div><h2>{e(h)}</h2><ul>' + ''.join(f'<li><a href="{u}">{e(t)}</a></li>' for t, u in links) + '</ul></div>'
-    diy = col('DIY Toolkits', [('Start here', r('index.html')), ('All toolkits', r('toolkits.html')), ('My Profile', r('my-profile.html')), ('Your journey', r('your-journey.html')), ('Roadmap', r('roadmap.html')), ('Progress', r('progress.html'))])
+    diy = col('DIY Toolkits', [('Start here', r('index.html')), ('All toolkits', r('toolkits.html')), ('My Profile', r('my-profile.html')), ('Your journey', r('your-journey.html')), ('Roadmap', r('roadmap.html'))])
     svc = col('Services', [('SEO Marketing', BL + '/services/seo-marketing/'), ('Paid Advertising', BL + '/services/paid-advertising/'), ('RevOps', BL + '/services/revops-agency/'), ('Content Marketing', BL + '/services/content-marketing/'), ('CRO Marketing', BL + '/services/cro-marketing/')])
     co = col('Company', [('About', BL + '/about-us/'), ('Areas Served', BL + '/areas-served/'), ('Blog', BL + '/blog/'), ('Case Studies', BL + '/digital-marketing-seo-case-studies/'), ('About Sweet Takes Podcast', BL + '/sweet-story/')])
     contact = ('<div><h2>Contact</h2><address><a href="tel:+18014363003">(801) 436-3003</a><br>4101 N Thanksgiving Way, Suite 175<br>Lehi, Utah 84043</address>'
@@ -885,11 +892,8 @@ if __name__ == '__main__':
     apply('toolkits.html', header('toolkits.html', 'toolkits', '', None, None, ''), theme=True)
     # Assets (internal): widgets and slide tiles; shares sub-tabs with the sales deck and mockups.
     apply('widgets.html', header('widgets.html', 'widgets', '', None, None, ''), theme=True)
-    # Progress: the visitor's progress across every toolkit (a My Profile sub-tab).
-    if os.path.exists(os.path.join(ROOT, 'progress.html')):
-        apply('progress.html', header('progress.html', 'progress', '', None, None, ''))
     apply('journey.html', header('journey.html', 'journey', '', None, None, ''))
-    # My Profile: the Business Profile and every toolkit's saved answers, in one place.
+    # My Profile: the Business Profile, every toolkit's saved answers, and the visitor's progress, in one place.
     if os.path.exists(os.path.join(ROOT, 'my-profile.html')):
         apply('my-profile.html', header('my-profile.html', 'profile-home', '', None, None, ''))
     # Your journey: the client-facing journey map (the visitor's own path). journey.html is the internal map.
