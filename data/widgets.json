@@ -508,7 +508,7 @@
       "email": "epounder@bigleap.com",
       "banner": "",
       "qr": "assets/qr/erica-pounder.svg",
-      "bio": "Meet Erica. Email Marketing at Big Leap."
+      "bio": "Meet Erica. Email Marketing at Big Leap. A mom who writes every email with real, parent-tested empathy, and the rare marketer who spends her own weekends geeking out over AI automation webinars purely for fun."
     },
     "Coby Bush": {
       "title": "VP of Marketing",
@@ -516,7 +516,7 @@
       "email": "coby@bigleap.com",
       "banner": "assets/people/coby-bush-banner.jpg",
       "qr": "assets/qr/coby-bush.svg",
-      "bio": "Coby is a brand strategist and fractional CMO. His practice is grounded in behavioral economics and built on one conviction: a brand’s most defensible asset is not its product, but its perspective. He is the co-architect of the Big Leap Way, a methodology for developing brand-led go-to-market strategies that create customers out of critics and evangelists out of customers."
+      "bio": "Coby is a brand strategist and fractional CMO. His practice is grounded in behavioral economics and built on one conviction: a brand’s most defensible asset is not its product, but its perspective. He is the co-architect of the Big Leap Way, a methodology for developing brand-led go-to-market strategies that create customers out of critics and evangelists out of customers. Off the clock, he’s a lifelong Magic: The Gathering player — by his own admission, he was still shuffling decks on his mission when he probably should’ve been doing something else."
     }
   },
   "note": "people[].photo: a square headshot path (e.g. assets/people/dallas-olsen.jpg) or URL. Empty shows initials."
