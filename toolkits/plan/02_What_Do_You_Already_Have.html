@@ -409,6 +409,27 @@ body { background: #fff; color: #000; }
 .stack-sm td::before { content: attr(data-l); color: var(--muted); font-weight: 700; font-size: 13px; }
 }
 /* ---- Strategy starters (plan series): components built on the toolkit design system ---- */
+/* Strategy starters: optional real numbers ("Have real numbers?" boxes) */
+.data-box { margin-top: 12px; border: 1px dashed var(--line-strong); border-radius: 10px; background: var(--surface); }
+.data-box > summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--heading); }
+.data-box > summary .opt-note { font-weight: 400; color: var(--muted); }
+.data-box[open] > summary { border-bottom: 1px dashed var(--line); }
+.data-box > .q-help { padding: 10px 14px 0; margin: 0; }
+.data-grid { display: grid; gap: 14px; padding: 12px 14px 14px; }
+.data-f { display: grid; gap: 4px; }
+.data-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.data-l { flex: 1 1 12rem; font-size: 14px; font-weight: 700; color: var(--heading); }
+.data-in { display: inline-flex; align-items: center; gap: 6px; }
+.data-in .num-in { width: 7.5rem; font-size: 16px; }
+.data-u { font-size: 13px; font-weight: 700; color: var(--muted); }
+.data-how { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.data-how a { color: var(--blue-ink); font-weight: 700; }
+.data-said { margin: 0; font-size: 12.5px; font-weight: 700; color: var(--blue-ink); }
+.tool-list { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 4px; }
+.tool-list a { color: var(--blue-ink); font-weight: 700; }
+.aud-row[hidden] { display: none; }
+.aud-row .opts { flex: 1 1 100%; }
+.aud-row .text-field { flex: 1 1 100%; }
 .text-field.long { font-weight: 400; line-height: 1.45; resize: vertical; min-height: 2.6em; }
 .q-text-count { font-size: 12px; color: var(--muted); text-align: right; }
 .prelim { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border: 1px dashed var(--line-strong); border-radius: 8px; background: var(--bg); font-size: 13.5px; }
@@ -767,7 +788,7 @@ body { background: #fff; color: #000; }
 <div class="wordmark">BIG LEAP <span class="wm-sub">· STRATEGY STARTERS</span></div>
 <p class="eyebrow"><span class="kit">Strategy Starter 2 of 4</span><span class="campaign">Notice Different · Align to Genuine · Recommend Delight</span></p>
 <h1>What Do You Already Have?</h1>
-<p class="lede">Most businesses have more to build on than they think, and some of what they have can't carry the weight yet. Mark each foundation as usable, needs work, missing or not sure. You get credit for what works, a clear list of gaps, and what to fix first.</p>
+<p class="lede">Most businesses have more to build on than they think, and some of what they have can't carry the weight yet. Start with who buys from you and what drives them, then mark each foundation as usable, needs work, missing or not sure. You get credit for what works, a clear list of gaps, and what to fix first.</p>
 </header>
 <section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
 <nav class="stepper" aria-labelledby="stepper-h">
@@ -798,6 +819,15 @@ body { background: #fff; color: #000; }
 </ul>
 <p class="q-help">Owning something and being able to build on it are different. Each question says what “usable” means.</p>
 </div>
+<fieldset class="q" id="aud-who"><legend><span class="q-label">Who buys from you</span></legend>
+<p class="q-help">Your best customers, the ones you'd clone if you could. Answer what you know; “Not sure” is useful too. Free ways to check: <span id="who-tools"></span></p>
+<div class="q-rows" id="who-rows"></div>
+</fieldset>
+<fieldset class="q" id="aud-drive"><legend><span class="q-label">What drives them</span></legend>
+<p class="q-help">Why they buy, what starts the search and who decides. This is what “usable” audience understanding looks like, and it shapes what to fix first. Free ways to check: <span id="drive-tools"></span></p>
+<div class="q-rows" id="drive-rows"></div>
+</fieldset>
+<div class="q"><span class="q-label">Your foundations</span><p class="q-help">Now mark what you have to build on.</p></div>
 <div id="areas"></div>
 <button type="button" class="btn btn-strong see-results" id="see-results">See my foundations</button>
 </form>
@@ -809,6 +839,17 @@ body { background: #fff; color: #000; }
 <p class="hero-fig"><span class="hero-num" id="out-num">0</span><span class="hero-unit" id="out-unit">gaps to close</span></p>
 <p class="answer-line" id="out-line"></p>
 <p class="prelim"><span><b>Your own assessment.</b> These marks come from you, not from an inspection of your accounts. Use the “usable means” test on anything you're unsure about before you rebuild it.</span></p>
+</section>
+
+<section class="panel deliv" aria-labelledby="aud-h">
+<div class="deliv-head">
+<h2 id="aud-h">Who you're building for</h2>
+<p class="deliv-sub">Your best customers in one paragraph. Every foundation below is judged by whether it works for them.</p>
+</div>
+<p id="aud-line"></p>
+<p class="fine" id="aud-quote" hidden></p>
+<div class="sub" id="aud-impl-wrap"><h3>What this changes in your foundations</h3><p class="sub-lede">These reasons are added to the ranking below.</p><ul class="bullets" id="aud-impl"></ul></div>
+<div class="sub" id="aud-flag-wrap" hidden><h3>Worth a second look</h3><ul class="bullets" id="aud-flags"></ul></div>
 </section>
 
 <section class="panel deliv" aria-labelledby="map-h">
@@ -897,8 +938,8 @@ const CURRENT_KIT = 2;
 const SERIES = [
 { n: 1, short: 'Situation', title: 'Are You Solving the Right Problem?', file: '01_Are_You_Solving_the_Right_Problem.html' },
 { n: 2, short: 'Foundations', title: 'What Do You Already Have?', file: '02_What_Do_You_Already_Have.html' },
-{ n: 3, short: 'Brand', title: 'What Makes You Worth Choosing?', file: '03_What_Makes_You_Worth_Choosing.html' },
-{ n: 4, short: 'Delight', title: 'Would Your Customers Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
+{ n: 3, short: 'Go to Market', title: 'How Do You Go to Market?', file: '03_What_Makes_You_Worth_Choosing.html' },
+{ n: 4, short: 'Motions', title: 'Do People Notice, Choose and Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
 ];
 const LINKS = {
 profile:     { name: 'Build Your Business Profile',              url: '../paid/01_What_Kind_of_Business_Are_You.html',             owner: 'Scott Smoot' },
@@ -921,8 +962,8 @@ flows:       { name: 'Which Emails Should Send Themselves?',     url: '../email/
 emailHealth: { name: 'Is Your Email Program Working?',           url: '../email/03_Is_Your_Email_Program_Working.html',            owner: 'Erica Pounder' },
 situation:   { name: 'Are You Solving the Right Problem?',       url: '01_Are_You_Solving_the_Right_Problem.html',                 owner: '' },
 gap:         { name: 'What Do You Already Have?',                url: '02_What_Do_You_Already_Have.html',                          owner: '' },
-brand:       { name: 'What Makes You Worth Choosing?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
-delight:     { name: 'Would Your Customers Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
+brand:       { name: 'How Do You Go to Market?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
+delight:     { name: 'Do People Notice, Choose and Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
 roadmap:     { name: 'Your Marketing Roadmap',                   url: '../../roadmap.html',                                        owner: '' },
 hub:         { name: 'All DIY Toolkits',                         url: '../../index.html',                                          owner: '' },
 };
@@ -1267,6 +1308,8 @@ const GAP_PTS = { missing: 3, weak: 2, unknown: 1 };
 const EFFORT_PTS = { Small: 0.5, Medium: 0.25, Large: 0 };   // RULE OF THUMB: quick wins break ties
 
 const EXAMPLE = { position: 'weak', audience: 'weak', goals: 'missing', analytics: 'weak', identity: 'usable', website: 'usable', local: 'weak', paid: 'weak', email: 'missing', pr: 'na', capture: 'usable', response: 'weak', retention: 'missing' };
+const EXAMPLE_AUD = { type: 'consumers', age: ['35', '45'], life: ['home', 'kids'], shop: 'value', size: [], role: [], where: '', source: 'gut', drivers: ['trust', 'quality'], trigger: ['problem'], decide: 'two', hesitate: ['price'], words: '' };
+const MODEL_TYPE = { b2c: 'consumers', b2b: 'businesses', both: 'both' };
 const EXAMPLE_TEXT = 'Example: a local home-services company with a good-looking site and a CRM, but no written positioning, no goals and nothing after the sale. Change any answer to make it yours.';
 
 /* What the Business Profile can and cannot tell us. It can say something is missing or does not apply.
@@ -1291,7 +1334,127 @@ if (p.goal !== 'leads' && p.goal !== 'calls' && p.model === 'b2c' && p.offer ===
 return { m, note };
 }
 
-function rank(ans, goal, situation) {
+/* Free tools we trust: linked from the optional "real numbers" boxes and the copied plan.
+   Checked Oct 22, 2026. Free, or free with an account; limits noted where they matter. */
+const TOOLS = {
+trends:    ['Google Trends', 'https://trends.google.com/trends/'],
+kwplanner: ['Google Keyword Planner (free with a Google Ads account)', 'https://ads.google.com/home/tools/keyword-planner/'],
+semrush:   ['Semrush free account (10 searches a day)', 'https://www.semrush.com/'],
+ahrefsKw:  ['Ahrefs Keyword Generator', 'https://ahrefs.com/keyword-generator'],
+google:    ['Google Search', 'https://www.google.com/'],
+maps:      ['Google Maps', 'https://www.google.com/maps'],
+adsTrans:  ['Google Ads Transparency Center', 'https://adstransparency.google.com/'],
+metaLib:   ['Meta Ad Library', 'https://www.facebook.com/ads/library/'],
+census:    ['Census Business Builder', 'https://www.census.gov/data/data-tools/cbb.html'],
+censusData:['data.census.gov', 'https://data.census.gov/'],
+gsc:       ['Google Search Console', 'https://search.google.com/search-console'],
+ga4:       ['Google Analytics', 'https://analytics.google.com/'],
+gbp:       ['Google Business Profile', 'https://business.google.com/'],
+bing:      ['Bing Webmaster Tools', 'https://www.bing.com/webmasters'],
+crm:       ['HubSpot free CRM', 'https://www.hubspot.com/products/crm'],
+forms:     ['Google Forms', 'https://forms.google.com/'],
+clarity:   ['Microsoft Clarity', 'https://clarity.microsoft.com/'],
+metaSuite: ['Meta Business Suite', 'https://business.facebook.com/'],
+utm:       ['Google Campaign URL Builder', 'https://ga-dev-tools.google/campaign-url-builder/'],
+};
+function toolLink(k) { const t = TOOLS[k]; return t ? '<a href="' + esc(t[1]) + '" target="_blank" rel="noopener">' + esc(t[0]) + ' ↗</a>' : ''; }
+function toolPlain(k) { const t = TOOLS[k]; return t ? t[0] + ': ' + t[1] : ''; }
+
+/* ---------- who buys and what drives them (added Oct 22, 2026, from Coby's review) ----------
+   Feeds the gap ranking: each answer can add a reason (and a little weight) to the foundation
+   it depends on. RULES OF THUMB, shown next to each reason. */
+const AUD = {
+who: [
+{ id: 'type', label: 'Who buys from you?', kind: 'radio', cls: 'wrap2', opts: [['consumers', 'Consumers'], ['businesses', 'Businesses'], ['both', 'Both'], ['unsure', 'Not sure']] },
+{ id: 'age', label: 'Their age, mostly', kind: 'check', show: 'consumers', opts: [['u25', 'Under 25'], ['25', '25–34'], ['35', '35–44'], ['45', '45–54'], ['55', '55–64'], ['65', '65 and over'], ['unsure', 'Not sure']] },
+{ id: 'life', label: 'Their situation', kind: 'check', show: 'consumers', opts: [['home', 'Homeowners'], ['rent', 'Renters'], ['kids', 'Families with kids'], ['retired', 'Retired'], ['students', 'Students'], ['unsure', 'Not sure']] },
+{ id: 'shop', label: 'How they shop', kind: 'radio', cls: 'wrap2', show: 'consumers', opts: [['budget', 'Lowest price'], ['value', 'Best value'], ['premium', 'Premium'], ['unsure', 'Not sure']] },
+{ id: 'size', label: 'Company size, mostly', kind: 'check', show: 'businesses', opts: [['1', '1–10 people'], ['11', '11–50'], ['51', '51–200'], ['201', '201–1,000'], ['1000', 'Over 1,000'], ['unsure', 'Not sure']] },
+{ id: 'role', label: 'Who you usually deal with', kind: 'check', show: 'businesses', opts: [['owner', 'Owner or founder'], ['marketing', 'Marketing'], ['ops', 'Operations'], ['finance', 'Finance'], ['it', 'IT'], ['other', 'Someone else']] },
+{ id: 'where', label: 'Where they are', kind: 'text', ph: 'For example: Salt Lake County, the Mountain West, all of the US' },
+{ id: 'source', label: 'Where does this picture come from?', kind: 'radio', cls: 'stack', opts: [['data', 'Our data: CRM, analytics or surveys'], ['talk', 'Talking with customers'], ['gut', 'Gut feel'], ['unsure', 'Not sure']] },
+],
+drive: [
+{ id: 'drivers', label: 'Why they pick a provider (up to three)', kind: 'check', max: 3, opts: [['price', 'Price'], ['speed', 'Speed'], ['quality', 'Quality'], ['expertise', 'Expertise'], ['trust', 'Trust and reputation'], ['convenience', 'Convenience or location'], ['relationship', 'A personal relationship'], ['results', 'Proven results'], ['unsure', 'Not sure']] },
+{ id: 'trigger', label: 'What usually starts their search?', kind: 'check', opts: [['problem', 'Something broke or went wrong'], ['event', 'A deadline or event'], ['growth', 'Growth or a change'], ['season', 'A season or time of year'], ['referral', 'Someone recommended it'], ['unsure', 'Not sure']] },
+{ id: 'decide', label: 'Who makes the decision?', kind: 'radio', cls: 'stack', opts: [['one', 'One person'], ['two', 'Two people, like a couple or partners'], ['team', 'A small team'], ['committee', 'A committee with sign-off'], ['unsure', 'Not sure']] },
+{ id: 'hesitate', label: 'What makes them hesitate? (up to two)', kind: 'check', max: 2, opts: [['price', 'Price'], ['risk', 'Fear of choosing wrong'], ['timing', 'Timing'], ['approval', 'Needing approval'], ['urgency', 'No urgency'], ['unsure', 'Not sure']] },
+{ id: 'words', label: 'Their biggest worry, in their words (optional)', kind: 'text', ph: 'For example: “I don’t want to waste another year on a vendor who doesn’t get us”' },
+],
+};
+const AUD_FIELDS = AUD.who.concat(AUD.drive);
+const AUD_TOOLS = { who: ['ga4', 'metaSuite', 'censusData', 'forms'], drive: ['forms', 'gbp', 'clarity'] };
+function optLabel(f, v) { const o = f.opts.filter((x) => x[0] === v)[0]; return o ? o[1] : v; }
+function audField(id) { return AUD_FIELDS.filter((f) => f.id === id)[0]; }
+function audRowHtml(f) {
+const lid = 'aud-' + f.id + '-q';
+let ctl;
+if (f.kind === 'radio') ctl = '<div class="seg ' + (f.cls || 'wrap2') + '" role="radiogroup" aria-labelledby="' + lid + '">' + f.opts.map((o) => '<input type="radio" id="aud-' + f.id + '-' + o[0] + '" name="aud-' + f.id + '" value="' + o[0] + '"><label for="aud-' + f.id + '-' + o[0] + '">' + esc(o[1]) + '</label>').join('') + '</div>';
+else if (f.kind === 'check') ctl = '<div class="opts opts-2" role="group" aria-labelledby="' + lid + '">' + f.opts.map((o) => '<label class="opt" for="aud-' + f.id + '-' + o[0] + '"><input type="checkbox" id="aud-' + f.id + '-' + o[0] + '" name="aud-' + f.id + '" value="' + o[0] + '"' + (f.max ? ' data-max="' + f.max + '"' : '') + '><span class="opt-text"><span class="opt-title">' + esc(o[1]) + '</span></span></label>').join('') + '</div>';
+else ctl = '<input class="text-field" type="text" id="aud-' + f.id + '" maxlength="140" autocomplete="off" placeholder="' + esc(f.ph || '') + '" aria-labelledby="' + lid + '">';
+return '<div class="q-row aud-row" id="audrow-' + f.id + '"' + (f.show ? ' data-show="' + f.show + '"' : '') + '><span class="row-label" id="' + lid + '">' + esc(f.label) + (f.id === 'type' ? ' <span class="pf-tag" id="pf-aud-type" hidden>From your profile</span>' : '') + '</span>' + ctl + '</div>';
+}
+function readAudInput() {
+const u = {};
+AUD_FIELDS.forEach((f) => {
+if (f.kind === 'radio') u[f.id] = radioVal('aud-' + f.id);
+else if (f.kind === 'check') u[f.id] = [].map.call(document.querySelectorAll('input[name="aud-' + f.id + '"]:checked'), (x) => x.value);
+else u[f.id] = clean($('aud-' + f.id).value).slice(0, 140);
+});
+return u;
+}
+function applyAudInput(u) {
+u = u || {};
+AUD_FIELDS.forEach((f) => {
+if (f.kind === 'radio') { const r = document.querySelector('input[name="aud-' + f.id + '"]:checked'); if (r) r.checked = false; if (u[f.id]) setRadio('aud-' + f.id, u[f.id]); }
+else if (f.kind === 'check') [].forEach.call(document.querySelectorAll('input[name="aud-' + f.id + '"]'), (x) => { x.checked = (u[f.id] || []).indexOf(x.value) > -1; });
+else $('aud-' + f.id).value = u[f.id] || '';
+});
+showAudRows(u.type);
+}
+function showAudRows(type) {
+[].forEach.call(document.querySelectorAll('.aud-row[data-show]'), (row) => { const s = row.getAttribute('data-show'); row.hidden = !(type === 'both' || type === 'unsure' || !type || type === s); });
+}
+const known = (arr) => (arr || []).filter((x) => x !== 'unsure');
+function listWords(arr) { arr = arr.filter(Boolean); return arr.length <= 1 ? (arr[0] || '') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1]; }
+function readAudience(u) {
+const drivers = known(u.drivers), trig = known(u.trigger), hes = known(u.hesitate);
+const consumersOn = u.type === 'consumers' || u.type === 'both', bizOn = u.type === 'businesses' || u.type === 'both';
+const whoKnown = !!u.type && u.type !== 'unsure' && (!consumersOn || known(u.age).length > 0) && (!bizOn || known(u.size).length > 0);
+const driveKnown = drivers.length > 0 && trig.length > 0 && !!u.decide && u.decide !== 'unsure';
+const boost = {};
+const add = (area, pts, why) => { if (!boost[area]) boost[area] = { pts: 0, why: [] }; boost[area].pts += pts; boost[area].why.push(why); };
+if (!driveKnown) add('audience', 2, 'You aren’t sure yet what drives the decision. That is what “needs work” looks like for audience understanding.');
+if (!whoKnown) add('audience', 1, 'Who buys is not pinned down yet.');
+if (u.source === 'gut') add('audience', 1, 'Your picture of the customer comes from gut feel. A few customer conversations would confirm it.');
+if (drivers.indexOf('price') > -1) add('position', 1, 'Your buyers weigh price. A clear promise is what lets you win on more than price.');
+if (drivers.indexOf('trust') > -1 || drivers.indexOf('results') > -1) { add('local', 1, 'Your buyers choose on trust and proof, so reviews carry weight.'); add('retention', 1, 'Reviews, referrals and customer stories are the proof your buyers look for.'); }
+if (drivers.indexOf('expertise') > -1) { add('pr', 1, 'Your buyers choose on expertise, which earned press helps prove.'); add('website', 1, 'Content that shows your expertise lives on your website.'); }
+if (drivers.indexOf('speed') > -1 || trig.indexOf('problem') > -1) { add('response', 1, 'Buyers with an urgent need tend to pick whoever answers first.'); add('website', 1, 'They search when something goes wrong, so they need to find you fast.'); }
+if (drivers.indexOf('convenience') > -1) add('local', 1, 'Convenience buyers pick what is close and easy to find on Maps.');
+if (trig.indexOf('referral') > -1) add('retention', 1, 'Recommendations start their search, so referrals deserve a plan.');
+if (trig.indexOf('season') > -1 || trig.indexOf('event') > -1) add('email', 1, 'Demand comes in waves. Email lets you be there when the season or deadline arrives.');
+if (u.decide === 'team' || u.decide === 'committee') { add('email', 1, 'Several people decide, so follow-up has to answer each one’s questions.'); add('response', 1, 'More people deciding means a longer decision; every lead needs a clear owner.'); }
+if (hes.indexOf('risk') > -1) add('position', 1, 'Fear of choosing wrong eases with a clear promise and proof.');
+if (hes.indexOf('price') > -1 && drivers.indexOf('price') < 0) add('position', 1, 'Price makes them hesitate even though it isn’t why they choose: show the value plainly.');
+// one-sentence picture
+const bits = [];
+if (consumersOn) {
+const age = known(u.age).map((v) => optLabel(audField('age'), v)), life = known(u.life).map((v) => optLabel(audField('life'), v).toLowerCase());
+bits.push((u.type === 'both' ? 'Consumers' : 'Mostly consumers') + (age.length ? ' aged ' + listWords(age) : '') + (life.length ? ', often ' + listWords(life) : '') + (u.shop && u.shop !== 'unsure' ? ', who shop for ' + optLabel(audField('shop'), u.shop).toLowerCase() : ''));
+}
+if (bizOn) {
+const size = known(u.size).map((v) => optLabel(audField('size'), v).replace(' people', '')), role = (u.role || []).map((v) => ({ owner: 'the owner or founder', marketing: 'marketing', ops: 'operations', finance: 'finance', it: 'IT', other: 'someone else' })[v] || v);
+bits.push((u.type === 'both' ? 'businesses' : 'Mostly businesses') + (size.length ? ' with ' + listWords(size) + ' people' : '') + (role.length ? ', where you usually deal with ' + listWords(role) : ''));
+}
+let sentence = bits.length ? bits.join(', and ') + (u.where ? ', in ' + u.where : '') + '.' : 'Who buys from you isn’t set yet.';
+if (drivers.length) sentence += ' They choose on ' + listWords(drivers.map((v) => optLabel(audField('drivers'), v).toLowerCase())) + '.';
+if (trig.length) sentence += ' The search usually starts with ' + listWords(trig.map((v) => ({ problem: 'something breaking or going wrong', event: 'a deadline or event', growth: 'growth or a change', season: 'a season or time of year', referral: 'a recommendation' })[v] || v)) + '.';
+if (u.decide && u.decide !== 'unsure') sentence += ' ' + optLabel(audField('decide'), u.decide).replace(/, like.*$/, '') + (u.decide === 'two' ? ' decide.' : ' decides.');
+if (hes.length) sentence += ' What holds them back: ' + listWords(hes.map((v) => optLabel(audField('hesitate'), v).toLowerCase())) + '.';
+return { whoKnown, driveKnown, boost, sentence };
+}
+function rank(ans, goal, situation, aud) {
 const gaps = AREAS.filter((a) => GAP_PTS[ans[a.id]]);
 const isGap = (id) => !!GAP_PTS[ans[id]];
 const out = gaps.map((a) => {
@@ -1301,6 +1464,7 @@ const blocks = Object.keys(NEEDS).filter((k) => NEEDS[k].indexOf(a.id) > -1 && a
 if (blocks.length) { s += Math.min(3, blocks.length * 1.5); why.push('Other work depends on it: ' + blocks.map((k) => BY[k].name.toLowerCase()).join(', ')); }
 if (goal && GOAL_AREAS[goal] && GOAL_AREAS[goal].indexOf(a.id) > -1) { s += 2; why.push('Matters for your goal: ' + GOAL_WORDS[goal]); }
 if (situation && situation.limiting && SITUATION_AREAS[situation.limiting].indexOf(a.id) > -1) { s += 2; why.push('Your situation check flagged ' + SITUATION_WORDS[situation.limiting]); }
+if (aud && aud.boost[a.id]) { s += Math.min(3, aud.boost[a.id].pts); aud.boost[a.id].why.slice(0, 2).forEach((w) => why.push('Your customers: ' + lcFirst(w))); }
 s += (7 - a.layer) * 0.2;                                   // lower layers first, gently
 s += EFFORT_PTS[a.effort] || 0;
 const waits = (NEEDS[a.id] || []).filter(isGap);
@@ -1323,6 +1487,8 @@ const saved = loadAssessPart('gap'), situation = loadAssessPart('situation');
 let touched = !!(saved && saved.answers), pf = fromProfile(profile);
 
 // form rows, built from AREAS so the copy and the logic never drift apart
+$('who-rows').innerHTML = AUD.who.map(audRowHtml).join(''); $('drive-rows').innerHTML = AUD.drive.map(audRowHtml).join('');
+$('who-tools').innerHTML = AUD_TOOLS.who.map(toolLink).join(' · '); $('drive-tools').innerHTML = AUD_TOOLS.drive.map(toolLink).join(' · ') + ' · or ask your last five customers.';
 $('areas').innerHTML = AREAS.map((a, i) => {
 const opts = ['usable', 'weak', 'missing', 'unknown'].concat(a.optional ? ['na'] : []);
 const first = i === 0 || AREAS[i - 1].layer !== a.layer;
@@ -1344,6 +1510,10 @@ function goal() { const rm = loadAssessPart('roadmap'); return (rm && rm.goal) |
 
 function planText(m) {
 const L = ['YOUR FOUNDATIONS', 'What Do You Already Have? (Big Leap Strategy Starter 2 of 4, Draft 1)', 'Your own assessment. Usable means it can carry what you want to build next.', ''];
+L.push('WHO YOU’RE BUILDING FOR', m.aud.sentence); if (m.u.words) L.push('In their words: “' + m.u.words.replace(/^[“"]|[”"]$/g, '') + '”');
+const implT = []; Object.keys(m.aud.boost).forEach((id) => m.aud.boost[id].why.forEach((w) => implT.push('- ' + BY[id].name + ': ' + w)));
+if (implT.length) L.push('What this changes in your foundations (added to the ranking):', ...implT);
+L.push('Free ways to check who buys and why: ' + AUD_TOOLS.who.concat(AUD_TOOLS.drive.filter((t) => AUD_TOOLS.who.indexOf(t) < 0)).map(toolPlain).join('; ') + '.', '');
 L.push(m.counts.gaps + ' gaps to close · ' + m.counts.usable + ' usable · ' + m.counts.unknown + ' not sure', '');
 L.push('FIX THESE FIRST');
 m.r.top.forEach((x, i) => { L.push((i + 1) + '. ' + x.a.name + ' [' + STATES[m.ans[x.a.id]].toUpperCase() + ']'); x.why.forEach((w) => L.push('   - ' + w)); if (x.waits.length) L.push('   - Needs first: ' + x.waits.map((id) => BY[id].name).join(', ')); L.push('   ' + fixText(x.a)); });
@@ -1362,13 +1532,23 @@ return L.concat(planFooter(m.r.top[0] && m.r.top[0].a.fix ? m.r.top[0].a.fix : '
 
 function render() {
 syncOptChecked(form);
-const ans = readInput(), r = rank(ans, goal(), situation ? situation.result : null);
+const ans = readInput(), u = readAudInput(), aud = readAudience(u), r = rank(ans, goal(), situation ? situation.result : null, aud);
 const counts = { usable: 0, weak: 0, missing: 0, unknown: 0, na: 0 }; AREAS.forEach((a) => { counts[ans[a.id]]++; });
 counts.gaps = counts.weak + counts.missing;
-last = { ans, r, counts };
+last = { ans, r, counts, u, aud };
 const isEx = !touched;
 setExampleState(isEx && !profile, EXAMPLE_TEXT, profile && !touched ? 'Started from your Business Profile. It can tell us what is missing, not what is usable, so mark the rest yourself.' : 'Your answers save in this browser as you go. Nothing is sent anywhere.');
-if (!isEx) saveAssessPart('gap', { answers: ans, result: { counts, top: r.top.map((x) => x.a.id), gaps: r.order.map((x) => x.a.id) } });
+if (!isEx) saveAssessPart('gap', { answers: Object.assign({}, ans, { aud: u }), result: { counts, top: r.top.map((x) => x.a.id), gaps: r.order.map((x) => x.a.id), aud: { type: u.type || '', drivers: known(u.drivers), decide: u.decide || '', whoKnown: aud.whoKnown, driveKnown: aud.driveKnown } } });
+// who you're building for
+$('aud-line').textContent = aud.sentence;
+$('aud-quote').hidden = !u.words; $('aud-quote').textContent = u.words ? 'In their words: “' + u.words.replace(/^[“"]|[”"]$/g, '') + '”' : '';
+const impl = []; Object.keys(aud.boost).forEach((id) => aud.boost[id].why.forEach((w) => impl.push('<li><b>' + esc(BY[id].name) + ':</b> ' + esc(w) + '</li>')));
+$('aud-impl-wrap').hidden = !impl.length; $('aud-impl').innerHTML = impl.join('');
+const flags = [];
+if (ans.audience === 'usable' && !aud.driveKnown) flags.push('You marked audience understanding as usable, but you weren’t sure what drives the decision. By the test, that is “needs work”.');
+if (ans.audience === 'usable' && u.source === 'gut') flags.push('Audience understanding is marked usable, and it comes from gut feel. Confirm it with five customer conversations before you build on it.');
+if ((ans.audience === 'missing' || ans.audience === 'weak') && aud.whoKnown && aud.driveKnown && u.source !== 'gut') flags.push('You answered who buys and what drives them with confidence. Write it down where the team can use it, and audience understanding may already be usable.');
+$('aud-flag-wrap').hidden = !flags.length; $('aud-flags').innerHTML = flags.map((f) => '<li>' + esc(f) + '</li>').join('');
 // headline
 $('out-num').textContent = String(counts.gaps);
 $('out-unit').textContent = (counts.gaps === 1 ? 'gap to close' : 'gaps to close') + (counts.usable ? ', and ' + counts.usable + ' foundation' + (counts.usable === 1 ? '' : 's') + ' already usable' : '');
@@ -1395,25 +1575,35 @@ renderXlinks([{ key: 'roadmap', why: 'pulls this check together with your profil
 syncCopy(); sticky();
 }
 function profileStrip() {
-renderProfileStrip(profile, (p) => { profile = p; pf = fromProfile(p); if (!touched) { applyInput(Object.assign({}, blank(), pf.m)); showProfileTags(true); } render(); }, () => { profile = null; pf = fromProfile(null); showProfileTags(false); profileStrip(); render(); });
+renderProfileStrip(profile, (p) => { profile = p; pf = fromProfile(p); if (!touched) { applyInput(Object.assign({}, blank(), pf.m)); showProfileTags(true); applyAudInput({ type: MODEL_TYPE[p.model] || '' }); markFromProfile(['pf-aud-type'], !!MODEL_TYPE[p.model]); } render(); }, () => { profile = null; pf = fromProfile(null); showProfileTags(false); profileStrip(); render(); });
 }
 function blank() { const o = {}; AREAS.forEach((a) => { o[a.id] = 'unknown'; }); return o; }
-initShell(CURRENT_KIT, () => { touched = false; applyInput(EXAMPLE); showProfileTags(false); render(); const f = form.querySelector('input[name="position"]:checked'); if (f) f.focus(); });
+initShell(CURRENT_KIT, () => { touched = false; applyInput(EXAMPLE); applyAudInput(EXAMPLE_AUD); markFromProfile(['pf-aud-type'], false); showProfileTags(false); render(); const f = form.querySelector('input[name="position"]:checked'); if (f) f.focus(); });
 $('cta-link').href = CTA_URL; $('cta-link').textContent = 'Talk to a strategist (optional)';
 $('print-btn').addEventListener('click', printPlan);
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your foundations and build order are copied. Paste them into an email or a doc.');
 const sticky = initSticky();
 form.addEventListener('submit', (e) => e.preventDefault());
-const onUser = (e) => { touched = true; const id = e.target && e.target.name; if (id && $('pf-' + id)) { markFromProfile(['pf-' + id], false); $('note-' + id).hidden = true; } render(); };
+const onUser = (e) => { touched = true; const id = e.target && e.target.name; if (id && $('pf-' + id) && $('note-' + id)) { markFromProfile(['pf-' + id], false); $('note-' + id).hidden = true; } render(); };
+form.addEventListener('change', (e) => {
+const t = e.target;
+if (t && t.type === 'checkbox' && t.name && t.name.indexOf('aud-') === 0) {
+const all = [].slice.call(document.querySelectorAll('input[name="' + t.name + '"]'));
+if (t.checked && t.value === 'unsure') all.forEach((x) => { if (x !== t) x.checked = false; });
+else if (t.checked) { all.forEach((x) => { if (x.value === 'unsure') x.checked = false; }); const max = +t.getAttribute('data-max') || 0; if (max && all.filter((x) => x.checked).length > max) t.checked = false; }
+}
+if (t && t.name === 'aud-type') { showAudRows(t.value); markFromProfile(['pf-aud-type'], false); }
+}, true);
 form.addEventListener('change', onUser);
-if (saved && saved.answers) applyInput(Object.assign(blank(), saved.answers));
-else if (profile) { applyInput(Object.assign(blank(), pf.m)); showProfileTags(true); }
-else applyInput(EXAMPLE);
+form.addEventListener('input', (e) => { if (e.target && e.target.type === 'text') onUser(e); });
+if (saved && saved.answers) { applyInput(Object.assign(blank(), saved.answers)); applyAudInput(saved.answers.aud || {}); }
+else if (profile) { applyInput(Object.assign(blank(), pf.m)); showProfileTags(true); applyAudInput({ type: MODEL_TYPE[profile.model] || '' }); markFromProfile(['pf-aud-type'], !!MODEL_TYPE[profile.model]); }
+else { applyInput(EXAMPLE); applyAudInput(EXAMPLE_AUD); }
 profileStrip(); render();
 })();
 
 </script>
-<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="01_Are_You_Solving_the_Right_Problem.html"><small>← Previous</small><b>Are You Solving the Right Problem?</b></a><a class="blp-hub" href="../../index.html"><small>Strategy · Toolkit 2 of 4</small><b>All toolkits</b></a><a class="blp-a" href="03_What_Makes_You_Worth_Choosing.html"><small>Next →</small><b>What Makes You Worth Choosing?</b></a></div></nav><!-- /bl-pager -->
+<!-- bl-pager --><nav class="blp" aria-label="Previous and next toolkit"><div class="blp-in"><a class="blp-a back" href="01_Are_You_Solving_the_Right_Problem.html"><small>← Previous</small><b>Are You Solving the Right Problem?</b></a><a class="blp-hub" href="../../index.html"><small>Strategy · Toolkit 2 of 4</small><b>All toolkits</b></a><a class="blp-a" href="03_What_Makes_You_Worth_Choosing.html"><small>Next →</small><b>How Do You Go to Market?</b></a></div></nav><!-- /bl-pager -->
 <script id="bl-owner-js">
 (function () {
   var P = {"name": "Coby Bush", "title": "VP of Marketing", "photo": "../../assets/people/coby-bush.jpg"};

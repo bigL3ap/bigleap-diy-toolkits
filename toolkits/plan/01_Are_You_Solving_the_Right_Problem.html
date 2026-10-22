@@ -409,6 +409,24 @@ body { background: #fff; color: #000; }
 .stack-sm td::before { content: attr(data-l); color: var(--muted); font-weight: 700; font-size: 13px; }
 }
 /* ---- Strategy starters (plan series): components built on the toolkit design system ---- */
+/* Strategy starters: optional real numbers ("Have real numbers?" boxes) */
+.data-box { margin-top: 12px; border: 1px dashed var(--line-strong); border-radius: 10px; background: var(--surface); }
+.data-box > summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--heading); }
+.data-box > summary .opt-note { font-weight: 400; color: var(--muted); }
+.data-box[open] > summary { border-bottom: 1px dashed var(--line); }
+.data-box > .q-help { padding: 10px 14px 0; margin: 0; }
+.data-grid { display: grid; gap: 14px; padding: 12px 14px 14px; }
+.data-f { display: grid; gap: 4px; }
+.data-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.data-l { flex: 1 1 12rem; font-size: 14px; font-weight: 700; color: var(--heading); }
+.data-in { display: inline-flex; align-items: center; gap: 6px; }
+.data-in .num-in { width: 7.5rem; font-size: 16px; }
+.data-u { font-size: 13px; font-weight: 700; color: var(--muted); }
+.data-how { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.data-how a { color: var(--blue-ink); font-weight: 700; }
+.data-said { margin: 0; font-size: 12.5px; font-weight: 700; color: var(--blue-ink); }
+.tool-list { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 4px; }
+.tool-list a { color: var(--blue-ink); font-weight: 700; }
 .text-field.long { font-weight: 400; line-height: 1.45; resize: vertical; min-height: 2.6em; }
 .q-text-count { font-size: 12px; color: var(--muted); text-align: right; }
 .prelim { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border: 1px dashed var(--line-strong); border-radius: 8px; background: var(--bg); font-size: 13.5px; }
@@ -767,7 +785,7 @@ body { background: #fff; color: #000; }
 <div class="wordmark">BIG LEAP <span class="wm-sub">· STRATEGY STARTERS</span></div>
 <p class="eyebrow"><span class="kit">Strategy Starter 1 of 4</span><span class="campaign">Notice Different · Align to Genuine · Recommend Delight</span></p>
 <h1>Are You Solving the Right Problem?</h1>
-<p class="lede">Before you spend more time or money, check what kind of growth is actually on the table and what is holding you back. Answer what you know, skip what you don't. You get a plain-English read of your situation, your top three priorities and the free toolkits that help.</p>
+<p class="lede">Before you spend more time or money, check what kind of growth is actually on the table and what is holding you back. Answer what you know, skip what you don't, and add real numbers if you have them. You get a plain-English read of your situation, your top three priorities and the free toolkits that help.</p>
 </header>
 <section class="profile-strip" id="profile-strip" aria-label="Business Profile"></section>
 <nav class="stepper" aria-labelledby="stepper-h">
@@ -789,25 +807,9 @@ body { background: #fff; color: #000; }
 <button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
 </div>
 
-<div class="q">
-<label class="q-label" for="sell">What do you sell? <span class="pf-tag" id="pf-sell" hidden>From your profile</span></label>
-<input class="text-field" id="sell" name="sell" type="text" maxlength="80" autocomplete="off">
-<p class="q-help">A few words is plenty. These three frame your summary in your own words and carry into the brand starter.</p>
-</div>
-<div class="q">
-<label class="q-label" for="pay">What do customers actually pay for?</label>
-<input class="text-field" id="pay" name="pay" type="text" maxlength="60" autocomplete="off">
-<p class="q-help">Not the product. The result they want, like “peace of mind”, “more time” or “looking good to their boss”.</p>
-</div>
-<div class="q">
-<label class="q-label" for="deliver">How do you deliver it?</label>
-<input class="text-field" id="deliver" name="deliver" type="text" maxlength="60" autocomplete="off">
-<p class="q-help">For example: in person, online, a subscription, a team that comes to you.</p>
-</div>
-
 <fieldset class="q">
-<legend><span class="q-label">Your market</span></legend>
-<p class="q-help">What kind of growth is possible. “Not sure” is a fine answer; we'll tell you how to find out.</p>
+<legend><span class="q-label">Market situation</span></legend>
+<p class="q-help">What kind of growth is possible in your market. Pick what fits from what you know; “Not sure” is a fine answer, and we'll tell you how to find out.</p>
 <div class="q-rows">
 <div class="q-row"><span class="row-label" id="comp-q">When someone looks for what you sell, how many credible options do they find?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="comp-q"><input type="radio" id="comp-few" name="comp" value="few"><label for="comp-few">Only a few</label><input type="radio" id="comp-some" name="comp" value="some"><label for="comp-some">Some</label><input type="radio" id="comp-many" name="comp" value="many"><label for="comp-many">A crowd</label><input type="radio" id="comp-unsure" name="comp" value="unsure"><label for="comp-unsure">Not sure</label></div></div>
 <div class="q-row"><span class="row-label" id="demand-q">The number of people looking for what you sell is…</span><div class="seg wrap2" role="radiogroup" aria-labelledby="demand-q"><input type="radio" id="demand-growing" name="demand" value="growing"><label for="demand-growing">Growing</label><input type="radio" id="demand-flat" name="demand" value="flat"><label for="demand-flat">About the same</label><input type="radio" id="demand-shrinking" name="demand" value="shrinking"><label for="demand-shrinking">Shrinking</label><input type="radio" id="demand-unsure" name="demand" value="unsure"><label for="demand-unsure">Not sure</label></div></div>
@@ -816,10 +818,15 @@ body { background: #fff; color: #000; }
 <div class="q-row"><span class="row-label" id="unserved-q">Do people ask for things you don't offer, or from places you don't serve?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="unserved-q"><input type="radio" id="unserved-often" name="unserved" value="often"><label for="unserved-often">Often</label><input type="radio" id="unserved-sometimes" name="unserved" value="sometimes"><label for="unserved-sometimes">Sometimes</label><input type="radio" id="unserved-rarely" name="unserved" value="rarely"><label for="unserved-rarely">Rarely</label><input type="radio" id="unserved-unsure" name="unserved" value="unsure"><label for="unserved-unsure">Not sure</label></div></div>
 <div class="q-row"><span class="row-label" id="unprompted-q">How many new customers find you on their own: word of mouth, or searching your name?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="unprompted-q"><input type="radio" id="unprompted-most" name="unprompted" value="most"><label for="unprompted-most">Most</label><input type="radio" id="unprompted-some" name="unprompted" value="some"><label for="unprompted-some">Some</label><input type="radio" id="unprompted-few" name="unprompted" value="few"><label for="unprompted-few">Few</label><input type="radio" id="unprompted-unsure" name="unprompted" value="unsure"><label for="unprompted-unsure">Not sure</label></div></div>
 </div>
+<details class="data-box" id="mk-box">
+<summary>Have real numbers? Add them <span class="opt-note">(optional)</span></summary>
+<p class="q-help">What you know from experience is enough. Real numbers make the read sharper, and each one fills in the matching answer above. Every field says where to find it with a free tool we trust.</p>
+<div class="data-grid" id="mk-fields"></div>
+</details>
 </fieldset>
 
 <fieldset class="q">
-<legend><span class="q-label">Your business health</span></legend>
+<legend><span class="q-label">Business situation</span></legend>
 <p class="q-help">A business grows well when buyers can tell it apart, growth stays profitable and customers stick. These six show which of the three is holding you back.</p>
 <div class="q-rows">
 <div class="q-row"><span class="row-label" id="choose-q">Why do customers pick you over the alternatives?</span><div class="seg stack" role="radiogroup" aria-labelledby="choose-q"><input type="radio" id="choose-only" name="choose" value="only"><label for="choose-only">Something only we do, and they can say what</label><input type="radio" id="choose-price" name="choose" value="price"><label for="choose-price">Mostly price, location or convenience</label><input type="radio" id="choose-unsure" name="choose" value="unsure"><label for="choose-unsure">We're honestly not sure</label></div></div>
@@ -829,6 +836,11 @@ body { background: #fff; color: #000; }
 <div class="q-row"><span class="row-label" id="repeat-q">How many customers come back, renew or buy again?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="repeat-q"><input type="radio" id="repeat-most" name="repeat" value="most"><label for="repeat-most">Most</label><input type="radio" id="repeat-some" name="repeat" value="some"><label for="repeat-some">Some</label><input type="radio" id="repeat-few" name="repeat" value="few"><label for="repeat-few">Few</label><input type="radio" id="repeat-once" name="repeat" value="once"><label for="repeat-once">It's a one-time buy</label></div></div>
 <div class="q-row"><span class="row-label" id="referral-q">How much new business comes from referrals and reviews?</span><div class="seg wrap2" role="radiogroup" aria-labelledby="referral-q"><input type="radio" id="referral-lot" name="referral" value="lot"><label for="referral-lot">A lot</label><input type="radio" id="referral-some" name="referral" value="some"><label for="referral-some">Some</label><input type="radio" id="referral-little" name="referral" value="little"><label for="referral-little">Very little</label><input type="radio" id="referral-unsure" name="referral" value="unsure"><label for="referral-unsure">Not sure</label></div></div>
 </div>
+<details class="data-box" id="bz-box">
+<summary>Have real numbers? Add them <span class="opt-note">(optional)</span></summary>
+<p class="q-help">Your own sales records and free tools hold most of these. Each number fills in the matching answer above; you can still change it.</p>
+<div class="data-grid" id="bz-fields"></div>
+</details>
 </fieldset>
 
 <button type="button" class="btn btn-strong see-results" id="see-results">See my situation</button>
@@ -932,8 +944,8 @@ const CURRENT_KIT = 1;
 const SERIES = [
 { n: 1, short: 'Situation', title: 'Are You Solving the Right Problem?', file: '01_Are_You_Solving_the_Right_Problem.html' },
 { n: 2, short: 'Foundations', title: 'What Do You Already Have?', file: '02_What_Do_You_Already_Have.html' },
-{ n: 3, short: 'Brand', title: 'What Makes You Worth Choosing?', file: '03_What_Makes_You_Worth_Choosing.html' },
-{ n: 4, short: 'Delight', title: 'Would Your Customers Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
+{ n: 3, short: 'Go to Market', title: 'How Do You Go to Market?', file: '03_What_Makes_You_Worth_Choosing.html' },
+{ n: 4, short: 'Motions', title: 'Do People Notice, Choose and Recommend You?', file: '04_Would_Your_Customers_Recommend_You.html' },
 ];
 const LINKS = {
 profile:     { name: 'Build Your Business Profile',              url: '../paid/01_What_Kind_of_Business_Are_You.html',             owner: 'Scott Smoot' },
@@ -956,8 +968,8 @@ flows:       { name: 'Which Emails Should Send Themselves?',     url: '../email/
 emailHealth: { name: 'Is Your Email Program Working?',           url: '../email/03_Is_Your_Email_Program_Working.html',            owner: 'Erica Pounder' },
 situation:   { name: 'Are You Solving the Right Problem?',       url: '01_Are_You_Solving_the_Right_Problem.html',                 owner: '' },
 gap:         { name: 'What Do You Already Have?',                url: '02_What_Do_You_Already_Have.html',                          owner: '' },
-brand:       { name: 'What Makes You Worth Choosing?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
-delight:     { name: 'Would Your Customers Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
+brand:       { name: 'How Do You Go to Market?',           url: '03_What_Makes_You_Worth_Choosing.html',                     owner: '' },
+delight:     { name: 'Do People Notice, Choose and Recommend You?',      url: '04_Would_Your_Customers_Recommend_You.html',                owner: '' },
 roadmap:     { name: 'Your Marketing Roadmap',                   url: '../../roadmap.html',                                        owner: '' },
 hub:         { name: 'All DIY Toolkits',                         url: '../../index.html',                                          owner: '' },
 };
@@ -1247,6 +1259,79 @@ rd: { name: 'Recommend Delight', short: 'Give customers something worth recommen
 };
 const DEPTH = { 1: 'Near the surface', 2: 'Further down', 3: 'At the foundation' };
 function printPlan() { try { window.print(); } catch (e) {} }
+/* Free tools we trust: linked from the optional "real numbers" boxes and the copied plan.
+   Checked Oct 22, 2026. Free, or free with an account; limits noted where they matter. */
+const TOOLS = {
+trends:    ['Google Trends', 'https://trends.google.com/trends/'],
+kwplanner: ['Google Keyword Planner (free with a Google Ads account)', 'https://ads.google.com/home/tools/keyword-planner/'],
+semrush:   ['Semrush free account (10 searches a day)', 'https://www.semrush.com/'],
+ahrefsKw:  ['Ahrefs Keyword Generator', 'https://ahrefs.com/keyword-generator'],
+google:    ['Google Search', 'https://www.google.com/'],
+maps:      ['Google Maps', 'https://www.google.com/maps'],
+adsTrans:  ['Google Ads Transparency Center', 'https://adstransparency.google.com/'],
+metaLib:   ['Meta Ad Library', 'https://www.facebook.com/ads/library/'],
+census:    ['Census Business Builder', 'https://www.census.gov/data/data-tools/cbb.html'],
+censusData:['data.census.gov', 'https://data.census.gov/'],
+gsc:       ['Google Search Console', 'https://search.google.com/search-console'],
+ga4:       ['Google Analytics', 'https://analytics.google.com/'],
+gbp:       ['Google Business Profile', 'https://business.google.com/'],
+bing:      ['Bing Webmaster Tools', 'https://www.bing.com/webmasters'],
+crm:       ['HubSpot free CRM', 'https://www.hubspot.com/products/crm'],
+forms:     ['Google Forms', 'https://forms.google.com/'],
+clarity:   ['Microsoft Clarity', 'https://clarity.microsoft.com/'],
+metaSuite: ['Meta Business Suite', 'https://business.facebook.com/'],
+utm:       ['Google Campaign URL Builder', 'https://ga-dev-tools.google/campaign-url-builder/'],
+};
+function toolLink(k) { const t = TOOLS[k]; return t ? '<a href="' + esc(t[1]) + '" target="_blank" rel="noopener">' + esc(t[0]) + ' ↗</a>' : ''; }
+function toolPlain(k) { const t = TOOLS[k]; return t ? t[0] + ': ' + t[1] : ''; }
+
+/* ---------- optional real numbers: each fills in the matching answer (RULES OF THUMB, explained in the plan) ---------- */
+const DATA_FIELDS = {
+mk: [
+{ id: 'mk_volume', label: 'Monthly searches for your main term', unit: 'a month', sets: [], tools: ['kwplanner', 'semrush', 'ahrefsKw'], how: 'Enter the term the way a customer would search it. Keyword Planner may show a range, like 1K–10K, unless you run ads; use the middle of it.' },
+{ id: 'mk_trend', label: 'Search interest now vs. a year ago', unit: '% change', neg: true, sets: ['demand'], tools: ['trends'], how: 'Search your main term, set the range to the past 5 years and compare this year with last. Enter the change, like 15 or -10.' },
+{ id: 'mk_comp', label: 'Credible competitors on the first page of results', unit: 'businesses', sets: ['comp'], tools: ['google', 'maps'], how: 'Search what you sell the way a customer would, on Google and Google Maps. Count the businesses you would really compete with.' },
+{ id: 'mk_ads', label: 'Of those, how many run ads', unit: 'businesses', sets: [], tools: ['adsTrans', 'metaLib'], how: 'Look up each competitor by name and count who is advertising right now.' },
+{ id: 'mk_size', label: 'Businesses or households you could realistically serve', unit: 'in your area', sets: ['share'], tools: ['census', 'censusData'], how: 'Census Business Builder counts households and businesses by area and type. A rough number is fine.' },
+{ id: 'mk_cust', label: 'Customers you served last year', unit: 'customers', sets: ['share'], tools: ['crm'], how: 'From your sales records, accounting software or CRM.' },
+{ id: 'mk_brand', label: 'Search clicks that include your business name', unit: '% of clicks', sets: ['unprompted'], tools: ['gsc', 'bing'], how: 'In Search Console, open Performance, filter queries that contain your name and compare those clicks with the total.' },
+],
+bz: [
+{ id: 'bz_cac', label: 'Cost to win one new customer, now', unit: 'dollars', sets: ['cac', 'worth'], tools: ['ga4', 'crm'], how: 'Marketing spend for a recent month ÷ new customers that month.' },
+{ id: 'bz_cac_prev', label: 'The same cost a year ago', unit: 'dollars', sets: ['cac'], tools: ['crm'], how: 'The same math for the same month last year.' },
+{ id: 'bz_value', label: 'What one customer is worth over time', unit: 'dollars', sets: ['worth'], tools: ['crm'], how: 'Average revenue per purchase × how many times a customer buys (or months they stay). Your accounting software or CRM has the inputs.' },
+{ id: 'bz_disc', label: 'Deals closed below list price', unit: '% of deals', sets: ['discount'], tools: ['crm'], how: 'Last quarter’s deals that closed below list price ÷ all deals.' },
+{ id: 'bz_repeat', label: 'Customers who buy again or renew', unit: '% of customers', sets: ['repeat'], tools: ['crm', 'ga4'], how: 'Customers with more than one purchase in the last year ÷ all customers. Google Analytics shows returning visitors if you have no sales data.' },
+{ id: 'bz_ref', label: 'New customers from referrals and reviews', unit: '% of new customers', sets: ['referral'], tools: ['forms', 'gbp'], how: 'Ask “How did you hear about us?” on every form or first call for a month. Google Business Profile shows how many found you there.' },
+],
+};
+const DATA_IDS = DATA_FIELDS.mk.concat(DATA_FIELDS.bz).map((f) => f.id);
+/* RULES OF THUMB: thresholds that turn a number into an answer. Calibrate with the strategy team. */
+function deriveData(d) {
+const set = {}, notes = {}, extra = [];
+const has = (k) => d[k] != null;
+if (has('mk_trend')) { const t = d.mk_trend; set.demand = t >= 10 ? 'growing' : t <= -10 ? 'shrinking' : 'flat'; notes.demand = 'search interest ' + (t >= 0 ? 'up ' : 'down ') + fmt(Math.abs(t)) + '% on a year ago'; }
+if (has('mk_comp')) { const c = d.mk_comp; set.comp = c <= 3 ? 'few' : c <= 9 ? 'some' : 'many'; notes.comp = fmt(c) + ' credible competitors on the first page'; }
+if (has('mk_size') && has('mk_cust') && d.mk_size > 0) { const s = d.mk_cust / d.mk_size * 100; set.share = s < 10 ? 'few' : s < 40 ? 'good' : 'most'; notes.share = 'about ' + fmt(s, s < 1 ? 1 : 0) + '% of the customers you could serve already buy from you'; }
+if (has('mk_brand')) { const b = d.mk_brand; set.unprompted = b >= 50 ? 'most' : b >= 20 ? 'some' : 'few'; notes.unprompted = fmt(b) + '% of search clicks include your name'; }
+if (has('bz_cac') && has('bz_cac_prev') && d.bz_cac_prev > 0) { set.cac = d.bz_cac > d.bz_cac_prev * 1.1 ? 'up' : 'steady'; notes.cac = 'cost per customer ' + money(d.bz_cac) + ', from ' + money(d.bz_cac_prev) + ' a year ago'; }
+if (has('bz_cac') && has('bz_value') && d.bz_cac > 0) { const r = d.bz_value / d.bz_cac; set.worth = r >= 3 ? 'healthy' : 'tight'; notes.worth = 'a customer is worth about ' + fmt(r, 1) + '× what it costs to win them'; }
+if (has('bz_disc')) { const x = d.bz_disc; set.discount = x < 10 ? 'rarely' : x < 40 ? 'sometimes' : 'often'; notes.discount = fmt(x) + '% of deals close below list price'; }
+if (has('bz_repeat')) { const x = d.bz_repeat; set.repeat = x >= 50 ? 'most' : x >= 20 ? 'some' : 'few'; notes.repeat = fmt(x) + '% of customers buy again'; }
+if (has('bz_ref')) { const x = d.bz_ref; set.referral = x >= 40 ? 'lot' : x >= 15 ? 'some' : 'little'; notes.referral = fmt(x) + '% of new customers come from referrals and reviews'; }
+if (has('mk_volume')) { const v = d.mk_volume; notes.volume = 'about ' + fmt(v) + ' searches a month for your main term'; if (v < 100) extra.push({ m: 'generate', pts: 1, why: 'very few searches a month for your main term' }); else if (v >= 1000) extra.push({ m: 'capture', pts: 1, why: 'steady search demand for your main term' }); }
+if (has('mk_ads')) { notes.ads = fmt(d.mk_ads) + ' competitors running ads'; if (d.mk_ads >= 5) extra.push({ m: 'generate', pts: 1, why: 'many competitors advertising for what you sell' }); }
+return { set, notes, extra, count: Object.keys(d).filter((k) => d[k] != null).length };
+}
+function radioLabel(name, value) { const l = document.querySelector('label[for="' + name + '-' + value + '"]'); return l ? l.textContent : value; }
+function renderDataFields() {
+['mk', 'bz'].forEach((g) => {
+$(g + '-fields').innerHTML = DATA_FIELDS[g].map((f) => '<div class="data-f"><div class="data-row"><label class="data-l" for="d-' + f.id + '">' + esc(f.label) + '</label><span class="data-in"><input class="num-in data-num" type="number" id="d-' + f.id + '" data-id="' + f.id + '" inputmode="decimal" step="any"' + (f.neg ? '' : ' min="0"') + '><span class="data-u">' + esc(f.unit) + '</span></span></div>' +
+'<p class="data-how"><b>Where to find it:</b> ' + esc(f.how) + ' ' + f.tools.map(toolLink).join(' · ') + '</p><p class="data-said" id="ds-' + f.id + '" hidden></p></div>').join('');
+});
+}
+function readData() { const d = {}; DATA_IDS.forEach((k) => { const el = $('d-' + k); if (!el || el.value === '') return; const n = parseFloat(el.value); if (Number.isFinite(n)) d[k] = clamp(n, DATA_FIELDS.mk.concat(DATA_FIELDS.bz).find((f) => f.id === k).neg ? -100 : 0, 1e9); }); return d; }
+function applyData(d) { DATA_IDS.forEach((k) => { const el = $('d-' + k); if (el) el.value = d && d[k] != null ? d[k] : ''; }); }
 function textArea(id, label, value, rows) {
 return '<label class="q-label" for="' + id + '">' + esc(label) + '</label><textarea class="text-field long" id="' + id + '" rows="' + (rows || 3) + '">' + esc(value) + '</textarea>';
 }
@@ -1268,10 +1353,10 @@ Every rule below is deterministic and explained in the output.
 RULES OF THUMB are marked; they are starting points for review with
 the strategy team, not measurements.
 ===================================================================== */
-const EXAMPLE = { sell: 'Kitchen and bath remodeling', pay: 'A home they love', deliver: 'In-home design and build', comp: 'many', demand: 'flat', spend: 'costly', share: 'few', unserved: 'rarely', unprompted: 'some', choose: 'price', discount: 'sometimes', cac: 'up', worth: 'unknown', repeat: 'once', referral: 'some' };
+const EXAMPLE = { comp: 'many', demand: 'flat', spend: 'costly', share: 'few', unserved: 'rarely', unprompted: 'some', choose: 'price', discount: 'sometimes', cac: 'up', worth: 'unknown', repeat: 'once', referral: 'some', data: {} };
 const EXAMPLE_TEXT = 'Example: a remodeling company in a crowded local market whose ad costs keep rising. Change any answer to make it yours.';
 const RADIOS = ['comp', 'demand', 'spend', 'share', 'unserved', 'unprompted', 'choose', 'discount', 'cac', 'worth', 'repeat', 'referral'];
-const TEXTS = ['sell', 'pay', 'deliver'];
+const TEXTS = [];   /* the free-text sell / pay / deliver questions were removed (Coby, Oct 22) */
 
 /* ---------- 1. market: each signal adds points to capture, generate or expand ---------- */
 const MARKET_SIGNALS = {
@@ -1287,8 +1372,9 @@ capture:  { word: 'Capture', unit: 'demand: your most likely growth path', plain
 generate: { word: 'Generate', unit: 'demand: your most likely growth path', plain: 'The demand belongs to someone else, or does not exist yet. Growth means earning attention from people who are not looking yet, and taking share.' },
 expand:   { word: 'Expand', unit: 'into new markets: your most likely growth path', plain: 'You have largely won the market you serve. The next growth comes from new segments, products, price points or places.' },
 };
-function readMarket(a) {
+function readMarket(a, extra) {
 const pts = { capture: 0, generate: 0, expand: 0 }, why = { capture: [], generate: [], expand: [] };
+(extra || []).forEach((x) => { pts[x.m] += x.pts; why[x.m].push(x.why); });
 let answered = 0;
 Object.keys(MARKET_SIGNALS).forEach((k) => {
 const v = a[k]; if (!v || v === 'unsure') return;
@@ -1391,6 +1477,7 @@ const list = Object.keys(c).map((k) => c[k]).filter((x) => x.score > 0).sort((x,
 return { top: list.slice(0, 3), more: list.slice(3, 6) };
 }
 
+const UNKNOWN_TOOLS = { comp: ['google', 'maps'], demand: ['trends', 'gsc'], spend: ['ga4', 'crm'], share: ['census', 'crm'], unserved: ['forms'], unprompted: ['gsc', 'forms'], choose: ['forms'], discount: ['crm'], cac: ['ga4', 'crm'], worth: ['crm'], referral: ['forms', 'gbp'] };
 const UNKNOWN_HELP = {
 comp: ['How many options buyers find', 'Search for what you sell the way a customer would (Google, Maps, a marketplace if relevant) and count the credible options on the first page.'],
 demand: ['Whether demand is growing', 'Check Google Trends for your two or three main terms over five years, or compare Search Console impressions with last year.'],
@@ -1412,11 +1499,12 @@ none: ['Answer the market questions to see which signals to watch.'],
 };
 
 function readInput() {
-const o = {}; TEXTS.forEach((k) => { o[k] = $(k).value.trim(); }); RADIOS.forEach((k) => { o[k] = radioVal(k); }); return o;
+const o = {}; TEXTS.forEach((k) => { o[k] = $(k).value.trim(); }); RADIOS.forEach((k) => { o[k] = radioVal(k); }); o.data = readData(); return o;
 }
 function applyInput(a) {
 TEXTS.forEach((k) => { $(k).value = a[k] || ''; });
 RADIOS.forEach((k) => { if (a[k]) setRadio(k, a[k]); else { const r = document.querySelector('input[name="' + k + '"]:checked'); if (r) r.checked = false; } });
+applyData(a.data || {});
 }
 function sameAs(a, b) { return TEXTS.concat(RADIOS).every((k) => String(a[k] || '') === String(b[k] || '')); }
 
@@ -1455,10 +1543,10 @@ const saved = loadAssessPart('situation');
    Example answers, even with a profile loaded, are never saved. */
 let touched = !!(saved && saved.answers);
 
-function profileSell(p) { return p && p.industry ? p.industry : ''; }
 function planText(m) {
 const L = ['YOUR SITUATION: PRELIMINARY READ', 'Are You Solving the Right Problem? (Big Leap Strategy Starter 1 of 4, Draft 1)', 'Built from your answers. Not market research, financial advice or a forecast.', ''];
-if (m.a.sell || m.a.pay || m.a.deliver) L.push('You sell: ' + (m.a.sell || '(not given)') + ' · Customers pay for: ' + (m.a.pay || '(not given)') + ' · You deliver it: ' + (m.a.deliver || '(not given)'), '');
+const nts = Object.keys(m.dv.notes).map((k) => m.dv.notes[k]);
+if (nts.length) { L.push('YOUR NUMBERS (' + m.dv.count + ' entered)'); nts.forEach((n) => L.push('- ' + n.charAt(0).toUpperCase() + n.slice(1))); L.push(''); }
 L.push('MARKET: ' + (m.market.market ? MARKETS[m.market.market].word.toUpperCase() : 'NOT CLEAR YET') + ' (' + m.market.confText + ', ' + m.market.answered + ' of 6 signals answered)');
 if (m.market.market) L.push('   ' + MARKETS[m.market.market].plain);
 if (m.market.why.length) L.push('   Signals: ' + m.market.why.join('; ') + '.');
@@ -1470,8 +1558,11 @@ L.push('', 'YOUR NEXT THREE PRIORITIES');
 m.pri.top.forEach((x, i) => { L.push((i + 1) + '. ' + LINKS[x.key].name + ' · ' + absUrl(LINKS[x.key].url)); x.why.slice(0, 2).forEach((w) => L.push('   ' + w)); });
 L.push('', 'SIGNALS TO WATCH');
 WATCH[m.market.market || 'none'].forEach((w) => L.push('- ' + w));
-if (m.unknown.length) { L.push('', 'WHAT WOULD SHARPEN THIS READ'); m.unknown.forEach((k) => L.push('- ' + UNKNOWN_HELP[k][0] + ': ' + UNKNOWN_HELP[k][1])); }
-L.push('', 'HOW THIS WAS READ', '- Market: each answer adds points to capture, generate or expand. The highest total wins; the gap to the next shows how sure the read is.', '- Health: each answer scores strong, watch or weak. The weakest of the three is what is holding you back. When two tie, the market decides which usually limits first (rule of thumb).', '- Motions: the market sets a base depth for each motion and the limiting axis deepens its motion by one (rule of thumb).');
+if (m.unknown.length) { L.push('', 'WHAT WOULD SHARPEN THIS READ'); m.unknown.forEach((k) => L.push('- ' + UNKNOWN_HELP[k][0] + ': ' + UNKNOWN_HELP[k][1] + ((UNKNOWN_TOOLS[k] || []).length ? ' Free tools: ' + UNKNOWN_TOOLS[k].map((t) => TOOLS[t][0]).join(', ') + '.' : ''))); }
+const usedTools = []; m.unknown.forEach((k) => (UNKNOWN_TOOLS[k] || []).forEach((t) => { if (usedTools.indexOf(t) < 0) usedTools.push(t); }));
+['trends', 'kwplanner', 'gsc', 'ga4'].forEach((t) => { if (usedTools.indexOf(t) < 0) usedTools.push(t); });
+L.push('', 'FREE TOOLS FOR CHECKING YOUR NUMBERS'); usedTools.forEach((t) => L.push('- ' + toolPlain(t)));
+L.push('', 'HOW THIS WAS READ', '- Market: each answer adds points to capture, generate or expand. The highest total wins; the gap to the next shows how sure the read is.', '- Health: each answer scores strong, watch or weak. The weakest of the three is what is holding you back. When two tie, the market decides which usually limits first (rule of thumb).', '- Motions: the market sets a base depth for each motion and the limiting axis deepens its motion by one (rule of thumb).', '- Your numbers (optional) fill in the matching answer using rules of thumb: search interest up 10% or more is growing, down 10% or more is shrinking; 3 or fewer competitors is few, 10 or more is a crowd; under 10% of your market is a small share, 40% or more is most; a customer worth 3 times what they cost to win is healthy; 50% or more buying again is most; 40% or more from referrals is a lot. Under 100 searches a month leans toward generating demand, 1,000 or more toward capturing it.');
 return L.concat(planFooter('gap')).join('\n');
 }
 function levelText(l) { return l === 'strong' ? 'Strong' : l === 'watch' ? 'Worth watching' : l === 'weak' ? 'Weak' : 'Not enough answers'; }
@@ -1480,13 +1571,17 @@ function render() {
 syncOptChecked(form);
 const a = readInput();
 const isEx = !touched;
-const market = readMarket(a), health = readHealth(a, market.market), motions = readMotions(market.market, health.limiting);
+const dv = deriveData(a.data || {});
+const market = readMarket(a, dv.extra), health = readHealth(a, market.market), motions = readMotions(market.market, health.limiting);
 const r = { market, health, motions };
 const pri = priorities(r, profile, a);
 const unknown = RADIOS.filter((k) => UNKNOWN_HELP[k] && (a[k] === 'unsure' || a[k] === 'unknown' || (k === 'spend' && a[k] === 'untried')));
-last = { a, market, health, motions, pri, unknown };
+last = { a, market, health, motions, pri, unknown, dv };
+RADIOS.forEach((k) => { const t = $('dt-' + k); if (t) t.hidden = !(dv.set[k] && a[k] === dv.set[k]); });
+DATA_FIELDS.mk.concat(DATA_FIELDS.bz).forEach((f) => { const el = $('ds-' + f.id), keys = f.sets.filter((k) => dv.set[k]); let t = ''; if (keys.length) t = 'Fills in ' + keys.map((k) => '“' + radioLabel(k, dv.set[k]) + '”').join(' and ') + ' above.'; else if (f.id === 'mk_volume' && a.data.mk_volume != null) t = 'Counts toward the market read.'; else if (f.id === 'mk_ads' && a.data.mk_ads != null) t = a.data.mk_ads >= 5 ? 'Counts toward the market read.' : 'Noted in your plan.'; else if (a.data[f.id] != null && f.sets.length) t = 'Add the other number it pairs with to use it.'; el.textContent = t; el.hidden = !t; });
+$('prelim').innerHTML = '<span><b>Preliminary read' + (dv.count ? ', sharpened with ' + dv.count + ' of your own numbers' : '') + '.</b> ' + (dv.count ? 'Your numbers fill in answers using rules of thumb explained in the plan you copy. ' : '') + 'It is not market research or a review of your financials. Treat it as a starting point to check, not a verdict.</span>';
 setExampleState(isEx, EXAMPLE_TEXT, 'Your answers save in this browser as you go. Nothing is sent anywhere.');
-if (!isEx) saveAssessPart('situation', { answers: a, result: { market: market.market, conf: market.conf, limiting: health.limiting, axes: { diff: health.axes.diff.level, profit: health.axes.profit.level, durable: health.axes.durable.level }, depth: motions.depth, lead: motions.lead, top: pri.top.map((x) => x.key) } });
+if (!isEx) saveAssessPart('situation', { answers: a, result: { data: dv.count, market: market.market, conf: market.conf, limiting: health.limiting, axes: { diff: health.axes.diff.level, profit: health.axes.profit.level, durable: health.axes.durable.level }, depth: motions.depth, lead: motions.lead, top: pri.top.map((x) => x.key) } });
 // headline
 const mk = market.market ? MARKETS[market.market] : null;
 $('out-num').textContent = mk ? mk.word : 'Not clear';
@@ -1495,9 +1590,9 @@ const limTxt = health.limiting ? '<b>' + esc(AXES[health.limiting].name) + '</b>
 $('out-line').innerHTML = (market.runnerUp ? 'Your signals split between <b>' + esc(MARKETS[market.market].word.toLowerCase()) + '</b> and <b>' + esc(MARKETS[market.runnerUp].word.toLowerCase()) + '</b>. ' : '') + limTxt + '. Lead with <b>' + esc(MOTIONS[motions.lead].name) + '</b>: ' + esc(MOTIONS[motions.lead].short.toLowerCase()) + '.';
 flashIfChanged((market.market || '') + '|' + (health.limiting || '') + '|' + motions.lead);
 // lenses
-const sumBits = [a.sell && ('You sell <b>' + esc(a.sell) + '</b>'), a.pay && ('customers pay for <b>' + esc(a.pay) + '</b>'), a.deliver && ('you deliver it <b>' + esc(lcFirst(a.deliver)) + '</b>')].filter(Boolean);
+const sumBits = Object.keys(dv.notes).map((k) => dv.notes[k]);
 const whyMk = (mk && market.why.length) ? 'Why ' + esc(mk.word.toLowerCase()) + ': ' + esc(market.why.join('; ')) + '. ' : '';
-$('summary-line').innerHTML = whyMk + (sumBits.length ? sumBits.join(', ') + '. Keep that last answer in mind: what customers pay for is rarely what is on the invoice.' : 'Add what you sell and what customers pay for above, to frame this read in your own words.');
+$('summary-line').innerHTML = whyMk + (sumBits.length ? '<b>Your numbers:</b> ' + esc(sumBits.join('; ')) + '.' : 'Have real numbers? Add them in the optional boxes under each section to sharpen this read.');
 $('lenses').innerHTML =
 '<div class="lens"><span class="lens-k">The market · what is possible</span><span class="lens-v">' + (mk ? esc(mk.word) + ' demand' : 'Not clear yet') + '</span><span class="lens-n">' + esc(mk ? mk.plain : 'Answer at least three market questions.') + '</span><span class="conf' + (market.conf === 'low' ? ' low' : '') + '">' + esc(market.confText) + ' · ' + market.answered + ' of 6 signals</span></div>' +
 '<div class="lens"><span class="lens-k">Your business · what is needed</span><span class="lens-v">' + (health.limiting ? 'Fix ' + esc(AXES[health.limiting].name.toLowerCase()) : 'Not clear yet') + '</span><span class="lens-n">' + esc(health.limiting ? AXES[health.limiting].q : 'Answer the business health questions.') + '</span></div>' +
@@ -1515,16 +1610,19 @@ $('priorities').innerHTML = pri.top.map((x, i) => '<li class="' + (i === 0 ? 'is
 // watch + unknowns
 $('watch').innerHTML = WATCH[market.market || 'none'].map((w) => '<li>' + esc(w) + '</li>').join('');
 $('unknown-wrap').hidden = !unknown.length;
-$('unknowns').innerHTML = unknown.map((k) => '<li><b>' + esc(UNKNOWN_HELP[k][0]) + ':</b> ' + esc(UNKNOWN_HELP[k][1]) + '</li>').join('');
+$('unknowns').innerHTML = unknown.map((k) => '<li><b>' + esc(UNKNOWN_HELP[k][0]) + ':</b> ' + esc(UNKNOWN_HELP[k][1]) + ((UNKNOWN_TOOLS[k] || []).length ? ' Free tools: ' + UNKNOWN_TOOLS[k].map(toolLink).join(' · ') : '') + '</li>').join('');
 // next
 renderNext('gap', 'Your situation says what is needed. The foundations check credits what you already have, then shows what is left to build, in order.');
 renderXlinks(pri.more.map((x) => ({ key: x.key, why: lcFirst(x.why[0] || '') })));
 syncCopy(); sticky();
 }
 function profileStrip() {
-renderProfileStrip(profile, (p) => { profile = p; if (!$('sell').value) $('sell').value = profileSell(p); markFromProfile(['pf-sell'], !!profileSell(p)); render(); }, () => { profile = null; profileStrip(); render(); });
+renderProfileStrip(profile, (p) => { profile = p; render(); }, () => { profile = null; profileStrip(); render(); });
 }
-initShell(CURRENT_KIT, () => { touched = false; applyInput(EXAMPLE); markFromProfile(['pf-sell'], false); render(); $('sell').focus(); });
+renderDataFields();
+RADIOS.forEach((k) => { const lab = document.getElementById(k + '-q'); if (lab) lab.insertAdjacentHTML('beforeend', ' <span class="pf-tag" id="dt-' + k + '" hidden>From your numbers</span>'); });
+['mk-fields', 'bz-fields'].forEach((g) => $(g).addEventListener('input', (e) => { const id = e.target && e.target.getAttribute('data-id'); const f = id && DATA_FIELDS.mk.concat(DATA_FIELDS.bz).find((x) => x.id === id); if (!f) return; const dv = deriveData(readData()); f.sets.forEach((k) => { if (dv.set[k]) setRadio(k, dv.set[k]); }); }));
+initShell(CURRENT_KIT, () => { touched = false; applyInput(EXAMPLE); render(); const r = document.querySelector('#answers input'); if (r) r.focus(); });
 $('cta-link').href = CTA_URL; $('cta-link').textContent = 'Talk to a strategist (optional)';
 $('print-btn').addEventListener('click', printPlan);
 const syncCopy = initCopyButton('copy-btn', 'copy-host', 'copy-status', () => planText(last), 'Copy my plan', 'Your situation read is copied. Paste it into an email or a doc.');
@@ -1533,8 +1631,8 @@ form.addEventListener('submit', (e) => e.preventDefault());
 const onUser = () => { touched = true; render(); };
 form.addEventListener('input', onUser); form.addEventListener('change', onUser);
 if (saved && saved.answers) { applyInput(Object.assign({}, EXAMPLE, saved.answers)); }
-else { applyInput(EXAMPLE); if (profile && profileSell(profile)) { $('sell').value = profileSell(profile); markFromProfile(['pf-sell'], true); } }
-$('sell').addEventListener('input', () => markFromProfile(['pf-sell'], false));
+else { applyInput(EXAMPLE); }
+if (saved && saved.answers && Object.keys(saved.answers.data || {}).length) { $('mk-box').open = true; $('bz-box').open = true; }
 profileStrip(); render();
 })();
 

@@ -95,7 +95,7 @@ def main():
         basis = pg.inner_text('#basis').lower()
         rec(J, 'roadmap says it uses both checks', 'situation' in basis and 'foundations' in basis, basis[:120])
         t = titles(pg)
-        rec(J, 'positioning is a top priority; usable analytics is not', any('worth choosing' in x for x in t) and not any('see what your marketing does' in x.lower() for x in t), str(t))
+        rec(J, 'positioning is a top priority; usable analytics is not', any('your message' in x.lower() for x in t) and not any('see what your marketing does' in x.lower() for x in t), str(t))
         rec(J, 'no script errors', not errs, '; '.join(errs[:2]))
         ctx.close()
 

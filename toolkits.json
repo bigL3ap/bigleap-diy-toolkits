@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "start": {
     "title": "Build your Business Profile",
     "file": "toolkits/paid/01_What_Kind_of_Business_Are_You.html",
@@ -211,7 +211,7 @@
       "owner": "Coby Bush",
       "first": "Coby",
       "status": "draft",
-      "promise": "Step back before you build: check you are solving the right problem, see what you already have, sharpen your message and plan for customers worth recommending you.",
+      "promise": "Step back before you build: check your market and business situation, see what you already have and who buys, map where your marketing money goes, and balance the three motions.",
       "headline": "Know what to do first.",
       "toolkits": [
         {
@@ -219,10 +219,10 @@
           "short": "Situation",
           "title": "Are You Solving the Right Problem?",
           "file": "toolkits/plan/01_Are_You_Solving_the_Right_Problem.html",
-          "description": "Find out whether you're solving the right marketing problem: the opportunity in front of you, what's holding growth back, and your next three priorities. A preliminary read from a few answers.",
+          "description": "Read your market situation and your business situation from quick answers, sharpened with real numbers if you have them, and get your next three priorities. Every number links to a free tool that gives it.",
           "status": "draft",
           "reviewer": "Coby Bush",
-          "review": "Do the market, health and motion rules match the Situation Audit? Calibrate the base depths and the tie-break rule of thumb.",
+          "review": "Coby, Oct 22: market and business situation, optional real numbers. Check the thresholds that turn numbers into answers, the base depths and the tie-break rule of thumb.",
           "statusLabel": "Draft 1"
         },
         {
@@ -230,32 +230,32 @@
           "short": "Foundations",
           "title": "What Do You Already Have?",
           "file": "toolkits/plan/02_What_Do_You_Already_Have.html",
-          "description": "See what you already have, what works, what needs attention and what's missing, in the order to fix it. Credits work you've done instead of starting over.",
+          "description": "Who buys from you, what drives them and what you already have to build on, in the order to fix it. Credits work you've done instead of starting over.",
           "status": "draft",
           "reviewer": "Coby Bush",
-          "review": "Does the layer order and the 'usable means' test for each area match the Gap Audit? Who sets the written standard for 'not load-bearing'?",
+          "review": "Coby, Oct 22: added who buys and what drives them, feeding the gap ranking. Does the layer order and the usable-means test match the Gap Audit?",
           "statusLabel": "Draft 1"
         },
         {
           "n": 3,
-          "short": "Brand",
-          "title": "What Makes You Worth Choosing?",
+          "short": "Go to Market",
+          "title": "How Do You Go to Market?",
           "file": "toolkits/plan/03_What_Makes_You_Worth_Choosing.html",
-          "description": "Draft a positioning line, a customer promise and messaging themes from your own answers, ready to edit and use in ads, search and email.",
+          "description": "List where your marketing money goes, walk through how buyers find and choose you, and see where spend and the journey don't line up. Includes a first draft of your positioning and messaging.",
           "status": "draft",
           "reviewer": "Coby Bush",
-          "review": "Is this the smallest useful question set? Confirm it stays clearly separate from the full Brand Ideology process before any public release.",
+          "review": "Coby, Oct 22: Brand became Go to Market (spend inventory and customer journey), with the messaging starter kept. Check the channel-to-stage and channel-to-motion mapping.",
           "statusLabel": "Draft 1 · Coby review"
         },
         {
           "n": 4,
-          "short": "Delight",
-          "title": "Would Your Customers Recommend You?",
+          "short": "Motions",
+          "title": "Do People Notice, Choose and Recommend You?",
           "file": "toolkits/plan/04_Would_Your_Customers_Recommend_You.html",
-          "description": "Find the moments where customers decide whether to recommend you, and ethical ways to ask for reviews and referrals.",
+          "description": "Check your activities in all three motions: Notice Different, Align to Genuine and Recommend Delight. See which one is thinnest and what to fix first, including ethical ways to ask for reviews and referrals.",
           "status": "draft",
           "reviewer": "Erica Pounder and Coby Bush",
-          "review": "Does it complement Email 02 and SEO 02 without overlapping? Are the review and referral rules stated correctly for our clients' platforms?",
+          "review": "Coby, Oct 22: Delight expanded to the ND, AG and RD buckets of activities. Are these the right activities in each bucket?",
           "statusLabel": "Draft 1 · Coby review"
         }
       ]
