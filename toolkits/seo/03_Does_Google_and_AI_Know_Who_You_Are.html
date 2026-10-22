@@ -804,15 +804,15 @@ body { overflow-wrap: anywhere; }
 </div>
 <p class="q-help">Cross-linked profiles (website → LinkedIn → Facebook → website) tell Google these accounts all belong to the same entity.</p>
 <div class="sub-q">
-<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span></label>
+<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span><span data-pf="linkedin"></span></label>
 <input class="text-field" id="linkedin" name="linkedin" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="linkedin.com/company/yourbusiness">
 </div>
 <div class="sub-q">
-<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span></label>
+<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span><span data-pf="facebook"></span></label>
 <input class="text-field" id="facebook" name="facebook" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="facebook.com/yourbusiness">
 </div>
 <div class="sub-q">
-<label class="q-label" for="gbp">Your Google Business Profile URL <span class="opt-tag">(optional)</span></label>
+<label class="q-label" for="gbp">Your Google Business Profile URL <span class="opt-tag">(optional)</span><span data-pf="gbp"></span></label>
 <input class="text-field" id="gbp" name="gbp" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="g.page/yourbusiness">
 </div>
 <p class="q-help">Used only on this page, to fill in the example code below with your real links. Nothing is sent anywhere.</p>
@@ -1356,6 +1356,9 @@ let SNIPS = {};
     if (p) {
       if (p.ecommerce === 'shopify') i.cms = 'shopify';
       if (p.website === false) { i.orgschema = 'no'; used.push('orgschema'); }
+      if (p.linkedin) { i.linkedin = p.linkedin; used.push('linkedin'); }
+      if (p.facebook) { i.facebook = p.facebook; used.push('facebook'); }
+      if (p.gbpUrl) { i.gbp = p.gbpUrl; used.push('gbp'); }
     }
     applyInput(i);
     markFromProfile(used);

@@ -765,11 +765,11 @@ body { overflow-wrap: anywhere; }
 <input class="text-field" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="www.example.com">
 </div>
 <div class="sub-q">
-<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span></label>
+<label class="q-label" for="linkedin">Your LinkedIn page URL <span class="opt-tag">(optional)</span><span data-pf="linkedin"></span></label>
 <input class="text-field" id="linkedin" name="linkedin" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="linkedin.com/company/yourbusiness">
 </div>
 <div class="sub-q">
-<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span></label>
+<label class="q-label" for="facebook">Your Facebook page URL <span class="opt-tag">(optional)</span><span data-pf="facebook"></span></label>
 <input class="text-field" id="facebook" name="facebook" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="facebook.com/yourbusiness">
 </div>
 <p class="q-help">Used only on this page, to fill in the checks and code below with your real links. Nothing is sent anywhere.</p>
@@ -1667,6 +1667,8 @@ let SNIPS = {};
       if (p.locations === 'one' || p.locations === 'multi' || p.reach === 'local') plan.push('local');
       if (p.reach === 'international') plan.push('intl');
       if (p.locations || p.reach) { i.plan = plan; used.push('intl'); }
+      if (p.linkedin) { i.linkedin = p.linkedin; used.push('linkedin'); }
+      if (p.facebook) { i.facebook = p.facebook; used.push('facebook'); }
     }
     applyInput(i);
     markFromProfile(used);

@@ -784,6 +784,15 @@ body { background: #fff; color: #000; }
 </div>
 <p class="q-help"><b>GA4</b> counts visits and actions on your site. <b>Tag Manager</b> is one snippet that holds all your tracking codes. Your <b>Business Profile</b> is your listing on Google Maps.</p>
 </fieldset>
+<div class="q">
+<label class="q-label" for="linkedin">LinkedIn page <span class="opt-tag">Optional</span></label>
+<input class="text-field" id="linkedin" name="linkedin" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="linkedin.com/company/yourbusiness">
+<label class="q-label" for="facebook">Facebook page <span class="opt-tag">Optional</span></label>
+<input class="text-field" id="facebook" name="facebook" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="facebook.com/yourbusiness">
+<label class="q-label" for="gbpUrl">Google Business Profile link <span class="opt-tag">Optional</span></label>
+<input class="text-field" id="gbpUrl" name="gbpUrl" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="g.page/yourbusiness">
+<p class="q-help">Pre-fills these same links in the toolkits that use them, like structured data and local search. Nothing is sent anywhere.</p>
+</div>
 
 <button type="button" class="btn btn-strong see-results" id="see-results">See my profile</button>
 </form>
@@ -1135,7 +1144,7 @@ EXAMPLE: the prefilled answers (a local home-services business).
 ASSUMPTIONS: rules of thumb used to sort campaign types. These are
 Big Leap starting points, not Google requirements. Confirm with Scott.
 ===================================================================== */
-const EXAMPLE = { name: '', industry: 'Home services', model: 'b2c', offer: 'services', ecommerce: 'none', locations: 'one', reach: 'local', crm: 'hubspot', goal: 'leads', adBudget: 3000, website: 'yes', app: 'no', ga4: 'unsure', gtm: 'no', gbp: 'yes' };
+const EXAMPLE = { name: '', industry: 'Home services', model: 'b2c', offer: 'services', ecommerce: 'none', locations: 'one', reach: 'local', crm: 'hubspot', goal: 'leads', adBudget: 3000, website: 'yes', app: 'no', ga4: 'unsure', gtm: 'no', gbp: 'yes', linkedin: '', facebook: '', gbpUrl: '' };
 const ASSUMPTIONS = {
 videoMinBudget: 3000,   // $/mo: below this, keep Demand Gen / YouTube at "not yet" so budget stays on high-intent Search (rule of thumb)
 smallBudget: 1000,      // $/mo: below this, recommend one campaign type only (rule of thumb)
@@ -1162,6 +1171,7 @@ model: radioVal('model'), offer: radioVal('offer'), ecommerce: radioVal('ecommer
 locations: radioVal('locations'), reach: radioVal('reach'), crm: radioVal('crm'), goal: radioVal('goal'),
 adBudgetRaw: $('adBudget').value, website: radioVal('website'), app: radioVal('app'),
 ga4: radioVal('ga4'), gtm: radioVal('gtm'), gbp: radioVal('gbp'),
+linkedin: $('linkedin').value.trim().slice(0, 200), facebook: $('facebook').value.trim().slice(0, 200), gbpUrl: $('gbpUrl').value.trim().slice(0, 200),
 };
 }
 function toProfile(i) {
@@ -1171,6 +1181,7 @@ ecommerce: i.offer === 'services' ? 'none' : (i.ecommerce || 'none'),
 locations: i.locations || 'none', reach: i.reach || 'local', app: i.app === 'yes', crm: i.crm || 'none',
 website: i.website !== 'no', goal: i.goal || 'leads', adBudget: numOrNull(i.adBudgetRaw),
 ga4: i.ga4 || 'unsure', gtm: i.gtm || 'unsure', gbp: i.gbp || 'no',
+linkedin: i.linkedin || '', facebook: i.facebook || '', gbpUrl: i.gbpUrl || '',
 };
 }
 function applyProfileToForm(p) {
@@ -1184,6 +1195,7 @@ setRadio('locations', p.locations); setRadio('reach', p.reach); setRadio('crm', 
 $('adBudget').value = p.adBudget == null ? '' : p.adBudget;
 setRadio('website', p.website === false ? 'no' : 'yes'); setRadio('app', p.app ? 'yes' : 'no');
 setRadio('ga4', p.ga4); setRadio('gtm', p.gtm); setRadio('gbp', p.gbp);
+$('linkedin').value = p.linkedin || ''; $('facebook').value = p.facebook || ''; $('gbpUrl').value = p.gbpUrl || '';
 }
 function applyExample() { applyProfileToForm(Object.assign({ v: 1 }, EXAMPLE, { website: true, app: false })); }
 function isExample(i) {
