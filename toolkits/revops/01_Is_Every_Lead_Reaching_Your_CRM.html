@@ -657,6 +657,19 @@ tbody th { font-weight: 700; color: var(--heading); }
 <p class="example-text" id="example-text">Example: 100 form leads a month, and some forms still email an inbox. Change any answer to make it yours.</p>
 <button type="button" class="text-btn" id="restore-example" hidden>Go back to the example answers</button>
 </div>
+<fieldset class="q" id="crm-q">
+<legend><span class="q-label">Which CRM does your team use?</span></legend>
+<div class="opts">
+<label class="opt" for="crm-hubspot"><input type="radio" id="crm-hubspot" name="crm" value="hubspot" checked><span class="opt-text"><span class="opt-title">HubSpot</span></span></label>
+<label class="opt" for="crm-ghl"><input type="radio" id="crm-ghl" name="crm" value="ghl"><span class="opt-text"><span class="opt-title">GoHighLevel</span></span></label>
+<label class="opt" for="crm-monday"><input type="radio" id="crm-monday" name="crm" value="monday"><span class="opt-text"><span class="opt-title">monday.com</span></span></label>
+<label class="opt" for="crm-pipedrive"><input type="radio" id="crm-pipedrive" name="crm" value="pipedrive"><span class="opt-text"><span class="opt-title">Pipedrive</span></span></label>
+<label class="opt" for="crm-zoho"><input type="radio" id="crm-zoho" name="crm" value="zoho"><span class="opt-text"><span class="opt-title">Zoho CRM</span></span></label>
+<label class="opt" for="crm-salesforce"><input type="radio" id="crm-salesforce" name="crm" value="salesforce"><span class="opt-text"><span class="opt-title">Salesforce</span></span></label>
+<label class="opt" for="crm-other"><input type="radio" id="crm-other" name="crm" value="other"><span class="opt-text"><span class="opt-title">Something else / not sure</span></span></label>
+</div>
+<p class="q-help">Everything below adjusts to match, down to the exact menus and feature names to look for.</p>
+</fieldset>
 <div class="q">
 <div class="q-row">
 <label class="q-label" for="leads">Form leads a month</label>
@@ -670,9 +683,9 @@ tbody th { font-weight: 700; color: var(--heading); }
 <fieldset class="q">
 <legend><span class="q-label">Where do form submissions land?</span></legend>
 <div class="opts">
-<label class="opt" for="dest-all"><input type="radio" id="dest-all" name="dest" value="all"><span class="opt-text"><span class="opt-title">Every form creates a HubSpot contact</span></span></label>
-<label class="opt" for="dest-some"><input type="radio" id="dest-some" name="dest" value="some" checked><span class="opt-text"><span class="opt-title">Some in HubSpot, some only in an inbox</span></span></label>
-<label class="opt" for="dest-none"><input type="radio" id="dest-none" name="dest" value="none"><span class="opt-text"><span class="opt-title">An inbox or spreadsheet only</span></span></label>
+<label class="opt" for="dest-all"><input type="radio" id="dest-all" name="dest" value="all"><span class="opt-text"><span class="opt-title" id="dest-all-title">Every form creates a HubSpot contact</span></span></label>
+<label class="opt" for="dest-some"><input type="radio" id="dest-some" name="dest" value="some" checked><span class="opt-text"><span class="opt-title" id="dest-some-title">Some in HubSpot, some only in an inbox</span></span></label>
+<label class="opt" for="dest-none"><input type="radio" id="dest-none" name="dest" value="none"><span class="opt-text"><span class="opt-title" id="dest-none-title">An inbox or spreadsheet only</span></span></label>
 </div>
 </fieldset>
 <div class="q">
@@ -682,7 +695,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 <input type="radio" id="track-unsure" name="track" value="unsure" checked><label for="track-unsure">Not sure</label>
 <input type="radio" id="track-no" name="track" value="no"><label for="track-no">No</label>
 </div>
-<p class="q-help">Check in two minutes: Settings → Tracking Code → Validate your tracking code.</p>
+<p class="q-help" id="track-help">Check in two minutes: Settings → Tracking Code → Validate your tracking code.</p>
 </div>
 <div class="q">
 <div class="q-row">
@@ -692,7 +705,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 <input type="radio" id="utm-no" name="utm" value="no" checked><label for="utm-no">No</label>
 </div>
 </div>
-<p class="q-help">UTM source, medium and campaign saved on the contact.</p>
+<p class="q-help" id="utm-help">UTM source, medium and campaign saved on the contact.</p>
 </div>
 <div class="q">
 <div class="q-row">
@@ -713,6 +726,70 @@ tbody th { font-weight: 700; color: var(--heading); }
 </div>
 <p class="q-help">Need the confirmation email itself? <span data-kit="2">Toolkit 2</span> writes it for you.</p>
 </fieldset>
+<fieldset class="q" id="hub-q" hidden>
+<legend><span class="q-label">Which HubSpot Hub(s) do you have?</span></legend>
+<div class="opts">
+<label class="opt" for="hub-sales"><input type="checkbox" id="hub-sales" name="hub" value="sales"><span class="opt-text"><span class="opt-title">Sales Hub</span></span></label>
+<label class="opt" for="hub-marketing"><input type="checkbox" id="hub-marketing" name="hub" value="marketing"><span class="opt-text"><span class="opt-title">Marketing Hub</span></span></label>
+<label class="opt" for="hub-service"><input type="checkbox" id="hub-service" name="hub" value="service"><span class="opt-text"><span class="opt-title">Service Hub</span></span></label>
+<label class="opt" for="hub-cms"><input type="checkbox" id="hub-cms" name="hub" value="cms"><span class="opt-text"><span class="opt-title">CMS Hub</span></span></label>
+<label class="opt" for="hub-operations"><input type="checkbox" id="hub-operations" name="hub" value="operations"><span class="opt-text"><span class="opt-title">Operations Hub</span></span></label>
+<label class="opt" for="hub-commerce"><input type="checkbox" id="hub-commerce" name="hub" value="commerce"><span class="opt-text"><span class="opt-title">Commerce Hub</span></span></label>
+</div>
+<p class="q-help">Check off every Hub on your subscription. We'll look at which of that Hub's own tools you're actually using.</p>
+</fieldset>
+<fieldset class="q" id="tools-sales-q" hidden>
+<legend><span class="q-label">Which Sales Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-sales-meetings"><input type="checkbox" id="tool-sales-meetings" name="tool-sales" value="meetings"><span class="opt-text"><span class="opt-title">Meeting links</span></span></label>
+<label class="opt" for="tool-sales-snippets"><input type="checkbox" id="tool-sales-snippets" name="tool-sales" value="snippets"><span class="opt-text"><span class="opt-title">Snippets</span></span></label>
+<label class="opt" for="tool-sales-templates"><input type="checkbox" id="tool-sales-templates" name="tool-sales" value="templates"><span class="opt-text"><span class="opt-title">Templates</span></span></label>
+<label class="opt" for="tool-sales-scheduler"><input type="checkbox" id="tool-sales-scheduler" name="tool-sales" value="scheduler"><span class="opt-text"><span class="opt-title">Meeting scheduler</span></span></label>
+</div>
+<p class="q-help">Check off what your reps already use day to day. We'll flag the rest below.</p>
+</fieldset>
+<fieldset class="q" id="tools-marketing-q" hidden>
+<legend><span class="q-label">Which Marketing Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-marketing-forms"><input type="checkbox" id="tool-marketing-forms" name="tool-marketing" value="forms"><span class="opt-text"><span class="opt-title">Forms</span></span></label>
+<label class="opt" for="tool-marketing-workflows"><input type="checkbox" id="tool-marketing-workflows" name="tool-marketing" value="workflows"><span class="opt-text"><span class="opt-title">Workflows</span></span></label>
+<label class="opt" for="tool-marketing-landing"><input type="checkbox" id="tool-marketing-landing" name="tool-marketing" value="landing"><span class="opt-text"><span class="opt-title">Landing pages</span></span></label>
+<label class="opt" for="tool-marketing-ads"><input type="checkbox" id="tool-marketing-ads" name="tool-marketing" value="ads"><span class="opt-text"><span class="opt-title">Ads integration</span></span></label>
+<label class="opt" for="tool-marketing-scoring"><input type="checkbox" id="tool-marketing-scoring" name="tool-marketing" value="scoring"><span class="opt-text"><span class="opt-title">Lead scoring</span></span></label>
+</div>
+<p class="q-help">Check off what's actually live, not just available on your plan.</p>
+</fieldset>
+<fieldset class="q" id="tools-service-q" hidden>
+<legend><span class="q-label">Which Service Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-service-tickets"><input type="checkbox" id="tool-service-tickets" name="tool-service" value="tickets"><span class="opt-text"><span class="opt-title">Tickets</span></span></label>
+<label class="opt" for="tool-service-kb"><input type="checkbox" id="tool-service-kb" name="tool-service" value="kb"><span class="opt-text"><span class="opt-title">Knowledge base</span></span></label>
+<label class="opt" for="tool-service-chat"><input type="checkbox" id="tool-service-chat" name="tool-service" value="chat"><span class="opt-text"><span class="opt-title">Live chat</span></span></label>
+</div>
+</fieldset>
+<fieldset class="q" id="tools-cms-q" hidden>
+<legend><span class="q-label">Which CMS Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-cms-pages"><input type="checkbox" id="tool-cms-pages" name="tool-cms" value="pages"><span class="opt-text"><span class="opt-title">Website pages</span></span></label>
+<label class="opt" for="tool-cms-blog"><input type="checkbox" id="tool-cms-blog" name="tool-cms" value="blog"><span class="opt-text"><span class="opt-title">Blog</span></span></label>
+<label class="opt" for="tool-cms-seo"><input type="checkbox" id="tool-cms-seo" name="tool-cms" value="seo"><span class="opt-text"><span class="opt-title">SEO recommendations</span></span></label>
+</div>
+</fieldset>
+<fieldset class="q" id="tools-operations-q" hidden>
+<legend><span class="q-label">Which Operations Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-operations-sync"><input type="checkbox" id="tool-operations-sync" name="tool-operations" value="sync"><span class="opt-text"><span class="opt-title">Data sync</span></span></label>
+<label class="opt" for="tool-operations-quality"><input type="checkbox" id="tool-operations-quality" name="tool-operations" value="quality"><span class="opt-text"><span class="opt-title">Data quality automation</span></span></label>
+</div>
+</fieldset>
+<fieldset class="q" id="tools-commerce-q" hidden>
+<legend><span class="q-label">Which Commerce Hub tools do you already use?</span></legend>
+<div class="opts">
+<label class="opt" for="tool-commerce-quotes"><input type="checkbox" id="tool-commerce-quotes" name="tool-commerce" value="quotes"><span class="opt-text"><span class="opt-title">Quotes</span></span></label>
+<label class="opt" for="tool-commerce-invoices"><input type="checkbox" id="tool-commerce-invoices" name="tool-commerce" value="invoices"><span class="opt-text"><span class="opt-title">Invoices</span></span></label>
+<label class="opt" for="tool-commerce-payments"><input type="checkbox" id="tool-commerce-payments" name="tool-commerce" value="payments"><span class="opt-text"><span class="opt-title">Payment links</span></span></label>
+</div>
+</fieldset>
 <button type="button" class="btn btn-strong see-results" id="see-results">See your Intake Map</button>
 </form>
 </section>
@@ -729,6 +806,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </div>
 <ol class="strip" id="strip" aria-label="Your intake chain at a glance"></ol>
 <ol class="steps" id="plan"></ol>
+<div id="hub-audit" hidden></div>
 </section>
 <section class="closing" aria-labelledby="closing-h">
 <h2 id="closing-h">Want every lead captured for you?</h2>
@@ -757,7 +835,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 <details class="method" id="method">
 <summary>How we calculate this <span class="pill" id="edited-pill" hidden>Edited</span></summary>
 <div class="method-body">
-<p>Hand work is the minutes below, per lead, for each handoff a person does. The middle of each range matches Toolkit 5. When only some forms reach HubSpot, a share of leads still arrives by inbox. When only one of the alert and confirmation is automatic, half the time counts.</p>
+<p>Hand work is the minutes below, per lead, for each handoff a person does. The middle of each range matches Toolkit 5. When only some forms reach your CRM, a share of leads still arrives by inbox. When only one of the alert and confirmation is automatic, half the time counts.</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th scope="col">Assumption</th><th scope="col">Low</th><th scope="col">High</th></tr></thead>
@@ -773,7 +851,7 @@ tbody th { font-weight: 700; color: var(--heading); }
 </div>
 <footer class="foot">
 <p><a href="../../toolkits.html">← All Big Leap DIY Toolkits</a></p>
-<p>Estimates built from typical small-business lead intake, not a measurement of your account. Measure your real numbers first. HubSpot features and plan limits change, so check what your account includes.</p>
+<p>Estimates built from typical small-business lead intake, not a measurement of your account. Measure your real numbers first. Every CRM's features and plan limits change over time and across tiers, so check what your account actually includes before you build on any instruction here.</p>
 <p>Big Leap · RevOps DIY Toolkit 1 of 7 · Notice Different · Align to Genuine</p>
 </footer>
 </div>
@@ -816,7 +894,114 @@ assignMinutes: [2, 4],         // picking an owner and passing the lead on, per 
 notifyMinutes: [1, 3],         // forwarding the alert and confirming by hand, per lead
 someFormsInboxShare: [0.25, 0.75], // share of leads still arriving by inbox when only some forms reach HubSpot
 };
-const EXAMPLE = { leads: 100, dest: 'some', track: 'unsure', utm: 'no', owner: 'no', notify: 'none' };
+const EXAMPLE = { leads: 100, crm: 'hubspot', dest: 'some', track: 'unsure', utm: 'no', owner: 'no', notify: 'none' };
+/* =====================================================================
+CRM_COPY: platform-specific labels and how-to text for the CRM selected
+in crm-q. HubSpot keeps the original, most-detailed copy (it's Big Leap's
+own primary platform). GoHighLevel and monday.com are sourced from
+dedicated research; Pipedrive, Zoho CRM and Salesforce get a lighter
+touch with real menu names, since Big Leap doesn't work in them daily —
+visitors should still confirm specifics against their own plan. "other"
+is a CRM-agnostic fallback for anything not listed.
+===================================================================== */
+const CRM_COPY = {
+hubspot: { name: 'HubSpot', recordNoun: 'contact',
+destAll: 'Every form creates a HubSpot contact', destSome: 'Some in HubSpot, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Is the HubSpot tracking code on every form page?', trackHelp: 'Check in two minutes: Settings → Tracking Code → Validate your tracking code.',
+trackHow: 'Settings → Tracking Code → Validate, for each domain. WordPress uses HubSpot’s plugin; Webflow and Wix have HubSpot apps; Squarespace uses Code Injection.',
+utmHelp: 'UTM source, medium and campaign saved on the contact.', utmHow: 'Add three hidden UTM fields, plus Inquiry type, Service interest, How did you hear about us and Service area as dropdowns.',
+connectHow: 'HubSpot forms work on every plan. Site-builder forms can use non-HubSpot form capture (plain HTML only, answers land as text). Forms inside an iframe or outside tool need an embedded HubSpot form.',
+ownerHow: 'Add a hidden Contact owner field with that form’s rep. Sharing leads across reps? Use routing rules instead.',
+notifyHow: 'The confirmation lives in the form’s Automation tab. Free tools allow one email per form; Starter allows a short series. Nothing reaches "contact owner" until an owner is set.' },
+ghl: { name: 'GoHighLevel', recordNoun: 'contact',
+destAll: 'Every form creates a GoHighLevel contact', destSome: 'Some in GoHighLevel, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Is the GoHighLevel tracking snippet live on every form page?', trackHelp: 'GHL-hosted funnels and websites add it for you. A form on an outside site needs the snippet pasted in by hand.',
+trackHow: 'GoHighLevel pages and funnels built inside GHL carry its tracking automatically. A form embedded on an outside site (WordPress, a custom site) needs the tracking snippet pasted into that page’s header, and UTM parameters mapped through a webhook or a Zapier/Make step — GHL has no official plugin for most site builders, so an embed code or iframe is the usual route.',
+utmHelp: 'UTM source, medium and campaign saved on the contact.', utmHow: 'On GHL-hosted pages, UTM values are captured automatically. On an outside site, map them to custom fields through the form’s hidden fields or a webhook/Zapier step so they land on the contact.',
+connectHow: 'Build the form as a GHL Form or Survey so a submission creates a contact automatically. A form on an outside platform needs GHL’s embed code or an iframe — there’s no official GHL plugin for WordPress or most other builders.',
+ownerHow: 'Use a workflow’s "Assign to User" action, or your plan’s round-robin rotation if it has one — confirm the exact rotation logic (availability-based vs. workload-based) with your GHL rep before relying on it.',
+notifyHow: 'Build the alert and confirmation as the first two steps of a GHL Workflow triggered by the form, not the form’s own settings. GHL’s "If/Else" branching can route the confirmation differently by what the lead answered.' },
+monday: { name: 'monday.com', recordNoun: 'item',
+destAll: 'Every form creates an item on your monday CRM board', destSome: 'Some on the board, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Does every WorkForm pass UTM source and campaign onto the item it creates?', trackHelp: 'monday’s WorkForms don’t capture UTM parameters natively — this usually needs a hidden field mapped through an automation tool.',
+trackHow: 'monday’s WorkForms have no native UTM capture. The common workaround is a hidden form field populated by a short script, or routing the submission through Zapier or Make with a UTM-capture step (Attributer.io is a popular one), so source and campaign land in dedicated board columns.',
+utmHelp: 'Lead source, Campaign and Medium saved as columns on the item.', utmHow: 'Add Lead source, Campaign and Medium as columns on the board, and map them from the workaround above — there’s no built-in field for this the way some CRMs have one.',
+connectHow: 'A WorkForm submission creates an item on the connected board automatically. Embedding one on an outside site uses monday’s iframe embed code; some users report embedding breaking under a strict Content-Security-Policy on the host site, so test it on the live page, not just in the builder preview.',
+ownerHow: 'monday CRM’s round-robin automation assigns a new item’s owner by availability, not current workload, and resets the rotation every 30 days. It’s on monday CRM Standard and Pro; the more flexible workflow-builder version is Ultimate-only.',
+notifyHow: 'Build the alert and confirmation as monday Automations ("When an item is created, notify..." plus a second automation to the lead’s email) rather than relying on the form itself to send anything.' },
+pipedrive: { name: 'Pipedrive', recordNoun: 'lead',
+destAll: 'Every form creates a lead in Pipedrive', destSome: 'Some in Pipedrive, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Does every web form pass its source into Pipedrive?', trackHelp: 'Pipedrive’s own Web Forms have limited native UTM capture — most teams map it through a hidden field or an automation step.',
+trackHow: 'Check each form against Pipedrive’s Web Forms feature (Leads → Web Forms). Source and UTM tracking isn’t automatic the way it is in some CRMs; teams typically add a hidden field to the form, or route the submission through Zapier to write UTM values onto the lead. Confirm current behavior against your plan — this has changed across Pipedrive versions.',
+utmHelp: 'Lead source, Campaign and Medium saved on the lead.', utmHow: 'Add custom fields for Lead source, Campaign and Medium on the lead or deal, and populate them through the form’s hidden fields or a Zapier step.',
+connectHow: 'Pipedrive’s Web Forms feature creates a lead in the Leads Inbox (or a deal, if you choose) directly from a form you build and embed. A form built elsewhere still needs to reach Pipedrive through its API or a Zapier/Make connection.',
+ownerHow: 'Pipedrive doesn’t have a native round-robin assignment the way some CRMs do; most teams route this through Zapier, a dedicated distribution app, or by hand from the shared Leads Inbox. Confirm what your plan includes before promising automatic rotation.',
+notifyHow: 'Set up a Pipedrive automation ("When a deal or lead is created...") to notify the owner, and a separate email automation or Zapier step for the prospect’s confirmation.' },
+zoho: { name: 'Zoho CRM', recordNoun: 'lead',
+destAll: 'Every form creates a lead in Zoho CRM', destSome: 'Some in Zoho, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Does every Zoho form pass its source into the lead record?', trackHelp: 'Zoho’s form tools support hidden fields for UTM capture — confirm they’re actually mapped on each form.',
+trackHow: 'Zoho CRM’s Web-to-Lead form generator (Setup → Web Forms) supports hidden fields for Lead Source and UTM values; Zoho Forms (the separate product) needs the same fields added and connected to CRM through its native integration.',
+utmHelp: 'UTM source, medium and campaign saved on the lead.', utmHow: 'Map UTM source, medium and campaign to hidden fields on the Web-to-Lead form, or the equivalent fields in Zoho Forms’ CRM integration.',
+connectHow: 'Zoho CRM’s Web-to-Lead generator builds an embeddable HTML form that creates a lead directly. Zoho Forms can also push submissions into CRM through its built-in integration, without a separate automation tool.',
+ownerHow: 'Zoho CRM has native round-robin lead distribution: Setup → Automation → Assignment Rules, with a round-robin option by criteria you define. This is a built-in feature, not a workaround.',
+notifyHow: 'Build the rep alert and prospect confirmation as Workflow Rules (Setup → Automation → Workflow Rules) triggered on lead creation, rather than relying on the form.' },
+salesforce: { name: 'Salesforce', recordNoun: 'Lead',
+destAll: 'Every form creates a Lead in Salesforce', destSome: 'Some in Salesforce, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Does every Web-to-Lead form pass its source into the Lead?', trackHelp: 'Salesforce’s classic Web-to-Lead generator supports hidden fields for UTM values, but they have to be added by hand on each form.',
+trackHow: 'Salesforce’s Web-to-Lead generator (Setup → Lead Settings → Web-to-Lead) produces an HTML form with hidden fields you can map to custom Lead fields for UTM source, medium and campaign — add them before generating the form, not after.',
+utmHelp: 'UTM source, medium and campaign saved on the Lead.', utmHow: 'Add custom Lead fields for UTM source, medium and campaign, and include them as hidden fields when you generate the Web-to-Lead form.',
+connectHow: 'Generate the form through Web-to-Lead and embed the resulting HTML directly, or use Pardot/Account Engagement forms if your org has it. Either way, the form needs to point at Salesforce’s own lead-capture endpoint, not a generic inbox.',
+ownerHow: 'Salesforce’s Lead Assignment Rules route by criteria you define; round-robin specifically usually needs a Flow built on top of them (a standard pattern) or a dedicated tool like LeanData for larger teams.',
+notifyHow: 'Build the rep alert and prospect confirmation as part of the Lead Assignment Rule’s email alert, or a Flow triggered on Lead creation — not the Web-to-Lead form’s own settings, which has very limited autoresponder options.' },
+other: { name: 'your CRM', recordNoun: 'contact',
+destAll: 'Every form creates a contact or lead in your CRM', destSome: 'Some in your CRM, some only in an inbox', destNone: 'An inbox or spreadsheet only',
+trackLabel: 'Does every form pass its source into your CRM?', trackHelp: 'Most CRMs call this UTM tracking or lead source capture. Check your form builder’s settings for hidden fields or a native tracking snippet.',
+trackHow: 'Look for your CRM’s own form-capture tool first — most include hidden fields for UTM source, medium and campaign. If forms live outside the CRM, a tool like Zapier or Make can map the submission’s UTM parameters onto the new record.',
+utmHelp: 'Lead source, Campaign and Medium saved on the record.', utmHow: 'Add Lead source, Campaign and Medium fields to the contact or lead record, and populate them from the form’s hidden fields or an integration step.',
+connectHow: 'Use your CRM’s own form builder when it has one; it’s usually the most direct way to guarantee every submission becomes a record. A form built elsewhere needs an integration (native, Zapier, or Make) pointed at your CRM’s contact or lead creation endpoint.',
+ownerHow: 'Check whether your CRM has a native round-robin or assignment-rule feature (most mid-market and enterprise CRMs do); if not, this is usually built with an integration tool.',
+notifyHow: 'Most CRMs support an automation or workflow triggered on record creation — use that for both the rep alert and the prospect confirmation, rather than relying on the form tool’s own limited autoresponder.' },
+};
+function crmCopy(crm) { return CRM_COPY[crm] || CRM_COPY.hubspot; }
+/* =====================================================================
+HUBS: the HubSpot-only Hub/tool usage audit (only shown when crm === 'hubspot').
+Each tool's "why" is the plain-language reason it's worth turning on,
+not a feature description — this toolkit never invents a number for it.
+===================================================================== */
+const HUBS = [
+{ key: 'sales', name: 'Sales Hub', tools: [
+{ key: 'meetings', name: 'Meeting links', why: 'Lets a lead book time on a rep’s calendar straight from an email or page, without back-and-forth.' },
+{ key: 'snippets', name: 'Snippets', why: 'Reusable canned replies for the questions reps answer every day, so replies go out faster and still sound consistent.' },
+{ key: 'templates', name: 'Templates', why: 'Saved full emails for repeat outreach (follow-ups, proposals) that still feel personal with a few swapped fields.' },
+{ key: 'scheduler', name: 'Meeting scheduler', why: 'The booking page itself, synced to a rep’s real calendar so nobody gets double-booked.' },
+] },
+{ key: 'marketing', name: 'Marketing Hub', tools: [
+{ key: 'forms', name: 'Forms', why: 'HubSpot’s own forms are what make contact creation and source tracking automatic in the first place.' },
+{ key: 'workflows', name: 'Workflows', why: 'Automates nurture emails and lead-scoring changes without a person sending each one.' },
+{ key: 'landing', name: 'Landing pages', why: 'Built-in pages for campaigns that need their own tracking without a developer.' },
+{ key: 'ads', name: 'Ads integration', why: 'Connects ad spend to the contacts and revenue it actually produced, instead of just clicks.' },
+{ key: 'scoring', name: 'Lead scoring', why: 'Flags which leads are sales-ready instead of making reps guess.' },
+] },
+{ key: 'service', name: 'Service Hub', tools: [
+{ key: 'tickets', name: 'Tickets', why: 'Tracks a customer issue through to resolution instead of losing it in an inbox.' },
+{ key: 'kb', name: 'Knowledge base', why: 'Answers common questions before they become a ticket.' },
+{ key: 'chat', name: 'Live chat', why: 'Catches a question the moment it happens, on the page where it happened.' },
+] },
+{ key: 'cms', name: 'CMS Hub', tools: [
+{ key: 'pages', name: 'Website pages', why: 'Pages built and hosted in HubSpot inherit its tracking and personalization automatically.' },
+{ key: 'blog', name: 'Blog', why: 'HubSpot’s native blog ties posts directly to the contacts and deals they go on to influence.' },
+{ key: 'seo', name: 'SEO recommendations', why: 'Built-in suggestions for pages that are thin or missing the basics.' },
+] },
+{ key: 'operations', name: 'Operations Hub', tools: [
+{ key: 'sync', name: 'Data sync', why: 'Keeps HubSpot and another tool (billing, support) matching without manual exports.' },
+{ key: 'quality', name: 'Data quality automation', why: 'Cleans up formatting issues, like inconsistent phone numbers, on its own.' },
+] },
+{ key: 'commerce', name: 'Commerce Hub', tools: [
+{ key: 'quotes', name: 'Quotes', why: 'Sends a professional, trackable quote without leaving HubSpot.' },
+{ key: 'invoices', name: 'Invoices', why: 'Bills a customer and tracks payment status on the same record as the deal.' },
+{ key: 'payments', name: 'Payment links', why: 'Lets a prospect pay on the spot from a link, instead of a separate invoicing step.' },
+] },
+];
 /* ---------- series helpers (shared by all seven toolkits) ---------- */
 const SERIES = [
 { n: 1, short: 'Capture', name: 'Lead Intake Setup Kit', title: 'Is Every Lead Reaching Your CRM?' },
@@ -1043,12 +1228,13 @@ return L;
 const LIMITS = [
 { key: 'phone', title: 'Phone and chat leads', text: 'Call tracking and chat capture, so leads that never touch a form still land with a source.' },
 { key: 'multi', title: 'Several sites or brands in one account', text: 'Properties, routing and reporting designed together so each brand stays separate.' },
-{ key: 'iframe', title: 'Third-party forms that have to stay', text: 'A direct integration when a booking widget or outside form can’t become a HubSpot form.' },
+{ key: 'iframe', title: 'Third-party forms that have to stay', text: 'A direct integration when a booking widget or outside form can’t become a native form in your CRM.' },
 { key: 'dedupe', title: 'Cross-channel deduplication', text: 'One record per person across form, phone and email, without merging by hand.' },
 { key: 'attribution', title: 'Multi-touch attribution', text: 'Credit for every touch before the form, once first-touch source is reliable.' },
 ];
 function model(input, a) {
 const leads = clamp(toNum(input.leads), 0, 1e6);
+const copy = crmCopy(input.crm);
 const lo = (v) => Math.min(v[0], v[1]), hi = (v) => Math.max(v[0], v[1]);
 const share = input.dest === 'all' ? [0, 0] : input.dest === 'none' ? [1, 1] : [lo(a.someFormsInboxShare), hi(a.someFormsInboxShare)];
 const nf = input.notify === 'both' ? 0 : input.notify === 'one' ? 0.5 : 1;
@@ -1068,29 +1254,30 @@ const gaps = handoffs.filter((h) => !h.ok).length;
 const open = [], done = [];
 if (input.track !== 'yes') open.push({
 title: 'Install and check the tracking code', self: 1, kit: 1, where: 'Step 3',
-why: input.track === 'no' ? 'Right now new contacts arrive with no traffic source, so no report can say which marketing worked.' : 'Check this first. Every source report you build later depends on it.',
-how: 'Settings → Tracking Code → Validate, for each domain. WordPress uses HubSpot’s plugin; Webflow and Wix have HubSpot apps; Squarespace uses Code Injection.',
+why: input.track === 'no' ? 'Right now new ' + copy.recordNoun + 's arrive with no traffic source, so no report can say which marketing worked.' : 'Check this first. Every source report you build later depends on it.',
+how: copy.trackHow,
 });
 if (input.utm === 'no') open.push({
-title: 'Save the campaign on every contact', self: 1, kit: 1, where: 'Step 4',
-why: 'Add three hidden UTM fields, plus Inquiry type, Service interest, How did you hear about us and Service area as dropdowns.',
+title: 'Save the campaign on every ' + copy.recordNoun, self: 1, kit: 1, where: 'Step 4',
+why: copy.utmHow,
 });
-if (input.track === 'yes' && input.utm === 'yes') done.push({ title: 'Source and campaign land on every contact', done: true });
+if (input.track === 'yes' && input.utm === 'yes') done.push({ title: 'Source and campaign land on every ' + copy.recordNoun, done: true });
 if (input.dest !== 'all') open.push({
-title: 'Connect every form to HubSpot', self: 1, kit: 1, where: 'Steps 2 and 5',
-why: input.dest === 'some' ? 'List every form on every domain. Any that only emails an inbox is a lead HubSpot never sees.' : 'Today a lead exists in HubSpot only if someone types it in.',
-how: 'HubSpot forms work on every plan. Site-builder forms can use non-HubSpot form capture (plain HTML only, answers land as text). Forms inside an iframe or outside tool need an embedded HubSpot form.',
+title: 'Connect every form to ' + copy.name, self: 1, kit: 1, where: 'Steps 2 and 5',
+why: input.dest === 'some' ? 'List every form on every domain. Any that only emails an inbox is a lead ' + copy.name + ' never sees.' : 'Today a lead exists in ' + copy.name + ' only if someone types it in.',
+how: copy.connectHow,
 });
-else done.push({ title: 'Every form creates a contact', done: true });
+else done.push({ title: 'Every form creates a ' + copy.recordNoun, done: true });
 if (input.owner === 'no') open.push({
 title: 'Set an owner on every form', self: 1, kit: 1, where: 'Step 6',
-why: 'Add a hidden Contact owner field with that form’s rep. Sharing leads across reps? Use routing rules instead.',
+why: 'Sharing leads across reps instead of one person owning each? ' + kitPlain(3) + ' writes the routing rules.',
+how: copy.ownerHow,
 });
 else done.push({ title: 'Every lead gets an owner', done: true });
 if (input.notify !== 'both') open.push({
 title: input.notify === 'one' ? 'Add the missing alert or confirmation' : 'Alert the rep and confirm the prospect', self: 1, kit: 1, where: 'Step 6',
-why: 'Notify the contact owner and a backup, and send a confirmation that says who will reply and when.',
-how: 'The confirmation lives in the form’s Automation tab. Free tools allow one email per form; Starter allows a short series. Nothing reaches "contact owner" until an owner is set.',
+why: 'Notify the record owner and a backup, and send a confirmation that says who will reply and when.',
+how: copy.notifyHow,
 });
 else done.push({ title: 'The rep and the prospect both hear right away', done: true });
 if (open.length) open.push({
@@ -1119,10 +1306,64 @@ return a;
 function edited(a) { return ROWS.some((r) => [0, 1].some((i) => Math.abs(a[r.key][i] - ASSUMPTIONS[r.key][i]) > 1e-9)); }
 function readInput() {
 const el = form.elements, v = (n) => { const f = el.namedItem(n); return f ? f.value : ''; };
-return { leads: $('leads').value, dest: v('dest'), track: v('track'), utm: v('utm'), owner: v('owner'), notify: v('notify') };
+return { leads: $('leads').value, crm: v('crm') || 'hubspot', dest: v('dest'), track: v('track'), utm: v('utm'), owner: v('owner'), notify: v('notify') };
 }
-function isExample(i) { return toNum(i.leads) === EXAMPLE.leads && ['dest', 'track', 'utm', 'owner', 'notify'].every((k) => i[k] === EXAMPLE[k]); }
-function applyExample() { $('leads').value = EXAMPLE.leads; ['dest', 'track', 'utm', 'owner', 'notify'].forEach((k) => { $(k + '-' + EXAMPLE[k]).checked = true; }); }
+function isExample(i) { return toNum(i.leads) === EXAMPLE.leads && ['crm', 'dest', 'track', 'utm', 'owner', 'notify'].every((k) => i[k] === EXAMPLE[k]); }
+function applyExample() { $('leads').value = EXAMPLE.leads; ['crm', 'dest', 'track', 'utm', 'owner', 'notify'].forEach((k) => { $(k + '-' + EXAMPLE[k]).checked = true; }); }
+// Swaps the HubSpot-specific copy baked into the HTML for the selected CRM's own labels.
+function applyCrmCopy(crm) {
+const c = crmCopy(crm);
+$('dest-all-title').textContent = c.destAll;
+$('dest-some-title').textContent = c.destSome;
+$('dest-none-title').textContent = c.destNone;
+$('track-q').textContent = c.trackLabel;
+$('track-help').textContent = c.trackHelp;
+$('utm-help').textContent = c.utmHelp;
+}
+// Shows the HubSpot Hub picker only for HubSpot, and each Hub's tool checklist only once that Hub is checked.
+function syncHubVisibility(crm) {
+const isHS = crm === 'hubspot';
+$('hub-q').hidden = !isHS;
+HUBS.forEach((h) => {
+const checked = isHS && !!form.querySelector('input[name="hub"][value="' + h.key + '"]:checked');
+$('tools-' + h.key + '-q').hidden = !checked;
+});
+}
+// Which HubSpot tools the visitor said they're using, by Hub, for Hubs they checked.
+function hubAuditData() {
+return HUBS.filter((h) => form.querySelector('input[name="hub"][value="' + h.key + '"]:checked')).map((h) => {
+const used = h.tools.filter((t) => form.querySelector('input[name="tool-' + h.key + '"][value="' + t.key + '"]:checked'));
+const unused = h.tools.filter((t) => !used.includes(t));
+return { hub: h, used, unused };
+});
+}
+function renderHubAudit(crm) {
+const box = $('hub-audit');
+if (crm !== 'hubspot') { box.hidden = true; return; }
+const rows = hubAuditData();
+if (!rows.length) { box.hidden = true; return; }
+box.hidden = false;
+box.innerHTML = '<div class="deliv-head" style="margin-top:4px"><h2>Your HubSpot tool audit</h2><p class="deliv-sub">What you checked off as already in use, Hub by Hub, and what\'s worth turning on next.</p></div>' +
+rows.map((r) => {
+const strip = r.hub.tools.map((t) => {
+const on = r.used.includes(t);
+return '<li><span class="' + (on ? 'ok' : 'no') + '"><span class="mark" aria-hidden="true">' + (on ? '✓' : '✕') + '</span>' + esc(t.name) + '</span></li>';
+}).join('');
+const steps = r.unused.map((t, i) => '<li><span class="sn">' + (i + 1) + '</span><span class="sb"><span class="st-top"><span class="st-title">Turn on ' + esc(t.name) + '</span></span><p class="st-why">' + esc(t.why) + '</p></span></li>').join('');
+return '<div style="margin-top:14px"><p class="label" style="margin-bottom:6px">' + esc(r.hub.name) + '</p><ol class="strip">' + strip + '</ol>' +
+(steps ? '<ol class="steps" style="margin-top:8px">' + steps + '</ol>' : '<p class="q-help" style="margin-top:6px">Every ' + esc(r.hub.name) + ' tool on this list is already in use.</p>');
+}).join('') + '</div>';
+}
+function hubAuditText() {
+const rows = hubAuditData();
+if (!rows.length) return [];
+const L = ['', 'YOUR HUBSPOT TOOL AUDIT'];
+rows.forEach((r) => {
+L.push(r.hub.name + ': ' + (r.used.length ? r.used.map((t) => t.name).join(', ') + ' in use' : 'nothing checked as in use'));
+r.unused.forEach((t) => L.push('  - Turn on ' + t.name + ': ' + t.why));
+});
+return L;
+}
 function xlinks(m) {
 return m.sourceGap ? [
 { key: 'tracking', why: 'set up GA4, Tag Manager and conversion events so every lead keeps the campaign that sent it.' },
@@ -1140,6 +1381,7 @@ L.push(m.gaps + ' of 5 handoffs need a person · Hand work: ' + hoursRange(m.low
 L.push(m.handoffs.map((h) => (h.ok ? '[ok] ' : '[gap] ') + h.label).join(' > '));
 L.push('', 'FIXES, IN BUILD ORDER');
 stepsText(m.items).forEach((l) => L.push(l));
+hubAuditText().forEach((l) => L.push(l));
 const xl = xlinksText(xlinks(m));
 if (xl.length) L.push('', 'RELATED BIG LEAP TOOLKITS', ...xl);
 L.push('', 'WHERE THE DIY VERSION STOPS', ...limitsText(LIMITS));
@@ -1149,14 +1391,18 @@ return L.concat(planFooter(2)).join('\n');
 function render() {
 const input = readInput(), a = readA(), m = model(input, a), ed = edited(a);
 last = { m, ed };
+applyCrmCopy(input.crm);
+syncHubVisibility(input.crm);
+renderHubAudit(input.crm);
 setExampleState(isExample(input), 'Example: 100 form leads a month, and some forms still email an inbox. Change any answer to make it yours.');
 $('edited-pill').hidden = !ed;
 const allGood = m.gaps === 0;
 $('out-gaps').textContent = allGood ? 'All 5' : m.gaps + ' of 5';
 $('out-gaps').classList.toggle('is-zero', allGood);
 $('out-unit').textContent = allGood ? 'handoffs run on their own' : m.gaps === 1 ? 'handoff needs a person' : 'handoffs need a person';
+const crmName = crmCopy(input.crm).name;
 $('out-line').innerHTML = allGood
-? 'Every lead lands in HubSpot with a source and an owner, and both sides hear about it right away.'
+? 'Every lead lands in ' + esc(crmName) + ' with a source and an owner, and both sides hear about it right away.'
 : m.highMin <= 0 ? (!m.leads ? 'Each one is a place a lead can wait or slip. Add your form leads a month to size the hand work.' : m.sourceGap ? 'Each one is a place a lead can wait or slip. It costs no hand time, but every report on which marketing works depends on it.' : 'Each one is a place a lead can wait or slip, though at these estimates it costs no hand time.')
 : 'Each one is a place a lead can wait or slip, and together they cost about <b>' + esc(hoursRange(m.lowMin, m.highMin)) + '</b> of hand work.';
 $('answer').classList.toggle('is-done', allGood);
